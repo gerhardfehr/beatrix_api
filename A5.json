@@ -1,0 +1,93 @@
+{
+    "A5": {
+      "title": "Funktionsprinzip der Meta-Axiome",
+      "description": "Dieses Kapitel beschreibt das Wirkprinzip, die Aktivierungslogik, Vererbung und Validierung der Meta-Axiome (MA 0.00–0.99) innerhalb des BEATRIX- und BCM-Systems. Es stellt sicher, dass Meta-Axiome als operative Steuerungslogik aktiv wirken, sich gegenseitig kohärent verhalten und in Übereinstimmung mit der Governance-Struktur (A10) stehen.",
+      "activation_model": {
+        "trigger_points": [
+          "Systeminitialisierung (BCM3_00_INIT9249_KERNEL)",
+          "Modulregistrierung (nach BCM2_00_STD9232)",
+          "Kontextvalidierung (BCM2_04_KON8904)",
+          "Auditprüfung (BCM3_01_WATCHDOG)"
+        ],
+        "sequence_logic": "Meta-Axiome werden in logischer Reihenfolge (MA 0.21 → 0.22 → 0.26 → 0.30 → 0.31 → 0.40) aktiviert. Diese Reihenfolge entspricht dem in A6 definierten meta_axiom_flow.",
+        "runtime_awareness": true,
+        "auto_reactivation": "Falls ein Meta-Axiom deaktiviert oder überschrieben wurde, wird es durch den Watchdog automatisch reaktiviert."
+      },
+      "propagation_mechanism": {
+        "type": "recursive_inheritance",
+        "description": "Meta-Axiome vererben sich top-down an alle Module, die auf BCM2_00_STD9232 basieren.",
+        "inheritance_scope": [
+          "Standardmodule (BCM2_XX)",
+          "Interventionsmodule (BCM2_13_INT9250)",
+          "Kernel (BCM3_00_INIT9249)",
+          "Auditmodule (BCM3_01_WATCHDOG)"
+        ],
+        "override_policy": "Untergeordnete Module dürfen Meta-Axiome nicht überschreiben, sondern nur spezifizieren.",
+        "conflict_resolution": "Konflikte zwischen Meta-Axiomen werden durch A6 geregelt (meta_axiom_consistency)."
+      },
+      "validation_protocol": {
+        "responsible_components": [
+          "BCM3_00_INIT9249_KERNEL",
+          "BCM2_10_STD10061",
+          "BCM3_01_WATCHDOG"
+        ],
+        "audit_frequency": "weekly",
+        "validation_stages": [
+          "Existenzprüfung – Ist das Axiom geladen?",
+          "Kohärenzprüfung – Wirkt es konsistent mit anderen Axiomen?",
+          "Governanceprüfung – Ist es autorisiert (gemäß A10)?"
+        ],
+        "error_handling": {
+          "auto_repair": true,
+          "repair_policy": "Fehlende Meta-Axiome werden automatisch nachgeladen oder aus dem Standard rekonstruiert.",
+          "severity_levels": {
+            "minor": "Inkonsistenz erkannt, System läuft weiter",
+            "major": "Axiomverletzung blockiert Modulregistrierung",
+            "critical": "Kernel-Stop, Systemneustart erforderlich"
+          }
+        }
+      },
+      "meta_axiom_lifecycle": {
+        "stages": [
+          "Definition (in 7232)",
+          "Referenzierung (in 9232 / 10061)",
+          "Implementierung (im Kernel 9249)",
+          "Überwachung (durch Watchdog 9251)",
+          "Revision (unter Aufsicht A10)"
+        ],
+        "governance_binding": "Alle Änderungen oder Deaktivierungen eines Meta-Axioms bedürfen der Genehmigung gemäß A10 (Governance und Ethikrat)."
+      },
+      "performance_model": {
+        "efficiency_gain": "Meta-Axiome werden parallel validiert, sobald der Kernel MA 0.21–0.31 geladen hat.",
+        "expected_init_speed": "2.0 Sekunden",
+        "meta_parallelism": true
+      },
+      "dependencies": {
+        "requires": [
+          "BCM2_00_STD9232",
+          "BCM2_10_STD10061",
+          "BCM3_00_INIT9249",
+          "BCM3_01_WATCHDOG"
+        ],
+        "cross_reference": "A6 – Systemische Integration der Meta-Axiome"
+      },
+      "supervision": {
+        "supervised_by": "BCM3_01_WATCHDOG",
+        "governed_by": "FehrAdvice Scientific Advisory Board",
+        "review_cycle": "jährlich",
+        "ethics_binding": "FehrAdvice Ethics & Integrity Council"
+      },
+      "version": "3.0.2025",
+      "status": "active",
+      "metadata": {
+        "author": "FehrAdvice & Partners AG",
+        "contributors": [
+          "Gerhard Fehr",
+          "Andrea Fehr",
+          "BEATRIX Kernel Development Team"
+        ],
+        "approval_date": "2025-10-31"
+      }
+    }
+}
+  

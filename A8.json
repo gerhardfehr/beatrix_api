@@ -1,0 +1,78 @@
+{
+    "A8": {
+      "title": "Versionierung der Meta-Axiome",
+      "description": "Dieses Kapitel definiert die Versionierungslogik, Kompatibilitätsrichtlinien und Auditmechanismen für die Meta-Axiome (MA 0.00–0.99). Es stellt sicher, dass alle Systemkomponenten dieselbe Meta-Axiomenbasis verwenden und Änderungen transparent, reversibel und nachvollziehbar bleiben.",
+      "version_model": {
+        "current_version": "3.0.2025",
+        "previous_version": "2.5.2024",
+        "next_planned_version": "3.1.2026",
+        "version_policy": {
+          "major_change": "Neue Axiomenfamilien oder strukturelle Regeln (z. B. MA_0.40)",
+          "minor_change": "Erweiterung bestehender Regeln ohne Veränderung der Basisstruktur",
+          "patch_change": "Fehlerbehebung oder semantische Korrektur"
+        },
+        "semantic_versioning": true,
+        "backward_compatibility": {
+          "enabled": true,
+          "mechanism": "Legacy-Axiom-Handler (BCM3_01_WATCHDOG)",
+          "description": "Ältere Module (≤ v2.x) bleiben kompatibel, indem ihre Meta-Axiome automatisch auf aktuelle Semantik gemappt werden."
+        }
+      },
+      "change_log": [
+        {
+          "version": "3.0.2025",
+          "changes": [
+            "Einführung des Axioms MA_0.40 (Lexikalische Identität)",
+            "Erweiterung A5–A7 zu operativer Meta-Architektur",
+            "Verknüpfung mit Governance-Audit (A10)"
+          ],
+          "approved_by": "FehrAdvice Scientific Advisory Board",
+          "approval_date": "2025-10-31"
+        },
+        {
+          "version": "2.5.2024",
+          "changes": [
+            "Integration von Kontextpflicht (MA_0.26) und Deklarationspflicht (MA_0.31)",
+            "Einbindung des Standards BCM2_10_STD10061"
+          ],
+          "approved_by": "FehrAdvice R&D Zürich",
+          "approval_date": "2024-07-12"
+        }
+      ],
+      "distribution_policy": {
+        "propagation": "automatisch über Kernel (9249)",
+        "trigger_modules": [
+          "BCM3_00_INIT9249_KERNEL",
+          "BCM3_01_WATCHDOG",
+          "BCM2_10_STD10061"
+        ],
+        "update_mechanism": {
+          "method": "rolling update",
+          "fallback": "rollback zur letzten stabilen Version",
+          "audit_trigger": "jede Versionierungserhöhung ≥ minor"
+        }
+      },
+      "validation_protocol": {
+        "supervised_by": "BCM3_01_WATCHDOG",
+        "check_frequency": "monthly",
+        "audit_type": "meta_version_consistency",
+        "auto_sync": true,
+        "auto_sync_description": "Kernel gleicht Meta-Versionen automatisch zwischen Modulen ab und erzwingt Konsistenz."
+      },
+      "governance_binding": {
+        "supervised_by": "FehrAdvice Scientific Advisory Board",
+        "approval_required_for_major_changes": true,
+        "ethics_review_by": "FehrAdvice Ethics & Integrity Council",
+        "audit_reference": "meta_version_governance_9251"
+      },
+      "metadata": {
+        "author": "FehrAdvice & Partners AG",
+        "maintainer": "BEATRIX Kernel Core Team",
+        "location": "Zürich, Schweiz",
+        "review_date": "2025-10-31"
+      },
+      "status": "active",
+      "version": "3.0.2025"
+    }
+}
+  
