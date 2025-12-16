@@ -1,0 +1,1192 @@
+{
+    "module_id": 7243,
+    "module_name": "WAX – Willingness to Act",
+    "chapters": {
+        "A1_Definition_Context": {
+            "definition": "WAX describes the momentary willingness to act of an actor or segment. It functions as a bridge between utility logic (INU, KNU, IDN) and real behavior.",
+            "differentiation": [
+                "≠ Preference (long-term utility structure)",
+                "≠ Motivation (fundamental driving force)",
+                "≠ Awareness (salience filter)",
+                "= Momentary State"
+            ],
+            "formal_basis": "Hybrid function between Additivity and Complementarity, controlled by $\\lambda \\in [0,1]$",
+            "role_bcm": [
+                "Macro: societal willingness to act",
+                "Meso: segment positioning",
+                "Micro: individual decision threshold"
+            ]
+        },
+        "A2_Scope_Context": {
+            "scope_of_application": "Individuals, Groups, Organizations, Societies",
+            "context_levels": [
+                "Micro",
+                "Meso",
+                "Macro"
+            ],
+            "cultural_geographical": [
+                "WEIRD/non-WEIRD",
+                "urban/rural",
+                "digital/analog"
+            ],
+            "time_dimension": [
+                "short-term (seconds/days)",
+                "medium-term (weeks/months)",
+                "long-term (years/institutions)"
+            ],
+            "triggers": [
+                "Crises",
+                "Shocks",
+                "Disruptions"
+            ],
+            "system_integration": {
+                "upstream": [
+                    "7234_INU",
+                    "7235_KNU",
+                    "7236_IDN",
+                    "7240_AWX"
+                ],
+                "core": "7243_WAX",
+                "downstream": [
+                    "7256_JNY",
+                    "7257_SEG",
+                    "7259_WTX"
+                ]
+            }
+        },
+        "A3_Objectives": {
+            "goals": [
+                "Mapping the momentary willingness to act",
+                "Transformation of utility into behavior",
+                "Steering the Behavioral Change Journey",
+                "Integration of context variables (UNS, KOM, INST)",
+                "Segmentation by willingness to act",
+                "Indicator for intervention architecture",
+                "Aggregation to the macro-level",
+                "Feedback function (WAX $\\rightarrow$ AWX)",
+                "Closing the Attitude–Behavior Gap"
+            ]
+        },
+        "A4_Axiomatics": {
+            "description": "The axiomatics of WAX comprise approximately 70–80 axioms.",
+            "cluster": {
+                "Cluster1": "Basic Conditions",
+                "Cluster2": "Definition & Hybrid Logic",
+                "Cluster3": "Influencing Factors",
+                "Cluster4": "Functional Logic",
+                "Cluster5": "Complementarities",
+                "Cluster6": "Integration",
+                "Cluster7": "Segments",
+                "Cluster8": "Dynamics & Transition",
+                "Cluster9": "Measurability & Calibration",
+                "Cluster10": "Intervention"
+            },
+            "Cluster1_Basic_Conditions": [
+                {
+                    "axiom_id": "1.1",
+                    "title": "Context Dependency",
+                    "wording": "WAX is always a function of Awareness, Utility Types (INU, KNU, IDN), Uncertainty, Complexity, Segment, and Institutions.",
+                    "formula": "$WAX = f(AWX, INU, KNU, IDN, UNS, KOM, SEG, INST)$"
+                },
+                {
+                    "axiom_id": "1.2",
+                    "title": "Salience Filter",
+                    "wording": "Only utility types that are made salient by Awareness are considered in WAX. Non-salient utilities are equal to zero.",
+                    "formula": "U_i^eff = U_i * S_i, wobei S_i ∈ {0,1}"
+                },
+                {
+                    "axiom_id": "1.3",
+                    "title": "Discounting by Uncertainty",
+                    "wording": "Uncertainty reduces the contribution of a utility proportionally by a factor $\\gamma$.",
+                    "formula": "U_i^disc = γ_i * U_i, mit 0 ≤ γ_i ≤ 1"
+                },
+                {
+                    "axiom_id": "1.4",
+                    "title": "Amplification by Complexity",
+                    "wording": "Complexity can amplify or attenuate utility values by a factor $\\delta$.",
+                    "formula": "U_i^adj = δ_i * U_i, δ_i > 0"
+                },
+                {
+                    "axiom_id": "1.5",
+                    "title": "Weighting Factor",
+                    "wording": "Each utility type receives a weight $\\alpha_i$; the sum of all $\\alpha_i$ is 1.",
+                    "formula": "Σ α_i = 1"
+                },
+                {
+                    "axiom_id": "1.6",
+                    "title": "Momentary Willingness to Act",
+                    "wording": "WAX exclusively maps the current state, not long-term utility structures.",
+                    "formula": "WAX_t ≠ Präferenzfunktion"
+                },
+                {
+                    "axiom_id": "1.7",
+                    "title": "Non-Isolation",
+                    "wording": "WAX cannot be calculated in isolation but always requires inputs from INU, KNU, IDN, and AWX.",
+                    "formula": "WAX ⊥ ∅; Input = {INU, KNU, IDN, AWX}"
+                },
+                {
+                    "axiom_id": "1.8",
+                    "title": "Dynamic Sensitivity",
+                    "wording": "WAX is sensitive to small changes in AWX, UNS, and KOM.",
+                    "formula": "∂WAX/∂AWX > 0; ∂WAX/∂UNS < 0; ∂WAX/∂KOM ≠ 0"
+                }
+            ],
+            "Cluster2_Definition_Hybrid_Logic": [
+                {
+                    "axiom_id": "2.1",
+                    "title": "Hybrid Function",
+                    "wording": "WAX is a weighted mixture of additive and complementary logic, controlled by the factor λ.",
+                    "formula": "WAX = λ * WAX^compl + (1 - λ) * WAX^add"
+                },
+                {
+                    "axiom_id": "2.2",
+                    "title": "Additive Border Case",
+                    "wording": "If $\\lambda = 0$, WAX follows additive logic and corresponds to an optimizing actor (Homo oeconomicus).",
+                    "formula": "WAX = WAX^add, falls λ = 0"
+                },
+                {
+                    "axiom_id": "2.3",
+                    "title": "Complementary Border Case",
+                    "wording": "If $\\lambda = 1$, WAX follows complementary logic, and behavior is blocked by the weakest component.",
+                    "formula": "WAX = WAX^compl, falls λ = 1"
+                },
+                {
+                    "axiom_id": "2.4",
+                    "title": "Normal Mixed Form Case",
+                    "wording": "In the normal case, λ is between 0 and 1, and WAX is a mixed form.",
+                    "formula": "0 < λ < 1 → WAX = λ*WAX^compl + (1-λ)*WAX^add"
+                },
+                {
+                    "axiom_id": "2.5",
+                    "title": "Endogeneity of λ",
+                    "wording": "The value of λ is endogenous and is determined by norm salience, identity, institutions, and complexity.",
+                    "formula": "λ = f(Normen, IDN, INST, KOM)"
+                },
+                {
+                    "axiom_id": "2.6",
+                    "title": "Ambivalence Measure",
+                    "wording": "The difference between the additive and complementary result is a measure of ambivalence.",
+                    "formula": "Ambivalenz = |WAX^add - WAX^compl|"
+                },
+                {
+                    "axiom_id": "2.7",
+                    "title": "Path Dependence",
+                    "wording": "The current value of λ depends on its history (path dependence).",
+                    "formula": "λ_t = f(λ_(t-1), AWX, UNS, KOM)"
+                }
+            ],
+            "Cluster3_Influencing_Factors": [
+                {
+                    "axiom_id": "3.1",
+                    "title": "Time Dependence",
+                    "wording": "WAX changes over time due to learning, habituation, or norm erosion.",
+                    "formula": "WAX_t ≠ WAX_(t+1)"
+                },
+                {
+                    "axiom_id": "3.2",
+                    "title": "Norm Salience",
+                    "wording": "Salient norms increase the influence of collective and identity utility types.",
+                    "formula": "U^norm = φ * U, φ > 1"
+                },
+                {
+                    "axiom_id": "3.3",
+                    "title": "Emotional Amplification",
+                    "wording": "Emotions modulate the weighting of individual utility types.",
+                    "formula": "α_i = f(emotion)"
+                },
+                {
+                    "axiom_id": "3.4",
+                    "title": "Information Availability",
+                    "wording": "More information reduces uncertainty and increases the effectiveness of utility.",
+                    "formula": "∂γ/∂Information > 0"
+                },
+                {
+                    "axiom_id": "3.5",
+                    "title": "Social Proximity",
+                    "wording": "Utilities from close social relationships have higher weights.",
+                    "formula": "α_peer > α_stranger"
+                },
+                {
+                    "axiom_id": "3.6",
+                    "title": "Stress & Coping",
+                    "wording": "Stress situations can distort utility processing; coping strategies act as a regulator.",
+                    "formula": "γ = f(Stress, Coping)"
+                },
+                {
+                    "axiom_id": "3.7",
+                    "title": "Time Horizon",
+                    "wording": "Short-term utilities are over-proportionally weighted compared to long-term utilities.",
+                    "formula": "α_short > α_long"
+                },
+                {
+                    "axiom_id": "3.8",
+                    "title": "Context Vector",
+                    "wording": "The context (political, cultural, ecological) modulates the entire WAX function.",
+                    "formula": "WAX = f(Context)"
+                },
+                {
+                    "axiom_id": "3.9",
+                    "title": "Technology Influence",
+                    "wording": "Digital communication changes salience and accelerates norm diffusion.",
+                    "formula": "∂S_i/∂Digital > 0"
+                },
+                {
+                    "axiom_id": "3.10",
+                    "title": "Social Comparison Processes",
+                    "wording": "Willingness to act depends on comparison with relevant peers.",
+                    "formula": "WAX_i = f(WAX_peer)"
+                }
+            ],
+            "Cluster4_Functional_Logic": [
+                {
+                    "axiom_id": "4.1",
+                    "title": "Additive Logic",
+                    "wording": "In the additive case, all salient weighted utilities are summed. This corresponds to the Homo oeconomicus.",
+                    "formula": "WAX^add = Σ (α_i * γ_i * δ_i * U_i * S_i)"
+                },
+                {
+                    "axiom_id": "4.2",
+                    "title": "Complementary Logic",
+                    "wording": "In the complementary case, the willingness to act is determined by the weakest component.",
+                    "formula": "WAX^compl = min(α_i * γ_i * δ_i * U_i * S_i)"
+                },
+                {
+                    "axiom_id": "4.3",
+                    "title": "Hybrid Logic",
+                    "wording": "Normally, WAX is a mixture of additive and complementary logic.",
+                    "formula": "WAX = λ * WAX^compl + (1-λ) * WAX^add"
+                },
+                {
+                    "axiom_id": "4.4",
+                    "title": "Ambivalence Measure",
+                    "wording": "The difference between the additive and complementary result measures ambivalence in decision-making behavior.",
+                    "formula": "Ambivalenz = |WAX^add - WAX^compl|"
+                },
+                {
+                    "axiom_id": "4.5",
+                    "title": "Threshold Logic",
+                    "wording": "Behavior only occurs if WAX exceeds a context-dependent threshold value.",
+                    "formula": "Behavior = 1 falls WAX ≥ θ"
+                },
+                {
+                    "axiom_id": "4.6",
+                    "title": "Non-Linearity",
+                    "wording": "There is a non-linear relationship (S-curve) between WAX and actual behavior.",
+                    "formula": "P(Behavior=1) = 1 / (1 + e^-(WAX-θ))"
+                },
+                {
+                    "axiom_id": "4.7",
+                    "title": "Interdependence",
+                    "wording": "The contributions of the utility types are interdependent and non-separable.",
+                    "formula": "∂WAX/∂U_i ≠ konstant"
+                },
+                {
+                    "axiom_id": "4.8",
+                    "title": "Asymmetry",
+                    "wording": "Negative utilities (Losses) have a stronger effect on WAX than positive utilities.",
+                    "formula": "∂WAX/∂Loss > ∂WAX/∂Gain"
+                },
+                {
+                    "axiom_id": "4.9",
+                    "title": "Diminishing Returns",
+                    "wording": "Additional increases in utility have a diminishing effect on WAX.",
+                    "formula": "∂²WAX/∂U² < 0"
+                },
+                {
+                    "axiom_id": "4.10",
+                    "title": "Self-Coherence and Willingness to Act",
+                    "wording": "WAX reacts to the dissonance between self-image (I_t) and social feedback (S_t). Small dissonances lead to willingness to learn and adapt, large dissonances lead to blockade and protective behavior. The axiom connects identity coherence with momentary action energy.",
+                    "definition": {
+                        "core_relation": "ΔI_t = |I_t − S_t|",
+                        "functional_form": "WAX_t = f(AWX_t, ΔI_t)",
+                        "gradient_conditions": {
+                            "small_dissonance": "∂WAX/∂ΔI_t > 0 für ΔI_t < 0.6",
+                            "large_dissonance": "∂WAX/∂ΔI_t < 0 für ΔI_t ≥ 0.6"
+                        },
+                        "interpretation": "WAX increases when moderate self-image deviations trigger learning impulses, but decreases when dissonance threatens identity. Thus, $\\Delta I_t$ forms a coupling variable between IDN (self-image) and the probability of action."
+                    },
+                    "upstream_links": {
+                        "idn_reference": "7236_IDN.A70b",
+                        "awx_reference": "7240_AWX.A70a"
+                    },
+                    "downstream_links": {
+                        "jny_reference": "7256_JNY.PhaseShift",
+                        "seg_reference": "7257_SEG.λ_Segment"
+                    },
+                    "meta": {
+                        "version_tag": "v4.1_patch_MirrorGap",
+                        "status": "proposed",
+                        "reviewed_by": "BEATRIX Black Belt Kernel",
+                        "created": "2025-10-14",
+                        "author": "FehrAdvice & Partners AG – BCM Kernel Team"
+                    },
+                    "governance": {
+                        "integration_rule": "Insert after Axiom 4.9 (Diminishing Returns).",
+                        "validation_status": "pending_review",
+                        "watchdog_trigger": "WAX_FreezeAlert bei ΔI_t > 0.8"
+                    }
+                }
+            ],
+            "Cluster5_Complementarities": [
+                {
+                    "axiom_id": "5.1",
+                    "title": "Individual Utility × Awareness",
+                    "wording": "Individual utility only works if it is saliently activated by Awareness.",
+                    "formula": "U_INU^eff = U_INU * S_INU"
+                },
+                {
+                    "axiom_id": "5.2",
+                    "title": "Collective Utility × Uncertainty",
+                    "wording": "Collective utility is sensitive to uncertainty, as coordination becomes uncertain.",
+                    "formula": "U_KNU^eff = γ * U_KNU"
+                },
+                {
+                    "axiom_id": "5.3",
+                    "title": "Identity Utility × Complexity",
+                    "wording": "With increasing complexity, identity norms become stronger as a decision heuristic.",
+                    "formula": "U_IDN^eff = δ * U_IDN, δ > 1 with high complexity"
+                },
+                {
+                    "axiom_id": "5.4",
+                    "title": "INU × IDN",
+                    "wording": "Individual and identity utility can mutually reinforce or block each other.",
+                    "formula": "U_INU_IDN = f(U_INU, U_IDN)"
+                },
+                {
+                    "axiom_id": "5.5",
+                    "title": "KNU × IDN",
+                    "wording": "Collective norms and identity usually act complementarily.",
+                    "formula": "U_KNU_IDN = min(U_KNU, U_IDN)"
+                },
+                {
+                    "axiom_id": "5.6",
+                    "title": "Norm Blockade",
+                    "wording": "Strong norms can completely block high individual utility.",
+                    "formula": "WAX = min(U_norm, U_INU)"
+                },
+                {
+                    "axiom_id": "5.7",
+                    "title": "Institutional Reinforcement",
+                    "wording": "Strong institutions stabilize WAX against shocks.",
+                    "formula": "Var(WAX) ↓, falls INST stark"
+                },
+                {
+                    "axiom_id": "5.8",
+                    "title": "Uncertainty × Complexity",
+                    "wording": "High uncertainty in complex contexts increases the influence of identity and norms.",
+                    "formula": "λ ↑, if UNS high ∧ KOM high"
+                }
+            ],
+            "Cluster6_Integration": [
+                {
+                    "axiom_id": "6.1",
+                    "title": "Upstream Inputs",
+                    "wording": "WAX necessarily requires the inputs from INU (7234), KNU (7235), IDN (7236), and AWX (7240).",
+                    "formula": "Input = {INU, KNU, IDN, AWX}"
+                },
+                {
+                    "axiom_id": "6.2",
+                    "title": "Core Transformation",
+                    "wording": "WAX transforms utility types and context into momentary willingness to act.",
+                    "formula": "WAX = f(INU, KNU, IDN, AWX, UNS, KOM, INST)"
+                },
+                {
+                    "axiom_id": "6.3",
+                    "title": "Downstream Outputs",
+                    "wording": "WAX delivers outputs to SEG (7257), JNY (7256), and WTX (7259).",
+                    "formula": "Output = {SEG, JNY, WTX}"
+                },
+                {
+                    "axiom_id": "6.4",
+                    "title": "Monitoring Interfaces",
+                    "wording": "WAX is a core indicator in the Intervention Toolkit (9250) and the Watchdog Module (9251).",
+                    "formula": "Monitoring = {INT, WATCHDOG}"
+                },
+                {
+                    "axiom_id": "6.5",
+                    "title": "Crosslinks",
+                    "wording": "WAX is linked to Uncertainty (9485 ff.), Complexity (9492), and Institutions (9493 ff.).",
+                    "formula": "WAX = f(UNS, KOM, INST)"
+                },
+                {
+                    "axiom_id": "6.6",
+                    "title": "Feedback to Awareness",
+                    "wording": "WAX influences future Awareness and changes norm salience.",
+                    "formula": "AWX_(t+1) = f(WAX_t)"
+                },
+                {
+                    "axiom_id": "6.7",
+                    "title": "Life Course Integration",
+                    "wording": "WAX changes over life phases and is linked to LCP (7457).",
+                    "formula": "WAX_age = f(LCP)"
+                }
+            ],
+            "Cluster7_Segments": [
+                {
+                    "axiom_id": "7.1",
+                    "title": "Segment WAX",
+                    "wording": "Each segment receives its own WAX value, which is calculated from the specific parameters.",
+                    "formula": "WAX_SEG = f(INU_SEG, KNU_SEG, IDN_SEG, AWX_SEG, λ_SEG)"
+                },
+                {
+                    "axiom_id": "7.2",
+                    "title": "Segment Heterogeneity",
+                    "wording": "Segments differ in Awareness, utility structure, and λ.",
+                    "formula": "λ_A ≠ λ_B → WAX_A ≠ WAX_B"
+                },
+                {
+                    "axiom_id": "7.3",
+                    "title": "Linear Segment Aggregation",
+                    "wording": "Macro-WAX can be represented as a weighted average of the segment WAX values.",
+                    "formula": "WAX_macro = Σ (ω_s * WAX_SEG_s)"
+                },
+                {
+                    "axiom_id": "7.4",
+                    "title": "Network Aggregation",
+                    "wording": "With strong networking, aggregation is not linear but depends on diffusion and interdependence.",
+                    "formula": "WAX_macro = f(Network(WAX_SEG))"
+                },
+                {
+                    "axiom_id": "7.5",
+                    "title": "Segment Interdependence",
+                    "wording": "Changes in one segment influence neighboring segments via network effects.",
+                    "formula": "ΔWAX_A → ΔWAX_B falls Network(A,B) > 0"
+                },
+                {
+                    "axiom_id": "7.6",
+                    "title": "Segment Paths",
+                    "wording": "Segments can pass through different paths in the Behavioral Change Journey.",
+                    "formula": "Path_SEG ∈ {StatusQuo, Ambivalenz, Wandel}"
+                },
+                {
+                    "axiom_id": "7.7",
+                    "title": "Tipping Points Between Segments",
+                    "wording": "If critical segments tip, other segments can follow (domino effect).",
+                    "formula": "WAX_macro ↑ when Σ Critical_SEG ≥ θ"
+                },
+                {
+                    "axiom_id": "7.8",
+                    "title": "Segment Specialization",
+                    "wording": "Certain segments drive change (innovators), others slow it down (traditionalists).",
+                    "formula": "∂WAX_macro/∂WAX_Innovatoren > ∂WAX_macro/∂WAX_Laggards"
+                }
+            ],
+            "Cluster8_Dynamics_Transition": [
+                {
+                    "axiom_id": "8.1",
+                    "title": "Deterministic Dynamics",
+                    "wording": "The change in λ follows deterministic functions of Awareness, Uncertainty, and Complexity.",
+                    "formula": "dλ/dt = α*AWX - β*UNS - γ*KOM"
+                },
+                {
+                    "axiom_id": "8.2",
+                    "title": "Stochastic Dynamics",
+                    "wording": "In addition to deterministic trends, random shocks occur that can lead to jumps in λ.",
+                    "formula": "dλ = μ dt + σ dB_t"
+                },
+                {
+                    "axiom_id": "8.3",
+                    "title": "Tipping Points",
+                    "wording": "If Awareness or social norms exceed a threshold, λ abruptly tips towards additive.",
+                    "formula": "λ(t+1) = λ(t) - Δ, falls AWX ≥ θ"
+                },
+                {
+                    "axiom_id": "8.4",
+                    "title": "Rebound",
+                    "wording": "After a change, λ can fall back to the old state if institutions are weak.",
+                    "formula": "λ → λ_old, if INST weak"
+                },
+                {
+                    "axiom_id": "8.5",
+                    "title": "Stabilization",
+                    "wording": "Strong institutions stabilize λ long-term and reduce fluctuations.",
+                    "formula": "Var(λ) ↓ with INST strong"
+                },
+                {
+                    "axiom_id": "8.6",
+                    "title": "Life Phases",
+                    "wording": "λ changes systematically over the life phases.",
+                    "formula": "λ_age = f(LCP)"
+                },
+                {
+                    "axiom_id": "8.7",
+                    "title": "Path Dependence",
+                    "wording": "The dynamics of λ are dependent on the previous path and are not completely reversible.",
+                    "formula": "λ_t = f(λ_(t-1), History)"
+                },
+                {
+                    "axiom_id": "8.8",
+                    "title": "Coordinated Transition",
+                    "wording": "Simultaneous changes in multiple segments amplify the dynamics.",
+                    "formula": "Δλ_macro = Σ Δλ_SEG + κ*Interdependence"
+                }
+            ],
+            "Cluster9_Measurability_Calibration": [
+                {
+                    "axiom_id": "9.1",
+                    "title": "Indirect Measurement",
+                    "wording": "WAX is not directly observable but must be inferred via indicators such as surveys, choice experiments, or observed behavior.",
+                    "formula": "WAX^ = f(Survey, Choice, Behavior)"
+                },
+                {
+                    "axiom_id": "9.2",
+                    "title": "Ambivalence Measurement",
+                    "wording": "Ambivalence can be empirically measured via variance in behavior or intransitive choice patterns.",
+                    "formula": "Ambivalence = Var(WAX^) or Intransitivity > 0$"
+                },
+                {
+                    "axiom_id": "9.3",
+                    "title": "Estimation of λ",
+                    "wording": "The value of λ is estimated by empirically testing differences between additive and complementary logic.",
+                    "formula": "λ = (WAX^ - WAX^compl) / (WAX^add - WAX^compl)"
+                },
+                {
+                    "axiom_id": "9.4",
+                    "title": "Segment Calibration",
+                    "wording": "The estimation of WAX and λ is carried out segment by segment to make heterogeneity visible.",
+                    "formula": "λ_SEG = f(Data_SEG)"
+                },
+                {
+                    "axiom_id": "9.5",
+                    "title": "Validation",
+                    "wording": "The predictive quality of WAX is checked by correlation with observed behavior.",
+                    "formula": "Validity = Corr(WAX^, Behavior_obs)"
+                },
+                {
+                    "axiom_id": "9.6",
+                    "title": "Time Series Measurement",
+                    "wording": "WAX must be recorded via time series to make dynamics and transitions visible.",
+                    "formula": "WAX_t → Time Series"
+                },
+                {
+                    "axiom_id": "9.7",
+                    "title": "Experimental Manipulation",
+                    "wording": "Causality can be tested via targeted experiments on Awareness, Uncertainty, or Complexity.",
+                    "formula": "ΔWAX = f(ΔAWX, ΔUNS, ΔKOM)"
+                }
+            ],
+            "Cluster10_Intervention": [
+                {
+                    "axiom_id": "10.1",
+                    "title": "Intervention Lever",
+                    "wording": "WAX can be influenced by changes in Awareness, Uncertainty, Complexity, as well as financial or social incentives.",
+                    "formula": "INT: {ΔAWX, ΔUNS, ΔKOM, INC_fin, INC_soc} → ΔWAX"
+                },
+                {
+                    "axiom_id": "10.2",
+                    "title": "Threshold Condition",
+                    "wording": "An intervention only works if a context-dependent threshold value is exceeded.",
+                    "formula": "ΔWAX = 0, if INC < θ"
+                },
+                {
+                    "axiom_id": "10.3",
+                    "title": "Non-Linearity",
+                    "wording": "The effect of interventions increases disproportionately as soon as the threshold is exceeded.",
+                    "formula": "ΔWAX = f(INC), increasing for INC ≥ θ"
+                },
+                {
+                    "axiom_id": "10.4",
+                    "title": "Segment Dependency",
+                    "wording": "Interventions have different strengths of effect in different segments.",
+                    "formula": "ΔWAX_SEG = f(SEG, INT)"
+                },
+                {
+                    "axiom_id": "10.5",
+                    "title": "Backfire Effect",
+                    "wording": "In contexts with strong norms, financial incentives can strengthen norms and increase λ.",
+                    "formula": "INC_fin → λ ↑ if Norm Strength high"
+                },
+                {
+                    "axiom_id": "10.6",
+                    "title": "Temporal Effect",
+                    "wording": "Interventions take effect with a time delay; short-term effects differ from long-term effects.",
+                    "formula": "ΔWAX_t ≠ ΔWAX_t+Δ"
+                },
+                {
+                    "axiom_id": "10.7",
+                    "title": "Combined Interventions",
+                    "wording": "Combinations (e.g., Awareness + social incentives) are more effective than single measures.",
+                    "formula": "Eff(ΔAWX + INC_soc) > Eff(ΔAWX) + Eff(INC_soc)"
+                },
+                {
+                    "axiom_id": "10.8",
+                    "title": "Feedback Effect",
+                    "wording": "Interventions not only change WAX but also feed back into Awareness and norm salience.",
+                    "formula": "AWX_(t+1) = f(WAX_t, INT_t)"
+                }
+            ],
+            "Cluster11_Master_Formula": [
+                {
+                    "axiom_id": "11.1",
+                    "title": "Overall WAX Formula",
+                    "wording": "The overall formula summarizes all axioms from A4 (Clusters 1–10) and operationalizes WAX in BCM 2.0.",
+                    "formula": {
+                        "Effective_Utility": "U_i_eff = α_i * γ_i(UNS) * δ_i(KOM) * U_i * S_i(AWX)",
+                        "Additive": "WAX_add = Σ U_i_eff",
+                        "Complementary": "WAX_compl = min(U_i_eff)",
+                        "Hybrid": "WAX = λ_t * WAX_compl + (1 - λ_t) * WAX_add",
+                        "Ambivalence": "Ambivalence = |WAX_add - WAX_compl|",
+                        "Threshold": "Behavior = 1 if WAX ≥ θ",
+                        "Segments": "WAX_macro = Σ ω_s * WAX_seg[s] or f(Network(WAX_seg))",
+                        "Lambda_Dynamics": "dλ/dt = α * AWX - β * UNS - γ * KOM + σ dB_t",
+                        "Intervention": "ΔWAX = f(ΔAWX, ΔUNS, ΔKOM, INC_fin, INC_soc)",
+                        "Feedback": "AWX_(t+1) = f(WAX_t, Intervention)"
+                    }
+                }
+            ],
+            "Cluster12_System_Integration_Simulation": {
+                "title": "System Integration & Simulation (Meta-Axioms)",
+                "version_tag": "v5.5_proxy_UNSIntegration_MA",
+                "purpose": "This cluster describes the meta-axiomatics of BCM2_06_WAX. It integrates all axioms 1–11 into a time-dependent system logic and uses the simplified uncertainty proxy $UNS_{eff}$ to simulate willingness to act over time.",
+                "meta_formula": {
+                    "expression": "WAX_sim(t) = F(ΔAWX_t, ΔUNS_eff_t, ΔKOM_t, λ_t, SEG_state_t, INT_t)",
+                    "description": "Time-dynamic aggregation of the WAX axioms. Behavior over time results from changes in the central influencing factors."
+                },
+                "uns_integration_proxy": {
+                    "meta_module": "9485_UNS_META",
+                    "included_submodules": [
+                        "9486_ENV",
+                        "9495_IPN",
+                        "9493_INS",
+                        "9494_EPI",
+                        "10180_AMB"
+                    ],
+                    "integration_logic": "UNS_eff = Σ (w_k * UNS_k)",
+                    "default_weights": {
+                        "w_ENV": 0.25,
+                        "w_IPN": 0.20,
+                        "w_INS": 0.20,
+                        "w_EPI": 0.15,
+                        "w_AMB": 0.20
+                    },
+                    "lambda_function": "λ_t = f(UNS_eff, KOM_t, INST_t)",
+                    "status_flag": "SIMPLIFIED_ACTIVE"
+                },
+                "meta_axioms": [
+                    {
+                        "ma_id": "12.1",
+                        "title": "Time Dynamics of the WAX Function",
+                        "wording": "The temporal change in WAX results from the derivatives of the influencing factors Awareness, Uncertainty, Complexity, and Intervention.",
+                        "formula": "dWAX/dt = ∂WAX/∂AWX * dAWX/dt + ∂WAX/∂UNS_eff * dUNS_eff/dt + ∂WAX/∂KOM * dKOM/dt + ∂WAX/∂INT * dINT/dt",
+                        "status_flag": "ACTIVE"
+                    },
+                    {
+                        "ma_id": "12.2",
+                        "title": "Path Dependence of λ",
+                        "wording": "The hybrid parameter λ changes over time depending on the Awareness, Uncertainty, and Complexity dynamics.",
+                        "formula": "dλ/dt = α * AWX - β * UNS_eff - γ * KOM",
+                        "parameters": {
+                            "alpha": "Sensitivity to Awareness changes",
+                            "beta": "Damping factor due to Uncertainty",
+                            "gamma": "Complexity resistance"
+                        },
+                        "status_flag": "ACTIVE"
+                    },
+                    {
+                        "ma_id": "12.3",
+                        "title": "Feedback Rule Between WAX and Awareness",
+                        "wording": "WAX influences future Awareness. Increasing willingness to act increases the probability that a topic remains salient.",
+                        "formula": "AWX_(t+1) = f(WAX_t, INT_t)",
+                        "interpretation": "Increased willingness to act stabilizes Awareness over time.",
+                        "status_flag": "ACTIVE"
+                    },
+                    {
+                        "ma_id": "12.4",
+                        "title": "Stability Condition",
+                        "wording": "The system is stable when the variance of WAX remains within a context-dependent limit value.",
+                        "formula": "Var(WAX_t) < θ_stab",
+                        "parameters": {
+                            "theta_stab": "Limit value for permissible volatility of willingness to act"
+                        },
+                        "governance_link": "9251_WATCHDOG",
+                        "status_flag": "ACTIVE"
+                    }
+                ],
+                "simulation_engine": {
+                    "engine_id": "BCM_SIM_CORE_v2",
+                    "iteration_scheme": "WAX_(t+1) = WAX_t + ΔWAX_t + ε_t, ε_t ~ N(0, σ^2)",
+                    "sigma_squared_control": "Variance proportional to $UNS_{eff}$",
+                    "supported_modes": [
+                        "Deterministic",
+                        "Stochastic",
+                        "Agent-based"
+                    ]
+                },
+                "integration_links": {
+                    "upstream_modules": [
+                        "7234_INU",
+                        "7235_KNU",
+                        "7236_IDN",
+                        "7240_AWX"
+                    ],
+                    "crosslinks": [
+                        "9485_UNS_META",
+                        "9492_KOM",
+                        "9493_INST",
+                        "9250_INT",
+                        "9251_WATCHDOG"
+                    ],
+                    "downstream_modules": [
+                        "7256_JNY",
+                        "7257_SEG",
+                        "7259_WTX"
+                    ]
+                },
+                "governance_audit": {
+                    "audit_event": "WAX_CLUSTER12_META_VALIDATION",
+                    "watchdog_triggers": [
+                        "WAX_STABILITY_ALERT",
+                        "UNSProxy_Volatility_Check",
+                        "λ_PATH_DEPENDENCY_MONITOR"
+                    ],
+                    "status_flag": "READY_FOR_VALIDATION"
+                },
+                "status": "ready_for_validation",
+                "notes": "Cluster 12 operationalizes the meta-axiomatics of BCM3.0. The meta-formula functions as a higher-order axiom and maps the dynamic system behavior of WAX with the integration of the uncertainty proxy $UNS_{eff}$."
+            }
+        },
+        "A5_Requirements": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter defines the operative, data-related, and contextual requirements for the calculation and simulation of BCM2_06_WAX using the Uncertainty Proxy $UNS_{\\text{eff}}$.",
+            "inputs": {
+                "core_modules": [
+                    "7234_INU",
+                    "7235_KNU",
+                    "7236_IDN",
+                    "7240_AWX"
+                ],
+                "description": "These modules provide the central utility types and the Awareness filter as input for the WAX function."
+            },
+            "context_variables": {
+                "primary": [
+                    "UNS_eff (aggregated uncertainty index, 9485 ff.)",
+                    "Complexity (9492)",
+                    "Institutions (9493 ff.)"
+                ],
+                "secondary": [
+                    "Life Phases (7457 LCP)",
+                    "Cultural Dynamics (WEIRD/non-WEIRD)",
+                    "Media Environment Variables (9486_ENV)"
+                ],
+                "description": "Context variables modulate discounting (γ), amplification (δ), and the hybrid factor (λ), thereby determining the momentary willingness to act."
+            },
+            "segment_parameters": {
+                "categories": [
+                    "Sociodemographics (Age, Education, Income)",
+                    "Cultural Codes (Individualism/Collectivism)",
+                    "Social Roles (Family, Organization, Peer-Groups)",
+                    "Digital Identities (Online Communities, Avatars)",
+                    "Hybrid Roles (real/digital)"
+                ],
+                "purpose": "These parameters define λ_SEG and make differences in willingness to act and intervention efficiency visible."
+            },
+            "awareness_salience": {
+                "dimensions": [
+                    "Topic Salience (AWX)",
+                    "Trigger Effects (media, social, emotional)",
+                    "Active Utility Types (INU, KNU, IDN)",
+                    "Instant Response (physiological activation)"
+                ],
+                "description": "Awareness determines which utility types are salient and enter the WAX function."
+            },
+            "dynamics_time": {
+                "time_scales": [
+                    "Instant (milliseconds–seconds)",
+                    "Short-term (seconds–days)",
+                    "Medium-term (weeks–months)",
+                    "Long-term (years–decades)"
+                ],
+                "description": "The time dimension ranges from instantaneous reactions (System 0) to institutionally stabilized behavioral patterns."
+            },
+            "intervention_parameters": {
+                "categories": [
+                    "Type (Awareness, Norm, Incentive, Rule, Institution)",
+                    "Strength (Intensity, Reach)",
+                    "Timing (Phase position in behavior)",
+                    "Expected Interaction (Synergy, Backfire, Attenuation)",
+                    "Target Segment (λ_SEG-based)"
+                ],
+                "description": "Parameters for planning and simulation of interventions in Module 9250 INT."
+            },
+            "measurement": {
+                "sources": [
+                    "Behavioral Data (Compliance, Adoption, Participation)",
+                    "Survey Data (Intentions, Self-reports)",
+                    "Choice Experiments (Lab/Field)",
+                    "Network Data (Diffusion, Peer Effects)",
+                    "Time Series (Long-term development of $WAX_t$)",
+                    "Proxy Indicators (e.g., market volatility → UNS_eff)"
+                ],
+                "validation": "All empirical data is calibrated segment-wise (Cluster 10 Measurability) and monitored by 9251 WATCHDOG."
+            },
+            "meta_links": {
+                "simulation_link": "Cluster12_SystemIntegration_Simulation",
+                "governance_link": "9251_WATCHDOG",
+                "intervention_link": "9250_INT"
+            },
+            "status_flag": "READY_FOR_VALIDATION",
+            "notes": "A5_Requirements v5.5 integrates the proxy uncertainty family (UNS_eff), expands the time dimension to include 'Instant,' and links WAX to Modules 9250 (Intervention) and 9251 (Governance)."
+        },
+        "A6_Integration": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter describes the structural, functional, and time-dynamic integration of module 7243_WAX into the architecture of BCM 3.0. It defines upstream and downstream relationships, governance links, and feedback effects, considering the aggregated uncertainty proxy $UNS_{\\text{eff}}$.",
+            "upstream": {
+                "modules": [
+                    "7234_INU",
+                    "7235_KNU",
+                    "7236_IDN",
+                    "7240_AWX"
+                ],
+                "description": "These modules provide utility types and the Awareness filter, which form the input basis for the calculation of WAX."
+            },
+            "core": {
+                "module": "7243_WAX",
+                "description": "WAX transforms the utility types and context variables into momentary willingness to act and serves as the central transition variable between utility logic and behavior."
+            },
+            "downstream": {
+                "modules": [
+                    "7256_JNY",
+                    "7257_SEG",
+                    "7259_WTX"
+                ],
+                "description": "Downstream modules use WAX to control the Behavioral Change Journey (JNY), segment logic (SEG), and probability function (WTX)."
+            },
+            "monitoring": {
+                "modules": [
+                    "9250_INT",
+                    "9251_WATCHDOG"
+                ],
+                "description": "Monitoring and intervention control are carried out via 9250 (Intervention Toolkit) and 9251 (Watchdog). Both modules monitor $\\Delta WAX$, λ-dynamics, and the stability of the system. "
+            },
+            "crosslinks": {
+                "primary": [
+                    "UNS_eff (aggregated uncertainty index, 9485 ff.)",
+                    "Complexity (9492)",
+                    "Institutions (9493 ff.)"
+                ],
+                "secondary": [
+                    "Life Journeys (7457_LCP)",
+                    "Simulation (Cluster12_SystemIntegration_Simulation)",
+                    "Governance (9251_WATCHDOG)"
+                ],
+                "description": "These modules provide additional context dimensions that modulate the discounting, amplification, and stability of the WAX value."
+            },
+            "feedback_loops": {
+                "forward": "WAX_t influences future Awareness (AWX_(t+1)) and norm salience.",
+                "reverse": "Changes in AWX, UNS_eff, or KOM directly feed back into WAX.",
+                "temporal": "ΔWAX_t is transferred into temporal simulations via Cluster 12 (WAX_(t+1) = WAX_t + ΔWAX_t + ε_t)."
+            },
+            "integration_logic": {
+                "meta_formula": "WAX = f(INU, KNU, IDN, AWX, UNS_eff, KOM, INST, λ)",
+                "simulation_formula": "dWAX/dt = ∂WAX/∂AWX * dAWX/dt + ∂WAX/∂UNS_eff * dUNS_eff/dt + ∂WAX/∂KOM * dKOM/dt + ∂WAX/∂INT * dINT/dt"
+            },
+            "governance_links": {
+                "watchdog": {
+                    "audit_event": "WAX_CLUSTER12_META_VALIDATION",
+                    "triggers": [
+                        "WAX_STABILITY_ALERT",
+                        "UNSProxy_Volatility_Check",
+                        "λ_PATH_DEPENDENCY_MONITOR"
+                    ],
+                    "status": "active"
+                },
+                "intervention_monitoring": {
+                    "module": "9250_INT",
+                    "metric": "ΔWAX as primary impact indicator"
+                }
+            },
+            "status_flag": "READY_FOR_VALIDATION",
+            "notes": "A6_Integration v5.5 replaces the individual dimensions of the uncertainty family with the aggregated proxy UNS_eff and fully links WAX with the meta-axiomatics of Cluster 12 and the governance modules 9250 and 9251. Feedback loops and stability conditions are simulated dynamically."
+        },
+        "A7_Boundaries": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter defines the theoretical, methodological, and operational boundaries of the applicability of BCM2_06_WAX, integrating the dynamic and stochastic components of BCM 3.0.",
+            "delimitations": {
+                "core": [
+                    "WAX ≠ Preference Function (no long-term utility ordering)",
+                    "WAX ≠ Motivation (no general driving force)",
+                    "WAX ≠ Awareness (no pure salience setting)",
+                    "Not a long-term model, but a momentary state (t-dependent)",
+                    "No self-intervention; changes only via upstream or context variables",
+                    "No simple aggregation without segment logic (7257_SEG)",
+                    "No substitution of the utility modules INU/KNU/IDN or the AWX filter"
+                ],
+                "extended": [
+                    "WAX is not a stable disposition but a temporally fluctuating system variable",
+                    "Simulation results are context- and path-dependent (λ-dynamics)",
+                    "WAX cannot be interpreted without UNS_eff (proxy required)",
+                    "No use as an individual performance metric or psychological test score"
+                ],
+                "description": "Delimitations ensure the formal consistency of WAX within the BCM architecture and prevent faulty reinterpretations outside of utility and context logic."
+            },
+            "constraints": {
+                "contextual": [
+                    "Highly context- and time-dependent (WAX_t varies across segments and epochs)",
+                    "Susceptible to distortions from uncertainty and complexity changes (UNS_eff, KOM)",
+                    "Backfire effects possible in contexts with strong norms or incorrectly set incentives"
+                ],
+                "technical": [
+                    "Stochastic fluctuations (ε_t) can lead to short-term instabilities",
+                    "Results depend on the quality and granularity of the input data",
+                    "Simulation results are sensitive to λ initial values and segment weightings"
+                ],
+                "governance": [
+                    "Requires active monitoring by 9251_WATCHDOG",
+                    "Only valid within licensed BCM environments (FehrAdvice & Partners AG)"
+                ],
+                "description": "Constraints define the conditions under which WAX is reliably applicable, both empirically and simulatively."
+            },
+            "validation_conditions": {
+                "stability": "Var(WAX_t) < θ_stab over simulation horizon",
+                "coherence": "WAX consistent with {INU, KNU, IDN, AWX} within defined error tolerance ε < 0.05",
+                "governance_event": "WAX_BOUNDARY_ALERT upon violation of stability or coherence conditions"
+            },
+            "status_flag": "READY_FOR_VALIDATION",
+            "notes": "A7_Boundaries v5.5 extends the classical delimitations with dynamic, stochastic, and governance-related constraints. It establishes compatibility with Cluster 12 (System Integration) and the monitoring mechanisms of the Watchdog Module 9251."
+        },
+        "A8_Versioning": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter documents the formal development logic of the module BCM2_06_WAX – Willingness to Act from its original additive version (v1.0) to the current meta-axiomatics (v5.5) within the BCM 3.0 architecture.",
+            "versions": [
+                {
+                    "id": "v1.0",
+                    "label": "Additive Base Model",
+                    "period": "2018–2019",
+                    "core_change": "Introduction of WAX as a pure summation function of salient utility without context integration.",
+                    "structure": "WAX = Σ (α_i * U_i * S_i)",
+                    "status": "archived"
+                },
+                {
+                    "id": "v2.0",
+                    "label": "Hybrid Model with λ",
+                    "period": "2019–2021",
+                    "core_change": "Introduction of the λ-logic for mixing additive and complementary decision structures.",
+                    "structure": "WAX = λ * WAX^compl + (1 - λ) * WAX^add",
+                    "status": "archived"
+                },
+                {
+                    "id": "v3.0",
+                    "label": "Context and Dynamics Integration",
+                    "period": "2021–2023",
+                    "core_change": "Introduction of the variables Uncertainty (UNS), Complexity (KOM), and Institutions (INST) with time dynamics.",
+                    "structure": "dλ/dt = α * AWX - β * UNS - γ * KOM",
+                    "status": "stable"
+                },
+                {
+                    "id": "v4.0",
+                    "label": "Segment Logic & Network Aggregation",
+                    "period": "2023–2024",
+                    "core_change": "Introduction of segment-specific λ values (λ_SEG) and network aggregation (Macro-WAX).",
+                    "structure": "WAX_SEG = λ_SEG * WAX^compl + (1 - λ_SEG) * WAX^add",
+                    "status": "stable"
+                },
+                {
+                    "id": "v5.0",
+                    "label": "Uncertainty Family & Ambiguity",
+                    "period": "2024–2025",
+                    "core_change": "Integration of the Uncertainty Family (9485 ff.) and the Ambiguity Module (10180 UNS_AMB).",
+                    "structure": "γ_i = f(UNS_ENV, UNS_IPN, UNS_INS, UNS_EPI, UNS_AMB)",
+                    "status": "active"
+                },
+                {
+                    "id": "v5.5",
+                    "label": "Proxy Integration & Meta-Axiomatics",
+                    "period": "2025–",
+                    "core_change": "Introduction of the aggregated Uncertainty Proxy (UNS_eff) and the Meta-Axioms (Cluster 12) for dynamic simulation. ",
+                    "structure": "WAX_sim(t) = F(ΔAWX_t, ΔUNS_eff_t, ΔKOM_t, λ_t, SEG_state_t, INT_t)",
+                    "crosslinks": [
+                        "Cluster12_SystemIntegration",
+                        "9251_WATCHDOG",
+                        "9250_INT"
+                    ],
+                    "status": "ready_for_validation"
+                }
+            ],
+            "meta_relations": {
+                "upstream": [
+                    "7234_INU",
+                    "7235_KNU",
+                    "7236_IDN",
+                    "7240_AWX"
+                ],
+                "downstream": [
+                    "7256_JNY",
+                    "7257_SEG",
+                    "7259_WTX"
+                ],
+                "linked_clusters": [
+                    "Cluster10_Measurability",
+                    "Cluster12_SystemIntegration"
+                ]
+            },
+            "version_control": {
+                "maintainer": "FehrAdvice & Partners AG – BCM Kernel Team",
+                "last_update": "2025-11-01",
+                "validation_module": "9251_WATCHDOG",
+                "review_cycle": "annually (Q4)",
+                "status_flag": "READY_FOR_VALIDATION"
+            },
+            "notes": "A8_Versioning v5.5 represents the consolidated development of the WAX module—from additive logic (v1.0) through hybrid and segment logic (v2.0–v4.0) to proxy integration and meta-axiomatics (Cluster 12). This version forms the basis for audit, simulation, and governance processes in BCM 3.0."
+        },
+        "A9_Citation": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter defines the scientific referencing, citation requirements, and publication basis for module 7243_WAX – Willingness to Act, including the integration of the uncertainty family and meta-axiomatics (Cluster 12).",
+            "mandatory_reference": {
+                "text": "FehrAdvice & Partners AG. (2025). BCM 3.0 – Modul 7243_WAX: Willingness to Act (v5.5_proxy_UNSIntegration). Zurich: FehrAdvice & Partners AG.",
+                "citation_standard": "APA 7th Edition",
+                "doi": "10.48592/BCM3.7243.v5.5",
+                "handle": "hdl:BCM3_7243_WAX_v55"
+            },
+            "citation_guidelines": {
+                "mandatory": [
+                    "Every scientific, commercial, or practice-oriented use of WAX must refer to FehrAdvice & Partners AG and BCM 3.0.",
+                    "The citation format must include the version and year.",
+                    "From Version 5.0 onwards, the DOI or Handle link must also be used."
+                ],
+                "recommended": [
+                    "When integrating into research reports, simulations, or policy papers: citation in the methods section.",
+                    "When applying in digital tools or dashboards: automated source reference (metadata-based)."
+                ]
+            },
+            "publications": {
+                "white_papers": [
+                    "FehrAdvice & Partners AG. (2023). Hybrid Decision Logics: From Awareness to Action. Zurich.",
+                    "FehrAdvice & Partners AG. (2024). The WAX Model in Organizational Behavior. Zurich.",
+                    "FehrAdvice & Partners AG. (2025). Proxy Integration of Uncertainty Families (BCM 3.0 Update). Zurich."
+                ],
+                "case_studies": [
+                    "Climate Policy and Societal Willingness to Act (EU & Switzerland, 2023–2025)",
+                    "FGM Prevention Programs in Somalia (2022–2024)",
+                    "Digital Trust & Cybersecurity Adoption in Swiss SMEs (2024–2025)"
+                ],
+                "academic_references": [
+                    "Fehr, E., Schurz, J., & Berset, L. (2024). Behavioral Change Modeling: Hybrid Structures and Context Integration. Working Paper, FehrAdvice Research Series.",
+                    "FehrAdvice & Partners AG. (2025). BCM 3.0 Handbook – Axiomatic Foundations of WAX and λ-Logic. Zurich."
+                ]
+            },
+            "cross_references": {
+                "upstream_modules": [
+                    "7234_INU",
+                    "7235_KNU",
+                    "7236_IDN",
+                    "7240_AWX"
+                ],
+                "downstream_modules": [
+                    "7256_JNY",
+                    "7257_SEG",
+                    "7259_WTX"
+                ],
+                "crosslinked_clusters": [
+                    "Cluster10_Measurability",
+                    "Cluster12_SystemIntegration"
+                ],
+                "meta_modules": [
+                    "9485_UNS_META",
+                    "9250_INT",
+                    "9251_WATCHDOG"
+                ]
+            },
+            "governance": {
+                "license": "BCM 3.0 License – FehrAdvice & Partners AG, Zurich",
+                "use_conditions": [
+                    "Use only with an active BCM license and a valid version (≥ v5.0).",
+                    "Unchanged reproduction of the axioms and meta-formulas is mandatory.",
+                    "Extensions or modifications are only permitted within the BCM research network."
+                ],
+                "watchdog_link": "9251_WATCHDOG",
+                "status_flag": "VALIDATED"
+            },
+            "metadata": {
+                "maintainer": "FehrAdvice & Partners AG – BCM Kernel Team",
+                "curator": "BEATRIX Black Belt",
+                "last_update": "2025-11-01",
+                "review_cycle": "annually (Q4)",
+                "audit_event": "CITATION_VALIDATION_EVENT_7243"
+            },
+            "notes": "A9_Citation v5.5 forms the official reference basis for Module 7243_WAX. It standardizes citation requirements in BCM 3.0, includes DOI/Handle references, and links the module to governance and Watchdog structures."
+        },
+        "A10_License_Governance": {
+            "version_tag": "v5.5_proxy_UNSIntegration",
+            "purpose": "This chapter defines the legal, ethical, and systemic governance conditions for the module BCM2_06_WAX – Willingness to Act (v5.5). It regulates ownership, license, control, ethics, and monitoring within the framework of the BCM 3.0 architecture.",
+            "ownership": {
+                "holder": "FehrAdvice & Partners AG, Zurich",
+                "rights": [
+                    "Copyright protected under Swiss law",
+                    "Part of the BCM 3.0 research architecture",
+                    "Exclusive proprietary rights to axioms, formulas, and meta-structure"
+                ],
+                "notes": "All derivatives and sub-modules are subject to the FehrAdvice BCM license structure."
+            },
+            "license": {
+                "type": "BCM 3.0 Standard License – Research & Application",
+                "usage_rights": [
+                    "Internal use in training, consulting, and research is permitted with an active license",
+                    "External use (publication, commercial application) only with explicit approval from FehrAdvice & Partners AG",
+                    "Citation requirement (A9_Citation) is part of the license conditions"
+                ],
+                "forbidden_use": [
+                    "Isolated use outside the BCM context",
+                    "Modification or substitution of axioms without formal clearance",
+                    "Commercial use without a license agreement"
+                ]
+            },
+            "governance": {
+                "modules": [
+                    "9251_WATCHDOG",
+                    "9250_INT",
+                    "Cluster12_SystemIntegration_Simulation"
+                ],
+                "rules": [
+                    "WATCHDOG monitors all active simulations, versioning, and Stability Checks (Var(WAX_t) < θ_stab). ",
+                    "Intervention Monitoring (9250) checks $\\Delta WAX$ as the impact indicator.",
+                    "Cluster 12 defines meta-axiomatics and time dynamics as the auditing basis for system stability."
+                ],
+                "status_flag": "ACTIVE"
+            },
+            "ethics": {
+                "principles": [
+                    "Use of the module only in ethically justifiable contexts.",
+                    "No application for the evaluation of individual persons or groups.",
+                    "Ethics approvals are required for sensitive topics (e.g., FGM, Hate Speech, Politics).",
+                    "Interventions must not cause damaging psychological, social, or cultural effects."
+                ],
+                "governance_link": "9251_WATCHDOG",
+                "ethics_audit": "ETHICS_COMPLIANCE_7243"
+            },
+            "liability": {
+                "clauses": [
+                    "FehrAdvice & Partners AG assumes no liability for faulty or abusive application.",
+                    "Users bear responsibility for the validity and transparency of their analyses.",
+                    "Simulation results are considered model-based forecasts, not statements of fact."
+                ],
+                "jurisdiction": "Switzerland (Zurich)",
+                "liability_status": "Limited"
+            },
+            "versioning_requirement": {
+                "requirement": "Every use must include a clear version specification (e.g., v5.5_proxy_UNSIntegration).",
+                "watchdog_validation": "Version is automatically checked against the BCM version register with every simulation.",
+                "compliance_flag": "MANDATORY"
+            },
+            "boundaries": {
+                "usage_scope": [
+                    "No standalone use without upstream/downstream modules",
+                    "No aggregation without segment logic (7257)",
+                    "No empirical application without calibration (Cluster 10)"
+                ],
+                "meta_boundary": "WAX can only be stably simulated within the framework of the hybrid logic λ and the uncertainty proxy $UNS_{\\text{eff}}$."
+            },
+            "supervision": {
+                "audit_events": [
+                    "WAX_CLUSTER12_META_VALIDATION",
+                    "WAX_BOUNDARY_ALERT",
+                    "UNSProxy_Volatility_Check",
+                    "λ_PATH_DEPENDENCY_MONITOR"
+                ],
+                "audit_cycle": "quarterly (Q1, Q2, Q3, Q4)",
+                "responsible_unit": "BCM Kernel & Watchdog Team"
+            },
+            "status_flag": "READY_FOR_AUDIT",
+            "notes": "A10_License_Governance v5.5 integrates the legal, ethical, and systemic supervision of module 7243_WAX. It directly links ownership and ethics to the Watchdog architecture (9251) and ensures that every application is context-appropriate, versioned, and auditable."
+        }
+    }
+}

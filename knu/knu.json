@@ -1,0 +1,557 @@
+{
+    "module": {
+        "id": "7235",
+        "name": "BCM2_02_Collective Benefit",
+        "version": "3.1",
+        "description": "Extended axiomatics of collective benefit including destruction logic (A43–A46), comprising dispositional and behavior-based components.",
+        "sections": {
+            "A1": {
+                "title": "Chapter Designation and Context",
+                "text": "The module BCM2_02_Collective Benefit formalizes the logic of benefit and disbenefit arising from collective goods. Collective benefit exists when goods or states are non-excludable and non-rivalrous. It arises independently of individual participation and operates across all FEPSDE dimensions (financial, psychological, physical, social, ecological, digital)."
+            },
+            "A2": {
+                "title": "Scope of Applicability",
+                "text": "The module applies to collectives of any size: teams, organizations, societies, or digital communities. Collective benefit includes both benefit gains and disbenefits and exerts effects even on actors who do not contribute themselves. Representation takes place across all FEPSDE dimensions."
+            },
+            "A3": {
+                "title": "Objective and Function within the Model",
+                "text": "The objective is the formal representation of collective benefit as a benefit and disbenefit function. The module defines the axioms governing collective action: non-excludability, non-rivalry, free-riding, punishment, reward, and norm stability. It forms the foundation for governance architectures and intervention designs."
+            },
+            "A4": {
+                "title": "Axiomatics",
+                "axioms": [
+                    {
+                        "id": "A1",
+                        "title": "FEPSDE Structure",
+                        "formula": "N_{kol}(t) = \\\\sum_{d \\\\in \\\\{fin, psy, phy, soc, eco, dig\\\\}} G_d^{kol}(t)",
+                        "description": "Collective benefit covers all FEPSDE dimensions: financial, psychological, physical, social, ecological, and digital."
+                    },
+                    {
+                        "id": "A2",
+                        "title": "Context Weights",
+                        "formula": "N_{kol}(t) = \\\\sum_{d} \\\\omega_d(t) \\\\cdot G_d^{kol}(t), \\\\\\\\; \\\\sum_d \\\\omega_d(t) = 1",
+                        "description": "The dimensions of collective benefit are weighted differently depending on context."
+                    },
+                    {
+                        "id": "A3",
+                        "title": "Pain/Gain Separation",
+                        "formula": "W(t) = \\\\sum G_{kol}(t) - \\\\sum P_{kol}(t)",
+                        "description": "Benefit gains (gain) and losses (pain) are modeled strictly separately."
+                    },
+                    {
+                        "id": "A4",
+                        "title": "Pain–Gain Asymmetry",
+                        "formula": "|\\\\partial W/\\\\partial P| \\\\gg |\\\\partial W/\\\\partial G|",
+                        "description": "Losses have a stronger impact than gains of equal magnitude."
+                    },
+                    {
+                        "id": "A5",
+                        "title": "Pain–Gain Complementarity",
+                        "formula": "\\\\kappa_{PG_{ij}} = 0, \\\\\\\\; \\\\forall i \\\\neq j",
+                        "description": "Pain and gain must not be mixed or netted against each other."
+                    },
+                    {
+                        "id": "A6",
+                        "title": "Temporal Conditionality",
+                        "formula": "W_{tot}(t) = \\\\sum_{\\\\tau \\\\in \\\\{inst, kurz, mittel, lang\\\\}} \\\\beta_\\\\tau \\\\cdot U_\\\\tau(t)",
+                        "description": "Collective benefit unfolds across four time horizons: instantaneous, short-term, medium-term, and long-term."
+                    },
+                    {
+                        "id": "A7",
+                        "title": "Uncertainty Modulation",
+                        "formula": "\\\\beta_\\\\tau = \\\\beta_\\\\tau^0 (1 - U_{env} - U_{epi} - U_{ipn} - U_{ins})",
+                        "description": "Uncertainty changes the time preferences of collective benefit. Environmental, epistemic, interpersonal, and institutional uncertainties act directly."
+                    },
+                    {
+                        "id": "A8",
+                        "title": "Belief-Based Cooperation",
+                        "formula": "N_{kol}(t) = (\\\\rho_K + f(B^{eff}(t))) \\\\cdot \\\\sum_d G_d^{kol}(t)",
+                        "description": "Cooperation within the collective emerges from beliefs about the contribution behavior of other actors."
+                    },
+                    {
+                        "id": "A9",
+                        "title": "Actor Types in the Collective",
+                        "formula": "\\\\rho_K(segment, phase) \\\\in \\\\{0, f(B^{eff}), 1\\\\}",
+                        "description": "Different actor types exist: pure egoists, conditional cooperators, and pure cooperators."
+                    },
+                    {
+                        "id": "A10",
+                        "title": "Life Changing Events",
+                        "formula": "\\\\Delta U(t) = LCE \\\\cdot \\\\theta, \\\\\\\\; \\\\theta > 0",
+                        "description": "Societal shocks or life changing events shift collective benefit irreversibly."
+                    },
+                    {
+                        "id": "A11",
+                        "title": "Non-Excludability",
+                        "formula": "\\\\forall i: U_{ind,i}(t) \\\\geq 0 \\\\\\\\; \\\\text{wenn } N_{kol}(t) > 0",
+                        "description": "No one can be fully excluded from collective benefit."
+                    },
+                    {
+                        "id": "A12",
+                        "title": "Non-Rivalry",
+                        "formula": "\\\\partial U_{ind,i}/\\\\partial U_{ind,j} = 0",
+                        "description": "Use by one person does not reduce the benefit of others."
+                    },
+                    {
+                        "id": "A13",
+                        "title": "Commons Rivalry",
+                        "formula": "\\\\partial U_{ind,i}/\\\\partial U_{ind,j} < 0 \\\\\\\\; \\\\text{bei Ressourcenkonflikten}",
+                        "description": "With scarce collective resources, rivalry arises (tragedy of the commons)."
+                    },
+                    {
+                        "id": "A14",
+                        "title": "Social Benefit and Disbenefit",
+                        "formula": "U^{soc} = +\\\\gamma_{inst}^{soc} \\\\cdot Coop - \\\\delta_{inst}^{soc}\\\\cdot Sanction",
+                        "description": "Social norms generate both social benefit and social disbenefit."
+                    },
+                    {
+                        "id": "A15",
+                        "title": "Financial Benefit and Disbenefit",
+                        "formula": "U^{fin} = +\\\\gamma^{fin}_{exist} - \\\\delta^{fin}_{inst} \\\\cdot Tax",
+                        "description": "Financial resources create security, but also costs such as taxes."
+                    },
+                    {
+                        "id": "A16",
+                        "title": "Psychological Benefit and Disbenefit",
+                        "formula": "U^{psy} = +\\\\gamma^{psy}\\\\cdot Trust - \\\\delta^{psy}\\\\cdot Stress",
+                        "description": "Collectives create psychological safety, but also stress through pressure and expectation."
+                    },
+                    {
+                        "id": "A17",
+                        "title": "Physical Benefit and Disbenefit",
+                        "formula": "U^{phy} = +\\\\gamma^{phy}\\\\cdot Safety - \\\\delta^{phy}\\\\cdot Regulation",
+                        "description": "Physical safety can be created collectively, but restrictions as well."
+                    },
+                    {
+                        "id": "A18",
+                        "title": "Digital Benefit and Disbenefit",
+                        "formula": "U^{dig} = +\\\\gamma^{dig}\\\\cdot Access - \\\\delta^{dig}\\\\cdot Surveillance",
+                        "description": "Digital infrastructure provides access, but also generates surveillance and control costs."
+                    },
+                    {
+                        "id": "A19",
+                        "title": "Ecological Benefit and Disbenefit",
+                        "formula": "U^{eco} = +\\\\gamma^{eco}\\\\cdot Sustainability - \\\\delta^{eco}\\\\cdot Restriction",
+                        "description": "Collective environmental protection yields benefits; ecological constraints can create disbenefits."
+                    },
+                    {
+                        "id": "A20",
+                        "title": "Cumulative Experience",
+                        "formula": "N_{kol}(t) = \\\\sum_{\\\\tau=0}^t G^{kol}(\\\\tau)e^{-\\\\mu_G (t-\\\\tau)} - P^{kol}(\\\\tau)e^{-\\\\mu_P (t-\\\\tau)}",
+                        "description": "Societal experience shapes collective benefit over time; gains and losses act asymmetrically."
+                    },
+                    {
+                        "id": "A21",
+                        "title": "Intergenerational Effect",
+                        "formula": "N_{kol}^{tot}(t) = \\\\sum_{g=0}^\\\\infty \\\\delta^g N_{kol}^{(gen+g)}(t+g)",
+                        "description": "Collective benefit operates across generations and is intergenerationally relevant."
+                    },
+                    {
+                        "id": "A22",
+                        "title": "Identity Complementarity",
+                        "formula": "N_{kol}^{eff}(t) = N_{kol}(t) \\\\cdot (1 + \\\\kappa \\\\cdot IDN(t))",
+                        "description": "Identification with a collective amplifies collective benefit."
+                    },
+                    {
+                        "id": "A23",
+                        "title": "Institutional Embeddedness",
+                        "formula": "N_{kol}(t) = f(N_{kol}^0(t), Inst(t))",
+                        "description": "Institutions shape benefit and disbenefit."
+                    },
+                    {
+                        "id": "A24",
+                        "title": "Resilience",
+                        "formula": "N_{kol}^{res}(t) = N_{kol}(t) \\\\cdot (1 - \\\\varepsilon)",
+                        "description": "Collective benefit remains stable even under disruptions."
+                    },
+                    {
+                        "id": "A25",
+                        "title": "Emergence and Tipping Points",
+                        "formula": "dN_{kol}/dt = f(SN, Coop, Policy) + \\\\xi(t)",
+                        "description": "Collective benefit can abruptly collapse or rise due to tipping points."
+                    },
+                    {
+                        "id": "A26",
+                        "title": "Fairness and Distribution",
+                        "formula": "N_{kol}(t) = \\\\sum_i U_{ind,i}(t) - \\\\phi \\\\cdot Var(U_{ind,i}(t))",
+                        "description": "Unequal distributions reduce collective benefit."
+                    },
+                    {
+                        "id": "A27",
+                        "title": "Ethics and Privacy",
+                        "formula": "N_{kol}(t) = f(...) \\\\\\\\; s.t. \\\\\\\\; Fairness, Privacy",
+                        "description": "Collective benefit must comply with ethical standards and privacy."
+                    },
+                    {
+                        "id": "A28",
+                        "title": "Transparency",
+                        "formula": "T(N_{kol}) = \\\\{Formeln, Parameter, Quellen\\\\}",
+                        "description": "Collective benefit must be transparently documented and verifiable."
+                    },
+                    {
+                        "id": "A29",
+                        "title": "Bias Control",
+                        "formula": "Bias(N_{kol}) \\\\leq \\\\epsilon_{max}",
+                        "description": "Bias in the measurement of collective benefit must be limited."
+                    },
+                    {
+                        "id": "A30",
+                        "title": "Misuse Prevention",
+                        "formula": "Archive(N_{kol}(t)), Protect(N_{kol}(t))",
+                        "description": "Collective benefit must be protected against misuse and archived."
+                    },
+                    {
+                        "id": "A31",
+                        "title": "Decentralized Punishment",
+                        "formula": "U_p = U_p - \\sum_d c_d(s), \\\\; U_d = U_d - m \\cdot c_p(s)",
+                        "description": "Decentralized punishment occurs only when social norms exist, punishment is proportionate, and marginal benefits are greater than or equal to marginal costs."
+                    },
+                    {
+                        "id": "A32",
+                        "title": "Centralized Punishment",
+                        "formula": "U_d(t+1) = U_d(t) - P_{inst}(t) \\cdot I_{acc}(t)",
+                        "description": "Centralized punishment is effective only when institutions possess accurate information and sanctions are perceived as legitimate."
+                    },
+                    {
+                        "id": "A33",
+                        "title": "Whistleblowing",
+                        "formula": "Report_i(t) = 1 \\\\; \\text{if } E[U_{WB}] - E[C_{WB}] > 0 \\\\; \\wedge Protect_{WB}(t) \\geq \\theta",
+                        "description": "Whistleblowing occurs only when expected benefits exceed expected costs and sufficient protection is ensured."
+                    },
+                    {
+                        "id": "A34",
+                        "title": "Preventive Conformity",
+                        "formula": "P(V_{conf}(t)) = f(SN_{strength}(t), m_{legit}(t))",
+                        "description": "Strong norms combined with proportionate sanctions lead to preventive conformity without the need for actual punishment."
+                    },
+                    {
+                        "id": "A35",
+                        "title": "Institutional Quality",
+                        "formula": "Eff_{inst}(t) = f(Q_{inst}(t), I_{acc}(t), Fairness(t))",
+                        "description": "The effectiveness of centralized punishment depends on institutional quality, fairness, and informational accuracy."
+                    },
+                    {
+                        "id": "A36",
+                        "title": "Elite Role Modeling",
+                        "formula": "P(V_{conf}(t)) = f(..., Elite_{conf}(t))",
+                        "description": "Role-model behavior by elites strengthens or weakens norm conformity and the legitimacy of sanctions."
+                    },
+                    {
+                        "id": "A37",
+                        "title": "Positive Incentives",
+                        "formula": "U_{conf}(t) = U_{conf}(t) + r - c_r",
+                        "description": "Rewards for conforming behavior stabilize collective benefit."
+                    },
+                    {
+                        "id": "A38",
+                        "title": "Rehabilitation",
+                        "formula": "U_{post-pun}(t) = U_{norm}(t)",
+                        "description": "After punishment, reintegration into the collective is necessary to restore normative equilibrium."
+                    },
+                    {
+                        "id": "A39",
+                        "title": "Inequality Effects",
+                        "formula": "Impact_{pun}(i) \\neq Impact_{pun}(j)",
+                        "description": "Punishments affect actors differently depending on status and available resources."
+                    },
+                    {
+                        "id": "A40",
+                        "title": "Mis-Punishment",
+                        "formula": "Err(t) > 0 \\\\; \\Rightarrow Trust(t+1) \\downarrow",
+                        "description": "Erroneous punishment destroys trust and institutional legitimacy."
+                    },
+                    {
+                        "id": "A41",
+                        "title": "Cultural Variation",
+                        "formula": "Form(Pun) = f(Culture)",
+                        "description": "The form and acceptance of punishment depend on cultural norms."
+                    },
+                    {
+                        "id": "A42",
+                        "title": "Dynamic Adaptation",
+                        "formula": "Pun(t) = f(DefectionRate(t), Context(t))",
+                        "description": "Punishment dynamically adapts to defection rates and contextual conditions."
+                    }
+                ]
+            },
+            "A5": {
+                "title": "Requirements",
+                "text": "Modeling collective benefit requires data on individual contributions and collective outcomes. In addition, indicators for norm strength, cultural acceptance, institutional quality, fairness, inequality, and statistical error rates are necessary."
+            },
+            "A6": {
+                "title": "Integration",
+                "text": "The module 7235 integrates as follows: 7232 (Meta) and 9232 (Standard); 7234 (Individual Benefit) and 7236 (Identity Benefit); 7240 (Awareness) and 7243 (Willingness); 8904 (Context Logic) and 7257 (Segment Logic); 7457 (Life Journeys) and 7256 (Behavioral Change Journey); uncertainty modules 9485–9495 and 9492 (Complexity); 9250 (Intervention Toolkit) and 9251 (Watchdog); 9477 (Statistical Modeling), 9479 (Player Types), and 9480 (Game Theory)."
+            },
+            "A7": {
+                "title": "Module Limitations",
+                "text": "The module does not model individual benefit preferences; this is covered in module 7234. Full simulations require context and uncertainty modules. Without incorporating institutional quality (A35), no reliable statements can be made about centralized punishment."
+            },
+            "A8": {
+                "title": "Versioning",
+                "text": "Version 1.0: Introduction of FEPSDE structure. Version 2.0: Integration of pain/gain, time, uncertainty. Version 2.5: Expansion with governance and transparency. Version 3.0: Added punishment, incentive, and stability axioms (A31–A42). Version 3.1: Extension with A43–A46 (destruction logic including Dark Triad and behavioral indicators)."
+            },
+            "A9": {
+                "title": "Citation",
+                "text": "Fehr and Gächter (2000ff.): public goods experiments, cooperation and punishment. Ostrom (1990): governing the commons and collective goods. FehrAdvice & Partners AG: Behavioral Change Model BCM 2.0/2.1."
+            },
+            "A10": {
+                "title": "License",
+                "text": "Use according to FehrAdvice BCM 2.0 licensing. Citation required for reuse."
+            }
+        },
+        "axioms_extension": [
+            {
+                "id": "A43",
+                "title": "Antisocial Punishment (Destruction Condition)",
+                "formula": "Pun_anti = Pun * (1 - Legit) * (1 - NormCoh)",
+                "description": "Punishment without legitimacy and without normative coherence destroys collective benefit.",
+                "linked_axioms": [
+                    "A31",
+                    "A35",
+                    "A40",
+                    "A41"
+                ],
+                "empirical_reference": "Herrmann, Thöni & Gächter (2008), Science 319, 1362–1367"
+            },
+            {
+                "id": "A44",
+                "title": "Dispositional Amplification (Dark Triad Extension I)",
+                "formula": "Θ_DT = α_M*M + α_N*N + α_P*P",
+                "description": "Machiavellianism (M), narcissism (N), and psychopathy (P) amplify the intensity of antisocial punishment. Each component affects legitimacy, norm coherence, and punishment differently.",
+                "linked_axioms": [
+                    "A43"
+                ],
+                "parameters": {
+                    "α_M": 0.4,
+                    "α_N": 0.35,
+                    "α_P": 0.25
+                },
+                "empirical_reference": "Paulhus & Williams (2002); Jones & Paulhus (2014)"
+            },
+            {
+                "id": "A45",
+                "title": "Behavior-Based Indicators (A43 Decalogue Extension II)",
+                "formula": "Θ_Beh = Σ_i β_i * v_i, i=1..10",
+                "description": "Ten micro-social behavioral patterns signal the activation of antisocial punishment.",
+                "behavioral_indicators": [
+                    {
+                        "id": 1,
+                        "name": "Gaslighting",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 2,
+                        "name": "Guilt-Tripping",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 3,
+                        "name": "Silent Treatment",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 4,
+                        "name": "Love Bombing",
+                        "β": 0.07
+                    },
+                    {
+                        "id": 5,
+                        "name": "Playing the Victim",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 6,
+                        "name": "Triangulation",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 7,
+                        "name": "Emotional Blackmail",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 8,
+                        "name": "Social Undermining",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 9,
+                        "name": "Exclusion Signaling",
+                        "β": 0.1
+                    },
+                    {
+                        "id": 10,
+                        "name": "Moral Framing Punishment",
+                        "β": 0.13
+                    }
+                ],
+                "linked_axioms": [
+                    "A43",
+                    "A44"
+                ],
+                "empirical_reference": "FehrAdvice Research (2025)"
+            },
+            {
+                "id": "A46",
+                "title": "Destruction Function with Disposition and Behavior (A43-DTX Extension III)",
+                "formula": "Pun_anti_DTX = Pun * (1 - Legit) * (1 - NormCoh) * (1 + Θ_DT) * (1 + Θ_Beh)",
+                "description": "Extended destruction condition: antisocial punishment is multiplicatively amplified by dispositional (Dark Triad) and behavior-based (A43 Decalogue) factors.",
+                "linked_axioms": [
+                    "A43",
+                    "A44",
+                    "A45"
+                ],
+                "empirical_reference": "FehrAdvice & Partners AG – BCM 2.1 Simulation Engine"
+            }
+        ],
+        "integration_v31": {
+            "title": "Integration",
+            "version": "3.1",
+            "description": "Describes the functional embedding of module 7235 – Collective Benefit – in the overall architecture of the Behavioral Change Model 2.0. It considers all dependencies to meta, utility, context, uncertainty, and intervention modules, as well as the new destruction axioms A43–A46.",
+            "sections": [
+                {
+                    "heading": "1. Meta and Structure Modules",
+                    "modules": [
+                        {
+                            "id": "7232",
+                            "name": "BCM2_00_META",
+                            "role": "Fundamental axioms and logical framework conditions of the model."
+                        },
+                        {
+                            "id": "9232",
+                            "name": "BCM2_00_STD",
+                            "role": "Standardization of variable and function notations."
+                        }
+                    ],
+                    "integration_logic": "Meta and standard modules provide the formal frame for all benefit functions; axioms A1–A7 of 7235 directly reference the base concepts defined there."
+                },
+                {
+                    "heading": "2. Utility Modules",
+                    "modules": [
+                        {
+                            "id": "7234",
+                            "name": "Individual Benefit",
+                            "link": "Aggregation of individual contributions into N_kol."
+                        },
+                        {
+                            "id": "7236",
+                            "name": "Identity Benefit",
+                            "link": "Degree of identification modulates N_kol (A22)."
+                        }
+                    ],
+                    "integration_logic": "7235 represents the collective aggregation layer that links 7234 (individual) and 7236 (identity)."
+                },
+                {
+                    "heading": "3. Awareness and Willingness Modules",
+                    "modules": [
+                        {
+                            "id": "7240",
+                            "name": "Awareness",
+                            "role": "Perception of collective benefit; influences Legit(t)."
+                        },
+                        {
+                            "id": "7243",
+                            "name": "Willingness",
+                            "role": "Readiness to act to maintain N_kol; responds to Pun_anti."
+                        }
+                    ],
+                    "integration_logic": "Perception and willingness functions act as feedback loops: if awareness or willingness decreases, Pun_anti increases and ΔN_kol becomes negative."
+                },
+                {
+                    "heading": "4. Context and Segment Modules",
+                    "modules": [
+                        {
+                            "id": "8904",
+                            "name": "Context Logic",
+                            "role": "Defines situational conditions for legitimacy and norm coherence."
+                        },
+                        {
+                            "id": "7257",
+                            "name": "Segment Logic",
+                            "role": "Computes Θ_DT and Θ_Beh depending on context and segment."
+                        },
+                        {
+                            "id": "7457",
+                            "name": "Life Journeys",
+                            "role": "Temporal variation of collective benefit perception."
+                        },
+                        {
+                            "id": "7256",
+                            "name": "Behavioral Change Journey",
+                            "role": "Phase model for change processes of collective structures."
+                        }
+                    ],
+                    "integration_logic": "Context and segmentation determine weights ω_d(t) and the dynamics of Legit(t) and NormCoh(t) over time and life phase."
+                },
+                {
+                    "heading": "5. Uncertainty and Complexity Modules",
+                    "modules": [
+                        {
+                            "id": "9485–9495",
+                            "name": "Uncertainty Modules",
+                            "role": "Modulate β_τ and influence long-run stability of collective benefit."
+                        },
+                        {
+                            "id": "9492",
+                            "name": "Complexity",
+                            "role": "Analyzes system robustness against Pun_anti disturbances."
+                        }
+                    ],
+                    "integration_logic": "Uncertainty reduces time preference and amplifies the impact of A43; complexity modulates system resilience (A24)."
+                },
+                {
+                    "heading": "6. Governance and Intervention Modules",
+                    "modules": [
+                        {
+                            "id": "9250",
+                            "name": "Intervention Toolkit",
+                            "role": "Provides action options for A36–A38 (role modeling, incentives, rehabilitation)."
+                        },
+                        {
+                            "id": "9251",
+                            "name": "Watchdog",
+                            "role": "Monitors Pun_anti_DTX, Θ_DT, and Θ_Beh as an early-warning system."
+                        }
+                    ],
+                    "integration_logic": "A43–A46 provide inputs for Watchdog 9251. If a threshold is exceeded, 9250 activates suitable intervention pathways."
+                },
+                {
+                    "heading": "7. Empirical and Game-Theoretic Validation",
+                    "modules": [
+                        {
+                            "id": "9477",
+                            "name": "Statistical Modeling",
+                            "role": "Validates empirical values of Pun_anti_DTX and ΔN_kol."
+                        },
+                        {
+                            "id": "9479",
+                            "name": "Player Types",
+                            "role": "Determines segment types (cooperative, egoistic, conditional) for ρ_K."
+                        },
+                        {
+                            "id": "9480",
+                            "name": "Game Theory",
+                            "role": "Computes strategic equilibria under punishment conditions."
+                        }
+                    ],
+                    "integration_logic": "Data from 7235 (N_kol, Pun_anti_DTX) serve as inputs for experimental and game-theoretic simulations."
+                },
+                {
+                    "heading": "8. Extension A43–A46 (Destruction Logic)",
+                    "description": "The destruction axioms A43–A46 connect structural, dispositional, and behavioral layers.",
+                    "linkage": {
+                        "A43": "Defines the base condition for antisocial punishment.",
+                        "A44": "Extends with dispositional amplification (Dark Triad).",
+                        "A45": "Adds behavior-based indicators (A43 Decalogue).",
+                        "A46": "Links all factors into the destruction function Pun_anti_DTX."
+                    },
+                    "integration_logic": "These axioms are directly coupled with Watchdog 9251 and Segment Logic 7257 to detect destructive dynamics early and compensate via Intervention Toolkit 9250."
+                },
+                {
+                    "heading": "9. Integration Outcome",
+                    "summary": "7235 is the central aggregation module for collective benefit, disbenefit, and destruction functions. It links individual, collective, and identity-level utility layers with context, uncertainty, and intervention logics. Through A43–A46, it serves as the interface for detecting, quantifying, and stabilizing collective dynamics."
+                }
+            ]
+        }
+    }
+}

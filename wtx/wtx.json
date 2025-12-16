@@ -1,0 +1,202 @@
+{
+    "module": {
+        "id": "BCM2_07_WTX7260",
+        "name": "Probability Function",
+        "axiom_count": 10,
+        "version": "2.0",
+        "release_date": "2025-07",
+        "maintainer": "FehrAdvice & Partners AG",
+        "architecture": "BCM 2.0 / BEATRIX 2025",
+        "scope_binding": "mandatory_for_decision_transition_effect_chance_modeling"
+    },
+    "A1_Title": {
+        "title": "BCM2_07_WTX7260 [Probability Function – 10 Axioms]"
+    },
+    "A2_Scope": {
+        "description": "This chapter defines the axiomatic and operational structure of the probability function in the Behavioral Change Model (BCM 2.0/BEATRIX). It specifies the calculation, meaning, and modulation of probabilities as a core element of behavioral change architecture, simulation, and intervention planning. The module is mandatory for all BCM/BEATRIX applications modeling decision, transition, or effect chances."
+    },
+    "A3_Objectives": {
+        "goals": [
+            "Formalization and operationalization of decision and transition probabilities in behavioral change",
+            "Integration of utility, willingness, awareness, context, and segment logic into probabilistic models",
+            "Enabling empirically testable, transparently documented, and auditable probability computations"
+        ]
+    },
+    "A4_Axioms": [
+        {
+            "id": "P_01",
+            "name": "Probabilistic Decision Architecture",
+            "definition": "Any behavioral change is representable via probability functions between states/phases.",
+            "formal": "P(i→j, t) = f(N(t), W(t), A_mod(t), S(t), C(t))"
+        },
+        {
+            "id": "P_02",
+            "name": "Utility Dependence",
+            "definition": "Transition probability increases with subjectively perceived total utility.",
+            "formal": "∂P/∂N > 0"
+        },
+        {
+            "id": "P_03",
+            "name": "Willingness as Switching Condition",
+            "definition": "If willingness is not given, the probability of behavioral change is zero.",
+            "formal": "P(i→j, t) = 0 if W(t) < θ_W"
+        },
+        {
+            "id": "P_04",
+            "name": "Awareness as Trigger",
+            "definition": "Situationally activated awareness increases transition probability.",
+            "formal": "∂P/∂A_mod > 0"
+        },
+        {
+            "id": "P_05",
+            "name": "Context Dependence",
+            "definition": "Context factors modulate all transition probabilities.",
+            "formal": "P(i→j, t) = f(..., C(t))"
+        },
+        {
+            "id": "P_06",
+            "name": "Segment Differentiation",
+            "definition": "Each segment has its own probability functions and parameters.",
+            "formal": "P_S(i→j, t) = f_S(...)"
+        },
+        {
+            "id": "P_07",
+            "name": "Dynamics and Feedback",
+            "definition": "Probabilities are time-dependent and are adapted through experience, feedback, and learning processes.",
+            "formal": "P(i→j, t+1) = f(P(i→j, t), Feedback(t), Learning(t))"
+        },
+        {
+            "id": "P_08",
+            "name": "Social Reinforcement",
+            "definition": "Social norms and observed behavior influence probabilities.",
+            "formal": "P(i→j, t) = f(..., SN(t), OVB(t))"
+        },
+        {
+            "id": "P_09",
+            "name": "Uncertainty, Risk, and Ambiguity",
+            "definition": "Higher uncertainty, perceived risk, or ambiguity reduce transition probabilities.",
+            "formal": "∂P/∂Risk < 0; ∂P/∂Uncertainty < 0; ∂P/∂Ambiguity < 0"
+        },
+        {
+            "id": "P_10",
+            "name": "Measurability and Operationalization",
+            "definition": "Probabilities must be empirically measurable and testable via observable transitions, repetitions, or experimental designs.",
+            "formal": "O_P(t) → P(i→j, t)"
+        }
+    ],
+    "A5_Prerequisites": {
+        "requirements": [
+            "Initialization of the BEATRIX/BCM kernel (BCM3_00_INIT9249_KERNEL)",
+            "Loaded modules for utilities (BCM2_01_INU, BCM2_02_KNU, BCM2_03_IDN), awareness (BCM2_05_AWX), willingness (BCM2_06_KOM), segment logic (BCM2_08_PRB / BCM2_09_SEG), behavioral change journey (BCM2_10_JNY)",
+            "Context vector defined for each application"
+        ]
+    },
+    "A6_Module_Integration": {
+        "integration": [
+            "Direct coupling to utility, willingness, awareness, segment, and context modules",
+            "Integrated in all agent-based simulations, policy and intervention architectures",
+            "Foundation for calibration of experimental and real-world behavioral models"
+        ]
+    },
+    "A7_Language_and_Semantic_Boundaries": {
+        "constraints": [
+            "Only BCM-conform terminology (no psychological, suggestive, or system-external terms)",
+            "No use for individual diagnostics; only for model-based analysis and simulation"
+        ]
+    },
+    "A8_Versioning": {
+        "status": {
+            "bcm_version": "2.0",
+            "release": "July 2025",
+            "responsibility": "FehrAdvice & Partners AG"
+        }
+    },
+    "A9_Referencing": {
+        "modules": [
+            "BCM2_01_INU",
+            "BCM2_02_KNU",
+            "BCM2_03_IDN",
+            "BCM2_05_AWX",
+            "BCM2_06_KOM",
+            "BCM2_08_PRB",
+            "BCM2_09_SEG",
+            "BCM2_10_JNY",
+            "BCM3_00_INIT9249_KERNEL"
+        ],
+        "literature": [
+            "FehrAdvice Behavioral Change Model",
+            "Theoretical and empirical work on probabilistic decision theory",
+            "Experimental studies on behavioral change"
+        ]
+    },
+    "A10_License_and_Usage": {
+        "license": "Use restricted to the BEATRIX/BCM 2.0 architecture with explicit initialization and inclusion of all mandatory modules.",
+        "conditions": [
+            "Explicit kernel initialization is required",
+            "All mandatory modules must be integrated",
+            "Commercial and scientific use requires written permission from FehrAdvice & Partners AG"
+        ]
+    },
+    "Conclusion": {
+        "summary": [
+            "Formally transparent, traceable modeling and simulation of behavioral transitions",
+            "Integration of all relevant utility, willingness, awareness, segment, and context factors",
+            "Empirical testability, auditability, and governance for decision and intervention architectures in BCM 2.0/BEATRIX"
+        ]
+    },
+    "Appendix": {
+        "archived_content_notice": "Earlier versions may exist for documentation/comparison only and must not be used for modeling, simulation, or interventions; only the current version (v2.0, July 2025) is applicable.",
+        "legacy_table_mapping": [
+            {
+                "legacy_id": "P1",
+                "maps_to": "P_03",
+                "note": "Legacy emphasizes monotonic dependence on W; current axiom defines W as a hard switch/zero condition under threshold."
+            },
+            {
+                "legacy_id": "P2",
+                "maps_to": "P_03",
+                "note": "Legacy logistic form is a specific functional instantiation of threshold sensitivity; current axiom stays abstract."
+            },
+            {
+                "legacy_id": "P3",
+                "maps_to": "P_06",
+                "note": "Segment-specific thresholds/parameters are covered by segment differentiation."
+            },
+            {
+                "legacy_id": "P4",
+                "maps_to": "P_05",
+                "note": "Journey-phase sensitivity can be represented as part of context/structural modulators; if modeled explicitly, it is included via C(t) or as a dedicated factor in f."
+            },
+            {
+                "legacy_id": "P5",
+                "maps_to": "P_10",
+                "note": "Asymptotic behavior supports probabilistic (non-deterministic) interpretation; measurability requirement remains."
+            },
+            {
+                "legacy_id": "P6",
+                "maps_to": "P_07",
+                "note": "Time-dynamics are explicitly captured via feedback/learning update."
+            },
+            {
+                "legacy_id": "P7",
+                "maps_to": "P_01",
+                "note": "Interventions affect probabilities via upstream inputs (utilities, awareness, willingness, context); represented by f(.) arguments."
+            },
+            {
+                "legacy_id": "P8",
+                "maps_to": "P_01",
+                "note": "Combined effect of BCM components is captured in the core functional dependency statement."
+            },
+            {
+                "legacy_id": "P9",
+                "maps_to": "P_07",
+                "note": "Experience learning changing slope/parameters is captured by probability update with learning/feedback."
+            },
+            {
+                "legacy_id": "P10",
+                "maps_to": "P_10",
+                "note": "Stochastic noise / non-determinism is consistent with empirical measurability and probabilistic interpretation."
+            }
+        ]
+    }
+}

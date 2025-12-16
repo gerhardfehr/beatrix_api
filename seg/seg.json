@@ -1,0 +1,219 @@
+{
+    "module": {
+        "id": "BCM2_09_SEG7257",
+        "name": "Segment Logic (Behavioral Change Segments)",
+        "axiom_count": 10,
+        "version": "2.0",
+        "release_date": "2025-07",
+        "maintainer": "FehrAdvice & Partners AG",
+        "architecture": "BCM 2.0 / BEATRIX 2025"
+    },
+    "A1_Title": {
+        "title": "BCM2_09_SEG7257 [Segment Logic – Axioms of the Behavioral Change Segments]"
+    },
+    "A2_Scope": {
+        "description": "This chapter specifies the axiomatic and operational structure of segment logic in the Behavioral Change Model (BCM 2.0/BEATRIX). It defines segment-based heterogeneity, segment-specific willingness and awareness dynamics, transition rules, intervention sensitivity, and model couplings for all behavioral-economic applications, simulations, and intervention architectures."
+    },
+    "A3_Objectives": {
+        "goals": [
+            "Precise, model-integrated representation of segmented behavioral dynamics in populations and organizations",
+            "Operationalization of heterogeneity along the Behavioral Change Journey, the willingness function, and all utility dimensions",
+            "Enablement of segment-specific interventions and their evaluation",
+            "Ensuring measurability, comparability, and auditability of segments and their transitions"
+        ]
+    },
+    "A4_Axioms": [
+        {
+            "id": "SEG_01",
+            "name": "Segment-Based Heterogeneity",
+            "definition": "Populations are heterogeneous and consist of distinct behavioral segments.",
+            "formal": "S ∈ {Leaders, EarlyAdopters, Pragmatists, Followers, Skeptics, Resistants}",
+            "notes": "Segment labels are BCM-conform terms; segment set is the default taxonomy for BCM2_09."
+        },
+        {
+            "id": "SEG_02",
+            "name": "Willingness Is Segment-Dependent",
+            "definition": "Each segment has its own willingness function.",
+            "formal": "W_S(t) = f(N_ind,S, N_kol,S, N_id,S, A_S(t), B_S(t), H_S(t))",
+            "notes": "Weights, distortions, and sensitivities vary by segment."
+        },
+        {
+            "id": "SEG_03",
+            "name": "Awareness Acts Differentially",
+            "definition": "Awareness affects different segments with different intensity.",
+            "formal": "dW_S/dA ≠ dW_{S'}/dA",
+            "notes": "Leaders and EarlyAdopters are typically more awareness-sensitive than Skeptics and Resistants."
+        },
+        {
+            "id": "SEG_04",
+            "name": "Social Influence Is Asymmetrically Distributed",
+            "definition": "Some segments (e.g., Leaders, EarlyAdopters) exert disproportionate influence on others.",
+            "formal": "S_influence ∝ Degree_centrality(S)"
+        },
+        {
+            "id": "SEG_05",
+            "name": "Segment Transitions Are Probabilistic",
+            "definition": "Individuals can move between segments with transition probabilities.",
+            "formal": "P(S_i → S_j) = f(A(t), W(t), SN(t))"
+        },
+        {
+            "id": "SEG_06",
+            "name": "Intervention Sensitivity Is Segment-Dependent",
+            "definition": "Intervention effectiveness varies across segments.",
+            "formal": "ΔW_S(t) = f(I_segment(t))"
+        },
+        {
+            "id": "SEG_07",
+            "name": "Segment Size Is Dynamic",
+            "definition": "Segment sizes change over time.",
+            "formal": "dS(t)/dt = f(Transitions, Norms, Feedback, Contexts)"
+        },
+        {
+            "id": "SEG_08",
+            "name": "Collective Utility Acts Indirectly",
+            "definition": "In segmented populations, collective utility takes effect via social norms and identity rather than directly.",
+            "formal": "N_kol,S(t) = f(SN_S, G_id,S)"
+        },
+        {
+            "id": "SEG_09",
+            "name": "Risk Evaluation Differs by Segment",
+            "definition": "Risk profiles differ across segments.",
+            "formal": "B_S(t) = (λ_R^S, λ_A^S, λ_U^S, α_OC^S, α_LA^S)"
+        },
+        {
+            "id": "SEG_10",
+            "name": "Segmentation Is Decisive for Modeling and Intervention",
+            "definition": "One-size-fits-all measures are inefficient and can generate resistance.",
+            "formal": "¬OneSizeFitsAll",
+            "notes": "Interventions must be planned segment-differentiated for effectiveness and to avoid backfire/resistance patterns."
+        }
+    ],
+    "A5_Prerequisites": {
+        "requirements": [
+            "Initialization of the BEATRIX/BCM kernel (BCM3_00_INIT9249_KERNEL)",
+            "Loaded modules for utility functions (BCM2_01_INU, BCM2_02_KNU, BCM2_03_IDN), awareness (BCM2_05_AWX), willingness (BCM2_06_KOM / BCM2_07_WTX)",
+            "Definition of the segmentation grid for the target population or organization",
+            "Context vector defined for each segment analysis"
+        ]
+    },
+    "A6_Module_Integration": {
+        "integration": [
+            "Direct linkage with the willingness function, awareness, utility modules, and the Behavioral Change Journey (BCM2_10_JNY)",
+            "Segment logic functions as a filter and amplifier for all intervention and simulation architectures",
+            "Integrated into the Intervention Toolkit (BCM2_13_INT)"
+        ]
+    },
+    "A7_Language_and_Semantic_Boundaries": {
+        "constraints": [
+            "Only BCM-conform terminology and segment labels are used",
+            "No application for individual diagnostics; exclusively for model-based change and intervention architecture",
+            "No use of psychological, suggestive, or system-external terms"
+        ]
+    },
+    "A8_Versioning": {
+        "status": {
+            "bcm_version": "2.0",
+            "release": "July 2025",
+            "responsibility": "FehrAdvice & Partners AG"
+        }
+    },
+    "A9_References": {
+        "modules": [
+            "BCM2_01_INU",
+            "BCM2_02_KNU",
+            "BCM2_03_IDN",
+            "BCM2_05_AWX",
+            "BCM2_06_KOM",
+            "BCM2_07_WTX",
+            "BCM2_10_JNY",
+            "BCM3_00_INIT9249_KERNEL"
+        ],
+        "literature": [
+            "Rogers: Diffusion of Innovations",
+            "FehrAdvice Behavioral Change Model",
+            "Empirical segmentation studies (project-specific additions required)"
+        ]
+    },
+    "A10_License_and_Usage": {
+        "license": "Use restricted to the BEATRIX/BCM 2.0 architecture with explicit initialization and inclusion of all mandatory modules.",
+        "conditions": [
+            "Explicit kernel initialization is required",
+            "All mandatory modules must be integrated",
+            "Commercial and scientific use requires written permission from FehrAdvice & Partners AG"
+        ]
+    },
+    "Conclusion": {
+        "summary": [
+            "Enables precise, operationalizable modeling of societal change processes",
+            "Structures heterogeneity without unnecessary model complication",
+            "Allows targeted, empirically testable segment interventions",
+            "Fully compatible with willingness, the Behavioral Change Journey, and all meta-axioms"
+        ]
+    },
+    "Appendix": {
+        "archived_content_notice": "An older chapter version may exist for documentation/comparison only and must not be used for modeling, simulation, or interventions; only the current version (v2.0, July 2025) is applicable.",
+        "non_normative_extensions": [
+            {
+                "id": "SEG_11",
+                "name": "Axiom of Imperfection (extended 2025)",
+                "status": "non_normative_extension",
+                "definition": "In any population there exist residual segments (Always-Lie, Always-Truth) that act deterministically under certain contexts. These segments are not absolute constants: depending on identifiability, trust in institutions, and identity stability, they may transition into the Middle segment or flip into the opposite Always segment. The Middle segment remains the central dynamic space.",
+                "formalization": {
+                    "population": "N = L ∪ M ∪ T",
+                    "rules": {
+                        "Always_Lie": {
+                            "share": "0.05 ≤ |L|/|N| ≤ 0.10",
+                            "rule": "P(Lie | R=0, i ∈ L) = 1",
+                            "transitions": [
+                                {
+                                    "condition": "R > 0",
+                                    "to": "M",
+                                    "probability": "> 0"
+                                }
+                            ]
+                        },
+                        "Always_Truth": {
+                            "share": "0.05 ≤ |T|/|N| ≤ 0.10",
+                            "rule": "P(Truth | R=0, i ∈ T) = 1",
+                            "transitions": [
+                                {
+                                    "condition": "IDN/UNS destabilized",
+                                    "to": "M",
+                                    "probability": "> 0"
+                                },
+                                {
+                                    "condition": "IDN collapse + loss of trust",
+                                    "to": "L",
+                                    "probability": "> 0"
+                                }
+                            ]
+                        },
+                        "Middle_Segment": {
+                            "share": "0.80 ≤ |M|/|N| ≤ 0.90",
+                            "rule": "0 < P(Truth | R=0, i ∈ M) < 1",
+                            "transitions": [
+                                {
+                                    "condition": "Repetition + absence of sanctions",
+                                    "to": "L",
+                                    "probability": "> 0"
+                                },
+                                {
+                                    "condition": "Stable norm + IDN adoption",
+                                    "to": "T",
+                                    "probability": "> 0"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "implications": [
+                    "Residual segments are stable attractors but not absolute constants.",
+                    "Identifiability (R), institutional trust (UNS-INS), and identity (IDN) govern transitions.",
+                    "The Middle segment is the key space (80–90%) and absorbs parts of L and T.",
+                    "Radical breaks are modelable (e.g., T → L or M → T).",
+                    "Simulations become more realistic because transition paths are explicit."
+                ]
+            }
+        ]
+    }
+}

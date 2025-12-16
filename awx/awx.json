@@ -1,0 +1,1384 @@
+{
+    "BCM2_05_AWX_7240_01_Sec_Definition": {
+        "title": "Definition – Function, Systematics, and Meta-Embedding of the Awareness Function",
+        "module_id": "7240",
+        "module_code": "BCM2_05_AWX",
+        "description": "Defines Awareness as a dynamic, systemically differentiated condition for converting potential benefit into effective benefit. Awareness integrates visceral, emotional, and cognitive processes and determines whether behavior becomes benefit-effective at the moment of decision (= Moment of Truth). The definition follows the meta-axiomatics MA_0.00 l–r and z–zc.",
+        "meta_ref": [
+            "MA_0.00l",
+            "MA_0.00m",
+            "MA_0.00n",
+            "MA_0.00o",
+            "MA_0.00p",
+            "MA_0.00q",
+            "MA_0.00r",
+            "MA_0.00za",
+            "MA_0.00zb",
+            "MA_0.00zc"
+        ],
+        "core_definition": {
+            "statement": "Awareness is the necessary condition for converting a potential benefit (individual, collective, identity-based) into effective benefit at the Moment of Truth.",
+            "extended": "Awareness means consciousness of one’s own impact—positive or negative—on individual, collective, and identity-based benefit types. It spans physiological (SYS 0), affective-emotional (SYS 1), and cognitive-reflective (SYS 2) system levels.",
+            "formal_condition": "U_eff,X(t*) = U_pot,X(t*) × A_SYSi,X(t*), X ∈ {INU, KNU, IDN}, i ∈ {0,1,2}"
+        },
+        "systemic_levels": {
+            "SYS0_Instant": {
+                "definition": "Automatic visceral activation – instant awareness without conscious processing.",
+                "examples": [
+                    "pain stimulus",
+                    "hunger",
+                    "reflex",
+                    "sexual desire"
+                ],
+                "formal": "A_SYS0 = 1 under immediate sensory or affective reaction"
+            },
+            "SYS1_Affective": {
+                "definition": "Emotional awareness of the meaning and social resonance of one’s behavior.",
+                "examples": [
+                    "guilt",
+                    "compassion",
+                    "pride",
+                    "shame"
+                ],
+                "formal": "A_SYS1 = f(Emotion_valence, Social_feedback)"
+            },
+            "SYS2_Reflective": {
+                "definition": "Cognitive awareness of impact, consequences, and meaning in the context of rules and norms.",
+                "examples": [
+                    "thinking about impact",
+                    "ethical deliberation",
+                    "rational reflection"
+                ],
+                "formal": "A_SYS2 = f(Causal_understanding, Rule_clarity, Evidence_clarity)"
+            }
+        },
+        "exception_rule": {
+            "Instant_INU": "Physiologically felt individual benefit effects (e.g., pain, hunger, dopamine kick) do not require conscious awareness – SYS 0 activates automatically.",
+            "Instant_IDN": "Emotional-social, instantly felt identity effects (e.g., applause, exclusion) are activated without reflection.",
+            "Instant_KNU": "Collective benefit can only have instant impact via mediation (through IDN or empathy); direct instant collective awareness does not exist."
+        },
+        "meta_interpretation": {
+            "MA_0.00l": "Defines Awareness as the necessary transformation condition between U_pot and U_eff.",
+            "MA_0.00m": "Defines the 0–1 continuum of Awareness: 0 = no awareness (habit), 1 = fully conscious transformation.",
+            "MA_0.00n": "Anchors Awareness as a process across system levels 0–2 (Instant → Affect → Reflection).",
+            "MA_0.00o": "Binds Awareness to visceral baseline reactions (System 0 per Loewenstein).",
+            "MA_0.00p": "Defines dynamic interaction between systems 0–2 as a meta-feedback process.",
+            "MA_0.00q": "Enables cultural and neuroeconomic modulation of awareness thresholds.",
+            "MA_0.00r": "Integrates compliance and honesty as meta-awareness effects (System 2)."
+        },
+        "meta_feedback": {
+            "learning_loop": "A_SYS2(t+1) = A_SYS2(t) + ρ_feedback × ΔOutcome_impact",
+            "description": "Awareness learns via feedback from behavioral consequences and corrects its own impact estimation (MA 0.00zc)."
+        },
+        "meta_constraints": {
+            "C1": "Awareness is always situational (Moment of Truth must be defined).",
+            "C2": "Awareness cannot be maximal simultaneously in SYS0 and SYS2 (hyper-dissonance).",
+            "C3": "Awareness ends when habitualization > θ_habit or total_uncertainty > θ_uncertainty."
+        },
+        "governance": {
+            "validation_rule": "Σ|ΔA_SYSi| ≤ θ_meta ∧ C1–C3 satisfied → Definition = STABLE",
+            "watchdog_link": "9251_WATCHDOG_CORE",
+            "reporting": "9477_STAT_AWX_DEF_LOG",
+            "status_flag": "META_VALIDATED"
+        },
+        "version": "v5.3",
+        "author": "FehrAdvice BCM Kernel – Meta Integration Team",
+        "release_date": "2025-10-25",
+        "compliance_ref": "BCM2_00_STD_9232_v3.4"
+    },
+    "BCM2_05_AWX_7240_02_Sec_Scope_Context": {
+        "title": "Scope & Context – Reach, situational conditions, and systemic linkage of the Awareness function",
+        "module_id": "7240",
+        "module_code": "BCM2_05_AWX",
+        "description": "Describes the functional reach of Awareness across benefit types, contexts, and decision situations. Awareness (A_SYS0–2) acts exclusively situationally at the Moment of Truth and mediates between potential and effective benefit. This definition follows meta-axioms MA_0.00 l–n, p–r and z–zc.",
+        "meta_ref": [
+            "MA_0.00l",
+            "MA_0.00m",
+            "MA_0.00n",
+            "MA_0.00p",
+            "MA_0.00q",
+            "MA_0.00r",
+            "MA_0.00za",
+            "MA_0.00zb"
+        ],
+        "functional_scope": {
+            "coverage": [
+                "INU",
+                "KNU",
+                "IDN"
+            ],
+            "rule": "Awareness only acts when at least one benefit type is active at the Moment of Truth.",
+            "formal": "A_total(t*) = f(A_INU, A_KNU, A_IDN) | A_X(t) = 0 for all t ≠ t*"
+        },
+        "context_integration": {
+            "sources": [
+                "8904_KON",
+                "9492_KOM_META",
+                "9485_UNS_ENV",
+                "9493_UNS_INS",
+                "9495_UNS_IPN",
+                "9494_UNS_EPI"
+            ],
+            "definition": "Awareness is fully context-dependent. It emerges when stimuli, norms, emotions, or institutional signals are in a recognizable relationship with individual, collective, or identity-based benefit.",
+            "formal": "A_SYSi(t*) = f(C(t*), Norm(t*), Emotion(t*), σ_U(t*))",
+            "meta_condition": "C_rel (social relevance) must hold."
+        },
+        "moment_of_truth": {
+            "definition": "The Moment of Truth (t*) is the decision point at which potential benefit can be transformed into behavior via Awareness.",
+            "formal": "A_SYSi(t*) > 0 ⇔ decision active ∧ context salience > θ_awareness",
+            "implication": "Awareness can act only at moment t*, not before or after; this distinguishes it from knowledge or attitudes."
+        },
+        "cross_module_links": {
+            "upstream": [
+                "7234_INU",
+                "7235_KNU",
+                "7236_IDN"
+            ],
+            "downstream": [
+                "7243_WAX",
+                "7259_PRB",
+                "7256_JNY"
+            ],
+            "governance": [
+                "9251_WATCHDOG",
+                "9477_STAT"
+            ],
+            "formal": "U_eff,X(t*) = U_pot,X(t*) × A_SYSi,X(t*); W_X(t*) = f(U_eff,X(t*))"
+        },
+        "meta_scope_differentiation": {
+            "SYS0": "Instant Awareness – reflexive visceral activation, no conscious reflection.",
+            "SYS1": "Affective Awareness – emotional resonance, coupled to social signals.",
+            "SYS2": "Reflective Awareness – cognitive-reflective integration and evaluation of consequences.",
+            "transition_rule": "A_SYSi(t*) can dynamically shift across system levels (e.g., SYS0 → SYS1 → SYS2) per MA_0.00p."
+        },
+        "contextual_determinants": {
+            "cognitive": [
+                "attention",
+                "evidence clarity",
+                "complexity"
+            ],
+            "emotional": [
+                "affective valence",
+                "fear",
+                "hope"
+            ],
+            "social": [
+                "norm pressure",
+                "institutional trust",
+                "peer visibility"
+            ],
+            "cultural": [
+                "narratives",
+                "symbols",
+                "rituals"
+            ],
+            "biological": [
+                "energy level",
+                "age",
+                "neurodiversity"
+            ],
+            "meta_condition": "All determinants must be ≤ θ_capacity and ≥ θ_salience for A_SYSi(t*) > 0."
+        },
+        "meta_constraints": {
+            "C1": "Awareness is valid only if relevant context (C_rel) exists.",
+            "C2": "Awareness must not be maximal simultaneously in SYS0 and SYS2.",
+            "C3": "Collective benefit (KNU) is always awareness-required; instant KNU is not possible.",
+            "C4": "Awareness decreases when complexity or uncertainty thresholds are exceeded."
+        },
+        "governance": {
+            "validation_rule": "Σ|ΔA_SYSi| ≤ θ_meta ∧ C1–C4 satisfied → Scope = VALID",
+            "audit_event": "AWX_SCOPE_VALIDATION",
+            "watchdog_link": "9251_WATCHDOG_CORE",
+            "reporting": "9477_STAT_AWX_SCOPE_LOG",
+            "status_flag": "META_VALIDATED"
+        },
+        "version": "v5.3",
+        "author": "FehrAdvice BCM Kernel – Meta Integration Team",
+        "release_date": "2025-10-25",
+        "compliance_ref": "BCM2_00_STD_9232_v3.4"
+    },
+    "BCM2_05_AWX_7240_03_Sec_Objectives": {
+        "title": "Objectives – Purpose, function, and direction of effect of the Awareness function",
+        "module_id": "7240",
+        "module_code": "BCM2_05_AWX",
+        "description": "Defines the functional objectives of the Awareness function (A_SYS0–2) within BCM. Awareness acts as a necessary transformer that converts potential benefit into effective benefit and enables behavior at the Moment of Truth. Objectives follow MA_0.00 l–r and MA_0.00 z–zc.",
+        "meta_ref": [
+            "MA_0.00l",
+            "MA_0.00m",
+            "MA_0.00n",
+            "MA_0.00o",
+            "MA_0.00p",
+            "MA_0.00q",
+            "MA_0.00r",
+            "MA_0.00za",
+            "MA_0.00zb",
+            "MA_0.00zc"
+        ],
+        "core_objectives": {
+            "O1": {
+                "title": "Transformation from potential to effective benefit",
+                "definition": "Awareness enables U_pot → U_eff by making benefit salient and action-effective.",
+                "formal": "U_eff,X(t*) = U_pot,X(t*) × A_SYSi,X(t*)",
+                "meta_link": "MA_0.00l"
+            },
+            "O2": {
+                "title": "Reducing the knowledge–action gap",
+                "definition": "Awareness closes the gap between cognitive knowledge (SYS2) and actual behavior (SYS0–1).",
+                "formal": "Δ(Action–Knowledge) ∝ 1/A_total",
+                "meta_link": "MA_0.00m"
+            },
+            "O3": {
+                "title": "Integration of external effects",
+                "definition": "Awareness includes consciousness of positive and negative impacts on other people or groups.",
+                "formal": "A_SYS2 = f(Impact_self, Impact_others)",
+                "meta_link": "MA_0.00r"
+            },
+            "O4": {
+                "title": "Systemic differentiation",
+                "definition": "Awareness integrates three system levels (visceral, affective, reflective) into a dynamic unity.",
+                "formal": "A_total(t*) = f(A_SYS0, A_SYS1, A_SYS2)",
+                "meta_link": "MA_0.00n"
+            },
+            "O5": {
+                "title": "Enabling compliance and honesty",
+                "definition": "Awareness enables reflective self-evaluation regarding rule compliance and ethical integrity.",
+                "formal": "Compliance = f(A_SYS2 × Rule_clarity)",
+                "meta_link": "MA_0.00r"
+            },
+            "O6": {
+                "title": "Maintaining meta-coherence",
+                "definition": "Awareness functions as a control variable ensuring benefit types, willingness, and context remain consistent.",
+                "formal": "Σ|ΔA_SYSi| ≤ θ_meta",
+                "meta_link": "MA_0.00za"
+            },
+            "O7": {
+                "title": "Feedback-based learning capability",
+                "definition": "Awareness adapts via feedback loops to observed action outcomes.",
+                "formal": "A_SYS2(t+1) = A_SYS2(t) + ρ_feedback × ΔOutcome_impact",
+                "meta_link": "MA_0.00zc"
+            },
+            "O8": {
+                "title": "Strengthening collective decision quality",
+                "definition": "Shared awareness makes collective decisions more coherent, transparent, and fair.",
+                "formal": "A_Group(t*) = Σ A_i(t*) / n",
+                "meta_link": "MA_0.00q"
+            }
+        },
+        "systemic_function": {
+            "definition": "Awareness acts as a multiplicative amplifier and filter between benefit modules (7234–7236) and Willingness (7243).",
+            "formal": [
+                "U_eff,X(t*) = U_pot,X(t*) × A_total(t*)",
+                "W_X(t*) = f(U_eff,X(t*), Norm, Motivation)"
+            ],
+            "meta_condition": "A_total > 0 → potential benefit becomes behavior-relevant"
+        },
+        "evaluation_metrics": {
+            "AAR": "Awareness Activation Rate",
+            "ARI": "Awareness Resonance Index = Emotion × Cognition",
+            "AIC": "Awareness Impact Coefficient = ΔP(Behavior)/ΔA_total",
+            "meta_validation": "9477_STAT validates all metrics in conjunction with 9251_WATCHDOG"
+        },
+        "governance": {
+            "validation_rule": "If O1–O8 are functionally satisfied and Σ|ΔA_SYSi| ≤ θ_meta → Objectives = VALID",
+            "audit_event": "AWX_OBJECTIVE_VALIDATION",
+            "watchdog_link": "9251_WATCHDOG_CORE",
+            "reporting": "9477_STAT_AWX_OBJECTIVES_LOG",
+            "status_flag": "META_VALIDATED"
+        },
+        "version": "v5.3",
+        "author": "FehrAdvice BCM Kernel – Meta Integration Team",
+        "release_date": "2025-10-25",
+        "compliance_ref": "BCM2_00_STD_9232_v3.4"
+    },
+    "BCM2_05_AWX_7240_04_Axiomatics": {
+        "cluster_1_fundamental_mandatory_axioms": {
+            "axioms": [
+                {
+                    "axiom_id": "AWX-A1",
+                    "axiom_type": "Transformer",
+                    "module_link": "BCM2_05_AWX_7240",
+                    "obj_meta": {
+                        "name": "Awareness transformation condition",
+                        "valid_for": [
+                            "INU",
+                            "KNU",
+                            "IDN"
+                        ],
+                        "moment": "t* (Moment of Truth)",
+                        "reference_modules": [
+                            "7234_INU",
+                            "7235_KNU",
+                            "7236_IDN",
+                            "7243_WAX"
+                        ]
+                    },
+                    "obj_core": {
+                        "statement": "Potential benefit becomes effective only if Awareness > 0 at moment t*.",
+                        "formula": "U_eff,X(t*) = U_pot,X(t*) × A_X(t*)",
+                        "condition": "A_X(t*) > 0 ⇔ behavior active",
+                        "interpretation": "Awareness acts as multiplier and filter between benefit potential and behavior."
+                    },
+                    "obj_exceptions": {
+                        "instant_INU": {
+                            "condition": "U_pot,INU ∈ physiologically instantly felt",
+                            "rule": "A_INU(t*) = 1"
+                        },
+                        "instant_IDN": {
+                            "condition": "U_pot,IDN ∈ socially-emotionally instantly felt",
+                            "rule": "A_IDN(t*) = 1"
+                        },
+                        "KNU": {
+                            "condition": "X = KNU",
+                            "rule": "Awareness requirement always applies (A_KNU(t*) ≥ θ_min)"
+                        }
+                    },
+                    "obj_links": {
+                        "upstream": [
+                            "BCM2_00_STD_9232",
+                            "BCM2_01_INU_7234"
+                        ],
+                        "downstream": [
+                            "BCM2_06_WAX_7243"
+                        ],
+                        "governance": [
+                            "9251_WATCHDOG_CORE"
+                        ]
+                    },
+                    "obj_status": {
+                        "version": "v5.3",
+                        "validation": "AOM_CONFORM",
+                        "date": "2025-11-04"
+                    }
+                },
+                {
+                    "id": "AWX-A1a",
+                    "title": "Community relevance",
+                    "definition": "Awareness is the consciousness that one’s behavior affects the benefit of a relevant community.",
+                    "formula": "A_mod(t) > 0 ⇔ ∃ (N_coll(t) ∨ N_id(t)) ∧ C_rel"
+                },
+                {
+                    "id": "AWX-A1b",
+                    "title": "Social externalities",
+                    "definition": "Awareness becomes behavior-effective only when effects on collective or identity-based benefit of a relevant community are recognized.",
+                    "formula": "A_mod(t) > 0 only if ∃ (N_coll(t) ∨ N_id(t)) ∧ C_rel"
+                },
+                {
+                    "id": "AWX-A1c",
+                    "title": "Time-delayed individual benefit",
+                    "definition": "Awareness also includes individual benefit with delayed effects that must be made salient anticipatorily.",
+                    "formula": "A_mod(t) > 0 ⇒ N_ind(t+h) salient if h > θ_instant"
+                },
+                {
+                    "id": "AWX-A2",
+                    "title": "Moment of Truth",
+                    "definition": "Awareness acts exclusively at the moment of decision.",
+                    "formula": "A_X(t) = 0 for all t ≠ t*",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A2a",
+                            "title": "Situational activation",
+                            "definition": "Only context-triggered awareness is effective.",
+                            "formula": "A_mod(t) = 1 only when Trigger_ctx(t) = true"
+                        },
+                        {
+                            "id": "AWX-A2b",
+                            "title": "General awareness as a learning effect",
+                            "definition": "General awareness emerges only through repeated situational activation.",
+                            "formula": "A_gen(t) = Σ(τ=0…t) δA_mod(τ)"
+                        },
+                        {
+                            "axiom_id": "AWX-A2c",
+                            "name": "Dynamic salience",
+                            "definition": "Awareness changes depending on the temporal dynamics of the perceived context.",
+                            "formula": [
+                                "σ_dyn(C_i,t) = σ_0(C_i) + ρ · dC_i/dt",
+                                "P(A_i = 1 | C_i, t, S_i) = χ(C_i, σ_dyn(C_i,t), S_i)"
+                            ],
+                            "variables": [
+                                "C_i",
+                                "σ_0",
+                                "ρ",
+                                "t",
+                                "S_i",
+                                "A_i"
+                            ],
+                            "derived_from": [
+                                "AWX-A2",
+                                "KX11"
+                            ],
+                            "meta_links": {
+                                "related_to": [
+                                    "MA5",
+                                    "MA5a",
+                                    "AWX-A2a",
+                                    "AWX-A2b"
+                                ],
+                                "governing_module": "BCM2_05_AWX7240"
+                            },
+                            "review_status": "active",
+                            "version": "2.1",
+                            "notes": "Extension validated and released – part of the productive Awareness function."
+                        }
+                    ]
+                },
+                {
+                    "id": "AWX-A3",
+                    "title": "Positive and negative impact",
+                    "definition": "Awareness necessarily includes both positive and negative impacts of behavior.",
+                    "formula": "U_eff,X(t*) = (U_pot,positive,X + U_pot,negative,X) * A_X(t*)"
+                },
+                {
+                    "id": "AWX-A4",
+                    "title": "Instant-benefit exceptions",
+                    "definition": "Certain benefit effects occur instantly without awareness (INU_instant, IDN_instant). Collective benefit is never instant.",
+                    "formula": "If X ∈ {INU_instant, IDN_instant} → A_X(t*) = 1; if X = KNU → awareness-required"
+                },
+                {
+                    "id": "AWX-A5",
+                    "title": "General vs. situational",
+                    "definition": "Only situational impact-awareness at the Moment of Truth is behavior-effective.",
+                    "formula": "A_general ≠ A_situational; only A_situational(t*) is relevant"
+                },
+                {
+                    "id": "AWX-A6",
+                    "title": "Inter-individual differences",
+                    "definition": "Awareness levels vary between individuals due to cognitive, emotional, social, and biological factors.",
+                    "formula": "A_X^i(t*) ≠ A_X^j(t*)",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A6a",
+                            "title": "Cognitive structuring capability",
+                            "definition": "Whether awareness becomes reflective depends on literacy, media competence, and logical model-building.",
+                            "formula": "A_reflective(t) = f(Lit, MediaComp, LogModel)"
+                        }
+                    ]
+                },
+                {
+                    "id": "AWX-A7",
+                    "title": "Context dependence",
+                    "definition": "Awareness is fully context-bound.",
+                    "formula": "A_X(t*) = f(C(t))",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A7a",
+                            "title": "Context as amplifier or blocker",
+                            "definition": "Context factors can amplify or block awareness.",
+                            "formula": "A_mod(t) = f(C(t))"
+                        }
+                    ]
+                },
+                {
+                    "id": "AWX-A8",
+                    "title": "Limitation",
+                    "definition": "Awareness is limited by attentional capacity.",
+                    "formula": "∑ A_X(t*) ≤ Capacity_limit",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A8a",
+                            "title": "Uncertainty and ambiguity",
+                            "definition": "Ambiguity, risk, and uncertainty slow or distort awareness learning.",
+                            "formula": "dA_gen(t)/dt ↓ when σ(U(t)), σ(Amb(t)) ↑"
+                        }
+                    ]
+                },
+                {
+                    "id": "AWX-A9",
+                    "title": "Salience and priming",
+                    "definition": "Awareness emerges only if benefit is salient or activated via priming.",
+                    "formula": "A_X(t*) = f(Salience, Priming)",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A9a",
+                            "title": "Hyper-awareness",
+                            "definition": "Awareness can be exaggerated such that even minimally relevant benefits become salient.",
+                            "formula": "A_mod(t) ≫ A_norm(t) ⇒ ∀N_x(t) salient, even if Relevance(N_x) ≈ 0"
+                        },
+                        {
+                            "id": "AWX-A9b",
+                            "title": "Awareness blockade",
+                            "definition": "Awareness can be blocked such that relevant benefits do not become salient.",
+                            "formula": "A_mod(t) = 0 ⇒ N_x(t) not salient although Relevance(N_x) > 0"
+                        }
+                    ]
+                },
+                {
+                    "id": "AWX-A10",
+                    "title": "Habitualization",
+                    "definition": "Habitual behavioral patterns require no awareness.",
+                    "formula": "If behavior is habitualized → A_X(t*) ≈ 0",
+                    "sub_axioms": [
+                        {
+                            "id": "AWX-A10a",
+                            "title": "Decay effect",
+                            "definition": "As habitualization increases, functional access to awareness decreases.",
+                            "formula": "dA_gen(t)/dt ∝ –H(t)"
+                        },
+                        {
+                            "id": "AWX-A10b",
+                            "title": "Clinical relevance",
+                            "definition": "Persistent deviations (hyper or blockade) become clinically relevant when distress or functional loss emerges.",
+                            "formula": "Clinical_Relevant(V) = 1 ⇔ (Persistence(V) > θ_time) ∧ (Distress(V) > θ_pain ∨ FunctionalLoss(V) > θ_function)"
+                        }
+                    ]
+                }
+            ]
+        },
+        "cluster_2_determinants": {
+            "axioms": [
+                {
+                    "id": "AWX-A11",
+                    "title": "Cognitive attention span",
+                    "definition": "Awareness increases with available attention and decreases under overload.",
+                    "formula": "A_X(t*) ∝ Attention_capacity"
+                },
+                {
+                    "id": "AWX-A12",
+                    "title": "Cognitive load",
+                    "definition": "Awareness decreases with increasing cognitive burden from parallel tasks or information.",
+                    "formula": "A_X(t*) = f(-Cognitive_load)"
+                },
+                {
+                    "id": "AWX-A13",
+                    "title": "Evidence availability",
+                    "definition": "Awareness increases with clarity, simplicity, and visibility of evidence for impact.",
+                    "formula": "A_X(t*) ∝ Evidence_clarity"
+                },
+                {
+                    "id": "AWX-A14",
+                    "title": "Availability heuristic",
+                    "definition": "Awareness increases with the mental availability of examples or memories.",
+                    "formula": "A_X(t*) ∝ Availability(X)"
+                },
+                {
+                    "id": "AWX-A15",
+                    "title": "Emotional valence",
+                    "definition": "Positive or negative affect increases awareness for the associated benefit.",
+                    "formula": "A_X(t*) = f(Emotion_valence)"
+                },
+                {
+                    "id": "AWX-A16",
+                    "title": "Fear as amplifier",
+                    "definition": "Fear increases awareness for negative impact particularly strongly.",
+                    "formula": "A_X(t*) ∝ Fear_intensity"
+                },
+                {
+                    "id": "AWX-A17",
+                    "title": "Hope as amplifier",
+                    "definition": "Hope increases awareness for positive impact.",
+                    "formula": "A_X(t*) ∝ Hope_intensity"
+                },
+                {
+                    "id": "AWX-A18",
+                    "title": "Affective resonance",
+                    "definition": "Awareness increases when behavior is linked to strong emotional reactions.",
+                    "formula": "A_X(t*) = f(Affect_resonance)"
+                },
+                {
+                    "id": "AWX-A19",
+                    "title": "Social norm pressure",
+                    "definition": "Awareness increases when behavior is strongly socially sanctioned or rewarded.",
+                    "formula": "A_X(t*) ∝ Norm_pressure"
+                },
+                {
+                    "id": "AWX-A20",
+                    "title": "Social mirroring",
+                    "definition": "Awareness increases when behavior is visibly mirrored by peers or relevant others.",
+                    "formula": "A_X(t*) ∝ Peer_visibility"
+                },
+                {
+                    "id": "AWX-A21",
+                    "title": "Network effects",
+                    "definition": "Awareness increases when behavior is amplified in social networks.",
+                    "formula": "A_X(t*) ∝ Network_exposure"
+                },
+                {
+                    "id": "AWX-A22",
+                    "title": "Institutional legitimacy",
+                    "definition": "Awareness increases when behavior is supported by institutions perceived as legitimate.",
+                    "formula": "A_X(t*) ∝ Institutional_trust"
+                },
+                {
+                    "id": "AWX-A23",
+                    "title": "Institutional trust",
+                    "definition": "Lack of trust in institutions reduces awareness levels.",
+                    "formula": "A_X(t*) = f(Institutional_trust)"
+                },
+                {
+                    "id": "AWX-A24",
+                    "title": "Rule clarity",
+                    "definition": "The clearer the rules, the higher awareness of their impact.",
+                    "formula": "A_X(t*) ∝ Rule_clarity"
+                },
+                {
+                    "id": "AWX-A25",
+                    "title": "Cultural narratives",
+                    "definition": "Awareness increases when behavior is embedded in existing narratives.",
+                    "formula": "A_X(t*) ∝ Cultural_narrative_strength"
+                },
+                {
+                    "id": "AWX-A26",
+                    "title": "Symbols and rituals",
+                    "definition": "Cultural symbols and rituals increase awareness particularly strongly.",
+                    "formula": "A_X(t*) ∝ Symbolic_salience"
+                },
+                {
+                    "id": "AWX-A27",
+                    "title": "Priming effects",
+                    "definition": "Conscious or unconscious priming increases the probability that benefit becomes salient.",
+                    "formula": "A_X(t*) = f(Priming)"
+                },
+                {
+                    "id": "AWX-A28",
+                    "title": "Biological factors",
+                    "definition": "Awareness varies with biological properties such as age, sex, neurodiversity.",
+                    "formula": "A_X(t*) = f(Biological_traits)"
+                },
+                {
+                    "id": "AWX-A29",
+                    "title": "Energetic state",
+                    "definition": "Awareness decreases with exhaustion and increases with high energy.",
+                    "formula": "A_X(t*) ∝ Energy_level"
+                },
+                {
+                    "id": "AWX-A30",
+                    "title": "Interactive determinants",
+                    "definition": "Awareness results from interaction of multiple determinants (e.g., Emotion × Norm_pressure).",
+                    "formula": "A_X(t*) = f(Determinant_1 × Determinant_2 × …)"
+                }
+            ]
+        },
+        "cluster_3_benefit_type_specific_awareness": {
+            "axioms": [
+                {
+                    "id": "AWX-A31",
+                    "title": "Awareness INU",
+                    "definition": "Awareness for individual benefit means consciousness that one’s behavior has positive or negative impact on one’s own individual benefit.",
+                    "formula": "U_eff,INU(t*) = U_pot,INU(t*) * A_INU(t*)"
+                },
+                {
+                    "id": "AWX-A32",
+                    "title": "Awareness KNU",
+                    "definition": "Awareness for collective benefit means consciousness that one’s behavior has positive or negative impact on the benefit of a community or group.",
+                    "formula": "U_eff,KNU(t*) = U_pot,KNU(t*) * A_KNU(t*)"
+                },
+                {
+                    "id": "AWX-A33",
+                    "title": "Awareness IDN",
+                    "definition": "Awareness for identity-based benefit means consciousness that one’s behavior has positive or negative impact on belonging, recognition, or identity.",
+                    "formula": "U_eff,IDN(t*) = U_pot,IDN(t*) * A_IDN(t*)"
+                },
+                {
+                    "id": "AWX-A34",
+                    "title": "Differentiation by benefit type",
+                    "definition": "Awareness differs by benefit type: INU strongest, KNU weakest, IDN strongly context-dependent.",
+                    "formula": "A_INU > A_IDN > A_KNU (on average)"
+                },
+                {
+                    "id": "AWX-A35",
+                    "title": "Instant INU",
+                    "definition": "Physiologically felt individual benefit effects (e.g., hunger, pain, fatigue, dopamine kick) are instant and require no awareness.",
+                    "formula": "If U_pot,INU ∈ {physiologically instantly felt} → A_INU(t*) = 1"
+                },
+                {
+                    "id": "AWX-A36",
+                    "title": "Instant IDN",
+                    "definition": "Social-emotional identity effects (e.g., applause, shame, symbols) are instant and require no awareness.",
+                    "formula": "If U_pot,IDN ∈ {social-emotionally instantly felt} → A_IDN(t*) = 1"
+                },
+                {
+                    "id": "AWX-A37",
+                    "title": "No instant KNU",
+                    "definition": "Collective benefit is never instant. All KNU effects are awareness-required.",
+                    "formula": "For all U_pot,KNU: A_KNU(t*) < 1 without awareness"
+                },
+                {
+                    "id": "AWX-A38",
+                    "title": "Interaction INU ↔ KNU",
+                    "definition": "Awareness for KNU increases when an INU is simultaneously affected.",
+                    "formula": "A_KNU(t*) = f(A_INU(t*))"
+                },
+                {
+                    "id": "AWX-A39",
+                    "title": "Interaction INU ↔ IDN",
+                    "definition": "Awareness for INU increases when the behavior is simultaneously identity-relevant.",
+                    "formula": "A_INU(t*) = f(A_IDN(t*))"
+                },
+                {
+                    "id": "AWX-A40",
+                    "title": "Interaction KNU ↔ IDN",
+                    "definition": "Awareness for KNU increases when belonging to a community is strongly identity-salient.",
+                    "formula": "A_KNU(t*) = f(A_IDN(t*))"
+                },
+                {
+                    "id": "AWX-A41",
+                    "title": "Awareness hierarchy",
+                    "definition": "In conflict cases, INU awareness dominates IDN, and IDN dominates KNU.",
+                    "formula": "A_INU > A_IDN > A_KNU (in conflict)"
+                },
+                {
+                    "id": "AWX-A42",
+                    "title": "Awareness overlay",
+                    "definition": "Awareness for one benefit type can temporarily override awareness for another.",
+                    "formula": "A_X(t*) = 0 if A_Y(t*) >> A_X(t*)"
+                },
+                {
+                    "id": "AWX-A43",
+                    "title": "Awareness multiplication",
+                    "definition": "Total effective benefit is the sum of awareness-filtered benefit types.",
+                    "formula": "U_eff(t*) = U_eff,INU(t*) + U_eff,KNU(t*) + U_eff,IDN(t*)"
+                },
+                {
+                    "id": "AWX-A44",
+                    "title": "Awareness sensitivity",
+                    "definition": "Awareness threshold differs by benefit type: INU low threshold, KNU high threshold.",
+                    "formula": "Threshold_A_INU < Threshold_A_IDN < Threshold_A_KNU"
+                },
+                {
+                    "id": "AWX-A45",
+                    "title": "Awareness amplification via multi-effect",
+                    "definition": "If behavior affects INU, KNU, and IDN simultaneously, awareness increases multiplicatively.",
+                    "formula": "A_total(t*) = A_INU(t*) + A_KNU(t*) + A_IDN(t*) + interaction_term"
+                }
+            ]
+        },
+        "cluster_4_complexity_and_uncertainty": {
+            "axioms": [
+                {
+                    "id": "AWX-A46",
+                    "title": "Complexity reduction",
+                    "definition": "Awareness decreases as decision complexity increases.",
+                    "formula": "A_X(t*) = f(-Complexity)"
+                },
+                {
+                    "id": "AWX-A47",
+                    "title": "Necessity of framing",
+                    "definition": "Under high complexity, awareness becomes possible only via simplification, framing, or heuristics.",
+                    "formula": "If Complexity > Threshold → A_X(t*) = f(Framing)"
+                },
+                {
+                    "id": "AWX-A47a",
+                    "title": "Failure Awareness Gap",
+                    "definition": "Awareness is systematically distorted when failures remain communicatively, institutionally, or culturally invisible. The Failure Awareness Gap describes the collective perception gap that arises when errors are socially stigmatized, not reported, or algorithmically filtered out. It grows under high power distance, low transparency standards, and low psychological safety.",
+                    "formula": [
+                        "ΔAwareness_F = f(VisibilityCost, PowerDistance, -Transparency, -PsychSafety, FeedbackLag, NormShame)",
+                        "A_eff(t*) = A_base(t*) × (1 - ΔAwareness_F)"
+                    ],
+                    "variables": [
+                        "VisibilityCost",
+                        "PowerDistance",
+                        "Transparency",
+                        "PsychSafety",
+                        "FeedbackLag",
+                        "NormShame",
+                        "A_eff",
+                        "A_base"
+                    ],
+                    "parameters": {
+                        "λ": "Sensitivity coefficient (0 < λ ≤ 1)",
+                        "Threshold_FailureGap": 0.25
+                    },
+                    "interpretation": "If ΔAwareness_F rises above 0.25, the system loses adaptive perceptual capability (perceptual lock-in). The axiom binds communicative and cultural determinants to the awareness function and explains why systems recognize failures too late.",
+                    "links": {
+                        "upstream": [
+                            "8904_KON",
+                            "9493_UNS_INS",
+                            "9495_UNS_IPN"
+                        ],
+                        "downstream": [
+                            "7243_WAX",
+                            "9251_WATCHDOG"
+                        ],
+                        "related_axioms": [
+                            "AWX-A46",
+                            "AWX-A47",
+                            "AWX-A48"
+                        ]
+                    },
+                    "empirical_reference": [
+                        "Eskreis-Winkler et al. (2025) – The Failure Gap",
+                        "Edmondson (1999) – Psychological Safety",
+                        "FehrAdvice BCM2 Kernel Extensions (2025)"
+                    ],
+                    "meta_axioms": [
+                        "MA_0.00l",
+                        "MA_0.00n",
+                        "MA_0.00p",
+                        "MA_0.00zc"
+                    ],
+                    "review_status": "proposed_v5.0",
+                    "author": "FehrAdvice BEATRIX Kernel Integration Team",
+                    "release_date": "2025-11-03"
+                },
+                {
+                    "id": "AWX-A48",
+                    "title": "Environmental uncertainty",
+                    "definition": "If consequences of behavior in the environment are uncertain, awareness decreases.",
+                    "formula": "A_X(t*) = f(-Environmental_uncertainty)"
+                },
+                {
+                    "id": "AWX-A49",
+                    "title": "Interpersonal uncertainty",
+                    "definition": "Awareness decreases when it is unclear how other individuals will react.",
+                    "formula": "A_X(t*) = f(-Interpersonal_uncertainty)"
+                },
+                {
+                    "id": "AWX-A50",
+                    "title": "Institutional uncertainty",
+                    "definition": "If trust in institutions is lacking or rules are unclear, awareness decreases.",
+                    "formula": "A_X(t*) = f(-Institutional_uncertainty)"
+                },
+                {
+                    "id": "AWX-A51",
+                    "title": "Epistemic uncertainty",
+                    "definition": "If knowledge about cause–effect relationships is missing, awareness drops to zero.",
+                    "formula": "If Epistemic_uncertainty → A_X(t*) = 0"
+                },
+                {
+                    "id": "AWX-A52",
+                    "title": "Uncertainty accumulation",
+                    "definition": "Awareness decreases more strongly when multiple uncertainty types occur simultaneously.",
+                    "formula": "A_X(t*) = f(-(Uncertainty_U + Uncertainty_I + Uncertainty_E + …))"
+                },
+                {
+                    "id": "AWX-A53",
+                    "title": "Uncertainty differentiation",
+                    "definition": "Awareness reacts with different strengths to uncertainty types: epistemic > institutional > interpersonal > environmental.",
+                    "formula": "Impact_A_Epistemic > Impact_A_Institutional > Impact_A_Interpersonal > Impact_A_Environmental"
+                },
+                {
+                    "id": "AWX-A54",
+                    "title": "Complexity–uncertainty interaction",
+                    "definition": "Complexity amplifies the effect of uncertainty and reduces awareness disproportionately.",
+                    "formula": "A_X(t*) = f(-Complexity × Total_uncertainty)"
+                },
+                {
+                    "id": "AWX-A55",
+                    "title": "Need for institutional aids",
+                    "definition": "Under high complexity and uncertainty, awareness can be secured only via institutional orientation aids (e.g., rules, standards, labels).",
+                    "formula": "If Complexity & Uncertainty high → A_X(t*) = f(Institutional_aids)"
+                }
+            ]
+        },
+        "cluster_5_time_and_dynamics": {
+            "axioms": [
+                {
+                    "id": "AWX-A56",
+                    "title": "Situationality",
+                    "definition": "Awareness exists only in specific situations and contexts. It is not permanent.",
+                    "formula": "A_X(t*) ≠ A_X(t**)"
+                },
+                {
+                    "id": "AWX-A57",
+                    "title": "Fluctuation",
+                    "definition": "Awareness levels fluctuate strongly over time depending on context and person factors.",
+                    "formula": "Var(A_X(t)) > 0 over time"
+                },
+                {
+                    "id": "AWX-A58",
+                    "title": "Decay effect",
+                    "definition": "Without renewed triggers, awareness decays exponentially.",
+                    "formula": "A_X(t + Δt) = A_X(t) * e^(-λΔt)"
+                },
+                {
+                    "id": "AWX-A59",
+                    "title": "Reactivation",
+                    "definition": "Awareness can be reactivated or strengthened via repeated triggers.",
+                    "formula": "A_X(t*) = f(Trigger_count, Trigger_intensity)"
+                },
+                {
+                    "id": "AWX-A60",
+                    "title": "Habitual attenuation",
+                    "definition": "Repeated exposure can weaken awareness if a stimulus becomes routine.",
+                    "formula": "A_X(t*) → 0 under high repetition without variation"
+                },
+                {
+                    "id": "AWX-A61",
+                    "title": "Life-phase dependence",
+                    "definition": "Awareness varies systematically across life phases (childhood, youth, adulthood, old age).",
+                    "formula": "A_X(t*) = f(Life_phase)"
+                },
+                {
+                    "id": "AWX-A62",
+                    "title": "Life events",
+                    "definition": "Certain major events (e.g., birth, death, illness, job loss) change awareness abruptly.",
+                    "formula": "ΔA_X(t*) >> 0 under LifeEvent"
+                },
+                {
+                    "id": "AWX-A63",
+                    "title": "Shock trigger",
+                    "definition": "Sudden shock events increase awareness massively and immediately.",
+                    "formula": "A_X(t*) = A_X(t*-1) + Shock_intensity"
+                },
+                {
+                    "id": "AWX-A64",
+                    "title": "Long-term stabilization",
+                    "definition": "Repeated confrontation with stimuli can stabilize awareness long-term if stimuli remain variable and salient.",
+                    "formula": "lim (Trigger → ∞) A_X(t*) → stable_value"
+                },
+                {
+                    "id": "AWX-A65",
+                    "title": "Journey integration",
+                    "definition": "Awareness acts as a trigger in specific phases of the Behavioral Change Journey.",
+                    "formula": "A_X(t*) ∝ Journey_phase"
+                }
+            ]
+        },
+        "cluster_6_conflict_and_dissonance": {
+            "axioms": [
+                {
+                    "id": "AWX-A66",
+                    "title": "Suppression",
+                    "definition": "Awareness can be consciously or unconsciously suppressed if it is unpleasant or threatening.",
+                    "formula": "If Awareness → strong negative emotion → A_X(t*) ↓"
+                },
+                {
+                    "id": "AWX-A67",
+                    "title": "Cognitive vs. emotional split",
+                    "definition": "Individuals can be cognitively informed about an impact without emotional awareness emerging.",
+                    "formula": "A_cognitive ≠ A_emotional"
+                },
+                {
+                    "id": "AWX-A68",
+                    "title": "Norm-conflict blockade",
+                    "definition": "Awareness can be blocked when different social norms send contradictory behavioral signals.",
+                    "formula": "If Norm1 ≠ Norm2 → A_X(t*) ↓"
+                },
+                {
+                    "id": "AWX-A69",
+                    "title": "False awareness",
+                    "definition": "Misinformation, propaganda, or distorted frames can create awareness that is factually wrong.",
+                    "formula": "A_X(t*) ≠ Reality_Impact"
+                },
+                {
+                    "id": "AWX-A70",
+                    "title": "Collective overlay",
+                    "definition": "Collective narratives or group identities can override or suppress individual awareness.",
+                    "formula": "A_individual(t*) = 0 if A_collective(t*) >> A_individual(t*)"
+                },
+                {
+                    "module_id": "7240",
+                    "module_code": "BCM2_05_AWX",
+                    "version": "4.1",
+                    "update_type": "extension",
+                    "insert_cluster": "Cluster 6 – Conflict & Dissonance",
+                    "insert_position_after": "AWX-A69",
+                    "new_axiom": {
+                        "id": "AWX-A70a",
+                        "title": "Mirror coherence and awareness dissonance",
+                        "definition": "Awareness responds to the difference between self-image (I_t) and social feedback (S_t), measured as Mirror Gap ΔI_t. Small differences promote learning-awareness; large differences activate protective-awareness.",
+                        "formula": [
+                            "A_X(t*) = f(MirrorGap_t)",
+                            "∂A_X/∂ΔI_t > 0 for ΔI_t < 0.6",
+                            "∂A_X/∂ΔI_t < 0 for ΔI_t ≥ 0.6"
+                        ],
+                        "variables": [
+                            "ΔI_t",
+                            "I_t",
+                            "S_t",
+                            "A_X(t*)"
+                        ],
+                        "parameters": {
+                            "Mirror_Threshold_Learning": 0.3,
+                            "Mirror_Threshold_Defensive": 0.6,
+                            "Mirror_Threshold_Overload": 0.8
+                        },
+                        "source_link": {
+                            "module": "7236_IDN",
+                            "axiom": "IDN-A70b"
+                        },
+                        "downstream_link": {
+                            "module": "7243_WAX",
+                            "relation": "Reduction of willingness when A_X(t*) < 0.3"
+                        },
+                        "watchdog_trigger": {
+                            "module": "9251_WATCHDOG",
+                            "event": "AWX_Mirror_Alert",
+                            "condition": "ΔI_t > 0.8"
+                        },
+                        "meta_axioms": [
+                            "M-05",
+                            "M-06",
+                            "M-09"
+                        ],
+                        "version_tag": "v4.1_patch_MirrorGap",
+                        "author": "FehrAdvice BEATRIX Kernel",
+                        "review_status": "proposed"
+                    }
+                }
+            ]
+        },
+        "cluster_7_segment_and_player_logic": {
+            "axioms": [
+                {
+                    "id": "AWX-A71",
+                    "title": "Segment dependence",
+                    "definition": "Awareness levels vary systematically across segments defined in 7257.",
+                    "formula": "A_X^Segment_i ≠ A_X^Segment_j"
+                },
+                {
+                    "id": "AWX-A72",
+                    "title": "Player types",
+                    "definition": "Awareness levels differ by player type (e.g., cooperative, competitive, strategic) per 9479.",
+                    "formula": "A_X(t*) = f(Player_type)"
+                },
+                {
+                    "id": "AWX-A73",
+                    "title": "Cultural differentiation",
+                    "definition": "Awareness varies strongly across cultures due to different narratives, symbols, and institutions.",
+                    "formula": "A_X(t*) = f(Culture)"
+                },
+                {
+                    "id": "AWX-A74",
+                    "title": "Education and competence level",
+                    "definition": "Awareness increases with higher education/competence and decreases with low knowledge.",
+                    "formula": "A_X(t*) ∝ Education_level"
+                },
+                {
+                    "id": "AWX-A75",
+                    "title": "Socioeconomic status",
+                    "definition": "Awareness depends on socioeconomic status: resource abundance enables higher awareness.",
+                    "formula": "A_X(t*) ∝ SES (Socioeconomic Status)"
+                }
+            ]
+        },
+        "cluster_8_interaction_and_aggregation": {
+            "axioms": [
+                {
+                    "id": "AWX-A76",
+                    "title": "Aggregation of individual awareness",
+                    "definition": "Collective awareness level results from aggregating individual awareness values within a group.",
+                    "formula": "A_Group(t*) = Σ A_i(t*) / n"
+                },
+                {
+                    "id": "AWX-A77",
+                    "title": "Dynamic multiplicity",
+                    "definition": "Aggregated awareness is non-linear and determined by dynamic weights (e.g., influence of individuals).",
+                    "formula": "A_Group(t*) = Σ w_i * A_i(t*), w_i ≠ constant"
+                },
+                {
+                    "id": "AWX-A78",
+                    "title": "Awareness cascades",
+                    "definition": "An awareness statement or action can trigger a cascade that increases awareness in others.",
+                    "formula": "ΔA_j(t*) = f(A_i(t*), Influence_strength)"
+                },
+                {
+                    "id": "AWX-A79",
+                    "title": "Awareness spillover",
+                    "definition": "Awareness in one domain can strengthen or activate awareness in other domains.",
+                    "formula": "A_X(t*) ↔ A_Y(t*)"
+                },
+                {
+                    "id": "AWX-A80",
+                    "title": "Awareness blockades",
+                    "definition": "Toxic communication (e.g., hate speech, targeted disinformation) can block awareness at the collective level.",
+                    "formula": "A_Group(t*) = 0 if HateSpeech_intensity >> Threshold"
+                }
+            ]
+        }
+    },
+    "A5_Requirements_v5.0": {
+        "id": "A5",
+        "title": "Requirements – input conditions and determinants of the Awareness function",
+        "definition": "Defines the structural, contextual, and psychological prerequisites under which Awareness (A_SYS0–2) can become effective at the Moment of Truth. Awareness requires a defined benefit base, an impact mapping between behavior and benefit, and defined determinants at cognitive, emotional, social, institutional, cultural, and communicative levels.",
+        "requirements": {
+            "R1_Benefit_Base": "INU, KNU, and IDN must be fully defined and operationalized.",
+            "R2_Impact_Relations": "The mapping between behavior and benefit (positive/negative) must be known or observable.",
+            "R3_Determinants": {
+                "cognitive": [
+                    "attention",
+                    "evidence clarity",
+                    "cognitive load"
+                ],
+                "emotional": [
+                    "affective valence",
+                    "fear",
+                    "hope",
+                    "resonance"
+                ],
+                "social": [
+                    "norm pressure",
+                    "peer visibility",
+                    "institutional trust"
+                ],
+                "institutional": [
+                    "rule clarity",
+                    "institutional legitimacy",
+                    "governance transparency"
+                ],
+                "cultural": [
+                    "narratives",
+                    "symbols",
+                    "rituals",
+                    "shame and honor norms"
+                ],
+                "biological": [
+                    "energy level",
+                    "age",
+                    "neurodiversity"
+                ],
+                "communicative": [
+                    "visibility cost",
+                    "power distance",
+                    "feedback lag",
+                    "psychological safety"
+                ],
+                "complexity": [
+                    "decision complexity",
+                    "ambiguity",
+                    "information density"
+                ],
+                "uncertainty": [
+                    "environmental uncertainty",
+                    "interpersonal uncertainty",
+                    "institutional uncertainty",
+                    "epistemic uncertainty"
+                ]
+            },
+            "R4_Time_Context": "Awareness is situational; the Moment of Truth (t*) must be contextualized, time-unambiguous, and salience-capable.",
+            "R5_Instant_Exceptions": "Special logic: INU_instant and IDN_instant act without awareness; KNU is always awareness-required.",
+            "R6_Segmentation": "Awareness varies by segment logic (7257) and player types (9479).",
+            "R7_Communicative_Dynamics": "Collective awareness is additionally influenced by communicative distortions (overconfidence, survivorship bias, failure gap). Together they form the Awareness Bias Block.",
+            "R8_Thresholds": {
+                "Awareness_FailureGap": "ΔAwareness_F > 0.25 ⇒ perceptual lock-in, automatic watchdog trigger.",
+                "Awareness_Capacity": "Σ|ΔA_SYSi| ≤ θ_meta"
+            }
+        },
+        "interfaces": {
+            "inputs": [
+                "Benefit types (7234_INU, 7235_KNU, 7236_IDN)",
+                "Context (8904_KON)",
+                "Uncertainty (9493–9495)",
+                "Complexity (9492)",
+                "Communication conditions (Failure Gap, Overconfidence, Survivorship Bias)"
+            ],
+            "outputs": [
+                "Willingness (7243)",
+                "Probability function (7259)",
+                "Watchdog (9251) → Event: AWX_FailureGap_Alert"
+            ]
+        },
+        "meta_axioms": [
+            "MA_0.00l",
+            "MA_0.00m",
+            "MA_0.00p",
+            "MA_0.00zc"
+        ],
+        "validation_rule": "All determinants defined ∧ C_rel valid ∧ Σ|ΔA_SYSi| ≤ θ_meta → Awareness applicable",
+        "version": "v5.0",
+        "author": "FehrAdvice BEATRIX Kernel Integration Team",
+        "release_date": "2025-11-03"
+    },
+    "A6_Integration_v5.0": {
+        "id": "A6",
+        "title": "Integration – systemic linkage of the Awareness function with other BCM modules",
+        "definition": "Defines the logical, functional, and governance interfaces between the Awareness function (7240) and the other core modules of BCM 2.0. Awareness acts as an intermediate transformation variable between benefit, context, uncertainty, complexity, and willingness. In v5.0, communicative distortions (Bias Block: Overconfidence, Survivorship Bias, Failure Gap) are additionally integrated.",
+        "integration_links": {
+            "upstream": [
+                "7234_INU – Individual Benefit",
+                "7235_KNU – Collective Benefit",
+                "7236_IDN – Identity Benefit",
+                "8904_KON – Context Logic",
+                "9492_KOM_META – Complexity Logic",
+                "9493_UNS_INS – Institutional Uncertainty",
+                "9494_UNS_EPI – Epistemic Uncertainty",
+                "9495_UNS_IPN – Interpersonal Uncertainty",
+                "9485_UNS_ENV – Environmental Uncertainty",
+                "9479_SPT – Player Types",
+                "9480_GAM – Game Theory",
+                "9251_WATCHDOG – Feedback and Control Module",
+                "9477_STA – Statistical Modeling",
+                "7232_META – Meta-Axioms"
+            ],
+            "bias_block_coupling": {
+                "definition": "Awareness is coupled to the Bias Block consisting of Overconfidence, Survivorship Bias, and Failure Gap.",
+                "formal": [
+                    "Bias_total(t) = Bias_conf + Bias_surv + Bias_fail + κ(Bias_conf × Bias_surv × Bias_fail)",
+                    "ΔAwareness_F = f(VisibilityCost, PowerDistance, -Transparency, -PsychSafety, FeedbackLag)"
+                ],
+                "modules": [
+                    "7243_WAX",
+                    "8904_KON",
+                    "9251_WATCHDOG"
+                ],
+                "watchdog_trigger": "AWX_FailureGap_Alert"
+            },
+            "downstream": [
+                "7243_WAX – Willingness",
+                "7259_WTX – Probability Function",
+                "7260_PRB – Decision Probability",
+                "7257_SEG – Segment Logic",
+                "7256_JNY – Behavioral Change Journey",
+                "7457_LCP – Life-Phase Logic"
+            ],
+            "intervention_control": [
+                "9250_INT – Intervention Toolkit",
+                "9251_WATCHDOG – Control Architecture",
+                "9477_STA – Statistics Module",
+                "9912_HSP – Hate Speech & Counter Speech"
+            ]
+        },
+        "integration_logic": {
+            "core": "Awareness modulates willingness via bias-weighted effectiveness: W_eff = f(U_eff × (1 - Bias_total))",
+            "watchdog_rule": "If ΔAwareness_F > 0.25 or κ > 0.1 → Event: AWX_FailureGap_Alert",
+            "feedback_loop": "A_SYS2(t+1) = A_SYS2(t) + ρ_feedback × ΔOutcome_impact × (1 - Bias_total)",
+            "meta_condition": "Awareness stable if Bias_total < θ_Bias and Σ|ΔA_SYSi| ≤ θ_meta"
+        },
+        "governance": {
+            "validation_rule": "All upstream modules available ∧ watchdog active ∧ Σ|ΔA_SYSi| ≤ θ_meta → Integration = VALID",
+            "audit_event": "AWX_INTEGRATION_VALIDATION",
+            "status_flag": "META_VALIDATED"
+        },
+        "version": "v5.0",
+        "author": "FehrAdvice BEATRIX Kernel Integration Team",
+        "release_date": "2025-11-03",
+        "compliance_ref": "BCM2_00_STD_9232_v3.4"
+    },
+    "A7_Boundaries_v5.0": {
+        "title": "Boundaries – delimiting the Awareness function from related concepts and bias influences",
+        "definition": "A7 specifies what Awareness is not within BCM 2.0. With v5.0, boundaries against systemic, communicative, and bias-based pseudo-awareness states are added. Awareness refers exclusively to real-time cognitive, emotional, or reflective processing of one’s own benefit impact at the Moment of Truth—independent of socially mediated frames, discourses, or perceptual distortions.",
+        "boundaries": [
+            "Awareness ≠ knowledge (information can exist without consciousness).",
+            "Awareness ≠ attitude (preferential, but not real-time behavior-relevant).",
+            "Awareness ≠ motivation (motivation can exist without awareness of impact).",
+            "Awareness ≠ information (communication ≠ consciousness of consequences).",
+            "Awareness ≠ automatic processes (exception: instant INU or IDN).",
+            "Awareness ≠ norm enforcement (conformity can occur without consciousness).",
+            "Awareness ≠ strategic rationality (planning ≠ impact-consciousness).",
+            "Awareness ≠ a stable trait (it is dynamic and context-dependent).",
+            "Awareness ≠ benefit itself (it mediates benefit but does not create it).",
+            "Awareness ≠ full behavioral control (it is necessary but not sufficient).",
+            "Awareness ≠ visibility (public communication ≠ individual consciousness).",
+            "Awareness ≠ transparency (transparency can exist without being perceived).",
+            "Awareness ≠ feedback (feedback creates awareness only if internalized).",
+            "Awareness ≠ discourse (social debates do not create individual awareness per se).",
+            "Awareness ≠ data awareness (algorithmic display does not replace impact consciousness).",
+            "Awareness ≠ false awareness (misinterpretations or framing create pseudo-consciousness)."
+        ],
+        "bias_references": {
+            "linked_biases": [
+                "Overconfidence Bias",
+                "Survivorship Bias",
+                "Failure Awareness Gap",
+                "Information Visibility Bias",
+                "Mirror Gap Bias"
+            ],
+            "governance_link": "9251_WATCHDOG_CORE",
+            "watchdog_event": "AWX_FailureGap_Alert"
+        },
+        "meta_reference": [
+            "MA_0.00r",
+            "MA_0.00zc",
+            "MA_0.00zb"
+        ],
+        "author": "FehrAdvice BEATRIX Kernel – Awareness Extension Team",
+        "version": "v5.0",
+        "release_date": "2025-11-03",
+        "status": "proposed_v5.0"
+    },
+    "A8_UseCases": [
+        "Simulation of behavior gaps (knowledge vs. doing)",
+        "Modeling biases (e.g., loss aversion)",
+        "Design of interventions (priming, framing, defaults)",
+        "Segment and target-group analysis",
+        "Journey mapping",
+        "Life-phase analysis",
+        "Uncertainty and complexity analysis",
+        "Strategic simulation (player types, game theory)",
+        "Monitoring and control (watchdog, hate speech)",
+        "Empirical measurement (statistics)"
+    ],
+    "A9_Limitations": [
+        "Limited attention span",
+        "Selectivity and distortion",
+        "Strong context dependence",
+        "Fluctuation and decay over time",
+        "Lack of persistence",
+        "No guarantee of behavior",
+        "Measurement problems",
+        "Manipulability",
+        "Weakness for collective benefit",
+        "Awareness is a multiplier, not a full explanation"
+    ],
+    "A10_License_and_Governance_v5.0": {
+        "id": "A10",
+        "title": "License & Governance – control architecture, ethical use, and bias monitoring",
+        "definition": "Regulates usage, control, and governance of the Awareness function within BCM 2.0. In v5.0, automated monitoring of communicative distortions (Overconfidence, Survivorship Bias, Failure Gap) via Watchdog module 9251 is introduced. This checks perceptual integrity of Awareness in real time.",
+        "ownership": {
+            "holder": "FehrAdvice & Partners AG",
+            "license_type": "BCM 2.0 Core License",
+            "mandatory_status": "Mandatory module – without Awareness no valid simulation or intervention architecture.",
+            "governed_by": [
+                "9251_WATCHDOG",
+                "9477_STAT",
+                "9232_STD"
+            ]
+        },
+        "usage_rules": {
+            "R1": "Awareness may be used exclusively within licensed BCM models.",
+            "R2": "All extensions must be axiomatically consistent and meta-validated.",
+            "R3": "Faulty implementations or uncontrolled bias amplification trigger automatic watchdog checks.",
+            "R4": "Every application must be disclosed and documented (governance protocol duty).",
+            "R5": "Covert influence or manipulative use of the Awareness function is excluded.",
+            "R6": "Goal is to promote fair, transparent, and adaptive decision architectures."
+        },
+        "bias_monitoring": {
+            "description": "Automated monitoring of communicative distortions in the Awareness system.",
+            "bias_block": [
+                "Overconfidence",
+                "Survivorship Bias",
+                "Failure Gap"
+            ],
+            "formal_rule": "Bias_total = Bias_conf + Bias_surv + Bias_fail + κ(Bias_conf × Bias_surv × Bias_fail)",
+            "watchdog_trigger_conditions": [
+                "ΔAwareness_F > 0.25",
+                "κ > 0.10",
+                "Bias_total > θ_Bias"
+            ],
+            "governance_response": {
+                "event": "AWX_FailureGap_Alert",
+                "action": [
+                    "Watchdog log entry in 9477_STAT",
+                    "Bias recomputation in Awareness Cluster 4",
+                    "Signal to module 7243_WAX (willingness damping)",
+                    "Notification to governance layer (9251)"
+                ]
+            },
+            "meta_integration": "Bias monitoring is an integral part of the BCM Watchdog core. It ensures perceptual integrity across all usage levels."
+        },
+        "reporting_and_audit": {
+            "data_logging": {
+                "repository": "9477_STAT_AWX_GOV_LOG",
+                "log_events": [
+                    "AWX_INTEGRATION_VALIDATION",
+                    "AWX_FailureGap_Alert",
+                    "AWX_BiasCoupling_Anomaly",
+                    "AWX_MetaThreshold_Breach"
+                ]
+            },
+            "review_cycle": "semi-annual",
+            "governance_authority": "FehrAdvice Kernel Review Board",
+            "status_flag": "META_VALIDATED"
+        },
+        "ethics_and_responsibility": {
+            "E1": "Awareness interventions must not cause psychologically or socially harmful effects.",
+            "E2": "All applications must aim to foster perception, not distort it.",
+            "E3": "The module serves to increase collective orientation, fairness, and decision quality.",
+            "E4": "Users and organizations bear full responsibility for integrity, transparency, and traceability of applications."
+        },
+        "license_terms": {
+            "version": "v5.0",
+            "valid_from": "2025-11-03",
+            "supersedes": "v4.0",
+            "license_scope": "Awareness (BCM2_05_AWX), including bias monitoring and Failure Gap.",
+            "audit_compliance_ref": "BCM2_00_STD_9232_v3.4",
+            "meta_axioms": [
+                "MA_0.00l",
+                "MA_0.00n",
+                "MA_0.00r",
+                "MA_0.00zc"
+            ]
+        },
+        "author": "FehrAdvice BEATRIX Kernel Governance Team",
+        "release_date": "2025-11-03"
+    }
+}
