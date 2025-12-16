@@ -1,764 +1,472 @@
 {
     "module": {
         "id": "7236",
-        "code": "BCM2_03_IDN",
-        "title": "Identitätsnutzen",
-        "type": "Nutzenmodul",
-        "owner": "FehrAdvice & Partners AG",
-        "year": 2025
-    },
-    "structure": {
-        "A1": {
-            "chapter_context": "Dieses Modul bildet den Identitätsnutzen ab. Es implementiert die Meta-Axiome aus 7232 (Mehrdimensionalität, Zeitlichkeit, Kontextabhängigkeit, Segmentlogik). Es definiert Identität als Selbstdefinition durch Zugehörigkeit und Differenz, verankert in sozialen, kulturellen und institutionellen Rahmenbedingungen. Es unterscheidet sich von INU (7234) und KNU (7235), da Identitäten eigenständige Nutzenfunktionen mit spezifischen Pains & Gains erzeugen. IDN wirkt als Brücke zwischen INU und KNU und ist zentral für Awareness (7240) und Willingness (7243)."
-        },
-        "A2": {
-            "scope": [
-                "Gilt für alle Identitätsnutzenfunktionen in BCM-Simulationen.",
-                "Abbildung von Identitätslagen über soziale Rollen, kulturelle Zugehörigkeiten, Geschlecht, digitale Identitäten, Markenidentitäten, kollektive Zugehörigkeiten, Lebensphasen.",
-                "Gültig für WEIRD- und non-WEIRD-Kontexte.",
-                "Umfasst Fristigkeiten (instant, kurz-, mittel-, langfristig).",
-                "Unterstützt Segmentierung nach Identitätsstärke, Stabilität, Kontextabhängigkeit.",
-                "Anwendbar für intersektionale, hybride und kollektive Identitäten.",
-                "Grundlage für Szenarien mit Normkonflikten, Identitätskrisen, Schocks und Resilienz."
-            ]
-        },
-        "A3": {
-            "objectives": [
-                "Abbildung von Pain- und Gain-Strukturen von Identitäten.",
-                "Integration von Fristigkeiten und Diskontierung.",
-                "Aggregation mehrerer Identitäten mit Gewichtungen.",
-                "Erfassung von Komplementarität und Konflikt zwischen Identitäten.",
-                "Einbettung in soziale, kulturelle, institutionelle Kontexte.",
-                "Dynamische Modellierung von Identitäts-Journeys (Krise → Übergang → Stabilisierung).",
-                "Berücksichtigung von Normen, Legitimität und Anerkennung.",
-                "Abbildung von Resilienz, Schocks, Unsicherheit.",
-                "Integration digitaler und intergenerationaler Identitäten.",
-                "Bereitstellung der Schnittstelle zu Awareness (7240) und Willingness (7243)."
-            ]
-        },
-        "A5": {
-            "requirements": [
-                "Daten zu Identitäts-Pains & Gains (z. B. Anerkennung, Ausschluss, Zugehörigkeit, Stigma).",
-                "Segmentparameter: Rolle, Kultur, Geschlecht, Alter, Institutionen.",
-                "Intersektionale Identitätslagen.",
-                "Fristigkeitsparameter & Diskontierungsfaktoren.",
-                "Awareness-Level.",
-                "Normen & Legitimitätsindikatoren.",
-                "Kontextparameter (Situationen, Milieus).",
-                "Resilienz- und Schockdaten.",
-                "Digitale Identitätsparameter (Privacy, Reputation, Connectivity, Avatar).",
-                "Ressourceninvestitionen in Identitäten."
-            ]
-        },
-        "A6": {
-            "integration": {
-                "Meta": [
-                    "7232 META",
-                    "9232 STD"
-                ],
-                "Awareness_Willingness": [
-                    "7240 AWX",
-                    "7243 WAX"
-                ],
-                "Nutzenmodule": [
-                    "7234 INU",
-                    "7235 KNU"
-                ],
-                "Kontext_Segment": [
-                    "8904 KON",
-                    "7257 SEG"
-                ],
-                "Journey_Lebensphasen": [
-                    "7256 JNY",
-                    "7457 LCP"
-                ],
-                "Unsicherheit_Komplexität": [
-                    "9485–9494"
-                ],
-                "Intervention_Monitoring": [
-                    "9250 INT",
-                    "9251 WATCHDOG"
-                ],
-                "Erweiterte_Logiken": [
-                    "9477 STA",
-                    "9479 SPT",
-                    "9480 GAM"
-                ]
-            }
-        },
-        "A7": {
-            "boundaries": [
-                "Modul bildet ausschliesslich den Identitätsnutzen ab.",
-                "INU (7234) und KNU (7235) bleiben eigenständig.",
-                "Externe Rahmenbedingungen nur soweit sie Identitätsnutzen betreffen.",
-                "Aggregation von IDN mit INU und KNU erfolgt nur über Architekturstandards.",
-                "Modul selbst generiert keine Interventionen, liefert aber Input für 9250 (INT)."
-            ]
-        },
-        "A8": {
-            "versioning": [
-                "v1.0 – Grundstruktur, Abgrenzung zu INU/KNU.",
-                "v1.1 – Strukturkonformität gemäss 9232 (A1–A10).",
-                "v2.0 – Erweiterung um Fristigkeiten, Awareness, Kontext.",
-                "v2.1 – Einführung von Komplementarität und Konflikten.",
-                "v2.2 – Integration von Normen, Institutionen, Legitimität.",
-                "v2.3 – Erweiterung um digitale Identität.",
-                "v2.4 – Aufnahme von Resilienz, Schocks, Unsicherheit.",
-                "v2.5 – Investition & ROI von Identitäten.",
-                "v3.0 – Vollständige Integration A1–A70, inkl. Kohärenzprinzip."
-            ]
-        },
-        "A9": {
-            "citation": "Kapitel BCM2_03_IDN (ID 7236), FehrAdvice & Partners AG, 2025. Vollständig BCM-konforme Version mit Integration der Meta-Axiome (7232) und expliziter Abgrenzung zu INU (7234) und KNU (7235)."
-        },
-        "A10": {
-            "license": "© FehrAdvice & Partners AG. Nutzung ausschliesslich im Rahmen des BCM 2.0 erlaubt. Jede Anwendung muss die Architekturstandards (9232) und Meta-Axiome (7232) berücksichtigen."
-        }
-    },
-    "axioms": [
-        {
-            "id": "IDN-A1",
-            "title": "Definition",
-            "description": "Eine Identität ist die Selbstdefinition einer Person durch Zugehörigkeit (Inklusion) und Abgrenzung (Differenz) innerhalb sozialer, kultureller oder institutioneller Rahmenbedingungen.",
-            "formula": "Identität = f(Zugehörigkeit, Differenz)"
-        },
-        {
-            "id": "IDN-A2",
-            "title": "Multiplizität",
-            "description": "Jede Person trägt mehrere Identitäten gleichzeitig, die als eigenständige Nutzenquellen wirken.",
-            "formula": "U_IDN_total = Σ (π_j * U_IDN^j)"
-        },
-        {
-            "id": "IDN-A3",
-            "title": "Eigenständigkeit",
-            "description": "Identitäten erzeugen spezifische Nutzen (Gains) und Kosten (Pains), die nicht aus individuellem (INU) oder kollektivem Nutzen (KNU) ableitbar sind.",
-            "formula": "U_IDN^j = G_IDN^j - C_IDN^j"
-        },
-        {
-            "id": "IDN-A4",
-            "title": "Nettonutzen",
-            "description": "Der Nettonutzen einer Identität ergibt sich aus Zugehörigkeit, Anerkennung und Rollenkohärenz minus Ausschluss, Stigmatisierung und Rollenkonflikten.",
-            "formula": "U_IDN^j = (α*Anerkennung^j + β*Zugehörigkeit^j + γ*Kohärenz^j) - (θ*Ausschluss^j + λ*Stigma^j + μ*Konflikt^j)"
-        },
-        {
-            "id": "IDN-A5",
-            "title": "Fristigkeit",
-            "description": "Identitätsnutzen entfaltet sich fristigkeitsspezifisch (instantan, kurz-, mittel-, langfristig) und wird durch zeitliche Diskontierung moduliert.",
-            "formula": "U_IDN^j = Σ (δ_i^j * ω_i^j * (G_i^j - C_i^j))"
-        },
-        {
-            "id": "IDN-A6",
-            "title": "Aggregation",
-            "description": "Der Gesamtnutzen einer Person ergibt sich aus der Aggregation mehrerer Identitäten, gewichtet nach Relevanz (π_j).",
-            "formula": "U_IDN_total = Σ (π_j * U_IDN^j)"
-        },
-        {
-            "id": "IDN-A7",
-            "title": "Sozialität",
-            "description": "Identitätsnutzen ist relational; er entsteht im Bezug zu anderen und ist ohne soziale Einbettung nicht vollständig bestimmbar.",
-            "formula": "U_IDN^j = f(Selbst, Andere)"
-        },
-        {
-            "id": "IDN-A8",
-            "title": "Kontext",
-            "description": "Die Salienz einer Identität hängt vom Kontext ab; Kontexte aktivieren unterschiedliche Identitäten unterschiedlich stark.",
-            "formula": "π_j_context = f(KON)"
-        },
-        {
-            "id": "IDN-A9",
-            "title": "Motivierte Awareness – Adaptive Selbstkohärenz",
-            "definition": "Awareness beschreibt den Grad, in dem eine Identität kognitiv, emotional und sozial bewusst aktiviert wird. Sie bestimmt, ob und in welchem Ausmass der potenzielle Identitätsnutzen wirksam wird. Awareness ist eine adaptive Selbstregulationsfunktion, die selektiv Informationen zulässt oder ausblendet, um Kohärenz und emotionale Stabilität des Selbstbildes zu erhalten.",
-            "function": "Awareness wirkt als Filter zwischen potenzieller (latenter) und handlungsleitender (salienter) Identität. Sie aktiviert, hemmt oder verzerrt Identitätsinformationen in Abhängigkeit von emotionalen, motivationalen und kontextuellen Bedingungen und vermittelt zwischen Wahrnehmung (Awareness-System 7240) und Entscheidung (Willingness-System 7243).",
-            "condition": "A_j(t) = f(Bedrohung^j(t), Selbstwert^j(t), Emotion^j(t), Kontext^j(t), Informationskosten^j(t))",
-            "formula": "U_IDN_effective(t) = Σ_j [A_j(t) * π_j_context(t) * U_IDN^j(t)]",
-            "parameters": {
-                "A_j(t)": "Awareness-Level der Identität j im Zeitpunkt t (0 ≤ A_j ≤ 1)",
-                "π_j_context(t)": "Kontextgewichtung der Identität j",
-                "U_IDN^j(t)": "potenzieller Identitätsnutzen",
-                "Bedrohung^j": "wahrgenommene Identitätsbedrohung (negative Information, Dissonanz)",
-                "Selbstwert^j": "Stabilität des positiven Selbstbildes",
-                "Emotion^j": "affektiver Zustand (z. B. Stolz, Scham, Schuld)",
-                "Kontext^j": "situative und soziale Salienz",
-                "Informationskosten^j": "mentale und emotionale Kosten der Informationsaufnahme"
+        "name": "Identity Utility",
+        "version": "3.0",
+        "description": "This module represents identity utility. It implements the meta-axioms from 7232 (multidimensionality, temporality, context dependency, segment logic). It defines identity as self-definition through belonging and differentiation, anchored in social, cultural, and institutional frameworks. It differs from INU (7234) and KNU (7235) as identities generate independent utility functions with specific pains and gains. IDN acts as a bridge between INU and KNU and is central to Awareness (7240) and Willingness (7243).",
+        "section": {
+            "A1": {
+                "title": "Chapter Context",
+                "text": "Module code: BCM2_03_IDN. Type: Utility module. Owner: FehrAdvice & Partners AG. Year: 2025. This module represents identity utility and implements meta-axioms from 7232 including multidimensionality, temporality, context dependency, and segment logic. Identity is defined as self-definition through belonging and differentiation, anchored in social, cultural, and institutional frameworks. It differs from individual utility (INU 7234) and collective utility (KNU 7235) as identities generate independent utility functions with specific pains and gains. IDN acts as a bridge between INU and KNU and is central to Awareness (7240) and Willingness (7243)."
             },
-            "interpretation": "Awareness ist zeit- und kontextabhängig. Ohne Awareness bleibt Identitätsnutzen latent; mit Awareness wird Identität salient und verhaltensleitend. Motivation und Emotion bestimmen die Richtung: selbstbestätigend (Kohärenzerhalt), selbstkorrigierend (Transformation) oder selbstschützend (Verdrängung).",
-            "complementarity": [
-                "IDN-A44 – Identitätsunsicherheit (Unsicherheit reduziert Awareness-Level)",
-                "IDN-A57 – Emotionale Intensität (Emotion moduliert Awareness)",
-                "IDN-A70 – Kohärenzprinzip (Awareness als Mechanismus der Kohärenzbewahrung)",
-                "Verknüpfung mit 7240 (AWX – Awareness-System) und 7243 (WAX – Willingness-System)",
-                "Ergänzt durch A75 (Latent vs. Salient), A76 (Priming), A77 (Dynamische Multiplizität)"
-            ],
-            "relation": [
-                "Meta-Axiom M-06 (Kontextabhängigkeit)",
-                "Meta-Axiom M-09 (Dynamik)",
-                "Meta-Axiom M-10 (Komplementarität)"
-            ],
-            "boundary": "Awareness ist kein rationaler Steuermechanismus, sondern ein adaptives Gleichgewicht zwischen Wahrnehmung, Emotion und Selbstwert. Sie kann Selbsttäuschung und Informationsverzerrung erzeugen, wirkt jedoch funktional stabilisierend, da sie Identitätskohärenz und psychische Kontinuität bewahrt.",
-            "semantic": "Awareness ist der Prozess, durch den Identität sich selbst sieht – und dabei auswählt, was sie sehen kann, ohne zu zerbrechen.",
-            "citation": "BCM2_03_IDN – Identitätsnutzen (v3.2, FehrAdvice & Partners AG, 2025)",
-            "license": "© FehrAdvice & Partners AG – BCM 2.0 Architecture Standard gemäss 9232"
-        },
-        {
-            "id": "IDN-A10",
-            "title": "Komplementarität & Konflikt",
-            "description": "Identitäten können sich gegenseitig verstärken (Komplementarität) oder widersprechen (Konflikt), wodurch sich der Gesamtnutzen erhöht oder reduziert.",
-            "formula": "U_IDN_total = Σ (π_j * U_IDN^j) + Σ (κ_jk * Interaktion(j,k))"
-        },
-        {
-            "id": "IDN-A11",
-            "title": "Pfadabhängigkeit",
-            "description": "Identitätsnutzen ist dynamisch und hängt von früheren Erfahrungen, Entscheidungen und Ereignissen ab. Vergangenheit prägt aktuelle Identitätslagen.",
-            "formula": "U_IDN,t^j = f(U_IDN,t-1^j, Ereignisse_t)"
-        },
-        {
-            "id": "IDN-A12",
-            "title": "Identity Journey",
-            "description": "Identitäten entwickeln sich über Journeys hinweg (Aufbau, Krise, Transformation, Stabilisierung). Jede Phase erzeugt unterschiedliche Nutzenwirkungen.",
-            "formula": "Journey^j = {Aufbau, Krise, Transition, Stabilisierung}"
-        },
-        {
-            "id": "IDN-A13",
-            "title": "Normen",
-            "description": "Normen verstärken oder schwächen Identitätsnutzen durch Konformität oder Abweichung.",
-            "formula": "U_IDN^j = U_IDN^j + η*Normkonformität^j - ζ*Normkonflikt^j"
-        },
-        {
-            "id": "IDN-A14",
-            "title": "Institutionalisierung",
-            "description": "Institutionen können Identitäten stabilisieren (Kostenreduktion) oder destabilisieren (Kostenerhöhung).",
-            "formula": "C_IDN^j = f(Stabilisierung_institutionell, Destabilisierung_institutionell)"
-        },
-        {
-            "id": "IDN-A15",
-            "title": "Unsicherheit",
-            "description": "Identitätsnutzen ist sensitiv gegenüber Unsicherheit (epistemisch, interpersonell, institutionell, umweltbezogen).",
-            "formula": "Var(U_IDN^j) = f(Unsicherheit_ep, Unsicherheit_ip, Unsicherheit_ins, Unsicherheit_env)"
-        },
-        {
-            "id": "IDN-A16",
-            "title": "Fristenintegration",
-            "description": "Identitätsnutzen ist über alle Fristigkeiten integriert, von instantan bis langfristig.",
-            "formula": "U_IDN^j = Σ (δ_i^j * ω_i^j * U_i^j), i ∈ {inst, kurz, mittel, lang}"
-        },
-        {
-            "id": "IDN-A17",
-            "title": "Fristigkeitsprofile",
-            "description": "Unterschiedliche Identitäten haben unterschiedliche Fristigkeitsprofile (z. B. flüchtig vs. institutionell).",
-            "formula": "Profil^j = {ω_inst^j, ω_kurz^j, ω_mittel^j, ω_lang^j}"
-        },
-        {
-            "id": "IDN-A18",
-            "title": "Diskontierung",
-            "description": "Identitätsnutzen wird zeitlich diskontiert, wobei Diskontierungsraten identitätsspezifisch variieren.",
-            "formula": "U_IDN^j = Σ (δ_i^j * (G_i^j - C_i^j))"
-        },
-        {
-            "id": "IDN-A19",
-            "title": "Zeitliche Dynamik",
-            "description": "Die Gewichtung der Fristigkeiten verändert sich dynamisch über Lebensphasen.",
-            "formula": "ω_i,t^j = f(Lebensphase_t, Ereignisse_t)"
-        },
-        {
-            "id": "IDN-A20",
-            "title": "Rückkopplung über Zeit",
-            "description": "Kurzfristige Identitätsgewinne können langfristige Identitätskosten verursachen (und umgekehrt).",
-            "formula": "ΔU_IDN,lang^j = g(U_IDN,kurz^j)"
-        },
-        {
-            "id": "IDN-A21",
-            "title": "Identitäts-Gains",
-            "description": "Identitätsgewinne entstehen durch Anerkennung, Zugehörigkeit, Kohärenz und Normkonformität.",
-            "formula": "G_i^j = α*Anerkennung_i^j + β*Zugehörigkeit_i^j + γ*Kohärenz_i^j + δ*Normkonformität_i^j"
-        },
-        {
-            "id": "IDN-A22",
-            "title": "Identitäts-Pains",
-            "description": "Identitätskosten entstehen durch Ausschluss, Stigmatisierung, Dissonanz und Konflikte.",
-            "formula": "C_i^j = θ*Ausschluss_i^j + λ*Stigmatisierung_i^j + μ*Dissonanz_i^j + ν*Konflikt_i^j"
-        },
-        {
-            "id": "IDN-A23",
-            "title": "Asymmetrie von Pains und Gains",
-            "description": "Identitäts-Pains wiegen stärker als Identitäts-Gains.",
-            "formula": "|C_i^j| > |G_i^j|"
-        },
-        {
-            "id": "IDN-A24",
-            "title": "Komplementäre Gains",
-            "description": "Unterschiedliche Identitäten können sich in ihren Gains positiv ergänzen.",
-            "formula": "G_total = Σ G_i^j + Σ κ_jk^+ * (G^j * G^k)"
-        },
-        {
-            "id": "IDN-A25",
-            "title": "Konfliktkosten",
-            "description": "Konflikte zwischen Identitäten erzeugen zusätzliche Kosten.",
-            "formula": "C_total = Σ C_i^j + Σ κ_jk^- * Konflikt(j,k)"
-        },
-        {
-            "id": "IDN-A26",
-            "title": "Dominanz",
-            "description": "Die dominante Identität in einem Kontext bestimmt die Verhaltenstendenz.",
-            "formula": "U_IDN^primed = max_j (π_j_context * U_IDN^j)"
-        },
-        {
-            "id": "IDN-A27",
-            "title": "Stabilität",
-            "description": "Identitäten unterscheiden sich in ihrer zeitlichen Stabilität.",
-            "formula": "Stabilität^j = f(Institutionalisierung^j, Persistenz^j)"
-        },
-        {
-            "id": "IDN-A28",
-            "title": "Stärke",
-            "description": "Die Stärke einer Identität hängt von Salienz, emotionaler Intensität und Relevanz ab.",
-            "formula": "Stärke^j = f(Salienz^j, Emotion^j, Relevanz^j)"
-        },
-        {
-            "id": "IDN-A29",
-            "title": "Kontextabhängigkeit",
-            "description": "Die Aktivierung von Identitäten variiert kontextabhängig.",
-            "formula": "π_j_context = f(KON)"
-        },
-        {
-            "id": "IDN-A30",
-            "title": "Relationalität",
-            "description": "Identitätsnutzen ergibt sich auch aus Abgrenzung zu anderen Identitäten.",
-            "formula": "U_IDN^j = f(Zugehörigkeit^j, Abgrenzung^j)"
-        },
-        {
-            "id": "IDN-A31",
-            "title": "Fristigkeitsspezifische Gains",
-            "description": "Identitätsgewinne können nach Fristigkeiten unterschieden werden (instantan, kurz-, mittel-, langfristig).",
-            "formula": "G_IDN^j = {G_inst^j, G_kurz^j, G_mittel^j, G_lang^j}"
-        },
-        {
-            "id": "IDN-A32",
-            "title": "Fristigkeitsspezifische Pains",
-            "description": "Identitätskosten treten in verschiedenen Fristen auf und können zeitlich unterschiedlich wirken.",
-            "formula": "C_IDN^j = {C_inst^j, C_kurz^j, C_mittel^j, C_lang^j}"
-        },
-        {
-            "id": "IDN-A33",
-            "title": "Zeitdefinitionen je Identitätstyp",
-            "description": "Unterschiedliche Identitätstypen haben unterschiedliche Zeithorizonte (flüchtig, institutionell, hybrid).",
-            "formula": "Zeitprofil^j = f(Typ^j)"
-        },
-        {
-            "id": "IDN-A34",
-            "title": "Reversibilität",
-            "description": "Identitätsgewinne können verloren gehen und Identitätskosten können überwunden werden.",
-            "formula": "ΔU_IDN^j ∈ {+,-}, reversibel"
-        },
-        {
-            "id": "IDN-A35",
-            "title": "Rückkopplung von Fristigkeiten",
-            "description": "Kurzfristige Gewinne können langfristige Kosten erzeugen, und umgekehrt.",
-            "formula": "ΔU_IDN,lang^j = g(U_IDN,kurz^j)"
-        },
-        {
-            "id": "IDN-A36",
-            "title": "Eigenständige Pains",
-            "description": "Identitäten können eigenständige Pains erzeugen, die unabhängig von individuellen oder kollektiven Nutzen wirken.",
-            "formula": "C_IDN^j ≠ C_INU, C_KNU"
-        },
-        {
-            "id": "IDN-A37",
-            "title": "Eigenständige Gains",
-            "description": "Identitäten können eigenständige Gains erzeugen, die nicht durch INU oder KNU substituiert werden können.",
-            "formula": "G_IDN^j ≠ G_INU, G_KNU"
-        },
-        {
-            "id": "IDN-A38",
-            "title": "Asymmetrische Wirkung",
-            "description": "Identitäts-Pains wirken stärker und länger nach als Identitäts-Gains.",
-            "formula": "|C_IDN^j| > |G_IDN^j|"
-        },
-        {
-            "id": "IDN-A39",
-            "title": "Segmentspezifische Unterschiede",
-            "description": "Identitäts-Pains und -Gains unterscheiden sich nach Segmenten (Alter, Gender, Kultur, Rolle).",
-            "formula": "U_IDN^j_segment = f(Segmentparameter)"
-        },
-        {
-            "id": "IDN-A40",
-            "title": "Kontextuelle Konflikte",
-            "description": "Identitätskonflikte entstehen spezifisch in bestimmten Kontexten.",
-            "formula": "C_Konflikt^j = f(KON)"
-        },
-        {
-            "id": "IDN-A41",
-            "title": "Normintegration",
-            "description": "Identitätsnutzen wird durch die Kohärenz mit gesellschaftlichen Normen verstärkt und durch Normkonflikte geschwächt.",
-            "formula": "U_IDN^j = U_IDN^j + η*Normkohärenz^j - ζ*Normkonflikt^j"
-        },
-        {
-            "id": "IDN-A42",
-            "title": "Interventionen",
-            "description": "Interventionen können Identitätsnutzen durch Symbole, Narrative und Rollen beeinflussen.",
-            "formula": "ΔU_IDN^j = f(Symbole, Narrative, Rollen)"
-        },
-        {
-            "id": "IDN-A43",
-            "title": "Identity Journeys",
-            "description": "Identitäten entwickeln sich über Lebensreisen mit charakteristischen Phasen und Übergängen.",
-            "formula": "Journey^j = {Aufbau, Krise, Transition, Stabilisierung}"
-        },
-        {
-            "id": "IDN-A44",
-            "title": "Adaptive Identitätsunsicherheit",
-            "definition": "Unsicherheit beschreibt den Grad an Instabilität und Ambiguität, den eine Person in Bezug auf ihre Identität empfindet. Sie entsteht aus der Differenz zwischen Selbstbild und sozialer Realität und wird dynamisch durch Awareness, Emotion, Selbstwert und Kontext beeinflusst.",
-            "formula": "ΔU_IDN^j(t) = -[ φ1*Unsicherheit^j(t) - φ2*A_j(t) + φ3*Emotion^j(t) - φ4*Kontextkohärenz^j(t) ]",
-            "parameters": {
-                "φ1": "Sensitivität gegenüber Unsicherheit",
-                "φ2": "Stabilisierender Effekt der Awareness",
-                "φ3": "Emotionale Modulation (positive Emotionen senken Unsicherheit)",
-                "φ4": "Kontextkohärenz oder -inkohärenz",
-                "A_j(t)": "Awareness-Level der Identität j",
-                "Emotion^j": "Affektiver Zustand",
-                "Selbstwert^j": "Grad des Selbstvertrauens",
-                "Unsicherheit^j": "Wahrgenommene Identitätsinstabilität"
+            "A2": {
+                "title": "Scope and Application",
+                "text": "Applies to all identity utility functions in BCM simulations. Representation of identity situations across social roles, cultural affiliations, gender, digital identities, brand identities, collective affiliations, and life phases. Valid for WEIRD and non-WEIRD contexts. Covers time horizons (instant, short-term, medium-term, long-term). Supports segmentation by identity strength, stability, and context dependency. Applicable for intersectional, hybrid, and collective identities. Foundation for scenarios with norm conflicts, identity crises, shocks, and resilience."
             },
-            "interpretation": "Identitätsunsicherheit ist eine adaptive Rückkopplungsgrösse, die kurzfristig stabilisierend und langfristig regulierend wirkt. Sie entsteht durch Spannung zwischen Selbstbild und sozialem Spiegel und moduliert den Identitätsnutzen dynamisch.",
-            "complementarity": [
-                "IDN-A9",
-                "IDN-A57",
-                "IDN-A67",
-                "IDN-A70"
-            ],
-            "relation": [
-                "Meta-Axiom M-05",
-                "Meta-Axiom M-06",
-                "Meta-Axiom M-09"
-            ],
-            "semantic": "Unsicherheit ist das adaptive Zittern der Identität zwischen Wissen und Selbstschutz.",
-            "citation": "BCM2_03_IDN – Identitätsnutzen (v3.2, FehrAdvice & Partners AG, 2025)"
-        },
-        {
-            "id": "IDN-A45",
-            "title": "Brückenfunktion",
-            "description": "Identitätsnutzen wirkt als Brücke zwischen individuellem Nutzen (INU) und kollektivem Nutzen (KNU).",
-            "formula": "U_IDN^j = f(U_INU, U_KNU)"
-        },
-        {
-            "id": "IDN-A46",
-            "title": "Digitale Identität",
-            "description": "Digitale Identitäten erzeugen eigenständige Pains und Gains, die mit physischen Identitäten interagieren.",
-            "formula": "U_IDN^digital ≠ U_IDN^physisch; U_IDN_total = U_IDN^digital + U_IDN^physisch + κ*Interaktion"
-        },
-        {
-            "id": "IDN-A47",
-            "title": "Kohärenz vs. Fragmentierung",
-            "description": "Eine fragmentierte Identitätsarchitektur erhöht die Identitätskosten.",
-            "formula": "C_Fragmentierung ∝ Anzahl(Widersprüche)"
-        },
-        {
-            "id": "IDN-A48",
-            "title": "Intergenerationale Identität",
-            "description": "Identitäten werden über Generationen weitergegeben und erzeugen Nutzen oder Kosten durch Kontinuität oder Brüche.",
-            "formula": "U_IDN^gen = ρ * (Kontinuität - Bruch)"
-        },
-        {
-            "id": "IDN-A49",
-            "title": "Makroebene",
-            "description": "Gesellschaftliche, kulturelle und nationale Rahmenbedingungen prägen den Identitätsnutzen.",
-            "formula": "U_IDN^j = f(Kultur, Nation, Gesellschaft)"
-        },
-        {
-            "id": "IDN-A50",
-            "title": "Ressourcenbindung",
-            "description": "Identitäten erfordern Investitionen an Zeit, Geld und Energie; diese Kosten reduzieren den Nettonutzen.",
-            "formula": "C_Ressourcen^j = τ*(Zeit + Geld + Energie)"
-        },
-        {
-            "id": "IDN-A51",
-            "title": "Bewusste vs. unbewusste Identität",
-            "description": "Auch unbewusste Identitäten entfalten Wirkung, selbst wenn die Awareness = 0.",
-            "formula": "U_IDN_effective = A_j*U_IDN^j + (1 - A_j)*ε*U_IDN^j, ε > 0"
-        },
-        {
-            "id": "IDN-A52",
-            "title": "Schocks & Transformation",
-            "description": "Externe Schocks können Identitäten abrupt destabilisieren oder transformieren.",
-            "formula": "ΔU_IDN^j = f(Schock, Resilienz^j)"
-        },
-        {
-            "id": "IDN-A53",
-            "title": "Intersektionalität",
-            "description": "Überschneidungen mehrerer Identitäten erzeugen spezifische Pains & Gains.",
-            "formula": "U_IDN^intersektional = Σ χ_jk * Intersektion(j,k)"
-        },
-        {
-            "id": "IDN-A54",
-            "title": "Dynamische Gewichtung",
-            "description": "Die Relevanzgewichte von Identitäten verändern sich dynamisch über Zeit und Lebensphasen.",
-            "formula": "π_j,t = f(π_j,t-1, Ereignisse_t, Lebensphase_t)"
-        },
-        {
-            "id": "IDN-A55",
-            "title": "Multiplikative Effekte",
-            "description": "Kombinationen von Identitäten können überproportionale Wirkungen erzeugen.",
-            "formula": "U_IDN_total = Π (1 + κ_jk) * U_IDN^j"
-        },
-        {
-            "id": "IDN-A56",
-            "title": "Kollektive Identität",
-            "description": "Kollektive Identitäten verbinden IDN mit KNU und erzeugen hybride Nutzenfunktionen.",
-            "formula": "U_IDN^kollektiv = f(U_IDN, U_KNU)"
-        },
-        {
-            "id": "IDN-A57",
-            "title": "Emotionale Intensität – Affektive Kohärenzregulation",
-            "definition": "Emotionale Intensität beschreibt den Grad, in dem Emotionen den Identitätsnutzen verstärken oder dämpfen. Sie wirkt als adaptive Rückkopplungsvariable zwischen Awareness, Unsicherheit und Kohärenz und übersetzt kognitive Spannungen in affektive Energie.",
-            "formula": "U_IDN_emotional(t) = ψ1 * [A_j(t) - Unsicherheit^j(t) + θ*Selbstwert^j(t) + ρ*Resonanz^j(t)] * U_IDN^j(t)",
-            "parameters": {
-                "ψ1": "Verstärkungskoeffizient für emotionale Wirkung",
-                "θ": "Gewicht des Selbstwerts",
-                "ρ": "Gewicht sozialer Resonanz",
-                "A_j(t)": "Awareness-Level der Identität j",
-                "Unsicherheit^j": "Adaptiver Unsicherheitsgrad",
-                "Selbstwert^j": "Stabilität des Selbstbildes",
-                "Resonanz^j": "Soziale Spiegelung / Zugehörigkeitsgefühl"
+            "A3": {
+                "title": "Objectives and Functions",
+                "text": "Objectives: Representation of pain and gain structures of identities. Integration of time horizons and discounting. Aggregation of multiple identities with weightings. Capture of complementarity and conflict between identities. Embedding in social, cultural, and institutional contexts. Dynamic modeling of identity journeys (crisis → transition → stabilization). Consideration of norms, legitimacy, and recognition. Representation of resilience, shocks, and uncertainty. Integration of digital and intergenerational identities. Provision of interface to Awareness (7240) and Willingness (7243)."
             },
-            "interpretation": "Emotion ist der affektive Regler der Identität. Sie übersetzt Spannungen in Energie, steuert Awareness, moduliert Unsicherheit und definiert die Stabilität des Selbst über Zeit und Kontext.",
-            "complementarity": [
-                "IDN-A9",
-                "IDN-A44",
-                "IDN-A67",
-                "IDN-A70"
-            ],
-            "relation": [
-                "Meta-Axiom M-06",
-                "Meta-Axiom M-09",
-                "Meta-Axiom M-10",
-                "Meta-Axiom M-12"
-            ],
-            "semantic": "Emotion ist das Pulsieren der Identität – die Balance zwischen Fühlen und Halten.",
-            "citation": "BCM2_03_IDN – Identitätsnutzen (v3.2, FehrAdvice & Partners AG, 2025)"
-        },
-        {
-            "id": "IDN-A58",
-            "title": "Identitätsinvestition",
-            "description": "Menschen investieren bewusst Ressourcen in Identitäten; diese Investitionen erzeugen Return oder Verlust.",
-            "formula": "ROI_IDN^j = (U_IDN^j - C_Investition^j) / C_Investition^j"
-        },
-        {
-            "id": "IDN-A59",
-            "title": "Legitimität & Anerkennung",
-            "description": "Der volle Nutzen einer Identität hängt von ihrer gesellschaftlichen Legitimität ab.",
-            "formula": "U_IDN^j = U_IDN^j + ζ*Legitimität^j - ξ*Illegitimität^j"
-        },
-        {
-            "id": "IDN-A60",
-            "title": "Fremd-Awareness",
-            "description": "Der Nutzen einer Identität entsteht auch aus der Wirkung des eigenen Verhaltens auf die Identitäten anderer.",
-            "formula": "U_IDN^Fremd = Σ A_k^other * Effekte(MeinVerhalten → Identität^k)"
-        },
-        {
-            "id": "IDN-A61",
-            "title": "Parallele Journeys",
-            "description": "Mehrere Identitäts-Journeys können gleichzeitig verlaufen (z. B. beruflich und familiär). Ihr Zusammenspiel beeinflusst den Gesamtnutzen.",
-            "formula": "Journey_total = {Journey_Beruf, Journey_Familie, Journey_Community, ...}"
-        },
-        {
-            "id": "IDN-A62",
-            "title": "Reversibilität von Pains & Gains",
-            "description": "Identitätskosten können überwunden werden, und Identitätsgewinne können verloren gehen.",
-            "formula": "ΔU_IDN^j ∈ {+,-}, reversibel"
-        },
-        {
-            "id": "IDN-A63",
-            "title": "Neutralität",
-            "description": "Identitäten können inaktiv sein und in einem Kontext weder Gains noch Pains erzeugen.",
-            "formula": "U_IDN^neutral = 0"
-        },
-        {
-            "id": "IDN-A64",
-            "title": "Hierarchie von Konflikten",
-            "description": "Nicht alle Identitätskonflikte sind gleich schwerwiegend; dominante Konflikte überlagern schwächere.",
-            "formula": "C_Konflikt_total = max(C_Konflikt^j,k)"
-        },
-        {
-            "id": "IDN-A65",
-            "title": "Identitätsmobilität",
-            "description": "Identitäten unterscheiden sich darin, wie leicht sie gewechselt oder transformiert werden können.",
-            "formula": "Mobilität^j = f(Stabilität^j, Institutionalisierung^j)"
-        },
-        {
-            "id": "IDN-A66",
-            "title": "Globale vs. lokale Normen",
-            "description": "Identitätsnutzen wird durch globale (universelle) und lokale (kulturelle, milieuspezifische) Normen unterschiedlich beeinflusst.",
-            "formula": "U_IDN^j = f(Normen_global, Normen_lokal)"
-        },
-        {
-            "id": "IDN-A67",
-            "title": "Resilienz",
-            "description": "Identitäten haben unterschiedliche Widerstandskraft gegen externe Schocks.",
-            "formula": "Resilienz^j = ΔU_IDN^j / Schock"
-        },
-        {
-            "id": "IDN-A68",
-            "title": "Messbarkeit von Returns",
-            "description": "Investitionen in Identitäten können anhand des identitätsbezogenen Returns gemessen werden.",
-            "formula": "ROI_IDN^j = (Nutzen^j - Kosten^j) / Investition^j"
-        },
-        {
-            "id": "IDN-A69",
-            "title": "Meta-Relationalität",
-            "description": "Identitätsnutzen entsteht aus der Balance zwischen Selbstdefinition und Fremdzuschreibung.",
-            "formula": "U_IDN^j = f(Selbstzuschreibung^j, Fremdzuschreibung^j)"
-        },
-        {
-            "id": "IDN-A70",
-            "title": "Kohärenzprinzip – Adaptive Integrationsleistung der Identität",
-            "definition": "Kohärenz beschreibt die Fähigkeit einer Identität, trotz innerer und sozialer Spannungen eine erlebte Einheit des Selbst aufrechtzuerhalten. Sie entsteht aus der Interaktion von Awareness, Emotion, Unsicherheit, Selbstwert und sozialem Kontext.",
-            "formula": "U_IDN_coherent(t) = γ1*[A_j(t)*Emotion^j(t)] - γ2*Unsicherheit^j(t) + γ3*Selbstwert^j(t) + γ4*Kontextkohärenz^j(t)",
-            "parameters": {
-                "γ1": "Energieübertragungsfaktor zwischen Emotion und Awareness",
-                "γ2": "Unsicherheitsdämpfung",
-                "γ3": "Selbstwertverstärkung",
-                "γ4": "Kontextkohärenz / soziale Synchronisation",
-                "A_j(t)": "Awareness-Level der Identität j",
-                "Emotion^j": "Emotionale Intensität",
-                "Unsicherheit^j": "Adaptiver Unsicherheitsgrad",
-                "Selbstwert^j": "Stabilität des Selbstbildes",
-                "Kontext^j": "Soziale Spiegelung und Resonanz"
-            },
-            "interpretation": "Kohärenz ist der integrative Mechanismus des Identitätsnutzens. Sie hält das Gleichgewicht zwischen Awareness, Emotion und Unsicherheit aufrecht und ermöglicht dadurch psychische und soziale Stabilität.",
-            "complementarity": [
-                "IDN-A9",
-                "IDN-A44",
-                "IDN-A57",
-                "IDN-A67"
-            ],
-            "relation": [
-                "Meta-Axiom M-05",
-                "Meta-Axiom M-09",
-                "Meta-Axiom M-10",
-                "Meta-Axiom M-12"
-            ],
-            "semantic": "Kohärenz ist das Gleichgewicht der Identität zwischen Wahrnehmen, Fühlen und Bestehen.",
-            "citation": "BCM2_03_IDN – Identitätsnutzen (v3.2, FehrAdvice & Partners AG, 2025)"
-        }
-    ],
-    "extensions": {
-        "v3.3": [
-            {
-                "id": "IDN-A70b",
-                "title": "Selbstbildfunktion und Spiegelkohärenz",
-                "definition": "Das Selbstbild I_t(θ) beschreibt die zeitabhängige, marginale Überzeugung eines Individuums über die eigenen Identitätsparameter. Es entsteht durch Rückkopplung zwischen Selbstwahrnehmung und sozialem Feedback (S_t) und bestimmt die Stabilität der Identitätskohärenz. Abweichungen zwischen Selbstbild und sozialem Spiegel aktivieren adaptive Schutzmechanismen gemäss IDN-A9 (Motivierte Awareness) und IDN-A44 (Adaptive Unsicherheit).",
-                "formula": "ΔI_t = f(|I_t(θ) - S_t|, A_j(t), Emotion^j(t), Kontext^j(t))",
-                "parameters": {
-                    "I_t(θ)": "marginale Überzeugung über eigene Identitätsparameter (Werte, Fähigkeiten, Rollen, Zugehörigkeiten)",
-                    "S_t": "wahrgenommenes soziales Feedback gemäss BCM2_04_KON (Kapitel 8904)",
-                    "A_j(t)": "Awareness-Level der Identität j zum Zeitpunkt t (0 ≤ A_j ≤ 1)",
-                    "Emotion^j(t)": "affektiver Zustand, beeinflusst kognitive Kohärenz",
-                    "Kontext^j(t)": "soziale und situative Bedingungen, welche Feedback modulieren"
-                },
-                "behavioral_interpretation": "Selbstbild und soziales Feedback bilden ein bidirektionales System: Individuen passen ihr Selbstbild an wahrgenommenes Feedback an, während gleichzeitig Wahrnehmung und Interpretation dieses Feedbacks vom bestehenden Selbstbild abhängen (self-confirming bias). Diese Dynamik stabilisiert Identität kurzfristig, kann aber langfristig Verzerrungen und Informationsvermeidung erzeugen.",
-                "axiomatic_relations": {
-                    "complements": [
-                        "IDN-A9",
-                        "IDN-A44",
-                        "IDN-A57",
-                        "IDN-A70"
-                    ],
-                    "meta_axioms": [
-                        "M-05",
-                        "M-06",
-                        "M-09",
-                        "M-10"
-                    ],
-                    "context_link": {
-                        "module": "BCM2_04_KON",
-                        "id": "8904",
-                        "relation": "bidirectional",
-                        "description": "Soziales Feedback S_t beeinflusst I_t(θ); das Selbstbild moduliert wiederum die Wahrnehmung von Feedback."
+            "A4": {
+                "title": "Binding Logic Rules (Identity Axioms IDN-A1 to IDN-A70)",
+                "text": "This section contains the formal axioms that define the binding logic rules for the Identity Utility module. These axioms establish the foundational principles for identity-based utility modeling, including identity definition, multiplicity, autonomy, net utility, temporality, aggregation, sociality, context dependency, awareness, complementarity, conflict, path dependency, journeys, norms, institutionalization, uncertainty, and various extensions covering digital identity, coherence, fragmentation, emotions, resilience, and the coherence principle.",
+                "axioms": [
+                    {
+                        "id": "IDN-A1",
+                        "title": "Definition",
+                        "formula": "Identity = f(Belonging, Differentiation)",
+                        "description": "An identity is the self-definition of a person through belonging (inclusion) and differentiation (difference) within social, cultural, or institutional frameworks."
+                    },
+                    {
+                        "id": "IDN-A2",
+                        "title": "Multiplicity",
+                        "formula": "U_IDN_total = Σ (π_j * U_IDN^j)",
+                        "description": "Every person carries multiple identities simultaneously, which act as independent utility sources."
+                    },
+                    {
+                        "id": "IDN-A3",
+                        "title": "Autonomy",
+                        "formula": "U_IDN^j = G_IDN^j - C_IDN^j",
+                        "description": "Identities generate specific utilities (gains) and costs (pains) that are not derivable from individual utility (INU) or collective utility (KNU)."
+                    },
+                    {
+                        "id": "IDN-A4",
+                        "title": "Net Utility",
+                        "formula": "U_IDN^j = (α*Recognition^j + β*Belonging^j + γ*Coherence^j) - (θ*Exclusion^j + λ*Stigma^j + μ*Conflict^j)",
+                        "description": "The net utility of an identity results from belonging, recognition, and role coherence minus exclusion, stigmatization, and role conflicts."
+                    },
+                    {
+                        "id": "IDN-A5",
+                        "title": "Temporality",
+                        "formula": "U_IDN^j = Σ (δ_i^j * ω_i^j * (G_i^j - C_i^j))",
+                        "description": "Identity utility unfolds across specific time horizons (instant, short-term, medium-term, long-term) and is modulated by temporal discounting."
+                    },
+                    {
+                        "id": "IDN-A6",
+                        "title": "Aggregation",
+                        "formula": "U_IDN_total = Σ (π_j * U_IDN^j)",
+                        "description": "The total utility of a person results from the aggregation of multiple identities, weighted by relevance (π_j)."
+                    },
+                    {
+                        "id": "IDN-A7",
+                        "title": "Sociality",
+                        "formula": "U_IDN^j = f(Self, Others)",
+                        "description": "Identity utility is relational; it emerges in relation to others and cannot be fully determined without social embedding."
+                    },
+                    {
+                        "id": "IDN-A8",
+                        "title": "Context Dependency",
+                        "formula": "π_j_context = f(CONTEXT)",
+                        "description": "The salience of an identity depends on context; contexts activate different identities with varying strengths."
+                    },
+                    {
+                        "id": "IDN-A9",
+                        "title": "Motivated Awareness – Adaptive Self-Coherence",
+                        "formula": "U_IDN_effective(t) = Σ_j [A_j(t) * π_j_context(t) * U_IDN^j(t)]",
+                        "description": "Awareness describes the degree to which an identity is cognitively, emotionally, and socially consciously activated. It determines whether and to what extent potential identity utility becomes effective. Awareness is an adaptive self-regulation function that selectively admits or blocks information to maintain coherence and emotional stability of the self-image. Awareness acts as a filter between potential (latent) and action-guiding (salient) identity."
+                    },
+                    {
+                        "id": "IDN-A10",
+                        "title": "Complementarity and Conflict",
+                        "formula": "U_IDN_total = Σ (π_j * U_IDN^j) + Σ (κ_jk * Interaction(j,k))",
+                        "description": "Identities can mutually reinforce each other (complementarity) or contradict each other (conflict), thereby increasing or reducing total utility."
+                    },
+                    {
+                        "id": "IDN-A11",
+                        "title": "Path Dependency",
+                        "formula": "U_IDN,t^j = f(U_IDN,t-1^j, Events_t)",
+                        "description": "Identity utility is dynamic and depends on previous experiences, decisions, and events. The past shapes current identity situations."
+                    },
+                    {
+                        "id": "IDN-A12",
+                        "title": "Identity Journey",
+                        "formula": "Journey^j = {Building, Crisis, Transition, Stabilization}",
+                        "description": "Identities develop over journeys (building, crisis, transformation, stabilization). Each phase generates different utility effects."
+                    },
+                    {
+                        "id": "IDN-A13",
+                        "title": "Norms",
+                        "formula": "U_IDN^j = U_IDN^j + η*NormConformity^j - ζ*NormConflict^j",
+                        "description": "Norms strengthen or weaken identity utility through conformity or deviation."
+                    },
+                    {
+                        "id": "IDN-A14",
+                        "title": "Institutionalization",
+                        "formula": "C_IDN^j = f(InstitutionalStabilization, InstitutionalDestabilization)",
+                        "description": "Institutions can stabilize identities (cost reduction) or destabilize them (cost increase)."
+                    },
+                    {
+                        "id": "IDN-A15",
+                        "title": "Uncertainty",
+                        "formula": "Var(U_IDN^j) = f(Uncertainty_epistemic, Uncertainty_interpersonal, Uncertainty_institutional, Uncertainty_environmental)",
+                        "description": "Identity utility is sensitive to uncertainty (epistemic, interpersonal, institutional, environmental)."
+                    },
+                    {
+                        "id": "IDN-A16",
+                        "title": "Temporal Integration",
+                        "formula": "U_IDN^j = Σ (δ_i^j * ω_i^j * U_i^j), i ∈ {instant, short, medium, long}",
+                        "description": "Identity utility is integrated across all time horizons, from instant to long-term."
+                    },
+                    {
+                        "id": "IDN-A17",
+                        "title": "Temporal Profiles",
+                        "formula": "Profile^j = {ω_instant^j, ω_short^j, ω_medium^j, ω_long^j}",
+                        "description": "Different identities have different temporal profiles (e.g., transient vs. institutional)."
+                    },
+                    {
+                        "id": "IDN-A18",
+                        "title": "Discounting",
+                        "formula": "U_IDN^j = Σ (δ_i^j * (G_i^j - C_i^j))",
+                        "description": "Identity utility is temporally discounted, with discount rates varying by identity type."
+                    },
+                    {
+                        "id": "IDN-A19",
+                        "title": "Temporal Dynamics",
+                        "formula": "ω_i,t^j = f(LifePhase_t, Events_t)",
+                        "description": "The weighting of time horizons changes dynamically over life phases."
+                    },
+                    {
+                        "id": "IDN-A20",
+                        "title": "Temporal Feedback",
+                        "formula": "ΔU_IDN,long^j = g(U_IDN,short^j)",
+                        "description": "Short-term identity gains can cause long-term identity costs (and vice versa)."
+                    },
+                    {
+                        "id": "IDN-A21",
+                        "title": "Identity Gains",
+                        "formula": "G_i^j = α*Recognition_i^j + β*Belonging_i^j + γ*Coherence_i^j + δ*NormConformity_i^j",
+                        "description": "Identity gains arise from recognition, belonging, coherence, and norm conformity."
+                    },
+                    {
+                        "id": "IDN-A22",
+                        "title": "Identity Pains",
+                        "formula": "C_i^j = θ*Exclusion_i^j + λ*Stigmatization_i^j + μ*Dissonance_i^j + ν*Conflict_i^j",
+                        "description": "Identity costs arise from exclusion, stigmatization, dissonance, and conflicts."
+                    },
+                    {
+                        "id": "IDN-A23",
+                        "title": "Asymmetry of Pains and Gains",
+                        "formula": "|C_i^j| > |G_i^j|",
+                        "description": "Identity pains weigh more heavily than identity gains."
+                    },
+                    {
+                        "id": "IDN-A24",
+                        "title": "Complementary Gains",
+                        "formula": "G_total = Σ G_i^j + Σ κ_jk^+ * (G^j * G^k)",
+                        "description": "Different identities can positively complement each other in their gains."
+                    },
+                    {
+                        "id": "IDN-A25",
+                        "title": "Conflict Costs",
+                        "formula": "C_total = Σ C_i^j + Σ κ_jk^- * Conflict(j,k)",
+                        "description": "Conflicts between identities generate additional costs."
+                    },
+                    {
+                        "id": "IDN-A26",
+                        "title": "Dominance",
+                        "formula": "U_IDN^primed = max_j (π_j_context * U_IDN^j)",
+                        "description": "The dominant identity in a context determines behavioral tendency."
+                    },
+                    {
+                        "id": "IDN-A27",
+                        "title": "Stability",
+                        "formula": "Stability^j = f(Institutionalization^j, Persistence^j)",
+                        "description": "Identities differ in their temporal stability."
+                    },
+                    {
+                        "id": "IDN-A28",
+                        "title": "Strength",
+                        "formula": "Strength^j = f(Salience^j, Emotion^j, Relevance^j)",
+                        "description": "The strength of an identity depends on salience, emotional intensity, and relevance."
+                    },
+                    {
+                        "id": "IDN-A29",
+                        "title": "Context Dependency",
+                        "formula": "π_j_context = f(CONTEXT)",
+                        "description": "The activation of identities varies by context."
+                    },
+                    {
+                        "id": "IDN-A30",
+                        "title": "Relationality",
+                        "formula": "U_IDN^j = f(Belonging^j, Differentiation^j)",
+                        "description": "Identity utility also results from differentiation from other identities."
+                    },
+                    {
+                        "id": "IDN-A31",
+                        "title": "Temporal-Specific Gains",
+                        "formula": "G_IDN^j = {G_instant^j, G_short^j, G_medium^j, G_long^j}",
+                        "description": "Identity gains can be differentiated by time horizons (instant, short-term, medium-term, long-term)."
+                    },
+                    {
+                        "id": "IDN-A32",
+                        "title": "Temporal-Specific Pains",
+                        "formula": "C_IDN^j = {C_instant^j, C_short^j, C_medium^j, C_long^j}",
+                        "description": "Identity costs occur at different time horizons and can have temporally different effects."
+                    },
+                    {
+                        "id": "IDN-A33",
+                        "title": "Time Definitions by Identity Type",
+                        "formula": "TimeProfile^j = f(Type^j)",
+                        "description": "Different identity types have different time horizons (transient, institutional, hybrid)."
+                    },
+                    {
+                        "id": "IDN-A34",
+                        "title": "Reversibility",
+                        "formula": "ΔU_IDN^j ∈ {+,-}, reversible",
+                        "description": "Identity gains can be lost and identity costs can be overcome."
+                    },
+                    {
+                        "id": "IDN-A35",
+                        "title": "Temporal Feedback",
+                        "formula": "ΔU_IDN,long^j = g(U_IDN,short^j)",
+                        "description": "Short-term gains can generate long-term costs, and vice versa."
+                    },
+                    {
+                        "id": "IDN-A36",
+                        "title": "Autonomous Pains",
+                        "formula": "C_IDN^j ≠ C_INU, C_KNU",
+                        "description": "Identities can generate autonomous pains that operate independently of individual or collective utility."
+                    },
+                    {
+                        "id": "IDN-A37",
+                        "title": "Autonomous Gains",
+                        "formula": "G_IDN^j ≠ G_INU, G_KNU",
+                        "description": "Identities can generate autonomous gains that cannot be substituted by INU or KNU."
+                    },
+                    {
+                        "id": "IDN-A38",
+                        "title": "Asymmetric Effect",
+                        "formula": "|C_IDN^j| > |G_IDN^j|",
+                        "description": "Identity pains have stronger and longer-lasting effects than identity gains."
+                    },
+                    {
+                        "id": "IDN-A39",
+                        "title": "Segment-Specific Differences",
+                        "formula": "U_IDN^j_segment = f(SegmentParameters)",
+                        "description": "Identity pains and gains differ by segments (age, gender, culture, role)."
+                    },
+                    {
+                        "id": "IDN-A40",
+                        "title": "Contextual Conflicts",
+                        "formula": "C_Conflict^j = f(CONTEXT)",
+                        "description": "Identity conflicts arise specifically in certain contexts."
+                    },
+                    {
+                        "id": "IDN-A41",
+                        "title": "Norm Integration",
+                        "formula": "U_IDN^j = U_IDN^j + η*NormCoherence^j - ζ*NormConflict^j",
+                        "description": "Identity utility is strengthened by coherence with social norms and weakened by norm conflicts."
+                    },
+                    {
+                        "id": "IDN-A42",
+                        "title": "Interventions",
+                        "formula": "ΔU_IDN^j = f(Symbols, Narratives, Roles)",
+                        "description": "Interventions can influence identity utility through symbols, narratives, and roles."
+                    },
+                    {
+                        "id": "IDN-A43",
+                        "title": "Identity Journeys",
+                        "formula": "Journey^j = {Building, Crisis, Transition, Stabilization}",
+                        "description": "Identities develop over life journeys with characteristic phases and transitions."
+                    },
+                    {
+                        "id": "IDN-A44",
+                        "title": "Adaptive Identity Uncertainty",
+                        "formula": "ΔU_IDN^j(t) = -[ φ1*Uncertainty^j(t) - φ2*A_j(t) + φ3*Emotion^j(t) - φ4*ContextCoherence^j(t) ]",
+                        "description": "Uncertainty describes the degree of instability and ambiguity that a person experiences regarding their identity. It arises from the difference between self-image and social reality and is dynamically influenced by awareness, emotion, self-worth, and context. Identity uncertainty is an adaptive feedback variable that has a stabilizing effect in the short term and a regulatory effect in the long term."
+                    },
+                    {
+                        "id": "IDN-A45",
+                        "title": "Bridge Function",
+                        "formula": "U_IDN^j = f(U_INU, U_KNU)",
+                        "description": "Identity utility acts as a bridge between individual utility (INU) and collective utility (KNU)."
+                    },
+                    {
+                        "id": "IDN-A46",
+                        "title": "Digital Identity",
+                        "formula": "U_IDN^digital ≠ U_IDN^physical; U_IDN_total = U_IDN^digital + U_IDN^physical + κ*Interaction",
+                        "description": "Digital identities generate autonomous pains and gains that interact with physical identities."
+                    },
+                    {
+                        "id": "IDN-A47",
+                        "title": "Coherence vs. Fragmentation",
+                        "formula": "C_Fragmentation ∝ Number(Contradictions)",
+                        "description": "A fragmented identity architecture increases identity costs."
+                    },
+                    {
+                        "id": "IDN-A48",
+                        "title": "Intergenerational Identity",
+                        "formula": "U_IDN^gen = ρ * (Continuity - Break)",
+                        "description": "Identities are transmitted across generations and generate utility or costs through continuity or breaks."
+                    },
+                    {
+                        "id": "IDN-A49",
+                        "title": "Macro Level",
+                        "formula": "U_IDN^j = f(Culture, Nation, Society)",
+                        "description": "Social, cultural, and national frameworks shape identity utility."
+                    },
+                    {
+                        "id": "IDN-A50",
+                        "title": "Resource Binding",
+                        "formula": "C_Resources^j = τ*(Time + Money + Energy)",
+                        "description": "Identities require investments of time, money, and energy; these costs reduce net utility."
+                    },
+                    {
+                        "id": "IDN-A51",
+                        "title": "Conscious vs. Unconscious Identity",
+                        "formula": "U_IDN_effective = A_j*U_IDN^j + (1 - A_j)*ε*U_IDN^j, ε > 0",
+                        "description": "Even unconscious identities have an effect, even when awareness = 0."
+                    },
+                    {
+                        "id": "IDN-A52",
+                        "title": "Shocks and Transformation",
+                        "formula": "ΔU_IDN^j = f(Shock, Resilience^j)",
+                        "description": "External shocks can abruptly destabilize or transform identities."
+                    },
+                    {
+                        "id": "IDN-A53",
+                        "title": "Intersectionality",
+                        "formula": "U_IDN^intersectional = Σ χ_jk * Intersection(j,k)",
+                        "description": "Overlaps of multiple identities generate specific pains and gains."
+                    },
+                    {
+                        "id": "IDN-A54",
+                        "title": "Dynamic Weighting",
+                        "formula": "π_j,t = f(π_j,t-1, Events_t, LifePhase_t)",
+                        "description": "The relevance weights of identities change dynamically over time and life phases."
+                    },
+                    {
+                        "id": "IDN-A55",
+                        "title": "Multiplicative Effects",
+                        "formula": "U_IDN_total = Π (1 + κ_jk) * U_IDN^j",
+                        "description": "Combinations of identities can generate disproportionate effects."
+                    },
+                    {
+                        "id": "IDN-A56",
+                        "title": "Collective Identity",
+                        "formula": "U_IDN^collective = f(U_IDN, U_KNU)",
+                        "description": "Collective identities connect IDN with KNU and generate hybrid utility functions."
+                    },
+                    {
+                        "id": "IDN-A57",
+                        "title": "Emotional Intensity – Affective Coherence Regulation",
+                        "formula": "U_IDN_emotional(t) = ψ1 * [A_j(t) - Uncertainty^j(t) + θ*SelfWorth^j(t) + ρ*Resonance^j(t)] * U_IDN^j(t)",
+                        "description": "Emotional intensity describes the degree to which emotions amplify or dampen identity utility. It acts as an adaptive feedback variable between awareness, uncertainty, and coherence and translates cognitive tensions into affective energy. Emotion is the affective regulator of identity, translating tensions into energy, controlling awareness, modulating uncertainty, and defining the stability of the self over time and context."
+                    },
+                    {
+                        "id": "IDN-A58",
+                        "title": "Identity Investment",
+                        "formula": "ROI_IDN^j = (U_IDN^j - C_Investment^j) / C_Investment^j",
+                        "description": "People consciously invest resources in identities; these investments generate returns or losses."
+                    },
+                    {
+                        "id": "IDN-A59",
+                        "title": "Legitimacy and Recognition",
+                        "formula": "U_IDN^j = U_IDN^j + ζ*Legitimacy^j - ξ*Illegitimacy^j",
+                        "description": "The full utility of an identity depends on its social legitimacy."
+                    },
+                    {
+                        "id": "IDN-A60",
+                        "title": "External Awareness",
+                        "formula": "U_IDN^External = Σ A_k^other * Effects(MyBehavior → Identity^k)",
+                        "description": "The utility of an identity also arises from the effect of one's own behavior on the identities of others."
+                    },
+                    {
+                        "id": "IDN-A61",
+                        "title": "Parallel Journeys",
+                        "formula": "Journey_total = {Journey_Career, Journey_Family, Journey_Community, ...}",
+                        "description": "Multiple identity journeys can run simultaneously (e.g., professional and family). Their interplay influences total utility."
+                    },
+                    {
+                        "id": "IDN-A62",
+                        "title": "Reversibility of Pains and Gains",
+                        "formula": "ΔU_IDN^j ∈ {+,-}, reversible",
+                        "description": "Identity costs can be overcome, and identity gains can be lost."
+                    },
+                    {
+                        "id": "IDN-A63",
+                        "title": "Neutrality",
+                        "formula": "U_IDN^neutral = 0",
+                        "description": "Identities can be inactive and generate neither gains nor pains in a context."
+                    },
+                    {
+                        "id": "IDN-A64",
+                        "title": "Hierarchy of Conflicts",
+                        "formula": "C_Conflict_total = max(C_Conflict^j,k)",
+                        "description": "Not all identity conflicts are equally severe; dominant conflicts override weaker ones."
+                    },
+                    {
+                        "id": "IDN-A65",
+                        "title": "Identity Mobility",
+                        "formula": "Mobility^j = f(Stability^j, Institutionalization^j)",
+                        "description": "Identities differ in how easily they can be changed or transformed."
+                    },
+                    {
+                        "id": "IDN-A66",
+                        "title": "Global vs. Local Norms",
+                        "formula": "U_IDN^j = f(Norms_global, Norms_local)",
+                        "description": "Identity utility is influenced differently by global (universal) and local (cultural, milieu-specific) norms."
+                    },
+                    {
+                        "id": "IDN-A67",
+                        "title": "Resilience",
+                        "formula": "Resilience^j = ΔU_IDN^j / Shock",
+                        "description": "Identities have different resistance to external shocks."
+                    },
+                    {
+                        "id": "IDN-A68",
+                        "title": "Measurability of Returns",
+                        "formula": "ROI_IDN^j = (Utility^j - Costs^j) / Investment^j",
+                        "description": "Investments in identities can be measured by identity-related returns."
+                    },
+                    {
+                        "id": "IDN-A69",
+                        "title": "Meta-Relationality",
+                        "formula": "U_IDN^j = f(SelfAttribution^j, ExternalAttribution^j)",
+                        "description": "Identity utility emerges from the balance between self-definition and external attribution."
+                    },
+                    {
+                        "id": "IDN-A70",
+                        "title": "Coherence Principle – Adaptive Integration Performance of Identity",
+                        "formula": "U_IDN_coherent(t) = γ1*[A_j(t)*Emotion^j(t)] - γ2*Uncertainty^j(t) + γ3*SelfWorth^j(t) + γ4*ContextCoherence^j(t)",
+                        "description": "Coherence describes the ability of an identity to maintain an experienced unity of self despite internal and social tensions. It emerges from the interaction of awareness, emotion, uncertainty, self-worth, and social context. Coherence is the integrative mechanism of identity utility. It maintains the balance between awareness, emotion, and uncertainty and thereby enables psychological and social stability. Coherence is the balance of identity between perceiving, feeling, and persisting."
                     }
-                },
-                "semantic": "Identität erkennt sich selbst im Spiegel der Anderen – und wählt, was sie sehen kann, ohne zu zerbrechen.",
-                "citation": "FehrAdvice & Partners AG (2025): Erweiterung BCM2_03_IDN – Axiom IDN-A71b, 'Selbstbildfunktion und Spiegelkohärenz'. Erstellt für BEATRIX Black Belt v2.1.",
-                "license": "© FehrAdvice & Partners AG – Nutzung nur im Rahmen des BCM 2.0 Architekturstandards gemäss Kapitel 9232."
+                ]
+            },
+            "A5": {
+                "title": "Prerequisites and Requirements",
+                "text": "Data on identity pains and gains (e.g., recognition, exclusion, belonging, stigma). Segment parameters: role, culture, gender, age, institutions. Intersectional identity situations. Temporal parameters and discount factors. Awareness levels. Norms and legitimacy indicators. Context parameters (situations, milieus). Resilience and shock data. Digital identity parameters (privacy, reputation, connectivity, avatar). Resource investments in identities."
+            },
+            "A6": {
+                "title": "Module Integration and Linkages",
+                "text": "Meta modules: 7232 META, 9232 STD. Awareness and Willingness: 7240 AWX, 7243 WAX. Utility modules: 7234 INU, 7235 KNU. Context and Segment: 8904 KON, 7257 SEG. Journey and Life Phases: 7256 JNY, 7457 LCP. Uncertainty and Complexity: 9485–9494. Intervention and Monitoring: 9250 INT, 9251 WATCHDOG. Extended Logics: 9477 STA, 9479 SPT, 9480 GAM."
+            },
+            "A7": {
+                "title": "Semantic Boundaries and Limitations",
+                "text": "The module exclusively represents identity utility. Individual utility INU (7234) and collective utility KNU (7235) remain independent. External frameworks only insofar as they affect identity utility. Aggregation of IDN with INU and KNU occurs only through architecture standards. The module itself does not generate interventions but provides input for 9250 (INT)."
+            },
+            "A8": {
+                "title": "Version Control and Registry",
+                "text": "Version history: v1.0 – Basic structure, differentiation from INU/KNU. v1.1 – Structural conformity according to 9232 (A1–A10). v2.0 – Extension with time horizons, awareness, context. v2.1 – Introduction of complementarity and conflicts. v2.2 – Integration of norms, institutions, legitimacy. v2.3 – Extension with digital identity. v2.4 – Incorporation of resilience, shocks, uncertainty. v2.5 – Investment and ROI of identities. v3.0 – Complete integration A1–A70, including coherence principle."
+            },
+            "A9": {
+                "title": "Citation and References",
+                "text": "Chapter BCM2_03_IDN (ID 7236), FehrAdvice & Partners AG, 2025. Fully BCM-compliant version with integration of meta-axioms (7232) and explicit differentiation from INU (7234) and KNU (7235)."
+            },
+            "A10": {
+                "title": "License and Governance",
+                "text": "Copyright FehrAdvice & Partners AG. Use exclusively within the framework of BCM 2.0. Any application must consider the architecture standards (9232) and meta-axioms (7232)."
             }
-        ],
-        "v3.1": [
-            {
-                "id": "IDN-A71",
-                "title": "Komplexitätsanker",
-                "formula": "Salienz_IDN(t) = α * K(t)",
-                "parameters": {
-                    "K(t)": "wahrgenommene Komplexität zum Zeitpunkt t",
-                    "α": "Sensitivitätsparameter > 0"
-                },
-                "explanation": "Je höher die wahrgenommene Komplexität, desto stärker wird Identität als kognitiver Anker aktiviert."
-            },
-            {
-                "id": "IDN-A72",
-                "title": "Saturationspriorität",
-                "formula": "U_IDN(t) > U_INU(t) + U_KNU(t) falls Saturation(t) > 1",
-                "parameters": {
-                    "U_IDN": "Identitätsnutzen",
-                    "U_INU": "Individueller Nutzen",
-                    "U_KNU": "Kollektiver Nutzen",
-                    "Saturation(t)": "K(t) / κ (vgl. Modul 9492)"
-                },
-                "explanation": "Bei Überschreiten des Saturationsgrads gewinnt Identitätsnutzen Vorrang gegenüber individuellem und kollektivem Nutzen."
-            },
-            {
-                "id": "IDN-A73",
-                "title": "Segmentierte Identitätsreaktion",
-                "formula": "ΔU_IDN^s(t) = f_s(K(t), κ_s, φ_s)",
-                "parameters": {
-                    "s": "Segment",
-                    "κ_s": "durchschnittliche kognitive Kapazität des Segments",
-                    "φ_s": "Komplexitätsresilienz"
-                },
-                "explanation": "Der Nutzenbeitrag von Identität zur Komplexitätsbewältigung ist segmentspezifisch."
-            },
-            {
-                "id": "IDN-A74",
-                "title": "Komplexitätspolarisierung",
-                "formula": "U_IDN(K) = +β * K wenn 0 < K ≤ K*; -γ * K wenn K > K*",
-                "parameters": {
-                    "K": "wahrgenommene Komplexität",
-                    "K*": "kritischer Schwellenwert",
-                    "β": "positiver Stabilitätsfaktor",
-                    "γ": "negativer Polarisierungsfaktor"
-                },
-                "explanation": "Bei mittlerer Komplexität stärkt Identität die Stabilität; bei extremer Komplexität führt sie zu Polarisierung oder Fragmentierung."
-            },
-            {
-                "id": "IDN-A75",
-                "title": "Latent vs. Salient",
-                "formula": "U_IDN_eff(t) = U_IDN_pot * A_IDN(t)",
-                "parameters": {
-                    "U_IDN_pot": "Potenzial einer Identität, latent immer vorhanden",
-                    "A_IDN(t)": "Awareness-Level der Identität im Moment t"
-                },
-                "explanation": "Identität ist stets latent vorhanden, aber nur der durch Awareness salient gemachte Teil entfaltet wirksamen Identitätsnutzen."
-            },
-            {
-                "id": "IDN-A76",
-                "title": "Priming-Funktion",
-                "formula": "A_IDN(t) = f(Priming, Narrative, Synchronisation, Kontext)",
-                "parameters": {
-                    "Priming": "gezielte Aktivierung durch Symbole, Sprache, Reize",
-                    "Narrative": "Einbettung in kulturelle Geschichten und Frames",
-                    "Synchronisation": "gleichzeitige Betonung durch viele Akteure (Medien, Events)",
-                    "Kontext": "Situative Passung (Ort, Zeit, soziales Setting)"
-                },
-                "explanation": "Der Awareness-Level einer Identität entsteht dynamisch durch externe und interne Aktivierungsmechanismen."
-            },
-            {
-                "id": "IDN-A77",
-                "title": "Dynamische Multiplizität",
-                "formula": "U_IDN_eff_total(t) = Σ_k [ U_IDN_pot(k) * A_IDN_k(t) * w_k(t) ]",
-                "parameters": {
-                    "U_IDN_pot(k)": "Potenzial einer Identitätsdimension k (z. B. Religion, Beruf, Nation)",
-                    "A_IDN_k(t)": "Awareness-Level der Identität k im Moment t",
-                    "w_k(t)": "Gewichtung der Identität k abhängig von Kontext, Lebensphase und sozialem Umfeld"
-                },
-                "explanation": "Individuen tragen multiple Identitäten gleichzeitig. Welche Identität im Entscheidungsprozess wirkt, hängt von deren Potenzial, Aktivierungsgrad und dynamischer Gewichtung ab."
-            }
-        ]
+        }
     }
 }
