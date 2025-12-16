@@ -1,0 +1,1417 @@
+{
+    "module": {
+        "module_id": "BCM2_01_INU7234",
+        "module_name": "Individual Utility (INU)",
+        "version": "3.0",
+        "status": "active",
+        "last_updated": "2025-12-16",
+        "standard_compliance": "BCM Standard 9232 v2.3",
+        "author": "FehrAdvice & Partners AG"
+    },
+    "sections": {
+        "A1": {
+            "section": "A1",
+            "title": "Chapter Title & Context",
+            "chapter_title": "BCM2_01_INU – Individual Utility (v3.0, compliant with Meta-Axioms)",
+            "context": "This module represents the individual utility function. It implements Meta-Axioms 0.011–0.013 (multidimensionality, temporality, context dependency) as well as 0.041–0.042 (time horizons and uncertainty modulation) and 0.131 (segment-specific weighting) from Module 7232. The WEIRD bias (Western, Educated, Industrialized, Rich, Democratic) must be explicitly considered in every application."
+        },
+        "A2": {
+            "section": "A2",
+            "title": "Scope of Application",
+            "scope": [
+                "Applies to all individual utility functions in BCM simulations",
+                "Applicable in WEIRD and Non-WEIRD contexts",
+                "Maps individual evaluations across FEPSDE dimensions (financial, emotional, physical, social, digital, ecological)",
+                "Covers four time horizons (instant, short-, medium-, long-term) according to 7232",
+                "Segment-specific operationalization (age, gender, SES, life phases, culture)",
+                "Supports intersectional segmentation",
+                "Foundation for scenarios with stress, coping, social comparisons, disruptions",
+                "Input for Awareness (7240) and Willingness (7243)"
+            ]
+        },
+        "A3": {
+            "section": "A3",
+            "title": "Objective & Function in the Model",
+            "objectives": [
+                "Representation of individual pain and gain structures across FEPSDE dimensions",
+                "Integration of time horizons and discounting",
+                "Consideration of segment-specific differences",
+                "Mapping of context-dependent effects on utility perception",
+                "Integration of memory, learning and dynamic adaptation",
+                "Consideration of cognitive biases, motivated beliefs and blind spots",
+                "Embedding of stress and coping mechanisms",
+                "Representation of social comparison dynamics",
+                "Mapping of technological disruptions",
+                "Extension to ecological dimensions and sustainability",
+                "Interface to Awareness and Willingness"
+            ]
+        },
+        "A4": {
+            "section": "A4",
+            "title": "Axioms",
+            "axiom_count": 60,
+            "axioms": [
+                {
+                    "axiom_id": "INU-A0",
+                    "title": "Masterfunktion der individuellen Wertfunktion",
+                    "type": "master_axiom",
+                    "text": "Die individuelle Wertfunktion V_individuell einer Handlung, Tätigkeit, Entscheidung, eines Verhaltens oder eines Urteils ergibt sich aus der Integration mehrerer Ebenen: (1) Baseline-Wert des Tätigseins, (2) multidimensionale Gains und Pains in FEPSDE, (3) Referenzpunkte und Verlustaversion, (4) Zeitdimension (instant, kurz-, mittel-, langfristig), (5) Segment- und Kontextabhängigkeit, (6) Dynamik durch Feedback, Lernen und Psychologie, (7) Collateral Effekte (Beauty & Damage) sowie (8) Reaktionszeit als Maß für Präferenzklarheit.",
+                    "formula": "V_individuell(a,t,k,s) = V_base(i) + Σ_{d∈FEPSDE} ω_d(t,s,k)[G_d(a,t) - λ_d(k,s) * P_d(a,t)] + C_intr,extr,idn(a,t,k,s) + CB(a,t,k,s) - CD(a,t,k,s) + RT_adj(a,t,k,s)",
+                    "variables": {
+                        "a": "Handlung, Entscheidung, Tätigkeit, Verhalten",
+                        "t": "Zeitdimension (instant, kurz-, mittel-, langfristig)",
+                        "k": "Kontextparameter (Institutionen, Kultur, Regeln, Unsicherheit)",
+                        "s": "Segmentparameter (Alter, Gender, sozioökonomischer Status, Lebensphase)",
+                        "V_base(i)": "Baseline-Wert des Tätigseins für Individuum i",
+                        "G_d(a,t)": "Nutzen (Gain) in Dimension d",
+                        "P_d(a,t)": "Disnutzen (Pain) in Dimension d",
+                        "ω_d(t,s,k)": "Gewichtung der Dimension d abhängig von Zeit, Segment und Kontext",
+                        "λ_d(k,s)": "Verlustaversion in Dimension d, kontext- und segmentspezifisch",
+                        "C_intr,extr,idn": "Komplementarität zwischen intrinsischem, extrinsischem und identitärem Wert",
+                        "CB(a,t,k,s)": "Collateral Beauty, positive unbeabsichtigte Nebeneffekte",
+                        "CD(a,t,k,s)": "Collateral Damage, negative unbeabsichtigte Nebeneffekte",
+                        "RT_adj(a,t,k,s)": "Reaktionszeit-Anpassung, misst Präferenzklarheit"
+                    },
+                    "dimensions": [
+                        "finanziell",
+                        "emotional",
+                        "physisch",
+                        "sozial",
+                        "digital",
+                        "ökologisch"
+                    ],
+                    "integration": [
+                        "Meta-Axiome 7232",
+                        "Kollektiver Nutzen 7235",
+                        "Identitätsnutzen 7236",
+                        "Awareness 7240",
+                        "Willingness 7243",
+                        "Kontext 8904",
+                        "Segmentlogik 7257"
+                    ],
+                    "status": "active",
+                    "version": "v4.0"
+                },
+                {
+                    "axiom_id": "INU-A1",
+                    "title": "FEPSDE-Struktur",
+                    "type": "structural",
+                    "text": "Individueller Wert ergibt sich aus sechs Dimensionen: finanziell, emotional, physiologisch, sozial, digital, ökologisch. Jede Dimension hat ein Gewicht, Gewinne und Verluste werden getrennt abgebildet, modifiziert durch Verlustaversion und Kontextfaktoren.",
+                    "formula": "N_ind(t) = Σ_{d∈{fin, emo, psy, soc, dig, eco}} ω_d(t) [ G_d(t) - λ_d * P_d(t) ]",
+                    "variables": {
+                        "ω_d": "Gewichtung der Dimension d",
+                        "G_d": "Gewinn (Gain) in Dimension d",
+                        "P_d": "Verlust (Pain) in Dimension d",
+                        "λ_d": "Verlustaversion in Dimension d"
+                    },
+                    "dimensions": [
+                        "finanziell",
+                        "emotional",
+                        "physisch",
+                        "sozial",
+                        "digital",
+                        "ökologisch"
+                    ],
+                    "integration": [
+                        "Verlustaversion (A2)",
+                        "Referenzpunkte (A7)",
+                        "Lebensphasen (A16)",
+                        "Kontext 8904",
+                        "Segmentlogik 7257"
+                    ],
+                    "status": "active",
+                    "version": "v3.1"
+                },
+                {
+                    "axiom_id": "INU-A2",
+                    "title": "Verlustaversion (Gain-Pain)",
+                    "type": "behavioral",
+                    "text": "Verluste werden im Normalfall stärker gewichtet als Gewinne. Der Parameter λ kann größer als 1 sein (klassische Verlustaversion), aber auch kleiner als 1 (z. B. bei Schmerzlust, Askese oder sportlichen Tätigkeiten).",
+                    "formula": "U_d(t) = G_d(t) - λ_d * P_d(t), λ_d ≥ 0",
+                    "variables": {
+                        "G_d": "Gewinn (Gain) in Dimension d",
+                        "P_d": "Verlust (Pain) in Dimension d",
+                        "λ_d": "Verlustaversion in Dimension d, kontextabhängig"
+                    },
+                    "integration": [
+                        "FEPSDE-Struktur (A1)",
+                        "Referenzpunkte (A7)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v2.2"
+                },
+                {
+                    "axiom_id": "INU-A3",
+                    "title": "Baseline-Wert des Tätigseins",
+                    "type": "baseline",
+                    "text": "Jede Tätigkeit hat einen Grundwert (V_base), der nicht durch Belohnungen oder spezifische Tätigkeiten erklärt werden muss. Er umfasst psychologische, soziale, emotionale und physiologische Grundbedürfnisse, die durch Aktivität erfüllt werden.",
+                    "formula": "V_base = Σ_{d∈FEPSDE} ω_d_base [G_d_base - λ_d_base * P_d_base]",
+                    "variables": {
+                        "ω_d_base": "Gewichtung der Grunddimension d",
+                        "G_d_base": "Grundnutzen einer Dimension d",
+                        "P_d_base": "Grunddisnutzen einer Dimension d",
+                        "λ_d_base": "Verlustaversion für Grundnutzen/-disnutzen"
+                    },
+                    "integration": [
+                        "FEPSDE-Struktur (A1)",
+                        "Lebensphasen (A16)",
+                        "Segmentlogik 7257"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A4",
+                    "title": "Intrinsischer Wert spezifischer Tätigkeit",
+                    "type": "value",
+                    "text": "Der intrinsische Wert einer Tätigkeit ergibt sich aus dem Erleben der Tätigkeit selbst. Tätigkeiten können positiv intrinsisch sein (Freude, Flow, Sinn) oder negativ (Langeweile, Überforderung).",
+                    "formula": "V_intrinsic(task) = f(FEPSDE_except_financial)",
+                    "variables": {
+                        "task": "Die betrachtete Tätigkeit",
+                        "FEPSDE_except_financial": "Alle Dimensionen außer finanziell"
+                    },
+                    "integration": [
+                        "Baseline-Wert (A3)",
+                        "Komplementarität (A6)",
+                        "Awareness (7240)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A4a",
+                    "title": "Intrinsischer Machtwert",
+                    "type": "value_extension",
+                    "text": "Individuen können Nutzen aus der reinen Ausübung von Macht ziehen, selbst ohne instrumentelle Vorteile. Dieser intrinsische Machtwert spiegelt die psychisch-emotionale Befriedigung durch Einfluss und Kontrolle wider.",
+                    "formula": "U_Power_intr(t) = λ_P * WTP_Power(t)",
+                    "variables": {
+                        "U_Power_intr(t)": "Intrinsischer Nutzen der Machtausübung zum Zeitpunkt t",
+                        "λ_P": "Gewichtungsparameter der Machtpräferenz",
+                        "WTP_Power(t)": "Beobachtete Zahlungsbereitschaft für Machtausübung"
+                    },
+                    "interpretation": {
+                        "λ_P ≈ 0": "keine intrinsische Machtpräferenz",
+                        "λ_P > 0": "hoher psychischer Nutzen durch Einflussnahme",
+                        "λ_P < 0": "Aversion gegen Machtausübung (Delegationspräferenz)"
+                    },
+                    "integration": [
+                        "INU-A4",
+                        "7232 META",
+                        "7240 AWX",
+                        "7243 WAX",
+                        "7257 SEG"
+                    ],
+                    "status": "experimental",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A5",
+                    "title": "Extrinsischer Wert spezifischer Tätigkeit",
+                    "type": "value",
+                    "text": "Der extrinsische Wert ergibt sich aus Belohnungen oder externen Faktoren (z. B. Geld, Anerkennung, Status, Sicherheit). Er kann die intrinsische Motivation verstärken (Komplementarität) oder schwächen (Crowding-out).",
+                    "formula": "V_extrinsic(task) = f(finanziell, reputational, institutionelle Faktoren)",
+                    "variables": {
+                        "finanziell": "Monetäre Belohnung",
+                        "reputational": "Soziale Anerkennung, Status",
+                        "institutionelle Faktoren": "Verbindliche externe Rahmenbedingungen"
+                    },
+                    "integration": [
+                        "Intrinsischer Wert (A4)",
+                        "Komplementarität (A6)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A6",
+                    "title": "Komplementarität der Wertfunktionen",
+                    "type": "complementarity",
+                    "text": "Der Gesamtwert einer Tätigkeit ergibt sich nicht nur aus der Addition von Baseline-, intrinsischem und extrinsischem Wert, sondern auch aus ihren Interaktionen. Diese können komplementär (gegenseitige Verstärkung) oder substitutiv (gegenseitige Abschwächung) wirken.",
+                    "formula": "V_total = V_base + V_intrinsic + V_extrinsic + κ(V_base, V_intrinsic, V_extrinsic)",
+                    "variables": {
+                        "V_base": "Grundwert des Tätigseins",
+                        "V_intrinsic": "Intrinsischer Wert einer Tätigkeit",
+                        "V_extrinsic": "Extrinsischer Wert einer Tätigkeit",
+                        "κ": "Komplementaritätsfunktion zwischen den Wertarten"
+                    },
+                    "integration": [
+                        "Baseline-Wert (A3)",
+                        "Intrinsischer Wert (A4)",
+                        "Extrinsischer Wert (A5)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A7",
+                    "title": "Referenzpunkte",
+                    "type": "evaluation",
+                    "text": "Nutzen und Disnutzen entstehen immer relativ zu einem Referenzpunkt. Dieser kann individuell (z. B. Einkommenserwartung), sozial (Vergleich mit Peers) oder lebensphasenabhängig sein. Verschiebt sich der Referenzpunkt, verschiebt sich auch die Bewertung.",
+                    "formula": "U_d(t) = f(x_d(t) - R_d(t), R_social(t), LCP_phase(t))",
+                    "variables": {
+                        "x_d(t)": "Tatsächliches Outcome in Dimension d zum Zeitpunkt t",
+                        "R_d(t)": "Individueller Referenzpunkt in Dimension d",
+                        "R_social(t)": "Sozialer Referenzpunkt",
+                        "LCP_phase(t)": "Lebensphasenabhängiger Referenzpunkt"
+                    },
+                    "integration": [
+                        "Verlustaversion (A2)",
+                        "Lebensphasen (A16)",
+                        "Soziale Vergleichsdynamik (A23)"
+                    ],
+                    "status": "active",
+                    "version": "v2.0"
+                },
+                {
+                    "axiom_id": "INU-A8",
+                    "title": "Zeitbewertung",
+                    "type": "temporal",
+                    "text": "Nutzen wird je nach zeitlichem Horizont unterschiedlich gewichtet. Kurzfristige Gewinne und Verluste sind oft überproportional salient, während mittel- und langfristige Effekte stärker diskontiert werden.",
+                    "formula": "U_d(t) = Σ_{τ∈{inst, kurz, mittel, lang}} β_τ δ_τ^t U_{d,τ}(t)",
+                    "variables": {
+                        "τ": "Zeithorizont (instant, kurz-, mittel-, langfristig)",
+                        "β_τ": "Gewichtungsfaktor je Fristigkeit",
+                        "δ_τ": "Diskontierungsfaktor je Fristigkeit",
+                        "U_{d,τ}(t)": "Nutzen in Dimension d für Fristigkeit τ"
+                    },
+                    "integration": [
+                        "Referenzpunkte (A7)",
+                        "Salienz (A15)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v2.0"
+                },
+                {
+                    "axiom_id": "INU-A9",
+                    "title": "Unsicherheit & Risiko",
+                    "type": "risk",
+                    "text": "Individuelle Bewertungen sind immer mit Unsicherheit verbunden. Risiko (bekannte Wahrscheinlichkeiten), Ambiguität (unbekannte Wahrscheinlichkeiten) und Unsicherheit (unvollständiges Wissen) reduzieren den wahrgenommenen Wert.",
+                    "formula": "U_d(t) = U_d(t) (1 - φ_risk,d - φ_amb,d - φ_unc,d)",
+                    "variables": {
+                        "φ_risk,d": "Risikoabschlag in Dimension d",
+                        "φ_amb,d": "Ambiguitätsabschlag in Dimension d",
+                        "φ_unc,d": "Unsicherheitsabschlag in Dimension d"
+                    },
+                    "integration": [
+                        "Kontext 8904",
+                        "Unsicherheitsmodule 9485–9495"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A10",
+                    "title": "Motivated Beliefs",
+                    "type": "psychological",
+                    "text": "Individuen verzerren ihre Überzeugungen, wenn die Wahrheit zu schmerzhaft wäre. Diese Selbsttäuschung reduziert kurzfristig Pain, kann langfristig aber Wertverluste erzeugen.",
+                    "formula": "B^M_d(t) = B^R_d(t)(1 - γ_d * max(0, P_d(t)-T_d))",
+                    "variables": {
+                        "B^M_d(t)": "Motivierte Überzeugung in Dimension d",
+                        "B^R_d(t)": "Rationale Überzeugung in Dimension d",
+                        "γ_d": "Sensitivitätsparameter",
+                        "T_d": "Schwellenwert, ab dem Pain verzerrend wirkt"
+                    },
+                    "integration": [
+                        "Blind Spots (A11)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A11",
+                    "title": "Blind Spots",
+                    "type": "information",
+                    "text": "Individuen berücksichtigen nicht alle verfügbaren Informationen, sondern blenden selektiv Aspekte aus. Diese Blind Spots reduzieren den wahrgenommenen Wert einer Handlung oder verstärken ihn, wenn kritische Informationen ignoriert werden.",
+                    "formula": "U_d(t) = U_d(t)(1 - φ_BS,d)",
+                    "variables": {
+                        "U_d(t)": "Wert in Dimension d",
+                        "φ_BS,d": "Blind-Spot-Parameter in Dimension d (0 ≤ φ ≤ 1)"
+                    },
+                    "integration": [
+                        "Motivated Beliefs (A10)",
+                        "Awareness (7240)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A12",
+                    "title": "Dynamische Anpassung",
+                    "type": "dynamics",
+                    "text": "Individueller Wert passt sich kontinuierlich an externe Rückmeldungen (Feedback) und an Kontexteinflüsse an. Diese Dynamik ist zentral für die Erklärung von Lernprozessen und Gewöhnungseffekten.",
+                    "formula": "dN_ind(t)/dt = α(Feedback(t) - N_ind(t)) + β(Context(t) - N_ind(t))",
+                    "variables": {
+                        "N_ind(t)": "Individueller Wert zum Zeitpunkt t",
+                        "Feedback(t)": "Externe Rückmeldung",
+                        "Context(t)": "Kontextfaktor",
+                        "α": "Anpassungsgeschwindigkeit Feedback",
+                        "β": "Anpassungsgeschwindigkeit Kontext"
+                    },
+                    "integration": [
+                        "Gedächtnis (A13)",
+                        "Kontext 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A13",
+                    "title": "Gedächtnis",
+                    "type": "memory",
+                    "text": "Frühere Erfahrungen wirken auf die aktuelle Bewertung nach. Der Einfluss nimmt exponentiell mit der Zeit ab, bleibt aber bestehen. Dies erklärt die Persistenz von Gewohnheiten und Traumata.",
+                    "formula": "M_d(t) = Σ_{k=0}^∞ ρ^k U_d(t-k), 0<ρ<1",
+                    "variables": {
+                        "M_d(t)": "Gedächtniswert in Dimension d",
+                        "ρ": "Vergessensrate (0 < ρ < 1)",
+                        "U_d(t-k)": "Wert in Dimension d k-Perioden zurück"
+                    },
+                    "integration": [
+                        "Dynamische Anpassung (A12)",
+                        "Lebensphasen (A16)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A14",
+                    "title": "Willingness-Schnittstelle",
+                    "type": "transition",
+                    "text": "Der individuelle Wert ist Input für die Entscheidung, ob eine Handlung tatsächlich ausgeführt wird. Dies geschieht über eine Schwellenwertfunktion, die Sensitivität gegenüber Kontextfaktoren abbildet.",
+                    "formula": "W(t) = f(N_ind(t), θ(t), C_context(t))",
+                    "variables": {
+                        "W(t)": "Handlungsbereitschaft zum Zeitpunkt t",
+                        "N_ind(t)": "Individueller Wert",
+                        "θ(t)": "Individuelle Entscheidungsschwelle",
+                        "C_context(t)": "Kontextfaktor"
+                    },
+                    "integration": [
+                        "Awareness (7240)",
+                        "Willingness (7243)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A15",
+                    "title": "Salienz",
+                    "type": "salience",
+                    "text": "Sofortige Gewinne oder Verluste sind immer salient, während mittel- und langfristige Effekte nur dann salient sind, wenn sie durch Awareness aktiviert werden.",
+                    "formula": "Salienz_{d,τ}(t) = 1 wenn τ=instant, sonst A(t)",
+                    "variables": {
+                        "Salienz_{d,τ}(t)": "Salienz in Dimension d für Fristigkeit τ",
+                        "A(t)": "Awareness-Level zum Zeitpunkt t"
+                    },
+                    "integration": [
+                        "Zeitbewertung (A8)",
+                        "Awareness (7240)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A16",
+                    "title": "Lebensphasenabhängigkeit",
+                    "type": "segmentation",
+                    "text": "Der individuelle Wert von Tätigkeiten und Entscheidungen ist stark abhängig von der Lebensphase. Bedürfnisse, Präferenzen und Sensitivitäten verändern sich entlang des Lebenslaufs.",
+                    "formula": "U_d(t) = f(LCP_phase(t))",
+                    "variables": {
+                        "U_d(t)": "Nutzen in Dimension d zum Zeitpunkt t",
+                        "LCP_phase(t)": "Lebensphasenparameter (Kindheit, Jugend, Erwerbsphase, Alter)"
+                    },
+                    "integration": [
+                        "Referenzpunkte (A7)",
+                        "Gedächtnis (A13)",
+                        "Segmentlogik 7257",
+                        "Lebensreisen 7457"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A17",
+                    "title": "Genderdifferenzierung",
+                    "type": "segmentation",
+                    "text": "Männer, Frauen und nicht-binäre Personen haben im Durchschnitt unterschiedliche Nutzenstrukturen. Diese Unterschiede können biologisch, sozial oder kulturell geprägt sein.",
+                    "formula": "U_{d,gender}(t) = f(gender, context, segment)",
+                    "variables": {
+                        "U_{d,gender}(t)": "Nutzen in Dimension d für Gendergruppe zum Zeitpunkt t",
+                        "gender": "Geschlechtsidentität",
+                        "context": "Kultureller und institutioneller Kontext"
+                    },
+                    "integration": [
+                        "Intersektionalität (A21)",
+                        "Segmentlogik 7257"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A18",
+                    "title": "Kulturelle & institutionelle Kontexte",
+                    "type": "context",
+                    "text": "Kultur und Institutionen prägen die Wahrnehmung von Nutzen und Disnutzen. Was in einem Kontext wertvoll ist, kann in einem anderen wertlos oder gar negativ sein.",
+                    "formula": "U_d(t) = f(C_culture(t), I_institutions(t))",
+                    "variables": {
+                        "U_d(t)": "Nutzen in Dimension d zum Zeitpunkt t",
+                        "C_culture(t)": "Kultureller Kontext",
+                        "I_institutions(t)": "Institutioneller Kontext"
+                    },
+                    "integration": [
+                        "Kontextlogik 8904",
+                        "Soziale Vergleichsdynamik (A23)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A19",
+                    "title": "Digitale Nutzenachse",
+                    "type": "extension",
+                    "text": "Die Digitalisierung hat eine eigenständige Nutzenachse hervorgebracht. Individueller Wert kann durch digitale Aspekte wie Privatsphäre, Vernetzung, Reputation und digitale Identität stark beeinflusst werden.",
+                    "formula": "U_digital(t) ∈ {privacy, connectivity, reputation, identity}",
+                    "variables": {
+                        "U_digital(t)": "Digitaler Nutzen zum Zeitpunkt t",
+                        "privacy": "Schutz der Privatsphäre",
+                        "connectivity": "Grad der digitalen Vernetzung",
+                        "reputation": "Digitale Reputation",
+                        "identity": "Digitale Identität"
+                    },
+                    "integration": [
+                        "FEPSDE-Struktur (A1)",
+                        "Technologische Disruption (A24)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A20",
+                    "title": "Habitdämpfung",
+                    "type": "habit",
+                    "text": "Je stärker eine Handlung habitualisiert ist, desto schwächer wirken neue Gains oder Pains. Gewohnheiten dämpfen die Wirkung von Veränderungen und machen Verhalten träger.",
+                    "formula": "U_d(t) = U_d(t)(1 - H(t))",
+                    "variables": {
+                        "U_d(t)": "Nutzen in Dimension d zum Zeitpunkt t",
+                        "H(t)": "Habit-Parameter (0 ≤ H ≤ 1)"
+                    },
+                    "integration": [
+                        "Gedächtnis (A13)",
+                        "Dynamische Anpassung (A12)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A21",
+                    "title": "Intersektionalität",
+                    "type": "segmentation",
+                    "text": "Der individuelle Wert ergibt sich oft nicht nur aus einer Zugehörigkeit, sondern aus der Überlagerung mehrerer Dimensionen wie Gender, Alter, sozioökonomischer Status, Kultur oder Ethnizität.",
+                    "formula": "U_d(t) = f(Gender, Age, SES, Ethnicity, Culture, Institutions)",
+                    "variables": {
+                        "SES": "Sozioökonomischer Status",
+                        "Ethnicity": "Ethnische Zugehörigkeit",
+                        "Culture": "Kulturelle Zugehörigkeit",
+                        "Institutions": "Institutionelle Verankerung"
+                    },
+                    "integration": [
+                        "Genderdifferenzierung (A17)",
+                        "Lebensphasenabhängigkeit (A16)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A22",
+                    "title": "Stress & emotionale Regulation",
+                    "type": "context",
+                    "text": "Stress reduziert den individuellen Wert. Emotionale Regulation, Coping-Strategien und Resilienz wirken als Puffer.",
+                    "formula": "U_stress(t) = P_d(t)(1 - Coping(t)) - Resilienz(t)",
+                    "variables": {
+                        "P_d(t)": "Pain in Dimension d",
+                        "Coping(t)": "Wirksamkeit von Coping-Strategien",
+                        "Resilienz(t)": "Individuelles Maß an Resilienz"
+                    },
+                    "integration": [
+                        "Unsicherheit (A9)",
+                        "Lebensphasenabhängigkeit (A16)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A23",
+                    "title": "Soziale Vergleichsdynamik",
+                    "type": "comparison",
+                    "text": "Menschen bewerten ihren Wert nicht absolut, sondern relativ zu Peers. Der Vergleich mit anderen kann Nutzen steigern (Statusgewinne) oder Pain erzeugen (Statusverluste).",
+                    "formula": "U_d(t) = f(x_d(t)-R_d(t), x_d(t)-Peer_d(t))",
+                    "variables": {
+                        "x_d(t)": "Eigener Zustand in Dimension d",
+                        "R_d(t)": "Individueller Referenzpunkt",
+                        "Peer_d(t)": "Referenzpunkt der Vergleichsgruppe"
+                    },
+                    "integration": [
+                        "Referenzpunkte (A7)",
+                        "Kultureller Kontext (A18)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A24",
+                    "title": "Technologische Disruption",
+                    "type": "disruption",
+                    "text": "Technologische Schocks verändern Wertstrukturen abrupt. Sie können kurzfristig Pain erzeugen (z. B. Jobverlust), langfristig jedoch auch große Gains (z. B. Produktivität, Gesundheit).",
+                    "formula": "U_d(t+1) = U_d(t) + Δ_disruption(t), Δ_disruption(t) = Shock(t)*σ_d",
+                    "variables": {
+                        "Δ_disruption(t)": "Disruptionsschock",
+                        "σ_d": "Sensitivität der Dimension d"
+                    },
+                    "integration": [
+                        "Digitale Nutzenachse (A19)",
+                        "Kontextlogik 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A25",
+                    "title": "Collateral Damage",
+                    "type": "side_effect",
+                    "text": "Jede Handlung kann unbeabsichtigte negative Nebenwirkungen erzeugen. Collateral Damage beschreibt diese schädlichen Effekte, die oft in anderen Dimensionen auftreten als die beabsichtigten Gains.",
+                    "formula": "CD(a,t) = Σ_{d∈FEPSDE} φ_d^- * (SideEffect_d(a,t))",
+                    "variables": {
+                        "CD(a,t)": "Collateral Damage aus Handlung a zum Zeitpunkt t",
+                        "φ_d^-": "Gewichtung negativer Nebeneffekte in Dimension d",
+                        "SideEffect_d(a,t)": "Nebenwirkung in Dimension d"
+                    },
+                    "integration": [
+                        "Masteraxiom (A0)",
+                        "Collateral Beauty (A26)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A26",
+                    "title": "Collateral Beauty",
+                    "type": "side_effect",
+                    "text": "Jede Handlung kann unbeabsichtigte positive Nebenwirkungen erzeugen. Collateral Beauty beschreibt diese positiven Effekte, die in anderen Dimensionen sichtbar werden als die ursprüngliche Intention.",
+                    "formula": "CB(a,t) = Σ_{d∈FEPSDE} φ_d^+ * (SideEffect_d(a,t))",
+                    "variables": {
+                        "CB(a,t)": "Collateral Beauty aus Handlung a zum Zeitpunkt t",
+                        "φ_d^+": "Gewichtung positiver Nebeneffekte in Dimension d",
+                        "SideEffect_d(a,t)": "Positive Nebenwirkung in Dimension d"
+                    },
+                    "integration": [
+                        "Masteraxiom (A0)",
+                        "Collateral Damage (A25)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A27",
+                    "title": "Reaktionszeit-Simulation (Time Will Tell-Integration)",
+                    "type": "measurement",
+                    "text": "Die Reaktionszeit einer Entscheidung ist eine endogene Funktion der Präferenzklarheit (ΔV), der individuellen Basisgeschwindigkeit (RT_i), der Item-Schwierigkeit (RT_j) sowie stochastischer Noise-Faktoren.",
+                    "formula": "RT_{i,j} = RT_i * RT_j * (1 / (1 + α * ΔV)) + ε",
+                    "variables": {
+                        "RT_{i,j}": "Simulierte Reaktionszeit für Person i und Aufgabe j",
+                        "RT_i": "Individuelle Basisreaktionsgeschwindigkeit",
+                        "RT_j": "Item-spezifische Basiszeit",
+                        "ΔV": "Präferenzklarheit = |V(A) - V(B)|",
+                        "α": "Sensitivitätsparameter",
+                        "ε": "Stochastische Komponente (Noise)"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "Kontextmodul 8904",
+                        "Unsicherheitsmodul 7260"
+                    ],
+                    "status": "experimental",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A28",
+                    "title": "Präferenzrekonstruktion unter Rauschen",
+                    "type": "measurement",
+                    "text": "Individuelle Präferenzen sind latent und nicht direkt beobachtbar. Entscheidungen enthalten Rauschen, weshalb einzelne Wahlhandlungen nicht ausreichen, um stabile Präferenzen zu rekonstruieren.",
+                    "formula": "ΔU(x,y) ∝ -E[RT(x,y)]",
+                    "variables": {
+                        "ΔU(x,y)": "Nutzenunterschied zwischen Option x und y",
+                        "RT(x,y)": "Reaktionszeit bei Entscheidung zwischen x und y",
+                        "p(x|y)": "Wahrscheinlichkeit, dass x gegenüber y gewählt wird"
+                    },
+                    "integration": [
+                        "A2 Verlustaversion",
+                        "A7 Referenzpunkte",
+                        "A15 Salienz",
+                        "A13 Gedächtnis"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A29",
+                    "title": "Item-korrigierte relative Reaktionszeit",
+                    "type": "measurement",
+                    "text": "Die Reaktionszeit einer Entscheidung ist nur informativ für die Stärke einer Präferenz, wenn sie um die individuelle Baseline-Geschwindigkeit und die Item-spezifische Schwierigkeit korrigiert wird.",
+                    "formula": "RelRT_{i,j} = RT_{i,j} / (\\bar{RT}_i * BaselineRT_j)",
+                    "variables": {
+                        "RT_{i,j}": "Antwortzeit von Person i bei Entscheidung j",
+                        "\\bar{RT}_i": "Durchschnittliche Antwortzeit von Person i über alle Items",
+                        "BaselineRT_j": "Schwierigkeit des Items j"
+                    },
+                    "interpretation": {
+                        "RelRT < 1": "Entscheidung schneller als erwartet → klare Präferenz",
+                        "RelRT ≈ 1": "Entscheidung normal schnell → neutrale Präferenz",
+                        "RelRT > 1": "Entscheidung langsamer als erwartet → unsichere Präferenz"
+                    },
+                    "integration": [
+                        "INU-A27",
+                        "INU-A28",
+                        "Meta-Axiom 0.013",
+                        "Unsicherheitsmodul 7243"
+                    ],
+                    "status": "experimental",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A30",
+                    "title": "Emotionale Valenz (Stolz, Scham, Schuld)",
+                    "type": "emotional",
+                    "text": "Emotionen wie Stolz, Scham oder Schuld modulieren die Wahrnehmung von Gains und Pains über den Hot-vs-Cold-State hinaus. Sie wirken als Verstärker oder Dämpfer auf die individuelle Wertfunktion.",
+                    "formula": "U_emotion(a,t) = ε_pride * Pride - ε_shame * Shame - ε_guilt * Guilt",
+                    "variables": {
+                        "ε_pride": "Sensitivität für Stolz (positiver Verstärker)",
+                        "ε_shame": "Sensitivität für Scham (negativer Modulator)",
+                        "ε_guilt": "Sensitivität für Schuld (negativer Modulator)"
+                    },
+                    "integration": [
+                        "INU-A0 Masteraxiom",
+                        "Awareness-Modul 7240",
+                        "Willingness-Modul 7243"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A31",
+                    "title": "Systemische Rückkopplungen",
+                    "type": "dynamics",
+                    "text": "Individuelles Verhalten verändert langfristig den Kontext, wodurch die individuelle Wertfunktion endogen beeinflusst wird. Verhalten ist damit nicht nur Ergebnis, sondern auch Input für zukünftige Rahmenbedingungen.",
+                    "formula": "Context(t+1) = f(Context(t), Σ Behavior_i(t))",
+                    "variables": {
+                        "Behavior_i": "Aggregiertes Verhalten der Akteure im System",
+                        "Context": "Ökonomische, soziale, politische und institutionelle Rahmenbedingungen"
+                    },
+                    "integration": [
+                        "Kontextmodul 8904",
+                        "Unsicherheitsmodul 7260",
+                        "Identitätsnutzen 7236"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A32",
+                    "title": "Begrenzte Aufmerksamkeit (Bounded Attention)",
+                    "type": "cognitive",
+                    "text": "Individuen können nur eine Teilmenge relevanter Informationen gleichzeitig verarbeiten. Dies limitiert die effektive Gewichtung einzelner Dimensionen in der Wertfunktion.",
+                    "formula": "ω_d_eff(t) = ω_d(t) * AttentionShare(d,t), Σ AttentionShare(d,t) ≤ 1",
+                    "variables": {
+                        "ω_d_eff": "Effektive Gewichtung einer Dimension d",
+                        "ω_d": "Nominale Gewichtung der Dimension d",
+                        "AttentionShare(d,t)": "Anteil der kognitiven Ressourcen, der einer Dimension zugewiesen wird"
+                    },
+                    "integration": [
+                        "Awareness 7240",
+                        "Kontextmodul 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A33",
+                    "title": "Selbstkontroll-Konflikte",
+                    "type": "temporal_conflict",
+                    "text": "Individuen haben Zeitinkonsistenzen zwischen dem langfristig planenden Selbst (long-run self) und dem kurzfristig handelnden Selbst (short-run self).",
+                    "formula": "U_total(t) = β * U_longrun(t) + (1-β) * U_shortrun(t), 0 < β < 1",
+                    "variables": {
+                        "β": "Gewicht des langfristigen Selbst (Selbstkontrollstärke)",
+                        "U_longrun": "Nutzen aus langfristiger Perspektive",
+                        "U_shortrun": "Nutzen aus kurzfristiger Perspektive"
+                    },
+                    "integration": [
+                        "Fristigkeiten (7232 Axiome)",
+                        "Awareness & Willingness (7240, 7243)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A34",
+                    "title": "Spillover-Effekte",
+                    "type": "cross_dimensional",
+                    "text": "Ein Verhalten oder eine Entscheidung in einer Domäne beeinflusst den Nutzen in anderen Domänen positiv oder negativ. Spillover-Effekte sind zentral für multi-dimensionale Entscheidungen.",
+                    "formula": "U_total(d,t) = U_d(t) + Σ_{j≠d} Spillover(d→j,t)",
+                    "variables": {
+                        "U_d(t)": "Nutzen der Primärdomäne d",
+                        "Spillover(d→j,t)": "Übertragungseffekt von Domäne d auf Domäne j"
+                    },
+                    "integration": [
+                        "FEPSDE-Dimensionen",
+                        "Komplementaritäten in INU-A0"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A35",
+                    "title": "Physiologische Grundbedürfnisse als Fundament",
+                    "type": "fundamental",
+                    "text": "Die individuelle Wertfunktion ist hierarchisch aufgebaut. Ohne ein Mindestniveau an physiologischer Befriedigung (z. B. Nahrung, Wasser, Schlaf, körperliche Sicherheit) verlieren höhere Nutzenkomponenten an Relevanz.",
+                    "formula": "U_total(t) = f(BasePhysNeeds(t)) * Σ_d U_d(t), mit f(BasePhysNeeds) ∈ [0,1]",
+                    "variables": {
+                        "BasePhysNeeds(t)": "Erfüllungsgrad physiologischer Grundbedürfnisse zum Zeitpunkt t",
+                        "U_d(t)": "Nutzen in Dimension d (FEPSDE) zum Zeitpunkt t",
+                        "f(BasePhysNeeds)": "Skalierungsfunktion"
+                    },
+                    "interpretation": {
+                        "BasePhysNeeds < Schwelle": "Alle höheren Nutzenwerte sind reduziert oder blockiert",
+                        "BasePhysNeeds ≥ Schwelle": "Höhere Nutzenwerte entfalten ihre volle Wirkung"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A2 Verlustaversion",
+                        "A7 Referenzpunkte",
+                        "A15 Salienz"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A36",
+                    "title": "Bias-Korrekturen (kognitive Verzerrungen)",
+                    "type": "correction",
+                    "text": "Individuen weichen systematisch von rationalen Bewertungen ab, da sie kognitiven Verzerrungen unterliegen (z. B. Status-quo-Bias, Framing-Effekte, Overconfidence, Anchoring).",
+                    "formula": "U'_d(t) = U_d(t) * (1 + θ_bias,d), mit θ_bias,d ∈ [-1, +1]",
+                    "variables": {
+                        "U_d(t)": "Nutzen in Dimension d (FEPSDE) zum Zeitpunkt t",
+                        "U'_d(t)": "Verzerrter Nutzen in Dimension d",
+                        "θ_bias,d": "Bias-Koeffizient je Dimension d"
+                    },
+                    "interpretation": {
+                        "θ_bias,d > 0": "Überschätzung des Nutzens (z. B. Overconfidence)",
+                        "θ_bias,d < 0": "Unterschätzung des Nutzens (z. B. Loss Aversion Overweighting)",
+                        "θ_bias,d = 0": "Keine Verzerrung, rationales Benchmark-Verhalten"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A2 Verlustaversion",
+                        "A7 Referenzpunkte",
+                        "A15 Salienz",
+                        "Kontextmodul 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A37",
+                    "title": "Moralische Präferenzen (Altruismus, Rache, Reziprozität)",
+                    "type": "moral",
+                    "text": "Neben individuellem, kollektivem und identitärem Nutzen entstehen Werte aus moralischen Präferenzen. Individuen erfahren positiven Nutzen, wenn sie anderen helfen (Altruismus) oder Fairness wiederherstellen (Reziprozität).",
+                    "formula": "U_moral(t) = ε_altruism * U_other_gain - ε_spite * U_other_gain + ε_recip * f(Fairness_dev)",
+                    "variables": {
+                        "U_moral(t)": "Moralischer Nutzen/Disnutzen zum Zeitpunkt t",
+                        "ε_altruism": "Sensitivität für altruistische Präferenzen",
+                        "ε_spite": "Sensitivität für neid- oder rachegetriebene Präferenzen",
+                        "ε_recip": "Sensitivität für Reziprozität",
+                        "U_other_gain": "Wahrgenommener Nutzen/Disnutzen einer anderen Person oder Gruppe",
+                        "Fairness_dev": "Abweichung vom Fairness-Referenzpunkt"
+                    },
+                    "interpretation": {
+                        "ε_altruism > 0": "Freude am Geben/anderen helfen",
+                        "ε_spite > 0": "Freude am Schädigen anderer (z. B. Rache, Neid)",
+                        "ε_recip > 0": "Freude an Fairnesswiederherstellung"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A2 Verlustaversion",
+                        "A7 Referenzpunkte",
+                        "A35 Physiologische Grundbedürfnisse",
+                        "Kontextmodul 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A38",
+                    "title": "Intertemporale Identitätsinvestition",
+                    "type": "identity",
+                    "text": "Individuen bewerten Handlungen nicht nur nach unmittelbarem Gewinn, sondern auch danach, wie stark sie zur langfristigen Identitätsbildung beitragen.",
+                    "formula": "U_ID(t) = β_ID * Σ_{τ>t} δ^{τ-t} * Consistency(Self_future(τ), Action(t))",
+                    "variables": {
+                        "U_ID(t)": "Nutzen aus Identitätsinvestition zum Zeitpunkt t",
+                        "β_ID": "Sensitivitätsparameter für Identitätsnutzen",
+                        "δ": "Diskontfaktor für zukünftige Zeitpunkte",
+                        "Self_future(τ)": "Erwartetes zukünftiges Selbstbild zum Zeitpunkt τ",
+                        "Action(t)": "Handlung zum Zeitpunkt t",
+                        "Consistency": "Funktion, die misst, wie stark eine Handlung mit dem zukünftigen Selbstbild übereinstimmt"
+                    },
+                    "interpretation": {
+                        "U_ID(t) hoch": "Handlung passt zu gewünschtem Selbstbild",
+                        "U_ID(t) niedrig": "Handlung steht im Konflikt zum gewünschten Selbstbild",
+                        "Negativer Wert": "Handlung schädigt das zukünftige Selbstbild"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A8 Zeitbewertung",
+                        "A13 Gedächtnis",
+                        "A37 Moralische Präferenzen",
+                        "Identitätsmodul 7236"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A39",
+                    "title": "Selbst-Unsicherheit (Noisy Preferences)",
+                    "type": "uncertainty",
+                    "text": "Individuelle Präferenzen sind keine stabilen Fixpunkte, sondern werden durch Unsicherheit, kognitive Limitationen und stochastische Prozesse beeinflusst.",
+                    "formula": "U_total(t) = U_true(t) + ε_pref",
+                    "variables": {
+                        "U_total(t)": "Beobachteter Nutzen einer Entscheidung zum Zeitpunkt t",
+                        "U_true(t)": "Latenter, stabiler Kernnutzen",
+                        "ε_pref": "Rauschkomponente (z. B. Normalverteilung N(0,σ²))"
+                    },
+                    "interpretation": {
+                        "Kleine ε_pref": "Präferenzen sind stabil und konsistent beobachtbar",
+                        "Grosse ε_pref": "Präferenzen wirken sprunghaft und schwer rekonstruierbar",
+                        "Persistente ε_pref": "Systematische Verzerrungen"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A27 Reaktionszeit",
+                        "A28 Präferenzrekonstruktion",
+                        "A29 Relative Reaktionszeit",
+                        "Unsicherheitsmodul 7260"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A40",
+                    "title": "Digitale Amplifikation (Social Media Verstärkung)",
+                    "type": "digital",
+                    "text": "Digitale Systeme verstärken Emotionen, Präferenzen und Identitätsmarker durch algorithmische Selektion und Feedback-Loops. Likes, Shares und algorithmisch personalisierte Inhalte führen zu überproportionaler Verstärkung.",
+                    "formula": "U_digital(t+1) = U_digital(t) * (1 + α_amp * Feedback(t))",
+                    "variables": {
+                        "U_digital(t)": "Individueller digitaler Nutzen zum Zeitpunkt t",
+                        "α_amp": "Amplifikationsfaktor (Intensität der algorithmischen Verstärkung)",
+                        "Feedback(t)": "Aggregierte Rückmeldungen (Likes, Shares, Kommentare)"
+                    },
+                    "interpretation": {
+                        "α_amp > 0": "Positive Verstärkung (z. B. Bestätigung, Anerkennung)",
+                        "α_amp < 0": "Negative Verstärkung (z. B. Hate Speech, Shitstorms)",
+                        "Hohe Feedback-Werte": "Starke Polarisierung"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A15 Salienz",
+                        "A23 Soziale Vergleichsdynamik",
+                        "A31 Systemische Rückkopplungen",
+                        "Modul 9912"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A41",
+                    "title": "Pfadabhängigkeit & Irreversibilität",
+                    "type": "path_dependency",
+                    "text": "Individuelle Entscheidungen sind nicht isoliert, sondern wirken langfristig auf die eigene Nutzenfunktion zurück. Pfadabhängigkeiten entstehen, wenn eine einmal gewählte Option die Wahrscheinlichkeit zukünftiger Optionen systematisch beeinflusst.",
+                    "formula": "U_total(t+1) = U_total(t) + φ_path * PastChoices(t) - φ_irrev * LostOptions(t)",
+                    "variables": {
+                        "U_total(t)": "Gesamtnutzen zum Zeitpunkt t",
+                        "φ_path": "Stärke der Pfadabhängigkeit",
+                        "PastChoices(t)": "Kumulierte Wirkung vergangener Entscheidungen",
+                        "φ_irrev": "Irreversibilitätsfaktor",
+                        "LostOptions(t)": "Anzahl bzw. Wert verlorener Handlungsoptionen"
+                    },
+                    "interpretation": {
+                        "Hoher φ_path": "Starke Verstärkung durch Gewohnheiten, Routinen oder Lock-in-Effekte",
+                        "Hoher φ_irrev": "Verlust von Optionen wirkt dauerhaft negativ",
+                        "Kombination": "Ein Verhalten kann positive Pfade (z. B. Bildung) oder negative Lock-ins (z. B. Abhängigkeit) erzeugen"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A13 Gedächtnis",
+                        "A20 Habitdämpfung",
+                        "A31 Systemische Rückkopplungen",
+                        "Kontextmodul 8904"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A42",
+                    "title": "Meta-Kognition (Selbstbewertung)",
+                    "type": "meta_cognitive",
+                    "text": "Individuen beobachten ihre eigenen Handlungen und rekonstruieren daraus ein Selbstbild. Abhängig davon, ob Handlung und Selbstbild konsistent sind, entsteht zusätzlicher Nutzen (Stolz) oder Disnutzen (Scham, Schuld).",
+                    "formula": "U_meta(t) = η_pos * Consistency(Self(t), Action(t)) - η_neg * Inconsistency(Self(t), Action(t))",
+                    "variables": {
+                        "U_meta(t)": "Meta-kognitiver Nutzen zum Zeitpunkt t",
+                        "Self(t)": "Aktuelles Selbstbild",
+                        "Action(t)": "Aktuelle Handlung",
+                        "Consistency": "Grad der Übereinstimmung zwischen Handlung und Selbstbild",
+                        "Inconsistency": "Grad der Abweichung zwischen Handlung und Selbstbild",
+                        "η_pos": "Sensitivität für positive Selbstbewertung (z. B. Stolz)",
+                        "η_neg": "Sensitivität für negative Selbstbewertung (z. B. Schuld, Scham)"
+                    },
+                    "interpretation": {
+                        "U_meta hoch": "Handlungen und Selbstbild sind konsistent",
+                        "U_meta niedrig": "Handlungen widersprechen dem Selbstbild",
+                        "Langfristig": "Meta-Kognition stabilisiert oder verändert das Selbstbild"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A30 Emotionale Valenz",
+                        "A37 Moralische Präferenzen",
+                        "A38 Identitätsinvestition",
+                        "Identitätsmodul 7236"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A43",
+                    "title": "Soziale Medienabhängigkeit (Digital Addiction)",
+                    "type": "addiction",
+                    "text": "Soziale Medien und digitale Plattformen sind so gestaltet, dass sie Abhängigkeitsmechanismen aktivieren. Wiederholte Nutzung verstärkt kurzfristigen emotionalen und sozialen Nutzen.",
+                    "formula": "U_digital(t+1) = U_digital(t) + α_add * Reward(t) - β_cost * Spillover(t)",
+                    "variables": {
+                        "U_digital(t)": "Digitaler Nutzen zum Zeitpunkt t",
+                        "α_add": "Addiktionsfaktor (Stärke der kurzfristigen Verstärkung)",
+                        "Reward(t)": "Kurzfristige Belohnung (Likes, Dopamin-Effekte)",
+                        "β_cost": "Kostenfaktor der Abhängigkeit",
+                        "Spillover(t)": "Negative Spillover in andere Dimensionen"
+                    },
+                    "interpretation": {
+                        "Hoher α_add, niedriger β_cost": "Digitale Suchtspirale",
+                        "Hoher β_cost": "Wahrnehmung negativer Konsequenzen",
+                        "Langfristig": "Stabile Verzerrung der Präferenzstruktur"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "A40 Digitale Amplifikation",
+                        "A41 Pfadabhängigkeit",
+                        "A42 Meta-Kognition",
+                        "Modul 9912"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A44",
+                    "title": "Finanziell ↔ Emotional",
+                    "type": "complementarity_fepsde",
+                    "text": "Finanzieller Nutzen entfaltet sich stärker, wenn er auch emotionale Sicherheit oder Freude erzeugt.",
+                    "formula": "C_{fin,emo}(t) = σ_{fin,emo} * U_fin(t) * U_emo(t)",
+                    "variables": {
+                        "U_fin(t)": "Nutzenwert in Dimension fin",
+                        "U_emo(t)": "Nutzenwert in Dimension emo",
+                        "σ_{fin,emo}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A45",
+                    "title": "Finanziell ↔ Psychologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Finanzielle Belohnung wirkt stärker, wenn sie psychologische Selbstwirksamkeit stärkt.",
+                    "formula": "C_{fin,psy}(t) = σ_{fin,psy} * U_fin(t) * U_psy(t)",
+                    "variables": {
+                        "U_fin(t)": "Nutzenwert in Dimension fin",
+                        "U_psy(t)": "Nutzenwert in Dimension psy",
+                        "σ_{fin,psy}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A46",
+                    "title": "Finanziell ↔ Sozial",
+                    "type": "complementarity_fepsde",
+                    "text": "Geld hat oft sozialen Wert (Status, Anerkennung, Teilhabe).",
+                    "formula": "C_{fin,soc}(t) = σ_{fin,soc} * U_fin(t) * U_soc(t)",
+                    "variables": {
+                        "U_fin(t)": "Nutzenwert in Dimension fin",
+                        "U_soc(t)": "Nutzenwert in Dimension soc",
+                        "σ_{fin,soc}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A47",
+                    "title": "Finanziell ↔ Digital",
+                    "type": "complementarity_fepsde",
+                    "text": "Digitale Güter gewinnen an Wert, wenn sie finanziell zugänglich sind.",
+                    "formula": "C_{fin,dig}(t) = σ_{fin,dig} * U_fin(t) * U_dig(t)",
+                    "variables": {
+                        "U_fin(t)": "Nutzenwert in Dimension fin",
+                        "U_dig(t)": "Nutzenwert in Dimension dig",
+                        "σ_{fin,dig}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A48",
+                    "title": "Finanziell ↔ Ökologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Nachhaltige Investitionen haben dann hohen Wert, wenn sie finanziell tragbar sind.",
+                    "formula": "C_{fin,eco}(t) = σ_{fin,eco} * U_fin(t) * U_eco(t)",
+                    "variables": {
+                        "U_fin(t)": "Nutzenwert in Dimension fin",
+                        "U_eco(t)": "Nutzenwert in Dimension eco",
+                        "σ_{fin,eco}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A49",
+                    "title": "Emotional ↔ Psychologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Emotionale Zustände sind eng mit psychologischer Selbstwahrnehmung verknüpft.",
+                    "formula": "C_{emo,psy}(t) = σ_{emo,psy} * U_emo(t) * U_psy(t)",
+                    "variables": {
+                        "U_emo(t)": "Nutzenwert in Dimension emo",
+                        "U_psy(t)": "Nutzenwert in Dimension psy",
+                        "σ_{emo,psy}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A50",
+                    "title": "Emotional ↔ Sozial",
+                    "type": "complementarity_fepsde",
+                    "text": "Emotionale Erfahrungen sind oft sozial geprägt.",
+                    "formula": "C_{emo,soc}(t) = σ_{emo,soc} * U_emo(t) * U_soc(t)",
+                    "variables": {
+                        "U_emo(t)": "Nutzenwert in Dimension emo",
+                        "U_soc(t)": "Nutzenwert in Dimension soc",
+                        "σ_{emo,soc}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A51",
+                    "title": "Emotional ↔ Digital",
+                    "type": "complementarity_fepsde",
+                    "text": "Digitale Interaktionen können starke emotionale Reaktionen auslösen.",
+                    "formula": "C_{emo,dig}(t) = σ_{emo,dig} * U_emo(t) * U_dig(t)",
+                    "variables": {
+                        "U_emo(t)": "Nutzenwert in Dimension emo",
+                        "U_dig(t)": "Nutzenwert in Dimension dig",
+                        "σ_{emo,dig}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A52",
+                    "title": "Emotional ↔ Ökologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Emotionale Bindungen verstärken die Wirkung ökologischer Entscheidungen.",
+                    "formula": "C_{emo,eco}(t) = σ_{emo,eco} * U_emo(t) * U_eco(t)",
+                    "variables": {
+                        "U_emo(t)": "Nutzenwert in Dimension emo",
+                        "U_eco(t)": "Nutzenwert in Dimension eco",
+                        "σ_{emo,eco}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A53",
+                    "title": "Psychologisch ↔ Sozial",
+                    "type": "complementarity_fepsde",
+                    "text": "Psychologische Selbstwirksamkeit verstärkt sich durch soziale Anerkennung.",
+                    "formula": "C_{psy,soc}(t) = σ_{psy,soc} * U_psy(t) * U_soc(t)",
+                    "variables": {
+                        "U_psy(t)": "Nutzenwert in Dimension psy",
+                        "U_soc(t)": "Nutzenwert in Dimension soc",
+                        "σ_{psy,soc}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A54",
+                    "title": "Psychologisch ↔ Digital",
+                    "type": "complementarity_fepsde",
+                    "text": "Digitale Kompetenzen entfalten Wert, wenn sie psychologisch als Selbstwirksamkeit wahrgenommen werden.",
+                    "formula": "C_{psy,dig}(t) = σ_{psy,dig} * U_psy(t) * U_dig(t)",
+                    "variables": {
+                        "U_psy(t)": "Nutzenwert in Dimension psy",
+                        "U_dig(t)": "Nutzenwert in Dimension dig",
+                        "σ_{psy,dig}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A55",
+                    "title": "Psychologisch ↔ Ökologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Nachhaltiges Verhalten kann psychologische Sinnhaftigkeit erzeugen.",
+                    "formula": "C_{psy,eco}(t) = σ_{psy,eco} * U_psy(t) * U_eco(t)",
+                    "variables": {
+                        "U_psy(t)": "Nutzenwert in Dimension psy",
+                        "U_eco(t)": "Nutzenwert in Dimension eco",
+                        "σ_{psy,eco}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A56",
+                    "title": "Sozial ↔ Digital",
+                    "type": "complementarity_fepsde",
+                    "text": "Digitale Plattformen entfalten Wert vor allem durch soziale Interaktionen.",
+                    "formula": "C_{soc,dig}(t) = σ_{soc,dig} * U_soc(t) * U_dig(t)",
+                    "variables": {
+                        "U_soc(t)": "Nutzenwert in Dimension soc",
+                        "U_dig(t)": "Nutzenwert in Dimension dig",
+                        "σ_{soc,dig}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A57",
+                    "title": "Sozial ↔ Ökologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Soziale Anerkennung verstärkt ökologisch motivierte Entscheidungen.",
+                    "formula": "C_{soc,eco}(t) = σ_{soc,eco} * U_soc(t) * U_eco(t)",
+                    "variables": {
+                        "U_soc(t)": "Nutzenwert in Dimension soc",
+                        "U_eco(t)": "Nutzenwert in Dimension eco",
+                        "σ_{soc,eco}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                },
+                {
+                    "axiom_id": "INU-A58",
+                    "title": "Digital ↔ Ökologisch",
+                    "type": "complementarity_fepsde",
+                    "text": "Digitale Technologien können ökologischen Nutzen verstärken oder schwächen.",
+                    "formula": "C_{dig,eco}(t) = σ_{dig,eco} * U_dig(t) * U_eco(t)",
+                    "variables": {
+                        "U_dig(t)": "Nutzenwert in Dimension dig",
+                        "U_eco(t)": "Nutzenwert in Dimension eco",
+                        "σ_{dig,eco}": "Stärke der Komplementarität"
+                    },
+                    "integration": [
+                        "Masteraxiom INU-A0",
+                        "FEPSDE-Struktur (A1)"
+                    ],
+                    "status": "active",
+                    "version": "v1.0"
+                }
+            ]
+        },
+        "A5": {
+            "section": "A5",
+            "title": "Requirements for Application",
+            "requirements": [
+                "Pain/Gain data across all FEPSDE dimensions",
+                "Explicit reference points for each dimension (individual, social, life-phase dependent)",
+                "Discounting parameters and time proxies",
+                "Uncertainty and risk parameters (φ_risk, φ_amb, φ_unc)",
+                "Segment parameters: age, gender, SES, life phase, culture, institutions",
+                "Intersectional identity positions",
+                "Coping and resilience values",
+                "Social comparison group data (peers)",
+                "Trigger parameters for technological disruptions",
+                "Ecological utility values",
+                "Digital utility components (privacy, connectivity, reputation, identity)"
+            ]
+        },
+        "A6": {
+            "section": "A6",
+            "title": "Structural Integration & Module Connections",
+            "integration": {
+                "meta": [
+                    "7232 META",
+                    "9232 STD"
+                ],
+                "awareness_willingness": [
+                    "7240 AWX",
+                    "7243 WAX"
+                ],
+                "utility": [
+                    "7235 KNU",
+                    "7236 IDN"
+                ],
+                "context_segment": [
+                    "8904 KON",
+                    "7257 SEG"
+                ],
+                "life_journeys": [
+                    "7457 LCP",
+                    "7256 JNY"
+                ],
+                "uncertainty_complexity": [
+                    "9485 UNS_META",
+                    "9486 UNS_ENV",
+                    "9495 UNS_IPN",
+                    "9493 UNS_INS",
+                    "9494 UNS_EPI",
+                    "9492 KOM_META"
+                ],
+                "intervention_monitoring": [
+                    "9250 INT",
+                    "9251 WATCHDOG"
+                ],
+                "extended_logics": [
+                    "9477 STA",
+                    "9479 SPT",
+                    "9480 GAM"
+                ]
+            }
+        },
+        "A7": {
+            "section": "A7",
+            "title": "Language & Semantic Boundaries",
+            "boundaries": [
+                "Module exclusively represents individual utility",
+                "Collective utility (7235) and identity utility (7236) are independent",
+                "External frameworks only integrated insofar as they affect individual utility perception",
+                "Aggregation to group utility occurs exclusively via 7235 (KNU)",
+                "Anchoring in identities occurs exclusively via 7236 (IDN)",
+                "Module is not responsible for intervention derivation, only provides input for 9250 (INT)"
+            ]
+        },
+        "A8": {
+            "section": "A8",
+            "title": "Versioning & Validity",
+            "versions": [
+                {
+                    "version": "v1.0",
+                    "description": "Original version: Introduction of FEPS with Pain/Gain separation"
+                },
+                {
+                    "version": "v1.1",
+                    "description": "Structural compliance according to 9232"
+                },
+                {
+                    "version": "v2.0",
+                    "description": "Extension with gender, life phases, culture; digital dimension"
+                },
+                {
+                    "version": "v2.1",
+                    "description": "Integration of intersectionality"
+                },
+                {
+                    "version": "v2.2",
+                    "description": "Stress, coping and resilience mechanisms"
+                },
+                {
+                    "version": "v2.3",
+                    "description": "Social comparison dynamics"
+                },
+                {
+                    "version": "v2.4",
+                    "description": "Technological disruptions"
+                },
+                {
+                    "version": "v2.5",
+                    "description": "Ecological dimension (FEPSDE logic)"
+                },
+                {
+                    "version": "v3.0",
+                    "description": "Complete integration with Meta-Axioms, WEIRD bias consideration"
+                }
+            ]
+        },
+        "A9": {
+            "section": "A9",
+            "title": "Citation & Reference",
+            "citation": "Chapter BCM2_01_INU (ID 7234), FehrAdvice & Partners AG, 2025. Version v3.0 with integration of Meta-Axioms (7232)."
+        },
+        "A10": {
+            "section": "A10",
+            "title": "License & Copyright Notice",
+            "license": "© FehrAdvice & Partners AG. Use exclusively within BCM 2.0 permitted. Every application must comply with architectural standards (9232) and Meta-Axioms (7232)."
+        }
+    }
+}
