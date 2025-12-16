@@ -2,145 +2,111 @@
     "module": {
         "id": "BCM2_10_JNY7256",
         "name": "Behavioral Change Journey",
-        "axiom_count": 10,
         "version": "2.0",
-        "release_date": "2025-07",
-        "maintainer": "FehrAdvice & Partners AG",
-        "architecture": "BCM 2.0 / BEATRIX 2025"
+        "description": "This module defines the axiomatic and operational structure of the Behavioral Change Journey (BCJ) in BCM 2.0. It describes all phases of behavioral change, the underlying transition conditions, and the coupling with awareness, willingness, utility, and segment logic. The module is mandatory for all simulations, models, and interventions that represent behavioral change phase trajectories. Axiom count: 10. Release date: 2025-07. Maintainer: FehrAdvice & Partners AG. Architecture: BCM 2.0 / BEATRIX 2025."
     },
-    "A1_Title": {
-        "title": "BCM2_10_JNY7256 [Behavioral Change Journey – 10 Axioms]"
-    },
-    "A2_Scope": {
-        "description": "This chapter defines the axiomatic and operational structure of the Behavioral Change Journey (BCJ) in BCM 2.0. It describes all phases of behavioral change, the underlying transition conditions, and the coupling with awareness, willingness, utility, and segment logic. The module is mandatory for all simulations, models, and interventions that represent behavioral change phase trajectories."
-    },
-    "A3_Objectives": {
-        "goals": [
-            "Realistic, formally representable description and analysis of behavioral change over time",
-            "Explicit linkage with awareness, utility functions, and segments",
-            "Foundation for agent-based simulations and evidence-based intervention architecture",
-            "Ensuring traceability and measurability of phases and transitions"
-        ]
-    },
-    "A4_Axioms": [
-        {
-            "id": "Axiom_1",
-            "title": "Phased Nature of Behavioral Change",
-            "description": "Behavioral change does not occur discretely, but through five sequential phases representing different psychological states.",
-            "formula": "BCJ = { PreC, Cont, Prep, Act, Main }"
+    "section": {
+        "A1": {
+            "title": "Module Context",
+            "text": "BCM2_10_JNY7256 - Behavioral Change Journey. This module contains 10 axioms that define the structure and dynamics of behavioral change journeys within the BCM 2.0 architecture."
         },
-        {
-            "id": "Axiom_2",
-            "title": "Phase Transitions Are Probabilistic",
-            "description": "Transitions between phases are not deterministic but modeled via transition probabilities.",
-            "formula": "P_{i→j}(t) = f(W(t), A_mod(t), S(t), B(t), C(t))"
+        "A2": {
+            "title": "Scope and Application",
+            "text": "This chapter defines the axiomatic and operational structure of the Behavioral Change Journey (BCJ) in BCM 2.0. It describes all phases of behavioral change, the underlying transition conditions, and the coupling with awareness, willingness, utility, and segment logic. The module is mandatory for all simulations, models, and interventions that represent behavioral change phase trajectories."
         },
-        {
-            "id": "Axiom_3",
-            "title": "Awareness as Entry Condition",
-            "description": "A transition from Pre-Contemplation to Contemplation is only possible if situational awareness is activated.",
-            "formula": "P_{PreC→Cont}(t) = 0 if A_mod(t) < ε"
+        "A3": {
+            "title": "Objectives and Function",
+            "text": "Goals: Realistic, formally representable description and analysis of behavioral change over time. Explicit linkage with awareness, utility functions, and segments. Foundation for agent-based simulations and evidence-based intervention architecture. Ensuring traceability and measurability of phases and transitions."
         },
-        {
-            "id": "Axiom_4",
-            "title": "Willingness Dominates Preparation and Action",
-            "description": "Without sufficient willingness, transitions to Preparation or Action are not possible.",
-            "formula": "P_{Cont→Prep}(t), P_{Prep→Act}(t) ∝ W(t)"
+        "A4": {
+            "title": "Binding Logic Rules - Behavioral Change Journey Axioms",
+            "text": "This section contains the 10 formal axioms that define the binding logic rules for the Behavioral Change Journey module. These axioms establish foundational principles for modeling behavioral change through sequential phases, probabilistic transitions, awareness as entry condition, willingness dominance in preparation and action, stabilization through habit formation, systemic possibility of relapse, segment-dependent phase durations, phase modulation of utility functions, complementarity with willingness, and experimental measurability of phases.",
+            "axioms": [
+                {
+                    "id": "Axiom_1",
+                    "title": "Phased Nature of Behavioral Change",
+                    "formula": "BCJ = { PreC, Cont, Prep, Act, Main }",
+                    "description": "Behavioral change does not occur discretely, but through five sequential phases representing different psychological states: Pre-Contemplation, Contemplation, Preparation, Action, and Maintenance."
+                },
+                {
+                    "id": "Axiom_2",
+                    "title": "Phase Transitions Are Probabilistic",
+                    "formula": "P_{i→j}(t) = f(W(t), A_mod(t), S(t), B(t), C(t))",
+                    "description": "Transitions between phases are not deterministic but modeled via transition probabilities. The transition probability from phase i to phase j at time t is a function of Willingness W(t), modulated Awareness A_mod(t), Social factors S(t), Behavioral factors B(t), and Context C(t)."
+                },
+                {
+                    "id": "Axiom_3",
+                    "title": "Awareness as Entry Condition",
+                    "formula": "P_{PreC→Cont}(t) = 0 if A_mod(t) < ε",
+                    "description": "A transition from Pre-Contemplation to Contemplation is only possible if situational awareness is activated. Without sufficient awareness level (below threshold ε), the probability of transition is zero."
+                },
+                {
+                    "id": "Axiom_4",
+                    "title": "Willingness Dominates Preparation and Action",
+                    "formula": "P_{Cont→Prep}(t), P_{Prep→Act}(t) ∝ W(t)",
+                    "description": "Without sufficient willingness, transitions to Preparation or Action are not possible. The transition probabilities from Contemplation to Preparation and from Preparation to Action are proportional to the willingness level W(t)."
+                },
+                {
+                    "id": "Axiom_5",
+                    "title": "Stabilization via Habit and Reinforcement",
+                    "formula": "P_{Act→Main}(t) = f(S(t), H(t), A_mod(t))",
+                    "description": "The transition to Maintenance depends on social reinforcement S(t), habit formation H(t), and modulated awareness A_mod(t). Stabilization occurs through reinforcement mechanisms and habituation processes."
+                },
+                {
+                    "id": "Axiom_6",
+                    "title": "Systemic Possibility of Relapse",
+                    "formula": "P_{j→i}(t) > 0 for i < j",
+                    "description": "All phases may regress to earlier phases due to contextual changes, negative experiences, or norm violations. The probability of transitioning from a later phase j to an earlier phase i is always greater than zero, representing the systemic possibility of relapse."
+                },
+                {
+                    "id": "Axiom_7",
+                    "title": "Segment-Dependent Phase Duration",
+                    "formula": "E[T_i] = f(Segment_type)",
+                    "description": "Phase duration and transition intensity vary by behavioral change segment. The expected duration E[T_i] of phase i is a function of the segment type, reflecting heterogeneity across population segments."
+                },
+                {
+                    "id": "Axiom_8",
+                    "title": "Phases Modulate Utility Functions",
+                    "formula": "N(t) = ω_ind,i * N_ind(t) + ω_kol,i * N_kol(t) + ω_id,i * N_id(t)",
+                    "description": "Each phase modulates the weighting of the three utility functions. The total utility N(t) is a weighted sum of individual utility N_ind(t), collective utility N_kol(t), and identity utility N_id(t), where weights ω vary by phase i."
+                },
+                {
+                    "id": "Axiom_9",
+                    "title": "BCJ Is Complementary to Willingness",
+                    "formula": "W(t+1) = f(W(t), BCJ_phase(t), L_exp(t))",
+                    "description": "The Behavioral Change Journey is not a consequence of willingness but feeds back into it. Willingness at time t+1 is a function of current willingness W(t), current BCJ phase, and learning experience L_exp(t), creating a dynamic feedback loop."
+                },
+                {
+                    "id": "Axiom_10",
+                    "title": "The Journey Is Experimentally Measurable",
+                    "formula": "BCJ_phase(t) = argmax_i O_i(t)",
+                    "description": "Phases can be identified via observable indicators such as awareness levels, search behavior, intention, and repetition. The current phase is determined by finding the phase i that maximizes the observable indicator O_i(t)."
+                }
+            ]
         },
-        {
-            "id": "Axiom_5",
-            "title": "Stabilization via Habit and Reinforcement",
-            "description": "The transition to Maintenance depends on social reinforcement and habit formation.",
-            "formula": "P_{Act→Main}(t) = f(S(t), H(t), A_mod(t))"
+        "A5": {
+            "title": "Prerequisites and Requirements",
+            "text": "Requirements: Initialization of the BEATRIX/BCM kernel (BCM3_00_INIT9249_KERNEL). Loaded modules for Awareness, Willingness, Utility, and Segment Logic. Defined context vector for each application."
         },
-        {
-            "id": "Axiom_6",
-            "title": "Systemic Possibility of Relapse",
-            "description": "All phases may regress to earlier phases due to contextual changes, negative experiences, or norm violations.",
-            "formula": "P_{j→i}(t) > 0 for i < j"
+        "A6": {
+            "title": "Structure Integration and Linkages",
+            "text": "Integration: Direct coupling to Awareness, Willingness, Utility, and Segment modules. Compatible with all agent-based simulation architectures in BCM. Integrated into the Intervention Toolkit (BCM2_13_INT). Referenced modules: BCM2_05_AWX (Awareness), BCM2_06_KOM (Complementarity), BCM2_07_WTX (Willingness), BCM2_08_PRB (Probabilities), BCM2_09_SEG (Segment Logic), BCM3_00_INIT9249_KERNEL (Kernel Initialization). Literature references: Prochaska & DiClemente – Transtheoretical Model, FehrAdvice Behavioral Change Model, Agent-based field experiments."
         },
-        {
-            "id": "Axiom_7",
-            "title": "Segment-Dependent Phase Duration",
-            "description": "Phase duration and transition intensity vary by behavioral change segment.",
-            "formula": "E[T_i] = f(Segment_type)"
+        "A7": {
+            "title": "Language and Semantic Boundaries",
+            "text": "Constraints: Only BCM-compliant terminology is used. No application for individual diagnostics. Restricted to architecture-based change processes."
         },
-        {
-            "id": "Axiom_8",
-            "title": "Phases Modulate Utility Functions",
-            "description": "Each phase modulates the weighting of the three utility functions.",
-            "formula": "N(t) = ω_ind,i * N_ind(t) + ω_kol,i * N_kol(t) + ω_id,i * N_id(t)"
+        "A8": {
+            "title": "Versioning and Validity",
+            "text": "BCM version: 2.0. Release: July 2025. Responsibility: FehrAdvice & Partners AG."
         },
-        {
-            "id": "Axiom_9",
-            "title": "BCJ Is Complementary to Willingness",
-            "description": "The Behavioral Change Journey is not a consequence of willingness but feeds back into it.",
-            "formula": "W(t+1) = f(W(t), BCJ_phase(t), L_exp(t))"
+        "A9": {
+            "title": "Citation and References",
+            "text": "Module references: BCM2_05_AWX, BCM2_06_KOM, BCM2_07_WTX, BCM2_08_PRB, BCM2_09_SEG, BCM3_00_INIT9249_KERNEL. Literature: Prochaska & DiClemente – Transtheoretical Model, FehrAdvice Behavioral Change Model, Agent-based field experiments."
         },
-        {
-            "id": "Axiom_10",
-            "title": "The Journey Is Experimentally Measurable",
-            "description": "Phases can be identified via observable indicators such as awareness levels, search behavior, intention, and repetition.",
-            "formula": "BCJ_phase(t) = argmax_i O_i(t)"
+        "A10": {
+            "title": "License and Ownership",
+            "text": "License: Use restricted to BEATRIX/BCM 2.0 architecture. Conditions: Explicit kernel initialization required. All mandatory modules must be integrated. Commercial and scientific use requires written permission from FehrAdvice & Partners AG."
         }
-    ],
-    "A5_Prerequisites": {
-        "requirements": [
-            "Initialization of the BEATRIX/BCM kernel (BCM3_00_INIT9249_KERNEL)",
-            "Loaded modules for Awareness, Willingness, Utility, and Segment Logic",
-            "Defined context vector for each application"
-        ]
-    },
-    "A6_Module_Integration": {
-        "integration": [
-            "Direct coupling to Awareness, Willingness, Utility, and Segment modules",
-            "Compatible with all agent-based simulation architectures in BCM",
-            "Integrated into the Intervention Toolkit (BCM2_13_INT)"
-        ]
-    },
-    "A7_Language_and_Semantic_Boundaries": {
-        "constraints": [
-            "Only BCM-compliant terminology is used",
-            "No application for individual diagnostics",
-            "Restricted to architecture-based change processes"
-        ]
-    },
-    "A8_Versioning": {
-        "status": {
-            "bcm_version": "2.0",
-            "release": "July 2025",
-            "responsibility": "FehrAdvice & Partners AG"
-        }
-    },
-    "A9_References": {
-        "modules": [
-            "BCM2_05_AWX",
-            "BCM2_06_KOM",
-            "BCM2_07_WTX",
-            "BCM2_08_PRB",
-            "BCM2_09_SEG",
-            "BCM3_00_INIT9249_KERNEL"
-        ],
-        "literature": [
-            "Prochaska & DiClemente – Transtheoretical Model",
-            "FehrAdvice Behavioral Change Model",
-            "Agent-based field experiments"
-        ]
-    },
-    "A10_License_and_Usage": {
-        "license": "Use restricted to BEATRIX/BCM 2.0 architecture",
-        "conditions": [
-            "Explicit kernel initialization required",
-            "All mandatory modules must be integrated",
-            "Commercial and scientific use requires written permission from FehrAdvice & Partners AG"
-        ]
-    },
-    "Conclusion": {
-        "summary": [
-            "Realistic modeling of behavioral change over time",
-            "Direct coupling with awareness, willingness, utility, and segment logic",
-            "Applicable to simulation, intervention, and policy design",
-            "Measurable and auditable phase transitions"
-        ]
     }
 }
