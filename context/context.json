@@ -1,0 +1,1042 @@
+{
+    "A1": {
+        "id": "BCM2_04_KON8904",
+        "title": "Context Logic",
+        "module_type": "context_module_structural_space",
+        "chapter_id_int": 8904,
+        "description": "The module describes the structure, function, and effect of context in the Behavioral Change Model (BCM) 2.0. Context is not an environment, but a structurally effective space in which utility effects can only be realized, inhibited, or changed.",
+        "epistemic_class": "operational",
+        "linked_standard": "BCM3_02_AOM v2.2 (FA-STD-10061 §3.1–3.4)",
+        "registry_version": "2.5",
+        "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+        "meta_ref": "BCM2_00_STD9232 §2.1",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-STRUC-01",
+            "status": "STRUCT_VALID_200",
+            "last_audit": "2025-10-24"
+        }
+    },
+    "A2": {
+        "scope": {
+            "application_domains": [
+                "Architecture models with context dependency",
+                "Simulations with context-sensitive dynamics",
+                "Segmentations with context-modulated effects",
+                "Derivation of intervention-capable ΔC(t) paths"
+            ],
+            "temporal_scope": "time-point-based and dynamic simulations (ΔC over t)",
+            "modularity": "applicable in all BCM2 and BCM3 complementary modules",
+            "restrictions": "only initializable when Awareness (7240), Willingness (7243), and Segment Logic modules (7257) are active"
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.2",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-SEM-01",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "A3": {
+        "purpose_and_function": {
+            "goals": [
+                "Modeling of contextual structures (vectorial)",
+                "Assessment of segment-relational effects and context elasticity",
+                "Integration of context axes in utility, awareness, and complementarity logic",
+                "Calculation of context-modulated thresholds and reactions"
+            ],
+            "functional_role": "The module operationalizes the contextual effect level at which individual, collective, and identity utility functions are realized or inhibited.",
+            "outputs": [
+                "φ(C⃗) – Context modulation function",
+                "χ(C⃗,S) – Context-dependent awareness probability",
+                "δ_i(C⃗) – Threshold shift through context",
+                "Ω(C,t) – Context dynamics over time"
+            ],
+            "linked_axioms": [
+                "AX_0.00c",
+                "AX_0.00e",
+                "AX_0.00j"
+            ]
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.3",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-EPI-01",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "validation_overall": {
+        "standard": "BCM2_00_STD9252",
+        "status": "FORM_VALID_200",
+        "last_audit": "2025-10-24",
+        "governance_validation": "approved"
+    },
+    "A4": {
+        "title": "Binding Logic Rules (Axioms KX1–KX21)",
+        "KON_Axioms": [
+            {
+                "axiom_id": "KX1",
+                "title": "Context is not utility, but structurally effective impact horizon",
+                "description": "Context influences behavior and utility realization, but is not itself a utility function. It forms the structural impact horizon in which utility functions only become effective or remain inhibited. Its effect varies over time, stability, and epistemic coherence.",
+                "formalization": "U_i(t) = f(INU_i, KNU_i, IDN_i | C⃗(t), α_control, Bias(E1–E5)) with U_i ≠ C⃗(t) ∧ ∂U_i/∂C⃗ ≠ 0",
+                "epistemic_class": "formal_dynamic",
+                "semantic_class": "context_structure",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "AX_0.00c",
+                    "AX_0.00e2",
+                    "AX_0.00j",
+                    "KX8",
+                    "KX21"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "implications": [
+                    "Context defines the structural conditions for utility realization.",
+                    "Any change in context changes the realization probability of U_i(t).",
+                    "Epistemic distortions (E1–E5) modulate the perception of context effect.",
+                    "High institutional stability (α_control) reduces context sensitivity."
+                ],
+                "parameters": {
+                    "U_i(t)": "Total utility of actor i over time t",
+                    "INU_i": "Individual utility",
+                    "KNU_i": "Collective utility",
+                    "IDN_i": "Identity utility",
+                    "C⃗(t)": "Time-dependent context vector",
+                    "α_control": "Degree of institutionalization of divergence (0–1)",
+                    "Bias(E1–E5)": "Epistemic distortion of context perception"
+                },
+                "governance_scope": "Behavioral Context Layer",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.6",
+                "registry_version": "2.6",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01",
+                        "AOM-DYN-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX2",
+                "title": "Context acts mediated and structurally feedback-coupled",
+                "description": "Context influences behavior through modulation functions such as complementarity, awareness, and decision thresholds, but simultaneously acts structurally back on behavior through the dynamic context function Ω(C⃗,t,α_control,ψ,Bias). This describes systemic drift, resonance, and stability damping between behavior and context over time.",
+                "formalization": "V_i(t+1) = f(U_i(t), κ(C⃗,t), A_mod(C⃗,t), θ_i(C⃗,t), Ω(C⃗,t,α_control,ψ,Bias)) with ∂V_i/∂C⃗ ≠ 0",
+                "epistemic_class": "formal_dynamic",
+                "semantic_class": "context_dynamics",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX1",
+                    "KX8",
+                    "KX10",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "implications": [
+                    "Context primarily acts through mediating functions like complementarity, awareness, and thresholds, but additionally possesses structural feedback.",
+                    "Ω(C⃗,t,α_control,ψ,Bias) models contextual drift and institutional resonance.",
+                    "High institutional stability (α_control) reduces feedback strength.",
+                    "Epistemic distortions (Bias E1–E5) can over- or underestimate feedback.",
+                    "ψ(C⃗,t) functions as damping coefficient for contextual resonance effects."
+                ],
+                "parameters": {
+                    "V_i(t)": "Behavior of actor i at time t",
+                    "U_i(t)": "Utility value of actor i at time t",
+                    "κ(C⃗,t)": "Complementarity function of context",
+                    "A_mod(C⃗,t)": "Awareness modulation via context and time",
+                    "θ_i(C⃗,t)": "Context-dependent, adaptive decision threshold",
+                    "Ω(C⃗,t,α_control,ψ,Bias)": "Dynamic context function (drift, resonance, stability, distortion)",
+                    "α_control": "Degree of institutionalization of divergence – structural stability parameter",
+                    "ψ(C⃗,t)": "Resonance coefficient (systemic reaction dynamics)",
+                    "Bias(E1–E5)": "Epistemic distortion on perception and context evaluation"
+                },
+                "governance_scope": "Behavioral Dynamics Layer",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.6",
+                "registry_version": "2.6",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01",
+                        "AOM-DYN-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX3",
+                "title": "Context is vectorial, multidimensional, structure-typed, and dynamically feedback-coupled",
+                "description": "The context of a system is understood as a dynamic, vectorial space C⃗(t) consisting of multiple dimensions c_i. Each dimension represents an independent structural effect level (institutional, social, symbolic, technical, physical, media, etc.) and is modulated over time, resonance ψ(C⃗,t), stability α_control, and epistemic distortion Bias(E1–E5).",
+                "formalization": "C⃗(t) = { (c_i, w_i, τ_i(t), α_control_i, ψ_i(t), Bias_i(E1–E5)) | i = 1,…,n; Σw_i = 1 } ∧ dC⃗/dt ≠ 0",
+                "epistemic_class": "formal_dynamic",
+                "semantic_class": "context_structure",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX1",
+                    "KX2",
+                    "KX8",
+                    "KX10",
+                    "AX_0.00e2",
+                    "AX_0.00j"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "C⃗(t)": "Total context vector at time t",
+                    "c_i": "Individual dimension of context (e.g., institutional, social, symbolic)",
+                    "w_i": "Weighting of respective context dimension (Σw_i = 1)",
+                    "τ_i(t)": "Time dependency or inertia of the dimension",
+                    "α_control_i": "Institutional stability of the respective axis (0–1)",
+                    "ψ_i(t)": "Resonance coefficient of axis i over time t",
+                    "Bias_i(E1–E5)": "Epistemic distortion of perception of this axis",
+                    "n": "Number of active context dimensions"
+                },
+                "implications": [
+                    "Context consists of dynamically weighted dimensions whose effects can be time-dependent, resonant, and epistemically distorted.",
+                    "High α_control stabilizes individual dimensions against drift but reduces adaptability.",
+                    "ψ(C⃗,t) allows modeling of resonance or damping effects between dimensions.",
+                    "Bias(E1–E5) explains divergent perceptions of the same context dimension.",
+                    "The vectorial context forms the basis for φ(C⃗,t), χ(C⃗,t,S), and Ω(C⃗,t)."
+                ],
+                "examples": {
+                    "mandatory_axes": [
+                        "institutional",
+                        "social",
+                        "media"
+                    ],
+                    "optional_axes": [
+                        "temporal",
+                        "technical",
+                        "symbolic",
+                        "economic",
+                        "legal",
+                        "physical"
+                    ]
+                },
+                "governance_scope": "Behavioral Context Architecture",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.6",
+                "registry_version": "2.6",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01",
+                        "AOM-DYN-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX4",
+                "title": "Complementarities are context-modulated, segment-relative, and dynamically feedback-coupled",
+                "description": "The strength and direction of complementarities between utility functions U_i and U_j depend on the structure, dynamics, stability, and perception of context. Context axes C⃗(t) modulate the interaction through the function φ(C⃗,t,S,ψ,Bias). Resonance ψ(C⃗,t) and stability α_control determine whether complementarities are amplified, damped, or become unstable.",
+                "formalization": "Comp(U_i,U_j|C⃗,t,S) = Comp₀(U_i,U_j)·φ(C⃗,t,S,ψ,Bias) + ε(Ω(C⃗,t),α_control) ∧ dComp/dt ≠ 0",
+                "epistemic_class": "formal_dynamic",
+                "semantic_class": "context_complementarity",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX1",
+                    "KX2",
+                    "KX3",
+                    "KX8",
+                    "KX10",
+                    "AX_0.00e2",
+                    "AX_0.00j"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "Comp(U_i,U_j|C⃗,t,S)": "Current complementarity between utility functions in segment S",
+                    "Comp₀(U_i,U_j)": "Base complementarity without context modulation",
+                    "φ(C⃗,t,S,ψ,Bias)": "Context, time, segment, and perception modulation function",
+                    "Ω(C⃗,t)": "Context drift / feedback function",
+                    "α_control": "Degree of institutionalization of divergence (stability coefficient)",
+                    "ψ(C⃗,t)": "Resonance coefficient between utility functions in context",
+                    "Bias(E1–E5)": "Epistemic distortion of complementarity perception",
+                    "ε(...)": "Residual term for nonlinear resonance and damping effects"
+                },
+                "implications": [
+                    "Complementarity is dynamic, segment-dependent, and modulable through context resonance ψ(C⃗,t).",
+                    "High context drift (Ω) leads to unstable complementarity.",
+                    "Institutional stability (α_control) dampens resonance and stabilizes cooperation effects.",
+                    "Epistemic distortions (Bias E1–E5) lead to asymmetric perceptions of the same relation.",
+                    "φ(C⃗,t,S,ψ,Bias) connects structural and psychological context levels."
+                ],
+                "governance_scope": "Behavioral Complementarity Architecture",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.6",
+                "registry_version": "2.6",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01",
+                        "AOM-DYN-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX5",
+                "title": "Awareness is context-dependent, dynamic, and segment-relational",
+                "description": "The probability and intensity of awareness depends on the structure and dynamics of context as well as segment affiliation. Awareness emerges through resonance between context axes C⃗(t) and segment-relative perception filters ω_S.",
+                "formalization": "P(A=1 | C⃗,t,S) = χ(C⃗,t,S,α_control) = σ(β₀ + Σ β_i·C_i(t) + γ_S + δ·Ω(C⃗,t) - η·Bias(E1–E5))",
+                "epistemic_class": "formal",
+                "semantic_class": "context_awareness",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX2",
+                    "KX3",
+                    "KX4",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "C⃗(t)": "Context vector at time t (institutional, social, symbolic, etc.)",
+                    "S": "Segment identity or collective perception structure",
+                    "α_control": "Degree of institutionalization of divergence – measures stability of perception order",
+                    "Ω(C⃗,t)": "Context drift or rate of change of context axes",
+                    "Bias(E1–E5)": "Perception bias arising from the difference between individual, collective, and institutional levels",
+                    "β_i": "Weighting parameters for context axes",
+                    "γ_S": "Segment-specific intercept",
+                    "δ": "Context drift coefficient",
+                    "η": "Bias damping coefficient"
+                },
+                "implications": [
+                    "Awareness emerges through resonance between context dynamics and segment-relative perception.",
+                    "High context drift (Ω) can destabilize awareness when α_control is low.",
+                    "Institutionally stable systems (high α_control) reduce Bias(E1–E5) and stabilize awareness.",
+                    "Awareness is not binary but a continuous, time-dependent variable."
+                ],
+                "examples": {
+                    "high_awareness_context": "α_control=0.8, Ω=0.1 → stable awareness with moderate context change",
+                    "low_awareness_context": "α_control=0.3, Ω=0.4 → awareness fluctuates strongly, segment reactions diverge"
+                },
+                "governance_scope": "Behavioral Awareness Logic",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX6",
+                "title": "Context acts segment-relationally and perception-differentiated",
+                "description": "Segments react differently to the same context because their internal perception functions ω_S and awareness profiles χ(C⃗,t,S) differ. Context effect is thus relational and dependent on segment-internal coherence, institutional stability (α_control), and perception bias (E1–E5).",
+                "formalization": "V_i(S_a,t) = f(U_i, C⃗,t, ω_Sa, χ(C⃗,t,Sa), α_control, Bias(E1–E5)) ≠ V_i(S_b,t) = f(U_i, C⃗,t, ω_Sb, χ(C⃗,t,Sb), α_control, Bias(E1–E5)) for S_a ≠ S_b",
+                "epistemic_class": "formal",
+                "semantic_class": "context_segmentation",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX3",
+                    "KX4",
+                    "KX5",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "V_i(S,t)": "Behavior function of individual i in segment S at time t",
+                    "U_i": "Utility vector of individual i (INU, KNU, IDN)",
+                    "C⃗(t)": "Vectorial context at time t",
+                    "ω_S": "Segment-internal perception filter – defines weighting of context axes",
+                    "χ(C⃗,t,S)": "Segment-relative awareness profile",
+                    "α_control": "Degree of institutionalization of divergence (coherence stabilizer)",
+                    "Bias(E1–E5)": "Difference between perception levels (individual–institutional)"
+                },
+                "implications": [
+                    "Context has no uniform effect; perception is segment-relative.",
+                    "Different segments use different perception filters ω_S(C⃗).",
+                    "High α_control reduces perception divergences between segments.",
+                    "Segmented awareness creates segmented behavioral effects (V_i(S)).",
+                    "Bias structures between E1–E5 can distort or amplify segment reactions."
+                ],
+                "examples": {
+                    "case_1": "Two professional groups (physicians, nurses) experience the same organizational context differently due to different ω_S.",
+                    "case_2": "Political segments react differently to media context depending on awareness level and social coherence."
+                },
+                "governance_scope": "Behavioral Segmentation Logic",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX7",
+                "title": "Context dynamically and perception-dependently influences utility thresholds",
+                "description": "The decision threshold θ_i of actor i is not a constant quantity but is modulated by the current context vector C⃗(t), individual awareness χ(C⃗,t,S), institutional stability (α_control), and perception bias (E1–E5).",
+                "formalization": "θ_i(C⃗,t) = θ₀i + δ_i(C⃗,t) - λ·χ(C⃗,t,S) + κ·(1 - α_control) + η·Bias(E1–E5)",
+                "epistemic_class": "formal",
+                "semantic_class": "context_thresholds",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX5",
+                    "KX6",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "θ_i(C⃗,t)": "context- and time-dependent decision threshold of actor i",
+                    "θ₀i": "Baseline threshold without context modulation",
+                    "δ_i(C⃗,t)": "Context-induced threshold shift via C⃗(t)",
+                    "χ(C⃗,t,S)": "Awareness function of segment S",
+                    "α_control": "Degree of institutionalization of divergence – stability factor for thresholds",
+                    "Bias(E1–E5)": "Perception distortion due to different epistemic levels",
+                    "λ": "Awareness sensitivity coefficient",
+                    "κ": "Stability weight for institutional control",
+                    "η": "Bias correction factor"
+                },
+                "implications": [
+                    "Context changes shift decision thresholds dynamically.",
+                    "Increased awareness (χ) lowers the threshold, increases action probability.",
+                    "Low institutional stability (α_control) increases threshold volatility.",
+                    "Epistemic distortions (Bias) lead to over- or underestimation of the threshold.",
+                    "Thresholds are thus adaptive functions, not constant parameters."
+                ],
+                "examples": {
+                    "example_1": "With stable institutions (α_control=0.8) and high awareness (χ=0.7), θ_i decreases by approx. 15%.",
+                    "example_2": "With low stability (α_control=0.3) and strong context drift (Ω=0.4), θ_i increases significantly, decision inhibition."
+                },
+                "governance_scope": "Behavioral Threshold Logic",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX8",
+                "title": "Context is inertial, feedback-coupled, and dynamic",
+                "description": "Context develops over time through feedback with behavior. Changes do not occur instantaneously but inertially and dependent on the resonance function ψ(C⃗,t), which describes sensitivity to behavior and institutional stability α_control.",
+                "formalization": "C⃗(t+1) = C⃗(t) + ψ(C⃗,t,α_control)·[g(V_t) - h(C⃗(t)) + ξ·Bias(E1–E5)]",
+                "epistemic_class": "dynamic_formal",
+                "semantic_class": "context_dynamics",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX7",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "C⃗(t)": "Vectorial context state at time t",
+                    "g(V_t)": "Behavior-induced context change (bottom-up)",
+                    "h(C⃗(t))": "Context-internal damping or entropy function (top-down)",
+                    "ψ(C⃗,t,α_control)": "Resonance or reaction coefficient, dependent on context stability and degree of institutionalization",
+                    "α_control": "Stability parameter – how strongly institutional structures compensate context drift",
+                    "Bias(E1–E5)": "Epistemic divergence that disturbs or distorts context resonance",
+                    "ξ": "Weighting factor for epistemic distortion (0–1)"
+                },
+                "implications": [
+                    "Context reacts with temporal delay to behavior – no simultaneous causality.",
+                    "Institutional stability α_control dampens contextual resonance and stabilizes systems.",
+                    "Bias(E1–E5) can distort feedback and over- or under-control resonance.",
+                    "With high ψ and low α_control, chaotic context drifts emerge.",
+                    "Context inertia is necessary to filter short-term behavioral changes."
+                ],
+                "examples": {
+                    "example_1": "After a political shock (ΔV_t), media context changes only slowly because ψ=0.2 and α_control=0.9 (high stability).",
+                    "example_2": "In an unstable system (α_control=0.3, ψ=0.8), the same event leads to massive context drift (ΔC=+0.6)."
+                },
+                "governance_scope": "Contextual Dynamics",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX9",
+                "title": "There is no context-neutral state",
+                "description": "Every observable behavior is under the influence of a context. A context-free state does not exist; every behavioral variation implies a change in at least one context dimension.",
+                "formalization": "∀ V ∈ Behavior : ∃ C ∈ Context with ∂V/∂C ≠ 0",
+                "epistemic_class": "formal",
+                "semantic_class": "context_dependence",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "AX_0.00c",
+                    "AX_0.00e"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "governance_scope": "Behavioral Context Logic",
+                "implications": [
+                    "No behavior exists without context reference.",
+                    "Every intervention changes at least one context dimension.",
+                    "Context dependency is a necessary condition for all utility functions U_i."
+                ],
+                "parameters": {
+                    "V": "Behavior (dependent variable)",
+                    "C": "Context vector (independent variable)",
+                    "∂V/∂C": "partial derivative of behavioral change with respect to context"
+                },
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX10",
+                "title": "Context is only structurally changeable",
+                "description": "Context changes arise exclusively through structural adjustments in institutions, rules, and norms. The speed and scope of these changes depend on the intervention elasticity Ω(C⃗,ΔI,α_control), which describes how sensitively the context reacts to institutional impulses.",
+                "formalization": "ΔC⃗ = Ω(C⃗,ΔI,α_control)·[f(ΔInstitutions,ΔRules,ΔNorms) + ξ·Bias(E1–E5)]",
+                "epistemic_class": "structural_formal",
+                "semantic_class": "context_intervention",
+                "linked_module": "BCM2_04_KON8904",
+                "linked_axioms": [
+                    "KX8",
+                    "KX21",
+                    "AX_0.00e2"
+                ],
+                "linked_standard": "FA-STD-10061 §3.1–3.4",
+                "parameters": {
+                    "ΔC⃗": "Change of context vector over time (t → t+1)",
+                    "ΔInstitutions": "Institutional adjustments (e.g., governance, organizational structures)",
+                    "ΔRules": "Formal rule systems (e.g., laws, protocols)",
+                    "ΔNorms": "Social and cultural norms",
+                    "Ω(C⃗,ΔI,α_control)": "Intervention elasticity – determines structural responsiveness of the system",
+                    "α_control": "Degree of institutionalization of divergence – describes stability",
+                    "Bias(E1–E5)": "Epistemic distortion that influences structural adjustment",
+                    "ξ": "Weighting factor for bias effect"
+                },
+                "implications": [
+                    "Context change is a structure-driven, not behavioral process.",
+                    "Rapid context transformation requires high intervention elasticity Ω.",
+                    "Institutional stability (α_control) dampens the effect of structural interventions.",
+                    "Epistemic distortions (Bias) can hinder or accelerate structural adjustment.",
+                    "Behavioral changes without structural change produce no sustainable context shift."
+                ],
+                "examples": {
+                    "example_1": "A company changes communication norms but not the hierarchy: ΔNorms>0, ΔInstitutions=0 → ΔC⃗ small.",
+                    "example_2": "A state reforms institutions and laws simultaneously: high Ω → ΔC⃗ large, stabilizing effect."
+                },
+                "governance_scope": "Structural Context Logic",
+                "meta_ref": "BCM2_00_STD9232 §2.4 (Axiomatic Rules)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                }
+            },
+            {
+                "axiom_id": "KX11",
+                "name": "Salience of Context Factors",
+                "equation": "Eff(C_i) = w_i · U (when S_i ≥ θ_S, else 0)",
+                "extended_equation": [
+                    "σ_dyn(C_i,t) = σ_0(C_i) + ρ · dC_i/dt",
+                    "Eff(C_i,t) = w_i · σ_dyn(C_i,t) · U"
+                ],
+                "variables": [
+                    "C_i",
+                    "σ_0",
+                    "ρ",
+                    "U",
+                    "S_i",
+                    "θ_S",
+                    "w_i",
+                    "t"
+                ],
+                "description": "Only salient context factors are behaviorally relevant. Dynamic salience σ_dyn(C_i,t) allows time-dependent perception intensity as a function of context change.",
+                "type": "salience",
+                "status": "active",
+                "version": "2.1",
+                "meta_links": {
+                    "derived_from": [
+                        "MA5",
+                        "MA5a"
+                    ],
+                    "related_to": [
+                        "KX5",
+                        "AWX2",
+                        "WAX4"
+                    ],
+                    "governing_module": "BCM2_04_KON8904"
+                },
+                "notes": "Extension integrates σ_dyn(C_i,t) = σ_0(C_i) + ρ · dC_i/dt. This function models habituation and reactivation of attention as a result of contextual dynamics. ρ is the reactivity coefficient, σ_0 is the base salience."
+            },
+            {
+                "axiom_id": "KX12",
+                "name": "Tasks as Context",
+                "description": "Activities are contextual elements of human behavior and are described via standardized dimensions. Relations between tasks can be complementary, substituting, or neutral.",
+                "task_dimensions": [
+                    {
+                        "id": "T1",
+                        "name": "Physically-routine",
+                        "abbr": "PRT"
+                    },
+                    {
+                        "id": "T2",
+                        "name": "Cognitively-routine",
+                        "abbr": "KRT"
+                    },
+                    {
+                        "id": "T3",
+                        "name": "Cognitively-analytical",
+                        "abbr": "KAN"
+                    },
+                    {
+                        "id": "T4",
+                        "name": "Creative-innovative",
+                        "abbr": "KIN"
+                    },
+                    {
+                        "id": "T5",
+                        "name": "Socially-cooperative",
+                        "abbr": "SKO"
+                    },
+                    {
+                        "id": "T6",
+                        "name": "Socially-negotiating",
+                        "abbr": "SVE"
+                    },
+                    {
+                        "id": "T7",
+                        "name": "Mixed Complex",
+                        "abbr": "MIX"
+                    },
+                    {
+                        "id": "T8",
+                        "name": "Meta-Tasks",
+                        "abbr": "META"
+                    }
+                ],
+                "utility_function": "U(Ti) = αi*INU + βi*KNU + γi*IDN",
+                "relations": {
+                    "complementary": "+1",
+                    "neutral": "0",
+                    "substituting": "-1"
+                },
+                "aggregate_utility": "U(S) = Σ U(Ti) + Σ δ * R(Ti,Tj|K) * min{U(Ti), U(Tj)}"
+            },
+            {
+                "axiom_id": "KX13",
+                "name": "Jobs as Task Combination",
+                "description": "A job is a structured combination of task dimensions with weightings, relations, and temporal structure.",
+                "definition": {
+                    "job": "J = { (Ti, wi) | Σ wi = 1 }",
+                    "utility_function": "U(J) = Σ wi*U(Ti) + Σ δ * R(Ti,Tj|K) * min{wi*U(Ti), wj*U(Tj)}",
+                    "time_extension": "Jt = { (Ti, wi, τi(t)) }"
+                },
+                "examples": {
+                    "Surgeon": {
+                        "PRT": 0.25,
+                        "KAN": 0.35,
+                        "SKO": 0.20,
+                        "SVE": 0.10,
+                        "MIX": 0.10
+                    },
+                    "Accountant": {
+                        "KRT": 0.60,
+                        "KAN": 0.30,
+                        "SKO": 0.05,
+                        "META": 0.05
+                    }
+                }
+            },
+            {
+                "axiom_id": "KX14",
+                "name": "Teams as Coordinated Job Combination",
+                "description": "A team is a combination of individuals with different job profiles whose coordinated cooperation is necessary to fulfill a task in the required time and quality.",
+                "definition": {
+                    "team": "Θ = {J1, J2, …, Jn}",
+                    "utility_function": "U(Θ) = Σ U(Jk) + Σ λ * C(Jk, Jl|K)",
+                    "task_requirement": "Σ τ(Jk) ≥ τ(A)"
+                },
+                "parameters": {
+                    "λ": "Quality of coordination (0 = poor, 1 = perfect)",
+                    "C": "Relation between job profiles in context (synergy or conflict)"
+                },
+                "examples": {
+                    "Surgical team": [
+                        "Surgeon",
+                        "Anesthesiologist",
+                        "Nurse",
+                        "Technician"
+                    ],
+                    "IT project team": [
+                        "Project manager",
+                        "Backend developer",
+                        "Frontend designer",
+                        "QA specialist"
+                    ]
+                }
+            },
+            {
+                "axiom_id": "KX15",
+                "name": "Departments as Structured Team Combination",
+                "description": "A department is a combination of multiple teams aligned toward a common goal. Utility results from team utility plus coordination effects.",
+                "definition": {
+                    "department": "A = {Θ1, Θ2, …, Θm}",
+                    "utility_function": "U(A) = Σ U(Θr) + Σ μ * C(Θr, Θs|K)",
+                    "goal_requirement": "Σ τ(Θr) ≥ τ(G)"
+                },
+                "parameters": {
+                    "μ": "Quality of department coordination (0 = poor, 1 = perfect)",
+                    "C": "Relation between teams in context (synergy or conflict)"
+                },
+                "examples": {
+                    "Hospital department": [
+                        "Surgery team",
+                        "Anesthesia team",
+                        "Nursing team"
+                    ],
+                    "IT department": [
+                        "Development team",
+                        "Support team",
+                        "Project management team"
+                    ]
+                }
+            },
+            {
+                "axiom_id": "KX16",
+                "name": "Organizations as Coordinated Department Combination",
+                "description": "An organization is a coordinated combination of multiple departments with shared governance, culture, and strategy.",
+                "definition": {
+                    "organisation": "O = {A1, A2, …, Ap}",
+                    "utility_function": "U(O) = Σ U(Aq) + Σ ν * C(Aq, Ar|K) + G(O)",
+                    "goal_requirement": "Σ τ(Aq) ≥ τ(Z)"
+                },
+                "parameters": {
+                    "ν": "Quality of organizational coordination (0 = weak, 1 = strong)",
+                    "C": "Relation between departments in context (synergy or conflict)",
+                    "G(O)": "Governance and culture effects that shape overall utility"
+                },
+                "examples": {
+                    "University": [
+                        "Faculty of Medicine",
+                        "Faculty of Economics",
+                        "Faculty of Engineering"
+                    ],
+                    "Company": [
+                        "Production",
+                        "Marketing",
+                        "Research & Development",
+                        "Finance"
+                    ]
+                }
+            },
+            {
+                "axiom_id": "KX17",
+                "name": "Networks and Ecosystems",
+                "description": "Networks emerge through cooperation of multiple organizations. They are characterized by dependencies, alliances, and shared infrastructure.",
+                "definition": {
+                    "network": "N = {O1, O2, …, On}",
+                    "utility_function": "U(N) = Σ U(Oi) + Σ ρ * C(Oi, Oj|K)"
+                },
+                "parameters": {
+                    "ρ": "Quality of network coordination",
+                    "C": "Relation between organizations in context"
+                },
+                "examples": {
+                    "Supply chain": [
+                        "Producer",
+                        "Logistics company",
+                        "Retailer"
+                    ],
+                    "Alliance": [
+                        "State A",
+                        "State B",
+                        "State C"
+                    ]
+                }
+            },
+            {
+                "axiom_id": "KX18",
+                "name": "Societies and Markets",
+                "description": "Societies emerge from the interaction of multiple networks and institutions. Markets are specific forms of societal coordination.",
+                "definition": {
+                    "society": "S = {N1, N2, …, Nq}",
+                    "utility_function": "U(S) = Σ U(Ni) + Σ σ * C(Ni, Nj|K) + I(S)"
+                },
+                "parameters": {
+                    "σ": "Quality of societal coordination (institutions, legal system, culture)",
+                    "I(S)": "Institutional effects on total utility"
+                },
+                "examples": {
+                    "Democracy": [
+                        "Party system",
+                        "Media networks",
+                        "Civil society"
+                    ],
+                    "Market economy": [
+                        "Companies",
+                        "State",
+                        "Consumer organizations"
+                    ]
+                }
+            },
+            {
+                "axiom_id": "KX19",
+                "name": "Multidimensionality of Rewards",
+                "module": "KON",
+                "description": "Rewards that activate multiple utility axes simultaneously have stronger effects than one-dimensional rewards. Freedom of choice additionally amplifies the effect through IDN and KNU effects.",
+                "formalization": {
+                    "cash_bonus": "ΔU_Cash = α * INU",
+                    "gift_bonus": "ΔU_Gift = α * INU + β * KNU + γ * IDN",
+                    "choice_bonus": "ΔU_Choice = ΔU_Option + λ * (KNU + IDN)"
+                },
+                "parameters": {
+                    "α": "Weight of individual utility",
+                    "β": "Weight of collective utility",
+                    "γ": "Weight of identity utility",
+                    "λ": "Choice amplification factor"
+                },
+                "implications": [
+                    "One-dimensional rewards have weak effects (cash).",
+                    "Multidimensional rewards create stronger effects (gift).",
+                    "Freedom of choice amplifies total utility regardless of chosen option."
+                ]
+            },
+            {
+                "axiom_id": "KX20",
+                "name": "Freedom of Choice as Context Factor",
+                "module": "KON",
+                "description": "Freedom of choice amplifies KNU and IDN but simultaneously increases complexity and uncertainty.",
+                "formalization": {
+                    "positive_effect": "ΔU_Choice+ = ΔU_Option + λ * (KNU + IDN)",
+                    "negative_effect": "ΔU_Choice- = - φ * κ_choice(n, δ)",
+                    "total_effect": "ΔU_Choice = ΔU_Option + λ * (KNU + IDN) - φ * κ_choice(n, δ)"
+                },
+                "parameters": {
+                    "λ": "Choice amplification factor (fairness, autonomy)",
+                    "φ": "Sensitivity to complexity costs",
+                    "κ_choice(n, δ)": "Complexity costs as function of number of options n and ambiguity δ"
+                },
+                "implications": [
+                    "With few, clear options: Net effect positive (autonomy, fairness).",
+                    "With many or difficult-to-compare options: Net effect negative (choice overload).",
+                    "Curated choice or default options lower complexity costs and stabilize net effect."
+                ]
+            },
+            {
+                "id": "KX21",
+                "title": "Degree of Institutionalization of Divergence",
+                "definition": "Systems possess a variable capacity to absorb and maintain stable divergent perception levels (E0–E5). This capacity describes the institutional mechanism that compensates context drift and maintains coherence.",
+                "meta_type": "context_extension",
+                "epistemic_class": "axiomatic",
+                "semantic_layer": "operational",
+                "context_scope": [
+                    "collective",
+                    "institutional"
+                ],
+                "functional_logic": {
+                    "equation": "Context_Resilience = (1 - Context_Drift) * α_control",
+                    "parameters": {
+                        "α_control": "Degree of institutionalization of divergence (0–1)"
+                    },
+                    "interpretation": "High resilience means that despite contextual drift, system coherence is maintained."
+                },
+                "linked_axiom": "AX_0.00j",
+                "validation": {
+                    "rule_set": [
+                        "AOM-STRUC-01",
+                        "AOM-SEM-01",
+                        "AOM-EPI-01",
+                        "AOM-VAL-01"
+                    ],
+                    "status": "AOM_VALID_200",
+                    "last_audit": "2025-10-24",
+                    "governance_validation": "approved"
+                },
+                "linked_standard": "BCM3_02_AOM v2.2 (FA-STD-10061 §3.1–3.4)",
+                "status": "active",
+                "version": "2.5",
+                "registry_version": "2.5",
+                "author": "FehrAdvice & Partners AG – BCM Architecture Core",
+                "notes": "KX21 extends context module 8904 with variable α_control according to AX 0.00j. Fully AOM-compliant, validated, and auditable."
+            }
+        ]
+    },
+    "A5": {
+        "prerequisites": {
+            "conditions": [
+                "Context axes must be specified or reconstructed as vector C(t).",
+                "Segment logic (BCM2_09_SEG7257) must be actively available.",
+                "Connection to A_mod(t), R(t), and ΔC(t) is required.",
+                "LLM-supported context extraction can be used when C⃗(t) is incomplete."
+            ],
+            "dependencies": [
+                "7240",
+                "7243",
+                "7257",
+                "7256"
+            ]
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.5",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-SEM-02",
+            "status": "STRUCT_VALID_200",
+            "last_audit": "2025-10-24"
+        }
+    },
+    "A6": {
+        "module_links": {
+            "Awareness": {
+                "module_id": 7240,
+                "relation": "Context dependency of A_mod(t)"
+            },
+            "Complementarity": {
+                "module_id": 7243,
+                "relation": "Context-modulated coupling via κ(t)"
+            },
+            "Segment_Logic": {
+                "module_id": 7257,
+                "relation": "Context influences segment reaction"
+            },
+            "Journey": {
+                "module_id": 7256,
+                "relation": "Context determines transitions & stability"
+            }
+        },
+        "integration_type": "operational_linkage_matrix",
+        "meta_ref": "BCM2_00_STD9232 §2.6",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-STRUC-02",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "A7": {
+        "semantic_boundary": {
+            "statement": "Context is not individual belief, not decision, not motivation. It is structural effect space and not substitutable by utility logic.",
+            "boundary_type": "semantic_limit",
+            "implication": "The module may not be used to model individual preference or motivation systems."
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.7",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-SEM-03",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "A8": {
+        "version_control": {
+            "v1.0": "Original (unstructured)",
+            "v1.1": "Fully axiomatized (KX1–KX10)",
+            "v2.0": "A1–A10-structured",
+            "v2.5": "FA-STD-10061-compliant (KX21, α_control integrated)"
+        },
+        "registry_version": "2.5",
+        "meta_ref": "BCM2_00_STD9232 §2.8",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-VAL-01",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "A9": {
+        "citation": {
+            "full_reference": "BCM2_04_KON (Chapter ID 8904), FehrAdvice & Partners AG (2025). Context Logic in BCM 2.0.",
+            "reference_type": "primary_source",
+            "linked_repository": "my.fehradvice.com/chapter/8904"
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.9",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-REF-01",
+            "status": "STRUCT_VALID_200"
+        }
+    },
+    "A10": {
+        "license": {
+            "statement": "Copyright protected. Use only within BCM-compliant architecture models.",
+            "owner": "FehrAdvice & Partners AG",
+            "governance_rule": "FA-STD-GOV v1.2",
+            "restrictions": "No distribution or reproduction outside certified BCM instances."
+        },
+        "meta_ref": "BCM2_00_STD9232 §2.10",
+        "status": "active",
+        "validation": {
+            "rule": "AOM-GOV-01",
+            "status": "STRUCT_VALID_200",
+            "last_audit": "2025-10-24"
+        }
+    },
+    "validation_overal": {
+        "standard": "BCM2_00_STD9252",
+        "status": "FORM_VALID_200",
+        "last_audit": "2025-10-24",
+        "governance_validation": "approved"
+    }
+}

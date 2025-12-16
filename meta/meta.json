@@ -1,0 +1,1064 @@
+{
+    "A1": {
+        "title": "Module Designation & Classification",
+        "module_id": 7232,
+        "module_code": "BCM2_00_META",
+        "module_name": "Meta-Axioms",
+        "module_alias": "Meta-Architecture & Meta-Axioms",
+        "version": "2.3",
+        "date": "2025-10-19",
+        "author": "FehrAdvice & Partners AG – Meta Kernel Team",
+        "status": "Active (valid from 2025-10-19)",
+        "license": "© FehrAdvice & Partners AG, Zürich 2025 – Use only within licensed BCM/BEATRIX architectures",
+        "classification": {
+            "system_level": "BCM2",
+            "module_type": "Core Module – Meta-Layer",
+            "function_level": [
+                "Meta-Ontology",
+                "Meta-Semantics",
+                "Meta-Governance",
+                "Meta-Coherence"
+            ],
+            "structure_standard": "STD_9232_V2.3",
+            "kernel_compatibility": "BEATRIX_V2.2+",
+            "audit_reference": "WATCHDOG_9251",
+            "meta_compatibility": "MA_0.00a–0.99"
+        },
+        "description": "BCM2_00_META is the central meta-core module of the Behavioral Change Model (BCM) 2.0. It defines the complete set of meta-axioms (0.00–0.99) that ensure the logical, formal, and functional order of the BCM. The module is documented under the alias 'Meta-Architecture & Meta-Axioms' but remains referenced in the kernel under its historical name 'Meta-Axioms'. It forms the highest logical layer of the BEATRIX architecture and ensures that all modules, models, and simulations remain CE-compliant, context-valid, and structurally integrable.",
+        "main_function": [
+            "Definition and management of all meta-axioms (0.00–0.99) as superordinate validity conditions.",
+            "Provision of meta-governance rules for BEATRIX, WATCHDOG, and INT_9250.",
+            "Ensuring CE-coherence across all function, uncertainty, and context modules.",
+            "Control of meta-coherence testing (ΔI_t) according to Axiom 0.39.",
+            "Standardization of machine-readable axiom formats (JSON/YAML) according to STD_9232.",
+            "Management of audit and validation logic for meta-layer and kernel interoperability."
+        ],
+        "scope": [
+            "Applies to all BCM chapters, modules, API endpoints, and GPT/tool applications based on BCM structure.",
+            "Mandatory module for initialization (INIT_9249), context logic (KON_8904), and intervention architecture (INT_9250).",
+            "Prerequisite for semantic, functional, and contextual validity in the entire BEATRIX system.",
+            "Foundation for audit, segment, and watchdog processes.",
+            "CE mandatory reference for all meta-layer operations and kernel simulations."
+        ],
+        "dependencies": {
+            "upstream": [
+                "STD_9232 – Structure Standard"
+            ],
+            "downstream": [
+                "KON_8904 – Context Logic",
+                "INT_9250 – Intervention Toolkit",
+                "WATCHDOG_9251 – Meta-Audit Core"
+            ],
+            "cross_references": [
+                "BCM3_00_INIT9249_KERNEL – Initialization Kernel Module",
+                "BCM3_01_WATCHDOG9251_CORE – Monitoring Core",
+                "BCM2_14_UNS_META – Uncertainty Meta",
+                "BCM2_17_KOM_META – Complexity Meta"
+            ]
+        },
+        "meta_data": {
+            "audit_status": "CE_OK",
+            "meta_coherence": 0.97,
+            "validation_level": "META_LEVEL_FULL",
+            "registry_version": "META_7232_V2.3",
+            "integrity_hash": "sha256:bbfe1b6a97c72802b8f3b594df9a8f40f4df1ea2a82ce41c743cb8a322b98e7c",
+            "last_validation": "2025-10-19T12:42:00Z"
+        }
+    },
+    "A2": {
+        "title": "Context Definition",
+        "version": "2.3",
+        "date": "2025-10-19",
+        "author": "FehrAdvice & Partners AG – Meta Kernel Team",
+        "description": "This chapter defines the formal, semantic, and functional context in which the module BCM2_00_META (Meta-Axioms) operates. It describes the meta-layer as the highest instance of the BCM architecture, which defines the validity, coherence, and context capability of all other modules. The meta-context operates comprehensively across ontology, semantics, function, governance, and ethics.",
+        "objectives": [
+            "Securing the structural, semantic, and functional integrity of all BCM modules.",
+            "Definition of the meta-framework within which all axioms and models are valid.",
+            "Ensuring CE-coherence, auditability, and empirical connectivity.",
+            "Description of contextual dependencies between meta, structure, and function layers.",
+            "Provision of basic criteria for kernel initialization, simulation, and intervention architecture."
+        ],
+        "scope": {
+            "system": "Behavioral Change Model (BCM) 2.0",
+            "layer": "Meta (highest layer)",
+            "usage": [
+                "Mandatory module in all BEATRIX, WATCHDOG, and INT_9250 processes.",
+                "Prerequisite for initialization (INIT_9249_KERNEL) and context building (KON_8904).",
+                "Valid for all GPT/LLM-based systems operating on BCM logic.",
+                "Applicable in models, simulations, and empirical intervention frameworks."
+            ],
+            "limitations": [
+                "Not applicable to external models without axiom structure (Non-BCM).",
+                "All submodules must be STD_9232-compliant and fulfill JSON format requirement (MA_0.00i)."
+            ]
+        },
+        "structure_reference": {
+            "references": [
+                "STD_9232 – Structure Standard",
+                "INIT_9249 – Initialization Kernel",
+                "KON_8904 – Context Logic",
+                "INT_9250 – Intervention Toolkit",
+                "WATCHDOG_9251 – Monitoring Kernel"
+            ],
+            "axiom_basis": "0.00a–0.99",
+            "logical_level": "Meta-Ontology > Meta-Semantics > Meta-Function > Meta-Governance",
+            "context_formula": "valid(META) ⇔ (∀ A_i ∈ BCM : format(A_i)=JSON ∧ structure(A_i)∈STD_9232 ∧ AX_0.00e≥0.5)"
+        },
+        "functionality": {
+            "initialization": "At kernel start, BCM2_00_META is loaded first and forms the meta-reference for all subsequent modules.",
+            "verification": "The Watchdog (9251) monitors meta-coherence via ΔI_t and meta-validity of all axioms per cycle.",
+            "integration": "All models operating on the meta-layer must be validated through AX_0.00e (Operationality) and AX_0.01a (Model-valid Concept Usage).",
+            "interoperability": "Meta-axioms affect all subsystems; violations trigger CE-WARN or CE-ERROR states."
+        },
+        "meta_parameter": {
+            "meta_level": "L0 – Meta-Core Layer",
+            "coherence_minimum": 0.95,
+            "watchdog_trigger": "META_LAYER_AUDIT",
+            "audit_frequency": "per_cycle",
+            "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel Team"
+        },
+        "context_relationships": {
+            "upstream": [
+                "STD_9232"
+            ],
+            "core": [
+                "INIT_9249",
+                "KON_8904",
+                "INT_9250",
+                "WATCHDOG_9251"
+            ],
+            "downstream": [
+                "BCM2_01_INU",
+                "BCM2_02_KNU",
+                "BCM2_03_IDN",
+                "BCM2_04_KON",
+                "BCM2_05_AWX",
+                "BCM2_06_WAX",
+                "BCM2_07_WTX",
+                "BCM2_09_SEG",
+                "BCM2_10_JNY"
+            ],
+            "crosslinks": [
+                "BCM2_14_UNS_META",
+                "BCM2_15_UNS_ENV",
+                "BCM2_17_KOM_META",
+                "BCM2_18_HSP",
+                "BCM3_30_STA",
+                "BCM3_34_GAM"
+            ]
+        },
+        "meta_data": {
+            "audit_status": "CE_OK",
+            "meta_coherence": 0.97,
+            "registry_version": "META_7232_V2.3",
+            "integrity_hash": "sha256:b762a49339a9fd93282c2f7e86efc30e1bcd3c2a8b7fd0d73a3b9bfa88a9d76b",
+            "last_validation": "2025-10-19T12:45:00Z"
+        }
+    },
+    "A3": {
+        "title": "Objectives",
+        "version": "2.3",
+        "date": "2025-10-19",
+        "author": "FehrAdvice & Partners AG – Meta Kernel Team",
+        "description": "This chapter defines the objectives and functional mandate of the meta-core module BCM2_00_META. It establishes how the meta-system secures the validity, coherence, connectivity, and verifiability of all BCM elements. The objectives encompass the normative, ontological, semantic, and governance-related control of the entire model.",
+        "objectives": {
+            "meta_ontological": [
+                "Ensuring existence conditions for systems, behavior, and meaning through Axioms 0.00a–0.00d.",
+                "Definition of balance between openness, closure, scarcity, and distinguishability.",
+                "Maintaining ontological stability and learning capacity of the BCM system architecture."
+            ],
+            "meta_semantic": [
+                "Operationalization of observability and applicability of all concepts and models (AX_0.00e–0.01a).",
+                "Securing semantic purity: concepts must be both defined and context-active.",
+                "Avoiding symbolic or non-operational constructs in the model space."
+            ],
+            "meta_functional": [
+                "Definition of the axiom space 0.00–0.99 as formal control logic for all submodules.",
+                "Introduction and maintenance of meta-governance rules for Watchdog (9251) and INT_9250.",
+                "Monitoring of meta-coherence (ΔI_t) as validity criterion for identity, awareness, and willingness modules."
+            ],
+            "meta_governance": [
+                "Securing CE-conformity and auditability of all BCM components.",
+                "Provision of meta-conditions for initialization, validation, and intervention architecture.",
+                "Prevention of invalid, unverified, or hypothetical module references.",
+                "Support of the Watchdog core in permanent axiom verification."
+            ],
+            "meta_ethics_and_fairness": [
+                "Maintaining scientific transparency, traceability, and fairness.",
+                "Avoiding algorithmic biases according to Axioms 0.22–0.24.",
+                "Securing data protection, ethics, and abuse prevention obligations according to 0.16 and 0.24."
+            ]
+        },
+        "functional_logic": {
+            "basic_equation": "valid(BCM) ⇔ (∀ M_i ∈ BCM : Axioms(M_i) ⊆ MA_0.00–0.99 ∧ CE(M_i)=TRUE)",
+            "interpretation": {
+                "0": "No valid meta-reference – model inactive.",
+                "0.5": "Partially compliant structure – meta-review required.",
+                "1": "Complete meta-coherence – system active and CE-compliant."
+            },
+            "watchdog_integration": "Each axiom of the meta-layer is audited per cycle. Violations trigger CE_WARNING or CE_STOP.",
+            "governance_principle": "Meta-validity stands above function, context, and intervention logic (hierarchy level L0)."
+        },
+        "usage_purpose": [
+            "Reference module for all axiom and structure verifications.",
+            "Prerequisite for initialization, context definition, and simulation.",
+            "Basis of the BEATRIX architecture for machine translation of theory into action.",
+            "Foundation for adaptive control (Watchdog loop) and CE monitoring."
+        ],
+        "output_formats": [
+            "JSON – machine-readable (standard format)",
+            "YAML – human-readable documentation",
+            "BCM-Registry-Schema – internal audit format"
+        ],
+        "meta_data": {
+            "audit_status": "CE_OK",
+            "meta_coherence": 0.98,
+            "watchdog_trigger": "META_GOAL_AUDIT",
+            "audit_frequency": "per_cycle",
+            "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel Team",
+            "registry_version": "META_7232_V2.3",
+            "integrity_hash": "sha256:a55e39dc8bbab16f0241423d4a09f64e37a79fba2d8bcb33157f1c90e0c79b91",
+            "last_validation": "2025-10-19T12:47:00Z"
+        }
+    },
+    "A4": {
+        "title": "BCM2_00_META – Meta-Architecture & Meta-Axioms",
+        "chapter_id": 7232,
+        "function": "Defines the meta-axioms that secure the logical, formal, and functional order of BCM 2.0.",
+        "scope": "Applies to all BCM chapters, modules, and submodules, as well as all GPT/tool/API applications based on BCM.",
+        "axioms": [
+            {
+                "chapter_content_id": 7232,
+                "axiom_id": "AX_0.00_MAIN_EXT",
+                "title": "Ontological Meta-Axiom of System Existence (extended, 2025-11)",
+                "category": "Meta-Ontology / Meta-Epistemology",
+                "version": "v6.0",
+                "sub_axioms": [
+                    "0.00a",
+                    "0.00b",
+                    "0.00c",
+                    "0.00d",
+                    "0.00e"
+                ],
+                "formal_definition": "Existence emerges from the interaction of Complexity (KOM) and Uncertainty (U). Ontologically, KOM is infinite (KOM_ont = ∞), U between 0 and 1. Systems exist epistemically when they can stabilize a finite subset of infinite world complexity and maintain partial uncertainty (0 < U < 1). Context emerges as a limited projection of this relation. Uncertainty (U) is understood in BCM as vector U = {U_epi, U_env, U_ipn, U_ins, U_meta, U_amb}.",
+                "functional_logic": {
+                    "equation": "S = f(KOM, U); KON = KOM · e^{−λ(U − U_opt)^2}",
+                    "ontology": {
+                        "KOM_ont": "∞",
+                        "U_ont": "[0,1]",
+                        "description": "The world is the infinite space of all possible states of complexity and uncertainty."
+                    },
+                    "epistemology": {
+                        "KOM_epist": "(0, ∞)",
+                        "U_epist": "(0,1)",
+                        "description": "Observable systems are finite projections of infinite world complexity with limited uncertainty."
+                    },
+                    "limit_conditions": {
+                        "KOM = 0": "Chaos – no difference, no existence.",
+                        "KOM → ∞": "Overcomplexity – inaccessible, no observability.",
+                        "U = 0": "Determinism – Arrow-Debreu limit, static perfection.",
+                        "U = 1": "Total indeterminacy – maximum entropy, loss of all coherence."
+                    },
+                    "domain": "∀ Systems ∈ Ω_World",
+                    "range": "KON ∈ [0,1]"
+                },
+                "uncertainty_vector": {
+                    "components": {
+                        "U_epi": "Epistemic uncertainty – limits of knowledge and observation (Module 9494)",
+                        "U_env": "Environmental uncertainty – fluctuations and resource dependencies (Module 9486)",
+                        "U_ipn": "Interpersonal uncertainty – reactions of other actors (Module 9495, standard dimension in BCM)",
+                        "U_ins": "Institutional uncertainty – rule and norm stability (Module 9493)",
+                        "U_meta": "Meta-uncertainty – uncertainty about the validity of the model itself (Module 9485)",
+                        "U_amb": "Ambiguity integration – vagueness and ambiguity (Module 10180)"
+                    },
+                    "composition": "U_total = Σ(ω_i * U_i); Σω_i = 1",
+                    "primary_dimension": "U_ipn",
+                    "note": "Interpersonal uncertainty (U_ipn) is the operational standard variable in the Behavioral Change Model, as it formally represents social interactions."
+                },
+                "disciplinary_mappings": {
+                    "scope": "Axiom 0.00 is formally interdisciplinarily isomorphic and connects all empirical and cultural sciences.",
+                    "mathematical_equivalence": "All disciplines use the same operator space (state diversity × probability), making KOM and U universally applicable.",
+                    "domains": {
+                        "physics": "Entropy and energy distribution (S = k ln(Ω)). State diversity = KOM, uncertainty = U.",
+                        "biology": "Variation and selection (Maturana, Varela). Variation = KOM, selection pressure = U.",
+                        "economics": "Arrow-Debreu limit (U=0), real markets (0<U<1). Market diversity = KOM, risk = U.",
+                        "sociology": "Expectation and contingency (Luhmann). Differentiation potential = KOM, social uncertainty = U."
+                    }
+                },
+                "references_to_uns_modules": [
+                    {
+                        "module_id": "9485",
+                        "binding": "U_meta"
+                    },
+                    {
+                        "module_id": "9486",
+                        "binding": "U_env"
+                    },
+                    {
+                        "module_id": "9495",
+                        "binding": "U_ipn"
+                    },
+                    {
+                        "module_id": "9493",
+                        "binding": "U_ins"
+                    },
+                    {
+                        "module_id": "9494",
+                        "binding": "U_epi"
+                    },
+                    {
+                        "module_id": "10180",
+                        "binding": "U_amb"
+                    }
+                ],
+                "goal_state": "Structural equilibrium (Eudaimonia): Stable state in which individual, collective, and identity-based action is coherent and consciously connected through awareness.",
+                "governance": {
+                    "watchdog_trigger": "META_UNS_AUDIT",
+                    "validation_rule": "AX_0.00 is valid only if all sub-axioms (0.00a–0.00e) ≥ θ_i and all uncertainty dimensions U_i are active.",
+                    "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel Team"
+                },
+                "integration_note": "Extension with uncertainty vector and explicit module references (9485–10180). Primary dimension remains interpersonal uncertainty (U_ipn). No interdisciplinary overextension beyond behavioral scope."
+            },
+            {
+                "chapter_id": 7232,
+                "axiom_id": "0.00a",
+                "title": "Distinguishability – Continuous Meta-Valence",
+                "category": "Meta-Ontology",
+                "version": "v3.0",
+                "formal_definition": "The existence and validity of every system presupposes that it can be distinguished from others. The degree of this distinguishability can vary between complete indifference (0) and maximum difference (1). Without minimal difference, there is no observation, no behavior, no meaning.",
+                "functional_logic": {
+                    "equation": "AX_0.00a(t) = Δ_norm(S_i, S_j) = |S_i - S_j| / max(|S_i|, |S_j|)",
+                    "domain": "∀ S_i, S_j ∈ ℜ",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "interpretation": {
+                        "0": "no distinction possible – system not observable",
+                        "0.5": "partially differentiable – system ambivalently observable",
+                        "1": "completely distinguishable – system clearly observable"
+                    }
+                },
+                "thresholds": {
+                    "collapse": 0.05,
+                    "critical": 0.5,
+                    "cohesive": 0.95
+                },
+                "state_map": {
+                    "collapse": {
+                        "state_id": "META_COLLAPSE",
+                        "description": "Δ_norm < 0.05 – Objects of observation are indistinguishable, system loses validity.",
+                        "kernel_action": "STOP",
+                        "watchdog_level": "CRITICAL"
+                    },
+                    "critical": {
+                        "state_id": "META_DRIFT",
+                        "description": "0.05 ≤ Δ_norm < 0.5 – weak distinguishability, CE_Warning active.",
+                        "kernel_action": "WARN",
+                        "watchdog_level": "ALERT"
+                    },
+                    "stable": {
+                        "state_id": "META_STABLE",
+                        "description": "0.5 ≤ Δ_norm < 0.95 – stable but not maximum differentiation; audit active.",
+                        "kernel_action": "CONTINUE",
+                        "watchdog_level": "NORMAL"
+                    },
+                    "cohesive": {
+                        "state_id": "META_COHESIVE",
+                        "description": "Δ_norm ≥ 0.95 – maximum distinguishability, meta-coherence given.",
+                        "kernel_action": "CONFIRM",
+                        "watchdog_level": "CE_OK"
+                    }
+                },
+                "meta_condition": "foundation_of(0.00b,0.00c,0.00d)",
+                "meta_relation": {
+                    "upstream_axioms": [],
+                    "downstream_axioms": [
+                        "0.00b",
+                        "0.00c",
+                        "0.00d",
+                        "0.01a"
+                    ],
+                    "crosslink_modules": [
+                        "BCM2_04_KON",
+                        "BCM2_05_AWX"
+                    ]
+                },
+                "meta_value": 0.92,
+                "function": "Ontological basis of all further meta-axioms and prerequisite for context formation (0.00). The axiom now measures the degree of differentiability as continuous meta-valence.",
+                "governance": {
+                    "watchdog_trigger": "META_CE_ALERT",
+                    "audit_frequency": "per_cycle",
+                    "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel"
+                },
+                "references": [
+                    "Leibniz 1714 – Monadology",
+                    "Spencer-Brown 1969 – Laws of Form",
+                    "FehrAdvice 2023 – BCM 2.0 Meta Layer"
+                ],
+                "change_log": "Reformulated to continuous meta-valence logic; introduction of Δ_norm as measurement; thresholds (0.05/0.5/0.95) defined for CE monitoring.",
+                "notes": "This axiom forms the foundation of all distinction operations in BCM. Values 0 and 1 are asymptotic system limits; real systems move in the open interval (0,1)."
+            },
+            {
+                "chapter_id": 7232,
+                "axiom_id": "0.00b",
+                "title": "Scarcity – Continuous Meta-Valence",
+                "category": "Meta-Ontology",
+                "version": "v3.0",
+                "formal_definition": "Every form of existence, decision, or behavior is determined by finiteness. The degree of scarcity determines how strongly a system is forced to choose. Absolute abundance (0) prevents selection, absolute scarcity (1) leads to system standstill.",
+                "functional_logic": {
+                    "equation": "AX_0.00b(t) = 1 - R_eff(t) / R_max",
+                    "domain": "R_eff(t) ∈ [0, R_max]",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "interpretation": {
+                        "0": "no scarcity – system has infinite resources; no selection possible",
+                        "0.5": "moderate scarcity – system selects efficiently, decision capacity maximal",
+                        "1": "absolute scarcity – no action possible anymore, system collapses"
+                    }
+                },
+                "thresholds": {
+                    "collapse": 0.95,
+                    "critical": 0.75,
+                    "optimal": 0.45,
+                    "abundance": 0.05
+                },
+                "state_map": {
+                    "abundance": {
+                        "state_id": "META_ABUNDANCE",
+                        "description": "AX_0.00b < 0.05 – no perceptible scarcity; system inert, decision pressure zero.",
+                        "kernel_action": "IDLE",
+                        "watchdog_level": "WARNING"
+                    },
+                    "optimal": {
+                        "state_id": "META_OPTIMAL",
+                        "description": "0.05 ≤ AX_0.00b < 0.75 – balanced scarcity, system capable of decision and learning stable.",
+                        "kernel_action": "CONTINUE",
+                        "watchdog_level": "NORMAL"
+                    },
+                    "critical": {
+                        "state_id": "META_CRITICAL",
+                        "description": "0.75 ≤ AX_0.00b < 0.95 – high scarcity, resource allocation distorted, CE monitor active.",
+                        "kernel_action": "ALERT",
+                        "watchdog_level": "HIGH"
+                    },
+                    "collapse": {
+                        "state_id": "META_COLLAPSE",
+                        "description": "AX_0.00b ≥ 0.95 – resources exhausted, decision space collapses.",
+                        "kernel_action": "STOP",
+                        "watchdog_level": "CRITICAL"
+                    }
+                },
+                "meta_condition": "foundation_of(BCM2_01_INU,BCM2_02_KNU,BCM2_07_WTX,BCM2_08_PRB)",
+                "meta_relation": {
+                    "upstream_axioms": [
+                        "0.00a"
+                    ],
+                    "downstream_axioms": [
+                        "0.00c",
+                        "0.00d",
+                        "0.01a"
+                    ],
+                    "crosslink_modules": [
+                        "BCM2_01_INU",
+                        "BCM2_02_KNU",
+                        "BCM2_07_WTX",
+                        "BCM2_08_PRB"
+                    ]
+                },
+                "meta_value": 0.47,
+                "function": "Defines the finite nature of all resources and decisions. Balances between abundance and shortage to maintain system stability and decision-making capacity.",
+                "governance": {
+                    "watchdog_trigger": "META_RESOURCE_ALERT",
+                    "audit_frequency": "per_cycle",
+                    "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel"
+                },
+                "references": [
+                    "Aristotle – Metaphysics (ca. 340 BC)",
+                    "Kant 1781 – Critique of Pure Reason",
+                    "Simon 1957 – Rational Choice and Scarcity",
+                    "FehrAdvice 2023 – BCM 2.0 Meta Layer"
+                ],
+                "change_log": "Reformulated to continuous meta-valence logic; introduction of normalized resource density R_eff/R_max; system states abundance-collapse defined.",
+                "notes": "Scarcity is not understood binarily but as a gradual tension variable between abundance (0) and exhaustion (1). The system strives for an optimal range around 0.45, where learning and selection are maximally efficient."
+            }
+        ]
+    },
+    "A5": {
+        "title": "Functional Principle of Meta-Axioms",
+        "description": "This chapter describes the operating principle, activation logic, inheritance, and validation of meta-axioms (MA 0.00–0.99) within the BEATRIX and BCM systems. It ensures that meta-axioms act as operational control logic, behave coherently with each other, and align with the governance structure (A10).",
+        "activation_model": {
+            "trigger_points": [
+                "System initialization (BCM3_00_INIT9249_KERNEL)",
+                "Module registration (according to BCM2_00_STD9232)",
+                "Context validation (BCM2_04_KON8904)",
+                "Audit review (BCM3_01_WATCHDOG)"
+            ],
+            "sequence_logic": "Meta-axioms are activated in logical order (MA 0.21 → 0.22 → 0.26 → 0.30 → 0.31 → 0.40). This order corresponds to the meta_axiom_flow defined in A6.",
+            "runtime_awareness": true,
+            "auto_reactivation": "If a meta-axiom is deactivated or overwritten, it is automatically reactivated by the Watchdog."
+        },
+        "propagation_mechanism": {
+            "type": "recursive_inheritance",
+            "description": "Meta-axioms inherit top-down to all modules based on BCM2_00_STD9232.",
+            "inheritance_scope": [
+                "Standard modules (BCM2_XX)",
+                "Intervention modules (BCM2_13_INT9250)",
+                "Kernel (BCM3_00_INIT9249)",
+                "Audit modules (BCM3_01_WATCHDOG)"
+            ],
+            "override_policy": "Subordinate modules may not override meta-axioms, only specify them.",
+            "conflict_resolution": "Conflicts between meta-axioms are regulated by A6 (meta_axiom_consistency)."
+        },
+        "validation_protocol": {
+            "responsible_components": [
+                "BCM3_00_INIT9249_KERNEL",
+                "BCM2_10_STD10061",
+                "BCM3_01_WATCHDOG"
+            ],
+            "audit_frequency": "weekly",
+            "validation_stages": [
+                "Existence check – Is the axiom loaded?",
+                "Coherence check – Does it work consistently with other axioms?",
+                "Governance check – Is it authorized (according to A10)?"
+            ],
+            "error_handling": {
+                "auto_repair": true,
+                "repair_policy": "Missing meta-axioms are automatically reloaded or reconstructed from the standard.",
+                "severity_levels": {
+                    "minor": "Inconsistency detected, system continues",
+                    "major": "Axiom violation blocks module registration",
+                    "critical": "Kernel stop, system restart required"
+                }
+            }
+        },
+        "meta_axiom_lifecycle": {
+            "stages": [
+                "Definition (in 7232)",
+                "Referencing (in 9232 / 10061)",
+                "Implementation (in kernel 9249)",
+                "Monitoring (by Watchdog 9251)",
+                "Revision (under supervision of A10)"
+            ],
+            "governance_binding": "All changes or deactivations of a meta-axiom require approval according to A10 (Governance and Ethics Council)."
+        },
+        "performance_model": {
+            "efficiency_gain": "Meta-axioms are validated in parallel once the kernel has loaded MA 0.21–0.31.",
+            "expected_init_speed": "2.0 seconds",
+            "meta_parallelism": true
+        },
+        "dependencies": {
+            "requires": [
+                "BCM2_00_STD9232",
+                "BCM2_10_STD10061",
+                "BCM3_00_INIT9249",
+                "BCM3_01_WATCHDOG"
+            ],
+            "cross_reference": "A6 – Systemic Integration of Meta-Axioms"
+        },
+        "supervision": {
+            "supervised_by": "BCM3_01_WATCHDOG",
+            "governed_by": "FehrAdvice Scientific Advisory Board",
+            "review_cycle": "annually",
+            "ethics_binding": "FehrAdvice Ethics & Integrity Council"
+        },
+        "version": "3.0.2025",
+        "status": "active",
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "contributors": [
+                "Gerhard Fehr",
+                "Andrea Fehr",
+                "BEATRIX Kernel Development Team"
+            ],
+            "approval_date": "2025-10-31"
+        }
+    },
+    "A6": {
+        "title": "Systemic Integration of Meta-Axioms",
+        "description": "This chapter describes the logical, hierarchical, and functional coherence of meta-axioms (MA 0.00–0.99). It defines their prioritization, dependencies, interaction rules, and conflict resolution mechanisms to ensure that the entire BCM system remains stable, consistent, and auditable.",
+        "meta_axiom_topology": {
+            "hierarchy": {
+                "level_1": "Normative Meta-Axioms (MA 0.00–0.29) – define basic principles and obligations.",
+                "level_2": "Contextual Meta-Axioms (MA 0.30–0.39) – regulate application and context verification.",
+                "level_3": "Structural Meta-Axioms (MA 0.40–0.99) – secure technical and semantic coherence."
+            },
+            "priority_rule": "Lower index values (MA 0.00–0.29) take precedence as framework, higher values (MA 0.30–0.99) specify and refine them.",
+            "dependency_model": {
+                "type": "directed_acyclic_graph",
+                "validation": "No cyclic dependencies allowed.",
+                "description": "Meta-axioms are modeled as a directed dependency graph to ensure clear sequences and dependencies."
+            }
+        },
+        "meta_axiom_flow": {
+            "sequence": [
+                "MA_0.21 → MA_0.22 → MA_0.26 → MA_0.30 → MA_0.31 → MA_0.40"
+            ],
+            "description": "This is the standardized order of activation and verification of meta-axioms in the kernel.",
+            "flow_type": "sequential with parallel audit monitoring",
+            "enforced_by": "BCM3_00_INIT9249_KERNEL",
+            "monitored_by": "BCM3_01_WATCHDOG"
+        },
+        "conflict_resolution_model": {
+            "principle": "Meta-axioms can specify each other but not mutually cancel.",
+            "rules": [
+                "In case of conflict between levels, the lower index axiom applies as framework rule.",
+                "The higher axiom may only specify, not negate.",
+                "Conflicts are marked as 'meta_conflict', not as errors.",
+                "Resolution occurs through logical prioritization or governance review (A10)."
+            ],
+            "response_types": {
+                "soft_conflict": "automatically resolved through prioritization",
+                "hard_conflict": "forwarded to governance review (A10)"
+            },
+            "validation_process": {
+                "audited_by": "BCM3_01_WATCHDOG",
+                "audit_type": "meta_axiom_consistency",
+                "check_frequency": "weekly"
+            }
+        },
+        "integration_matrix": {
+            "dimensions": [
+                "Normative",
+                "Contextual",
+                "Structural"
+            ],
+            "description": "Shows how meta-axioms work in different functional areas.",
+            "matrix": {
+                "Normative": [
+                    "MA_0.21",
+                    "MA_0.22"
+                ],
+                "Contextual": [
+                    "MA_0.26",
+                    "MA_0.30",
+                    "MA_0.31"
+                ],
+                "Structural": [
+                    "MA_0.40"
+                ]
+            }
+        },
+        "meta_consistency_engine": {
+            "component": "BCM3_01_WATCHDOG",
+            "function": "Automatic detection, classification, and prioritization of meta-conflicts.",
+            "conflict_classification": {
+                "type_1": "Normative conflict – rule contradicts basic axiom",
+                "type_2": "Context conflict – application collision",
+                "type_3": "Structural conflict – technical incompatibility"
+            },
+            "self_healing": {
+                "enabled": true,
+                "mechanism": "Automatic reconfiguration of meta-axiom order based on A5 (Functional Principle)."
+            }
+        },
+        "governance_binding": {
+            "supervised_by": "FehrAdvice Scientific Advisory Board",
+            "ethics_review": "FehrAdvice Ethics & Integrity Council",
+            "approval_required_for_meta_changes": true,
+            "audit_reference": "meta_axiom_coherence_9251"
+        },
+        "version": "3.0.2025",
+        "status": "active",
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "contributors": [
+                "Gerhard Fehr",
+                "Andrea Fehr",
+                "BEATRIX Kernel Development Team"
+            ],
+            "approval_date": "2025-10-31"
+        }
+    },
+    "A7": {
+        "title": "Language and Validity Boundaries of Meta-Axioms",
+        "description": "This chapter defines the linguistic, semantic, and domain-specific contexts in which the meta-axioms (MA 0.00–0.99) of the BCM system are valid. It ensures that semantic integrity and normative coherence are maintained across languages, models, and platforms.",
+        "scope": {
+            "valid_for": [
+                "BEATRIX-supported GPT systems",
+                "BCM 2.0 modules and subsequent versions",
+                "FehrAdvice internal architectures and simulations",
+                "Scientific applications in Behavioral Economics and Decision Theory"
+            ],
+            "excluded_from": [
+                "Non-formalized AI models without axiom validation",
+                "Legal or political systems without Standard 9232",
+                "Philosophical or theological discourses without empirical verifiability",
+                "Popular science or media interpretations without license"
+            ],
+            "activation_condition": "Meta-axioms are activated only when the underlying language and context hierarchy is validated according to BCM2_00_STD9232."
+        },
+        "language_layer": {
+            "base_language": "German (Swiss High German)",
+            "semantic_standard": "BCM2_00_STD9232:A7",
+            "translation_policy": {
+                "allowed": true,
+                "validation_required": true,
+                "conditions": [
+                    "All translations must be validated by FehrAdvice.",
+                    "Semantic meaning is normatively binding, not literal form.",
+                    "Deviating semantic fields lead to loss of conformity."
+                ]
+            },
+            "supported_languages": [
+                "German",
+                "English",
+                "French"
+            ],
+            "forbidden_terms": [
+                "rational",
+                "irrational",
+                "optimal",
+                "suboptimal",
+                "objective",
+                "subjective"
+            ],
+            "rationale": "These terms are not permitted in BCM because they are semantically linked with normative value judgments and distort empirical model logic."
+        },
+        "domain_limit": {
+            "valid_domains": [
+                "Behavioral Economics",
+                "Decision Theory",
+                "Social Psychology",
+                "Organizational Research",
+                "Governance Design"
+            ],
+            "excluded_domains": [
+                "Theology",
+                "Pure Philosophy",
+                "Ideological Discourses",
+                "Non-empirical Cultural Theories"
+            ],
+            "rationale": "Meta-axioms apply exclusively in empirically verifiable, systems-theoretically mappable domains."
+        },
+        "integration_with_other_axioms": {
+            "references": [
+                "A5",
+                "A6",
+                "A10"
+            ],
+            "description": "A7 is directly linked with A5 (Functional Principle), A6 (Coherence), and A10 (Governance) to ensure linguistic, logical, and ethical consistency.",
+            "watchdog_binding": {
+                "component": "BCM3_01_WATCHDOG",
+                "check_type": "linguistic_integrity_check",
+                "check_frequency": "monthly",
+                "error_code": "E7-LINGUISTIC-DRIFT",
+                "response": "Soft Warning – Recommendation for semantic validation."
+            }
+        },
+        "governance_binding": {
+            "supervised_by": "FehrAdvice Ethics & Integrity Council",
+            "review_cycle": "annually",
+            "approval_required_for_new_languages": true,
+            "license_requirement": "FehrAdvice Translation & Validation License",
+            "audit_reference": "meta_linguistic_integrity_9251"
+        },
+        "meta_linguistic_engine": {
+            "component": "BEATRIX Kernel Linguistic Parser",
+            "function": "Detection and correction of semantic drift.",
+            "mechanisms": [
+                "Detection of semantically prohibited terms",
+                "Mapping of meaning levels via BCM thesaurus",
+                "Self-healing for translation deviations"
+            ],
+            "self_healing": {
+                "enabled": true,
+                "mechanism": "Automatic reinterpretation based on base language (German)."
+            }
+        },
+        "version": "3.0.2025",
+        "status": "active",
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "contributors": [
+                "Gerhard Fehr",
+                "Andrea Fehr",
+                "BEATRIX Kernel Development Team"
+            ],
+            "approval_date": "2025-10-31"
+        }
+    },
+    "A8": {
+        "title": "Versioning of Meta-Axioms",
+        "description": "This chapter defines the versioning logic, compatibility guidelines, and audit mechanisms for meta-axioms (MA 0.00–0.99). It ensures that all system components use the same meta-axiom base and that changes remain transparent, reversible, and traceable.",
+        "version_model": {
+            "current_version": "3.0.2025",
+            "previous_version": "2.5.2024",
+            "next_planned_version": "3.1.2026",
+            "version_policy": {
+                "major_change": "New axiom families or structural rules (e.g., MA_0.40)",
+                "minor_change": "Extension of existing rules without changing basic structure",
+                "patch_change": "Bug fixing or semantic correction"
+            },
+            "semantic_versioning": true,
+            "backward_compatibility": {
+                "enabled": true,
+                "mechanism": "Legacy Axiom Handler (BCM3_01_WATCHDOG)",
+                "description": "Older modules (≤ v2.x) remain compatible as their meta-axioms are automatically mapped to current semantics."
+            }
+        },
+        "change_log": [
+            {
+                "version": "3.0.2025",
+                "changes": [
+                    "Introduction of Axiom MA_0.40 (Lexical Identity)",
+                    "Extension of A5–A7 to operational meta-architecture",
+                    "Link to governance audit (A10)"
+                ],
+                "approved_by": "FehrAdvice Scientific Advisory Board",
+                "approval_date": "2025-10-31"
+            },
+            {
+                "version": "2.5.2024",
+                "changes": [
+                    "Integration of context obligation (MA_0.26) and declaration obligation (MA_0.31)",
+                    "Integration of standard BCM2_10_STD10061"
+                ],
+                "approved_by": "FehrAdvice R&D Zürich",
+                "approval_date": "2024-07-12"
+            }
+        ],
+        "distribution_policy": {
+            "propagation": "automatic via kernel (9249)",
+            "trigger_modules": [
+                "BCM3_00_INIT9249_KERNEL",
+                "BCM3_01_WATCHDOG",
+                "BCM2_10_STD10061"
+            ],
+            "update_mechanism": {
+                "method": "rolling update",
+                "fallback": "rollback to last stable version",
+                "audit_trigger": "every versioning increase ≥ minor"
+            }
+        },
+        "validation_protocol": {
+            "supervised_by": "BCM3_01_WATCHDOG",
+            "check_frequency": "monthly",
+            "audit_type": "meta_version_consistency",
+            "auto_sync": true,
+            "auto_sync_description": "Kernel automatically synchronizes meta-versions between modules and enforces consistency."
+        },
+        "governance_binding": {
+            "supervised_by": "FehrAdvice Scientific Advisory Board",
+            "approval_required_for_major_changes": true,
+            "ethics_review_by": "FehrAdvice Ethics & Integrity Council",
+            "audit_reference": "meta_version_governance_9251"
+        },
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "maintainer": "BEATRIX Kernel Core Team",
+            "location": "Zürich, Switzerland",
+            "review_date": "2025-10-31"
+        },
+        "status": "active",
+        "version": "3.0.2025"
+    },
+    "A9": {
+        "title": "Citation and Source Integrity of Meta-Axioms",
+        "description": "This chapter defines the citation, reference, and validation standards for meta-axioms, modules, and scientific sources within the BCM and BEATRIX architecture. It ensures that every derivation, analysis, and simulation can be traced back to verifiable, audited sources.",
+        "citation_model": {
+            "citation_standard": "APA 7th Edition (FehrAdvice Extended Schema)",
+            "reference_prefix": "FA-REF",
+            "example": "FehrAdvice & Partners AG (2025). BCM2_00_META7232. Zürich.",
+            "machine_readable_format": "JSON-LD (Linked Data)",
+            "validation": {
+                "required_fields": [
+                    "author",
+                    "year",
+                    "title",
+                    "module_reference",
+                    "source_type"
+                ],
+                "auto_validation": true,
+                "validation_engine": "BCM3_01_WATCHDOG",
+                "error_code": "E9-CITATION-INCONSISTENCY"
+            }
+        },
+        "reference_integrity": {
+            "source_types": [
+                "Primary Source (API content, FehrAdvice original modules)",
+                "Secondary Source (peer-reviewed scientific papers)",
+                "Tertiary Source (meta-analyses or systematic reviews)"
+            ],
+            "hierarchy": {
+                "1": "Primary > Secondary > Tertiary",
+                "description": "Only primary sources may directly justify meta-axioms. Secondary and tertiary sources serve contextualization."
+            },
+            "cross_reference": {
+                "module_linking": true,
+                "mechanism": "CrossRef-ID + chapter_content_id",
+                "example": "BCM2_05_AWX[7240]:FA-REF-2025-07",
+                "integrity_check": {
+                    "run_frequency": "monthly",
+                    "component": "BCM3_01_WATCHDOG",
+                    "check_type": "reference_consistency_check"
+                }
+            }
+        },
+        "citation_audit_protocol": {
+            "audited_by": "FehrAdvice Scientific Advisory Board",
+            "audit_frequency": "quarterly",
+            "audit_scope": [
+                "Existence check (sources present?)",
+                "Integrity check (sources unchanged?)",
+                "Coherence check (citation logic consistent?)"
+            ],
+            "auto_correction": {
+                "enabled": true,
+                "method": "Automatic reloading from API sources (my.fehradvice.com)",
+                "fallback": "local reference library"
+            },
+            "report_format": "FA_CIT_AUDIT_REPORT_9251.json"
+        },
+        "governance_binding": {
+            "supervised_by": "FehrAdvice Scientific Advisory Board",
+            "ethics_binding": "FehrAdvice Ethics & Integrity Council",
+            "approval_required_for_external_sources": true,
+            "license_requirement": "FehrAdvice Research & Citation License",
+            "audit_reference": "meta_citation_integrity_9251"
+        },
+        "integration_with_other_axioms": {
+            "references": [
+                "A5",
+                "A8",
+                "A10"
+            ],
+            "description": "A9 directly interacts with A5 (Functional Principle), A8 (Versioning), and A10 (Governance) to ensure citations remain consistent across time, source, and responsibility."
+        },
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "contributors": [
+                "Gerhard Fehr",
+                "Andrea Fehr",
+                "BEATRIX Kernel Development Team"
+            ],
+            "approval_date": "2025-10-31",
+            "status": "active",
+            "version": "3.0.2025"
+        }
+    },
+    "A10": {
+        "title": "Governance, Ownership, and Responsibility of Meta-Axioms",
+        "description": "This chapter defines the ethical, legal, and organizational principles for the control, ownership, application, and monitoring of meta-axioms (MA 0.00–0.99). It ensures that scientific integrity, transparency, and accountability are maintained at all system levels.",
+        "governance_structure": {
+            "supervisory_bodies": {
+                "scientific_board": {
+                    "name": "FehrAdvice Scientific Advisory Board",
+                    "role": "Scientific supervision of the development and application of all axioms.",
+                    "composition": "Independent researchers and senior advisors with expertise in Behavioral Economics and Decision Theory.",
+                    "approval_rights": [
+                        "Introduction of new meta-axioms",
+                        "Changes to core modules (A5–A9)",
+                        "Release of versioning (A8)"
+                    ]
+                },
+                "ethics_council": {
+                    "name": "FehrAdvice Ethics & Integrity Council",
+                    "role": "Reviews ethical, communicative, and societal impacts of model applications.",
+                    "functions": [
+                        "Approval of intervention architectures",
+                        "Assessment of potential usage conflicts",
+                        "Publication of annual Ethics Impact Reports"
+                    ]
+                }
+            },
+            "operational_responsibility": {
+                "owner": "FehrAdvice & Partners AG, Zürich",
+                "maintainer": "BEATRIX Kernel Development Team",
+                "license_manager": "FehrAdvice IP & Legal Unit",
+                "responsibilities": [
+                    "Ensuring technical integrity (kernel, watchdog)",
+                    "Enforcement of licensing and usage terms",
+                    "Regular compliance reviews with external audits"
+                ]
+            }
+        },
+        "ethical_principles": {
+            "integrity": "All applications of the BCM system must be based on scientific evidence and must not pursue manipulative purposes.",
+            "transparency": "Every model-based decision is explainable and auditable.",
+            "accountability": "Every application must name a responsible entity.",
+            "non_exploitation": "The system may not be used to exploit trust, information asymmetries, or cognitive weaknesses.",
+            "human_centricity": "All models serve the understanding of human behavior, not influence without awareness or consent."
+        },
+        "compliance_framework": {
+            "licenses": {
+                "required_license": "FehrAdvice Behavioral Architecture License (FBA-L)",
+                "license_terms": "Regulates usage, distribution, translation, and application of all BCM modules.",
+                "license_check": {
+                    "component": "BCM3_01_WATCHDOG",
+                    "check_frequency": "quarterly",
+                    "error_code": "E10-LICENSE-VIOLATION",
+                    "auto_suspend": true
+                }
+            },
+            "audit_protocol": {
+                "frequency": "quarterly",
+                "audited_by": "FehrAdvice Scientific Advisory Board",
+                "audit_type": "meta_governance_integrity",
+                "report_format": "FA_GOV_AUDIT_REPORT_9251.json"
+            },
+            "violation_response": {
+                "severity_levels": {
+                    "minor": "Notice and recommendation for correction",
+                    "major": "Temporary license suspension",
+                    "critical": "Immediate system deactivation and audit review"
+                }
+            }
+        },
+        "ownership_and_intellectual_property": {
+            "copyright": "© FehrAdvice & Partners AG, Zürich",
+            "trademark": "BEATRIX® and BCM® are registered trademarks of FehrAdvice.",
+            "usage_rights": "Only usable within a valid license agreement.",
+            "redistribution_policy": {
+                "allowed": false,
+                "exceptions": [
+                    "Academic research with written permission",
+                    "Licensed partnerships"
+                ],
+                "data_handling": {
+                    "sensitive_data_protection": true,
+                    "GDPR_compliance": true
+                }
+            }
+        },
+        "integration_with_other_axioms": {
+            "references": [
+                "A5",
+                "A8",
+                "A9"
+            ],
+            "description": "A10 forms the governance and ethics anchoring of functional, versioning, and citation logic.",
+            "watchdog_binding": {
+                "component": "BCM3_01_WATCHDOG",
+                "check_type": "governance_integrity_check",
+                "check_frequency": "quarterly",
+                "response": "Automatic suspension of non-compliant modules"
+            }
+        },
+        "transparency_protocol": {
+            "public_disclosure": {
+                "annual_governance_report": "Publishes central changes and audits.",
+                "ethics_impact_statement": "Annual assessment of societal impacts.",
+                "open_science_binding": true
+            },
+            "traceability": {
+                "component": "BEATRIX Kernel Audit Trail",
+                "data_format": "FA_GOV_TRACE_LOG.json",
+                "retention_period": "10 years"
+            }
+        },
+        "version": "3.0.2025",
+        "status": "active",
+        "metadata": {
+            "author": "FehrAdvice & Partners AG",
+            "contributors": [
+                "Gerhard Fehr",
+                "Andrea Fehr",
+                "BEATRIX Kernel Governance Team"
+            ],
+            "approval_date": "2025-10-31"
+        }
+    }
+}
