@@ -1,338 +1,172 @@
 {
     "module": {
         "id": "BCM2_13_INT9250",
-        "name": "Interventionsbaukasten",
-        "title": "Interventionsbaukasten zur strukturierten Abbildung, Kombination und Simulation von Maßnahmen im BCM 2.0",
+        "name": "Intervention Toolkit",
         "version": "1.0",
-        "release_date": "2025-07",
-        "status": "active",
-        "standard_id": "9232",
-        "ip_owner": "FehrAdvice & Partners AG, Zürich",
-        "architecture": "BCM 2.0 / BEATRIX 2025",
-        "role_in_system": "core_intervention_architecture_module"
-    },
-    "A1_Context": {
-        "module_name": "BCM2_13_INT9250 - Interventionsbaukasten",
-        "context": "Part of the BCM 2.0 intervention architecture; manages single interventions, combinations, and path logics to generate stable behavioral change. Central for context-based, segmented, path-integrated strategies in BCM 2.0."
-    },
-    "A2_Scope": {
-        "applicable_context_levels": [
-            "state_federal",
-            "state_regional",
-            "state_municipal",
-            "organizational_companies",
-            "organizational_public_administration",
-            "organizational_ngos",
-            "institutional_associations",
-            "institutional_initiatives",
-            "family_and_individual",
-            "digital_platforms_algorithms_apps"
-        ],
-        "intervention_classes": [
-            "classic",
-            "behavioral",
-            "normative",
-            "structural",
-            "hybrid"
-        ]
-    },
-    "A3_Objectives_and_Function": {
-        "objectives": [
-            "Standardized capture and modeling of BCM-compatible interventions",
-            "Combinability of interventions along behavioral-economic paths",
-            "Simulatability of effects, side effects, reactance, and reinforcement",
-            "Operationalization of complementarities",
-            "Design of segment- and context-appropriate intervention portfolios"
-        ],
-        "function": "Core module for measure architecture, policy design, nudging strategies, and redesign of decision contexts."
-    },
-    "A4_Binding_Logic_Rules": {
-        "application_depth": [
-            {
-                "iteration": 1,
-                "mode": "Light",
-                "fields_activated": [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4",
-                    "F5",
-                    "F6"
+        "description": "Intervention Toolkit for structured mapping, combination, and simulation of measures in BCM 2.0. Part of the BCM 2.0 intervention architecture; manages single interventions, combinations, and path logics to generate stable behavioral change. Central for context-based, segmented, path-integrated strategies in BCM 2.0. Release date: 2025-07. Status: active. Standard ID: 9232. IP owner: FehrAdvice & Partners AG, Zurich. Architecture: BCM 2.0 / BEATRIX 2025. Role in system: core intervention architecture module.",
+        "section": {
+            "A1": {
+                "title": "Module Context",
+                "text": "Module name: BCM2_13_INT9250 - Intervention Toolkit. Part of the BCM 2.0 intervention architecture; manages single interventions, combinations, and path logics to generate stable behavioral change. Central for context-based, segmented, path-integrated strategies in BCM 2.0."
+            },
+            "A2": {
+                "title": "Scope and Application",
+                "text": "Applicable context levels: state federal, state regional, state municipal, organizational companies, organizational public administration, organizational NGOs, institutional associations, institutional initiatives, family and individual, digital platforms algorithms apps. Intervention classes: classic, behavioral, normative, structural, hybrid."
+            },
+            "A3": {
+                "title": "Objectives and Function",
+                "text": "Objectives: Standardized capture and modeling of BCM-compatible interventions. Combinability of interventions along behavioral-economic paths. Simulatability of effects, side effects, reactance, and reinforcement. Operationalization of complementarities. Design of segment- and context-appropriate intervention portfolios. Function: Core module for measure architecture, policy design, nudging strategies, and redesign of decision contexts."
+            },
+            "A4": {
+                "title": "Binding Logic Rules - Intervention Fields and Application Depth",
+                "text": "The intervention toolkit operates at three application depth levels: Light mode (Iteration 1) activates fields F1-F6 for basic intervention capture. Hybrid mode (Iteration 2) activates fields F1-F12 for intermediate intervention modeling with framing, autonomy, segments, complementarity, side effects, and time horizons. Profound mode (Iteration 3) activates all fields F1-F18 with optional F19-F20 for complete intervention architecture including evaluation, path functions, repetition requirements, responsible roles, sources, and system links. The fields are structured to ensure BCM 2.0 compatibility and enable standardized intervention modeling across all context levels and intervention classes.",
+                "axioms": [
+                    {
+                        "id": "F1",
+                        "title": "Title / Designation",
+                        "formula": "datatype: text_short; required_from_mode: Light",
+                        "description": "Clear name of the intervention. Purpose: Identification and reference of the intervention within the BCM system."
+                    },
+                    {
+                        "id": "F2",
+                        "title": "Intervention Type",
+                        "formula": "datatype: enum; required_from_mode: Light",
+                        "description": "One of 9 BCM types (e.g., informative, normative). Purpose: Classification of intervention mechanism and effect logic."
+                    },
+                    {
+                        "id": "F3",
+                        "title": "Context Level",
+                        "formula": "datatype: enum; required_from_mode: Light",
+                        "description": "State, organization, individual, etc. Purpose: Specification of the institutional and social level at which the intervention operates."
+                    },
+                    {
+                        "id": "F4",
+                        "title": "Target Structure (Utility Types)",
+                        "formula": "datatype: multi_choice; required_from_mode: Light",
+                        "description": "Target structure: Awareness / Individual utility / Identity utility / Collective utility. Purpose: Definition of which utility dimensions the intervention addresses."
+                    },
+                    {
+                        "id": "F5",
+                        "title": "FEPS Effect Dimension",
+                        "formula": "datatype: multi_choice; required_from_mode: Light",
+                        "description": "Financial / Emotional / Physical / Social. Purpose: Specification of the effect dimensions through which the intervention operates."
+                    },
+                    {
+                        "id": "F6",
+                        "title": "Journey Phase",
+                        "formula": "datatype: enum; required_from_mode: Light",
+                        "description": "e.g., awareness, trigger, stabilization. Purpose: Assignment of intervention to behavioral journey phases."
+                    },
+                    {
+                        "id": "F7",
+                        "title": "Framing Logic",
+                        "formula": "datatype: enum; required_from_mode: Hybrid",
+                        "description": "Positive / negative / social / neutral. Purpose: Specification of the psychological framing mechanism."
+                    },
+                    {
+                        "id": "F8",
+                        "title": "Autonomy Level",
+                        "formula": "datatype: enum; required_from_mode: Hybrid",
+                        "description": "Voluntariness, default, obligation, ban. Purpose: Specification of the degree of choice architecture and coercion."
+                    },
+                    {
+                        "id": "F9",
+                        "title": "Target Segment",
+                        "formula": "datatype: enum_id; required_from_mode: Hybrid",
+                        "description": "Link to BCM2_09_SEG. Purpose: Specification of which population segment the intervention targets."
+                    },
+                    {
+                        "id": "F10",
+                        "title": "Complementarity",
+                        "formula": "datatype: reference_list; required_from_mode: Hybrid",
+                        "description": "Links to other interventions. Purpose: Specification of synergies and dependencies with other interventions."
+                    },
+                    {
+                        "id": "F11",
+                        "title": "Side Effect Potential",
+                        "formula": "datatype: enum_plus_text; required_from_mode: Hybrid",
+                        "description": "Low/Medium/High + explanation. Purpose: Assessment of unintended consequences and risks."
+                    },
+                    {
+                        "id": "F12",
+                        "title": "Time Horizon",
+                        "formula": "datatype: enum; required_from_mode: Hybrid",
+                        "description": "Instant / short / medium / long-term. Purpose: Specification of the temporal effect profile of the intervention."
+                    },
+                    {
+                        "id": "F13",
+                        "title": "Evaluation Planned",
+                        "formula": "datatype: enum_plus_enum; required_from_mode: Profound",
+                        "description": "Yes/No + evaluation form (survey, KPI, etc.). Purpose: Specification of measurement and validation approach."
+                    },
+                    {
+                        "id": "F14",
+                        "title": "Path Function",
+                        "formula": "datatype: enum; required_from_mode: Profound",
+                        "description": "Opener / amplifier / escalator / stabilizer. Purpose: Specification of the role in the behavioral change path."
+                    },
+                    {
+                        "id": "F15",
+                        "title": "Repetition Required",
+                        "formula": "datatype: enum; required_from_mode: Profound",
+                        "description": "Yes / No / cyclic. Purpose: Specification of whether and how the intervention must be repeated."
+                    },
+                    {
+                        "id": "F16",
+                        "title": "Responsible Role",
+                        "formula": "datatype: text_or_enum; required_from_mode: Profound",
+                        "description": "e.g., HR, politics, school, parents. Purpose: Specification of implementation responsibility."
+                    },
+                    {
+                        "id": "F17",
+                        "title": "Source / Practice Reference",
+                        "formula": "datatype: text_or_link; required_from_mode: Profound",
+                        "description": "Studies, literature, pilot project. Purpose: Evidence base and validation of the intervention."
+                    },
+                    {
+                        "id": "F18",
+                        "title": "System Link / ID",
+                        "formula": "datatype: text_code; required_from_mode: Profound",
+                        "description": "Internal ID or API reference. Purpose: Technical integration and traceability."
+                    },
+                    {
+                        "id": "F19",
+                        "title": "Brief Description",
+                        "formula": "datatype: text_long; required_from_mode: Optional",
+                        "description": "Explanation of intervention and effect logic. Purpose: Detailed documentation of intervention mechanism."
+                    },
+                    {
+                        "id": "F20",
+                        "title": "Status / Validation",
+                        "formula": "datatype: enum; required_from_mode: Optional",
+                        "description": "Development status: planned / tested / active / discarded. Purpose: Lifecycle management of interventions."
+                    }
                 ]
             },
-            {
-                "iteration": 2,
-                "mode": "Hybrid",
-                "fields_activated": [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4",
-                    "F5",
-                    "F6",
-                    "F7",
-                    "F8",
-                    "F9",
-                    "F10",
-                    "F11",
-                    "F12"
-                ]
+            "A5": {
+                "title": "Prerequisites and Dependencies",
+                "text": "Mandatory initialization: BCM2_00_META (utility structure), BCM2_04_KON (context model), BCM2_05_AWX (awareness function), BCM2_07_WTX (willingness function), BCM2_08_PRB (probabilities and framing), BCM2_09_SEG (segment logic), BCM2_10_JNY (behavioral journey). Optional recommended: BCM2_11_GM (dialog mode control), BCM2_12_NOR (norm behavior)."
             },
-            {
-                "iteration": 3,
-                "mode": "Profound",
-                "fields_activated": [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4",
-                    "F5",
-                    "F6",
-                    "F7",
-                    "F8",
-                    "F9",
-                    "F10",
-                    "F11",
-                    "F12",
-                    "F13",
-                    "F14",
-                    "F15",
-                    "F16",
-                    "F17",
-                    "F18"
-                ],
-                "optional_fields": [
-                    "F19",
-                    "F20"
-                ]
+            "A6": {
+                "title": "Structure Integration and Linkages",
+                "text": "Mandatory links: F6 links to BCM2_10_JNY for journey phase binding. F9 links to BCM2_09_SEG for segment assignment. F3 links to BCM2_04_KON for context level binding. F4 links to BCM2_05_AWX for awareness effect and target structure coupling. F7 links to BCM2_08_PRB for framing structure binding. F10 links to module internal for complementarity logic across interventions. Optional extensions: BCM2_11_GM for dialog embedding. BCM2_12_NOR for norm linkage."
+            },
+            "A7": {
+                "title": "Language and Semantic Boundaries",
+                "text": "Constraints: No additive effect without path structure. Do not use the term intervention (Maßnahme) outside BCM context. No effectiveness assumptions without target structure (F4) and context (F3). No use outside an initialized BCM system environment."
+            },
+            "A8": {
+                "title": "Versioning and Validity",
+                "text": "Version: 1.0. Approval: 2025-07. Mandatory from: BCM 2.0 for all intervention architectures. Status: Activated architecture module (Standard 9232)."
+            },
+            "A9": {
+                "title": "Citation and References",
+                "text": "Author: FehrAdvice & Partners AG. Year: 2025. Title: BCM2_13_INT – Intervention Toolkit. Context: Behavioral Change Model 2.0, architecture module per chapter 9232."
+            },
+            "A10": {
+                "title": "License and Ownership",
+                "text": "Ownership: Intellectual property of FehrAdvice & Partners AG, Zurich. Usage restriction: Use only within licensed architecture or consulting systems; any transfer or derivative requires written consent."
             }
-        ],
-        "fields": [
-            {
-                "id": "F1",
-                "name": "Titel / Bezeichnung",
-                "datatype": "text_short",
-                "required_from_mode": "Light",
-                "purpose": "Clear name of the intervention"
-            },
-            {
-                "id": "F2",
-                "name": "Interventions-Typ",
-                "datatype": "enum",
-                "required_from_mode": "Light",
-                "purpose": "One of 9 BCM types (e.g., informative, normative)"
-            },
-            {
-                "id": "F3",
-                "name": "Kontext-Ebene",
-                "datatype": "enum",
-                "required_from_mode": "Light",
-                "purpose": "State, organization, individual, etc."
-            },
-            {
-                "id": "F4",
-                "name": "Zielstruktur (Nutzenarten)",
-                "datatype": "multi_choice",
-                "required_from_mode": "Light",
-                "purpose": "Target structure: Awareness / IND / IDN / collective utility"
-            },
-            {
-                "id": "F5",
-                "name": "FEPS-Wirkdimension",
-                "datatype": "multi_choice",
-                "required_from_mode": "Light",
-                "purpose": "Financial / Emotional / Physical / Social"
-            },
-            {
-                "id": "F6",
-                "name": "Journey-Phase",
-                "datatype": "enum",
-                "required_from_mode": "Light",
-                "purpose": "e.g., awareness, trigger, stabilization"
-            },
-            {
-                "id": "F7",
-                "name": "Framing-Logik",
-                "datatype": "enum",
-                "required_from_mode": "Hybrid",
-                "purpose": "Positive / negative / social / neutral"
-            },
-            {
-                "id": "F8",
-                "name": "Autonomiestufe",
-                "datatype": "enum",
-                "required_from_mode": "Hybrid",
-                "purpose": "Voluntariness, default, obligation, ban"
-            },
-            {
-                "id": "F9",
-                "name": "Zielsegment",
-                "datatype": "enum_id",
-                "required_from_mode": "Hybrid",
-                "purpose": "Link to BCM2_09_SEG"
-            },
-            {
-                "id": "F10",
-                "name": "Komplementarität",
-                "datatype": "reference_list",
-                "required_from_mode": "Hybrid",
-                "purpose": "Links to other interventions"
-            },
-            {
-                "id": "F11",
-                "name": "Nebenwirkungspotenzial",
-                "datatype": "enum_plus_text",
-                "required_from_mode": "Hybrid",
-                "purpose": "Low/Medium/High + explanation"
-            },
-            {
-                "id": "F12",
-                "name": "Zeithorizont",
-                "datatype": "enum",
-                "required_from_mode": "Hybrid",
-                "purpose": "Instant / short / medium / long-term"
-            },
-            {
-                "id": "F13",
-                "name": "Evaluation vorgesehen",
-                "datatype": "enum_plus_enum",
-                "required_from_mode": "Profound",
-                "purpose": "Yes/No + evaluation form (survey, KPI, etc.)"
-            },
-            {
-                "id": "F14",
-                "name": "Pfadfunktion",
-                "datatype": "enum",
-                "required_from_mode": "Profound",
-                "purpose": "Opener / amplifier / escalator / stabilizer"
-            },
-            {
-                "id": "F15",
-                "name": "Wiederholung erforderlich",
-                "datatype": "enum",
-                "required_from_mode": "Profound",
-                "purpose": "Yes / No / cyclic"
-            },
-            {
-                "id": "F16",
-                "name": "Verantwortliche Rolle",
-                "datatype": "text_or_enum",
-                "required_from_mode": "Profound",
-                "purpose": "e.g., HR, politics, school, parents"
-            },
-            {
-                "id": "F17",
-                "name": "Quelle / Praxisbezug",
-                "datatype": "text_or_link",
-                "required_from_mode": "Profound",
-                "purpose": "Studies, literature, pilot project"
-            },
-            {
-                "id": "F18",
-                "name": "Systemlink / ID",
-                "datatype": "text_code",
-                "required_from_mode": "Profound",
-                "purpose": "Internal ID or API reference"
-            },
-            {
-                "id": "F19",
-                "name": "Kurzbeschreibung",
-                "datatype": "text_long",
-                "required_from_mode": "Optional",
-                "purpose": "Explanation of intervention and effect logic"
-            },
-            {
-                "id": "F20",
-                "name": "Status / Validierung",
-                "datatype": "enum",
-                "required_from_mode": "Optional",
-                "purpose": "Development status: planned / tested / active / discarded"
-            }
-        ]
-    },
-    "A5_Prerequisites": {
-        "mandatory_initialization": [
-            "BCM2_00_META (utility structure)",
-            "BCM2_04_KON (context model)",
-            "BCM2_05_AWX (awareness function)",
-            "BCM2_07_WTX (willingness function)",
-            "BCM2_08_PRB (probabilities & framing)",
-            "BCM2_09_SEG (segment logic)",
-            "BCM2_10_JNY (behavioral journey)"
-        ],
-        "optional_recommended": [
-            "BCM2_11_GM (dialog mode control)",
-            "BCM2_12_NOR (norm behavior)"
-        ]
-    },
-    "A6_Structure_Integration_and_Linkages": {
-        "mandatory_links": [
-            {
-                "field": "F6",
-                "links_to": "BCM2_10_JNY",
-                "meaning": "Journey phase binding"
-            },
-            {
-                "field": "F9",
-                "links_to": "BCM2_09_SEG",
-                "meaning": "Segment assignment"
-            },
-            {
-                "field": "F3",
-                "links_to": "BCM2_04_KON",
-                "meaning": "Context level binding"
-            },
-            {
-                "field": "F4",
-                "links_to": "BCM2_05_AWX",
-                "meaning": "Awareness effect / target structure coupling"
-            },
-            {
-                "field": "F7",
-                "links_to": "BCM2_08_PRB",
-                "meaning": "Framing structure binding"
-            },
-            {
-                "field": "F10",
-                "links_to": "module_internal",
-                "meaning": "Complementarity logic across interventions"
-            }
-        ],
-        "optional_extensions": [
-            {
-                "module": "BCM2_11_GM",
-                "meaning": "Dialog embedding"
-            },
-            {
-                "module": "BCM2_12_NOR",
-                "meaning": "Norm linkage"
-            }
-        ]
-    },
-    "A7_Language_and_Semantic_Boundaries": {
-        "constraints": [
-            "No additive effect without path structure",
-            "Do not use the term 'Maßnahme' outside BCM context",
-            "No effectiveness assumptions without target structure (F4) and context (F3)",
-            "No use outside an initialized BCM system environment"
-        ]
-    },
-    "A8_Versioning_and_Validity": {
-        "version": "1.0",
-        "approval": "2025-07",
-        "mandatory_from": "BCM 2.0 for all intervention architectures",
-        "status": "Activated architecture module (Standard 9232)"
-    },
-    "A9_Referencing": {
-        "citation": {
-            "author": "FehrAdvice & Partners AG",
-            "year": 2025,
-            "title": "BCM2_13_INT – Interventionsbaukasten",
-            "context": "Behavioral Change Model 2.0, architecture module per chapter 9232"
         }
-    },
-    "A10_License_and_Ownership": {
-        "ownership": "Intellectual property of FehrAdvice & Partners AG, Zurich",
-        "usage_restriction": "Use only within licensed architecture or consulting systems; any transfer or derivative requires written consent."
     }
 }
