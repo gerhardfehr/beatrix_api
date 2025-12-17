@@ -229,6 +229,126 @@
         "axioms": [
             {
                 "chapter_content_id": 7232,
+                "axiom_id": "MA_0.00_MASTER",
+                "title": "BCM Master Function – Complete Behavioral Value Pipeline",
+                "category": "Meta-Architecture / Master Function",
+                "version": "v1.0",
+                "status": "master_axiom",
+                "formal_definition": "The BCM Master Function defines the complete transformation pipeline from potential utility through awareness and willingness to behavioral probability. All BCM modules are components (terms) of this master function. This axiom establishes the formal foundation from which all utility modules (INU, KNU, IDN) and processing modules (AWX, WAX, etc.) derive their structure.",
+                "master_formula": {
+                    "complete": "P(Behavior|a,t,k,s,j) = σ[ Σ_{X∈{INU,KNU,IDN}} U_pot(X,a,t,k,s) × A_X(t*) × γ(UNS) × δ(KOM) × K(k) × S(s) × J(j) - θ ]",
+                    "layers": {
+                        "L1_potential_utility": {
+                            "formula": "U_pot(X,a,t,k,s) = V_base(X) + Σ_{d∈FEPSDE} ω_d(X,t,s,k)[G_d(X,a,t) - λ_d(X,k,s) × P_d(X,a,t)] + C(X,a,t,k,s) + CB(X,a,t,k,s) - CD(X,a,t,k,s)",
+                            "description": "Potential utility across all dimensions (FEPSDE) with gain-pain separation, loss aversion, complementarities, and collateral effects",
+                            "modules": ["7234_INU", "7235_KNU", "7236_IDN"]
+                        },
+                        "L2_effective_utility": {
+                            "formula": "U_eff(X,a,t*,k,s) = U_pot(X,a,t,k,s) × A_X(t*)",
+                            "description": "Effective utility emerges when potential utility is multiplied by awareness at the Moment of Truth",
+                            "modules": ["7240_AWX"]
+                        },
+                        "L3_willingness": {
+                            "formula": "W(a,t,k,s) = f(U_eff^INU, U_eff^KNU, U_eff^IDN) × γ(UNS) × δ(KOM)",
+                            "description": "Willingness to act as hybrid function of effective utilities, modulated by uncertainty and complexity",
+                            "modules": ["7243_WAX"]
+                        },
+                        "L4_context_modulation": {
+                            "formula": "W_ctx(a,t,k,s) = W(a,t,k,s) × K(k)",
+                            "description": "Context modulates willingness through institutional, social, media, physical, and technical factors",
+                            "modules": ["8904_KON"]
+                        },
+                        "L5_segment": {
+                            "formula": "W_seg(a,t,k,s) = W_ctx × S(s)",
+                            "description": "Segment-specific modulation across behavioral types",
+                            "modules": ["7257_SEG"]
+                        },
+                        "L6_journey": {
+                            "formula": "W_jny(a,t,k,s,j) = W_seg × J(j)",
+                            "description": "Journey phase modulates willingness based on behavioral change stage",
+                            "modules": ["7256_JNY"]
+                        },
+                        "L7_probability": {
+                            "formula": "P(Behavior) = σ(W_jny - θ)",
+                            "description": "Behavioral probability via sigmoid transformation with threshold",
+                            "modules": ["7260_WTX"]
+                        },
+                        "L8_uncertainty": {
+                            "formula": "UNS = f(U_epi, U_env, U_ipn, U_ins, U_meta, U_amb)",
+                            "description": "Six-dimensional uncertainty vector modulates entire pipeline",
+                            "modules": ["9485_UNS_META", "9486_UNS_ENV", "9494_UNS_EPI", "9493_UNS_INS", "9495_UNS_IPN"]
+                        }
+                    }
+                },
+                "variables": {
+                    "X": "Entity type ∈ {individual, collective, identity}",
+                    "a": "Action, decision, activity, behavior",
+                    "t": "Time dimension ∈ {instant, short, medium, long}",
+                    "t*": "Moment of Truth - decision point",
+                    "k": "Context parameters (institutions, culture, rules, uncertainty)",
+                    "s": "Segment parameters (age, gender, SES, life phase, culture)",
+                    "j": "Journey phase ∈ {PreC, Cont, Prep, Act, Main}",
+                    "d": "FEPSDE dimension ∈ {financial, emotional, physical, social, digital, ecological}",
+                    "V_base(X)": "Baseline value for entity type X",
+                    "G_d(X,a,t)": "Gain in dimension d for entity X",
+                    "P_d(X,a,t)": "Pain in dimension d for entity X",
+                    "ω_d(X,t,s,k)": "Weight of dimension d, context-dependent",
+                    "λ_d(X,k,s)": "Loss aversion coefficient in dimension d",
+                    "C(X,...)": "Complementarity function for entity X",
+                    "CB(X,...)": "Collateral Beauty - positive side effects",
+                    "CD(X,...)": "Collateral Damage - negative side effects",
+                    "A_X(t*)": "Awareness level for entity X at Moment of Truth",
+                    "γ(UNS)": "Uncertainty discount factor",
+                    "δ(KOM)": "Complexity discount factor",
+                    "K(k)": "Context modulation function",
+                    "S(s)": "Segment modulation function",
+                    "J(j)": "Journey phase modulation function",
+                    "θ": "Behavioral threshold",
+                    "σ": "Sigmoid activation function"
+                },
+                "module_mapping": {
+                    "utility_modules": {
+                        "7234_INU": "U_pot(X=individual) - Individual Utility",
+                        "7235_KNU": "U_pot(X=collective) - Collective Utility",
+                        "7236_IDN": "U_pot(X=identity) - Identity Utility"
+                    },
+                    "processing_modules": {
+                        "7240_AWX": "A_X(t*) - Awareness Function",
+                        "7243_WAX": "W(...) - Willingness Function",
+                        "8904_KON": "K(k) - Context Logic",
+                        "7257_SEG": "S(s) - Segment Logic",
+                        "7256_JNY": "J(j) - Journey Logic",
+                        "7260_WTX": "P(Behavior) - Probability Function"
+                    },
+                    "modulation_modules": {
+                        "9485_UNS_META": "U_meta - Meta Uncertainty",
+                        "9486_UNS_ENV": "U_env - Environmental Uncertainty",
+                        "9494_UNS_EPI": "U_epi - Epistemic Uncertainty",
+                        "9493_UNS_INS": "U_ins - Institutional Uncertainty",
+                        "9495_UNS_IPN": "U_ipn - Interpersonal Uncertainty",
+                        "9492_KOM_META": "δ(KOM) - Complexity"
+                    },
+                    "governance_modules": {
+                        "9249_KERNEL": "Pipeline orchestration and initialization",
+                        "9251_WATCHDOG": "Coherence monitoring and validation",
+                        "9250_INT": "Intervention design and simulation"
+                    }
+                },
+                "derivation_rule": "All utility modules (INU, KNU, IDN) MUST implement the same structural formula U_pot(X,...) with X-specific instantiation. This ensures consistency and comparability across entity types.",
+                "governance": {
+                    "watchdog_trigger": "MASTER_FORMULA_AUDIT",
+                    "validation_rule": "All downstream modules must be derivable from and consistent with MA_0.00_MASTER",
+                    "coherence_minimum": 0.95,
+                    "responsibility": "FehrAdvice & Partners AG – BCM Meta Kernel Team"
+                },
+                "integration": [
+                    "All BCM modules (7234-9251)",
+                    "KERNEL initialization sequence",
+                    "WATCHDOG validation pipeline"
+                ]
+            },
+            {
+                "chapter_content_id": 7232,
                 "axiom_id": "AX_0.00_MAIN_EXT",
                 "title": "Ontological Meta-Axiom of System Existence (extended, 2025-11)",
                 "category": "Meta-Ontology / Meta-Epistemology",
