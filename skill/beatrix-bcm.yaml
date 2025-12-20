@@ -1,0 +1,324 @@
+# BEATRIX BCM 2.0 - Claude Skill Definition
+# FehrAdvice & Partners AG, Zürich 2025
+
+skill:
+  name: "beatrix-bcm"
+  alias: "Behavioral Change Model 2.0"
+  version: "2.3"
+  author: "FehrAdvice & Partners AG"
+  license: "© FehrAdvice & Partners AG, Zürich 2025"
+
+  description: |
+    BEATRIX ist ein axiomatisches Framework zur Modellierung, Vorhersage
+    und Steuerung menschlichen Verhaltens. Es basiert auf 300+ Axiomen
+    in modularer Architektur und verbindet Verhaltensökonomie, Psychologie
+    und Systemtheorie zu einem kohärenten Entscheidungsmodell.
+
+  core_capability: |
+    Analyse und Design von Verhaltensinterventionen auf Basis einer
+    Meta-Formel, die individuellen Nutzen (INU), kollektiven Nutzen (KNU)
+    und Identitätsnutzen (IDN) durch einen Kohärenz-Operator (Ψ) integriert.
+
+  # ═══════════════════════════════════════════════════════════════════
+  # META-META-FORMEL
+  # ═══════════════════════════════════════════════════════════════════
+
+  meta_formula:
+    minimal: "Φ = Ψ(U) · Γ"
+    standard: "Φ_BCM = Φ_META ⊗ Ψ(Φ_INU ⊕ Φ_KNU ⊕ Φ_IDN) · Γ · τ"
+    maximal: "Φ_META = Ω_ONT · Ω_EPI · Ω_AXI · Ψ(U, ω, ρ, σ) · Γ · τ · ∂ · μ · κ · λ"
+
+    dimensions:
+      - symbol: "Ω_ONT"
+        name: "Ontologie"
+        question: "Was existiert?"
+      - symbol: "Ω_EPI"
+        name: "Epistemologie"
+        question: "Was wissen wir?"
+      - symbol: "Ω_AXI"
+        name: "Axiologie"
+        question: "Was hat Wert?"
+      - symbol: "U"
+        name: "Nutzen-Vektor"
+        question: "Was ist der Nutzen?"
+      - symbol: "ω"
+        name: "Gewichtung"
+        question: "Wie wichtig?"
+      - symbol: "ρ"
+        name: "Kontext"
+        question: "In welcher Situation?"
+      - symbol: "σ"
+        name: "Subjekt"
+        question: "Für wen?"
+      - symbol: "Ψ"
+        name: "Kohärenz-Operator"
+        question: "Wie kombinieren?"
+      - symbol: "Γ"
+        name: "Governance"
+        question: "Was ist erlaubt?"
+      - symbol: "τ"
+        name: "Zeit"
+        question: "Wann?"
+      - symbol: "∂"
+        name: "Differenzial"
+        question: "Wie schnell?"
+      - symbol: "μ"
+        name: "Meta-Evolution"
+        question: "Wie evolvieren Regeln?"
+      - symbol: "κ"
+        name: "Komplementarität"
+        question: "Was bedingt sich gegenseitig?"
+      - symbol: "λ"
+        name: "Spannungs-Regulator"
+        question: "Lokal vs. Global Balance?"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # MODULE
+  # ═══════════════════════════════════════════════════════════════════
+
+  modules:
+    meta:
+      id: "7232"
+      name: "META"
+      axiom_count: 100
+      function: "Meta-Axiome: Ontologie, Epistemologie, Governance, Dynamik"
+      formula: "Φ_META = Ω_ONT · Ω_EPI · Ω_GOV · Ω_DYN"
+      role: "Grundformel-Generator und Validator"
+
+    inu:
+      id: "7234"
+      name: "INU (Individual Utility)"
+      axiom_count: 59
+      function: "Individueller Nutzen über FEPSDE-Dimensionen"
+      formula: "Φ_INU = V_base + Σ_d∈FEPSDE[ω_d(G_d - λ_d·P_d)] + C + CB - CD"
+      role: "Verfeinert U_ind in META-Grundformel"
+
+    knu:
+      id: "7235"
+      name: "KNU (Kollektiver Nutzen)"
+      axiom_count: 46
+      function: "Kollektiver Nutzen, Kooperation, Bestrafung, Destruktion"
+      formula: "Φ_KNU = U_kol · ρ_K · Ψ_IDN · Ψ_INST · Ψ_DEST"
+      role: "Verfeinert U_kol in META-Grundformel"
+
+    idn:
+      id: "7236"
+      name: "IDN (Identitätsnutzen)"
+      axiom_count: 70
+      function: "Identitätsnutzen, Multiplizität, Kohärenz, Konflikte"
+      formula: "Φ_IDN = Σ π_j · A_j · U_IDN^j"
+      role: "Verfeinert U_idn in META-Grundformel"
+
+    awx:
+      id: "7240"
+      name: "AWX (Awareness)"
+      function: "Bewusstseinsaktivierung für Verhaltensänderung"
+      role: "Aktiviert Aufmerksamkeit für Nutzen-Differenzen"
+
+    wax:
+      id: "7243"
+      name: "WAX (Willingness)"
+      function: "Handlungsbereitschaft mit λ-Hybrid-Logik"
+      formula: "WAX = λ · WAX^compl + (1-λ) · WAX^add"
+      role: "Bestimmt Bereitschaft zur Handlung"
+
+    wtx:
+      id: "7259"
+      name: "WTX (Probability)"
+      axiom_count: 10
+      function: "Übergangswahrscheinlichkeiten für Verhaltensänderung"
+      role: "Berechnet P(Verhalten | Nutzen, Awareness, Willingness)"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # SCHLÜSSELKONZEPTE
+  # ═══════════════════════════════════════════════════════════════════
+
+  key_concepts:
+    FEPSDE:
+      full: "Financial, Emotional, Physical, Social, Digital, Ecological"
+      description: "6 Nutzen-Dimensionen für ganzheitliche Verhaltensanalyse"
+
+    Ψ_operator:
+      name: "Kohärenz-Operator"
+      description: "Nicht-additive Kombination von Nutzen (Arrow-kompatibel)"
+      rationale: "Einfache Addition verletzt Arrow's Impossibility Theorem"
+
+    κ_complementarity:
+      name: "Komplementarität"
+      description: "Gegensätze, die sich gegenseitig bedingen"
+      pairs:
+        - ["Individuum", "Kollektiv"]
+        - ["Nutzen", "Kosten"]
+        - ["Kurzfristig", "Langfristig"]
+        - ["Stabilität", "Wandel"]
+        - ["Kooperation", "Destruktion"]
+        - ["Autonomie", "Interdependenz"]
+
+    λ_regulator:
+      name: "Spannungs-Regulator"
+      description: "Balance zwischen lokaler Optimierung und Komplementarität"
+      range: "[0, 1]"
+      dynamics: "λ = f(ρ, σ, t) - kontextabhängig, nicht statisch"
+      saturation: "Exponentiell sättigend (siehe MA_0.ES)"
+
+    five_levels:
+      hierarchy: ["META", "MACRO", "MESO", "MICRO", "IND"]
+      description: "5-Ebenen-System von Gesellschaft bis Individuum"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # METHODIK
+  # ═══════════════════════════════════════════════════════════════════
+
+  methodology:
+    intra_module:
+      description: "Beziehungen innerhalb eines Moduls"
+      hierarchy:
+        - level: 1
+          name: "Fundament-Axiome"
+          function: "Definieren Existenzbedingungen"
+        - level: 2
+          name: "Struktur-Axiome"
+          function: "FEPSDE-Dimensionen, Gewichtungen"
+        - level: 3
+          name: "Operations-Axiome"
+          function: "Berechnungslogik, Transformationen"
+        - level: 4
+          name: "Dynamik-Axiome"
+          function: "Zeitliche Entwicklung, Feedback"
+      relation_types:
+        - symbol: "→"
+          name: "Dependenz"
+        - symbol: "⊂"
+          name: "Spezialisierung"
+        - symbol: "⊕"
+          name: "Komposition"
+        - symbol: "⊗"
+          name: "Modulation"
+        - symbol: "⊥"
+          name: "Exklusion"
+
+    inter_module:
+      description: "Beziehungen zwischen Modulen"
+      architecture: "META validiert → Submodule verfeinern → AWX/WAX/WTX → Verhalten"
+      relation_types:
+        - symbol: "⊢"
+          name: "Governance"
+          meaning: "META validiert Modul"
+        - symbol: "→"
+          name: "Input-Flow"
+          meaning: "Datenfluss A nach B"
+        - symbol: "↔"
+          name: "Bidirektional"
+          meaning: "Gegenseitige Beeinflussung"
+        - symbol: "Ψ"
+          name: "Kohärenz"
+          meaning: "Semantische Abstimmung"
+
+    axiom_change:
+      types:
+        - type: "Neue Variable"
+          impact: "Additiv, lokalisiert"
+          risk: "Niedrig"
+        - type: "Neuer Constraint"
+          impact: "Validierung aller Module"
+          risk: "Mittel"
+        - type: "Operator-Änderung"
+          impact: "Systemweite Neuberechnung"
+          risk: "Hoch"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # ANWENDUNG
+  # ═══════════════════════════════════════════════════════════════════
+
+  use_cases:
+    - name: "Verhaltensanalyse"
+      description: "Analyse von Entscheidungen über INU/KNU/IDN"
+    - name: "Interventions-Design"
+      description: "Design von Nudges und Verhaltensinterventionen"
+    - name: "Segmentierung"
+      description: "Gruppierung nach Verhaltenstypen und λ-Werten"
+    - name: "Policy-Design"
+      description: "Evidenzbasierte Politikgestaltung"
+    - name: "Journey-Optimierung"
+      description: "Customer/Citizen Journey Analyse"
+    - name: "Change Management"
+      description: "Organisationale Veränderungsprozesse"
+
+  constraints:
+    epistemological:
+      - "Nicht-normativ: beschreibt, schreibt nicht vor"
+      - "Kontextabhängig: keine universellen Optima"
+      - "Falsifizierbar: Korollare sind empirisch testbar"
+
+    methodological:
+      - "Kohärenz-basiert: keine einfache Addition von Nutzen"
+      - "Meta-Axiome ohne Zahlenwerte (Zahlen nur in Korollaren)"
+      - "Design-Axiome sind Empfehlungen, nicht Zwang"
+
+    warnings:
+      - "1/e (0.37) ist KEIN universelles Optimum"
+      - "λ-Werte sind kontextabhängig"
+      - "Arrow's Theorem verbietet einfache Aggregation"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # INVOKATION
+  # ═══════════════════════════════════════════════════════════════════
+
+  invocation:
+    trigger_phrases:
+      - "Verhaltensänderung modellieren"
+      - "Intervention designen"
+      - "Nutzen analysieren"
+      - "BCM anwenden"
+      - "BEATRIX nutzen"
+
+    when_to_use:
+      - "Verhaltensänderung soll modelliert werden"
+      - "Interventionen müssen designt werden"
+      - "Nutzen-Trade-offs analysiert werden"
+      - "Identität und Kollektiv berücksichtigt werden müssen"
+      - "Kohärente Integration verschiedener Nutzen-Dimensionen"
+
+    when_not_to_use:
+      - "Rein technische Optimierung ohne Verhalten"
+      - "Normative Vorgaben ohne empirische Basis"
+      - "Einfache lineare Modelle ausreichend"
+
+  # ═══════════════════════════════════════════════════════════════════
+  # REFERENZEN
+  # ═══════════════════════════════════════════════════════════════════
+
+  references:
+    theoretical:
+      - "Kahneman & Tversky (1979): Prospect Theory"
+      - "Thaler & Sunstein (2008): Nudge"
+      - "Arrow (1951): Impossibility Theorem"
+      - "Simon (1955): Bounded Rationality"
+      - "Fehr & Schmidt (1999): Fairness"
+
+    bcm_specific:
+      - "FehrAdvice & Partners AG (2025): BCM 2.0 Handbook"
+      - "FehrAdvice & Partners AG (2025): BEATRIX Architecture"
+      - "FehrAdvice & Partners AG (2025): Meta-Axioms Reference"
+
+  api_endpoint: "/home/user/beatrix_api"
+
+  file_structure:
+    - path: "meta/meta.json"
+      content: "100 Meta-Axiome"
+    - path: "inu/inu.json"
+      content: "59 INU-Axiome"
+    - path: "knu/knu.json"
+      content: "46 KNU-Axiome"
+    - path: "idn/idn.json"
+      content: "70 IDN-Axiome"
+    - path: "awx/awx.json"
+      content: "AWX-Axiome"
+    - path: "wax/wax.json"
+      content: "WAX-Axiome mit λ-Logik"
+    - path: "wtx/wtx.json"
+      content: "10 WTX-Axiome"
+    - path: "context/context.json"
+      content: "Kontext-Definitionen"
+    - path: "seg/seg.json"
+      content: "Segmentierungs-Logik"
