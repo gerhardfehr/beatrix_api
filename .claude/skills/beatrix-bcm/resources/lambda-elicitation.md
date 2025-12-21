@@ -1,6 +1,6 @@
 # BCM λ-Elicitation: Methodik zur Lambda-Messung
 
-> **Systematische Erhebung des Spannungs-Regulators λ**
+> **Systematische Erhebung des Kooperations-Regulators λ**
 
 © FehrAdvice & Partners AG, Zürich 2025
 
@@ -553,7 +553,7 @@ PHASE 4: DESIGN                        │
 
 ```
 Relevante META-Axiome:
-- MA-ONT-14: λ: Spannungs-Regulator
+- MA-ONT-14: λ: Kooperations-Regulator
 - MA-ONT-15: λ ∈ [0, 1]: Hybrid-Kontinuum
 - MA-DYN-23: λ-Dynamik
 

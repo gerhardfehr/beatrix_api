@@ -44,7 +44,7 @@ U = WAS (Nutzen-Variablen)
 | 11 | ∂ | Differenzial | Wie schnell? |
 | 12 | μ | Meta-Evolution | Wie evolvieren Regeln? |
 | 13 | κ | Komplementarität | Was bedingt sich gegenseitig? |
-| 14 | λ | Spannungs-Regulator | Lokal vs. Global? |
+| 14 | λ | Kooperations-Regulator | Lokal vs. Global? |
 
 ---
 
@@ -140,7 +140,7 @@ Gegensätze, die sich gegenseitig bedingen:
 - Stabilität ↔ Wandel
 - Kooperation ↔ Destruktion
 
-### λ - Spannungs-Regulator
+### λ - Kooperations-Regulator
 Balance zwischen lokaler Optimierung und Komplementarität:
 ```
 U_eff = (1-λ) · U_lokal + λ · κ(U_lokal, U_komplement)

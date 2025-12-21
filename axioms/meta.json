@@ -175,7 +175,7 @@
       "id": "MA-ONT-14",
       "category": "ontology",
       "level": "operation",
-      "statement": "λ: Spannungs-Regulator",
+      "statement": "λ: Kooperations-Regulator",
       "description": "Reguliert lokal vs. global Orientierung",
       "formula": "U_eff = (1-λ) · U_lok + λ · κ(U_lok, U_komp)",
       "dependencies": ["MA-ONT-12", "MA-ONT-13"],

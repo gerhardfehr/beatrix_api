@@ -41,7 +41,7 @@ U = WAS (Nutzen-Variablen)
 | ∂ | Differenzial | Wie schnell? |
 | μ | Meta-Evolution | Wie evolvieren Regeln? |
 | κ | Komplementarität | Was bedingt sich gegenseitig? |
-| λ | Spannungs-Regulator | Lokal vs. Global? |
+| λ | Kooperations-Regulator | Lokal vs. Global? |
 
 ## Module
 
@@ -80,7 +80,7 @@ Gegensätze, die sich gegenseitig bedingen:
 - Kurzfristig ↔ Langfristig
 - Stabilität ↔ Wandel
 
-### λ - Spannungs-Regulator
+### λ - Kooperations-Regulator
 ```
 U_eff = (1-λ) · U_lokal + λ · κ(U_lokal, U_komplement)
 ```

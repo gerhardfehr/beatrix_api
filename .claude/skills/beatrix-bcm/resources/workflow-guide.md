@@ -239,7 +239,7 @@ Für jede FEPSDE-Dimension: **Gain (G)** und **Pain (P)** bewerten.
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## 2.4 λ-Analyse (Spannungs-Regulator)
+## 2.4 λ-Analyse (Kooperations-Regulator)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐

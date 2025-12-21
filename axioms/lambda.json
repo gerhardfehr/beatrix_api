@@ -4,7 +4,7 @@
   "version": "2.0",
   "axiom_count": 46,
   "meta_formula": "λ_eff(σ, ρ, t) = λ_Person(σ) + Δλ_Kontext(ρ) + Δλ_Institution(I) + Δλ_Dynamik(t) - Δλ_Antisozial(A)",
-  "description": "Formalisierung des Spannungs-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
+  "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "categories": {
     "foundation": {
       "range": [1, 8],

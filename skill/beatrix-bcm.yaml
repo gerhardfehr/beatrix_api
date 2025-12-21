@@ -69,7 +69,7 @@ skill:
         name: "Komplementarität"
         question: "Was bedingt sich gegenseitig?"
       - symbol: "λ"
-        name: "Spannungs-Regulator"
+        name: "Kooperations-Regulator"
         question: "Lokal vs. Global Balance?"
 
   # ═══════════════════════════════════════════════════════════════════
@@ -155,7 +155,7 @@ skill:
         - ["Autonomie", "Interdependenz"]
 
     λ_regulator:
-      name: "Spannungs-Regulator"
+      name: "Kooperations-Regulator"
       description: "Balance zwischen lokaler Optimierung und Komplementarität"
       range: "[0, 1]"
       dynamics: "λ = f(ρ, σ, t) - kontextabhängig, nicht statisch"
