@@ -1,12 +1,13 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.2",
-  "axiom_count": 78,
+  "version": "2.3",
+  "axiom_count": 86,
   "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
   "trajectory_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t), wobei λ_0 = λ_Person + Σ Δλ_Kontext",
+  "integration_formula": "U_eff = (1-λ) × U_INU + λ × κ(U_INU, U_KNU, U_IDN)",
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -82,6 +83,16 @@
         "equilibrium_neutral": "λ_∞^neutral ≈ 0.50 - Antisozial neutralisiert"
       },
       "phases": ["START", "FRÜH", "MITTE", "SPÄT", "EQUILIBRIUM"]
+    },
+    "integration": {
+      "range": [79, 86],
+      "prefix": "INT",
+      "description": "Integration von λ mit INU, KNU, IDN",
+      "coupling": {
+        "INU": "Individueller Nutzen - gewichtet mit (1-λ)",
+        "KNU": "Kollektiver Nutzen - gewichtet mit λ",
+        "IDN": "Identitätsnutzen - moduliert durch λ"
+      }
     }
   },
   "axioms": [
@@ -1081,6 +1092,109 @@
         {"id": "TRJ-10c", "statement": "MITTE: Trend verstärken oder umkehren noch möglich"},
         {"id": "TRJ-10d", "statement": "SPÄT: Schwer umkehrbar, hoher Aufwand"},
         {"id": "TRJ-10e", "statement": "EQUILIBRIUM: Strukturelle Änderung nötig für Umkehr"}
+      ]
+    },
+    {
+      "id": "LAM-INT-01",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "λ reguliert INU vs. KNU/IDN Balance",
+      "description": "Lambda bestimmt die Gewichtung zwischen individuellem und kollektivem/Identitäts-Nutzen",
+      "formula": "U_eff = (1-λ) × U_INU + λ × κ(U_INU, U_KNU, U_IDN)",
+      "dependencies": ["LAM-LAM-01", "MA-ONT-14"],
+      "testable": true,
+      "validates": ["META", "INU", "KNU", "IDN"]
+    },
+    {
+      "id": "LAM-INT-02",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "Bei λ=0: Reiner INU-Maximierer",
+      "description": "Homo oeconomicus ignoriert KNU und IDN",
+      "formula": "U_eff|_{λ=0} = U_INU; ∂U_eff/∂U_KNU = 0; ∂U_eff/∂U_IDN = 0",
+      "dependencies": ["LAM-INT-01", "LAM-LAM-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INT-03",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "Bei λ=1: Komplementäre Integration",
+      "description": "Alle drei Nutzen-Dimensionen müssen erfüllt sein (schwächstes Glied)",
+      "formula": "U_eff|_{λ=1} = min(U_INU, U_KNU, U_IDN)",
+      "dependencies": ["LAM-INT-01", "LAM-LAM-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INT-04",
+      "category": "integration",
+      "level": "structure",
+      "statement": "κ-Operator: Komplementarität",
+      "description": "Nicht-additive Kombination respektiert gegenseitige Abhängigkeit",
+      "formula": "κ(U_INU, U_KNU, U_IDN) = min(U_i) + α × Σ(U_i - min(U_i)); α < 1",
+      "dependencies": ["LAM-INT-01", "MA-ONT-13"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-04a", "statement": "Wenn eine Dimension stark negativ: U_eff stark reduziert"},
+        {"id": "INT-04b", "statement": "Ausgleich nur teilweise möglich (α < 1)"}
+      ]
+    },
+    {
+      "id": "LAM-INT-05",
+      "category": "integration",
+      "level": "structure",
+      "statement": "INU-KNU Trade-off",
+      "description": "Klassisches Kooperations-Dilemma: INU ↑ oft KNU ↓",
+      "formula": "∂U_INU/∂Aktion × ∂U_KNU/∂Aktion < 0 bei Dilemma-Situationen",
+      "dependencies": ["LAM-INT-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-05a", "statement": "Free Riding: INU ↑, KNU ↓"},
+        {"id": "INT-05b", "statement": "Kooperation: INU ↓ (kurzfristig), KNU ↑"}
+      ]
+    },
+    {
+      "id": "LAM-INT-06",
+      "category": "integration",
+      "level": "structure",
+      "statement": "IDN als Moderator",
+      "description": "Identitätsnutzen kann Trade-off zwischen INU und KNU auflösen",
+      "formula": "Wenn IDN_Kooperation > 0: U_eff(Kooperation) ↑ trotz INU ↓",
+      "dependencies": ["LAM-INT-01", "LAM-INT-05"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-06a", "statement": "Starke Gruppenidentität: IDN kompensiert INU-Verlust"},
+        {"id": "INT-06b", "statement": "Schwache Identität: Reine INU-KNU Abwägung"}
+      ]
+    },
+    {
+      "id": "LAM-INT-07",
+      "category": "integration",
+      "level": "operation",
+      "statement": "λ-abhängige Interventions-Wahl",
+      "description": "Interventionstyp muss zu λ der Zielgruppe passen",
+      "formula": "Intervention = f(λ, INU_gap, KNU_gap, IDN_gap)",
+      "dependencies": ["LAM-INT-01", "LAM-TYP-01"],
+      "testable": false,
+      "corollaries": [
+        {"id": "INT-07a", "statement": "λ niedrig (Self-Int.): INCENTIVE auf INU"},
+        {"id": "INT-07b", "statement": "λ mittel (Conditional): SOCIAL PROOF auf Belief"},
+        {"id": "INT-07c", "statement": "λ hoch (Altruist): IDENTITY verstärken, kein Crowding-out"}
+      ]
+    },
+    {
+      "id": "LAM-INT-08",
+      "category": "integration",
+      "level": "operation",
+      "statement": "Feedback-Loop: U_eff → λ",
+      "description": "Erlebter Gesamt-Nutzen beeinflusst zukünftiges λ",
+      "formula": "Δλ_Feedback = β × (U_eff_erlebt - U_eff_erwartet); β > 0 wenn Kooperation",
+      "dependencies": ["LAM-INT-01", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-08a", "statement": "Kooperation lohnt sich → λ steigt"},
+        {"id": "INT-08b", "statement": "Kooperation wird ausgenutzt → λ sinkt"},
+        {"id": "INT-08c", "statement": "Verstärkung der Verhaltenstypen über Zeit"}
       ]
     }
   ],
