@@ -116,6 +116,20 @@ Nutze BEATRIX für:
 - **Policy-Design**: Evidenzbasierte Politikgestaltung
 - **Journey-Optimierung**: Customer/Citizen Journeys
 
+## Praktischer Workflow
+
+Für die praktische Anwendung nutze den **5-Phasen-Workflow**:
+
+```
+PHASE 1: DIAGNOSE    → Zielverhalten, Zielgruppe, Kontext erfassen
+PHASE 2: ANALYSE     → INU, KNU, IDN, λ bewerten
+PHASE 3: SYNTHESE    → Kohärenz prüfen, Schwachstelle identifizieren
+PHASE 4: DESIGN      → Intervention entwickeln (AWX, WAX, Nudge)
+PHASE 5: EVALUATION  → Wirksamkeit messen, iterieren
+```
+
+**Detaillierter Workflow-Guide**: `resources/workflow-guide.md`
+
 ## Constraints
 
 ### Epistemologisch
