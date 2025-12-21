@@ -261,6 +261,7 @@
       "level": "operation",
       "statement": "Kontext-Analyse vor Parameter-Schätzung",
       "description": "LLM muss Kontext strukturiert analysieren",
+      "formula": "η = g(Earned, Need, Merit, Frame, Anon, Info); g: {0,1}⁶ → [0,1]",
       "analysis_dimensions": {
         "earned_windfall": "Wer hat zum Outcome beigetragen?",
         "need": "Wer braucht es mehr?",
@@ -278,6 +279,7 @@
       "level": "operation",
       "statement": "Persona-Analyse für Typ und θ̂",
       "description": "LLM analysiert Persona-Beschreibung systematisch",
+      "formula": "(Typ, θ̂) = h(StatedValues, RevealedBehavior, Consistency, WiggleRoom, InfoSeeking)",
       "analysis_dimensions": {
         "stated_values": "Was sagt die Person über sich?",
         "revealed_behavior": "Was tut sie tatsächlich?",
@@ -375,6 +377,7 @@
       "level": "structure",
       "statement": "Benchmark-Kalibrierung auf klassische Spiele",
       "description": "Grid-Search optimiert Parameter auf DG, UG, PGG Targets",
+      "formula": "Θ* = argmin_Θ Σᵢ wᵢ(Prediction_i(Θ) - Target_i)²",
       "benchmarks": {
         "dictator_game": {"target": "28% average giving", "source": "Engel (2011)"},
         "ultimatum_game": {"target": "50% rejection at 20/80", "source": "Güth et al. (1982)"},
@@ -400,6 +403,7 @@
       "level": "operation",
       "statement": "Kalibrierung ist einmalig und versioniert",
       "description": "Statische Parameter ändern sich nur bei Major Version Updates",
+      "formula": "∂Θ_static/∂t = 0 für t ∈ [v_n, v_{n+1}); Änderung nur bei Major Version",
       "versioning": {
         "current": "BCM 2.2",
         "parameters_locked": true,
@@ -653,6 +657,7 @@
       "level": "operation",
       "statement": "Empfehlung bei nicht-robustem Ergebnis",
       "description": "Was tun wenn Sensitivität hoch?",
+      "formula": "If |P_high - P_low| > τ_robust: Action ∈ {RequestContext, UseDefault, FlagUncertain}",
       "recommendations": [
         "Mehr Kontext anfordern",
         "Persona-Beschreibung vertiefen",
