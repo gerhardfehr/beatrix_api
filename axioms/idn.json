@@ -1,717 +1,657 @@
 {
   "module": "IDN",
   "id": "7245",
-  "version": "2.0",
-  "axiom_count": 47,
-  "description": "Identitätsnutzen-Modul: Integration von Akerlof/Kranton, Bénabou/Henkel, Konow und Fehr/Schmidt",
-  "meta_formula": "U_IDN = ω₁·I^AK(a,φ*) + ω₂·I^BH(θ̂,A) - ω₃·SD(φ*,η)",
-  "self_deception_formula": "φ*_d = (ω₁κ_d·a_d + ω₃ψ_d·η_d) / (ω₁κ_d + ω₃ψ_d)",
-  "full_formula": {
-    "U_IDN": "ω₁·Σ_d s_d·[-κ_d(a_d-φ*_d)² - α_d·D⁻_d - β_d·D⁺_d] + ω₂·[s·f(θ̂) + γ·θ̂·A] - ω₃·Σ_d s_d·ψ_d·(φ*_d-η_d)²",
-    "components": {
-      "AK": "Akerlof/Kranton: Norm-Dissonanz",
-      "FS": "Fehr/Schmidt: Inequity Aversion",
-      "BH": "Bénabou/Henkel: Self-Image",
-      "KO": "Konow: Self-Deception Kosten"
+  "version": "2.2",
+  "axiom_count": 52,
+  "description": "BCM 2.2 Identitätsnutzen-Modul: Regime-Switching, Motivated Inference, Strategic Ignorance, Context-Gated Fairness",
+  "paper_ready": true,
+  "timing": "(F,s) → m → σ → (a,μ̃,φ) → payoffs",
+  "state_variables": {
+    "exogenous": {
+      "F": "Kontext/Frame ∈ ℝᴷ",
+      "s": "Incentive-Salienz ∈ ℝ₊",
+      "x": "Outcomes (xᵢ, xⱼ) ∈ ℝ² für F/S"
+    },
+    "control": {
+      "σ": "Informationspräzision ∈ [0,1]",
+      "a": "Handlung ∈ [0,1]",
+      "μ̃": "Motivated mean (subjektiver Norm-Anker) ∈ [0,1]",
+      "φ": "Subjektive Norm/Belief ∈ [0,1]"
+    },
+    "latent": {
+      "m": "Regime ∈ {moral, market}"
     }
   },
+  "meta_formula": {
+    "utility": "U(a,σ,φ,μ̃;F,s,m) = U_mat(a;s,F) - μ_ID(F,m)[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+    "optimal_phi": "φ*(a,μ̃,m) = (ω₁κ·a + ω₃ψ·μ̃) / (ω₁κ + ω₃ψ)",
+    "optimal_mu_tilde": "μ̃*(a,σ,m) = (K(a,m)·a + H(σ,m)·μ_η(F)) / (K(a,m) + H(σ,m))",
+    "regime_switch": "P(m=market|s,F) = Λ(γ(s - s̄(F)))"
+  },
   "categories": {
-    "akerlof_kranton": {
-      "range": [1, 8],
-      "prefix": "AK",
-      "description": "Norm-basierte Identität nach Akerlof/Kranton (2000)",
-      "core_insight": "Identität tritt additiv in Nutzenfunktion ein, unabhängig von λ"
+    "regime": {
+      "range": [1, 5],
+      "prefix": "REG",
+      "description": "Regime-Switching m ∈ {moral, market}"
     },
-    "benabou_henkel": {
-      "range": [9, 14],
-      "prefix": "BH",
-      "description": "Belief-basiertes Self-Image nach Bénabou/Henkel (2025)",
-      "core_insight": "Menschen investieren in Selbstbild und schützen es durch selektive Erinnerung"
+    "norm": {
+      "range": [6, 12],
+      "prefix": "NRM",
+      "description": "Disziplinierte Norm-Funktion η mit Unsicherheit"
     },
-    "konow": {
-      "range": [15, 22],
-      "prefix": "KO",
-      "description": "Endogene Self-Deception nach Konow (2000)",
-      "core_insight": "Fairness-Beliefs sind endogen und passen sich an Verhalten an"
+    "affective": {
+      "range": [13, 17],
+      "prefix": "AFF",
+      "description": "Affektive Fairness (Fehr/Schmidt), kontext-gated"
     },
-    "fehr_schmidt": {
-      "range": [23, 26],
-      "prefix": "FS",
-      "description": "Inequity Aversion nach Fehr/Schmidt (1999)",
-      "core_insight": "Asymmetrische Aversion gegen Benachteiligung (α) und Bevorteilung (β)"
+    "cognitive": {
+      "range": [18, 29],
+      "prefix": "COG",
+      "description": "Kognitiver Block: Dissonanz, Self-Deception, Motivated Inference, Info-Kosten"
     },
-    "types": {
-      "range": [27, 31],
-      "prefix": "TYP",
-      "description": "Verhaltenstypen basierend auf κ/ψ-Konfiguration",
-      "empirical_distribution": {
-        "Fair": "~40-45%",
-        "Self-Deceptive": "~29%",
-        "Selfish": "~16%",
-        "Complex": "~10%"
-      }
+    "optimization": {
+      "range": [30, 40],
+      "prefix": "OPT",
+      "description": "Optimierung und Closed-Form Lösungen"
     },
-    "dynamics": {
-      "range": [32, 37],
-      "prefix": "DYN",
-      "description": "Temporale Dynamik von θ̂ und φ*"
-    },
-    "integration": {
-      "range": [38, 43],
-      "prefix": "INT",
-      "description": "Integration aller Komponenten in U_IDN"
+    "constraints": {
+      "range": [41, 47],
+      "prefix": "CNS",
+      "description": "Nebenbedingungen und Regularität"
     },
     "predictions": {
-      "range": [44, 47],
+      "range": [48, 52],
       "prefix": "PRD",
-      "description": "Testbare Vorhersagen des integrierten Modells"
+      "description": "Testbare Vorhersagen"
     }
   },
   "axioms": [
     {
-      "id": "IDN-AK-01",
-      "category": "akerlof_kranton",
+      "id": "IDN-REG-01",
+      "category": "regime",
       "level": "foundation",
-      "statement": "Identität als additiver Nutzenterm",
-      "description": "Identitätsnutzen tritt unabhängig von anderen Präferenzen in die Nutzenfunktion ein",
-      "formula": "U = U(a) + I(a; c, ε, P)",
-      "references": ["Akerlof & Kranton (2000)"],
+      "statement": "Zwei-Regime-Modell: Moral vs. Market",
+      "description": "Agent operiert in einem von zwei Regimes abhängig von Incentive-Salienz",
+      "formula": "m ∈ {moral, market}",
+      "testable": true,
+      "references": ["Bowles (2008)", "Gneezy & Rustichini (2000)"]
+    },
+    {
+      "id": "IDN-REG-02",
+      "category": "regime",
+      "level": "foundation",
+      "statement": "Switch-Wahrscheinlichkeit",
+      "description": "Logistische Funktion der Incentive-Salienz relativ zum Frame-Threshold",
+      "formula": "P(m=market|s,F) = Λ(γ(s - s̄(F))), wobei Λ(z) = 1/(1+e⁻ᶻ)",
+      "constraints": ["P ∈ [0,1]", "γ > 0", "s̄(F) ∈ ℝ"],
       "testable": true
     },
     {
-      "id": "IDN-AK-02",
-      "category": "akerlof_kranton",
-      "level": "foundation",
-      "statement": "Soziale Kategorien (c)",
-      "description": "Individuen gehören zu sozialen Kategorien die erwartetes Verhalten definieren",
-      "formula": "c ∈ {Beruf, Geschlecht, Ethnie, Religion, Organisation, Hobby, ...}",
-      "references": ["Akerlof & Kranton (2000)"],
+      "id": "IDN-REG-03",
+      "category": "regime",
+      "level": "structure",
+      "statement": "Modusabhängige Parameter (Crowding-Out)",
+      "description": "Identitätsparameter sind im Moral-Modus höher als im Market-Modus",
+      "formula": "q(F,m) ≥ 0 für q ∈ {κ,ψ,χ,ρ,ω₁,ω₃,μ_ID}; κ(F,moral) ≫ κ(F,market)",
+      "constraints": ["q(F,m) ≥ 0 ∀ q"],
       "testable": true,
       "corollaries": [
-        {"id": "AK-02a", "statement": "Mehrfachzugehörigkeit: Individuum hat typischerweise 5-15 aktive Kategorien"},
-        {"id": "AK-02b", "statement": "Kategorie-Hierarchie: Nicht alle Kategorien gleich salient"}
+        {"id": "REG-03a", "statement": "κ(F,moral) ≫ κ(F,market): Dissonanz-Sensitivität sinkt bei Incentives"},
+        {"id": "REG-03b", "statement": "ψ(F,moral) ≫ ψ(F,market): Self-Deception-Kosten sinken"},
+        {"id": "REG-03c", "statement": "χ(F,moral) ≫ χ(F,market): Motivated Inference billiger im Market"}
       ]
     },
     {
-      "id": "IDN-AK-03",
-      "category": "akerlof_kranton",
-      "level": "foundation",
-      "statement": "Präskriptionen (P)",
-      "description": "Jede Kategorie hat zugeordnete Verhaltensvorschriften",
-      "formula": "P_c: c → {erlaubte_Aktionen, verbotene_Aktionen}",
-      "references": ["Akerlof & Kranton (2000)"],
+      "id": "IDN-REG-04",
+      "category": "regime",
+      "level": "structure",
+      "statement": "Erwartete Parameter bei latentem m",
+      "description": "Bei Unsicherheit über Regime: Erwartungswert der Parameter",
+      "formula": "q̄(s,F) = (1-P)·q(F,moral) + P·q(F,market)",
+      "dependencies": ["IDN-REG-02", "IDN-REG-03"],
       "testable": true
     },
     {
-      "id": "IDN-AK-04",
-      "category": "akerlof_kranton",
-      "level": "structure",
-      "statement": "Salienz-Vektor s(λ, Kontext)",
-      "description": "Kontext aktiviert verschiedene Identitätsdimensionen mit unterschiedlicher Stärke",
-      "formula": "s_d = f(λ, Kontext); Σ s_d = 1; d ∈ FEPSDE",
-      "dependencies": ["IDN-AK-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "AK-04a", "statement": "F (Functional): Sachlogik, Effizienz"},
-        {"id": "AK-04b", "statement": "E (Emotional): Gefühle, Affekt"},
-        {"id": "AK-04c", "statement": "P (Political): Macht, Status, Fairness"},
-        {"id": "AK-04d", "statement": "S (Social): Zugehörigkeit, Normen"},
-        {"id": "AK-04e", "statement": "D (Digital): Technologie-Bezug"},
-        {"id": "AK-04f", "statement": "Eco (Ecological): Umwelt, Nachhaltigkeit"}
-      ]
-    },
-    {
-      "id": "IDN-AK-05",
-      "category": "akerlof_kranton",
-      "level": "structure",
-      "statement": "Norm-Dissonanz Kosten",
-      "description": "Verletzung der Präskription verursacht Identitätsverlust",
-      "formula": "L_d(a, P_d) = κ_d × (a_d - P_d)²",
-      "dependencies": ["IDN-AK-03", "IDN-AK-04"],
-      "testable": true,
-      "corollaries": [
-        {"id": "AK-05a", "statement": "κ_d > 0: Stärke der Dissonanz-Sensitivität"},
-        {"id": "AK-05b", "statement": "Quadratische Form: Kleine Abweichungen weniger schmerzhaft"}
-      ]
-    },
-    {
-      "id": "IDN-AK-06",
-      "category": "akerlof_kranton",
-      "level": "structure",
-      "statement": "Akerlof/Kranton Komponente aggregiert",
-      "description": "Summe der gewichteten Norm-Dissonanzen über alle Dimensionen",
-      "formula": "I^AK(a, φ*) = -Σ_d s_d × κ_d × (a_d - φ*_d)²",
-      "dependencies": ["IDN-AK-04", "IDN-AK-05"],
-      "testable": true
-    },
-    {
-      "id": "IDN-AK-07",
-      "category": "akerlof_kranton",
+      "id": "IDN-REG-05",
+      "category": "regime",
       "level": "operation",
-      "statement": "Identitäts-Bedrohung durch Andere",
-      "description": "Andere können die eigene Kategoriezugehörigkeit in Frage stellen",
-      "formula": "ΔI = -τ × Threat(c, others)",
-      "dependencies": ["IDN-AK-02"],
+      "statement": "Crowding-Out Mechanismus",
+      "description": "Monetäre Incentives verschieben vom Moral- zum Market-Modus",
+      "formula": "∂P/∂s > 0: Höhere Incentive-Salienz erhöht P(market)",
+      "dependencies": ["IDN-REG-02"],
       "testable": true,
-      "references": ["Akerlof & Kranton (2000)"]
+      "references": ["Frey & Jegen (2001)", "Gneezy, Meier & Rey-Biel (2011)"]
     },
     {
-      "id": "IDN-AK-08",
-      "category": "akerlof_kranton",
+      "id": "IDN-NRM-01",
+      "category": "norm",
+      "level": "foundation",
+      "statement": "Norm-Mean μ_η(F)",
+      "description": "Erwartete Norm als logistische Funktion des Kontexts",
+      "formula": "μ_η(F) = Λ(η₀ + Σₖ βₖ Fₖ)",
+      "constraints": ["μ_η ∈ (0,1)"],
+      "testable": true
+    },
+    {
+      "id": "IDN-NRM-02",
+      "category": "norm",
+      "level": "foundation",
+      "statement": "Norm-Unsicherheit τ²_η(F,σ)",
+      "description": "Varianz der Norm sinkt mit Informationspräzision",
+      "formula": "τ²_η(F,σ) = τ₀²(F)·r(σ), wobei r(σ) ∈ [0,1], r'(σ) < 0, r(1) = 0",
+      "constraints": ["τ²_η ≥ 0", "∂τ²_η/∂σ ≤ 0", "τ²_η(F,1) = 0"],
+      "testable": true
+    },
+    {
+      "id": "IDN-NRM-03",
+      "category": "norm",
+      "level": "structure",
+      "statement": "Posterior über η",
+      "description": "Trunkierte Normalverteilung respektiert Bounds [0,1]",
+      "formula": "η|F,σ ~ TruncNormal(μ_η(F), τ²_η(F,σ); [0,1])",
+      "dependencies": ["IDN-NRM-01", "IDN-NRM-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-NRM-04",
+      "category": "norm",
+      "level": "structure",
+      "statement": "Erwarteter quadratischer Fehler",
+      "description": "Normal-Approximation für Erwartung unter TruncNormal",
+      "formula": "𝔼[(φ-η)²] ≈ (φ-μ_η(F))² + τ²_η(F,σ)",
+      "dependencies": ["IDN-NRM-03"],
+      "testable": true
+    },
+    {
+      "id": "IDN-NRM-05",
+      "category": "norm",
       "level": "operation",
-      "statement": "Identitäts-Intervention: Salienz-Aktivierung",
-      "description": "Bestimmte Identität kann durch Priming aktiviert werden",
-      "formula": "s'_d = s_d + Δs_Prime; z.B. 'Als Schweizer...'",
-      "dependencies": ["IDN-AK-04"],
+      "statement": "Vollständige Information (σ=1)",
+      "description": "Bei perfekter Information kollabiert Unsicherheit",
+      "formula": "τ²_η(F,1) = 0 ⟹ η = μ_η(F) mit Sicherheit",
+      "dependencies": ["IDN-NRM-02"],
       "testable": true
     },
     {
-      "id": "IDN-BH-01",
-      "category": "benabou_henkel",
-      "level": "foundation",
-      "statement": "Self-Image als Kapital",
-      "description": "Selbstbild θ̂ ist akkumuliertes Kapital aus vergangenen Handlungen",
-      "formula": "θ̂ ∈ [0, 1]; 0 = 'schlechter Mensch', 1 = 'guter Mensch'",
-      "references": ["Bénabou & Henkel (2025)"],
-      "testable": true
-    },
-    {
-      "id": "IDN-BH-02",
-      "category": "benabou_henkel",
-      "level": "foundation",
-      "statement": "Identity Capital A",
-      "description": "Akkumulierte Investition in Selbstbild durch vergangene Handlungen",
-      "formula": "A = Σ_τ δ^(t-τ) × I(a_τ)",
-      "dependencies": ["IDN-BH-01"],
-      "references": ["Bénabou & Henkel (2025)"],
-      "testable": true
-    },
-    {
-      "id": "IDN-BH-03",
-      "category": "benabou_henkel",
-      "level": "structure",
-      "statement": "Bénabou/Henkel Nutzenkomponente",
-      "description": "Nutzen aus Selbstbild und akkumuliertem Identitätskapital",
-      "formula": "I^BH(θ̂, A) = s × f(θ̂) + γ × θ̂ × A",
-      "dependencies": ["IDN-BH-01", "IDN-BH-02"],
-      "references": ["Bénabou & Henkel (2025)"],
-      "testable": true,
-      "corollaries": [
-        {"id": "BH-03a", "statement": "s: Gewicht des reinen Selbstbild-Nutzens"},
-        {"id": "BH-03b", "statement": "f(θ̂): Konkave Funktion, z.B. f(θ̂) = θ̂^0.5"},
-        {"id": "BH-03c", "statement": "γ: Interaktionseffekt zwischen θ̂ und A"}
-      ]
-    },
-    {
-      "id": "IDN-BH-04",
-      "category": "benabou_henkel",
-      "level": "structure",
-      "statement": "Self-Image Updating",
-      "description": "θ̂ wird basierend auf Feedback aus Handlungen aktualisiert",
-      "formula": "θ̂_{t+1} = (1-δ) × θ̂_t + δ × [α⁺ × σ⁺_t + α⁻ × σ⁻_t]",
-      "dependencies": ["IDN-BH-01"],
-      "references": ["Bénabou & Henkel (2025)"],
-      "testable": true,
-      "corollaries": [
-        {"id": "BH-04a", "statement": "δ: Update-Rate, typisch 0.1-0.3"},
-        {"id": "BH-04b", "statement": "σ⁺: Positives Signal (prosoziale Handlung)"},
-        {"id": "BH-04c", "statement": "σ⁻: Negatives Signal (antisoziale Handlung)"},
-        {"id": "BH-04d", "statement": "α⁺ > α⁻: Asymmetrie (Positives stärker gewichtet)"}
-      ]
-    },
-    {
-      "id": "IDN-BH-05",
-      "category": "benabou_henkel",
+      "id": "IDN-NRM-06",
+      "category": "norm",
       "level": "operation",
-      "statement": "Signal-Generierung aus Handlung",
-      "description": "Handlung generiert Self-Image Signal relativ zu subjektiver Norm φ*",
-      "formula": "σ_t = h(a_t, φ*_t); σ > 0 wenn a > φ*, σ < 0 wenn a < φ*",
-      "dependencies": ["IDN-BH-04", "IDN-KO-02"],
+      "statement": "Strategische Ignoranz (σ=0)",
+      "description": "Ohne Information maximale Unsicherheit",
+      "formula": "τ²_η(F,0) = τ₀²(F): Maximale Norm-Unsicherheit",
+      "dependencies": ["IDN-NRM-02"],
       "testable": true
     },
     {
-      "id": "IDN-BH-06",
-      "category": "benabou_henkel",
+      "id": "IDN-NRM-07",
+      "category": "norm",
       "level": "operation",
-      "statement": "Selektive Erinnerung",
-      "description": "Menschen erinnern sich besser an identitätskonsistente Handlungen",
-      "formula": "P(recall | σ⁺) > P(recall | σ⁻) wenn θ̂ hoch",
-      "dependencies": ["IDN-BH-01", "IDN-BH-04"],
-      "references": ["Bénabou & Tirole (2002)"],
+      "statement": "Motivated Mean μ̃",
+      "description": "Subjektiver Norm-Anker ersetzt objektiven Mean",
+      "formula": "In SD-Term: 𝔼_η~TruncNormal(μ̃,τ²)[(φ-η)²] statt μ_η",
+      "dependencies": ["IDN-NRM-03"],
       "testable": true
     },
     {
-      "id": "IDN-KO-01",
-      "category": "konow",
+      "id": "IDN-AFF-01",
+      "category": "affective",
       "level": "foundation",
-      "statement": "Objektive vs. Subjektive Fairness-Norm",
-      "description": "η ist objektive Norm, φ* ist endogen angepasste subjektive Norm",
-      "formula": "η: exogen gegeben; φ*: endogen optimiert",
-      "references": ["Konow (2000)"],
+      "statement": "Fehr/Schmidt Inequity Aversion",
+      "description": "Asymmetrische Aversion gegen Benachteiligung und Bevorteilung",
+      "formula": "L_FS(x) = α·max(xⱼ-xᵢ,0) + β·max(xᵢ-xⱼ,0)",
+      "constraints": ["α ≥ 0", "β ≥ 0", "α ≥ β"],
+      "testable": true,
+      "references": ["Fehr & Schmidt (1999)"],
+      "empirical_values": {"α_median": 0.85, "β_median": 0.315}
+    },
+    {
+      "id": "IDN-AFF-02",
+      "category": "affective",
+      "level": "structure",
+      "statement": "Context-Gate ρ(F,m)",
+      "description": "Affektive Komponente wird durch Kontext und Modus moduliert",
+      "formula": "ρ(F,m) = Λ(ρ₀ + ρ₁·directness(F) + ρ₂·salience_other(F) + ρ₃·𝟙{m=moral})",
+      "constraints": ["ρ ∈ [0,1]"],
       "testable": true
     },
     {
-      "id": "IDN-KO-02",
-      "category": "konow",
-      "level": "foundation",
-      "statement": "Endogene Self-Deception",
-      "description": "Subjektive Norm φ* ist gewichteter Durchschnitt aus Handlung und objektiver Norm",
-      "formula": "φ*_d = (ω₁κ_d × a_d + ω₃ψ_d × η_d) / (ω₁κ_d + ω₃ψ_d)",
-      "dependencies": ["IDN-KO-01"],
-      "references": ["Konow (2000)"],
+      "id": "IDN-AFF-03",
+      "category": "affective",
+      "level": "structure",
+      "statement": "Affektiver Beitrag",
+      "description": "Gated Fehr/Schmidt Loss",
+      "formula": "L_aff = ρ(F,m)·L_FS(x)",
+      "dependencies": ["IDN-AFF-01", "IDN-AFF-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-AFF-04",
+      "category": "affective",
+      "level": "operation",
+      "statement": "Gate-Faktoren",
+      "description": "Was erhöht ρ (Aktivierung der affektiven Komponente)",
+      "formula": "∂ρ/∂directness > 0, ∂ρ/∂salience_other > 0, ρ(moral) > ρ(market)",
+      "dependencies": ["IDN-AFF-02"],
       "testable": true,
       "corollaries": [
-        {"id": "KO-02a", "statement": "κ_d hoch, ψ_d niedrig → φ* nahe bei a (Self-Deception möglich)"},
-        {"id": "KO-02b", "statement": "κ_d niedrig, ψ_d hoch → φ* nahe bei η (keine Self-Deception)"},
-        {"id": "KO-02c", "statement": "κ_d = ψ_d → φ* = (a + η) / 2"}
+        {"id": "AFF-04a", "statement": "Directness: Face-to-face erhöht ρ"},
+        {"id": "AFF-04b", "statement": "Salience: Sichtbares Gegenüber erhöht ρ"},
+        {"id": "AFF-04c", "statement": "Moral-Modus: ρ höher als im Market-Modus"}
       ]
     },
     {
-      "id": "IDN-KO-03",
-      "category": "konow",
-      "level": "structure",
-      "statement": "Self-Deception Kosten",
-      "description": "Abweichung von objektiver Norm verursacht kognitive Kosten",
-      "formula": "SD(φ*, η) = Σ_d s_d × ψ_d × (φ*_d - η_d)²",
-      "dependencies": ["IDN-KO-01", "IDN-KO-02"],
-      "references": ["Konow (2000)"],
+      "id": "IDN-AFF-05",
+      "category": "affective",
+      "level": "operation",
+      "statement": "Asymmetrie Benachteiligung vs. Bevorteilung",
+      "description": "Envy (α) stärker als Guilt (β)",
+      "formula": "α ≥ β; typisch α/β ≈ 2.7",
+      "dependencies": ["IDN-AFF-01"],
       "testable": true,
-      "corollaries": [
-        {"id": "KO-03a", "statement": "ψ_d: Self-Deception Kosten-Parameter"},
-        {"id": "KO-03b", "statement": "Hohe ψ → teure Self-Deception → weniger Verzerrung"}
-      ]
+      "references": ["Fehr & Schmidt (1999)"]
     },
     {
-      "id": "IDN-KO-04",
-      "category": "konow",
+      "id": "IDN-COG-01",
+      "category": "cognitive",
+      "level": "foundation",
+      "statement": "Dissonanz-Loss",
+      "description": "Kosten wenn Handlung von subjektiver Norm abweicht",
+      "formula": "L_dis = ω₁(F,m)·κ(F,m)·(a-φ)²",
+      "constraints": ["κ ≥ 0", "ω₁ ≥ 0"],
+      "testable": true,
+      "references": ["Akerlof & Kranton (2000)", "Festinger (1957)"]
+    },
+    {
+      "id": "IDN-COG-02",
+      "category": "cognitive",
+      "level": "foundation",
+      "statement": "Self-Deception Loss (Reality-Kosten)",
+      "description": "Kosten wenn subjektive Norm von objektiver Norm abweicht",
+      "formula": "L_SD = ω₃(F,m)·ψ(F,m)·𝔼_η[(φ-η)²]",
+      "constraints": ["ψ ≥ 0", "ω₃ ≥ 0"],
+      "testable": true,
+      "references": ["Konow (2000)"]
+    },
+    {
+      "id": "IDN-COG-03",
+      "category": "cognitive",
       "level": "structure",
-      "statement": "Dissonanz-Kosten bei gegebenem φ*",
-      "description": "Handlung die von subjektiver Norm abweicht verursacht Dissonanz",
-      "formula": "Dissonanz = Σ_d s_d × κ_d × (a_d - φ*_d)²",
-      "dependencies": ["IDN-KO-02", "IDN-AK-05"],
+      "statement": "Motivated Inference Kosten",
+      "description": "Kosten für Verschiebung des Norm-Ankers μ̃",
+      "formula": "C_MI(μ̃;F,σ,m) = (χ(F,m)/2)·(μ̃-μ_η(F))² / (τ²_η(F,σ)+ε)",
+      "constraints": ["χ ≥ 0", "ε > 0 klein"],
+      "dependencies": ["IDN-NRM-01", "IDN-NRM-02"],
       "testable": true
     },
     {
-      "id": "IDN-KO-05",
-      "category": "konow",
+      "id": "IDN-COG-04",
+      "category": "cognitive",
+      "level": "structure",
+      "statement": "No-Free-Lunch für Motivated Inference",
+      "description": "Mehr Präzision macht Belief-Verzerrung teurer",
+      "formula": "∂C_MI/∂σ > 0 wenn μ̃ ≠ μ_η(F)",
+      "dependencies": ["IDN-COG-03", "IDN-NRM-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-COG-05",
+      "category": "cognitive",
+      "level": "structure",
+      "statement": "Informationskosten",
+      "description": "Kosten für Informationsbeschaffung (Präzision σ)",
+      "formula": "C_info(σ;F,m) = c₀(F)·σ + 𝟙{m=market}·Δc(F)·σ + ½c₂·σ²",
+      "constraints": ["C_info ≥ 0", "C'_info ≥ 0", "C''_info ≥ 0"],
+      "testable": true
+    },
+    {
+      "id": "IDN-COG-06",
+      "category": "cognitive",
       "level": "operation",
       "statement": "Trade-off: Dissonanz vs. Self-Deception",
-      "description": "Optimale φ* balanciert Dissonanz-Kosten gegen Self-Deception-Kosten",
-      "formula": "min_{φ*} [κ(a - φ*)² + ψ(φ* - η)²]",
-      "dependencies": ["IDN-KO-03", "IDN-KO-04"],
-      "references": ["Konow (2000)"],
+      "description": "φ balanciert zwischen a und η",
+      "formula": "min_φ [ω₁κ(a-φ)² + ω₃ψ(φ-μ̃)²]",
+      "dependencies": ["IDN-COG-01", "IDN-COG-02"],
       "testable": true
     },
     {
-      "id": "IDN-KO-06",
-      "category": "konow",
+      "id": "IDN-COG-07",
+      "category": "cognitive",
       "level": "operation",
-      "statement": "Empirische Self-Deception Rate",
-      "description": "~71% der unfairen Dictator-Geber zeigen Self-Deception",
-      "formula": "P(Self-Deception | Unfair) ≈ 0.71",
-      "references": ["Konow (2000), S. 1083"],
-      "testable": true,
-      "empirical_evidence": {
-        "source": "Konow (2000)",
-        "finding": "71% of unfair allocators showed self-deception",
-        "method": "Post-decision fairness beliefs vs. objective norm"
-      }
-    },
-    {
-      "id": "IDN-KO-07",
-      "category": "konow",
-      "level": "operation",
-      "statement": "Self-Deception verstärkt sich über Zeit",
-      "description": "Fairness-Beliefs driften weiter von η weg nach Verzögerung",
-      "formula": "φ*_{t+Δ} > φ*_t wenn a > η (nach unfairer Handlung)",
-      "dependencies": ["IDN-KO-02"],
-      "references": ["Konow (2000), S. 1087"],
+      "statement": "Trade-off: Precision vs. Flexibility",
+      "description": "σ balanciert zwischen Norm-Sicherheit und MI-Kosten",
+      "formula": "Höheres σ → niedrigere τ² → bessere Norm-Kenntnis ABER teurere MI",
+      "dependencies": ["IDN-COG-03", "IDN-COG-05"],
       "testable": true
     },
     {
-      "id": "IDN-KO-08",
-      "category": "konow",
+      "id": "IDN-COG-08",
+      "category": "cognitive",
       "level": "operation",
-      "statement": "Information reduziert Self-Deception",
-      "description": "Explizite Kommunikation von η erhöht ψ und reduziert Verzerrung",
-      "formula": "ψ_explicit > ψ_implicit → φ*_explicit näher an η",
-      "dependencies": ["IDN-KO-02", "IDN-KO-03"],
+      "statement": "Identitäts-Multiplikator μ_ID",
+      "description": "Gesamtgewicht der Identitätskomponente",
+      "formula": "μ_ID(F,m) ≥ 0; μ_ID(F,moral) > μ_ID(F,market)",
+      "constraints": ["μ_ID ≥ 0"],
       "testable": true
     },
     {
-      "id": "IDN-FS-01",
-      "category": "fehr_schmidt",
+      "id": "IDN-COG-09",
+      "category": "cognitive",
       "level": "foundation",
-      "statement": "Inequity Aversion",
-      "description": "Menschen haben Aversion gegen ungleiche Verteilungen",
-      "formula": "U_FS = x_i - α × max(x_j - x_i, 0) - β × max(x_i - x_j, 0)",
-      "references": ["Fehr & Schmidt (1999)"],
+      "statement": "Bounds für Kontrollvariablen",
+      "description": "Alle endogenen Variablen auf [0,1] beschränkt",
+      "formula": "a ∈ [0,1], φ ∈ [0,1], μ̃ ∈ [0,1], σ ∈ [0,1]",
       "testable": true
     },
     {
-      "id": "IDN-FS-02",
-      "category": "fehr_schmidt",
+      "id": "IDN-COG-10",
+      "category": "cognitive",
       "level": "structure",
-      "statement": "Asymmetrie: α > β",
-      "description": "Benachteiligung schmerzt mehr als Bevorteilung",
-      "formula": "α ≥ β; typisch: α ≈ 0.85, β ≈ 0.32",
-      "dependencies": ["IDN-FS-01"],
-      "references": ["Fehr & Schmidt (1999)"],
+      "statement": "Self-Image Updating (Bénabou/Henkel)",
+      "description": "θ̂ wird basierend auf Feedback aktualisiert",
+      "formula": "θ̂_{t+1} = (1-δ)·θ̂_t + δ·[α⁺·σ⁺_t + α⁻·σ⁻_t]",
       "testable": true,
-      "empirical_evidence": {
-        "median_alpha": 0.85,
-        "median_beta": 0.315,
-        "source": "Fehr & Schmidt (1999), Table 1"
-      }
+      "references": ["Bénabou & Henkel (2025)"]
     },
     {
-      "id": "IDN-FS-03",
-      "category": "fehr_schmidt",
+      "id": "IDN-COG-11",
+      "category": "cognitive",
       "level": "structure",
-      "statement": "Integration in IDN-Formel",
-      "description": "Inequity Aversion als Teil der Akerlof/Kranton Komponente",
-      "formula": "I^AK erweitert: -κ(a-φ*)² - α×D⁻ - β×D⁺",
-      "dependencies": ["IDN-FS-01", "IDN-AK-06"],
-      "testable": true,
-      "corollaries": [
-        {"id": "FS-03a", "statement": "D⁻ = max(x_j - x_i, 0): Benachteiligung"},
-        {"id": "FS-03b", "statement": "D⁺ = max(x_i - x_j, 0): Bevorteilung"}
-      ]
-    },
-    {
-      "id": "IDN-FS-04",
-      "category": "fehr_schmidt",
-      "level": "operation",
-      "statement": "Ultimatum Game Erklärung",
-      "description": "Ablehnung unfairer Angebote durch hohe α-Werte",
-      "formula": "Reject wenn α × (x_P - x_R) > x_R",
-      "dependencies": ["IDN-FS-01", "IDN-FS-02"],
-      "references": ["Fehr & Schmidt (1999)"],
-      "testable": true,
-      "empirical_fit": {
-        "offer_20_80": "Ablehnung ~50%",
-        "offer_10_90": "Ablehnung ~75%"
-      }
-    },
-    {
-      "id": "IDN-TYP-01",
-      "category": "types",
-      "level": "foundation",
-      "statement": "Typ 'Fair': Hohe κ, hohe ψ",
-      "description": "Hohe Dissonanz-Kosten UND hohe Self-Deception-Kosten",
-      "formula": "κ ≈ 10, ψ ≈ 10; φ* ≈ η",
-      "dependencies": ["IDN-KO-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "TYP-01a", "statement": "Anteil: ~40-45% der Population"},
-        {"id": "TYP-01b", "statement": "Verhalten: Konsistent fair"},
-        {"id": "TYP-01c", "statement": "Self-Deception: Nicht möglich (zu teuer)"},
-        {"id": "TYP-01d", "statement": "θ̂: Stabil hoch"}
-      ]
-    },
-    {
-      "id": "IDN-TYP-02",
-      "category": "types",
-      "level": "foundation",
-      "statement": "Typ 'Self-Deceptive': Hohe κ, niedrige ψ",
-      "description": "Hohe Dissonanz-Kosten aber niedrige Self-Deception-Kosten",
-      "formula": "κ ≈ 10, ψ ≈ 2; φ* nahe bei a",
-      "dependencies": ["IDN-KO-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "TYP-02a", "statement": "Anteil: ~29% der Population"},
-        {"id": "TYP-02b", "statement": "Verhalten: Unfair, aber glaubt fair zu sein"},
-        {"id": "TYP-02c", "statement": "Self-Deception: Aktiv - passt φ* an a an"},
-        {"id": "TYP-02d", "statement": "θ̂: Stabil (durch Self-Deception geschützt)"}
-      ]
-    },
-    {
-      "id": "IDN-TYP-03",
-      "category": "types",
-      "level": "foundation",
-      "statement": "Typ 'Selfish': Niedrige κ, hohe ψ",
-      "description": "Niedrige Dissonanz-Kosten, hohe Self-Deception-Kosten",
-      "formula": "κ ≈ 2, ψ ≈ 10; φ* nahe bei η",
-      "dependencies": ["IDN-KO-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "TYP-03a", "statement": "Anteil: ~16% der Population"},
-        {"id": "TYP-03b", "statement": "Verhalten: Wissentlich unfair"},
-        {"id": "TYP-03c", "statement": "Self-Deception: Nicht möglich (zu teuer)"},
-        {"id": "TYP-03d", "statement": "θ̂: Sinkt bei unfairem Verhalten"}
-      ]
-    },
-    {
-      "id": "IDN-TYP-04",
-      "category": "types",
-      "level": "foundation",
-      "statement": "Typ 'Complex': Mittlere κ, mittlere ψ",
-      "description": "Moderate Kosten auf beiden Dimensionen",
-      "formula": "κ ≈ 5, ψ ≈ 5; φ* = Mischung",
-      "dependencies": ["IDN-KO-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "TYP-04a", "statement": "Anteil: ~10% der Population"},
-        {"id": "TYP-04b", "statement": "Verhalten: Kontextabhängig"},
-        {"id": "TYP-04c", "statement": "Self-Deception: Teilweise"},
-        {"id": "TYP-04d", "statement": "θ̂: Variabel"}
-      ]
-    },
-    {
-      "id": "IDN-TYP-05",
-      "category": "types",
-      "level": "operation",
-      "statement": "Typ-Identifikation durch κ/ψ-Ratio",
-      "description": "Verhältnis von κ zu ψ bestimmt Self-Deception-Tendenz",
-      "formula": "ρ = κ/ψ; ρ > 3 → Self-Deceptive; ρ < 0.3 → Selfish; else Fair/Complex",
-      "dependencies": ["IDN-TYP-01", "IDN-TYP-02", "IDN-TYP-03", "IDN-TYP-04"],
-      "testable": true
-    },
-    {
-      "id": "IDN-DYN-01",
-      "category": "dynamics",
-      "level": "foundation",
-      "statement": "θ̂-Update Gleichung",
-      "description": "Self-Image Update basierend auf Handlungs-Signal",
-      "formula": "θ̂_{t+1} = (1-δ) × θ̂_t + δ × [α⁺ × σ⁺_t + α⁻ × σ⁻_t]",
-      "dependencies": ["IDN-BH-04"],
-      "testable": true
-    },
-    {
-      "id": "IDN-DYN-02",
-      "category": "dynamics",
-      "level": "foundation",
       "statement": "Signal relativ zu φ*, nicht η",
-      "description": "Kritisch: Signal basiert auf subjektiver Norm",
-      "formula": "σ_t = h(a_t, φ*_t); NICHT h(a_t, η_t)",
-      "dependencies": ["IDN-DYN-01", "IDN-KO-02"],
-      "testable": true,
-      "corollaries": [
-        {"id": "DYN-02a", "statement": "Self-Deceptive: a < η aber a ≈ φ* → σ ≈ 0 → θ̂ stabil"},
-        {"id": "DYN-02b", "statement": "Selfish: a < η und a < φ* → σ < 0 → θ̂ sinkt"}
-      ]
-    },
-    {
-      "id": "IDN-DYN-03",
-      "category": "dynamics",
-      "level": "structure",
-      "statement": "Konvergenz von θ̂",
-      "description": "Langfristige Stabilität oder Drift des Selbstbilds",
-      "formula": "θ̂_∞ = f(Typ, Verhaltensmuster)",
-      "dependencies": ["IDN-DYN-01"],
-      "testable": true,
-      "corollaries": [
-        {"id": "DYN-03a", "statement": "Fair-Typ: θ̂_∞ ≈ 0.80"},
-        {"id": "DYN-03b", "statement": "Self-Deceptive: θ̂_∞ ≈ 0.65 (stabil durch SD)"},
-        {"id": "DYN-03c", "statement": "Selfish: θ̂_∞ ≈ 0.35 (sinkt bei Konfrontation)"}
-      ]
-    },
-    {
-      "id": "IDN-DYN-04",
-      "category": "dynamics",
-      "level": "operation",
-      "statement": "φ*-Drift über Zeit",
-      "description": "Self-Deception verstärkt sich nach Entscheidung",
-      "formula": "dφ*/dt > 0 wenn a > η (nach unfairer Handlung)",
-      "dependencies": ["IDN-KO-07"],
-      "references": ["Konow (2000)"],
+      "description": "Self-Image Update basiert auf subjektiver Norm",
+      "formula": "σ_t = h(a_t, φ*_t); σ > 0 wenn a > φ*, σ < 0 wenn a < φ*",
+      "dependencies": ["IDN-COG-10"],
       "testable": true
     },
     {
-      "id": "IDN-DYN-05",
-      "category": "dynamics",
-      "level": "operation",
-      "statement": "PGG Zerfall-Dynamik",
-      "description": "In Public Goods Games sinkt η wenn andere weniger beitragen",
-      "formula": "η_t = f(ḡ_{-i,t-1}); φ*_t passt sich an → Spirale nach unten",
-      "dependencies": ["IDN-KO-02"],
+      "id": "IDN-COG-12",
+      "category": "cognitive",
+      "level": "structure",
+      "statement": "Identity Capital A",
+      "description": "Akkumulierte Investition in Selbstbild",
+      "formula": "A = Σ_τ δ^(t-τ)·I(a_τ)",
+      "dependencies": ["IDN-COG-10"],
       "testable": true,
-      "empirical_fit": {
-        "round_1": "~50% Beitrag",
-        "round_10": "~15% Beitrag"
-      }
+      "references": ["Bénabou & Henkel (2025)"]
     },
     {
-      "id": "IDN-DYN-06",
-      "category": "dynamics",
-      "level": "operation",
-      "statement": "Punishment als η-Signal",
-      "description": "Bestrafung kommuniziert höhere Norm → reduziert Self-Deception",
-      "formula": "η_punish > η_no_punish; ψ_punish > ψ_no_punish",
-      "dependencies": ["IDN-DYN-05", "IDN-KO-03"],
-      "testable": true,
-      "empirical_fit": {
-        "with_punishment": "~90% Kooperation",
-        "without": "~15% Kooperation"
-      }
-    },
-    {
-      "id": "IDN-INT-01",
-      "category": "integration",
+      "id": "IDN-OPT-01",
+      "category": "optimization",
       "level": "foundation",
-      "statement": "Vollständige U_IDN Formel",
-      "description": "Integration aller vier Komponenten",
-      "formula": "U_IDN = ω₁·I^AK(a,φ*) + ω₂·I^BH(θ̂,A) - ω₃·SD(φ*,η)",
-      "dependencies": ["IDN-AK-06", "IDN-BH-03", "IDN-KO-03"],
+      "statement": "Gesamtnutzenfunktion",
+      "description": "Vollständige Utility-Funktion des Agenten",
+      "formula": "U(a,σ,φ,μ̃;F,s,m) = U_mat(a;s,F) - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI - C_info",
+      "dependencies": ["IDN-AFF-03", "IDN-COG-01", "IDN-COG-02", "IDN-COG-03", "IDN-COG-05"],
       "testable": true
     },
     {
-      "id": "IDN-INT-02",
-      "category": "integration",
+      "id": "IDN-OPT-02",
+      "category": "optimization",
       "level": "foundation",
-      "statement": "Erweiterte I^AK mit Inequity Aversion",
-      "description": "Akerlof/Kranton Komponente inkludiert Fehr/Schmidt",
-      "formula": "I^AK = Σ_d s_d × [-κ_d(a_d-φ*_d)² - α_d×D⁻_d - β_d×D⁺_d]",
-      "dependencies": ["IDN-AK-06", "IDN-FS-03"],
+      "statement": "Materialnutzen U_mat",
+      "description": "Anwendungsspezifischer materieller Nutzen",
+      "formula": "U_mat(a;s,F) ∈ ℝ (je Anwendung zu spezifizieren)",
       "testable": true
     },
     {
-      "id": "IDN-INT-03",
-      "category": "integration",
+      "id": "IDN-OPT-03",
+      "category": "optimization",
       "level": "structure",
-      "statement": "Gewichte ω₁, ω₂, ω₃",
-      "description": "Relative Gewichte der drei Hauptkomponenten",
-      "formula": "ω₁ + ω₂ + ω₃ = 1; typisch: ω₁ ≈ 0.5, ω₂ ≈ 0.2, ω₃ ≈ 0.3",
-      "dependencies": ["IDN-INT-01"],
+      "statement": "Sequentielle Maximierung",
+      "description": "Agent maximiert Erwartungsnutzen über Regime",
+      "formula": "max_{σ∈[0,1]} 𝔼_m[max_{a,φ,μ̃ ∈ [0,1]³} U(a,σ,φ,μ̃;F,s,m)]",
+      "dependencies": ["IDN-OPT-01", "IDN-REG-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-04",
+      "category": "optimization",
+      "level": "structure",
+      "statement": "Optimales φ* (Closed Form)",
+      "description": "Innere Lösung für subjektive Norm gegeben a, μ̃",
+      "formula": "φ*(a,μ̃,m) = (ω₁κ·a + ω₃ψ·μ̃) / (ω₁κ + ω₃ψ)",
+      "dependencies": ["IDN-COG-06"],
+      "constraints": ["φ* ∈ [0,1], sonst clip"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-05",
+      "category": "optimization",
+      "level": "structure",
+      "statement": "Optimales μ̃* (Motivated Inference)",
+      "description": "Innere Lösung für motivated mean gegeben a, σ",
+      "formula": "μ̃*(a,σ,m) = (K(a,m)·a + H(σ,m)·μ_η(F)) / (K(a,m) + H(σ,m))",
+      "dependencies": ["IDN-COG-03", "IDN-OPT-04"],
+      "constraints": ["μ̃* ∈ [0,1], sonst clip"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-06",
+      "category": "optimization",
+      "level": "structure",
+      "statement": "K und H Koeffizienten",
+      "description": "Hilfskoeffizienten für μ̃*-Formel",
+      "formula": "K(a,m) = μ_ID·(ω₁κ)(ω₃ψ)/(ω₁κ+ω₃ψ); H(σ,m) = χ(F,m)/(2(τ²_η(F,σ)+ε))",
+      "dependencies": ["IDN-OPT-05"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-07",
+      "category": "optimization",
+      "level": "operation",
+      "statement": "Value Function V(σ)",
+      "description": "Nach innen optimierter erwarteter Nutzen",
+      "formula": "V(σ) = 𝔼_m[max_{a,φ,μ̃} U(a,σ,φ,μ̃;F,s,m)]",
+      "dependencies": ["IDN-OPT-03"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-08",
+      "category": "optimization",
+      "level": "operation",
+      "statement": "KKT für σ* (Information Choice)",
+      "description": "Kuhn-Tucker Bedingungen für optimale Informationspräzision",
+      "formula": "σ* ∈ argmax_{σ∈[0,1]} V(σ); Innenlösung: V'(σ*)=0; Rand: σ*=0 ⟹ V'(0)≤0",
+      "dependencies": ["IDN-OPT-07"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-09",
+      "category": "optimization",
+      "level": "operation",
+      "statement": "Strategic Ignorance",
+      "description": "σ*=0 optimal wenn marginale Info-Vorteile < Kosten",
+      "formula": "σ* = 0 wenn V'(0) ≤ 0: Agent wählt bewusst keine Information",
+      "dependencies": ["IDN-OPT-08"],
       "testable": true,
-      "corollaries": [
-        {"id": "INT-03a", "statement": "ω₁: Norm-Konformität Gewicht"},
-        {"id": "INT-03b", "statement": "ω₂: Self-Image Gewicht"},
-        {"id": "INT-03c", "statement": "ω₃: Self-Deception Kosten Gewicht"}
-      ]
+      "references": ["Golman, Hagmann & Loewenstein (2017)"]
     },
     {
-      "id": "IDN-INT-04",
-      "category": "integration",
+      "id": "IDN-OPT-10",
+      "category": "optimization",
+      "level": "operation",
+      "statement": "Full Information",
+      "description": "σ*=1 optimal wenn marginale Info-Vorteile > Kosten bis σ=1",
+      "formula": "σ* = 1 wenn V'(1) ≥ 0: Agent wählt maximale Information",
+      "dependencies": ["IDN-OPT-08"],
+      "testable": true
+    },
+    {
+      "id": "IDN-OPT-11",
+      "category": "optimization",
+      "level": "operation",
+      "statement": "Zusammenspiel σ*, μ̃*, φ*",
+      "description": "Die drei inneren Lösungen sind interdependent",
+      "formula": "φ* = f(a, μ̃*(σ*)); μ̃* = g(a, σ*); Simultane Bestimmung",
+      "dependencies": ["IDN-OPT-04", "IDN-OPT-05", "IDN-OPT-08"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CNS-01",
+      "category": "constraints",
+      "level": "foundation",
+      "statement": "Domain-Constraints",
+      "description": "Alle Variablen auf [0,1] beschränkt",
+      "formula": "σ, a, φ, μ̃, η ∈ [0,1] (Trunkierung/Projektion falls nötig)",
+      "testable": true
+    },
+    {
+      "id": "IDN-CNS-02",
+      "category": "constraints",
+      "level": "foundation",
+      "statement": "Parameter-Positivität",
+      "description": "Alle relevanten Parameter nicht-negativ",
+      "formula": "α, β, κ, ψ, χ, ω₁, ω₃, μ_ID, c₀, c₂, Δc, γ ≥ 0",
+      "testable": true
+    },
+    {
+      "id": "IDN-CNS-03",
+      "category": "constraints",
       "level": "structure",
-      "statement": "Einbettung in BCM Gesamtformel",
-      "description": "U_IDN tritt additiv und unabhängig von λ in U_eff ein",
-      "formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + U_IDN",
-      "dependencies": ["IDN-INT-01"],
-      "references": ["Akerlof & Kranton (2000)", "LAM-INT-01"],
+      "statement": "Varianz-Monotonie",
+      "description": "Norm-Unsicherheit fällt mit Information",
+      "formula": "τ²_η(F,σ) ≥ 0, ∂τ²_η/∂σ ≤ 0, τ²_η(F,1) = 0",
+      "dependencies": ["IDN-NRM-02"],
       "testable": true
     },
     {
-      "id": "IDN-INT-05",
-      "category": "integration",
-      "level": "operation",
-      "statement": "Simultane Optimierung",
-      "description": "Agent optimiert a und φ* simultan",
-      "formula": "max_{a, φ*} U_eff s.t. φ* = (ω₁κ·a + ω₃ψ·η)/(ω₁κ + ω₃ψ)",
-      "dependencies": ["IDN-INT-01", "IDN-KO-02"],
+      "id": "IDN-CNS-04",
+      "category": "constraints",
+      "level": "structure",
+      "statement": "Kosten-Regularität",
+      "description": "Informationskosten konvex",
+      "formula": "C_info konvex in σ: C''_info(σ) ≥ 0",
+      "dependencies": ["IDN-COG-05"],
       "testable": true
     },
     {
-      "id": "IDN-INT-06",
-      "category": "integration",
+      "id": "IDN-CNS-05",
+      "category": "constraints",
+      "level": "structure",
+      "statement": "No-Free-Lunch für MI",
+      "description": "Mehr Präzision macht Verzerrung teurer",
+      "formula": "C_MI wächst wenn τ²_η ↓ (für festes μ̃ ≠ μ_η)",
+      "dependencies": ["IDN-COG-03", "IDN-COG-04"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CNS-06",
+      "category": "constraints",
       "level": "operation",
-      "statement": "Typ-abhängige Optimierung",
-      "description": "Verschiedene Typen erreichen verschiedene Optima",
-      "formula": "a*_Fair ≈ η; a*_SelfDec > η aber θ̂ stabil; a*_Selfish >> η und θ̂ sinkt",
-      "dependencies": ["IDN-INT-05", "IDN-TYP-01", "IDN-TYP-02", "IDN-TYP-03"],
+      "statement": "Regime-Switch Glattheit",
+      "description": "Switch-Wahrscheinlichkeit stetig und glatt",
+      "formula": "P(m=market) ∈ [0,1] und glatt in s",
+      "dependencies": ["IDN-REG-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CNS-07",
+      "category": "constraints",
+      "level": "operation",
+      "statement": "Existenz",
+      "description": "Maximum existiert auf kompakter Menge",
+      "formula": "Gesamtobjective stetig auf [0,1]³ ⟹ Maximum existiert (Weierstrass)",
       "testable": true
     },
     {
       "id": "IDN-PRD-01",
       "category": "predictions",
       "level": "operation",
-      "statement": "Vorhersage: Self-Deception messbar",
-      "description": "Post-Entscheidungs Fairness-Beliefs korrelieren stärker mit Handlung als mit η",
-      "formula": "Corr(Gabe, φ*) > Corr(Gabe, η)",
-      "dependencies": ["IDN-KO-02"],
+      "statement": "Crowding-Out Vorhersage",
+      "description": "Monetäre Incentives können moralisches Verhalten verdrängen",
+      "formula": "∂a_moral/∂s < 0 wenn s > s̄(F): Incentives über Threshold reduzieren moralisches Verhalten",
+      "dependencies": ["IDN-REG-05"],
       "testable": true,
-      "test_design": "Nach Dictator Game fragen: 'Was wäre fair gewesen?'"
+      "references": ["Gneezy & Rustichini (2000)"]
     },
     {
       "id": "IDN-PRD-02",
       "category": "predictions",
       "level": "operation",
-      "statement": "Vorhersage: Information reduziert Self-Deception",
-      "description": "Explizite η-Kommunikation führt zu fairerem Verhalten",
-      "formula": "ψ_explicit > ψ_implicit → φ* näher an η → a näher an η",
-      "dependencies": ["IDN-KO-08"],
+      "statement": "Strategic Ignorance Vorhersage",
+      "description": "Agenten meiden Information wenn sie Self-Deception stört",
+      "formula": "P(σ*=0) > 0 wenn C_MI hoch und τ₀² hoch",
+      "dependencies": ["IDN-OPT-09"],
       "testable": true,
-      "test_design": "Vor Entscheidung explizit kommunizieren was objektiv fair ist"
+      "references": ["Dana, Weber & Kuang (2007)"]
     },
     {
       "id": "IDN-PRD-03",
       "category": "predictions",
       "level": "operation",
-      "statement": "Vorhersage: Zeitverzögerung verstärkt Self-Deception",
-      "description": "Fairness-Beliefs driften über Zeit weiter von η weg",
-      "formula": "φ*_{t+1week} > φ*_{t+0} wenn a > η",
-      "dependencies": ["IDN-KO-07", "IDN-DYN-04"],
-      "testable": true,
-      "test_design": "Fairness-Belief messen (a) sofort und (b) 1 Woche nach Entscheidung"
+      "statement": "Context-Gate Vorhersage",
+      "description": "Affektive F/S-Reaktion stärker bei direktem Kontakt",
+      "formula": "Rejection_rate(face-to-face) > Rejection_rate(anonymous) bei gleichem Angebot",
+      "dependencies": ["IDN-AFF-04"],
+      "testable": true
     },
     {
       "id": "IDN-PRD-04",
       "category": "predictions",
       "level": "operation",
-      "statement": "Vorhersage: Typ-Interaktionen im PGG",
-      "description": "Gruppen-Zusammensetzung determiniert Kooperations-Equilibrium",
-      "formula": "Kooperation(4 Fair) > Kooperation(3F+1S) > Kooperation(4 Selfish)",
-      "dependencies": ["IDN-TYP-01", "IDN-TYP-03", "IDN-DYN-05"],
+      "statement": "Motivated Inference Vorhersage",
+      "description": "μ̃ driftet Richtung a (Self-Serving Bias in Beliefs)",
+      "formula": "Corr(μ̃*, a) > Corr(μ_η, a): Subjektive Norm folgt Verhalten",
+      "dependencies": ["IDN-OPT-05"],
       "testable": true,
-      "test_design": "PGG mit bekannter Typ-Zusammensetzung spielen",
-      "predictions": {
-        "4_fair": ">80% Kooperation",
-        "3_fair_1_selfish": "~40% Kooperation",
-        "2_fair_2_selfdeceptive": "~50% Kooperation",
-        "4_selfish": "<10% Kooperation"
-      }
+      "references": ["Konow (2000)"]
+    },
+    {
+      "id": "IDN-PRD-05",
+      "category": "predictions",
+      "level": "operation",
+      "statement": "Precision-Flexibility Trade-off",
+      "description": "Mehr Präzision erzwingt weniger Self-Deception",
+      "formula": "|φ* - μ_η| sinkt mit σ: Mehr Info → näher an objektiver Norm",
+      "dependencies": ["IDN-COG-04", "IDN-OPT-04"],
+      "testable": true
     }
   ],
   "references": [
     {
       "id": "AK2000",
-      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and Identity. Quarterly Journal of Economics, 115(3), 715-753.",
-      "contribution": "Identität als additiver Term in Nutzenfunktion; Kategorien und Präskriptionen"
-    },
-    {
-      "id": "BT2002",
-      "citation": "Bénabou, R., & Tirole, J. (2002). Self-Confidence and Personal Motivation. Quarterly Journal of Economics, 117(3), 871-915.",
-      "contribution": "Self-Image als Kapital; selektive Erinnerung"
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and Identity. QJE, 115(3), 715-753."
     },
     {
       "id": "BH2025",
-      "citation": "Bénabou, R., & Henkel, L. (2025). Identity and Self-Image. Working Paper.",
-      "contribution": "Identity Capital; θ̂-Dynamik; f(θ̂) Nutzen"
+      "citation": "Bénabou, R., & Henkel, L. (2025). Identity and Self-Image. Working Paper."
     },
     {
       "id": "KO2000",
-      "citation": "Konow, J. (2000). Fair Shares: Accountability and Cognitive Dissonance in Allocation Decisions. American Economic Review, 90(4), 1072-1091.",
-      "contribution": "Endogene Fairness-Beliefs; Self-Deception empirisch gemessen (71%)"
+      "citation": "Konow, J. (2000). Fair Shares: Accountability and Cognitive Dissonance in Allocation Decisions. AER, 90(4), 1072-1091."
     },
     {
       "id": "FS1999",
-      "citation": "Fehr, E., & Schmidt, K. M. (1999). A Theory of Fairness, Competition, and Cooperation. Quarterly Journal of Economics, 114(3), 817-868.",
-      "contribution": "Inequity Aversion; α/β-Parameter"
+      "citation": "Fehr, E., & Schmidt, K. M. (1999). A Theory of Fairness, Competition, and Cooperation. QJE, 114(3), 817-868."
     },
     {
-      "id": "EN2011",
-      "citation": "Engel, C. (2011). Dictator Games: A Meta Study. Experimental Economics, 14(4), 583-610.",
-      "contribution": "Meta-Analyse: Durchschnittliche Gabe ~28%; 36% geben 0"
+      "id": "GR2000",
+      "citation": "Gneezy, U., & Rustichini, A. (2000). A Fine is a Price. Journal of Legal Studies, 29(1), 1-17."
+    },
+    {
+      "id": "DWK2007",
+      "citation": "Dana, J., Weber, R. A., & Kuang, J. X. (2007). Exploiting Moral Wiggle Room. Economic Theory, 33(1), 67-80."
+    },
+    {
+      "id": "GHL2017",
+      "citation": "Golman, R., Hagmann, D., & Loewenstein, G. (2017). Information Avoidance. Journal of Economic Literature, 55(1), 96-135."
+    },
+    {
+      "id": "BOW2008",
+      "citation": "Bowles, S. (2008). Policies Designed for Self-Interested Citizens May Undermine 'The Moral Sentiments'. Science, 320(5883), 1605-1609."
     }
   ],
   "empirical_calibration": {
-    "dictator_game": {
-      "average_giving": "28%",
-      "zero_givers": "36%",
-      "self_deception_rate": "71%",
-      "bcm_fit": "excellent"
+    "crowding_out": {
+      "effect": "Incentives können prosoziales Verhalten um 30-50% reduzieren",
+      "source": "Gneezy & Rustichini (2000)"
     },
-    "ultimatum_game": {
-      "rejection_50_50": "~0%",
-      "rejection_20_80": "~50%",
-      "rejection_10_90": "~75%",
-      "bcm_fit": "excellent"
+    "strategic_ignorance": {
+      "effect": "~40% der Teilnehmer vermeiden Information in Dictator-Varianten",
+      "source": "Dana, Weber & Kuang (2007)"
     },
-    "public_goods_game": {
-      "round_1": "~50%",
-      "round_10_no_punishment": "~15%",
-      "round_10_with_punishment": "~90%",
-      "bcm_fit": "excellent"
+    "self_deception_rate": {
+      "effect": "71% der unfairen Allokatoren zeigen Self-Deception",
+      "source": "Konow (2000)"
     }
   }
 }
