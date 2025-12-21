@@ -1,0 +1,184 @@
+{
+  "module": "IDN",
+  "id": "7236",
+  "version": "2.0",
+  "axiom_count": 70,
+  "meta_formula": "Φ_IDN = Σ π_j · A_j · U_IDN^j",
+  "categories": {
+    "multiplicity": {
+      "range": [1, 20],
+      "prefix": "MUL",
+      "description": "Multiple Identitäten, Aktivierung, Kontextabhängigkeit"
+    },
+    "coherence": {
+      "range": [21, 40],
+      "prefix": "COH",
+      "description": "Identitäts-Kohärenz, Selbstbild, Konsistenz"
+    },
+    "alignment": {
+      "range": [41, 55],
+      "prefix": "ALI",
+      "description": "Verhalten-Identität-Alignment"
+    },
+    "conflict": {
+      "range": [56, 70],
+      "prefix": "CON",
+      "description": "Identitäts-Konflikte, Trade-offs"
+    }
+  },
+  "axioms": [
+    {
+      "id": "IDN-MUL-01",
+      "category": "multiplicity",
+      "level": "foundation",
+      "statement": "Multiple Identitäten",
+      "description": "Individuen haben multiple soziale Identitäten",
+      "formula": "I_σ = {I_1, I_2, ..., I_n}, n ≥ 1",
+      "dependencies": ["MA-ONT-09"],
+      "testable": true
+    },
+    {
+      "id": "IDN-MUL-02",
+      "category": "multiplicity",
+      "level": "foundation",
+      "statement": "Identitäts-Dimensionen",
+      "description": "Beruf, Familie, Nation, Religion, Hobby, etc.",
+      "formula": "I = {Professional, Family, National, Religious, ...}",
+      "dependencies": ["IDN-MUL-01"],
+      "testable": true
+    },
+    {
+      "id": "IDN-MUL-03",
+      "category": "multiplicity",
+      "level": "structure",
+      "statement": "Kontext-Aktivierung",
+      "description": "Kontext aktiviert spezifische Identitäten",
+      "formula": "π_j = f(ρ), Σ π_j = 1",
+      "dependencies": ["IDN-MUL-01", "MA-ONT-17"],
+      "testable": true
+    },
+    {
+      "id": "IDN-MUL-04",
+      "category": "multiplicity",
+      "level": "structure",
+      "statement": "Salienz",
+      "description": "Manche Identitäten sind salienter als andere",
+      "formula": "Salience(I_j) varies by ρ",
+      "dependencies": ["IDN-MUL-03"],
+      "testable": true
+    },
+    {
+      "id": "IDN-MUL-05",
+      "category": "multiplicity",
+      "level": "operation",
+      "statement": "Priming-Effekte",
+      "description": "Identität kann durch Cues aktiviert werden",
+      "formula": "π_j(post-prime) > π_j(pre-prime)",
+      "dependencies": ["IDN-MUL-03"],
+      "testable": true
+    },
+    {
+      "id": "IDN-COH-01",
+      "category": "coherence",
+      "level": "foundation",
+      "statement": "Selbstbild-Konsistenz",
+      "description": "Menschen streben nach kohärentem Selbstbild",
+      "formula": "U(Coherence) > U(Incoherence)",
+      "dependencies": ["IDN-MUL-01"],
+      "testable": true
+    },
+    {
+      "id": "IDN-COH-02",
+      "category": "coherence",
+      "level": "foundation",
+      "statement": "Kognitive Dissonanz",
+      "description": "Inkonsistenz zwischen Verhalten und Identität ist unangenehm",
+      "formula": "Dissonance = f(|Behavior - Identity|)",
+      "dependencies": ["IDN-COH-01"],
+      "testable": true,
+      "references": ["Festinger (1957)"]
+    },
+    {
+      "id": "IDN-COH-03",
+      "category": "coherence",
+      "level": "structure",
+      "statement": "Dissonanz-Reduktion",
+      "description": "Menschen reduzieren Dissonanz durch Einstellungsänderung",
+      "formula": "∂Attitude/∂Behavior > 0 post-commitment",
+      "dependencies": ["IDN-COH-02"],
+      "testable": true
+    },
+    {
+      "id": "IDN-COH-04",
+      "category": "coherence",
+      "level": "structure",
+      "statement": "Self-Perception",
+      "description": "Verhalten informiert Selbstbild",
+      "formula": "Identity = f(ObservedBehavior)",
+      "dependencies": ["IDN-COH-01"],
+      "testable": true,
+      "references": ["Bem (1967)"]
+    },
+    {
+      "id": "IDN-ALI-01",
+      "category": "alignment",
+      "level": "foundation",
+      "statement": "Alignment-Funktion",
+      "description": "Verhalten hat Alignment-Score mit Identität",
+      "formula": "A: V × I → [-1, 1]",
+      "dependencies": ["MA-ONT-18"],
+      "testable": true
+    },
+    {
+      "id": "IDN-ALI-02",
+      "category": "alignment",
+      "level": "structure",
+      "statement": "Identitäts-Nutzen",
+      "description": "Alignment generiert Nutzen",
+      "formula": "U_IDN = Σ π_j · A_j · w_j",
+      "dependencies": ["IDN-ALI-01", "IDN-MUL-03"],
+      "testable": true
+    },
+    {
+      "id": "IDN-ALI-03",
+      "category": "alignment",
+      "level": "operation",
+      "statement": "Identity-Consistent Behavior",
+      "description": "Identitäts-konsistentes Verhalten ist einfacher",
+      "formula": "Effort(V|Aligned) < Effort(V|Misaligned)",
+      "dependencies": ["IDN-ALI-01"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CON-01",
+      "category": "conflict",
+      "level": "foundation",
+      "statement": "Identitäts-Konflikte",
+      "description": "Multiple Identitäten können konfligieren",
+      "formula": "∃ V: A(V, I_j) · A(V, I_k) < 0",
+      "dependencies": ["IDN-MUL-01", "IDN-ALI-01"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CON-02",
+      "category": "conflict",
+      "level": "structure",
+      "statement": "Konflikt-Stress",
+      "description": "Identitäts-Konflikte erzeugen psychologischen Stress",
+      "formula": "Stress = f(Conflict_Intensity)",
+      "dependencies": ["IDN-CON-01"],
+      "testable": true
+    },
+    {
+      "id": "IDN-CON-03",
+      "category": "conflict",
+      "level": "operation",
+      "statement": "Konflikt-Resolution",
+      "description": "Konflikte werden durch Priorisierung gelöst",
+      "formula": "Choose I_j where Priority(I_j) = max",
+      "dependencies": ["IDN-CON-01"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 15 von 70 Axiomen - weitere nach Bedarf hinzufügen"
+}

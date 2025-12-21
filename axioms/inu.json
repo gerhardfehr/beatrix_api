@@ -1,0 +1,235 @@
+{
+  "module": "INU",
+  "id": "7234",
+  "version": "2.0",
+  "axiom_count": 59,
+  "meta_formula": "Φ_INU = V_base + Σ[ω_d(G_d - λ_d·P_d)] + C + CB - CD",
+  "categories": {
+    "fepsde_foundation": {
+      "range": [1, 12],
+      "prefix": "FEP",
+      "description": "FEPSDE-Dimensionen: Financial, Emotional, Physical, Social, Digital, Ecological"
+    },
+    "gains_pains": {
+      "range": [13, 30],
+      "prefix": "GAP",
+      "description": "Gains und Pains, Loss Aversion, Reference Points"
+    },
+    "cognitive": {
+      "range": [31, 45],
+      "prefix": "COG",
+      "description": "Kognitive Faktoren, Biases, Heuristiken"
+    },
+    "behavioral": {
+      "range": [46, 59],
+      "prefix": "BEH",
+      "description": "Verhaltens-Patterns, Habits, Decisions"
+    }
+  },
+  "axioms": [
+    {
+      "id": "INU-FEP-01",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "6 Nutzen-Dimensionen",
+      "description": "Individueller Nutzen hat sechs Dimensionen: FEPSDE",
+      "formula": "U_INU = f(F, E, P, S, D, Ec)",
+      "dependencies": ["MA-ONT-08"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-02",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Financial: Materieller Nutzen",
+      "description": "Geld, Vermögen, materielle Ressourcen",
+      "formula": "F = f(Income, Wealth, MaterialGoods)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-03",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Emotional: Affektiver Nutzen",
+      "description": "Gefühle, Wohlbefinden, Zufriedenheit",
+      "formula": "E = f(Affect, Wellbeing, Satisfaction)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-04",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Physical: Körperlicher Nutzen",
+      "description": "Gesundheit, Fitness, körperliches Wohlbefinden",
+      "formula": "P = f(Health, Fitness, PhysicalComfort)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-05",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Social: Sozialer Nutzen",
+      "description": "Beziehungen, Status, Zugehörigkeit",
+      "formula": "S = f(Relationships, Status, Belonging)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-06",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Digital: Digitaler Nutzen",
+      "description": "Online-Präsenz, digitale Identität, Konnektivität",
+      "formula": "D = f(OnlinePresence, DigitalAccess, Connectivity)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-07",
+      "category": "fepsde_foundation",
+      "level": "foundation",
+      "statement": "Ecological: Ökologischer Nutzen",
+      "description": "Umwelt, Nachhaltigkeit, Naturverbindung",
+      "formula": "Ec = f(EnvironmentQuality, Sustainability, NatureConnection)",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-08",
+      "category": "fepsde_foundation",
+      "level": "structure",
+      "statement": "Gewichtung ω",
+      "description": "Dimensionen haben individuelle Gewichte",
+      "formula": "ω_d ∈ [0,1], Σ_d ω_d = 1",
+      "dependencies": ["INU-FEP-01", "MA-ONT-16"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-09",
+      "category": "fepsde_foundation",
+      "level": "structure",
+      "statement": "Gewichte sind kontextabhängig",
+      "description": "ω variiert mit Situation",
+      "formula": "ω = f(ρ, σ, τ)",
+      "dependencies": ["INU-FEP-08"],
+      "testable": true
+    },
+    {
+      "id": "INU-FEP-10",
+      "category": "fepsde_foundation",
+      "level": "structure",
+      "statement": "Substitution begrenzt",
+      "description": "Dimensionen sind nicht perfekt substituierbar",
+      "formula": "∂²U/∂d_i∂d_j < ∞",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-GAP-01",
+      "category": "gains_pains",
+      "level": "foundation",
+      "statement": "Gains und Pains",
+      "description": "Nutzen = Gains minus Pains",
+      "formula": "U_d = G_d - λ·P_d",
+      "dependencies": ["INU-FEP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-GAP-02",
+      "category": "gains_pains",
+      "level": "foundation",
+      "statement": "Loss Aversion",
+      "description": "λ > 1: Verluste wiegen schwerer",
+      "formula": "λ ≈ 2.0 (empirisch)",
+      "dependencies": ["INU-GAP-01", "MA-EPI-15"],
+      "testable": true,
+      "references": ["Kahneman & Tversky (1979)"]
+    },
+    {
+      "id": "INU-GAP-03",
+      "category": "gains_pains",
+      "level": "structure",
+      "statement": "Reference Point",
+      "description": "Gains/Pains relativ zum Referenzpunkt",
+      "formula": "G = Outcome - Reference, P = Reference - Outcome",
+      "dependencies": ["INU-GAP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-GAP-04",
+      "category": "gains_pains",
+      "level": "structure",
+      "statement": "Reference Point ist adaptiv",
+      "description": "Referenzpunkt passt sich an",
+      "formula": "Ref(τ+Δτ) = f(Ref(τ), Outcomes)",
+      "dependencies": ["INU-GAP-03", "MA-DYN-19"],
+      "testable": true
+    },
+    {
+      "id": "INU-GAP-05",
+      "category": "gains_pains",
+      "level": "operation",
+      "statement": "Diminishing Sensitivity",
+      "description": "Abnehmende Sensitivität für Gains/Pains",
+      "formula": "∂²U/∂G² < 0, ∂²U/∂P² < 0",
+      "dependencies": ["INU-GAP-01"],
+      "testable": true
+    },
+    {
+      "id": "INU-COG-01",
+      "category": "cognitive",
+      "level": "foundation",
+      "statement": "Cognitive Budget",
+      "description": "Kognitive Ressourcen sind begrenzt",
+      "formula": "Σ CognitiveEffort ≤ Budget",
+      "dependencies": ["MA-EPI-02"],
+      "testable": true
+    },
+    {
+      "id": "INU-COG-02",
+      "category": "cognitive",
+      "level": "structure",
+      "statement": "Choice Overload",
+      "description": "Zu viele Optionen senken Zufriedenheit",
+      "formula": "∂Satisfaction/∂Options < 0 für Options > θ",
+      "dependencies": ["INU-COG-01"],
+      "testable": true,
+      "references": ["Iyengar & Lepper (2000)"]
+    },
+    {
+      "id": "INU-COG-03",
+      "category": "cognitive",
+      "level": "structure",
+      "statement": "Mental Accounting",
+      "description": "Geld wird in mentalen Konten kategorisiert",
+      "formula": "U(Money) = f(Account) nicht fungibel",
+      "dependencies": ["INU-FEP-02"],
+      "testable": true,
+      "references": ["Thaler (1999)"]
+    },
+    {
+      "id": "INU-BEH-01",
+      "category": "behavioral",
+      "level": "foundation",
+      "statement": "Default-Effekt",
+      "description": "Defaults haben überproportionalen Einfluss",
+      "formula": "P(Choice|Default) >> P(Choice|NonDefault)",
+      "dependencies": ["MA-EPI-17"],
+      "testable": true
+    },
+    {
+      "id": "INU-BEH-02",
+      "category": "behavioral",
+      "level": "structure",
+      "statement": "Commitment-Effekt",
+      "description": "Commitment erhöht Durchhalterate",
+      "formula": "P(Complete|Committed) > P(Complete|NonCommitted)",
+      "dependencies": ["MA-DYN-09"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 20 von 59 Axiomen - weitere nach Bedarf hinzufügen"
+}

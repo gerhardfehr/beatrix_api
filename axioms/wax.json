@@ -1,0 +1,167 @@
+{
+  "module": "WAX",
+  "id": "7243",
+  "version": "2.0",
+  "axiom_count": 30,
+  "meta_formula": "WAX = λ · WAX^compl + (1-λ) · WAX^add",
+  "categories": {
+    "willingness": {
+      "range": [1, 10],
+      "prefix": "WIL",
+      "description": "Bereitschaft zu handeln"
+    },
+    "lambda": {
+      "range": [11, 20],
+      "prefix": "LAM",
+      "description": "λ-Hybrid-Logik: additiv vs. komplementär"
+    },
+    "barriers": {
+      "range": [21, 30],
+      "prefix": "BAR",
+      "description": "Barrieren, Hindernisse, Frictions"
+    }
+  },
+  "axioms": [
+    {
+      "id": "WAX-WIL-01",
+      "category": "willingness",
+      "level": "foundation",
+      "statement": "WAX setzt AWX voraus",
+      "description": "Willingness braucht Awareness",
+      "formula": "WAX = f(AWX, U, Γ)",
+      "dependencies": ["MA-EPI-08", "AWX-AWR-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-WIL-02",
+      "category": "willingness",
+      "level": "foundation",
+      "statement": "WAX-Skala",
+      "description": "Willingness auf 5-Punkt-Skala messbar",
+      "formula": "WAX ∈ {1, 2, 3, 4, 5}",
+      "dependencies": ["WAX-WIL-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-WIL-03",
+      "category": "willingness",
+      "level": "structure",
+      "statement": "WAX < 3 = Barrieren senken",
+      "description": "Bei niedrigem WAX Barrieren reduzieren",
+      "formula": "If WAX < 3: Intervention = NUDGE/DESIGN",
+      "dependencies": ["WAX-WIL-02"],
+      "testable": true
+    },
+    {
+      "id": "WAX-WIL-04",
+      "category": "willingness",
+      "level": "operation",
+      "statement": "WAX ≥ 3 = Trigger setzen",
+      "description": "Bei hohem WAX nur noch Trigger nötig",
+      "formula": "If WAX ≥ 3: Intervention = Trigger/Reminder",
+      "dependencies": ["WAX-WIL-02"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-01",
+      "category": "lambda",
+      "level": "foundation",
+      "statement": "λ-Hybrid-Kontinuum",
+      "description": "λ reguliert additiv vs. komplementär",
+      "formula": "WAX = λ · WAX^compl + (1-λ) · WAX^add",
+      "dependencies": ["MA-ONT-14", "MA-ONT-15"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-02",
+      "category": "lambda",
+      "level": "foundation",
+      "statement": "λ = 0: Additiv (Homo oeconomicus)",
+      "description": "Rein individueller Nutzen",
+      "formula": "WAX^add = Σ ω_i · U_i",
+      "dependencies": ["WAX-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-03",
+      "category": "lambda",
+      "level": "foundation",
+      "statement": "λ = 1: Komplementär (schwächstes Glied)",
+      "description": "Gesamtnutzen begrenzt durch schwächste Komponente",
+      "formula": "WAX^compl = min(U_INU, U_KNU, U_IDN)",
+      "dependencies": ["WAX-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-04",
+      "category": "lambda",
+      "level": "structure",
+      "statement": "λ ist kontextabhängig",
+      "description": "Lambda variiert mit Situation",
+      "formula": "λ = f(ρ, σ, τ)",
+      "dependencies": ["WAX-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-05",
+      "category": "lambda",
+      "level": "structure",
+      "statement": "λ-Segmentierung",
+      "description": "Zielgruppen nach λ segmentierbar",
+      "formula": "Segment_low: λ < 0.3, Segment_mid: 0.3 ≤ λ ≤ 0.7, Segment_high: λ > 0.7",
+      "dependencies": ["WAX-LAM-04"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-06",
+      "category": "lambda",
+      "level": "operation",
+      "statement": "λ < 0.3: INU-Fokus",
+      "description": "Bei niedrigem λ individuellen Nutzen betonen",
+      "formula": "Intervention_focus = INU-based",
+      "dependencies": ["WAX-LAM-05"],
+      "testable": true
+    },
+    {
+      "id": "WAX-LAM-07",
+      "category": "lambda",
+      "level": "operation",
+      "statement": "λ > 0.7: KNU/IDN-Fokus",
+      "description": "Bei hohem λ kollektiven/Identitäts-Nutzen betonen",
+      "formula": "Intervention_focus = KNU/IDN-based",
+      "dependencies": ["WAX-LAM-05"],
+      "testable": true
+    },
+    {
+      "id": "WAX-BAR-01",
+      "category": "barriers",
+      "level": "foundation",
+      "statement": "Barrieren reduzieren WAX",
+      "description": "Hindernisse senken Handlungsbereitschaft",
+      "formula": "WAX = WAX_potential - Barriers",
+      "dependencies": ["WAX-WIL-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-BAR-02",
+      "category": "barriers",
+      "level": "structure",
+      "statement": "Friction Types",
+      "description": "Kognitive, physische, soziale, emotionale Barrieren",
+      "formula": "Barriers = B_cog + B_phys + B_soc + B_emo",
+      "dependencies": ["WAX-BAR-01"],
+      "testable": true
+    },
+    {
+      "id": "WAX-BAR-03",
+      "category": "barriers",
+      "level": "operation",
+      "statement": "NUDGE reduziert Frictions",
+      "description": "Choice Architecture senkt Barrieren",
+      "formula": "∂Barriers/∂NUDGE < 0",
+      "dependencies": ["WAX-BAR-01", "MA-GOV-07"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 14 von 30 Axiomen - weitere nach Bedarf hinzufügen"
+}
