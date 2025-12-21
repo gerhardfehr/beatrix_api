@@ -1,10 +1,11 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.0",
-  "axiom_count": 46,
-  "meta_formula": "λ_eff(σ, ρ, t) = λ_Person(σ) + Δλ_Kontext(ρ) + Δλ_Institution(I) + Δλ_Dynamik(t) - Δλ_Antisozial(A)",
+  "version": "2.1",
+  "axiom_count": 68,
+  "meta_formula": "λ_eff = λ_Person + Σ Δλ_Kontext(ρ_i) + Δλ_Institution(I) + Δλ_Dynamik(t) - Δλ_Antisozial(A)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
+  "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -30,6 +31,43 @@
       "range": [36, 46],
       "prefix": "ANT",
       "description": "Anti-soziale Bestrafung nach Herrmann/Thöni/Gächter (2008)"
+    },
+    "context": {
+      "range": [47, 68],
+      "prefix": "CTX",
+      "description": "22 Kontext-Dimensionen für Δλ_Kontext",
+      "subgroups": {
+        "structural": {
+          "prefix": "STR",
+          "dimensions": ["BCM-Ebene", "Kultur", "Domäne"],
+          "description": "Strukturelle Rahmenbedingungen"
+        },
+        "relational": {
+          "prefix": "REL",
+          "dimensions": ["Soziale Distanz", "Ingroup/Outgroup", "Macht/Status", "Vertrauen", "Reziprozitäts-Historie"],
+          "description": "Beziehung zwischen Akteuren"
+        },
+        "situational": {
+          "prefix": "SIT",
+          "dimensions": ["Sichtbarkeit", "Anonymität", "Gruppengröße", "Kommunikation", "Freiwilligkeit", "Default"],
+          "description": "Situative Faktoren"
+        },
+        "resources": {
+          "prefix": "RES",
+          "dimensions": ["Knappheit", "Stakes"],
+          "description": "Ressourcen-Bedingungen"
+        },
+        "temporal": {
+          "prefix": "TEM",
+          "dimensions": ["Temporalität", "Wiederholung"],
+          "description": "Zeitliche Faktoren"
+        },
+        "psychological": {
+          "prefix": "PSY",
+          "dimensions": ["Emotion", "Fairness", "Framing", "Komplexität"],
+          "description": "Psychologische Zustände"
+        }
+      }
     }
   },
   "axioms": [
@@ -597,6 +635,326 @@
       "formula": "Empfehle Peer Punishment nur wenn E[P_prosocial/P_antisocial] > 3",
       "dependencies": ["LAM-ANT-06", "LAM-ANT-07"],
       "testable": false
+    },
+    {
+      "id": "LAM-CTX-01",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "BCM-Ebene moduliert λ",
+      "description": "5 Ebenen: META, MAKRO, MESO, MIKRO, IND mit unterschiedlichen λ-Baseline",
+      "formula": "Δλ_Ebene = {META: ±0.2, MAKRO: ±0.15, MESO: ±0.10, MIKRO: ±0.15, IND: 0}",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-01a", "statement": "META: Kulturelle Grundnormen, λ variiert 0.3-0.8 zwischen Kulturen"},
+        {"id": "CTX-01b", "statement": "MAKRO: Institutionelle Ebene, f(RuleOfLaw, Democracy)"},
+        {"id": "CTX-01c", "statement": "MESO: Organisationsebene, Organisationskultur"},
+        {"id": "CTX-01d", "statement": "MIKRO: Gruppenebene, Reputation + Wiederholung"},
+        {"id": "CTX-01e", "statement": "IND: Personenebene = λ_Person (Trait)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-02",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "Kultur moduliert λ",
+      "description": "Individualistisch vs. Kollektivistisch als Grundorientierung",
+      "formula": "Δλ_Kultur ∈ [-0.2, +0.2]; kollektivistisch → +Δλ",
+      "dependencies": ["LAM-CTX-01"],
+      "testable": true,
+      "references": ["Hofstede (1980)", "Herrmann et al. (2008)"],
+      "corollaries": [
+        {"id": "CTX-02a", "statement": "Nordeuropa/Angelsächsisch: λ_Kultur ≈ +0.15"},
+        {"id": "CTX-02b", "statement": "Mittelmeer/Nahost: λ_Kultur ≈ -0.10 (mehr anti-soziale Bestrafung)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-03",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "Domäne moduliert λ",
+      "description": "Unterschiedliche λ-Werte je nach Lebensbereich",
+      "formula": "Δλ_Domäne = f(Domäne); Domäne ∈ {Arbeit, Freizeit, Konsum, Gesundheit, Umwelt}",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-03a", "statement": "Umwelt: λ hoch wenn kollektive Betroffenheit salient"},
+        {"id": "CTX-03b", "statement": "Konsum: λ oft niedrig (individuelle Entscheidung)"},
+        {"id": "CTX-03c", "statement": "Gesundheit: λ variabel (Impfen hoch, Ernährung niedrig)"},
+        {"id": "CTX-03d", "statement": "Arbeit: λ abhängig von Team vs. Individual-Incentives"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-04",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "foundation",
+      "statement": "Soziale Distanz moduliert λ",
+      "description": "Je näher die Beziehung, desto höher λ",
+      "formula": "Δλ_Distanz = -α × SozialeDistanz; α > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-04a", "statement": "Intim (Familie, Partner): Δλ ≈ +0.25"},
+        {"id": "CTX-04b", "statement": "Peer (Freunde, Kollegen): Δλ ≈ +0.15"},
+        {"id": "CTX-04c", "statement": "Community (Nachbarn): Δλ ≈ +0.05"},
+        {"id": "CTX-04d", "statement": "Organisation: Δλ ≈ 0"},
+        {"id": "CTX-04e", "statement": "Gesellschaft (Anonyme): Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-05",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "foundation",
+      "statement": "Ingroup/Outgroup moduliert λ",
+      "description": "Höhere Kooperation mit Ingroup-Mitgliedern",
+      "formula": "Δλ_Gruppe = +β wenn Ingroup, -β wenn Outgroup; β ≈ 0.15",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Tajfel & Turner (1979)"]
+    },
+    {
+      "id": "LAM-CTX-06",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Macht/Status moduliert λ",
+      "description": "Machtasymmetrie beeinflusst Kooperationsbereitschaft",
+      "formula": "Δλ_Macht = f(Machtdifferenz); nicht-monoton",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Fiske (1992)"],
+      "corollaries": [
+        {"id": "CTX-06a", "statement": "Symmetrisch: λ höher (Peer-Kooperation)"},
+        {"id": "CTX-06b", "statement": "Asymmetrisch: λ_mächtig oft niedriger, λ_schwach variabel"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-07",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Vertrauen moduliert λ",
+      "description": "Baseline-Vertrauen erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Trust = γ × Trust; γ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-ANT-07"],
+      "testable": true,
+      "references": ["Herrmann et al. (2008)"],
+      "corollaries": [
+        {"id": "CTX-07a", "statement": "High-Trust-Gesellschaft: Δλ ≈ +0.15"},
+        {"id": "CTX-07b", "statement": "Low-Trust-Gesellschaft: Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-08",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Reziprozitäts-Historie moduliert λ",
+      "description": "Positive Erfahrungen erhöhen λ, negative senken es",
+      "formula": "Δλ_History = δ × Σ(vergangene_Kooperation); δ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "references": ["Axelrod (1984)"]
+    },
+    {
+      "id": "LAM-CTX-09",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Sichtbarkeit moduliert λ",
+      "description": "Beobachtung erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Sichtbarkeit = +0.15 wenn beobachtet, 0 wenn privat",
+      "dependencies": ["LAM-LAM-07"],
+      "testable": true,
+      "references": ["Ariely et al. (2009)"]
+    },
+    {
+      "id": "LAM-CTX-10",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Anonymität moduliert λ",
+      "description": "Anonymität reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Anonymität = -0.10 wenn anonym, 0 wenn identifizierbar",
+      "dependencies": ["LAM-LAM-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-CTX-11",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Gruppengröße moduliert λ",
+      "description": "Größere Gruppen reduzieren individuelle Kooperationsbereitschaft",
+      "formula": "Δλ_Größe = -ε × log(n); ε > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Olson (1965)"],
+      "corollaries": [
+        {"id": "CTX-11a", "statement": "n=2-4: Δλ ≈ 0 (Baseline)"},
+        {"id": "CTX-11b", "statement": "n=10-20: Δλ ≈ -0.05"},
+        {"id": "CTX-11c", "statement": "n>100: Δλ ≈ -0.15"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-12",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Kommunikation moduliert λ",
+      "description": "Kommunikationsmöglichkeit erhöht Kooperation",
+      "formula": "Δλ_Kommunikation = +0.20 wenn möglich, 0 wenn keine",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Sally (1995)"]
+    },
+    {
+      "id": "LAM-CTX-13",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Freiwilligkeit moduliert λ",
+      "description": "Freiwillige Teilnahme erhöht intrinsische Motivation",
+      "formula": "Δλ_Freiwilligkeit = +0.10 wenn freiwillig, -0.05 wenn erzwungen",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Deci & Ryan (1985)"]
+    },
+    {
+      "id": "LAM-CTX-14",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Default moduliert λ",
+      "description": "Opt-out Default erhöht Kooperationsrate",
+      "formula": "Δλ_Default = +0.25 bei Opt-out vs. Opt-in",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Thaler & Sunstein (2008)"]
+    },
+    {
+      "id": "LAM-CTX-15",
+      "category": "context",
+      "subgroup": "resources",
+      "level": "structure",
+      "statement": "Knappheit moduliert λ",
+      "description": "Ressourcenknappheit reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Scarcity = -ζ × Scarcity; ζ > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Mullainathan & Shafir (2013)"],
+      "corollaries": [
+        {"id": "CTX-15a", "statement": "Überfluss: Δλ ≈ +0.05"},
+        {"id": "CTX-15b", "statement": "Moderate Knappheit: Δλ ≈ -0.10"},
+        {"id": "CTX-15c", "statement": "Extreme Knappheit: Δλ ≈ -0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-16",
+      "category": "context",
+      "subgroup": "resources",
+      "level": "structure",
+      "statement": "Stakes moduliert λ",
+      "description": "Höhere Einsätze können λ senken oder erhöhen",
+      "formula": "Δλ_Stakes = nicht-monoton; oft ↓ bei sehr hohen Stakes",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Camerer & Hogarth (1999)"]
+    },
+    {
+      "id": "LAM-CTX-17",
+      "category": "context",
+      "subgroup": "temporal",
+      "level": "structure",
+      "statement": "Temporalität moduliert λ",
+      "description": "Langfrist-Orientierung erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Zeit = +η × Zeithorizont; η > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-17a", "statement": "Kurzfristig: Δλ ≈ -0.10"},
+        {"id": "CTX-17b", "statement": "Langfristig: Δλ ≈ +0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-18",
+      "category": "context",
+      "subgroup": "temporal",
+      "level": "structure",
+      "statement": "Wiederholung moduliert λ",
+      "description": "Wiederholte Interaktion ermöglicht Reputation und Reziprozität",
+      "formula": "Δλ_Repeat = +θ × (1 - 1/E[Runden]); θ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "references": ["Axelrod (1984)"],
+      "corollaries": [
+        {"id": "CTX-18a", "statement": "Einmalig (Runde=1): Δλ = 0"},
+        {"id": "CTX-18b", "statement": "Wiederholt (Runden>10): Δλ ≈ +0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-19",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Emotionaler Zustand moduliert λ",
+      "description": "Emotionen beeinflussen Kooperationsbereitschaft bidirektional",
+      "formula": "Δλ_Emotion = f(Valenz, Arousal); komplex",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-19a", "statement": "Positive Emotion: Δλ ≈ +0.10"},
+        {"id": "CTX-19b", "statement": "Wut/Frustration: Δλ ≈ -0.15"},
+        {"id": "CTX-19c", "statement": "Angst: Δλ variabel (↑ bei Solidaritäts-Frame)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-20",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Fairness-Wahrnehmung moduliert λ",
+      "description": "Wahrgenommene Unfairness reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Fairness = +ι × FairnessPerception; ι > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Fehr & Schmidt (1999)"],
+      "corollaries": [
+        {"id": "CTX-20a", "statement": "Fair: Δλ ≈ +0.10"},
+        {"id": "CTX-20b", "statement": "Unfair: Δλ ≈ -0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-21",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Framing moduliert λ",
+      "description": "Kooperations-Frame vs. Wettbewerbs-Frame",
+      "formula": "Δλ_Framing = +0.15 bei Kooperations-Frame, -0.15 bei Wettbewerbs-Frame",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Liberman et al. (2004)"]
+    },
+    {
+      "id": "LAM-CTX-22",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Komplexität moduliert λ",
+      "description": "Hohe Komplexität reduziert strategisches Kooperieren",
+      "formula": "Δλ_Komplexität = -κ × Komplexität; κ > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-22a", "statement": "Einfach (klare Payoffs): Δλ ≈ 0"},
+        {"id": "CTX-22b", "statement": "Komplex (unsichere Outcomes): Δλ ≈ -0.10"}
+      ]
     }
   ],
   "references": [
