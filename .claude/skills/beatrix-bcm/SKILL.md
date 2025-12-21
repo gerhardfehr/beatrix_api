@@ -130,6 +130,24 @@ PHASE 5: EVALUATION  → Wirksamkeit messen, iterieren
 
 **Detaillierter Workflow-Guide**: `resources/workflow-guide.md`
 
+## Daten-Inputs
+
+Vor jeder BCM-Analyse müssen diese Daten erfasst werden:
+
+```
+1. PROJEKT-DEFINITION     → Ziel, Zeitrahmen, Erfolgskriterium
+2. ZIELVERHALTEN          → Was soll geändert werden?
+3. ZIELGRUPPE (σ)         → Wer? Segmente?
+4. KONTEXT (ρ)            → Physisch, sozial, institutionell, kulturell
+5. BASELINE               → Aktuelles Verhalten (%)
+6. FEPSDE-GEWICHTUNGEN    → ω pro Dimension (Σ = 100%)
+7. SOZIALE STRUKTUR       → Normen, Sanktionen, Vertrauen
+8. IDENTITÄTS-LANDSCHAFT  → Aktive Identitäten, Konflikte
+9. RESSOURCEN             → Budget, Zeit, Kanäle, Constraints
+```
+
+**Vollständiges Input-Template**: `resources/data-input-template.md`
+
 ## Constraints
 
 ### Epistemologisch
