@@ -1,14 +1,19 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.4",
+  "version": "2.5",
   "axiom_count": 88,
   "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
   "trajectory_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t), wobei λ_0 = λ_Person + Σ Δλ_Kontext",
-  "integration_formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + I_IDN(a; c, ε, P)",
-  "integration_note": "IDN ist additiv nach Akerlof/Kranton (2000): Identität tritt unabhängig von λ in die Nutzenfunktion ein",
+  "integration_formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + U_IDN(a,σ,φ,μ̃;F,s,m)",
+  "integration_note": "IDN ist BCM 2.2 Vollmodell mit Regime-Switch, Motivated Inference, Strategic Ignorance (siehe idn.json v2.2)",
+  "bcm_2_2_reference": {
+    "U_IDN": "U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+    "control_variables": ["σ (Info-Präzision)", "a (Handlung)", "μ̃ (Motivated Mean)", "φ (Subjektive Norm)"],
+    "regime": "m ∈ {moral, market} mit P(market|s,F) = Λ(γ(s-s̄))"
+  },
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -88,21 +93,30 @@
     "integration": {
       "range": [79, 88],
       "prefix": "INT",
-      "description": "Integration von λ mit INU, KNU, IDN",
+      "description": "Integration von λ mit INU, KNU, IDN (BCM 2.2)",
       "coupling": {
         "INU": "Individueller Nutzen - gewichtet mit (1-λ)",
         "KNU": "Kollektiver Nutzen - gewichtet mit λ",
-        "IDN": "Identitätsnutzen - additiv, unabhängig von λ (Akerlof/Kranton 2000)"
+        "IDN": "Identitätsnutzen - BCM 2.2 Vollmodell, additiv, unabhängig von λ"
       },
-      "akerlof_kranton_idn": {
-        "formula": "I_IDN = I(a; c, ε, P)",
+      "bcm_2_2_idn": {
+        "formula": "U_IDN = U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
         "components": {
-          "a": "Eigene Aktionen",
-          "c": "Soziale Kategorien (Identitätsgruppen)",
-          "ε": "Persönliche Charakteristiken",
-          "P": "Präskriptionen (Verhaltensvorschriften pro Kategorie)"
+          "σ": "Informationspräzision ∈ [0,1] - endogen gewählt",
+          "a": "Handlung ∈ [0,1]",
+          "μ̃": "Motivated mean ∈ [0,1] - subjektiver Norm-Anker",
+          "φ": "Subjektive Norm ∈ [0,1] - 'was ich mir als fair erzähle'",
+          "m": "Regime ∈ {moral, market} - Crowding-Out",
+          "L_aff": "Context-gated Fehr/Schmidt: ρ(F,m)·L_FS(x)",
+          "C_MI": "Motivated Inference Kosten",
+          "C_info": "Informationskosten"
         },
-        "mechanism": "Identitätsverlust wenn Aktionen gegen Präskriptionen der eigenen Kategorie verstoßen"
+        "closed_forms": {
+          "φ*": "(ω₁κ·a + ω₃ψ·μ̃) / (ω₁κ + ω₃ψ)",
+          "μ̃*": "(K·a + H·μ_η) / (K + H)",
+          "σ*": "KKT: V'(σ*)=0 oder Rand (Strategic Ignorance wenn σ*=0)"
+        },
+        "reference": "idn.json v2.2"
       }
     }
   },
@@ -1109,13 +1123,13 @@
       "id": "LAM-INT-01",
       "category": "integration",
       "level": "foundation",
-      "statement": "λ reguliert INU vs. KNU; IDN additiv unabhängig",
-      "description": "Lambda gewichtet INU und KNU; Identitätsnutzen tritt nach Akerlof/Kranton additiv ein",
-      "formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + I_IDN(a; c, ε, P)",
-      "dependencies": ["LAM-LAM-01", "MA-ONT-14"],
+      "statement": "λ reguliert INU vs. KNU; IDN additiv als BCM 2.2 Vollmodell",
+      "description": "Lambda gewichtet INU und KNU; U_IDN ist BCM 2.2 mit Regime-Switch, Motivated Inference, Strategic Ignorance",
+      "formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + U_IDN(a,σ,φ,μ̃;F,s,m)",
+      "dependencies": ["LAM-LAM-01", "MA-ONT-14", "IDN-OPT-01"],
       "testable": true,
       "validates": ["META", "INU", "KNU", "IDN"],
-      "references": ["Akerlof & Kranton (2000)"]
+      "references": ["BCM 2.2", "idn.json v2.2"]
     },
     {
       "id": "LAM-INT-02",
@@ -1149,16 +1163,17 @@
       "id": "LAM-INT-04",
       "category": "integration",
       "level": "structure",
-      "statement": "I_IDN Berechnung nach Akerlof/Kranton",
-      "description": "Identitätsnutzen hängt von Übereinstimmung zwischen Aktion und Präskription ab",
-      "formula": "I_IDN = I_0 - Σ_c [t_c × L_c(a, P_c)]; t_c = Salienz der Kategorie c, L_c = Verlust bei Normverletzung",
-      "dependencies": ["LAM-INT-01"],
+      "statement": "U_IDN Berechnung nach BCM 2.2",
+      "description": "Identitätsnutzen mit Regime-Switch, Motivated Inference und Strategic Ignorance",
+      "formula": "U_IDN = U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+      "dependencies": ["LAM-INT-01", "IDN-OPT-01"],
       "testable": true,
-      "references": ["Akerlof & Kranton (2000, 2010)"],
+      "references": ["BCM 2.2", "idn.json v2.2"],
       "corollaries": [
-        {"id": "INT-04a", "statement": "I_0: Baseline-Identitätsnutzen bei voller Konformität"},
-        {"id": "INT-04b", "statement": "L_c > 0 wenn Aktion gegen Präskription verstößt"},
-        {"id": "INT-04c", "statement": "Salienz t_c variiert situativ (z.B. Uniform erhöht berufliche Identität)"}
+        {"id": "INT-04a", "statement": "L_aff = ρ(F,m)·L_FS(x): Context-gated Fehr/Schmidt"},
+        {"id": "INT-04b", "statement": "φ* = (ω₁κ·a + ω₃ψ·μ̃)/(ω₁κ+ω₃ψ): Optimale subjektive Norm"},
+        {"id": "INT-04c", "statement": "μ̃*: Motivated mean für Self-Deception"},
+        {"id": "INT-04d", "statement": "σ*: Endogene Informationswahl (Strategic Ignorance wenn σ*=0)"}
       ]
     },
     {
