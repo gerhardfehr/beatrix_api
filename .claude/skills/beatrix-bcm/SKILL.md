@@ -245,13 +245,14 @@ BOOST → THINK → NUDGE → DESIGN → SOCIAL → IDENTITY → INCENTIVE → R
 ## Datenquellen
 
 Lies die Axiome aus diesen Dateien:
-- `meta/meta.json` - 100 Meta-Axiome
-- `inu/inu.json` - 59 INU-Axiome
-- `knu/knu.json` - 46 KNU-Axiome
-- `idn/idn.json` - 70 IDN-Axiome
-- `wax/wax.json` - WAX mit λ-Logik
-- `wtx/wtx.json` - Übergangswahrscheinlichkeiten
-- `context/context.json` - Kontext-Definitionen
+- `axioms/meta.json` - 100 Meta-Axiome
+- `axioms/inu.json` - 59 INU-Axiome
+- `axioms/knu.json` - 46 KNU-Axiome
+- `axioms/idn.json` - 70 IDN-Axiome
+- `axioms/lambda.json` - 35 λ-Axiome (Fehr/Gächter/Fischbacher)
+- `axioms/awx.json` - AWX-Axiome
+- `axioms/wax.json` - WAX mit λ-Logik
+- `axioms/wtx.json` - Übergangswahrscheinlichkeiten
 
 ## Beispiel-Anwendung
 
@@ -273,3 +274,5 @@ Lies die Axiome aus diesen Dateien:
 - Thaler & Sunstein (2008): Nudge
 - Arrow (1951): Impossibility Theorem
 - Fehr & Schmidt (1999): Fairness
+- Fehr & Gächter (2002): Altruistic Punishment
+- Fischbacher, Gächter & Fehr (2001): Conditional Cooperation

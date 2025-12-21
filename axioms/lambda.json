@@ -1,0 +1,479 @@
+{
+  "module": "LAMBDA",
+  "id": "7244",
+  "version": "2.0",
+  "axiom_count": 35,
+  "meta_formula": "λ_eff(σ, ρ, t) = λ_Person(σ) + Δλ_Kontext(ρ) + Δλ_Institution(I) + Δλ_Dynamik(t)",
+  "description": "Formalisierung des Spannungs-Regulators λ basierend auf Fehr, Gächter, Fischbacher et al.",
+  "categories": {
+    "foundation": {
+      "range": [1, 8],
+      "prefix": "LAM",
+      "description": "Grundlegende λ-Definition und Zwei-Ebenen-Modell"
+    },
+    "types": {
+      "range": [9, 16],
+      "prefix": "TYP",
+      "description": "Verhaltenstypen nach Fischbacher/Gächter/Fehr"
+    },
+    "dynamics": {
+      "range": [17, 24],
+      "prefix": "DYN",
+      "description": "Zeitliche Dynamik von λ"
+    },
+    "institutions": {
+      "range": [25, 35],
+      "prefix": "INS",
+      "description": "Institutionelle Verstärkung und Peer Punishment"
+    }
+  },
+  "axioms": [
+    {
+      "id": "LAM-LAM-01",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ ∈ [0, 1]: Kontinuum zwischen Eigennutz und Kollektiv",
+      "description": "Lambda ist ein kontinuierlicher Parameter auf dem Intervall [0, 1]",
+      "formula": "λ: Σ × P × T → [0, 1]",
+      "dependencies": ["MA-ONT-14"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-02",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ = 0: Homo oeconomicus (rein eigennützig)",
+      "description": "Bei λ = 0 maximiert das Subjekt nur individuellen Nutzen",
+      "formula": "U_eff|_{λ=0} = U_INU",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-03",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ = 1: Homo socialis (rein kollektivistisch)",
+      "description": "Bei λ = 1 wird Nutzen durch schwächstes Glied bestimmt",
+      "formula": "U_eff|_{λ=1} = min(U_INU, U_KNU, U_IDN)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-04",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "Zwei-Ebenen-Modell: λ_eff = λ_Person + Δλ_Kontext",
+      "description": "Effektives Lambda setzt sich aus Trait und State zusammen",
+      "formula": "λ_eff(σ, ρ) = λ_Person(σ) + Δλ_Kontext(ρ), constraint: λ_eff ∈ [0, 1]",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-05",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "λ_Person: Stabile Grundorientierung (Trait)",
+      "description": "Personengebundenes Lambda ist relativ stabil über Zeit",
+      "formula": "Var(λ_Person) << Var(λ_Kontext) über kurze Zeiträume",
+      "dependencies": ["LAM-LAM-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-06",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "Δλ_Kontext: Situative Modulation (State)",
+      "description": "Kontext moduliert Lambda typischerweise um ±0.2 bis ±0.3",
+      "formula": "|Δλ_Kontext| ≤ 0.3 typisch",
+      "dependencies": ["LAM-LAM-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-07",
+      "category": "foundation",
+      "level": "operation",
+      "statement": "Kontext-Faktoren für Δλ",
+      "description": "Öffentlichkeit, Gruppengröße, Anonymität beeinflussen Δλ",
+      "formula": "Δλ = f(Öffentlichkeit, Gruppengröße, Anonymität, Emotion)",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "LAM-07a",
+          "statement": "Öffentlichkeit erhöht λ: Δλ_öffentlich ≈ +0.15",
+          "testable": true
+        },
+        {
+          "id": "LAM-07b",
+          "statement": "Anonymität senkt λ: Δλ_anonym ≈ -0.10",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-LAM-08",
+      "category": "foundation",
+      "level": "operation",
+      "statement": "λ-Messung durch Public Goods Game",
+      "description": "Lambda approximierbar durch Beitragsverhalten",
+      "formula": "λ ≈ C_i / Endowment (im PGG-Kontext)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-TYP-01",
+      "category": "types",
+      "level": "foundation",
+      "statement": "Drei Verhaltenstypen nach λ-Charakteristik",
+      "description": "Population teilt sich in Altruisten, Conditional Cooperators, Self-Interested",
+      "formula": "Population = {ALTRUIST, CONDITIONAL, SELF_INTERESTED}",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fischbacher, Gächter & Fehr (2001)"]
+    },
+    {
+      "id": "LAM-TYP-02",
+      "category": "types",
+      "level": "foundation",
+      "statement": "ALTRUIST: λ hoch und konstant (~10%)",
+      "description": "Altruisten kooperieren unabhängig vom Verhalten anderer",
+      "formula": "λ_ALTRUIST = const ≈ 0.8-1.0, ∂λ/∂Belief = 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-02a",
+          "statement": "Anteil ALTRUIST ≈ 10% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-03",
+      "category": "types",
+      "level": "foundation",
+      "statement": "CONDITIONAL COOPERATOR: λ = f(Belief) (~50%)",
+      "description": "Conditional Cooperators passen λ an erwartetes Verhalten anderer an",
+      "formula": "λ_CC = f(E[λ_andere]), ∂λ/∂Belief > 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-03a",
+          "statement": "Anteil CONDITIONAL ≈ 50% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-04",
+      "category": "types",
+      "level": "foundation",
+      "statement": "SELF-INTERESTED: λ ≈ 0 (~30%)",
+      "description": "Self-Interested maximieren Eigennutz unabhängig von anderen",
+      "formula": "λ_SI ≈ 0, ∂λ/∂Belief = 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-04a",
+          "statement": "Anteil SELF_INTERESTED ≈ 30% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-05",
+      "category": "types",
+      "level": "structure",
+      "statement": "Conditional Cooperator: Zwei Subtypen",
+      "description": "Strategisch (leicht unter anderen) vs. Altruistisch (matching)",
+      "formula": "CC_strategisch: C_i = E[C_andere] - ε; CC_altruistisch: C_i ≈ E[C_andere]",
+      "dependencies": ["LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-06",
+      "category": "types",
+      "level": "structure",
+      "statement": "Belief über λ_andere ist entscheidend für CC",
+      "description": "Conditional Cooperators reagieren auf Belief, nicht auf tatsächliches Verhalten",
+      "formula": "λ_CC = f(Belief[λ_andere]), nicht f(λ_andere_tatsächlich)",
+      "dependencies": ["LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-07",
+      "category": "types",
+      "level": "operation",
+      "statement": "Pluralistic Ignorance: Belief ≠ Realität",
+      "description": "Menschen unterschätzen oft Kooperationsbereitschaft anderer",
+      "formula": "E[Belief[λ_andere]] < E[λ_andere_tatsächlich] typisch",
+      "dependencies": ["LAM-TYP-06"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-08",
+      "category": "types",
+      "level": "operation",
+      "statement": "Social Proof korrigiert Belief",
+      "description": "Information über tatsächliches Verhalten erhöht Belief und damit λ_CC",
+      "formula": "Δλ_CC = α × (λ_tatsächlich - Belief[λ]), α > 0",
+      "dependencies": ["LAM-TYP-06", "LAM-TYP-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-01",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "λ ist zeitabhängig: λ = f(t)",
+      "description": "Lambda verändert sich über Interaktionsrunden",
+      "formula": "λ(t+1) = λ(t) + Δλ(Feedback_t)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-DYN-02",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "Ohne Institution: λ(t) sinkt",
+      "description": "Ohne Sanktionsmechanismus sinkt λ über Runden",
+      "formula": "dλ/dt < 0 ohne Punishment",
+      "dependencies": ["LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "DYN-02a",
+          "statement": "λ sinkt von ~0.55 auf ~0.20 über 6 Runden (Fehr & Gächter)",
+          "testable": true
+        },
+        {
+          "id": "DYN-02b",
+          "statement": "Δλ/Runde ≈ -0.07 ohne Punishment",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-DYN-03",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "Mit Peer Punishment + Institution: λ(t) steigt",
+      "description": "Mit Sanktionsmechanismus (verstärkt) steigt λ über Runden",
+      "formula": "dλ/dt > 0 mit Punishment (multipliziert)",
+      "dependencies": ["LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "DYN-03a",
+          "statement": "λ steigt von ~0.55 auf ~0.90 über 6 Runden (Fehr & Gächter)",
+          "testable": true
+        },
+        {
+          "id": "DYN-03b",
+          "statement": "Δλ/Runde ≈ +0.07 mit Punishment",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-DYN-04",
+      "category": "dynamics",
+      "level": "structure",
+      "statement": "Mechanismus des λ-Verfalls (ohne Punishment)",
+      "description": "Conditional Cooperators sehen Free Rider und passen Belief an",
+      "formula": "Belief(t+1) = Belief(t) - β × FreeRiding_beobachtet, β > 0",
+      "dependencies": ["LAM-DYN-02", "LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-05",
+      "category": "dynamics",
+      "level": "structure",
+      "statement": "Mechanismus des λ-Anstiegs (mit Punishment)",
+      "description": "Free Rider werden bestraft → weniger Free Riding → Belief steigt",
+      "formula": "Belief(t+1) = Belief(t) + γ × Punishment_beobachtet, γ > 0",
+      "dependencies": ["LAM-DYN-03", "LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-06",
+      "category": "dynamics",
+      "level": "operation",
+      "statement": "Positive Feedback-Schleife mit Punishment",
+      "description": "Mehr Punishment → weniger Free Riding → höherer Belief → mehr Kooperation",
+      "formula": "Punishment ↑ → FreeRiding ↓ → Belief ↑ → λ_CC ↑ → Kooperation ↑",
+      "dependencies": ["LAM-DYN-05"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-07",
+      "category": "dynamics",
+      "level": "operation",
+      "statement": "Negative Feedback-Schleife ohne Punishment",
+      "description": "Free Riding → Belief sinkt → weniger Kooperation → mehr Free Riding",
+      "formula": "FreeRiding ↑ → Belief ↓ → λ_CC ↓ → Kooperation ↓ → FreeRiding ↑",
+      "dependencies": ["LAM-DYN-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-08",
+      "category": "dynamics",
+      "level": "dynamics",
+      "statement": "Langfristige Equilibria",
+      "description": "Zwei stabile Gleichgewichte: λ→0 oder λ→1",
+      "formula": "lim_{t→∞} λ(t) ∈ {~0.2, ~0.9} abhängig von Institution",
+      "dependencies": ["LAM-DYN-06", "LAM-DYN-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-01",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Peer Punishment allein ist unvollständig",
+      "description": "Reines Peer Punishment (1:1) ist zu kostspielig",
+      "formula": "Punishment_Effektivität(1:1) < Punishment_Effektivität(1:M), M > 1",
+      "dependencies": ["LAM-DYN-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-02",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Institution als Multiplikator: M > 1",
+      "description": "Institution verstärkt Peer Punishment um Faktor M",
+      "formula": "Schaden_Ziel = M × Kosten_Punisher, M > 1",
+      "dependencies": ["LAM-INS-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "INS-02a",
+          "statement": "Fehr & Gächter: M = 3 (1:3 Ratio)",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-INS-03",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Kombination: Peer entscheidet WER, Institution verstärkt WIE STARK",
+      "description": "Optimale Kooperation braucht dezentrale Entscheidung + zentrale Verstärkung",
+      "formula": "λ_max = f(Peer_Entscheidung × Institution_Multiplikator)",
+      "dependencies": ["LAM-INS-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-04",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Peer-Komponente liefert Information",
+      "description": "Peers wissen lokal, wer Free Rider ist",
+      "formula": "Info_FreerRider = f(lokale_Beobachtung)",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-05",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Institution liefert Durchsetzung",
+      "description": "Institution macht Bestrafung glaubwürdig und effektiv",
+      "formula": "Glaubwürdigkeit = f(Multiplikator, Konsistenz)",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-06",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Second-Order Free Rider Problem",
+      "description": "Bestrafung selbst ist Public Good - Free Riding bei Bestrafung möglich",
+      "formula": "P(Bestrafen) < 1, auch wenn Bestrafung kollektiv optimal",
+      "dependencies": ["LAM-INS-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-07",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Altruistische Bestrafung existiert",
+      "description": "~60% bestrafen Free Rider trotz eigener Kosten",
+      "formula": "P(Bestrafen | Kosten > 0) ≈ 0.6",
+      "dependencies": ["LAM-INS-06"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-INS-08",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Bestrafung korreliert mit Normverletzung",
+      "description": "Je stärker Abweichung von Norm, desto härter Bestrafung",
+      "formula": "Punishment_ij = f(c_i - c_j), steigend für c_i > c_j",
+      "dependencies": ["LAM-INS-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-09",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Minimaler Multiplikator für Effektivität",
+      "description": "Es gibt einen Schwellenwert für M, unter dem Peer Punishment nicht wirkt",
+      "formula": "∃ M_min: ∀ M < M_min: λ_equilibrium → 0",
+      "dependencies": ["LAM-INS-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-10",
+      "category": "institutions",
+      "level": "dynamics",
+      "statement": "Institution kann Peer Punishment crowden out",
+      "description": "Zu starke zentrale Sanktion kann Peer-Motivation reduzieren",
+      "formula": "∂(Peer_Punishment)/∂(Institution_Stärke) < 0 für hohe Institution_Stärke",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-11",
+      "category": "institutions",
+      "level": "dynamics",
+      "statement": "Optimale Kombination: Peer + moderate Institution",
+      "description": "Maximum λ bei Kombination aus Peer-Entscheidung und moderater Verstärkung",
+      "formula": "λ_max bei M ∈ [2, 4], nicht bei M → ∞",
+      "dependencies": ["LAM-INS-10", "LAM-INS-09"],
+      "testable": true
+    }
+  ],
+  "references": [
+    {
+      "id": "FG2002",
+      "citation": "Fehr, E., & Gächter, S. (2002). Altruistic punishment in humans. Nature, 415(6868), 137-140.",
+      "key_findings": [
+        "Peer punishment (1:3) raises cooperation from 20% to 90%",
+        "~60% engage in costly punishment",
+        "Punishment correlates with norm violation"
+      ]
+    },
+    {
+      "id": "FGF2001",
+      "citation": "Fischbacher, U., Gächter, S., & Fehr, E. (2001). Are people conditionally cooperative? Economics Letters, 71(3), 397-404.",
+      "key_findings": [
+        "~50% Conditional Cooperators",
+        "~30% Self-Interested",
+        "~10% Altruists"
+      ]
+    },
+    {
+      "id": "HTG2008",
+      "citation": "Herrmann, B., Thöni, C., & Gächter, S. (2008). Antisocial punishment across societies. Science, 319(5868), 1362-1367.",
+      "key_findings": [
+        "Anti-social punishment exists in some cultures",
+        "Cooperators punishing cooperators",
+        "Undermines positive effect"
+      ]
+    }
+  ]
+}
