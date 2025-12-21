@@ -1,13 +1,14 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.3",
-  "axiom_count": 86,
+  "version": "2.4",
+  "axiom_count": 88,
   "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
   "trajectory_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t), wobei λ_0 = λ_Person + Σ Δλ_Kontext",
-  "integration_formula": "U_eff = (1-λ) × U_INU + λ × κ(U_INU, U_KNU, U_IDN)",
+  "integration_formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + I_IDN(a; c, ε, P)",
+  "integration_note": "IDN ist additiv nach Akerlof/Kranton (2000): Identität tritt unabhängig von λ in die Nutzenfunktion ein",
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -85,13 +86,23 @@
       "phases": ["START", "FRÜH", "MITTE", "SPÄT", "EQUILIBRIUM"]
     },
     "integration": {
-      "range": [79, 86],
+      "range": [79, 88],
       "prefix": "INT",
       "description": "Integration von λ mit INU, KNU, IDN",
       "coupling": {
         "INU": "Individueller Nutzen - gewichtet mit (1-λ)",
         "KNU": "Kollektiver Nutzen - gewichtet mit λ",
-        "IDN": "Identitätsnutzen - moduliert durch λ"
+        "IDN": "Identitätsnutzen - additiv, unabhängig von λ (Akerlof/Kranton 2000)"
+      },
+      "akerlof_kranton_idn": {
+        "formula": "I_IDN = I(a; c, ε, P)",
+        "components": {
+          "a": "Eigene Aktionen",
+          "c": "Soziale Kategorien (Identitätsgruppen)",
+          "ε": "Persönliche Charakteristiken",
+          "P": "Präskriptionen (Verhaltensvorschriften pro Kategorie)"
+        },
+        "mechanism": "Identitätsverlust wenn Aktionen gegen Präskriptionen der eigenen Kategorie verstoßen"
       }
     }
   },
@@ -1098,45 +1109,56 @@
       "id": "LAM-INT-01",
       "category": "integration",
       "level": "foundation",
-      "statement": "λ reguliert INU vs. KNU/IDN Balance",
-      "description": "Lambda bestimmt die Gewichtung zwischen individuellem und kollektivem/Identitäts-Nutzen",
-      "formula": "U_eff = (1-λ) × U_INU + λ × κ(U_INU, U_KNU, U_IDN)",
+      "statement": "λ reguliert INU vs. KNU; IDN additiv unabhängig",
+      "description": "Lambda gewichtet INU und KNU; Identitätsnutzen tritt nach Akerlof/Kranton additiv ein",
+      "formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + I_IDN(a; c, ε, P)",
       "dependencies": ["LAM-LAM-01", "MA-ONT-14"],
       "testable": true,
-      "validates": ["META", "INU", "KNU", "IDN"]
+      "validates": ["META", "INU", "KNU", "IDN"],
+      "references": ["Akerlof & Kranton (2000)"]
     },
     {
       "id": "LAM-INT-02",
       "category": "integration",
       "level": "foundation",
-      "statement": "Bei λ=0: Reiner INU-Maximierer",
-      "description": "Homo oeconomicus ignoriert KNU und IDN",
-      "formula": "U_eff|_{λ=0} = U_INU; ∂U_eff/∂U_KNU = 0; ∂U_eff/∂U_IDN = 0",
+      "statement": "Bei λ=0: INU-Maximierer, aber IDN bleibt aktiv",
+      "description": "Selbst homo oeconomicus hat Identität - IDN wirkt unabhängig von λ",
+      "formula": "U_eff|_{λ=0} = U_INU + I_IDN; ∂U_eff/∂U_KNU = 0, aber ∂U_eff/∂I_IDN = 1",
       "dependencies": ["LAM-INT-01", "LAM-LAM-02"],
-      "testable": true
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-02a", "statement": "Selbst ohne Kooperationsmotiv kann Identität Verhalten beeinflussen"},
+        {"id": "INT-02b", "statement": "Erklärt 'irrationales' Verhalten bei Egoisten mit starker Gruppenidentität"}
+      ]
     },
     {
       "id": "LAM-INT-03",
       "category": "integration",
       "level": "foundation",
-      "statement": "Bei λ=1: Komplementäre Integration",
-      "description": "Alle drei Nutzen-Dimensionen müssen erfüllt sein (schwächstes Glied)",
-      "formula": "U_eff|_{λ=1} = min(U_INU, U_KNU, U_IDN)",
+      "statement": "Bei λ=1: Volle KNU-Gewichtung plus IDN",
+      "description": "Maximale Kooperationsbereitschaft: KNU dominiert INU, IDN addiert sich",
+      "formula": "U_eff|_{λ=1} = U_KNU + I_IDN",
       "dependencies": ["LAM-INT-01", "LAM-LAM-03"],
-      "testable": true
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-03a", "statement": "Altruisten maximieren KNU, IDN kann Richtung vorgeben"},
+        {"id": "INT-03b", "statement": "Welches Kollektiv (Ingroup) hängt von Identität ab"}
+      ]
     },
     {
       "id": "LAM-INT-04",
       "category": "integration",
       "level": "structure",
-      "statement": "κ-Operator: Komplementarität",
-      "description": "Nicht-additive Kombination respektiert gegenseitige Abhängigkeit",
-      "formula": "κ(U_INU, U_KNU, U_IDN) = min(U_i) + α × Σ(U_i - min(U_i)); α < 1",
-      "dependencies": ["LAM-INT-01", "MA-ONT-13"],
+      "statement": "I_IDN Berechnung nach Akerlof/Kranton",
+      "description": "Identitätsnutzen hängt von Übereinstimmung zwischen Aktion und Präskription ab",
+      "formula": "I_IDN = I_0 - Σ_c [t_c × L_c(a, P_c)]; t_c = Salienz der Kategorie c, L_c = Verlust bei Normverletzung",
+      "dependencies": ["LAM-INT-01"],
       "testable": true,
+      "references": ["Akerlof & Kranton (2000, 2010)"],
       "corollaries": [
-        {"id": "INT-04a", "statement": "Wenn eine Dimension stark negativ: U_eff stark reduziert"},
-        {"id": "INT-04b", "statement": "Ausgleich nur teilweise möglich (α < 1)"}
+        {"id": "INT-04a", "statement": "I_0: Baseline-Identitätsnutzen bei voller Konformität"},
+        {"id": "INT-04b", "statement": "L_c > 0 wenn Aktion gegen Präskription verstößt"},
+        {"id": "INT-04c", "statement": "Salienz t_c variiert situativ (z.B. Uniform erhöht berufliche Identität)"}
       ]
     },
     {
@@ -1157,14 +1179,16 @@
       "id": "LAM-INT-06",
       "category": "integration",
       "level": "structure",
-      "statement": "IDN als Moderator",
-      "description": "Identitätsnutzen kann Trade-off zwischen INU und KNU auflösen",
-      "formula": "Wenn IDN_Kooperation > 0: U_eff(Kooperation) ↑ trotz INU ↓",
-      "dependencies": ["LAM-INT-01", "LAM-INT-05"],
+      "statement": "IDN als Trade-off-Auflöser (unabhängig von λ)",
+      "description": "Identitätsnutzen kann INU-KNU Dilemma auflösen - auch bei λ=0 Egoisten",
+      "formula": "Wenn P_c(Kooperation) ∈ Präskription: I_IDN(Kooperation) > I_IDN(Defection) → U_eff(Kooperation) ↑",
+      "dependencies": ["LAM-INT-01", "LAM-INT-04", "LAM-INT-05"],
       "testable": true,
+      "references": ["Akerlof & Kranton (2000)"],
       "corollaries": [
-        {"id": "INT-06a", "statement": "Starke Gruppenidentität: IDN kompensiert INU-Verlust"},
-        {"id": "INT-06b", "statement": "Schwache Identität: Reine INU-KNU Abwägung"}
+        {"id": "INT-06a", "statement": "Soldier: Kooperation durch Identität auch bei λ=0 möglich"},
+        {"id": "INT-06b", "statement": "Identitäts-basierte Intervention wirksam bei allen λ-Typen"},
+        {"id": "INT-06c", "statement": "Erklärt Gruppenkonformität ohne altruistische Motivation"}
       ]
     },
     {
@@ -1195,6 +1219,38 @@
         {"id": "INT-08a", "statement": "Kooperation lohnt sich → λ steigt"},
         {"id": "INT-08b", "statement": "Kooperation wird ausgenutzt → λ sinkt"},
         {"id": "INT-08c", "statement": "Verstärkung der Verhaltenstypen über Zeit"}
+      ]
+    },
+    {
+      "id": "LAM-INT-09",
+      "category": "integration",
+      "level": "structure",
+      "statement": "Identitätskategorien (c) und Präskriptionen (P)",
+      "description": "Zentrale Akerlof/Kranton Konzepte: Soziale Kategorien definieren erwartetes Verhalten",
+      "formula": "c ∈ {Beruf, Geschlecht, Ethnie, Religion, Organisation, Hobby, ...}; P_c: c → {erlaubte_Aktionen}",
+      "dependencies": ["LAM-INT-04"],
+      "testable": true,
+      "references": ["Akerlof & Kranton (2000, 2010)"],
+      "corollaries": [
+        {"id": "INT-09a", "statement": "Mehrfache Kategorien: Individuum hat meist mehrere aktive Identitäten"},
+        {"id": "INT-09b", "statement": "Salienz-Variation: Kontext aktiviert verschiedene Kategorien"},
+        {"id": "INT-09c", "statement": "Präskriptions-Konflikt: Verschiedene Kategorien können widersprüchliche P haben"},
+        {"id": "INT-09d", "statement": "Identitäts-Bedrohung: Andere können eigene Kategoriezugehörigkeit in Frage stellen"}
+      ]
+    },
+    {
+      "id": "LAM-INT-10",
+      "category": "integration",
+      "level": "operation",
+      "statement": "Identitäts-basierte Interventionen",
+      "description": "Verhaltensänderung durch Aktivierung oder Änderung von Identitätskategorien",
+      "formula": "ΔU_eff = Δt_c × L_c(a, P_c) + t_c × ΔL_c; Zwei Hebel: Salienz oder Präskription ändern",
+      "dependencies": ["LAM-INT-04", "LAM-INT-09"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-10a", "statement": "Salienz-Intervention: Bestimmte Identität aktivieren (z.B. 'Als Schweizer...')"},
+        {"id": "INT-10b", "statement": "Präskriptions-Intervention: Neue Norm für Kategorie etablieren"},
+        {"id": "INT-10c", "statement": "Kategorisierungs-Intervention: Neue Identitätsgruppe schaffen"}
       ]
     }
   ],
@@ -1234,6 +1290,30 @@
         "St. Gallen", "Bonn", "Athens", "Istanbul", "Riyadh",
         "Muscat", "Minsk", "Samara", "Dnipropetrovsk", "Seoul", "Chengdu"
       ]
+    },
+    {
+      "id": "AK2000",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and Identity. Quarterly Journal of Economics, 115(3), 715-753.",
+      "key_findings": [
+        "Identity is a separate, additive term in the utility function",
+        "Utility: U = U(actions) + I(actions; categories, characteristics, prescriptions)",
+        "Social categories (c) define expected behavior (prescriptions P)",
+        "Identity utility I decreases when actions violate prescriptions",
+        "Multiple identities: individuals belong to multiple categories",
+        "Salience: context determines which identity is activated"
+      ],
+      "bcm_relevance": "Fundamental für IDN-Modul: Identität tritt additiv und unabhängig von λ in Nutzenfunktion ein"
+    },
+    {
+      "id": "AK2010",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2010). Identity Economics: How Our Identities Shape Our Work, Wages, and Well-Being. Princeton University Press.",
+      "key_findings": [
+        "Extended identity economics to labor markets, education, organizations",
+        "Insider/Outsider dynamics in firms",
+        "School identity affects educational outcomes",
+        "Identity norms can substitute for monetary incentives"
+      ],
+      "bcm_relevance": "Anwendung auf verschiedene BCM-Domänen (Arbeit, Bildung, Organisationen)"
     }
   ]
 }
