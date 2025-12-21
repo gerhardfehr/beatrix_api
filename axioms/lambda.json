@@ -1,11 +1,12 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.1",
-  "axiom_count": 68,
-  "meta_formula": "λ_eff = λ_Person + Σ Δλ_Kontext(ρ_i) + Δλ_Institution(I) + Δλ_Dynamik(t) - Δλ_Antisozial(A)",
+  "version": "2.2",
+  "axiom_count": 78,
+  "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
+  "trajectory_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t), wobei λ_0 = λ_Person + Σ Δλ_Kontext",
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -68,6 +69,19 @@
           "description": "Psychologische Zustände"
         }
       }
+    },
+    "trajectory": {
+      "range": [69, 78],
+      "prefix": "TRJ",
+      "description": "Temporale Trajektorie: λ_0, λ(t), λ_∞",
+      "states": {
+        "initial": "λ_0 - Startwert vor Feedback",
+        "situative": "λ(t) - Aktueller Wert in Runde t",
+        "equilibrium_good": "λ_∞^gut ≈ 0.90 - Mit wirksamer Institution",
+        "equilibrium_bad": "λ_∞^schlecht ≈ 0.20 - Ohne Institution",
+        "equilibrium_neutral": "λ_∞^neutral ≈ 0.50 - Antisozial neutralisiert"
+      },
+      "phases": ["START", "FRÜH", "MITTE", "SPÄT", "EQUILIBRIUM"]
     }
   },
   "axioms": [
@@ -954,6 +968,119 @@
       "corollaries": [
         {"id": "CTX-22a", "statement": "Einfach (klare Payoffs): Δλ ≈ 0"},
         {"id": "CTX-22b", "statement": "Komplex (unsichere Outcomes): Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-TRJ-01",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ_0: Initialer Kooperations-Zustand",
+      "description": "Startwert vor jeglichem Feedback oder Intervention",
+      "formula": "λ_0 = λ_Person + Σ Δλ_Kontext(ρ_i)",
+      "dependencies": ["LAM-LAM-04", "LAM-LAM-06"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-02",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ(t): Situativer Kooperations-Zustand",
+      "description": "Aktueller Wert nach t Runden Feedback",
+      "formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
+      "dependencies": ["LAM-TRJ-01", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "TRJ-02a", "statement": "k ≈ 0.3/Runde typische Konvergenzrate"},
+        {"id": "TRJ-02b", "statement": "Nach ~7 Runden: 90% Konvergenz erreicht"}
+      ]
+    },
+    {
+      "id": "LAM-TRJ-03",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ_∞: Equilibrium-Zustand",
+      "description": "Stabiler Endzustand abhängig von institutionellem Setting",
+      "formula": "λ_∞ = f(Institution, Antisozial) ∈ {0.20, 0.50, 0.90}",
+      "dependencies": ["LAM-DYN-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-04",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Gutes Equilibrium: λ_∞^gut ≈ 0.90",
+      "description": "Erreichbar mit wirksamer Institution und niedriger anti-sozialer Bestrafung",
+      "formula": "λ_∞^gut ≈ 0.90 wenn Institution(M>2) UND P_prosocial/P_antisocial > 3",
+      "dependencies": ["LAM-TRJ-03", "LAM-INS-02", "LAM-ANT-06"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)", "Boston/Copenhagen in Herrmann et al. (2008)"]
+    },
+    {
+      "id": "LAM-TRJ-05",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Schlechtes Equilibrium: λ_∞^schlecht ≈ 0.20",
+      "description": "Ohne Institution oder mit hoher anti-sozialer Bestrafung",
+      "formula": "λ_∞^schlecht ≈ 0.20 wenn KEINE Institution ODER P_prosocial/P_antisocial < 1.5",
+      "dependencies": ["LAM-TRJ-03", "LAM-DYN-02", "LAM-ANT-10"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002) No-Punishment", "Muscat in Herrmann et al. (2008)"]
+    },
+    {
+      "id": "LAM-TRJ-06",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Neutrales Equilibrium: λ_∞^neutral ≈ 0.50",
+      "description": "Anti-soziale Bestrafung neutralisiert institutionellen Effekt",
+      "formula": "λ_∞^neutral ≈ 0.50 wenn Institution(M>2) UND P_prosocial/P_antisocial ∈ [1.5, 3]",
+      "dependencies": ["LAM-TRJ-03", "LAM-ANT-05"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-07",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Phasen-Identifikation",
+      "description": "5 temporale Phasen zur Zustandsdiagnose",
+      "formula": "Phase = {START: t=0, FRÜH: t∈[1,3], MITTE: t∈[4,7], SPÄT: t≥8, EQUILIBRIUM: |dλ/dt|<0.02}",
+      "dependencies": ["LAM-TRJ-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-08",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Trajektorie-Identifikation",
+      "description": "Richtung der λ-Entwicklung",
+      "formula": "Trajektorie = {AUFWÄRTS: dλ/dt > 0.02, STABIL: |dλ/dt| ≤ 0.02, ABWÄRTS: dλ/dt < -0.02}",
+      "dependencies": ["LAM-TRJ-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-09",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Früherkennung des Ziel-Equilibriums",
+      "description": "Nach 2-3 Runden ist Ziel-Equilibrium prognostizierbar",
+      "formula": "E[λ_∞] = λ(t=3) + 0.5 × sign(dλ/dt) × (1 - λ(t=3)) mit 80% Konfidenz",
+      "dependencies": ["LAM-TRJ-02", "LAM-TRJ-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-10",
+      "category": "trajectory",
+      "level": "dynamics",
+      "statement": "Interventions-Timing",
+      "description": "Optimaler Zeitpunkt für Intervention abhängig von Phase",
+      "formula": "Intervention_Effektivität = f(Phase); Maximum bei FRÜH, Minimum bei EQUILIBRIUM",
+      "dependencies": ["LAM-TRJ-07"],
+      "testable": true,
+      "corollaries": [
+        {"id": "TRJ-10a", "statement": "START: Maximale Gestaltbarkeit, Institution etablieren"},
+        {"id": "TRJ-10b", "statement": "FRÜH: Social Proof wirksam, Belief korrigierbar"},
+        {"id": "TRJ-10c", "statement": "MITTE: Trend verstärken oder umkehren noch möglich"},
+        {"id": "TRJ-10d", "statement": "SPÄT: Schwer umkehrbar, hoher Aufwand"},
+        {"id": "TRJ-10e", "statement": "EQUILIBRIUM: Strukturelle Änderung nötig für Umkehr"}
       ]
     }
   ],
