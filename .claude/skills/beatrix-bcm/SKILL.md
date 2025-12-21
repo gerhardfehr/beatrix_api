@@ -148,6 +148,20 @@ Vor jeder BCM-Analyse müssen diese Daten erfasst werden:
 
 **Vollständiges Input-Template**: `resources/data-input-template.md`
 
+## Decision Tree (Interventions-Logik)
+
+Systematische Auswahl der richtigen Intervention:
+
+```
+1. SCHWACHSTELLE → INU negativ? KNU negativ? IDN negativ?
+2. λ-STRATEGIE   → λ<0.3 (INU-Fokus) | 0.3-0.7 (Hybrid) | >0.7 (KNU/IDN)
+3. AWX-CHECK     → <3 = Awareness zuerst! | ≥3 = weiter
+4. WAX-CHECK     → <3 = Barrieren senken! | ≥3 = Trigger setzen
+5. NUDGE-WAHL    → Aus Katalog nach Schwachstelle
+```
+
+**Vollständiger Decision Tree**: `resources/decision-tree.md`
+
 ## Constraints
 
 ### Epistemologisch
