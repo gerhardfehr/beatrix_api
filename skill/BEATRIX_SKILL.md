@@ -185,11 +185,57 @@ ALLE ──→── Input-Flow ──→ AWX → WAX → WTX
 | Use Case | Beschreibung |
 |----------|--------------|
 | **Verhaltensanalyse** | Analyse von Entscheidungen über INU/KNU/IDN |
-| **Interventions-Design** | Design von Nudges und Verhaltensinterventionen |
+| **Interventions-Design** | Design über 8 Interventionstypen |
 | **Segmentierung** | Gruppierung nach Verhaltenstypen und λ-Werten |
 | **Policy-Design** | Evidenzbasierte Politikgestaltung |
 | **Journey-Optimierung** | Customer/Citizen Journey Analyse |
 | **Change Management** | Organisationale Veränderungsprozesse |
+
+---
+
+## 8 Interventionstypen
+
+BCM unterscheidet **8 Interventionstypen** (nicht nur Nudge!):
+
+| Typ | Beschreibung | Freiheit |
+|-----|--------------|----------|
+| **NUDGE** | Sanfte Stupser durch Choice Architecture | Hoch |
+| **BOOST** | Kompetenzstärkung und Empowerment | Hoch |
+| **THINK** | Reflexion und Deliberation fördern | Hoch |
+| **INCENTIVE** | Materielle Anreize setzen | Mittel |
+| **REGULATE** | Regeln und Gesetze | Niedrig |
+| **DESIGN** | Physische/digitale Umgebung gestalten | Mittel |
+| **SOCIAL** | Soziale Normen und Peer-Einfluss | Mittel |
+| **IDENTITY** | Identitäts-basierte Interventionen | Hoch |
+
+**Ethik-Leitlinie**: Nutze stets die mildeste Intervention, die das Ziel erreicht!
+
+**Eskalations-Reihenfolge**:
+```
+BOOST → THINK → NUDGE → DESIGN → SOCIAL → IDENTITY → INCENTIVE → REGULATE
+```
+
+---
+
+## 28 Interventions-Dimensionen
+
+Interventionen werden über **28 Dimensionen in 9 Kategorien** charakterisiert:
+
+| Kategorie | Dimensionen |
+|-----------|-------------|
+| **FREIHEIT (4)** | Entscheidungsraum, -freiheit, -kosten, Reversibilität |
+| **PSYCHOLOGIE (4)** | Kognitive Belastung, Bewusstheit, Motivation, Selbstwirksamkeit |
+| **ZEIT (3)** | Wirkungseintritt, -dauer, Feedback-Geschwindigkeit |
+| **REICHWEITE (3)** | Zielgruppen-Breite, Kontext-Spezifität, Skalierbarkeit |
+| **KONTEXT (3)** | Physisch/Digital, Sichtbarkeit, Institutioneller Rahmen |
+| **ETHIK (4)** | Paternalismus, Transparenz, Autonomie-Erhalt, Gerechtigkeit |
+| **IMPLEMENTATION (3)** | Kosten, Komplexität, Ressourcenbedarf |
+| **EFFEKT (2)** | Effektstärke, Konsistenz |
+| **DYNAMIK (2)** | Habituation, Spillover |
+
+**Wichtige Unterscheidungen**:
+- **Entscheidungsraum** ≠ **Entscheidungsfreiheit** (Optionen vorhanden ≠ Fähigkeit zu wählen)
+- **Entscheidungskosten** = Aufwand für Entscheidung (kognitiv, zeitlich, emotional)
 
 ---
 

@@ -111,10 +111,45 @@ U_eff = (1-λ) · U_lokal + λ · κ(U_lokal, U_komplement)
 
 Nutze BEATRIX für:
 - **Verhaltensanalyse**: Entscheidungen über INU/KNU/IDN analysieren
-- **Interventions-Design**: Nudges und Interventionen designen
+- **Interventions-Design**: Interventionen über 8 Typen designen
 - **Segmentierung**: Nach Verhaltenstypen und λ-Werten gruppieren
 - **Policy-Design**: Evidenzbasierte Politikgestaltung
 - **Journey-Optimierung**: Customer/Citizen Journeys
+
+## Interventions-Typen
+
+BCM unterscheidet **8 Interventionstypen** (nicht nur Nudge!):
+
+| Typ | Beschreibung | Freiheit |
+|-----|--------------|----------|
+| **NUDGE** | Sanfte Stupser durch Choice Architecture | Hoch |
+| **BOOST** | Kompetenzstärkung und Empowerment | Hoch |
+| **THINK** | Reflexion und Deliberation fördern | Hoch |
+| **INCENTIVE** | Materielle Anreize setzen | Mittel |
+| **REGULATE** | Regeln und Gesetze | Niedrig |
+| **DESIGN** | Physische/digitale Umgebung gestalten | Mittel |
+| **SOCIAL** | Soziale Normen und Peer-Einfluss | Mittel |
+| **IDENTITY** | Identitäts-basierte Interventionen | Hoch |
+
+**Ethik-Leitlinie**: Nutze stets die mildeste Intervention, die das Ziel erreicht!
+
+## 28 Dimensionen
+
+Interventionen werden über **28 Dimensionen in 9 Kategorien** charakterisiert:
+
+```
+FREIHEIT (4):    Entscheidungsraum, -freiheit, -kosten, Reversibilität
+PSYCHOLOGIE (4): Kognitive Belastung, Bewusstheit, Motivation, Selbstwirksamkeit
+ZEIT (3):        Wirkungseintritt, -dauer, Feedback-Geschwindigkeit
+REICHWEITE (3):  Zielgruppen-Breite, Kontext-Spezifität, Skalierbarkeit
+KONTEXT (3):     Physisch/Digital, Sichtbarkeit, Institutioneller Rahmen
+ETHIK (4):       Paternalismus, Transparenz, Autonomie-Erhalt, Gerechtigkeit
+IMPLEMENTATION (3): Kosten, Komplexität, Ressourcenbedarf
+EFFEKT (2):      Effektstärke, Konsistenz
+DYNAMIK (2):     Habituation, Spillover
+```
+
+**Vollständige Taxonomie**: `resources/intervention-taxonomy.md`
 
 ## Praktischer Workflow
 
@@ -155,12 +190,21 @@ Systematische Auswahl der richtigen Intervention:
 ```
 1. SCHWACHSTELLE → INU negativ? KNU negativ? IDN negativ?
 2. λ-STRATEGIE   → λ<0.3 (INU-Fokus) | 0.3-0.7 (Hybrid) | >0.7 (KNU/IDN)
-3. AWX-CHECK     → <3 = Awareness zuerst! | ≥3 = weiter
-4. WAX-CHECK     → <3 = Barrieren senken! | ≥3 = Trigger setzen
-5. NUDGE-WAHL    → Aus Katalog nach Schwachstelle
+3. AWX-CHECK     → <3 = BOOST/THINK zuerst! | ≥3 = weiter
+4. WAX-CHECK     → <3 = NUDGE/DESIGN! | ≥3 = weiter
+5. INTERVENTION  → Nach Schwachstelle und λ auswählen:
+   - INU negativ → INCENTIVE, DESIGN
+   - KNU negativ → SOCIAL, REGULATE
+   - IDN negativ → IDENTITY, BOOST
+```
+
+**Eskalations-Reihenfolge** (mildeste zuerst):
+```
+BOOST → THINK → NUDGE → DESIGN → SOCIAL → IDENTITY → INCENTIVE → REGULATE
 ```
 
 **Vollständiger Decision Tree**: `resources/decision-tree.md`
+**Interventions-Taxonomie**: `resources/intervention-taxonomy.md`
 
 ## Constraints
 
