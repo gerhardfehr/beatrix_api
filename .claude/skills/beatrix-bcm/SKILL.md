@@ -84,8 +84,26 @@ Gegensätze, die sich gegenseitig bedingen:
 ```
 U_eff = (1-λ) · U_lokal + λ · κ(U_lokal, U_komplement)
 ```
-- λ ist kontextabhängig: `λ = f(ρ, σ, t)`
-- Exponentiell sättigend (MA_0.ES)
+
+**Zwei-Ebenen-Modell:**
+```
+λ_effektiv = λ_Person + Δλ_Kontext
+
+λ_Person:  Stabile Grundorientierung (Trait)
+Δλ_Kontext: Situative Modulation ±0.2 (State)
+```
+
+**Verhaltenstypen (Fischbacher et al.):**
+
+| Typ | Anteil | λ-Charakteristik |
+|-----|--------|------------------|
+| ALTRUIST | ~10% | λ hoch, konstant |
+| CONDITIONAL COOPERATOR | ~50% | λ = f(Belief über andere) |
+| SELF-INTERESTED | ~30% | λ ≈ 0 |
+
+**Kritisch:** λ muss GEMESSEN werden, nicht angenommen!
+
+**λ-Elicitation Guide**: `resources/lambda-elicitation.md`
 
 ### MA_0.ES - Exponentielle Sättigung
 **Meta-Axiom** (strukturell, ohne Zahlenwert):
