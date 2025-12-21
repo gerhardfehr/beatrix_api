@@ -1,9 +1,9 @@
 {
   "module": "ESTIMATION",
   "id": "7245",
-  "version": "1.0",
-  "axiom_count": 42,
-  "description": "BEATRIX Estimation Workflow: LLM-basierte Parameterschätzung mit Delta-Qualifikation für BCM 2.2",
+  "version": "1.1",
+  "axiom_count": 55,
+  "description": "BEATRIX Estimation Workflow: LLM-basierte Parameterschätzung mit Delta-Qualifikation, Constrained Generation und Ambiguity Detection für BCM 2.2",
   "architecture": {
     "static_parameters": {
       "description": "Einmal kalibriert, nie verändert",
@@ -47,6 +47,16 @@
       "range": [33, 42],
       "prefix": "SEN",
       "description": "Sensitivitätsanalyse und Unsicherheitsbehandlung"
+    },
+    "validation": {
+      "range": [43, 49],
+      "prefix": "VAL",
+      "description": "Constrained Generation: Technische Robustheit der LLM-Schätzung"
+    },
+    "ambiguity": {
+      "range": [50, 55],
+      "prefix": "AMB",
+      "description": "Ambiguity Detection: Konsens vs. Polarisierung aus Ensemble-Verteilung"
     }
   },
   "axioms": [
@@ -677,6 +687,186 @@
       "formula": "P_action = Σ I(U_IDN_i > threshold) / N",
       "use_case": "Forschung, nicht Standard-Workflow",
       "dependencies": ["SEN-04"],
+      "testable": true
+    },
+    {
+      "id": "VAL-01",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Pre-Flight Plausibilitätsprüfung",
+      "description": "Vor Parameterschätzung: Ist das Szenario eine realistische Entscheidungssituation?",
+      "formula": "VALID = PreFlight(Scenario) ∈ {True, False}; If False: Abort",
+      "rationale": "Verhindert Halluzination bei unsinnigen Inputs (Garbage In, Garbage Out)",
+      "dependencies": [],
+      "testable": true
+    },
+    {
+      "id": "VAL-02",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Few-Shot Anchoring mit Referenzskalen",
+      "description": "Kalibrierungsskala im Prompt definiert semantische Ankerpunkte",
+      "formula": "Scale(param) = {(v₀, example₀), (v₁, example₁), ..., (v_n, example_n)}",
+      "example": {
+        "budget_pressure": {
+          "0.0": "Elon Musk - Geld spielt keine Rolle",
+          "0.2": "Upper Class - achtet auf Preise",
+          "0.5": "Mittelschicht - vergleicht, kann Fair Trade leisten",
+          "0.8": "Student/Geringverdiener - Fair Trade tut weh",
+          "1.0": "Existenzminimum - jeder Cent zählt"
+        }
+      },
+      "effect": "LLM mappt semantisch auf Skala statt zu halluzinieren",
+      "dependencies": ["EST-01"],
+      "testable": true
+    },
+    {
+      "id": "VAL-03",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Pydantic Schema-Enforcement",
+      "description": "Strukturierte Outputs erzwingen korrektes JSON-Format",
+      "formula": "Output = LLM(Prompt, response_model=Schema); Schema validates Output",
+      "implementation": {
+        "library": "pydantic + instructor",
+        "mechanism": "response_model Parameter erzwingt Schema",
+        "error_handling": "Bei Formatfehler: Self-Correction Loop"
+      },
+      "dependencies": ["EST-16"],
+      "testable": true
+    },
+    {
+      "id": "VAL-04",
+      "category": "validation",
+      "level": "structure",
+      "statement": "Ensemble Voting für Robustheit",
+      "description": "N≥3 parallele LLM-Runs, Median als Schätzung",
+      "formula": "θ̂_robust = Median({θ̂₁, θ̂₂, ..., θ̂_N}); N ≥ 3",
+      "rationale": "Einzelner Run kann 'Bad Day' haben - Ausreißer werden ignoriert",
+      "effect": "Reduziert Varianz, erhöht Inter-Rater Reliability",
+      "typical_N": 5,
+      "temperature": 0.3,
+      "dependencies": ["EST-01"],
+      "testable": true
+    },
+    {
+      "id": "VAL-05",
+      "category": "validation",
+      "level": "structure",
+      "statement": "Self-Correction Loop bei Formatfehlern",
+      "description": "Bei JSONDecodeError: Fehler ans LLM zurückschicken zur Korrektur",
+      "formula": "If ParseError(Output): Output = LLM(Prompt + ErrorMessage); max 3 retries",
+      "implementation": "Pydantic ValidationError wird als Feedback gesendet",
+      "dependencies": ["VAL-03"],
+      "testable": true
+    },
+    {
+      "id": "VAL-06",
+      "category": "validation",
+      "level": "operation",
+      "statement": "Inter-Rater Reliability Threshold",
+      "description": "Ensemble-Übereinstimmung muss Schwellenwert erreichen",
+      "formula": "IRR = 1 - (σ_ensemble / Range); IRR > 0.85 required",
+      "interpretation": {
+        "> 0.85": "Hohe Übereinstimmung - Schätzung vertrauenswürdig",
+        "0.7 - 0.85": "Moderate Übereinstimmung - Vorsicht geboten",
+        "< 0.7": "Niedrige Übereinstimmung - mehr Kontext nötig"
+      },
+      "dependencies": ["VAL-04"],
+      "testable": true
+    },
+    {
+      "id": "VAL-07",
+      "category": "validation",
+      "level": "operation",
+      "statement": "Constrained Generation Pipeline",
+      "description": "Vollständige Pipeline: PreFlight → Anchoring → Pydantic → Ensemble → IRR-Check",
+      "formula": "θ̂_final = Pipeline(PreFlight, Anchoring, Schema, Ensemble, IRR)",
+      "sequence": [
+        "1. PreFlight: VALID?",
+        "2. Anchoring: Skalen im Prompt",
+        "3. Schema: Pydantic-Validierung",
+        "4. Ensemble: N Runs parallel",
+        "5. IRR-Check: Übereinstimmung prüfen",
+        "6. Output: Median + Audit"
+      ],
+      "dependencies": ["VAL-01", "VAL-02", "VAL-03", "VAL-04", "VAL-06"],
+      "testable": true
+    },
+    {
+      "id": "AMB-01",
+      "category": "ambiguity",
+      "level": "foundation",
+      "statement": "Endogene Ambiguität aus Ensemble-Verteilung",
+      "description": "τ²_η wird aus der Varianz der N Ensemble-Schätzungen abgeleitet",
+      "formula": "τ²_η = Var({η̂₁, η̂₂, ..., η̂_N})",
+      "rationale": "Hohe Ensemble-Varianz = hohe normative Unsicherheit = mehr Wiggle Room",
+      "dependencies": ["VAL-04"],
+      "testable": true,
+      "references": ["Grossman & van der Weele (2017)"]
+    },
+    {
+      "id": "AMB-02",
+      "category": "ambiguity",
+      "level": "foundation",
+      "statement": "Bimodalitäts-Koeffizient erkennt Polarisierung",
+      "description": "Unterscheidung zwischen Unsicherheit (unimodal) und Wertekonflikt (bimodal)",
+      "formula": "BC = (s² + 1) / (k + 3((n-1)²/((n-2)(n-3)))); s=skew, k=kurtosis",
+      "threshold": "BC > 0.555 oder (Var > 0.15 ∧ k < -1.0) → Polarisierung",
+      "dependencies": ["AMB-01"],
+      "testable": true
+    },
+    {
+      "id": "AMB-03",
+      "category": "ambiguity",
+      "level": "structure",
+      "statement": "Konsens-Fall: Unimodale Verteilung",
+      "description": "Bei Konsens ist die Norm verrauscht aber singular",
+      "formula": "If ¬Polarized: μ_η = Median(η̂_j), τ²_η = Var(η̂_j)",
+      "interpretation": "Normales Rauschen - Agent hat moderate Wiggle Room",
+      "example": "Fast Fashion: Diffuse aber nicht gespaltene Meinungen",
+      "dependencies": ["AMB-02"],
+      "testable": true
+    },
+    {
+      "id": "AMB-04",
+      "category": "ambiguity",
+      "level": "structure",
+      "statement": "Polarisierungs-Fall: Bimodale Verteilung",
+      "description": "Bei Polarisierung existieren zwei konfliktäre Normen",
+      "formula": "If Polarized: τ²_η = max{Var} + λ_conflict × |μ_high - μ_low|",
+      "interpretation": "Wertekonflikt - Agent kann sich Peak aussuchen",
+      "example": "Containern: 50% 'Diebstahl', 50% 'Heldentum'",
+      "dependencies": ["AMB-02"],
+      "testable": true
+    },
+    {
+      "id": "AMB-05",
+      "category": "ambiguity",
+      "level": "operation",
+      "statement": "Strategische Peak-Wahl bei Polarisierung",
+      "description": "Self-Deceptive Agent wählt den selbstdienlichen Peak als Norm",
+      "formula": "μ_perceived = μ_favorable = argmax_{μ_low, μ_high} U(a, μ)",
+      "mechanism": "Agent rechtfertigt sich mit 'Ich halte mich an die Gruppe, die sagt es ist okay'",
+      "moral_consequence": "Agent fühlt sich moralisch im Recht trotz 50% Gesellschafts-Ablehnung",
+      "dependencies": ["AMB-04"],
+      "testable": true,
+      "references": ["Konow (2000)"]
+    },
+    {
+      "id": "AMB-06",
+      "category": "ambiguity",
+      "level": "operation",
+      "statement": "AmbiguityEngine: Automatische Klassifikation",
+      "description": "Algorithmus klassifiziert Ensemble-Verteilung und liefert BCM-Parameter",
+      "formula": "NormSignal = AmbiguityEngine(η̂_ensemble) → (μ_perceived, τ²_η, is_polarized)",
+      "output_schema": {
+        "mu_perceived": "Norm-Wert den Agent 'sieht'",
+        "tau_squared": "Wiggle Room (Varianz)",
+        "is_polarized": "Flag für Audit/Reporting",
+        "description": "Menschenlesbare Erklärung"
+      },
+      "dependencies": ["AMB-03", "AMB-04", "AMB-05"],
       "testable": true
     }
   ],
