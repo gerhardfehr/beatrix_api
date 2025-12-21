@@ -2,9 +2,9 @@
   "module": "LAMBDA",
   "id": "7244",
   "version": "2.0",
-  "axiom_count": 35,
-  "meta_formula": "λ_eff(σ, ρ, t) = λ_Person(σ) + Δλ_Kontext(ρ) + Δλ_Institution(I) + Δλ_Dynamik(t)",
-  "description": "Formalisierung des Spannungs-Regulators λ basierend auf Fehr, Gächter, Fischbacher et al.",
+  "axiom_count": 46,
+  "meta_formula": "λ_eff(σ, ρ, t) = λ_Person(σ) + Δλ_Kontext(ρ) + Δλ_Institution(I) + Δλ_Dynamik(t) - Δλ_Antisozial(A)",
+  "description": "Formalisierung des Spannungs-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
   "categories": {
     "foundation": {
       "range": [1, 8],
@@ -25,6 +25,11 @@
       "range": [25, 35],
       "prefix": "INS",
       "description": "Institutionelle Verstärkung und Peer Punishment"
+    },
+    "antisocial": {
+      "range": [36, 46],
+      "prefix": "ANT",
+      "description": "Anti-soziale Bestrafung nach Herrmann/Thöni/Gächter (2008)"
     }
   },
   "axioms": [
@@ -445,6 +450,153 @@
       "formula": "λ_max bei M ∈ [2, 4], nicht bei M → ∞",
       "dependencies": ["LAM-INS-10", "LAM-INS-09"],
       "testable": true
+    },
+    {
+      "id": "LAM-ANT-01",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Anti-soziale Bestrafung existiert",
+      "description": "Free Rider bestrafen Kooperatoren (nicht nur umgekehrt)",
+      "formula": "∃ P_antisocial: FreeRider → bestraft → Kooperator",
+      "dependencies": ["LAM-INS-07"],
+      "testable": true,
+      "references": ["Herrmann, Thöni & Gächter (2008)"]
+    },
+    {
+      "id": "LAM-ANT-02",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Zwei Bestrafungstypen: Pro-sozial vs. Anti-sozial",
+      "description": "Bestrafung ist nicht einheitlich - es gibt normerhaltende und normzerstörende",
+      "formula": "P_total = P_prosocial + P_antisocial",
+      "dependencies": ["LAM-ANT-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-03",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Pro-soziale Bestrafung ist universell",
+      "description": "Kooperatoren bestrafen Free Rider in allen Gesellschaften",
+      "formula": "P_prosocial > 0 ∀ Kulturen",
+      "dependencies": ["LAM-ANT-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-04",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Anti-soziale Bestrafung variiert stark zwischen Kulturen",
+      "description": "Kulturelle Unterschiede in anti-sozialer Bestrafung sind enorm",
+      "formula": "Var(P_antisocial | Kultur) >> Var(P_prosocial | Kultur)",
+      "dependencies": ["LAM-ANT-02"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-04a",
+          "statement": "Boston/Kopenhagen: Ratio pro:anti ≈ 6:1 bis 10:1",
+          "testable": true
+        },
+        {
+          "id": "ANT-04b",
+          "statement": "Athen/Riad/Muscat: Ratio pro:anti ≈ 1:1",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-05",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Netto-Effekt = Pro-sozial minus Anti-sozial",
+      "description": "Effekt von Peer Punishment auf λ hängt vom Netto-Effekt ab",
+      "formula": "Δλ_punishment = α × P_prosocial - β × P_antisocial",
+      "dependencies": ["LAM-ANT-02", "LAM-DYN-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-06",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Anti-soziale Bestrafung neutralisiert pro-soziale",
+      "description": "Bei hoher anti-sozialer Bestrafung kann Netto-Effekt null oder negativ sein",
+      "formula": "Wenn P_antisocial ≈ P_prosocial: Δλ_punishment → 0",
+      "dependencies": ["LAM-ANT-05"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-06a",
+          "statement": "Boston: λ_end ≈ 0.90 (hoher Netto-Effekt)",
+          "testable": true
+        },
+        {
+          "id": "ANT-06b",
+          "statement": "Muscat: λ_end ≈ 0.30 (neutralisiert)",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-07",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Korrelate anti-sozialer Bestrafung",
+      "description": "Anti-soziale Bestrafung korreliert mit institutionellen Faktoren",
+      "formula": "P_antisocial = f(RuleOfLaw⁻¹, Trust⁻¹, CivicNorms⁻¹, Democracy⁻¹)",
+      "dependencies": ["LAM-ANT-04"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-07a",
+          "statement": "Schwache Rechtsstaatlichkeit → hohe anti-soziale Bestrafung",
+          "testable": true
+        },
+        {
+          "id": "ANT-07b",
+          "statement": "Niedriges Vertrauen → hohe anti-soziale Bestrafung",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-08",
+      "category": "antisocial",
+      "level": "operation",
+      "statement": "Motive für anti-soziale Bestrafung",
+      "description": "Vergeltung, Neid, Normkonflikt, Ehre/Gesichtsverlust",
+      "formula": "P_antisocial = f(Vergeltung, Neid, Normkonflikt, Ehre)",
+      "dependencies": ["LAM-ANT-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-09",
+      "category": "antisocial",
+      "level": "operation",
+      "statement": "Vergeltungs-Motiv: Bestrafung provoziert Gegen-Bestrafung",
+      "description": "Wer bestraft wurde, bestraft zurück - unabhängig vom eigenen Beitrag",
+      "formula": "P_antisocial(t+1) = f(P_received(t))",
+      "dependencies": ["LAM-ANT-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-10",
+      "category": "antisocial",
+      "level": "dynamics",
+      "statement": "Negative Spirale bei hoher anti-sozialer Bestrafung",
+      "description": "Anti-soziale Bestrafung kann Kooperation zerstören statt aufbauen",
+      "formula": "Wenn P_antisocial > P_prosocial: dλ/dt < 0 TROTZ Punishment",
+      "dependencies": ["LAM-ANT-05", "LAM-ANT-09"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-11",
+      "category": "antisocial",
+      "level": "dynamics",
+      "statement": "Kontext-Check vor Peer Punishment Empfehlung",
+      "description": "Peer Punishment nur empfehlen wenn P_antisocial niedrig",
+      "formula": "Empfehle Peer Punishment nur wenn E[P_prosocial/P_antisocial] > 3",
+      "dependencies": ["LAM-ANT-06", "LAM-ANT-07"],
+      "testable": false
     }
   ],
   "references": [
@@ -470,9 +622,18 @@
       "id": "HTG2008",
       "citation": "Herrmann, B., Thöni, C., & Gächter, S. (2008). Antisocial punishment across societies. Science, 319(5868), 1362-1367.",
       "key_findings": [
-        "Anti-social punishment exists in some cultures",
-        "Cooperators punishing cooperators",
-        "Undermines positive effect"
+        "Anti-social punishment (Free Riders punishing Cooperators) exists",
+        "Pro-social punishment universal, anti-social varies by culture",
+        "Boston/Copenhagen: ratio pro:anti ≈ 6:1 to 10:1",
+        "Athens/Riyadh/Muscat: ratio pro:anti ≈ 1:1",
+        "Cooperation in round 10: Boston ~90%, Muscat ~30%",
+        "Anti-social correlates with weak rule of law, low trust",
+        "Anti-social punishment can neutralize or reverse positive effect"
+      ],
+      "locations_studied": [
+        "Zürich", "Boston", "Copenhagen", "Melbourne", "Nottingham",
+        "St. Gallen", "Bonn", "Athens", "Istanbul", "Riyadh",
+        "Muscat", "Minsk", "Samara", "Dnipropetrovsk", "Seoul", "Chengdu"
       ]
     }
   ]

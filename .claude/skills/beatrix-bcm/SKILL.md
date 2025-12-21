@@ -249,7 +249,7 @@ Lies die Axiome aus diesen Dateien:
 - `axioms/inu.json` - 59 INU-Axiome
 - `axioms/knu.json` - 46 KNU-Axiome
 - `axioms/idn.json` - 70 IDN-Axiome
-- `axioms/lambda.json` - 35 λ-Axiome (Fehr/Gächter/Fischbacher)
+- `axioms/lambda.json` - 46 λ-Axiome (inkl. Anti-soziale Bestrafung)
 - `axioms/awx.json` - AWX-Axiome
 - `axioms/wax.json` - WAX mit λ-Logik
 - `axioms/wtx.json` - Übergangswahrscheinlichkeiten
@@ -276,3 +276,4 @@ Lies die Axiome aus diesen Dateien:
 - Fehr & Schmidt (1999): Fairness
 - Fehr & Gächter (2002): Altruistic Punishment
 - Fischbacher, Gächter & Fehr (2001): Conditional Cooperation
+- Herrmann, Thöni & Gächter (2008): Antisocial Punishment
