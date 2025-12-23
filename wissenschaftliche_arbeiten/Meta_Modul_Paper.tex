@@ -1802,29 +1802,161 @@ Was hier passiert:
 \end{enumerate}
 \end{axiom}
 
-\subsubsection{Das ehrliche Value Proposition}
+\subsubsection{Das vollständige Value Proposition}
 
-\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Was BCM/BEATRIX verspricht -- und was nicht]
-\textbf{Wir versprechen:}
+Die Wertschöpfung von BCM/BEATRIX erstreckt sich über mehrere Dimensionen:
+
+\paragraph{1. Geschwindigkeit und Effizienz.}
+
+\begin{table}[h]
+\centering
+\caption{Zeitersparnis durch BCM/BEATRIX}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Aktivität} & \textbf{Klassisch} & \textbf{Mit BEATRIX} \\
+\midrule
+Verhaltensparameter-Schätzung & 2--4 Wochen (Primärforschung) & 2--4 Stunden \\
+Szenario-Modellierung & 1--2 Wochen & Echtzeit \\
+Sensitivitätsanalyse & Oft gar nicht & Automatisch \\
+Dokumentation der Annahmen & Nachträglich, unvollständig & Integriert \\
+Cross-Check mit Literatur & Manuell, sporadisch & Systematisch \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Implikation}: Projekte können schneller starten, mehr Iterationen durchlaufen, und Kunden bekommen früher Ergebnisse. Zeit ist Geld -- und Geschwindigkeit ist Wettbewerbsvorteil.
+
+\paragraph{2. Bessere Entscheidungen.}
+
+BCM/BEATRIX verbessert die Entscheidungsqualität durch:
+
 \begin{itemize}
-    \item[$\checkmark$] Kollektive Verhaltensannahmen werden \textbf{sichtbar}
-    \item[$\checkmark$] Ihr bekommt \textbf{Sprache} für Verhaltensparameter
-    \item[$\checkmark$] Unsicherheit wird \textbf{quantifiziert} statt versteckt
-    \item[$\checkmark$] Ihr könnt aus Fehlern \textbf{systematisch lernen}
-    \item[$\checkmark$] Verschiedene Perspektiven werden \textbf{vergleichbar}
-    \item[$\checkmark$] Der Prozess wird \textbf{dokumentiert} und auditierbar
+    \item \textbf{Reduktion von Blind Spots}: Systematische Berücksichtigung von 38 dokumentierten Biases verhindert, dass wichtige Verhaltenseffekte übersehen werden
+    \item \textbf{Explizite Unsicherheit}: Konfidenzintervalle statt Punktschätzungen ermöglichen risikoadjustierte Entscheidungen
+    \item \textbf{Kontrafaktische Analyse}: ``Was wäre wenn $\lambda$ höher ist?'' kann in Sekunden beantwortet werden
+    \item \textbf{Pre-Mortem-Fähigkeit}: Identifikation von Implementierungsbarrieren \textit{vor} dem Scheitern
+    \item \textbf{Konsistenz}: Dieselbe Situation wird nicht je nach Berater unterschiedlich eingeschätzt
 \end{itemize}
 
-\textbf{Wir versprechen NICHT:}
+\paragraph{3. Höhere Interventionswirksamkeit.}
+
+\begin{table}[h]
+\centering
+\caption{Hebel für Interventionserfolg}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Problem} & \textbf{BCM-Lösung} \\
+\midrule
+Falsche Diagnose (AWX vs. WAX vs. WTX) & Systematische Engpass-Identifikation \\
+Falscher Interventionstyp & 8-Typen-Taxonomie mit Matching \\
+Überschätzung von Nudge-Effekten & Lab-Field-Gap-Korrektur (MA-EPI-38) \\
+Ignorieren von Identitätsdynamik & IDN-Modul-Integration \\
+Fehlende Nachhaltigkeit & DYN-Axiome für Habit Formation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Quantifizierung}: Wenn BCM/BEATRIX die Interventionswirksamkeit um 20\% steigert (konservative Schätzung basierend auf besserer Diagnose), und ein typisches Projekt 500k CHF Interventionsbudget hat, sind das 100k CHF zusätzlicher Wert -- pro Projekt.
+
+\paragraph{4. Risikoreduktion.}
+
 \begin{itemize}
-    \item[$\times$] ``Die Wahrheit'' über menschliches Verhalten
-    \item[$\times$] Perfekte Prognosen
-    \item[$\times$] Ersatz für lokales Wissen und Intuition
-    \item[$\times$] Wissenschaftliche Gewissheit
-    \item[$\times$] Eliminierung von Unsicherheit
+    \item \textbf{Vermeidung teurer Fehlschläge}: Verhaltensblinde Strategien scheitern oft spektakulär (z.B. Produktlaunches, die Kundenverhalten falsch einschätzen)
+    \item \textbf{Früherkennung}: BEATRIX kann warnen, wenn Annahmen unplausibel sind (Plausibility Check)
+    \item \textbf{Dokumentierte Reasoning-Chain}: Bei Problemen kann nachvollzogen werden, \textit{warum} eine Entscheidung getroffen wurde
+    \item \textbf{Regulatory Compliance}: Für regulierte Branchen (Banken, Versicherungen) ist dokumentierte Methodik zunehmend wichtig
 \end{itemize}
 
-\textbf{Kurz}: BCM/BEATRIX macht Beratung nicht ``wissenschaftlicher'' im Sinne von ``objektiv wahr''. Es macht sie \textbf{besser} im Sinne von: transparenter, konsistenter, lernfähiger, skalierbarer, kommunizierbarer.
+\paragraph{5. Skalierbarkeit und Konsistenz.}
+
+\begin{itemize}
+    \item \textbf{Über Projekte hinweg}: Dieselbe Methodik für Pricing, Change Management, Produktdesign, Policy
+    \item \textbf{Über Teams hinweg}: Junior-Berater können schneller auf Senior-Niveau arbeiten
+    \item \textbf{Über Klienten hinweg}: Erkenntnisse aus Projekt A verbessern Projekt B
+    \item \textbf{Über Zeit hinweg}: Akkumulierendes Wissen statt wiederholtes Neuerfinden
+\end{itemize}
+
+\paragraph{6. Wissensmanagement und Lernen.}
+
+\begin{table}[h]
+\centering
+\caption{Lernschleifen im BCM/BEATRIX-System}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Ebene} & \textbf{Was wird gelernt?} & \textbf{Wie?} \\
+\midrule
+Projekt & War unsere Prognose korrekt? & Outcome-Tracking \\
+Kunde & Welche Parameter sind kundenspezifisch? & Kalibrierung über Zeit \\
+Industrie & Gibt es branchenspezifische Patterns? & Cross-Projekt-Analyse \\
+Methodik & Welche Base Rates stimmen? & Meta-Analyse der Predictions \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Der Flywheel-Effekt}: Je mehr Projekte mit BCM/BEATRIX durchgeführt werden, desto besser werden die Base Rates, desto präziser die Prognosen, desto höher der Wert für Kunden.
+
+\paragraph{7. Talent und Training.}
+
+\begin{itemize}
+    \item \textbf{Schnelleres Onboarding}: Neue Berater lernen BCM-Denken systematisch statt durch Osmose
+    \item \textbf{Konsistente Qualität}: Weniger Abhängigkeit von individueller Erfahrung einzelner Partner
+    \item \textbf{Codifiziertes Expertenwissen}: Das Wissen von Fehr, Fischbacher et al. ist im System, nicht nur in deren Köpfen
+    \item \textbf{Retention}: Wissen bleibt in der Firma, auch wenn Berater gehen
+\end{itemize}
+
+\paragraph{8. Differenzierung und Positionierung.}
+
+\begin{itemize}
+    \item \textbf{Unique Selling Proposition}: Kein anderer Berater hat ein vergleichbares System
+    \item \textbf{Wissenschaftliche Glaubwürdigkeit}: Zürich-Konstellation (ETH, UZH, FehrAdvice) ist einzigartig
+    \item \textbf{Defensible Methodology}: Schwer zu kopieren, weil auf Jahrzehnten Forschung aufbauend
+    \item \textbf{Premium-Positionierung}: Rechtfertigt höhere Tagessätze
+\end{itemize}
+
+\paragraph{9. Client Experience.}
+
+\begin{itemize}
+    \item \textbf{Transparenz}: Kunden verstehen, \textit{warum} Empfehlungen gemacht werden
+    \item \textbf{Ownership}: Kunden können Parameter anpassen und Konsequenzen sehen
+    \item \textbf{Vertrauen}: Wissenschaftliche Fundierung reduziert ``Bauchgefühl''-Skepsis
+    \item \textbf{Kontinuität}: Bei Folgeprojekten kann auf vorherige Analysen aufgebaut werden
+\end{itemize}
+
+\subsubsection{Quantifizierung des Gesamtwertes}
+
+\begin{table}[h]
+\centering
+\caption{Illustrative Wertschöpfung pro Projekt (konservative Schätzung)}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Werttreiber} & \textbf{CHF} \\
+\midrule
+Zeitersparnis (40h $\times$ 300 CHF/h) & 12'000 \\
+Höhere Interventionswirksamkeit (+10\% auf 500k Budget) & 50'000 \\
+Vermiedene Fehlentscheidungen (10\% Wahrscheinlichkeit $\times$ 200k Schaden) & 20'000 \\
+Bessere Client Experience (höhere Retention, Upselling) & 15'000 \\
+\midrule
+\textbf{Geschätzter Mehrwert pro Projekt} & \textbf{97'000} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Anmerkung}: Diese Zahlen sind illustrativ und projektabhängig. Der tatsächliche Wert variiert je nach Projektgröße, Komplexität und Anwendungsbereich.
+
+\subsubsection{Was BCM/BEATRIX NICHT verspricht}
+
+Zur Vollständigkeit -- und um unrealistische Erwartungen zu vermeiden:
+
+\begin{itemize}
+    \item[$\times$] \textbf{``Die Wahrheit''}: BCM liefert kalibrierte Schätzungen, keine Gewissheit
+    \item[$\times$] \textbf{Perfekte Prognosen}: Menschliches Verhalten bleibt stochastisch
+    \item[$\times$] \textbf{Ersatz für Domänenwissen}: BCM braucht lokalen Input, um zu funktionieren
+    \item[$\times$] \textbf{Automatisierung von Beratung}: BEATRIX unterstützt Berater, ersetzt sie nicht
+    \item[$\times$] \textbf{Eliminierung von Unsicherheit}: Es macht Unsicherheit \textit{sichtbar}, nicht \textit{weg}
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Das BCM/BEATRIX Value Proposition in einem Satz]
+BCM/BEATRIX macht verhaltensökonomische Beratung \textbf{schneller} (Stunden statt Wochen), \textbf{besser} (systematisch statt ad-hoc), \textbf{skalierbarer} (über Teams und Projekte), \textbf{lernfähiger} (akkumulierendes Wissen), und \textbf{nachvollziehbarer} (dokumentierte Reasoning-Chain) -- während es die unverzichtbare Rolle von Berater-Expertise und Kunden-Intuition \textbf{verstärkt statt ersetzt}.
 \end{tcolorbox}
 
 %==============================================================================
