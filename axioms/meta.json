@@ -1,8 +1,8 @@
 {
   "module": "META",
   "id": "7232",
-  "version": "2.1",
-  "axiom_count": 101,
+  "version": "2.2",
+  "axiom_count": 113,
   "meta_formula": "Φ_META = Ω_ONT · Ω_EPI · Ω_AXI · Ψ(U, ω, ρ, σ) · Γ · τ · ∂ · μ · κ · λ",
   "categories": {
     "ontology": {
@@ -11,17 +11,17 @@
       "description": "Was existiert? Grundlegende Entitäten und Beziehungen"
     },
     "epistemology": {
-      "range": [26, 50],
+      "range": [27, 63],
       "prefix": "EPI",
-      "description": "Was wissen wir? Wissen, Unsicherheit, Grenzen"
+      "description": "Was wissen wir? Wissen, Unsicherheit, Grenzen, Biases"
     },
     "governance": {
-      "range": [51, 75],
+      "range": [64, 88],
       "prefix": "GOV",
       "description": "Was ist erlaubt? Regeln, Constraints, Ethik"
     },
     "dynamics": {
-      "range": [76, 100],
+      "range": [89, 113],
       "prefix": "DYN",
       "description": "Wie verändert es sich? Zeit, Evolution, Adaptation"
     }
@@ -609,6 +609,155 @@
       "dependencies": ["MA-EPI-06"],
       "validates": ["AWX"],
       "testable": true
+    },
+    {
+      "id": "MA-EPI-26",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Base Rate Neglect",
+      "description": "Prior-Wahrscheinlichkeiten werden ignoriert zugunsten von Einzelfall-Information",
+      "formula": "P̂(H|E) ≈ P(E|H), ignoriert P(H)",
+      "dependencies": ["MA-EPI-24"],
+      "validates": ["AWX", "ESTIMATION"],
+      "testable": true,
+      "references": ["Kahneman & Tversky (1973)"],
+      "bcm_relevance": "LLM-Estimation muss Base Rates für Typen-Verteilung berücksichtigen"
+    },
+    {
+      "id": "MA-EPI-27",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Representativeness Heuristic",
+      "description": "Urteile basieren auf Ähnlichkeit zu Prototypen statt auf Wahrscheinlichkeit",
+      "formula": "P̂(A∈Category) = f(Similarity(A, Prototype))",
+      "dependencies": ["MA-EPI-04"],
+      "validates": ["AWX", "ESTIMATION"],
+      "testable": true,
+      "references": ["Kahneman & Tversky (1972)"]
+    },
+    {
+      "id": "MA-EPI-28",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Sunk Cost Fallacy",
+      "description": "Vergangene unwiederbringliche Kosten beeinflussen zukünftige Entscheidungen",
+      "formula": "U(Continue|SunkCost) > U(Continue|NoSunkCost), obwohl rational irrelevant",
+      "dependencies": ["MA-EPI-15"],
+      "validates": ["INU"],
+      "testable": true,
+      "references": ["Arkes & Blumer (1985)"]
+    },
+    {
+      "id": "MA-EPI-29",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Endowment Effect",
+      "description": "Eigene Güter werden höher bewertet als identische fremde Güter",
+      "formula": "WTA > WTP für gleiches Gut; WTA/WTP ≈ 2",
+      "dependencies": ["MA-EPI-15"],
+      "validates": ["INU"],
+      "testable": true,
+      "references": ["Thaler (1980)", "Kahneman, Knetsch & Thaler (1990)"]
+    },
+    {
+      "id": "MA-EPI-30",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Optimism Bias",
+      "description": "Systematische Unterschätzung negativer und Überschätzung positiver Outcomes für sich selbst",
+      "formula": "P̂(Positive|Self) > P(Positive); P̂(Negative|Self) < P(Negative)",
+      "dependencies": ["MA-EPI-06"],
+      "validates": ["AWX", "IDN"],
+      "testable": true,
+      "references": ["Weinstein (1980)"]
+    },
+    {
+      "id": "MA-EPI-31",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Self-Serving Bias",
+      "description": "Erfolge werden internal, Misserfolge external attribuiert",
+      "formula": "P(Internal|Success) > P(Internal|Failure)",
+      "dependencies": ["MA-EPI-06"],
+      "validates": ["IDN"],
+      "testable": true,
+      "references": ["Miller & Ross (1975)"],
+      "bcm_relevance": "Kern-Mechanismus für Motivated Inference im IDN-Modul"
+    },
+    {
+      "id": "MA-EPI-32",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Social Desirability Bias",
+      "description": "Selbstberichte sind verzerrt Richtung sozialer Erwünschtheit",
+      "formula": "Report(V) = V_true + ε_SD; ε_SD = f(Visibility, Norm)",
+      "dependencies": ["MA-EPI-06", "MA-ONT-11"],
+      "validates": ["AWX", "ESTIMATION"],
+      "testable": true,
+      "references": ["Crowne & Marlowe (1960)"],
+      "bcm_relevance": "Kritisch für BEATRIX: Persona-Beschreibungen sind systematisch verzerrt"
+    },
+    {
+      "id": "MA-EPI-33",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Omission Bias",
+      "description": "Präferenz für Unterlassung gegenüber Handlung bei gleichem Outcome",
+      "formula": "U(Outcome|Omission) > U(Outcome|Commission) für negative Outcomes",
+      "dependencies": ["MA-EPI-06"],
+      "validates": ["GOV", "IDN"],
+      "testable": true,
+      "references": ["Spranca, Minsk & Baron (1991)"]
+    },
+    {
+      "id": "MA-EPI-34",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Moral Licensing",
+      "description": "Vorherige gute Tat lizenziert nachfolgende schlechte Tat",
+      "formula": "P(BadAction|PriorGoodAction) > P(BadAction|NoPriorAction)",
+      "dependencies": ["MA-EPI-06"],
+      "validates": ["IDN", "KNU"],
+      "testable": true,
+      "references": ["Merritt, Effron & Monin (2010)"],
+      "bcm_relevance": "Identitäts-Dynamik: Selbstbild-Kredit wird aufgebaut und ausgegeben"
+    },
+    {
+      "id": "MA-EPI-35",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Identifiable Victim Effect",
+      "description": "Ein identifizierbares Opfer erzeugt mehr Empathie als statistische Opfer",
+      "formula": "U_empathy(1 identified) > U_empathy(N statistical)",
+      "dependencies": ["MA-EPI-06"],
+      "validates": ["KNU", "IDN"],
+      "testable": true,
+      "references": ["Small & Loewenstein (2003)"]
+    },
+    {
+      "id": "MA-EPI-36",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Scope Insensitivity",
+      "description": "Bewertung skaliert nicht proportional mit der Anzahl Betroffener",
+      "formula": "∂U/∂N → 0 für N → ∞; WTP(N) ≈ WTP(1)",
+      "dependencies": ["MA-EPI-35"],
+      "validates": ["KNU"],
+      "testable": true,
+      "references": ["Kahneman (1986)"],
+      "bcm_relevance": "Kollektiver Nutzen (KNU) wird systematisch unterschätzt"
+    },
+    {
+      "id": "MA-EPI-37",
+      "category": "epistemology",
+      "level": "operation",
+      "statement": "Affect Heuristic",
+      "description": "Emotionale Reaktionen bestimmen Risiko- und Nutzenurteile",
+      "formula": "Ûrisk = f(Affect); Ûbenefit = g(Affect); Corr(Ûrisk, Ûbenefit) < 0",
+      "dependencies": ["MA-EPI-05"],
+      "validates": ["AWX", "INU"],
+      "testable": true,
+      "references": ["Slovic, Finucane, Peters & MacGregor (2002)"]
     },
     {
       "id": "MA-GOV-01",
