@@ -16,9 +16,15 @@
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usepackage{epigraph}
+\usepackage{csquotes}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 
 \geometry{margin=2.5cm}
+
+% Epigraph styling
+\setlength{\epigraphwidth}{0.85\textwidth}
+\setlength{\epigraphrule}{0pt}
 
 % Theorem environments
 \theoremstyle{definition}
@@ -71,16 +77,358 @@ Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\
 
 \subsection{Motivation: Warum ein META-Modul?}
 
+\epigraph{\textit{``The formulation of a problem is often more essential than its solution, which may be merely a matter of mathematical or experimental skill.''}}{--- Albert Einstein \& Leopold Infeld, \textit{The Evolution of Physics} (1938)}
+
 Das Behavioral Change Model (\BCM) ist ein formal-mathematisches Framework zur Modellierung, Prognose und Beeinflussung menschlichen Verhaltens. Im Gegensatz zu rein empirischen Ansätzen basiert das \BCM{} auf einem axiomatischen Fundament, das explizite Annahmen über die Natur von Verhalten, Wissen, Erlaubtem und Veränderung macht.
 
-Das \META-Modul erfüllt dabei mehrere kritische Funktionen:
+Diese Entscheidung für Axiomatik ist nicht selbstverständlich. Die Verhaltensökonomie hat sich seit Kahneman und Tversky (1979) als empirische Disziplin verstanden -- als Sammlung von Anomalien, Effekten und Heuristiken. Doch genau diese empirische Stärke ist zugleich ihre theoretische Schwäche: Ohne explizite Fundamente bleibt die Disziplin eine lose Kollektion von Phänomenen, die sich weder systematisch integrieren noch maschinell operationalisieren lässt.
 
-\begin{enumerate}[label=(\roman*)]
-    \item \textbf{Konsistenzgarantie}: Alle operativen Module (INU, KNU, IDN, LAMBDA) müssen mit den \META-Axiomen kompatibel sein
-    \item \textbf{Transparenz}: Implizite Annahmen werden explizit und damit kritisierbar
-    \item \textbf{Erweiterbarkeit}: Neue Module können systematisch auf Konsistenz geprüft werden
-    \item \textbf{Interdisziplinarität}: Die vier Kategorien entsprechen klassischen philosophischen Disziplinen
+Das \META-Modul adressiert diese Lücke. Es macht explizit, was bisher implizit blieb -- und schafft damit die Voraussetzung für eine neue Generation verhaltensökonomischer Anwendungen.
+
+%------------------------------------------------------------------------------
+\subsubsection{Das Erbe impliziter Annahmen}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``Economics is haunted by more fallacies than any other study known to man.''}}{--- Henry Hazlitt, \textit{Economics in One Lesson} (1946)}
+
+Die Geschichte der Wirtschaftswissenschaften ist eine Geschichte impliziter Annahmen. Adam Smith sprach 1776 von der ``invisible hand'', ohne je zu definieren, unter welchen Bedingungen sie funktioniert. Léon Walras formalisierte 1874 das allgemeine Gleichgewicht, ohne die psychologischen Grundlagen seiner Akteure zu explizieren. Und selbst Kenneth Arrow und Gérard Debreu, die 1954 die Existenz eines Gleichgewichts bewiesen, taten dies auf Basis von Annahmen, die sie selbst als ``heroisch'' bezeichneten.
+
+Der \textit{Homo Oeconomicus} -- jene Fiktion eines vollständig rationalen, nutzenmaximierenden Agenten -- war nie als empirische Beschreibung gedacht. Er war ein \textit{Als-Ob-Konstrukt}, eine methodologische Vereinfachung. Doch über Jahrzehnte verwechselten Ökonomen das Modell mit der Realität. Milton Friedman verteidigte diese Praxis 1953 mit seinem berühmten ``As-If''-Argument:
+
+\begin{quote}
+\textit{``The relevant question to ask about the `assumptions' of a theory is not whether they are descriptively `realistic,' for they never are, but whether they are sufficiently good approximations for the purpose in hand.''}
+\end{quote}
+
+Das Problem: Friedman gab nie an, \textit{welche} Annahmen der Homo Oeconomicus eigentlich macht. Sie blieben implizit -- und damit unkritisierbar.
+
+Die Behavioral Economics Revolution ab 1979 war eine Reaktion auf diese impliziten Annahmen. Kahneman und Tversky dokumentierten systematische Abweichungen vom Rationalmodell: Loss Aversion, Framing Effects, Anchoring, Overconfidence. Doch -- und das ist der entscheidende Punkt -- sie \textit{ersetzten} das implizite Axiomensystem nicht. Sie \textit{kritisierten} es lediglich.
+
+Richard Thaler, der diese Kritik in die Ökonomie trug, beschrieb das Dilemma in seinem Nobelpreis-Vortrag 2017:
+
+\begin{quote}
+\textit{``We have learned a lot about how people deviate from the predictions of economic theory, but we have not yet built a coherent alternative theory.''}
+\end{quote}
+
+Dieses ``noch nicht'' dauert nun fast 50 Jahre. Die Verhaltensökonomie hat Anomalien gesammelt wie ein Kuriositätenkabinett -- aber kein neues Fundament gebaut. Das \META-Modul ist der Versuch, dieses Fundament nachzuliefern.
+
+\paragraph{Das Problem der Parametervariation.}
+
+Ein konkretes Beispiel illustriert die Konsequenzen impliziter Annahmen: Loss Aversion. Kahneman und Tversky (1979) schätzten den Loss-Aversion-Koeffizienten $\lambda$ auf etwa 2.0 -- Verluste wiegen doppelt so schwer wie Gewinne. Doch nachfolgende Studien fanden erhebliche Variation:
+
+\begin{table}[h]
+\centering
+\caption{Variation des Loss-Aversion-Koeffizienten $\lambda$ in der Literatur}
+\begin{tabular}{@{}llc@{}}
+\toprule
+\textbf{Studie} & \textbf{Kontext} & \textbf{$\lambda$} \\
+\midrule
+Kahneman \& Tversky (1979) & Hypothetische Lotterien & 2.25 \\
+Tversky \& Kahneman (1992) & Cumulative Prospect Theory & 2.25 \\
+Abdellaoui et al. (2007) & Reale Auszahlungen & 1.43 \\
+Gächter et al. (2022) & Meta-Analyse & 1.5--2.5 \\
+Yechiam (2019) & Kritische Analyse & 1.0--3.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ist $\lambda = 2.0$ nun ein Naturgesetz, ein Durchschnitt oder ein Artefakt? Die Literatur schweigt, weil die \textit{ontologische Frage} nie gestellt wurde: Was \textit{ist} Loss Aversion eigentlich -- ein stabiler Persönlichkeitstrait, ein kontextabhängiger Zustand oder ein statistisches Aggregat? Ohne explizite Ontologie bleibt diese Frage unbeantwortbar.
+
+Das \META-Modul adressiert dies in Axiom MA-EPI-15:
+
+\begin{quote}
+\textbf{Loss Aversion (MA-EPI-15):} $|U(\text{Loss})| > |U(\text{Gain})|$ für $|\text{Loss}| = |\text{Gain}|$. Der Koeffizient $\lambda$ ist kontextabhängig und liegt typischerweise im Bereich $[1.5, 2.5]$.
+\end{quote}
+
+Der entscheidende Unterschied: Das Axiom macht die Kontextabhängigkeit \textit{explizit}. Es behauptet nicht, dass $\lambda = 2.0$ universal gilt, sondern dass es einen \textit{Bereich} gibt -- und dass die \BEATRIX-Schätzung diesen Bereich respektieren muss.
+
+%------------------------------------------------------------------------------
+\subsubsection{Die axiomatische Tradition in der Wissenschaft}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``The method of `postulating' what we want has many advantages; they are the same as the advantages of theft over honest toil.''}}{--- Bertrand Russell, \textit{Introduction to Mathematical Philosophy} (1919)}
+
+Die Idee, Wissen auf expliziten Grundannahmen aufzubauen, ist nicht neu. Sie bildet den Kern des wissenschaftlichen Denkens seit der Antike.
+
+\paragraph{Euklids Elemente (ca. 300 v. Chr.).}
+
+Euklid begann seine \textit{Elemente} mit fünf Postulaten -- Annahmen, die nicht bewiesen, sondern gesetzt werden. Das berühmteste ist das Parallelenpostulat: \textit{Durch einen Punkt außerhalb einer Geraden gibt es genau eine Parallele.} Aus diesen fünf Postulaten leitete Euklid 465 Sätze ab -- ein Gebäude von atemberaubender Kohärenz.
+
+Für zwei Jahrtausende galt Euklid als Modell wissenschaftlicher Strenge. Erst im 19. Jahrhundert zeigten Lobatschewski, Bolyai und Riemann, dass man das Parallelenpostulat \textit{ändern} kann -- und konsistente, aber radikal andere Geometrien erhält. Diese Entdeckung war nur möglich, \textit{weil} Euklid seine Annahmen explizit gemacht hatte.
+
+Die Lektion für die Verhaltensökonomie: Implizite Annahmen können nicht systematisch variiert werden. Man weiß nicht einmal, dass man sie macht.
+
+\paragraph{Die Peano-Axiome (1889).}
+
+Giuseppe Peano formalisierte die natürlichen Zahlen in fünf Axiomen. Das erste: \textit{0 ist eine natürliche Zahl.} Das zweite: \textit{Jede natürliche Zahl hat einen Nachfolger.} Aus diesen minimalen Annahmen folgt die gesamte Arithmetik.
+
+Die Eleganz der Peano-Axiome liegt in ihrer \textit{Minimalität}: Sie machen genau die Annahmen, die nötig sind -- nicht mehr und nicht weniger. Das \META-Modul strebt dasselbe Ideal an: 113 Axiome, die das Minimum an Annahmen darstellen, um menschliches Verhalten konsistent zu modellieren.
+
+\paragraph{Kolmogorovs Wahrscheinlichkeitstheorie (1933).}
+
+Andrei Kolmogorov axiomatisierte die Wahrscheinlichkeitstheorie in drei Grundannahmen:
+\begin{enumerate}
+    \item Die Wahrscheinlichkeit eines Ereignisses ist nicht-negativ.
+    \item Die Wahrscheinlichkeit des sicheren Ereignisses ist 1.
+    \item Die Wahrscheinlichkeit der Vereinigung disjunkter Ereignisse ist die Summe ihrer Einzelwahrscheinlichkeiten.
 \end{enumerate}
+
+Vor Kolmogorov war ``Wahrscheinlichkeit'' ein vager Begriff -- manchmal Häufigkeit, manchmal Plausibilität, manchmal Wettquote. Nach Kolmogorov war klar, welche Operationen erlaubt sind und welche nicht.
+
+Die Verhaltensökonomie befindet sich 2024 in der Situation der Wahrscheinlichkeitstheorie vor 1933: Ein Sammelsurium von intuitiven Begriffen -- ``Nutzen'', ``Bias'', ``Heuristik'' -- ohne klare axiomatische Fundierung.
+
+\paragraph{Von Neumann-Morgenstern Expected Utility (1944).}
+
+John von Neumann und Oskar Morgenstern axiomatisierten in ihrer \textit{Theory of Games and Economic Behavior} die Entscheidungstheorie. Ihre Axiome -- Vollständigkeit, Transitivität, Kontinuität, Unabhängigkeit -- definierten erstmals präzise, was ``rationale Präferenzen'' bedeuten.
+
+Kahneman und Tversky (1979) zeigten, dass Menschen das Unabhängigkeitsaxiom systematisch verletzen (Allais-Paradox). Doch sie formulierten keine \textit{alternativen} Axiome. Prospect Theory blieb eine deskriptive Theorie ohne axiomatische Fundierung -- ein ``Addon'' zur Expected Utility, kein Ersatz.
+
+Daniel Ellsberg bemerkte in seinem wegweisenden Paper von 1961:
+
+\begin{quote}
+\textit{``If people's actual behavior is persistently inconsistent with [the axioms], then the axioms must be modified or abandoned.''}
+\end{quote}
+
+Das ``Modifizieren oder Aufgeben'' ist nie geschehen. Die Verhaltensökonomie lebt seit 60 Jahren mit gebrochenen Axiomen, ohne neue zu formulieren. Das \META-Modul schließt diese Lücke.
+
+\paragraph{Arrows Unmöglichkeitstheorem (1951).}
+
+Kenneth Arrow bewies, dass es keine Wahlregel gibt, die fünf scheinbar vernünftige Axiome gleichzeitig erfüllt (Pareto-Effizienz, Unabhängigkeit irrelevanter Alternativen, Nicht-Diktatur, universelle Domäne, Transitivität). Dieses ``Unmöglichkeitstheorem'' war ein intellektueller Schock -- aber nur möglich, \textit{weil} Arrow seine Annahmen explizit gemacht hatte.
+
+Die Lektion: Axiomatisierung führt manchmal zu unbequemen Erkenntnissen. Aber ohne sie bleibt man in behaglicher Unwissenheit.
+
+%------------------------------------------------------------------------------
+\subsubsection{Der LLM-Katalysator: Warum jetzt?}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``The limits of my language mean the limits of my world.''}}{--- Ludwig Wittgenstein, \textit{Tractatus Logico-Philosophicus} (1921)}
+
+Die Frage drängt sich auf: Warum entsteht das \META-Modul ausgerechnet jetzt -- 2024, nicht 1984 oder 2004? Die Antwort liegt in einer technologischen Diskontinuität: der \textbf{Large Language Model Revolution}.
+
+\paragraph{Menschen haben Intuition, Maschinen haben Text.}
+
+Ein erfahrener Behavioral Scientist ``weiß'', dass Loss Aversion bei Finanzentscheidungen stärker ist als bei Konsumentscheidungen. Er ``spürt'', wann ein Nudge manipulativ wird. Er ``ahnt'', welche Intervention bei welcher Zielgruppe wirken wird.
+
+Dieses Wissen ist \textit{tacit knowledge} im Sinne Michael Polanyis (1966):
+
+\begin{quote}
+\textit{``We can know more than we can tell.''}
+\end{quote}
+
+Für menschliche Praktiker ist tacit knowledge kein Problem -- sie haben es. Für Large Language Models ist es ein fundamentales Hindernis: Sie können nur verarbeiten, was in Text expliziert wurde.
+
+GPT-4 und Claude haben das gesamte Internet gelesen, inklusive aller wissenschaftlichen Papers zur Verhaltensökonomie. Doch sie haben nicht das ``Gefühl'' eines erfahrenen Praktikers. Wenn man sie fragt, welchen $\lambda$-Wert eine Persona hat, produzieren sie eine plausible Antwort -- ohne Verankerung in empirischen Base Rates, ohne Konsistenzprüfung, ohne Respekt für die Grenzen ihres Wissens.
+
+Das \META-Modul expliziert, was bisher implizit war -- und macht es damit maschinell verarbeitbar.
+
+\paragraph{Das Halluzinationsproblem.}
+
+LLMs ``halluzinieren'' -- sie produzieren flüssigen, plausiblen Text, der faktisch falsch ist. In Domänen wie Mathematik oder Geschichte kann man Halluzinationen durch Faktencheck entdecken. In der Verhaltensökonomie ist das schwieriger: Wenn ein LLM behauptet, eine bestimmte Persona habe $\beta = 0.7$ (Present Bias), wer soll das widerlegen?
+
+Die Lösung: \textit{Constrained Generation}. Das LLM wird nicht frei generieren gelassen, sondern durch explizite Axiome und Base Rates eingeschränkt. Wenn das \META-Modul sagt, dass $\beta$ typischerweise im Bereich $[0.5, 0.9]$ liegt (MA-EPI-16), kann das System Schätzungen außerhalb dieses Bereichs als verdächtig flaggen.
+
+\paragraph{Das Kalibrierungsproblem.}
+
+Menschen kalibrieren sich automatisch durch Erfahrung. Ein Arzt, der tausende Patienten gesehen hat, schätzt Wahrscheinlichkeiten genauer als ein Anfänger. LLMs haben keine solche Erfahrung -- sie haben nur Trainingstexte.
+
+Das Problem wird verschärft durch \textit{Social Desirability Bias} (MA-EPI-32): Menschen beschreiben sich in Texten systematisch positiver, als sie sind. Ein LLM, das auf Selbstbeschreibungen trainiert wurde, überschätzt systematisch Altruismus und unterschätzt Eigeninteresse.
+
+Das \META-Modul adressiert dies durch explizite Base Rates. Axiom MA-EPI-26 (Base Rate Neglect) erinnert das System daran, dass etwa 50\% der Bevölkerung ``Conditional Cooperators'' sind, 30\% ``Self-Interested'' und nur 10\% ``Altruisten'' (Fischbacher et al., 2001). Diese Zahlen sind keine Schätzungen des LLM -- sie sind empirisch fundierte Anker.
+
+\paragraph{Die neue Möglichkeit: Operationalisierung.}
+
+Vor 2022 wäre ein axiomatisches Verhaltens-Framework ``nur Philosophie'' gewesen -- interessant für Akademiker, irrelevant für die Praxis. Man hätte es nicht \textit{anwenden} können.
+
+LLMs ändern das fundamental. Ein System wie \BEATRIX{} kann:
+\begin{itemize}
+    \item Persona-Beschreibungen analysieren und BCM-Parameter schätzen
+    \item Verhaltensvorhersagen für verschiedene Szenarien generieren
+    \item Interventionen entwerfen und ihre Wirkung simulieren
+    \item Inkonsistenzen in Beschreibungen identifizieren
+    \item Unsicherheit quantifizieren und kommunizieren
+\end{itemize}
+
+Aber nur, wenn es \textit{weiß}, was es tut. Das \META-Modul liefert dieses Wissen.
+
+\paragraph{Wittgensteins Einsicht.}
+
+Wittgenstein schrieb im \textit{Tractatus}: ``Die Grenzen meiner Sprache bedeuten die Grenzen meiner Welt.'' Für LLMs gilt das wörtlich: Sie können nur operieren, was sprachlich expliziert wurde.
+
+Das \META-Modul ist der Versuch, die ``Welt'' der Verhaltensökonomie in Sprache zu fassen -- nicht als vage Prosa, sondern als präzise Axiome. Es erweitert damit die Grenzen dessen, was maschinell modellierbar ist.
+
+%------------------------------------------------------------------------------
+\subsubsection{Die vier Funktionen des META-Moduls}
+%------------------------------------------------------------------------------
+
+Das \META-Modul erfüllt vier distinkte, aber komplementäre Funktionen im \BCM-Ökosystem. Jede verdient eine detaillierte Betrachtung.
+
+\paragraph{(i) Konsistenzgarantie.}
+
+\epigraph{\textit{``A foolish consistency is the hobgoblin of little minds.''}}{--- Ralph Waldo Emerson, \textit{Self-Reliance} (1841)}
+
+Emerson mochte Konsistenz verachten -- für formale Systeme ist sie existentiell. Ein inkonsistentes Axiomensystem ist wertlos: Aus einem Widerspruch folgt alles (ex falso quodlibet).
+
+Das \META-Modul definiert die Konsistenzanforderungen für alle operativen Module:
+
+\begin{itemize}
+    \item Das \textbf{INU-Modul} (Individual Utility) muss konsistent sein mit den ontologischen Axiomen über Subjekte (MA-ONT-01), Nutzen (MA-ONT-03) und FEPSDE-Dimensionen (MA-ONT-08).
+
+    \item Das \textbf{KNU-Modul} (Collective Utility) muss konsistent sein mit den Axiomen über Gruppen (MA-ONT-10), Normen (MA-ONT-11) und soziale Präferenzen.
+
+    \item Das \textbf{IDN-Modul} (Identity) muss konsistent sein mit den Axiomen über multiple Identitäten (MA-ONT-09), Identitätsaktivierung (MA-ONT-17) und Identitätsevolution (MA-ONT-23).
+
+    \item Das \textbf{LAMBDA-Modul} muss konsistent sein mit den dynamischen Axiomen über $\lambda$-Dynamik (MA-DYN-23) und Feedback-Schleifen (MA-ONT-21).
+\end{itemize}
+
+\textbf{Beispiel für Konsistenzprüfung:} Angenommen, ein Praktiker möchte das INU-Modul um eine siebte Nutzen-Dimension erweitern -- etwa ``Spiritual'' (S). Diese Erweiterung muss konsistent sein mit:
+\begin{itemize}
+    \item MA-ONT-08: Die Gewichtungssumme muss weiterhin $\sum \omega_d = 1$ ergeben.
+    \item MA-EPI-01: Unvollständiges Wissen gilt auch für die neue Dimension.
+    \item MA-DYN-19: Hedonische Adaptation gilt auch für spirituelle Erfahrungen.
+\end{itemize}
+
+Ohne explizite Axiome wäre eine solche Konsistenzprüfung unmöglich -- man wüsste nicht, \textit{wogegen} man prüfen soll.
+
+\paragraph{(ii) Transparenz und Kritisierbarkeit.}
+
+\epigraph{\textit{``A theory which is not refutable by any conceivable event is non-scientific.''}}{--- Karl Popper, \textit{Conjectures and Refutations} (1963)}
+
+Karl Popper argumentierte, dass Wissenschaftlichkeit an Falsifizierbarkeit hängt. Eine Theorie, die mit \textit{jeder} möglichen Beobachtung kompatibel ist, sagt nichts über die Welt.
+
+Implizite Annahmen sind per Definition unfalsifizierbar: Man kann sie nicht testen, weil man nicht weiß, dass man sie macht. Explizite Axiome hingegen sind kritisierbar. Man kann fragen:
+\begin{itemize}
+    \item Ist MA-EPI-15 (Loss Aversion) empirisch haltbar?
+    \item Ist MA-GOV-06 (Subsidiarität) ethisch gerechtfertigt?
+    \item Ist MA-DYN-11 (Kritische Masse bei 25\%) korrekt kalibriert?
+\end{itemize}
+
+Die Antworten mögen kontrovers sein -- aber die \textit{Fragen} können gestellt werden. Das ist Wissenschaft.
+
+Imre Lakatos, Poppers Schüler und Kritiker, unterschied zwischen dem ``harten Kern'' einer Forschungsprogramms und seinem ``Schutzgürtel'' von Hilfshypothesen. Das \META-Modul macht diese Unterscheidung explizit:
+\begin{itemize}
+    \item \textbf{Harter Kern}: Die ontologischen Grundaxiome (Subjekte existieren, Nutzen existiert, Zeit existiert).
+    \item \textbf{Schutzgürtel}: Die spezifischen Parameter (Loss Aversion $\lambda \approx 2$, kritische Masse $P^* \approx 25\%$).
+\end{itemize}
+
+Der Schutzgürtel darf -- und soll -- durch empirische Forschung modifiziert werden. Der harte Kern bleibt stabil.
+
+\paragraph{(iii) Systematische Erweiterbarkeit.}
+
+\epigraph{\textit{``If I have seen further, it is by standing on the shoulders of giants.''}}{--- Isaac Newton, Brief an Robert Hooke (1675)}
+
+Wissenschaftlicher Fortschritt ist kumulativ. Newton baute auf Galilei und Kepler. Einstein baute auf Newton und Maxwell. Jede Generation steht auf den Schultern der vorigen.
+
+Die Verhaltensökonomie hat dieses Ideal bisher nicht erreicht. Jedes neue Paper startet quasi bei Null: eigene Definitionen, eigene Operationalisierungen, eigene implizite Annahmen. Replikationsstudien scheitern oft nicht an methodischen Fehlern, sondern an begrifflichen Inkompatibilitäten.
+
+Das \META-Modul schafft eine gemeinsame Grundlage. Neue Module können systematisch integriert werden, indem sie ihre Konsistenz mit den META-Axiomen nachweisen.
+
+\textbf{Beispiel: Integration eines AFFECT-Moduls.} Angenommen, zukünftige BCM-Versionen sollen Affekt-Dynamik modellieren -- die schnellen emotionalen Reaktionen, die Entscheidungen beeinflussen. Ein solches AFFECT-Modul müsste:
+\begin{enumerate}
+    \item Neue ontologische Axiome definieren (``Affekte existieren'', ``Affekte sind kurzlebig'').
+    \item Konsistenz mit bestehenden Axiomen nachweisen (z.B. Interaktion mit MA-EPI-05, der Zwei-Systeme-Theorie).
+    \item Epistemologische Constraints respektieren (z.B. MA-EPI-37, die Affect Heuristic).
+    \item Dynamische Axiome für Affekt-Verläufe formulieren.
+\end{enumerate}
+
+Das Ergebnis wäre eine \textit{kontrollierte} Erweiterung: Neues Wissen wird integriert, ohne die Kohärenz des Gesamtsystems zu zerstören.
+
+\paragraph{(iv) Interdisziplinäre Verankerung.}
+
+\epigraph{\textit{``Philosophy is written in this grand book, the universe... It is written in the language of mathematics.''}}{--- Galileo Galilei, \textit{Il Saggiatore} (1623)}
+
+Die vier Kategorien des \META-Moduls -- Ontologie, Epistemologie, Governance, Dynamik -- sind keine Erfindungen der Verhaltensökonomie. Sie entsprechen klassischen philosophischen Disziplinen, die seit der Antike reflektiert werden.
+
+\textbf{Ontologie} (griech. \textit{on} = seiend): Die Lehre vom Sein. Was existiert? Welche Entitäten und Beziehungen sind fundamental?
+
+Die META-Ontologie definiert: Subjekte ($\sigma$), Verhalten ($V$), Nutzen ($U$), Kontext ($\rho$), Zeit ($\tau$), Gruppen ($G$), Identitäten ($I$), Normen ($N$). Diese Entitäten sind die ``Möbel'' des BCM-Universums.
+
+Die philosophische Tradition -- von Aristoteles' Kategorien über Leibniz' Monadologie bis zu Quines ``On What There Is'' (1948) -- liefert das begriffliche Rüstzeug für diese Fragen.
+
+\textbf{Epistemologie} (griech. \textit{episteme} = Wissen): Die Lehre vom Wissen. Was können wir wissen? Welche Grenzen hat Erkenntnis?
+
+Die META-Epistemologie definiert: Wissen ist unvollständig (MA-EPI-01), Rationalität ist begrenzt (MA-EPI-02), Biases sind systematisch (MA-EPI-06 bis MA-EPI-37). Diese Axiome stehen in direkter Linie zur philosophischen Tradition -- von Platons Höhlengleichnis über Kants ``Grenzen der Vernunft'' bis zu Quines ``Two Dogmas of Empiricism'' (1951).
+
+\textbf{Governance} (lat. \textit{gubernare} = steuern): Die Lehre vom Erlaubten. Was darf man tun? Welche Interventionen sind ethisch?
+
+Die META-Governance definiert: Autonomie hat Primat (MA-GOV-03), Transparenz ist geboten (MA-GOV-05), Subsidiarität gilt (MA-GOV-06). Diese Prinzipien verbinden die Ethik -- von Kants kategorischem Imperativ über Mills Utilitarismus bis zu Rawls' Theorie der Gerechtigkeit -- mit der praktischen Interventionsgestaltung.
+
+\textbf{Dynamik} (griech. \textit{dynamis} = Kraft): Die Lehre von der Veränderung. Wie entwickeln sich Systeme? Was sind die Gesetze des Wandels?
+
+Die META-Dynamik definiert: Zeit existiert (MA-DYN-01), Pfadabhängigkeit gilt (MA-DYN-03), Gleichgewichte können multipel sein (MA-DYN-04). Diese Axiome verbinden die Metaphysik der Zeit -- von Heraklits ``Alles fließt'' über Hegels Dialektik bis zu Whiteheads Prozessphilosophie -- mit der Systemtheorie und den dynamischen Modellen der modernen Sozialwissenschaft.
+
+Die interdisziplinäre Verankerung hat praktische Konsequenzen: Das \BCM{} kann von Philosophen geprüft, von Ökonomen kalibriert, von Psychologen validiert und von Ingenieuren implementiert werden. Jede Disziplin findet Anknüpfungspunkte.
+
+%------------------------------------------------------------------------------
+\subsubsection{Abgrenzung: Was META nicht ist}
+%------------------------------------------------------------------------------
+
+Um Missverständnisse zu vermeiden, sei explizit gesagt, was das \META-Modul \textit{nicht} ist:
+
+\paragraph{Kein Bias-Katalog.}
+
+Das \META-Modul enthält in der EPI-Kategorie 37 Axiome zu kognitiven Biases. Aber es ist kein ``Katalog aller Biases''. Es gibt Hunderte dokumentierter Biases in der Literatur -- von Anchoring über Dunning-Kruger bis zum Zeigarnik-Effekt. Das \META-Modul wählt \textit{die für BCM relevanten} Biases aus und formalisiert sie. Vollständigkeit ist nicht das Ziel; Kohärenz ist es.
+
+\paragraph{Keine Heuristik-Sammlung.}
+
+Heuristiken (wie ``Take-the-Best'' oder ``Recognition Heuristic'') sind \textit{Beschreibungen} menschlicher Entscheidungsstrategien. Axiome sind \textit{Annahmen} über die Struktur der Welt. Das \META-Modul enthält Axiome \textit{über} Heuristiken (z.B. MA-EPI-04: ``Heuristiken sind adaptiv''), aber nicht die Heuristiken selbst.
+
+\paragraph{Kein Interventions-Cookbook.}
+
+Das \META-Modul definiert acht Interventionstypen (MA-GOV-08) und ethische Prinzipien für ihren Einsatz. Aber es enthält keine konkreten Rezepte (``Wenn X, dann nutze Nudge Y''). Solche Rezepte gehören in die Anwendungsschicht (\BEATRIX), nicht in die Fundamente.
+
+\paragraph{Keine empirische Theorie.}
+
+Axiome sind \textit{Setzungen}, keine Hypothesen. Man kann MA-ONT-01 (``Subjekte existieren'') nicht empirisch widerlegen -- es ist eine definitorische Annahme, keine Prognose. Die empirischen Gehalte des \BCM{} entstehen erst in den operativen Modulen, die auf den META-Axiomen aufbauen.
+
+%------------------------------------------------------------------------------
+\subsubsection{Praktische Konsequenzen fehlender Axiomatik}
+%------------------------------------------------------------------------------
+
+Die Notwendigkeit eines \META-Moduls wird am deutlichsten, wenn man die Konsequenzen seines Fehlens betrachtet. Drei Fallbeispiele illustrieren das Problem.
+
+\paragraph{Fallbeispiel 1: Inkommensurable Effektschätzungen.}
+
+Die Behavioral Insights Team (BIT) in UK schätzte 2015 die Effektgröße eines Tax-Nudges auf etwa 15 Prozentpunkte. Eine Replikation durch die australische Nudge-Unit fand nur 3 Prozentpunkte. Beide Teams arbeiteten seriös -- aber mit unterschiedlichen impliziten Annahmen über Baseline-Verhalten, Kontexteffekte und Messzeitpunkte.
+
+Ohne gemeinsame Sprache ist unklar, ob der Unterschied an der Intervention, der Population, dem Kontext oder der Messung liegt. Das \META-Modul liefert diese Sprache: MA-ONT-04 definiert, was ``Kontext'' bedeutet; MA-DYN-19 definiert, wie Effekte über Zeit abklingen; MA-EPI-26 fordert Berücksichtigung von Base Rates.
+
+\paragraph{Fallbeispiel 2: LLM-Halluzination bei Persona-Schätzung.}
+
+Ein Praktiker beschreibt eine Persona: ``Anna ist eine 35-jährige Managerin, die sich für Nachhaltigkeit engagiert und Fair-Trade-Produkte kauft.'' Ein naives LLM schätzt: ``Anna ist hochgradig altruistisch, $\lambda \approx 0.9$.''
+
+Das Problem: Die Beschreibung enthält \textit{stated values} (was Anna sagt), nicht \textit{revealed behavior} (was Anna tut). Social Desirability Bias (MA-EPI-32) legt nahe, dass die wahren Werte niedriger liegen. Base Rate Neglect (MA-EPI-26) erinnert daran, dass nur etwa 10\% der Bevölkerung ``echte Altruisten'' sind.
+
+Ein durch \META{} informiertes System wie \BEATRIX{} würde:
+\begin{enumerate}
+    \item Die Beschreibung als potenziell verzerrt flaggen.
+    \item Die Schätzung an empirischen Base Rates verankern.
+    \item Unsicherheit explizit quantifizieren (``$\lambda$ zwischen 0.5 und 0.8 mit 70\% Konfidenz'').
+\end{enumerate}
+
+\paragraph{Fallbeispiel 3: Kulturblindheit bei Interventions-Transfer.}
+
+Eine Nudge-Intervention funktioniert in Dänemark: Opt-Out für Organspende erhöht die Spenderquote von 4\% auf 85\%. Dieselbe Intervention wird nach Japan übertragen -- und scheitert.
+
+Warum? Ohne die META-Ebene (MA-ONT-26: 5-Ebenen-Hierarchie) fehlt die Sprache, um den Unterschied zu beschreiben. Mit \META{} ist klar:
+\begin{itemize}
+    \item \textbf{META-Ebene} (Kultur): Dänemark ist individualistisch, Japan ist kollektivistisch.
+    \item \textbf{MAKRO-Ebene} (Institution): Unterschiedliche rechtliche Rahmenbedingungen für Organspende.
+    \item \textbf{MESO-Ebene} (Organisation): Unterschiedliche Rolle von Krankenhäusern.
+    \item \textbf{MIKRO-Ebene} (Familie): In Japan entscheidet die Familie, nicht das Individuum.
+\end{itemize}
+
+Die 5-Ebenen-Hierarchie erklärt, warum ``derselbe'' Nudge in verschiedenen Kontexten radikal unterschiedlich wirkt -- und warum naive Übertragungen scheitern.
+
+%------------------------------------------------------------------------------
+\subsubsection{Zusammenfassung: Die Notwendigkeit des META}
+%------------------------------------------------------------------------------
+
+Das \META-Modul ist kein akademisches Luxusgut. Es ist eine praktische Notwendigkeit für jedes System, das menschliches Verhalten \textit{konsistent}, \textit{transparent}, \textit{erweiterbar} und \textit{interdisziplinär verankert} modellieren will.
+
+Die Alternative -- implizite Annahmen, fragmentierte Terminologie, nicht-kumulative Forschung -- hat die Verhaltensökonomie 50 Jahre lang behindert. Die LLM-Revolution erzwingt nun die Explizitmachung: Maschinen können nicht mit Intuition arbeiten; sie brauchen Axiome.
+
+Das \BCM{} liefert diese Axiome. Die Frage ist nicht, \textit{ob} ein solches Framework entstehen wird, sondern \textit{wer} es zuerst etabliert -- und damit die Standards für eine ganze Generation von AI-gestützter Verhaltensmodellierung setzt.
+
+%------------------------------------------------------------------------------
 
 \subsection{Forschungslücke: Warum existiert 2025 kein öffentliches META?}
 
