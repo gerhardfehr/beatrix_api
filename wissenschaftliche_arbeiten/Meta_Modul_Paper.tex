@@ -197,63 +197,380 @@ Kenneth Arrow bewies, dass es keine Wahlregel gibt, die fünf scheinbar vernünf
 Die Lektion: Axiomatisierung führt manchmal zu unbequemen Erkenntnissen. Aber ohne sie bleibt man in behaglicher Unwissenheit.
 
 %------------------------------------------------------------------------------
-\subsubsection{Der LLM-Katalysator: Warum jetzt?}
+\subsubsection{Von der Philosophie zur Infrastruktur: Die drei Zeitalter der Ontologie}
 %------------------------------------------------------------------------------
 
 \epigraph{\textit{``The limits of my language mean the limits of my world.''}}{--- Ludwig Wittgenstein, \textit{Tractatus Logico-Philosophicus} (1921)}
 
-Die Frage drängt sich auf: Warum entsteht das \META-Modul ausgerechnet jetzt -- 2024, nicht 1984 oder 2004? Die Antwort liegt in einer technologischen Diskontinuität: der \textbf{Large Language Model Revolution}.
+Die Frage drängt sich auf: Warum entsteht das \META-Modul ausgerechnet jetzt -- 2024, nicht 1984 oder 2004? Die Antwort liegt in einem fundamentalen Wandel der Rolle von Ontologie: \textbf{Was früher akademischer Luxus war, ist heute operative Infrastruktur.}
 
-\paragraph{Menschen haben Intuition, Maschinen haben Text.}
+Um diesen Wandel zu verstehen, müssen wir drei distinkte Epochen unterscheiden: das vor-digitale Zeitalter (bis ca. 1990), das digitale Zeitalter vor Machine Learning (1990--2020), und die LLM-Ära (ab 2022).
 
-Ein erfahrener Behavioral Scientist ``weiß'', dass Loss Aversion bei Finanzentscheidungen stärker ist als bei Konsumentscheidungen. Er ``spürt'', wann ein Nudge manipulativ wird. Er ``ahnt'', welche Intervention bei welcher Zielgruppe wirken wird.
+%..............................................................................
+\paragraph{Epoche I: Das vor-digitale Zeitalter (bis ca. 1990)}
+%..............................................................................
 
-Dieses Wissen ist \textit{tacit knowledge} im Sinne Michael Polanyis (1966):
+\subparagraph{Wie Verhaltensökonomie praktiziert wurde.}
+
+In der vor-digitalen Ära war verhaltensökonomische Arbeit ein zutiefst \textit{menschlicher} Prozess. Die gesamte Wertschöpfungskette -- von der Problemidentifikation über die Analyse bis zur Intervention -- lief über menschliche Köpfe, menschliche Gespräche, menschliche Intuition.
+
+\textbf{Fallbeispiel 1: Richard Thaler und die Pensionsfonds (1980er Jahre)}
 
 \begin{quote}
-\textit{``We can know more than we can tell.''}
+\textit{Richard Thaler berät ein Unternehmen zur Erhöhung der Pensionsfonds-Teilnahme. Sein Vorgehen:}
+\begin{enumerate}
+    \item \textit{Er führt 20 Interviews mit Mitarbeitern -- persönlich, mit Notizblock}
+    \item \textit{Er beobachtet das Anmeldeverfahren vor Ort}
+    \item \textit{Er diskutiert mit dem HR-Team über Barrieren}
+    \item \textit{Er entwickelt eine Hypothese: ``Mitarbeiter sind nicht irrational -- sie sind busy und das Formular ist zu kompliziert''}
+    \item \textit{Er schlägt vor: ``Macht die Einschreibung automatisch, mit Opt-Out''}
+    \item \textit{Er präsentiert die Idee dem Management -- in einem einstündigen Meeting, mit Folien auf Overhead-Projektor}
+\end{enumerate}
 \end{quote}
 
-Für menschliche Praktiker ist tacit knowledge kein Problem -- sie haben es. Für Large Language Models ist es ein fundamentales Hindernis: Sie können nur verarbeiten, was in Text expliziert wurde.
-
-GPT-4 und Claude haben das gesamte Internet gelesen, inklusive aller wissenschaftlichen Papers zur Verhaltensökonomie. Doch sie haben nicht das ``Gefühl'' eines erfahrenen Praktikers. Wenn man sie fragt, welchen $\lambda$-Wert eine Persona hat, produzieren sie eine plausible Antwort -- ohne Verankerung in empirischen Base Rates, ohne Konsistenzprüfung, ohne Respekt für die Grenzen ihres Wissens.
-
-Das \META-Modul expliziert, was bisher implizit war -- und macht es damit maschinell verarbeitbar.
-
-\paragraph{Das Halluzinationsproblem.}
-
-LLMs ``halluzinieren'' -- sie produzieren flüssigen, plausiblen Text, der faktisch falsch ist. In Domänen wie Mathematik oder Geschichte kann man Halluzinationen durch Faktencheck entdecken. In der Verhaltensökonomie ist das schwieriger: Wenn ein LLM behauptet, eine bestimmte Persona habe $\beta = 0.7$ (Present Bias), wer soll das widerlegen?
-
-Die Lösung: \textit{Constrained Generation}. Das LLM wird nicht frei generieren gelassen, sondern durch explizite Axiome und Base Rates eingeschränkt. Wenn das \META-Modul sagt, dass $\beta$ typischerweise im Bereich $[0.5, 0.9]$ liegt (MA-EPI-16), kann das System Schätzungen außerhalb dieses Bereichs als verdächtig flaggen.
-
-\paragraph{Das Kalibrierungsproblem.}
-
-Menschen kalibrieren sich automatisch durch Erfahrung. Ein Arzt, der tausende Patienten gesehen hat, schätzt Wahrscheinlichkeiten genauer als ein Anfänger. LLMs haben keine solche Erfahrung -- sie haben nur Trainingstexte.
-
-Das Problem wird verschärft durch \textit{Social Desirability Bias} (MA-EPI-32): Menschen beschreiben sich in Texten systematisch positiver, als sie sind. Ein LLM, das auf Selbstbeschreibungen trainiert wurde, überschätzt systematisch Altruismus und unterschätzt Eigeninteresse.
-
-Das \META-Modul adressiert dies durch explizite Base Rates. Axiom MA-EPI-26 (Base Rate Neglect) erinnert das System daran, dass etwa 50\% der Bevölkerung ``Conditional Cooperators'' sind, 30\% ``Self-Interested'' und nur 10\% ``Altruisten'' (Fischbacher et al., 2001). Diese Zahlen sind keine Schätzungen des LLM -- sie sind empirisch fundierte Anker.
-
-\paragraph{Die neue Möglichkeit: Operationalisierung.}
-
-Vor 2022 wäre ein axiomatisches Verhaltens-Framework ``nur Philosophie'' gewesen -- interessant für Akademiker, irrelevant für die Praxis. Man hätte es nicht \textit{anwenden} können.
-
-LLMs ändern das fundamental. Ein System wie \BEATRIX{} kann:
+Beachten Sie, was in diesem Prozess \textit{nicht} vorkam:
 \begin{itemize}
-    \item Persona-Beschreibungen analysieren und BCM-Parameter schätzen
-    \item Verhaltensvorhersagen für verschiedene Szenarien generieren
-    \item Interventionen entwerfen und ihre Wirkung simulieren
-    \item Inkonsistenzen in Beschreibungen identifizieren
-    \item Unsicherheit quantifizieren und kommunizieren
+    \item Keine formale Definition von ``Gegenwartsorientierung'' oder ``Present Bias''
+    \item Keine Quantifizierung des $\beta$-Parameters
+    \item Keine Spezifikation der Randbedingungen (für welche Mitarbeiter? in welchem kulturellen Kontext?)
+    \item Keine maschinenlesbare Dokumentation
 \end{itemize}
 
-Aber nur, wenn es \textit{weiß}, was es tut. Das \META-Modul liefert dieses Wissen.
+Der Erfolg hing vollständig von Thalers \textit{tacit knowledge} ab -- seinem Gespür, seiner Erfahrung, seiner Überzeugungskraft.
 
-\paragraph{Wittgensteins Einsicht.}
+\textbf{Fallbeispiel 2: Kahneman \& Tversky im Labor (1970er Jahre)}
 
-Wittgenstein schrieb im \textit{Tractatus}: ``Die Grenzen meiner Sprache bedeuten die Grenzen meiner Welt.'' Für LLMs gilt das wörtlich: Sie können nur operieren, was sprachlich expliziert wurde.
+Amos Tversky und Daniel Kahneman entwickelten die Prospect Theory in jahrelanger Zusammenarbeit. Ihr Arbeitsprozess:
+\begin{itemize}
+    \item \textbf{Gedankenexperimente}: Sie erfanden Szenarien (``Stellen Sie sich vor, Sie könnten €3.000 sicher bekommen oder mit 80\% Chance €4.000...'') und diskutierten ihre eigenen Intuitionen
+    \item \textbf{Kleine Stichproben}: Typische Studien hatten 50-100 Teilnehmer, oft Studenten
+    \item \textbf{Handschriftliche Analyse}: Daten wurden auf Papier erfasst und mit Taschenrechner ausgewertet
+    \item \textbf{Konzeptuelle Diskussion}: Stundenlange Gespräche über ``Was bedeutet es, risikoavers zu sein?''
+\end{itemize}
 
-Das \META-Modul ist der Versuch, die ``Welt'' der Verhaltensökonomie in Sprache zu fassen -- nicht als vage Prosa, sondern als präzise Axiome. Es erweitert damit die Grenzen dessen, was maschinell modellierbar ist.
+Das Ergebnis -- die Prospect Theory (1979) -- war ein Meilenstein. Aber sie enthielt \textit{keine explizite Ontologie}:
+\begin{itemize}
+    \item Der ``Entscheidungsträger'' wurde nicht formal definiert (Individuum? Haushalt? Firma?)
+    \item ``Referenzpunkt'' blieb vage (aktueller Besitz? Erwartung? sozialer Vergleich?)
+    \item Die Parameter $\alpha$, $\beta$, $\lambda$ wurden geschätzt, aber ihre Stabilität (Trait vs. State?) blieb offen
+    \item ``Framing'' wurde beschrieben, aber nicht taxonomiert
+\end{itemize}
+
+\textbf{Warum das funktionierte}: Die Paper wurden von Menschen gelesen -- Ökonomen, Psychologen, Praktikern -- die den fehlenden Kontext aus ihrem eigenen Wissen ergänzten. Wenn Kahneman ``Referenzpunkt'' schrieb, verstand der kompetente Leser \textit{ungefähr}, was gemeint war.
+
+\textbf{Fallbeispiel 3: Wissenstransfer durch Meister-Lehrling-Beziehung}
+
+Wie wurde verhaltensökonomisches Wissen in dieser Epoche weitergegeben?
+\begin{itemize}
+    \item \textbf{Doktoranden-Betreuung}: Ein Doktorand arbeitete 4-6 Jahre mit einem Professor. Er lernte nicht nur Methoden, sondern auch ``wie man denkt'' -- durch Osmose
+    \item \textbf{Konferenzen}: Jährliche Treffen (AEA, SJDM) ermöglichten persönlichen Austausch. Missverständnisse wurden in Kaffeepausen geklärt
+    \item \textbf{Bücher}: Thalers ``Quasi Rational Economics'' (1991) oder Kahneman, Slovic \& Tversky's ``Judgment under Uncertainty'' (1982) waren \textit{Prosa} -- keine Axiomensysteme
+    \item \textbf{Informelle Netzwerke}: ``Ruf Richard an und frag ihn'' war eine legitime Methode der Wissensgewinnung
+\end{itemize}
+
+\textbf{Die Rolle der Ontologie in Epoche I:}
+
+Ontologie war ein Thema für Philosophen -- nicht für Praktiker. Wer die Frage stellte ``Was \textit{ist} ein Referenzpunkt ontologisch?'' wurde als übertrieben theoretisch angesehen. Die pragmatische Antwort: ``Wir wissen es, wenn wir es sehen.''
+
+\textbf{Zusammenfassung Epoche I:}
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Ausprägung} \\
+\midrule
+Wissensträger & Menschen (tacit knowledge) \\
+Dokumentation & Prosa, Papers, Bücher \\
+Wissenstransfer & Meister-Lehrling, Konferenzen \\
+Skala & Dutzende Fälle pro Experte \\
+Ontologie & Implizit, ``wir wissen es wenn wir es sehen'' \\
+Funktionierte weil... & Menschen interpretierten und ergänzten \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%..............................................................................
+\paragraph{Epoche II: Das digitale Zeitalter vor Machine Learning (1990--2020)}
+%..............................................................................
+
+\subparagraph{Der Übergang zu datengetriebener Arbeit.}
+
+Die Digitalisierung veränderte die Verhaltensökonomie graduell aber fundamental. Neue Werkzeuge ermöglichten neue Arbeitsweisen -- aber die grundlegende Abhängigkeit von menschlicher Interpretation blieb.
+
+\textbf{Was sich änderte:}
+\begin{itemize}
+    \item \textbf{Größere Datensätze}: Statt 50 Interviews nun 50.000 Datenpunkte
+    \item \textbf{Statistische Software}: SPSS (1968), Stata (1985), R (1993) ermöglichten komplexe Analysen
+    \item \textbf{Online-Experimente}: Amazon Mechanical Turk (2005) revolutionierte die Datenerhebung
+    \item \textbf{Institutionalisierung}: Nudge Units entstanden (BIT UK 2010, US SBST 2014, hunderte weltweit)
+    \item \textbf{A/B-Testing}: Tech-Firmen testeten Verhaltensinterventionen in Echtzeit
+\end{itemize}
+
+\textbf{Fallbeispiel 4: Das Behavioural Insights Team UK (2010-2020)}
+
+Das BIT -- die weltweit erste staatliche Nudge Unit -- revolutionierte die Anwendung von Verhaltensökonomie. Ein typisches Projekt:
+
+\begin{quote}
+\textit{Das BIT will die Steuerzahlungsquote erhöhen. Vorgehen:}
+\begin{enumerate}
+    \item \textit{Hypothese: Soziale Normen motivieren Compliance (``Die meisten Ihrer Nachbarn haben bereits bezahlt'')}
+    \item \textit{Design: Randomized Controlled Trial mit 100.000 Steuerzahlern}
+    \item \textit{Treatment-Gruppen: Standard-Brief vs. Brief mit Soziale-Norm-Botschaft}
+    \item \textit{Analyse: Regressionsanalyse in Stata}
+    \item \textit{Ergebnis: 15\% höhere Zahlungsrate in Treatment-Gruppe}
+    \item \textit{Publikation: Working Paper mit p-Werten und Konfidenzintervallen}
+\end{enumerate}
+\end{quote}
+
+\textbf{Was fehlte -- auch beim BIT:}
+\begin{itemize}
+    \item \textbf{Mechanismus-Spezifikation}: \textit{Warum} wirkte die soziale Norm? Deskriptive Norm? Injunktive Norm? Gruppendruck? Informationsupdate?
+    \item \textbf{Moderator-Analyse}: Für \textit{wen} wirkte sie? (Alter? Einkommen? Persönlichkeit? Vorgeschichte?)
+    \item \textbf{Kontextbedingungen}: \textit{Wann} funktioniert Social Proof? (In welchen Kulturen? Bei welchen Verhaltenstypen?)
+    \item \textbf{Transfer-Regeln}: Kann man das Ergebnis auf Müllentsorgung, Energiesparen, Impfungen übertragen?
+\end{itemize}
+
+Das BIT produzierte \textit{Fakten} (``dieser Nudge wirkte hier''), aber kein \textit{transferierbares Wissen}.
+
+\textbf{Fallbeispiel 5: Google und die 41 Blautöne (2009)}
+
+Ein berühmtes Beispiel für datengetriebene Verhaltensoptimierung:
+
+\begin{quote}
+\textit{Google testete 41 verschiedene Blautöne für Links, um die Click-Through-Rate zu optimieren. Ergebnis: Der optimale Blauton brachte \$200 Millionen zusätzlichen Jahresumsatz.}
+\end{quote}
+
+Das Beispiel illustriert die Stärken \textit{und} Grenzen der Epoche II:
+\begin{itemize}
+    \item \textbf{Stärke}: Präzise Messung, große Stichprobe, klares Ergebnis
+    \item \textbf{Schwäche 1}: Kein Verständnis des Mechanismus -- \textit{warum} ist dieser Blauton besser?
+    \item \textbf{Schwäche 2}: Keine Generalisierbarkeit -- gilt das auch für Bing? Für eine Bank-Website? In Japan?
+    \item \textbf{Schwäche 3}: Keine Theorie -- das Ergebnis trägt nicht zum kumulativen Wissen bei
+\end{itemize}
+
+\textbf{Die Krise wird sichtbar: Replikationsprobleme}
+
+Ab 2015 wurde deutlich, dass etwas grundlegend nicht stimmte:
+
+\begin{enumerate}
+    \item \textbf{DellaVigna \& Linos (2022)}: Analysierten 126 RCTs von Nudge Units. Ergebnis: Durchschnittliche Effektgröße in der Praxis = \textbf{1.4 Prozentpunkte} -- verglichen mit 8.7 Prozentpunkten in akademischen Publikationen. Die Praxis-Effekte waren nur \textbf{1/6} der publizierten Effekte.
+
+    \item \textbf{Warum?} Die Autoren vermuten: Publication Bias, aber auch \textit{unterschiedliche Kontextbedingungen}. Ein Nudge, der in einem Paper mit Studenten funktionierte, scheitert bei einer anderen Bevölkerung.
+
+    \item \textbf{Das fundamentale Problem}: Ohne explizite Ontologie fehlte die Sprache, um zu analysieren, \textit{warum} ein Nudge in Kontext A funktioniert und in Kontext B nicht.
+\end{enumerate}
+
+\textbf{Zusammenfassung Epoche II:}
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Ausprägung} \\
+\midrule
+Wissensträger & Menschen + statistische Software \\
+Dokumentation & Papers mit p-Werten, RCT-Reports \\
+Wissenstransfer & Publikationen, Toolkits, Cookbooks \\
+Skala & Tausende bis Millionen Datenpunkte \\
+Ontologie & Implizit, versteckt in Variablennamen \\
+Funktionierte weil... & Menschen blieben in der Interpretations-Schleife \\
+Scheiterte weil... & Kein Transfer, keine Kumulation, Replikationskrise \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Die zentrale Erkenntnis aus Epoche II:}
+
+Man kann mit Big Data und RCTs sehr präzise messen, \textit{dass} etwas wirkt. Aber ohne explizite Ontologie bleibt unklar, \textit{warum} es wirkt, \textit{für wen} es wirkt, und \textit{wann} es wirkt. Jede Studie ist eine Insel. Kumulatives Wissen entsteht nicht.
+
+%..............................................................................
+\paragraph{Epoche III: Das LLM-Zeitalter (ab 2022)}
+%..............................................................................
+
+\subparagraph{Der Paradigmenwechsel.}
+
+Die Veröffentlichung von GPT-3 (2020), ChatGPT (2022) und GPT-4 (2023) markiert eine Diskontinuität. Zum ersten Mal sind Maschinen verfügbar, die:
+\begin{itemize}
+    \item Natürliche Sprache verstehen und generieren
+    \item Komplexe Reasoning-Aufgaben durchführen
+    \item Mit unstrukturierten Daten (Text, Beschreibungen) arbeiten
+    \item In Echtzeit auf neue Anfragen reagieren
+\end{itemize}
+
+Diese Fähigkeiten eröffnen revolutionäre Möglichkeiten für die Verhaltensökonomie -- aber sie erzwingen auch eine fundamentale Transformation: \textbf{Was implizit war, muss explizit werden.}
+
+\textbf{Fallbeispiel 9: ChatGPT ohne Ontologie -- Ein Experiment}
+
+Wir haben folgendes Experiment durchgeführt (März 2024):
+
+\begin{quote}
+\textbf{Prompt an ChatGPT-4:} ``Anna ist 35 Jahre alt, arbeitet als Marketing-Managerin, verdient €80.000/Jahr, ist verheiratet, hat zwei Kinder, und beschreibt sich als `umweltbewusst aber pragmatisch'. Schätze ihren Loss Aversion Parameter $\lambda$.''
+\end{quote}
+
+\textbf{Antwort ChatGPT (Run 1):}
+\begin{quote}
+``Basierend auf Annas Profil würde ich ihren Loss Aversion Parameter auf etwa $\lambda = 2.3$ schätzen. Als Marketing-Managerin ist sie wahrscheinlich risikoaverser als der Durchschnitt, und mit zwei Kindern hat sie mehr zu verlieren...''
+\end{quote}
+
+\textbf{Antwort ChatGPT (Run 2, identischer Prompt):}
+\begin{quote}
+``Annas $\lambda$ dürfte bei etwa $\lambda = 1.8$ liegen. Als berufstätige Mutter hat sie gelernt, pragmatische Entscheidungen zu treffen, was auf moderate Loss Aversion hindeutet...''
+\end{quote}
+
+\textbf{Antwort ChatGPT (Run 3, identischer Prompt):}
+\begin{quote}
+``Ich schätze $\lambda \approx 2.5$ für Anna. Ihre Umweltbewusstheit deutet auf Zukunftsorientierung hin, was oft mit höherer Loss Aversion korreliert...''
+\end{quote}
+
+\textbf{Was ist problematisch?}
+\begin{enumerate}
+    \item \textbf{Inkonsistenz}: Drei Runs, drei verschiedene Werte (1.8, 2.3, 2.5)
+    \item \textbf{Keine Base Rate}: Keine der Antworten erwähnt die empirische Verteilung von $\lambda$ in der Population
+    \item \textbf{Pseudo-Reasoning}: Die ``Begründungen'' klingen plausibel, sind aber post-hoc erfunden
+    \item \textbf{Keine Unsicherheitsquantifizierung}: Keine Konfidenzintervalle, keine Varianzangabe
+    \item \textbf{Keine Mechanismus-Spezifikation}: Warum sollte ``Umweltbewusstheit'' mit Loss Aversion korrelieren?
+\end{enumerate}
+
+\textbf{Fallbeispiel 11: BEATRIX mit META -- Der Unterschied}
+
+Derselbe Fall mit \BEATRIX{} und expliziter \META-Ontologie:
+
+\begin{quote}
+\textbf{Input}: Persona-Beschreibung von Anna (wie oben)
+
+\textbf{BEATRIX-Prozess}:
+\begin{enumerate}
+    \item \textbf{PreFlight Check}: Ist die Beschreibung vollständig? (FEPSDE-Dimensionen abgedeckt?)
+    \item \textbf{Base Rate Anchoring}: Starte mit empirischen Priors:
+    \begin{itemize}
+        \item $\lambda \sim \mathcal{N}(2.25, 0.5)$ basierend auf MA-EPI-15
+        \item P(Conditional Cooperator) = 0.50 basierend auf MA-EPI-26
+    \end{itemize}
+    \item \textbf{Social Desirability Korrektur}: ``umweltbewusst'' → prüfe \textit{Verhaltensevidenz}, nicht nur Selbstbeschreibung
+    \item \textbf{Ensemble Generation}: 5 parallele LLM-Runs
+    \item \textbf{Aggregation}: $\hat{\lambda} = \text{Median}(\lambda_1, ..., \lambda_5) = 2.2$
+    \item \textbf{Unsicherheitsquantifizierung}: $\lambda \in [1.9, 2.5]$ mit 80\% Konfidenz
+    \item \textbf{Bimodality Check}: Sind die 5 Schätzungen unimodal (Unsicherheit) oder bimodal (Ambivalenz)?
+\end{enumerate}
+\end{quote}
+
+\textbf{Der Unterschied}:
+\begin{itemize}
+    \item \textbf{Konsistenz}: Derselbe Input ergibt denselben Output
+    \item \textbf{Verankerung}: Empirische Base Rates statt willkürliche Schätzungen
+    \item \textbf{Unsicherheit}: Explizite Konfidenzintervalle
+    \item \textbf{Bias-Korrektur}: Social Desirability wird aktiv adressiert
+    \item \textbf{Transparenz}: Der gesamte Reasoning-Prozess ist dokumentiert
+\end{itemize}
+
+\textbf{Warum explizite Ontologie jetzt NOTWENDIG ist:}
+
+\begin{enumerate}
+    \item \textbf{LLMs haben kein Tacit Knowledge}
+
+    Ein LLM hat das gesamte Internet gelesen -- aber es hat nicht das ``Gefühl'' eines erfahrenen Praktikers. \textbf{Was nicht expliziert wurde, kann das LLM nicht systematisch anwenden.}
+
+    \item \textbf{Code-Interpreter erfordern Typen und Schemas}
+
+    Moderne LLM-Systeme wie \BEATRIX{} integrieren Code-Ausführung. Das erfordert formale Definitionen. \textbf{Ohne ontologische Festlegung kann kein Code geschrieben werden.}
+
+    \item \textbf{JSON-Schemas erfordern Entitäts-Definition}
+
+    \BEATRIX{} arbeitet mit strukturierten Outputs (Pydantic-Schemas). Das erfordert Antworten auf ontologische Fragen:
+    \begin{itemize}
+        \item Welche Entitäten existieren? → MA-ONT-01 bis MA-ONT-06
+        \item Welche Attribute haben sie? → MA-ONT-08 (FEPSDE)
+        \item Welche Beziehungen bestehen? → MA-ONT-07 (Drei-Komponenten-Struktur)
+        \item Welche Wertebereiche sind gültig? → MA-EPI-15 ($\lambda \in [1.5, 2.5]$)
+    \end{itemize}
+
+    \textbf{Das ist nichts anderes als angewandte Ontologie.}
+
+    \item \textbf{Prompt Engineering ist implizite Ontologie}
+
+    Jeder System-Prompt macht ontologische Annahmen -- ob der Autor es weiß oder nicht. \textbf{Wer keine explizite Ontologie hat, macht trotzdem ontologische Annahmen -- nur unkontrolliert.}
+\end{enumerate}
+
+\textbf{Zusammenfassung Epoche III:}
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Ausprägung} \\
+\midrule
+Wissensträger & LLMs + Code + Menschen (Aufsicht) \\
+Dokumentation & Strukturierte Schemas, APIs, Axiome \\
+Wissenstransfer & Codierte Systeme, trainierbare Modelle \\
+Skala & Millionen Interaktionen in Echtzeit \\
+Ontologie & \textbf{Operative Infrastruktur} \\
+Funktioniert nur wenn... & Explizite Ontologie vorhanden \\
+Scheitert wenn... & LLM ``frei'' operiert ohne Constraints \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%..............................................................................
+\paragraph{Die historische Analogie: Kolmogorovs Axiomatisierung}
+%..............................................................................
+
+Ein instruktiver Vergleich: Vor 1933 war ``Wahrscheinlichkeit'' ein vager Begriff. Verschiedene Autoren meinten Verschiedenes:
+\begin{itemize}
+    \item \textbf{Frequentisten}: Wahrscheinlichkeit = Grenzwert relativer Häufigkeit
+    \item \textbf{Bayesianer}: Wahrscheinlichkeit = Grad der Überzeugung
+    \item \textbf{Logizisten}: Wahrscheinlichkeit = logische Relation zwischen Propositionen
+\end{itemize}
+
+Menschen konnten trotzdem mit Wahrscheinlichkeit arbeiten, weil sie intuitiv wussten, was in welchem Kontext gemeint war.
+
+\textbf{Aber: Computer konnten nicht mit vager Wahrscheinlichkeit rechnen.}
+
+Andrei Kolmogorov (1933) axiomatisierte die Wahrscheinlichkeitstheorie in drei Grundannahmen:
+\begin{enumerate}
+    \item $P(A) \geq 0$ für alle Ereignisse $A$
+    \item $P(\Omega) = 1$ für den Ereignisraum $\Omega$
+    \item $P(A \cup B) = P(A) + P(B)$ für disjunkte $A, B$
+\end{enumerate}
+
+Diese Axiome sagten nicht, was Wahrscheinlichkeit ``wirklich ist'' -- sie definierten, wie man mit ihr \textit{rechnen} kann. Erst danach war probabilistische Software möglich.
+
+\textbf{Dieselbe Transformation passiert jetzt mit Verhaltensökonomie:}
+\begin{itemize}
+    \item Vor LLMs: Intuitive, implizite Behavioral Science
+    \item Mit LLMs: Axiomatische, explizite Behavioral Science (= BCM META)
+\end{itemize}
+
+Das \META-Modul ist für Verhaltensökonomie, was Kolmogorovs Axiome für Wahrscheinlichkeit waren: die Voraussetzung für maschinelle Operationalisierung.
+
+%..............................................................................
+\paragraph{Zusammenfassung: Der Statuswandel der Ontologie}
+%..............................................................................
+
+\begin{table}[h]
+\centering
+\caption{Die drei Epochen der Ontologie in der Verhaltensökonomie}
+\begin{tabular}{@{}p{3cm}p{4cm}p{4cm}p{4cm}@{}}
+\toprule
+\textbf{Aspekt} & \textbf{Vor-digital (--1990)} & \textbf{Digital (1990--2020)} & \textbf{LLM-Ära (2022--)} \\
+\midrule
+\textbf{Wissensträger} & Menschen mit tacit knowledge & Menschen + statistische Software & Menschen + LLMs + Code \\
+\textbf{Skala} & Dutzende Fälle & Tausende Datenpunkte & Millionen Interaktionen \\
+\textbf{Ambiguitäts-toleranz} & Hoch (Menschen interpretieren) & Mittel (Zahlen sind präzise, Bedeutung vage) & Niedrig (Maschinen brauchen Präzision) \\
+\textbf{Wissenstransfer} & Meister-Lehrling, Konferenzen & Papers, Cookbooks & Codierte Systeme, APIs \\
+\textbf{Status der Ontologie} & Philosophischer Luxus & Methodologische Option & \textbf{Operative Notwendigkeit} \\
+\textbf{Konsequenz ohne Ontologie} & Ineffizienz, aber funktional & Replikationsprobleme, Transfer-Schwierigkeiten & \textbf{System-Dysfunktion} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Die zentrale Einsicht:}
+
+Wittgenstein schrieb: ``Die Grenzen meiner Sprache bedeuten die Grenzen meiner Welt.'' Für Menschen ist das eine philosophische Aussage. Für LLMs ist es \textbf{wörtlich wahr}:
+\begin{itemize}
+    \item Was nicht in Sprache (Text) expliziert wurde, existiert für das LLM nicht
+    \item Das LLM kann nur über Entitäten reasonen, die benannt wurden
+    \item Beziehungen, die nicht spezifiziert wurden, kann es nicht inferieren
+\end{itemize}
+
+Das \META-Modul ist der Versuch, die ``Welt'' der Verhaltensökonomie vollständig in Sprache zu fassen -- nicht als philosophische Übung, sondern als \textbf{operative Infrastruktur} für die LLM-basierte Verhaltensmodellierung.
 
 %------------------------------------------------------------------------------
 \subsubsection{Die vier Funktionen des META-Moduls}
@@ -1195,9 +1512,33 @@ wobei:
 \section{Kategorie 1: Ontologie (ONT)}
 %==============================================================================
 
-Die Ontologie-Kategorie (26 Axiome: MA-ONT-01 bis MA-ONT-26) definiert, \textbf{was existiert} und welche fundamentalen Entitäten und Beziehungen das \BCM{} anerkennt.
+\epigraph{\textit{``The question `What is there?' can be answered, moreover, in a word -- `Everything' -- and everyone will accept this answer as true.''}}{--- Willard Van Orman Quine, \textit{On What There Is} (1948)}
 
-\subsection{Fundamentale Entitäten}
+Die Ontologie -- von griechisch \textit{on} (seiend) und \textit{logos} (Lehre) -- ist die philosophische Disziplin, die fragt: \textit{Was existiert?} Welche Entitäten, Eigenschaften und Beziehungen sind fundamental? Was ist die grundlegende Möblierung des Universums?
+
+Für das \BCM{} ist die Ontologie-Kategorie (26 Axiome: MA-ONT-01 bis MA-ONT-26) konstitutiv: Sie definiert die ``Möbel'' des verhaltensökonomischen Universums -- die Bausteine, aus denen alle weiteren Modellierungen zusammengesetzt werden.
+
+%------------------------------------------------------------------------------
+\subsection{Philosophischer Hintergrund: Von Aristoteles zu Quine}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``Being is said in many ways.''}}{--- Aristoteles, \textit{Metaphysik} IV.2 (ca. 350 v. Chr.)}
+
+Die ontologische Tradition in der westlichen Philosophie beginnt mit Aristoteles' \textit{Kategorienlehre}. Aristoteles unterschied zehn fundamentale Kategorien des Seins: Substanz, Quantität, Qualität, Relation, Ort, Zeit, Lage, Haben, Wirken und Leiden. Diese Kategorien sollten erschöpfend und gegenseitig exklusiv sein -- jedes Seiende fällt unter genau eine primäre Kategorie.
+
+Die moderne Ontologie wurde durch Quines Aufsatz ``On What There Is'' (1948) revolutioniert. Quine formulierte das berühmte Kriterium:
+
+\begin{quote}
+\textit{``To be is to be the value of a bound variable.''}
+\end{quote}
+
+Das bedeutet: Wir verpflichten uns ontologisch auf genau die Entitäten, über die wir in unseren besten Theorien quantifizieren. Das \BCM{} META-Modul folgt diesem quineanischen Ansatz: Die ONT-Axiome explizieren, auf welche Entitäten sich das \BCM{} ontologisch verpflichtet.
+
+%------------------------------------------------------------------------------
+\subsection{Fundamentale Entitäten: Das ontologische Fundament}
+%------------------------------------------------------------------------------
+
+Die ersten sechs ONT-Axiome etablieren die grundlegenden Existenzaussagen des \BCM:
 
 \begin{axiom}[Existenz des Subjekts: MA-ONT-01]
 \begin{equation}
@@ -1206,12 +1547,21 @@ Die Ontologie-Kategorie (26 Axiome: MA-ONT-01 bis MA-ONT-26) definiert, \textbf{
 Es existiert mindestens ein Entscheidungssubjekt $\sigma$.
 \end{axiom}
 
+\paragraph{Philosophische Begründung.}
+Dieses Axiom macht eine starke Annahme: Es gibt distinkte, identifizierbare Entscheidungsträger. Für das \BCM{} ist das Subjekt fundamental: Ohne Subjekte gibt es niemanden, der Entscheidungen trifft, Nutzen erfährt oder Verhalten zeigt.
+
+\paragraph{BCM-Relevanz.}
+Das Subjekt $\sigma$ ist der Anker aller weiteren Modellierung: Das INU-Modul modelliert den individuellen Nutzen \textit{dieses} Subjekts, das KNU-Modul modelliert, wie \textit{dieses} Subjekt den Nutzen anderer berücksichtigt, das IDN-Modul modelliert die Identität(en) \textit{dieses} Subjekts.
+
 \begin{axiom}[Existenz von Verhalten: MA-ONT-02]
 \begin{equation}
 \exists V: V \in \mathcal{V}, |\mathcal{V}| \geq 1
 \end{equation}
 Es gibt beobachtbare Verhaltensweisen $V$.
 \end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Dieses Axiom trennt das \BCM{} von rein mentalistischen Ansätzen. Verhalten ist \textit{beobachtbar} -- nicht nur subjektiv erlebt. Die Menge $\mathcal{V}$ enthält manifeste Handlungen, Unterlassungen, verbale Äußerungen, physiologische Reaktionen und digitale Interaktionen.
 
 \begin{axiom}[Existenz von Nutzen: MA-ONT-03]
 \begin{equation}
@@ -1220,36 +1570,101 @@ U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}
 Subjekte haben Nutzenfunktionen, die Verhalten bewerten.
 \end{axiom}
 
-\subsection{Strukturelle Axiome}
+\paragraph{Philosophische Begründung.}
+Das \BCM{} folgt der von-Neumann-Morgenstern-Tradition: Nutzen ist eine reellwertige Funktion, die Verhalten relativ zu einem Subjekt bewertet. Die Notation $U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}$ macht drei Dinge explizit: Nutzen ist \textit{verhaltensrelativ}, \textit{subjektrelativ} und \textit{reellwertig}.
+
+\begin{axiom}[Existenz von Kontext: MA-ONT-04]
+\begin{equation}
+\exists \rho: \rho \in \mathcal{P}, |\mathcal{P}| \geq 1
+\end{equation}
+Verhalten findet in Kontexten statt, die den Nutzen modulieren.
+\end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Dieses Axiom kodifiziert eine der zentralen Einsichten der Verhaltensökonomie: \textit{Context matters}. Der Homo Oeconomicus war kontextblind -- seine Präferenzen waren stabil und situationsunabhängig. Die empirische Forschung hat diese Annahme widerlegt.
+
+\begin{axiom}[Existenz von Zeit: MA-ONT-05]
+\begin{equation}
+\exists \tau: \tau \in T, T \subseteq \mathbb{R}^+
+\end{equation}
+Entscheidungen und Verhalten finden in der Zeit statt.
+\end{axiom}
+
+\begin{axiom}[Existenz von Constraints: MA-ONT-06]
+\begin{equation}
+\exists \Gamma: \Gamma(\sigma, \rho) \rightarrow \mathcal{V}' \subseteq \mathcal{V}
+\end{equation}
+Nicht alle Verhaltensweisen sind für alle Subjekte in allen Kontexten verfügbar.
+\end{axiom}
+
+%------------------------------------------------------------------------------
+\subsection{Strukturelle Axiome: Die Architektur des Nutzens}
+%------------------------------------------------------------------------------
 
 \begin{axiom}[Drei-Komponenten-Nutzen: MA-ONT-07]
 \begin{equation}
 U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}}
 \end{equation}
-Der Gesamtnutzen setzt sich aus individuellem Nutzen (INU), kollektivem Nutzen (KNU) und Identitätsnutzen (IDN) zusammen. Die Kombination erfolgt durch den Operator $\Psi$:
-\begin{equation}
-U = \Psi(U_{\text{INU}}, U_{\text{KNU}}, U_{\text{IDN}})
-\end{equation}
+Der Gesamtnutzen setzt sich aus individuellem Nutzen (INU), kollektivem Nutzen (KNU) und Identitätsnutzen (IDN) zusammen.
 \end{axiom}
+
+\paragraph{Theoretischer Hintergrund.}
+Diese Dreiteilung synthetisiert drei Forschungstraditionen: (1) \textbf{Individueller Nutzen}: Die klassische ökonomische Tradition von Bentham bis Samuelson; (2) \textbf{Kollektiver Nutzen}: Die Forschung zu sozialen Präferenzen (Fehr \& Schmidt, 1999); (3) \textbf{Identitätsnutzen}: Die Identitätsökonomie (Akerlof \& Kranton, 2000).
 
 \begin{axiom}[FEPSDE-Dimensionen: MA-ONT-08]
 \begin{equation}
-U_{\text{INU}} = \sum_{d \in \text{FEPSDE}} \omega_d \cdot u_d
+U_{\text{INU}} = \sum_{d \in \text{FEPSDE}} \omega_d \cdot u_d, \quad \sum_{d \in \text{FEPSDE}} \omega_d = 1
 \end{equation}
-Der individuelle Nutzen hat sechs Dimensionen:
-\begin{itemize}
-    \item \textbf{F}inancial (Finanziell)
-    \item \textbf{E}motional (Emotional)
-    \item \textbf{P}hysical (Physisch)
-    \item \textbf{S}ocial (Sozial)
-    \item \textbf{D}igital (Digital)
-    \item \textbf{E}cological (Ökologisch)
-\end{itemize}
+Der individuelle Nutzen hat sechs Dimensionen mit normierter Gewichtung.
 \end{axiom}
 
-\subsection{Die 5-Ebenen-Hierarchie (MA-ONT-26)}
+\begin{table}[h]
+\centering
+\caption{Die FEPSDE-Nutzen-Dimensionen}
+\begin{tabular}{@{}lp{5cm}p{5cm}@{}}
+\toprule
+\textbf{Dimension} & \textbf{Beschreibung} & \textbf{Beispiele} \\
+\midrule
+\textbf{F}inancial & Monetärer/materieller Nutzen & Einkommen, Vermögen, Ersparnisse \\
+\textbf{E}motional & Affektiver Nutzen & Freude, Zufriedenheit, Stolz \\
+\textbf{P}hysical & Körperlicher Nutzen & Gesundheit, Energie, Schmerzfreiheit \\
+\textbf{S}ocial & Sozialer Nutzen & Zugehörigkeit, Status, Anerkennung \\
+\textbf{D}igital & Digitaler Nutzen & Convenience, Vernetzung, Datenschutz \\
+\textbf{E}cological & Ökologischer Nutzen & Nachhaltigkeit, Umweltschutz \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-Ein zentrales ontologisches Axiom definiert die hierarchische Struktur sozialer Realität:
+%------------------------------------------------------------------------------
+\subsection{Soziale Ontologie: Gruppen, Identitäten, Normen}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``No man is an island, entire of itself.''}}{--- John Donne, \textit{Meditation XVII} (1624)}
+
+\begin{axiom}[Multiple Identitäten: MA-ONT-09]
+\begin{equation}
+\forall \sigma: I(\sigma) = \{i_1, i_2, \ldots, i_n\}, \quad n \geq 1
+\end{equation}
+Jedes Subjekt hat mindestens eine, typischerweise mehrere Identitäten.
+\end{axiom}
+
+\begin{axiom}[Existenz von Gruppen: MA-ONT-10]
+\begin{equation}
+\exists G: G \subseteq \Sigma, |G| \geq 2
+\end{equation}
+Es existieren Gruppen als Aggregate von Subjekten.
+\end{axiom}
+
+\begin{axiom}[Existenz von Normen: MA-ONT-11]
+\begin{equation}
+\exists N: N \in \mathcal{N}, \mathcal{N} = \{(V, G, \text{Sanktion})\}
+\end{equation}
+Normen sind Verhaltenserwartungen mit Sanktionen bei Abweichung.
+\end{axiom}
+
+%------------------------------------------------------------------------------
+\subsection{Die 5-Ebenen-Hierarchie (MA-ONT-26)}
+%------------------------------------------------------------------------------
 
 \begin{axiom}[BCM-Ebenen-Hierarchie: MA-ONT-26]
 \begin{equation}
@@ -1262,28 +1677,63 @@ E = \{\text{META}, \text{MAKRO}, \text{MESO}, \text{MIKRO}, \text{IND}\}
 
 \begin{table}[h]
 \centering
-\caption{Die 5 BCM-Ebenen}
-\label{tab:ebenen}
-\begin{tabular}{@{}lll@{}}
+\caption{Die 5 BCM-Ebenen im Detail}
+\label{tab:ebenen_detail}
+\begin{tabular}{@{}lp{3.5cm}p{3.5cm}p{4cm}@{}}
 \toprule
-\textbf{Ebene} & \textbf{Beschreibung} & \textbf{Beispiele} \\
+\textbf{Ebene} & \textbf{Beschreibung} & \textbf{Zeitskala} & \textbf{Beispiele} \\
 \midrule
-META & Kulturelle Grundnormen & Individualismus vs. Kollektivismus \\
-MAKRO & Institutionelle Ebene & Staat, Recht, Demokratie \\
-MESO & Organisationsebene & Unternehmen, Vereine, Netzwerke \\
-MIKRO & Gruppenebene & Teams, Familien, Freundeskreise \\
-IND & Personenebene & Traits, Präferenzen, Identität \\
+META & Kulturelle Tiefenstruktur & Generationen & Individualismus/Kollektivismus, Machtdistanz (Hofstede) \\
+MAKRO & Institutionelle Ordnung & Dekaden & Verfassung, Rechtssystem, Marktwirtschaft \\
+MESO & Organisationale Regeln & Jahre & Unternehmenskultur, Anreizsysteme \\
+MIKRO & Gruppenkontext & Monate & Teamdynamik, Familienstrukturen \\
+IND & Personenmerkmale & Stabil/variabel & Traits, Präferenzen, Identitäten \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Das Prinzip der Hierarchie lautet: \textit{Parameter auf höherer Ebene setzen Defaults für niedrigere Ebenen; niedrigere Ebenen können modulieren, aber nicht vollständig überschreiben.}
+\paragraph{Das Prinzip der Kontextualisierung.}
+Das Axiom postuliert: \textit{Höhere Ebenen kontextualisieren niedrigere Ebenen}. META setzt Defaults für alle tieferen Ebenen; MAKRO kann META-Defaults modulieren, aber nicht vollständig überschreiben; usw.
+
+\paragraph{BEATRIX-Relevanz.}
+Das 5-Ebenen-Modell ist zentral für die \BEATRIX-Parameterschätzung: (1) \textbf{Default-Kaskade}: Fehlende Information auf niedriger Ebene wird durch höhere Ebenen kompensiert; (2) \textbf{Plausibilitätsprüfung}: Schätzungen müssen mit höheren Ebenen konsistent sein; (3) \textbf{Interventionsdesign}: Die richtige Ebene für Interventionen muss identifiziert werden.
 
 %==============================================================================
 \section{Kategorie 2: Epistemologie (EPI)}
 %==============================================================================
 
+\epigraph{\textit{``Ich weiß, dass ich nichts weiß.''}}{--- Sokrates, nach Platon, \textit{Apologie}}
+
 Die Epistemologie-Kategorie (37 Axiome: MA-EPI-01 bis MA-EPI-37) definiert, \textbf{was wir wissen können}, welche Grenzen Wissen hat, und welche systematischen Verzerrungen (Biases) existieren.
+
+\subsection{Philosophischer Hintergrund: Von Platon zu Kahneman}
+
+\epigraph{\textit{``The mind is not a vessel to be filled, but a fire to be kindled.''}}{--- Plutarch, \textit{On Listening}}
+
+Die Frage nach den Grenzen menschlichen Wissens durchzieht die gesamte Philosophiegeschichte. Bereits Platons Höhlengleichnis illustriert, dass Menschen systematisch einer verzerrten Wahrnehmung der Realität unterliegen -- eine Einsicht, die in der modernen Kognitionspsychologie ihre empirische Bestätigung findet.
+
+\paragraph{Die rationalistische Tradition.}
+Descartes' \textit{cogito ergo sum} etablierte den methodischen Zweifel als epistemologisches Werkzeug. Interessanterweise führte der Rationalismus zu einer Überschätzung menschlicher Rationalität, die erst durch die Verhaltensökonomie korrigiert wurde. Leibniz' Konzept der \textit{petites perceptions} -- unbewusste Wahrnehmungen, die unser Denken beeinflussen -- nimmt jedoch bereits System-1-Prozesse vorweg.
+
+\paragraph{Der empiristische Einwand.}
+David Humes radikaler Empirismus stellte die Frage, ob \textit{irgendwelches} Wissen über kausale Zusammenhänge möglich sei. Seine Analyse der Induktion als psychologischer Gewohnheit (habit) statt logischer Notwendigkeit ist ein direkter Vorläufer der Heuristiken-Forschung. Wenn wir erwarten, dass die Sonne morgen aufgeht, tun wir dies nicht aus logischen Gründen, sondern aufgrund der \textit{Verfügbarkeitsheuristik} vergangener Sonnenaufgänge.
+
+\paragraph{Kants Synthese und die Grenzen der Vernunft.}
+Immanuel Kants \textit{Kritik der reinen Vernunft} etablierte, dass menschliche Erkenntnis durch die Struktur unseres Geistes geformt wird. Seine Kategorien der Anschauung (Raum, Zeit) und des Verstandes (Kausalität, Substanz) sind \textit{a priori} -- sie strukturieren unsere Erfahrung, bevor wir sie machen. Dies ist die philosophische Grundlage für die BCM-Annahme, dass Menschen die Realität nicht ``objektiv'' wahrnehmen, sondern durch kognitive Schemata.
+
+\paragraph{Der pragmatische Turn.}
+William James und John Dewey betonten, dass Wissen nicht Abbild der Realität ist, sondern Werkzeug zur Bewältigung von Problemen. Eine Überzeugung ist ``wahr'', wenn sie \textit{funktioniert}. Diese Perspektive legitimiert Heuristiken: Sie mögen logisch fehlerhaft sein, aber sie funktionieren ``gut genug'' in den meisten Situationen -- ein Kerngedanke von Gerd Gigerenzers ``ökologischer Rationalität''.
+
+\paragraph{Von der Philosophie zur Psychologie.}
+Der Übergang zur empirischen Kognitionspsychologie erfolgte durch:
+\begin{itemize}
+    \item \textbf{Herbert Simon (1955)}: Bounded Rationality als Alternative zum homo oeconomicus
+    \item \textbf{Amos Tversky \& Daniel Kahneman (1974)}: Systematische Dokumentation von Heuristiken und Biases
+    \item \textbf{Gerd Gigerenzer (1990er)}: Rehabilitation von Heuristiken als ``adaptiver Werkzeugkasten''
+    \item \textbf{Daniel Kahneman (2011)}: Synthese zur Zwei-Systeme-Theorie in \textit{Thinking, Fast and Slow}
+\end{itemize}
+
+Das \META-Modul integriert diese Traditionen: Es akzeptiert die \textit{Grenzen} menschlicher Rationalität (gegen den naiven Rationalismus), die \textit{Systematik} kognitiver Verzerrungen (gegen den naiven Empirismus), und die \textit{Funktionalität} von Heuristiken (mit dem Pragmatismus).
 
 \subsection{Grundlegende epistemische Axiome}
 
@@ -1292,6 +1742,12 @@ Die Epistemologie-Kategorie (37 Axiome: MA-EPI-01 bis MA-EPI-37) definiert, \tex
 K(U) \subset U
 \end{equation}
 Wissen über den Nutzen $K(U)$ ist immer eine echte Teilmenge des tatsächlichen Nutzens $U$. Vollständiges Wissen ist unerreichbar.
+
+\paragraph{Philosophische Begründung.}
+Dies ist die epistemologische Kernaussage, die von Sokrates bis zu den Grenzen des Laplaceschen Dämons reicht. In der Ökonomie manifestiert sie sich als ``Informationsasymmetrie'' (Akerlof, 1970), in der Entscheidungstheorie als ``Unsicherheit vs. Risiko'' (Knight, 1921).
+
+\paragraph{BCM-Relevanz.}
+Jede Parameterschätzung im BCM muss mit Unsicherheit operieren. Die BEATRIX-Pipeline verwendet daher Ensemble-Methoden und berichtet Konfidenzintervalle, nicht Punktschätzungen.
 \end{axiom}
 
 \begin{axiom}[Bounded Rationality: MA-EPI-02]
@@ -1299,15 +1755,121 @@ Wissen über den Nutzen $K(U)$ ist immer eine echte Teilmenge des tatsächlichen
 \text{Rationalität}(\sigma) \leq R_{\max}(\text{Kapazität}, \text{Zeit}, \text{Information})
 \end{equation}
 Rationalität ist durch kognitive Kapazität, verfügbare Zeit und Information beschränkt (Simon, 1955).
+
+\paragraph{Philosophische Begründung.}
+Herbert Simon formulierte Bounded Rationality als Antwort auf das unrealistische Modell des homo oeconomicus. Menschen \textit{satisficen} (``gut genug'') statt zu optimieren. Dies ist keine Schwäche, sondern eine adaptive Strategie angesichts begrenzter Ressourcen.
+
+\paragraph{Empirische Evidenz.}
+Miller (1956) zeigte, dass das Arbeitsgedächtnis auf $7 \pm 2$ Chunks begrenzt ist. Cowan (2001) reduzierte diese Schätzung auf 4 Chunks. Diese fundamentale Kapazitätsbeschränkung erklärt, warum Menschen Heuristiken verwenden \textit{müssen}.
+
+\paragraph{BCM-Relevanz.}
+Das BCM modelliert keine perfekt rationalen Agenten, sondern ``boundedly rational'' Entscheider. Die Komplexität von Interventionen muss der kognitiven Kapazität der Zielgruppe angepasst sein.
 \end{axiom}
 
 \begin{axiom}[Zwei-Systeme-Theorie: MA-EPI-05]
 Kognition operiert in zwei Modi:
 \begin{itemize}
-    \item \textbf{System 1}: Schnell, automatisch, heuristisch
-    \item \textbf{System 2}: Langsam, deliberativ, analytisch
+    \item \textbf{System 1}: Schnell, automatisch, heuristisch, mühelos, emotional
+    \item \textbf{System 2}: Langsam, deliberativ, analytisch, anstrengend, rational
 \end{itemize}
 Die meisten Alltagsentscheidungen werden von System 1 getroffen.
+
+\paragraph{Philosophische Wurzeln.}
+Die Unterscheidung zwischen automatischem und deliberativem Denken findet sich bereits bei:
+\begin{itemize}
+    \item Aristoteles: \textit{hexis} (Gewohnheit) vs. \textit{phronesis} (praktische Klugheit)
+    \item Hume: Passion vs. Reason (``Reason is, and ought only to be the slave of the passions'')
+    \item Freud: Es vs. Ich (mit anderem Fokus, aber ähnlicher Struktur)
+    \item William James: Habit vs. Will
+\end{itemize}
+
+\paragraph{Empirische Operationalisierung.}
+Kahneman \& Frederick (2002) operationalisieren die Unterscheidung durch:
+\begin{itemize}
+    \item \textbf{Cognitive Reflection Test (CRT)}: ``Ein Schläger und ein Ball kosten zusammen 1.10€. Der Schläger kostet 1€ mehr als der Ball. Was kostet der Ball?'' (System-1-Antwort: 0.10€, korrekt: 0.05€)
+    \item \textbf{Response Time}: System-1-Antworten kommen schneller
+    \item \textbf{Pupillendilation}: System-2-Aktivierung korreliert mit Pupillenerweiterung
+\end{itemize}
+
+\paragraph{BCM-Relevanz.}
+Die Interventionstypen NUDGE und DESIGN zielen auf System 1, während BOOST und THINK System 2 aktivieren. Die Wahl des Interventionstyps muss berücksichtigen, welches System die Zielverhalten typischerweise steuert.
+\end{axiom}
+
+\subsection{Die AWX-WAX-WTX-Sequenz: Ein epistemischer Pfad}
+
+Das BCM modelliert die Transformation von Information zu Verhalten als dreistufige Sequenz:
+
+\begin{axiom}[AWX -- Awareness: MA-EPI-07]
+\begin{equation}
+\text{AWX}(\sigma, I) = \mathbb{P}(\sigma \text{ kennt Information } I)
+\end{equation}
+Awareness ist die Wahrscheinlichkeit, dass ein Agent $\sigma$ eine relevante Information $I$ überhaupt wahrnimmt.
+
+\paragraph{Kognitive Mechanismen.}
+Awareness wird beeinflusst durch:
+\begin{itemize}
+    \item \textbf{Aufmerksamkeit}: Selektive Wahrnehmung filtert >99\% der Umgebungsinformation
+    \item \textbf{Salienz}: Hervorstechende Stimuli werden eher wahrgenommen
+    \item \textbf{Priming}: Vorherige Aktivierung erhöht Wahrnehmungswahrscheinlichkeit
+    \item \textbf{Inattentional Blindness}: Gorilla-Experiment (Simons \& Chabris, 1999)
+\end{itemize}
+
+\paragraph{Interventions-Implikation.}
+Bevor komplexere Interventionen greifen können, muss \textit{überhaupt} Awareness geschaffen werden. Dies ist oft der Engpass.
+\end{axiom}
+
+\begin{axiom}[WAX -- Willingness: MA-EPI-08]
+\begin{equation}
+\text{WAX}(\sigma, V | I) = \mathbb{P}(\sigma \text{ ist bereit zu } V | \sigma \text{ kennt } I)
+\end{equation}
+Willingness ist die bedingte Wahrscheinlichkeit, dass ein Agent zur Verhaltensänderung bereit ist, gegeben er hat die relevante Information.
+
+\paragraph{Motivationale Determinanten.}
+Willingness wird bestimmt durch:
+\begin{itemize}
+    \item Wahrgenommene Kosten-Nutzen-Relation
+    \item Selbstwirksamkeitserwartung (Bandura, 1977)
+    \item Identitätskongruenz (passt die Handlung zu meinem Selbstbild?)
+    \item Soziale Normen (was tun andere?)
+    \item Emotionale Valenz der Information
+\end{itemize}
+
+\paragraph{Der Knowledge-Attitude Gap.}
+Empirisch ist $\text{WAX} \ll \text{AWX}$ häufig: Menschen \textit{wissen}, dass Rauchen schädlich ist, sind aber nicht \textit{bereit}, aufzuhören.
+\end{axiom}
+
+\begin{axiom}[WTX -- Willingness to Transit: MA-EPI-09]
+\begin{equation}
+\text{WTX}(\sigma, V | \text{WAX}) = \mathbb{P}(\sigma \text{ handelt } V | \sigma \text{ ist bereit})
+\end{equation}
+WTX ist die Wahrscheinlichkeit, dass aus Bereitschaft tatsächlich Handlung wird.
+
+\paragraph{Der Intention-Action Gap.}
+Der Übergang von Intention zu Handlung scheitert oft an:
+\begin{itemize}
+    \item \textbf{Procrastination}: Aufschieben trotz Intention (Present Bias)
+    \item \textbf{Friction}: Kleine Hindernisse blockieren große Intentionen
+    \item \textbf{Forgetting}: Die Intention wird ``vergessen'' im Moment der Entscheidung
+    \item \textbf{Self-Control Failure}: Kurzfristige Impulse überwinden langfristige Intentionen
+\end{itemize}
+
+\paragraph{Interventions-Implikation.}
+Interventionen, die nur AWX oder WAX adressieren, scheitern oft am WTX-Bottleneck. Implementation Intentions (``Wenn Situation X, dann Handlung Y'') können den Intention-Action Gap schließen.
+\end{axiom}
+
+\begin{axiom}[Die vollständige Sequenz: MA-EPI-10]
+\begin{equation}
+\mathbb{P}(V) = \text{AWX} \times \text{WAX} \times \text{WTX}
+\end{equation}
+Die Wahrscheinlichkeit eines Verhaltens ist das Produkt aller drei Faktoren.
+
+\paragraph{Diagnostische Implikation.}
+Wenn ein Zielverhalten nicht auftritt, muss diagnostiziert werden, \textit{wo} die Sequenz bricht:
+\begin{itemize}
+    \item AWX-Problem: ``Die wissen gar nicht, dass...'' $\rightarrow$ Information, Salienz
+    \item WAX-Problem: ``Die wollen einfach nicht...'' $\rightarrow$ Motivation, Framing, Identität
+    \item WTX-Problem: ``Die nehmen es sich vor, aber...'' $\rightarrow$ Friction, Defaults, Commitment
+\end{itemize}
 \end{axiom}
 
 \subsection{Systematische Biases (MA-EPI-12 bis MA-EPI-37)}
@@ -1456,24 +2018,86 @@ MA-EPI-37 & Affect Heuristic & Slovic et al. (2002) \\
 \section{Kategorie 3: Governance (GOV)}
 %==============================================================================
 
+\epigraph{\textit{``The only freedom which deserves the name is that of pursuing our own good in our own way.''}}{--- John Stuart Mill, \textit{On Liberty} (1859)}
+
 Die Governance-Kategorie (25 Axiome: MA-GOV-01 bis MA-GOV-25) definiert, \textbf{was erlaubt ist} -- sowohl im Sinne von Verhaltens-Constraints als auch im Sinne ethischer Prinzipien für Interventionen.
+
+\subsection{Philosophischer Hintergrund: Von Mill zu Thaler}
+
+\epigraph{\textit{``Libertarian paternalism is not an oxymoron.''}}{--- Thaler \& Sunstein (2003)}
+
+Die Frage, unter welchen Bedingungen Verhaltensinterventionen ethisch legitim sind, berührt fundamentale Fragen der politischen Philosophie. Das Governance-Modul des \META{} navigiert zwischen zwei Extrempositionen: dem radikalen Libertarismus (``keine Intervention ist legitim'') und dem harten Paternalismus (``der Staat weiß es besser'').
+
+\paragraph{Mills Harm Principle.}
+John Stuart Mills \textit{On Liberty} (1859) etablierte das ``Harm Principle'' als liberales Grundprinzip: Die einzige Rechtfertigung für Einschränkung individueller Freiheit ist die Verhinderung von Schaden an anderen. Selbstschädigendes Verhalten darf nicht reguliert werden. Diese Position ist die historische Grundlage für die Ablehnung von Paternalismus.
+
+\paragraph{Die paternalistische Herausforderung.}
+Gegen Mill wurde argumentiert, dass Menschen systematisch gegen ihre eigenen Interessen handeln -- nicht aus freier Wahl, sondern aus kognitiven Limitationen. Gerald Dworkin (1972) unterschied:
+\begin{itemize}
+    \item \textbf{Harter Paternalismus}: Eingriff gegen den expliziten Willen der Person (z.B. Gurtpflicht)
+    \item \textbf{Weicher Paternalismus}: Eingriff nur bei nicht-autonomen Entscheidungen (z.B. bei Manipulation, Zwang, oder fehlender Information)
+\end{itemize}
+
+\paragraph{Libertärer Paternalismus.}
+Thaler \& Sunstein (2003, 2008) versöhnten die Positionen mit dem Konzept des ``Libertarian Paternalism'':
+\begin{itemize}
+    \item \textbf{Paternalistisch}: Interventionen zielen darauf, Menschen zu helfen, bessere Entscheidungen zu treffen (nach ihren eigenen Maßstäben)
+    \item \textbf{Libertär}: Die Wahlfreiheit bleibt erhalten; es werden keine Optionen entfernt
+\end{itemize}
+
+Das Schlüsselargument: Es gibt \textit{keine neutrale} Choice Architecture. Jede Präsentation von Optionen beeinflusst die Wahl. Wenn Beeinflussung unvermeidbar ist, sollte sie wenigstens in eine ``gute'' Richtung gehen.
+
+\paragraph{Die Kritik an Nudging.}
+Bovens (2009) und andere haben Nudging kritisiert:
+\begin{itemize}
+    \item \textbf{Manipulation}: Nudges umgehen bewusste Deliberation
+    \item \textbf{Transparenz}: Viele Nudges funktionieren nur, wenn sie nicht bekannt sind
+    \item \textbf{Wer definiert ``gut''?}: Das Konzept setzt voraus, dass jemand weiß, was für andere gut ist
+\end{itemize}
+
+\paragraph{Die BCM-Position.}
+Das \BCM{} ist \textbf{deskriptiv, nicht normativ}. Es modelliert Verhalten, es schreibt keine Ziele vor. Die Governance-Axiome definieren \textit{Constraints} für ethisches Interventionsdesign, aber die \textit{Ziele} werden extern vorgegeben. Diese Trennung von ``Ist'' und ``Soll'' folgt dem Humeschen Guillotine-Prinzip.
 
 \subsection{Fundamentale Governance-Prinzipien}
 
 \begin{axiom}[Autonomie-Primat: MA-GOV-03]
 Individuelle Autonomie hat grundsätzlich Vorrang. Einschränkungen bedürfen der Rechtfertigung.
+
+\paragraph{Philosophische Begründung.}
+Autonomie -- die Fähigkeit zur Selbstgesetzgebung -- ist ein Kernwert der Aufklärung. Kant formulierte: ``Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.'' Autonome Entscheidungen verdienen Respekt, auch wenn sie ``schlecht'' erscheinen.
+
+\paragraph{Operationalisierung.}
+Im BCM bedeutet dies: Jede Intervention, die Autonomie einschränkt, muss \textit{explizit} gerechtfertigt werden. Die Beweislast liegt beim Intervenierenden.
 \end{axiom}
 
 \begin{axiom}[Nicht-Normativität: MA-GOV-04]
 Das \BCM{} \textbf{beschreibt} Verhalten, es \textbf{schreibt nicht vor}. Die Wahl der Ziele liegt beim Auftraggeber, nicht beim Modell.
+
+\paragraph{Philosophische Begründung.}
+Dies folgt Humes Guillotine: Aus deskriptiven Aussagen (``so ist es'') folgen keine normativen (``so soll es sein''). Das BCM kann analysieren, \textit{wie} ein Ziel erreicht werden kann, aber nicht, \textit{ob} das Ziel gut ist.
+
+\paragraph{Praktische Implikation.}
+\BEATRIX{} kann sowohl für pro-soziale als auch für kommerzielle Ziele eingesetzt werden. Die ethische Verantwortung liegt beim Auftraggeber, nicht beim Modell.
 \end{axiom}
 
 \begin{axiom}[Transparenz-Gebot: MA-GOV-05]
 Interventionen sollen transparent sein. Verdeckte Manipulation ist zu vermeiden.
+
+\paragraph{Philosophische Begründung.}
+Kants Publizitätsprinzip: ``Alle auf das Recht anderer Menschen bezogenen Handlungen, deren Maxime sich nicht mit der Publizität verträgt, sind unrecht.'' Eine Intervention, die nur funktioniert, wenn sie geheim bleibt, ist ethisch problematisch.
+
+\paragraph{Empirisches Gegenargument.}
+Einige Nudges funktionieren auch nach Offenlegung (Loewenstein et al., 2015). Aber nicht alle -- und hier entsteht ein ethisches Dilemma.
 \end{axiom}
 
 \begin{axiom}[Subsidiarität: MA-GOV-06]
 Die \textbf{mildeste wirksame Intervention} ist zu wählen (Principle of Minimal Intervention).
+
+\paragraph{Philosophische Begründung.}
+Dies ist die Anwendung des Proportionalitätsprinzips auf Verhaltensinterventionen. Eine stärkere Intervention (z.B. Verbot) ist nur gerechtfertigt, wenn mildere Alternativen (z.B. Information) versagen.
+
+\paragraph{Praktische Anwendung.}
+Die 8 Interventionstypen des BCM sind nach ``Milde'' geordnet. Interventionsdesign sollte diese Hierarchie respektieren.
 \end{axiom}
 
 \subsection{Interventions-Taxonomie}
@@ -1529,7 +2153,38 @@ Extrinsische Anreize können intrinsische Motivation zerstören. Dies ist bei In
 \section{Kategorie 4: Dynamik (DYN)}
 %==============================================================================
 
+\epigraph{\textit{``Panta rhei'' -- Alles fließt.}}{--- Heraklit von Ephesus (ca. 500 v. Chr.)}
+
 Die Dynamik-Kategorie (25 Axiome: MA-DYN-01 bis MA-DYN-25) definiert, \textbf{wie sich Dinge verändern} -- zeitliche Prozesse, Gleichgewichte, Pfadabhängigkeiten und Evolution.
+
+\subsection{Philosophischer Hintergrund: Von Heraklit zur Komplexitätstheorie}
+
+\epigraph{\textit{``Time present and time past\\
+Are both perhaps present in time future,\\
+And time future contained in time past.''}}{--- T.S. Eliot, \textit{Four Quartets}}
+
+Die Frage nach der Natur von Veränderung und Zeit gehört zu den ältesten philosophischen Problemen. Das Dynamik-Modul des \META{} integriert Erkenntnisse aus Philosophie, Physik und Komplexitätswissenschaft.
+
+\paragraph{Die heraklitische Tradition.}
+Heraklit von Ephesus formulierte die radikale Position, dass \textit{alles} im Fluss ist: ``Man kann nicht zweimal in denselben Fluss steigen.'' Verhalten ist kein statischer Zustand, sondern ein kontinuierlicher Prozess. Diese Einsicht steht gegen die Tendenz der neoklassischen Ökonomie, Gleichgewichtszustände als ``normal'' zu betrachten.
+
+\paragraph{Der parmenidische Einwand.}
+Parmenides argumentierte dagegen, dass wahre Veränderung unmöglich sei -- was ist, kann nicht aufhören zu sein. Diese Position mag absurd erscheinen, enthält aber einen Kern: Viele ``Veränderungen'' sind nur scheinbar, sie sind Rekonfigurationen stabiler Elemente. Im BCM: Typen ($\tau$) ändern sich selten, aber ihre Manifestation in Verhalten variiert situativ.
+
+\paragraph{Aristoteles' Potentialität.}
+Aristoteles versöhnte die Positionen mit dem Konzept von \textit{dynamis} (Potentialität) und \textit{energeia} (Aktualität). Veränderung ist die Aktualisierung von Potential. Im BCM: Eine Person \textit{hat} das Potential zur Verhaltensänderung (AWX, WAX), aber die \textit{Aktualisierung} (WTX) erfordert den richtigen Kontext.
+
+\paragraph{Newtons Mechanik und die Idee der Vorhersagbarkeit.}
+Die newtonsche Physik suggerierte ein deterministisches Universum: Gegeben Anfangsbedingungen, ist die Zukunft vollständig bestimmt. Diese Idee beeinflusste die klassische Ökonomie mit ihren Gleichgewichtsmodellen. Laplace' Dämon könnte -- mit perfektem Wissen -- alle Zukunft vorhersagen.
+
+\paragraph{Poincaré, Lorenz und das Chaos.}
+Henri Poincaré (1890er) und Edward Lorenz (1963) zeigten, dass selbst deterministische Systeme \textit{praktisch} unvorhersagbar sein können -- der berühmte ``Schmetterlingseffekt''. Kleine Unterschiede in Anfangsbedingungen führen zu radikal unterschiedlichen Entwicklungen. Dies erklärt, warum Verhaltensvorhersagen fundamental unsicher sind.
+
+\paragraph{Komplexitätstheorie und Emergenz.}
+Die Santa Fe School (Holland, Arthur, Kauffman) etablierte, dass komplexe Systeme Eigenschaften zeigen, die nicht aus ihren Teilen vorhersagbar sind. Soziale Normen \textit{emergieren} aus individuellen Interaktionen. Tipping Points entstehen, wenn lokale Änderungen globale Kaskaden auslösen.
+
+\paragraph{Zeitliche Inkonsistenz und der gespaltene Wille.}
+Die philosophische Frage nach der personalen Identität über Zeit (Locke, Parfit) verbindet sich mit dem ökonomischen Problem der zeitlichen Inkonsistenz. Bin ``Ich heute'' derselbe wie ``Ich morgen''? Wenn nicht -- warum sollte Ich-heute für Ich-morgen sparen? Hyperbolic Discounting und Present Bias sind nicht ``irrational'', sondern reflektieren die genuine Pluralität des Selbst über Zeit.
 
 \subsection{Temporale Grundstruktur}
 
@@ -1538,6 +2193,12 @@ Entscheidungen sind diskrete Events in kontinuierlicher Zeit:
 \begin{equation}
 V(t) = \sum_i V_i \cdot \delta(t - t_i)
 \end{equation}
+
+\paragraph{Philosophische Bedeutung.}
+Dies formalisiert die Intuition, dass Verhalten aus diskreten \textit{Handlungen} besteht, nicht aus kontinuierlichen Zuständen. Eine Entscheidung ist ein ``Sprung'' -- mathematisch eine Dirac-Delta-Funktion.
+
+\paragraph{Praktische Implikation.}
+Interventionen müssen auf diese Entscheidungspunkte zielen. Der ``Moment der Wahrheit'' ist der Zeitpunkt $t_i$, an dem die Entscheidung fällt.
 \end{axiom}
 
 \begin{axiom}[Pfadabhängigkeit: MA-DYN-03]
@@ -1545,16 +2206,38 @@ V(t) = \sum_i V_i \cdot \delta(t - t_i)
 U(V, t) = f(V, \{V_\tau : \tau < t\})
 \end{equation}
 Der Nutzen einer Handlung hängt von der Geschichte ab, nicht nur vom aktuellen Zustand.
+
+\paragraph{Philosophische Begründung.}
+Dies ist die formale Ablehnung des ``markovianischen'' Menschenbilds. Menschen sind nicht gedächtnislos. Vergangene Entscheidungen beeinflussen zukünftige -- durch Gewohnheit, Identität, Sunk-Cost-Effekte und Pfadabhängigkeit.
+
+\paragraph{Empirische Evidenz.}
+Arthur (1989) zeigte, dass technologische ``Lock-ins'' (QWERTY-Tastatur, VHS vs. Betamax) durch Pfadabhängigkeit entstehen. Dasselbe gilt für Verhaltens-Lock-ins.
 \end{axiom}
 
 \subsection{Gleichgewichte und Stabilität}
 
 \begin{axiom}[Multiple Equilibria: MA-DYN-04]
 Es kann mehrere stabile Zustände geben. Das System kann in verschiedenen Gleichgewichten ``gefangen'' sein.
+
+\paragraph{Philosophische Bedeutung.}
+Dies widerspricht der Idee eines \textit{einzigen} optimalen Zustands. Gesellschaften können in ``guten'' oder ``schlechten'' Gleichgewichten stecken (z.B. hohe vs. niedrige Kooperation). Der aktuelle Zustand ist nicht notwendig der ``beste''.
+
+\paragraph{Interventions-Implikation.}
+Es genügt nicht, ein ``besseres'' Gleichgewicht zu kennen. Man muss den \textit{Übergang} orchestrieren -- und dieser kann eine kritische Masse erfordern.
 \end{axiom}
 
 \begin{axiom}[Tipping Points: MA-DYN-06]
 Kritische Schwellen existieren, an denen kleine Änderungen große Zustandswechsel auslösen können.
+
+\paragraph{Mathematische Grundlage.}
+Tipping Points sind Bifurkationspunkte in dynamischen Systemen. Am kritischen Punkt divergiert die ``Sensitivität'' gegen unendlich -- minimale Änderungen haben maximale Wirkung.
+
+\paragraph{Empirische Beispiele.}
+\begin{itemize}
+    \item \textbf{Soziale Normen}: Rauchen in Restaurants war in den 1980ern normal, kippte in den 2000ern
+    \item \textbf{Technologieadoption}: Elektroautos brauchten Jahre der Stagnation, dann exponentielles Wachstum
+    \item \textbf{Sprache}: Neue Begriffe (``Gender'', ``Climate Change'') kippen von Randphänomenen zum Mainstream
+\end{itemize}
 \end{axiom}
 
 \subsection{Gewohnheitsformation}
@@ -1565,6 +2248,12 @@ Gewohnheiten folgen dem Zyklus:
 \text{Cue} \rightarrow \text{Routine} \rightarrow \text{Reward}
 \end{equation}
 Wiederholung stärkt die Assoziation zwischen Cue und Routine.
+
+\paragraph{Neurowissenschaftliche Grundlage.}
+Der Habit Loop ist im Basalganglien verankert (Yin \& Knowlton, 2006). Bei Gewohnheitsformation verschiebt sich die Aktivität von präfrontalem Kortex (deliberativ) zu Striatum (automatisch). Gewohnheiten werden ``ausgelagert'' -- sie erfordern keine bewusste Aufmerksamkeit mehr.
+
+\paragraph{Interventions-Implikation.}
+Gewohnheiten zu ändern erfordert, den \textit{Cue} zu identifizieren und entweder zu entfernen (DESIGN) oder mit einer neuen Routine zu verknüpfen (``habit substitution'').
 \end{axiom}
 
 \subsection{Soziale Dynamik}
@@ -1574,14 +2263,36 @@ Wiederholung stärkt die Assoziation zwischen Cue und Routine.
 \frac{\partial P(V)}{\partial t} = \beta \cdot P(V) \cdot (1 - P(V)) \cdot f(\text{Network})
 \end{equation}
 Verhalten breitet sich sozial aus, analog zu epidemiologischen Modellen.
+
+\paragraph{Mathematische Struktur.}
+Dies ist eine logistische Wachstumsgleichung. Der Term $P(V) \cdot (1-P(V))$ bedeutet: Diffusion ist maximal, wenn 50\% adoptiert haben. Am Anfang ist zu wenig ``Ansteckungspotential'', am Ende zu wenig ``Empfängliche''.
+
+\paragraph{Netzwerk-Effekte.}
+Die Funktion $f(\text{Network})$ modelliert, dass Diffusion netzwerkabhängig ist. In dichten, homogenen Netzwerken ist $\beta$ hoch; in fragmentierten Netzwerken kann Diffusion stagnieren.
 \end{axiom}
 
 \begin{axiom}[Kritische Masse: MA-DYN-11]
 Ab einer Schwelle $P^* \approx 25\%$ (Centola, 2018) wird Verhalten selbstverstärkend.
+
+\paragraph{Empirische Evidenz.}
+Centola (2018) zeigte in kontrollierten Experimenten, dass soziale Konventionen kippen, wenn ca. 25\% eine Alternative praktizieren. Dies ist robust über verschiedene Kontexte.
+
+\paragraph{Praktische Implikation.}
+Um eine Norm zu ändern, muss nicht die gesamte Population überzeugt werden -- nur eine kritische Minderheit. Dies macht Verhaltensänderung ``effizienter'' als es erscheint.
 \end{axiom}
 
 \begin{axiom}[Norm-Kaskaden: MA-DYN-12]
 Normen können rapid kippen, wenn die kritische Masse erreicht wird.
+
+\paragraph{Historische Beispiele.}
+\begin{itemize}
+    \item \textbf{Fall der Berliner Mauer} (1989): Jahrzehntelange Stabilität, dann Kollaps innerhalb von Wochen
+    \item \textbf{MeToo-Bewegung} (2017): Jahrzehntelange Toleranz für Belästigung, dann rapides Kippen
+    \item \textbf{Gay Marriage}: Von Mehrheitsablehnung zu Mehrheitsakzeptanz innerhalb einer Generation
+\end{itemize}
+
+\paragraph{Theoretische Erklärung.}
+Kuran (1989) sprach von ``preference falsification'': Menschen verbergen ihre wahren Präferenzen, wenn sie glauben, in der Minderheit zu sein. Kaskaden entstehen, wenn ``pluralistische Ignoranz'' aufgedeckt wird.
 \end{axiom}
 
 \subsection{Temporale Biases}
@@ -1591,6 +2302,15 @@ Normen können rapid kippen, wenn die kritische Masse erreicht wird.
 D(t) = \frac{1}{1 + k \cdot t} \quad \text{statt} \quad D(t) = e^{-\delta t}
 \end{equation}
 Die tatsächliche Diskontierung ist hyperbolisch, nicht exponentiell. Dies führt zu zeitinkonsistenten Präferenzen.
+
+\paragraph{Philosophische Implikation.}
+Hyperbolisches Discounting bedeutet, dass Präferenzen zeitinkonsistent sind: Heute präferiere ich 100€ heute über 110€ morgen, aber gleichzeitig 110€ in 31 Tagen über 100€ in 30 Tagen. Dies ist ``irrational'' im Sinne der Erwartungsnutzentheorie, aber universell.
+
+\paragraph{Evolutionäre Erklärung.}
+In der evolutionären Umgebung war die Zukunft radikal unsicher. Immediate Belohnung hatte Überlebenswert. Die ``Irrationalität'' ist ein evolutionäres Erbe.
+
+\paragraph{Interventions-Implikation.}
+Commitment Devices (Odysseus am Mast) helfen, die ``irrationale'' zukünftige Person zu binden. Pre-Commitment ist eine rationale Strategie für ein irrationales Selbst.
 \end{axiom}
 
 \begin{axiom}[Hedonic Treadmill: MA-DYN-20]
@@ -1598,6 +2318,12 @@ Die tatsächliche Diskontierung ist hyperbolisch, nicht exponentiell. Dies führ
 \lim_{t \rightarrow \infty} U(t|\text{Change}) = U_{\text{baseline}}
 \end{equation}
 Glück kehrt nach positiven oder negativen Events zur Baseline zurück (Kahneman, 1999).
+
+\paragraph{Philosophische Bedeutung.}
+Dies ist eine empirische Bestätigung der stoischen und buddhistischen Intuition, dass externe Güter kein dauerhaftes Glück bringen. Hedonic Adaptation bedeutet: Lottogewinner sind langfristig nicht glücklicher, Querschnittsgelähmte nicht unglücklicher.
+
+\paragraph{Interventions-Implikation.}
+Interventionen, die auf dauerhaftes ``Glück'' durch Konsum zielen, sind zum Scheitern verurteilt. Nachhaltige Wohlbefindenssteigerung erfordert andere Strategien (Flow, Meaning, Relationships).
 \end{axiom}
 
 %==============================================================================
