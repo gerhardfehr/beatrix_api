@@ -1,7 +1,7 @@
 {
   "module": "LAMBDA",
   "id": "7244",
-  "version": "2.5",
+  "version": "2.6",
   "axiom_count": 88,
   "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
   "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
@@ -692,9 +692,9 @@
       "subgroup": "structural",
       "level": "foundation",
       "statement": "BCM-Ebene moduliert λ",
-      "description": "5 Ebenen: META, MAKRO, MESO, MIKRO, IND mit unterschiedlichen λ-Baseline",
+      "description": "5 Ebenen: META, MAKRO, MESO, MIKRO, IND mit unterschiedlichen λ-Baseline (definiert in MA-ONT-26)",
       "formula": "Δλ_Ebene = {META: ±0.2, MAKRO: ±0.15, MESO: ±0.10, MIKRO: ±0.15, IND: 0}",
-      "dependencies": ["LAM-LAM-06"],
+      "dependencies": ["LAM-LAM-06", "MA-ONT-26"],
       "testable": true,
       "corollaries": [
         {"id": "CTX-01a", "statement": "META: Kulturelle Grundnormen, λ variiert 0.3-0.8 zwischen Kulturen"},

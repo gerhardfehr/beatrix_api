@@ -1,12 +1,12 @@
 {
   "module": "META",
   "id": "7232",
-  "version": "2.0",
-  "axiom_count": 100,
+  "version": "2.1",
+  "axiom_count": 101,
   "meta_formula": "Φ_META = Ω_ONT · Ω_EPI · Ω_AXI · Ψ(U, ω, ρ, σ) · Γ · τ · ∂ · μ · κ · λ",
   "categories": {
     "ontology": {
-      "range": [1, 25],
+      "range": [1, 26],
       "prefix": "ONT",
       "description": "Was existiert? Grundlegende Entitäten und Beziehungen"
     },
@@ -302,6 +302,25 @@
       "dependencies": ["MA-ONT-19"],
       "validates": ["META"],
       "testable": false
+    },
+    {
+      "id": "MA-ONT-26",
+      "category": "ontology",
+      "level": "foundation",
+      "statement": "BCM operiert auf 5 hierarchischen Ebenen",
+      "description": "Soziale Realität ist geschichtet: META → MAKRO → MESO → MIKRO → IND. Höhere Ebenen kontextualisieren niedrigere.",
+      "formula": "E = {META, MAKRO, MESO, MIKRO, IND}; ∀e_i, e_j ∈ E: i < j → e_i kontextualisiert e_j",
+      "levels": {
+        "META": "Kulturelle Grundnormen (z.B. Individualismus vs. Kollektivismus)",
+        "MAKRO": "Institutionelle Ebene (Staat, Recht, Demokratie, Wirtschaftssystem)",
+        "MESO": "Organisationsebene (Unternehmen, Vereine, Netzwerke, Gemeinden)",
+        "MIKRO": "Gruppenebene (Teams, Familien, Freundeskreise)",
+        "IND": "Personenebene (Traits, Präferenzen, individuelle Identität)"
+      },
+      "principle": "Parameter auf höherer Ebene setzen Defaults für niedrigere Ebenen; niedrigere Ebenen können modulieren aber nicht vollständig überschreiben",
+      "dependencies": ["MA-ONT-04"],
+      "validates": ["LAMBDA", "IDN", "KNU"],
+      "testable": true
     },
     {
       "id": "MA-EPI-01",
