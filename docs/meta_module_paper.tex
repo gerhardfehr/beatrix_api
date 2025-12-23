@@ -1,0 +1,772 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+\geometry{margin=2.5cm}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Korollar}[theorem]
+
+% Custom commands
+\newcommand{\BCM}{\textsc{BCM}}
+\newcommand{\META}{\textsc{META}}
+\newcommand{\BEATRIX}{\textsc{BEATRIX}}
+\newcommand{\module}[1]{\textsc{#1}}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{META-Modul im BCM 2.2}
+\lhead{FehrAdvice}
+\rfoot{\thepage}
+
+\title{%
+    \Large \textbf{Das META-Modul: Axiomatische Grundlagen des Behavioral Change Model} \\[0.5em]
+    \large Formale Spezifikation der ontologischen, epistemologischen, governancebezogenen und dynamischen Fundamente
+}
+
+\author{%
+    BEATRIX Research Team \\
+    FehrAdvice \& Partners AG \\[0.5em]
+    \small Version 2.2 | Dezember 2024
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 113 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 37 kognitiven Biases (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%==============================================================================
+\section{Einführung}
+%==============================================================================
+
+\subsection{Motivation: Warum ein META-Modul?}
+
+Das Behavioral Change Model (\BCM) ist ein formal-mathematisches Framework zur Modellierung, Prognose und Beeinflussung menschlichen Verhaltens. Im Gegensatz zu rein empirischen Ansätzen basiert das \BCM{} auf einem axiomatischen Fundament, das explizite Annahmen über die Natur von Verhalten, Wissen, Erlaubtem und Veränderung macht.
+
+Das \META-Modul erfüllt dabei mehrere kritische Funktionen:
+
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Konsistenzgarantie}: Alle operativen Module (INU, KNU, IDN, LAMBDA) müssen mit den \META-Axiomen kompatibel sein
+    \item \textbf{Transparenz}: Implizite Annahmen werden explizit und damit kritisierbar
+    \item \textbf{Erweiterbarkeit}: Neue Module können systematisch auf Konsistenz geprüft werden
+    \item \textbf{Interdisziplinarität}: Die vier Kategorien entsprechen klassischen philosophischen Disziplinen
+\end{enumerate}
+
+\subsection{Architektur des BCM}
+
+Die Gesamtarchitektur des \BCM{} 2.2 lässt sich als Schichtenmodell darstellen:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    layer/.style={rectangle, draw, minimum width=12cm, minimum height=1.2cm, align=center},
+    arrow/.style={-{Stealth}, thick}
+]
+    % Layers
+    \node[layer, fill=blue!10] (meta) at (0,4) {\textbf{META} (113 Axiome) \\ ONT | EPI | GOV | DYN};
+    \node[layer, fill=green!10] (ops) at (0,2.5) {\textbf{Operative Module} \\ INU | KNU | IDN | LAMBDA};
+    \node[layer, fill=orange!10] (est) at (0,1) {\textbf{ESTIMATION} (55 Axiome) \\ LLM-basierte Parameterschätzung};
+    \node[layer, fill=red!10] (app) at (0,-0.5) {\textbf{BEATRIX Application} \\ Verhaltensvorhersage \& Intervention};
+
+    % Arrows
+    \draw[arrow] (meta) -- (ops) node[midway, right] {validiert};
+    \draw[arrow] (ops) -- (est) node[midway, right] {parametrisiert};
+    \draw[arrow] (est) -- (app) node[midway, right] {operationalisiert};
+\end{tikzpicture}
+\caption{Schichtenarchitektur des BCM 2.2}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Die Meta-Formel}
+
+Die übergreifende Struktur des \META-Moduls wird durch die \textbf{Meta-Formel} ausgedrückt:
+
+\begin{equation}
+\Phi_{\text{META}} = \Omega_{\text{ONT}} \cdot \Omega_{\text{EPI}} \cdot \Omega_{\text{GOV}} \cdot \Psi(U, \omega, \rho, \sigma) \cdot \Gamma \cdot \tau \cdot \partial \cdot \mu \cdot \kappa \cdot \lambda
+\label{eq:meta_formula}
+\end{equation}
+
+wobei:
+\begin{itemize}
+    \item $\Omega_{\text{ONT}}$: Ontologische Constraints (was existiert)
+    \item $\Omega_{\text{EPI}}$: Epistemologische Constraints (was wissbar ist)
+    \item $\Omega_{\text{GOV}}$: Governance-Constraints (was erlaubt ist)
+    \item $\Psi$: Nutzenfunktion mit Gewichten $\omega$, Kontext $\rho$, Subjekt $\sigma$
+    \item $\Gamma$: Verhaltensbeschränkungen
+    \item $\tau$: Zeit
+    \item $\partial$: Veränderungsoperator
+    \item $\mu, \kappa, \lambda$: Modulationsparameter
+\end{itemize}
+
+%==============================================================================
+\section{Kategorie 1: Ontologie (ONT)}
+%==============================================================================
+
+Die Ontologie-Kategorie (26 Axiome: MA-ONT-01 bis MA-ONT-26) definiert, \textbf{was existiert} und welche fundamentalen Entitäten und Beziehungen das \BCM{} anerkennt.
+
+\subsection{Fundamentale Entitäten}
+
+\begin{axiom}[Existenz des Subjekts: MA-ONT-01]
+\begin{equation}
+\exists \sigma: \sigma \in \Sigma, |\Sigma| \geq 1
+\end{equation}
+Es existiert mindestens ein Entscheidungssubjekt $\sigma$.
+\end{axiom}
+
+\begin{axiom}[Existenz von Verhalten: MA-ONT-02]
+\begin{equation}
+\exists V: V \in \mathcal{V}, |\mathcal{V}| \geq 1
+\end{equation}
+Es gibt beobachtbare Verhaltensweisen $V$.
+\end{axiom}
+
+\begin{axiom}[Existenz von Nutzen: MA-ONT-03]
+\begin{equation}
+U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}
+\end{equation}
+Subjekte haben Nutzenfunktionen, die Verhalten bewerten.
+\end{axiom}
+
+\subsection{Strukturelle Axiome}
+
+\begin{axiom}[Drei-Komponenten-Nutzen: MA-ONT-07]
+\begin{equation}
+U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}}
+\end{equation}
+Der Gesamtnutzen setzt sich aus individuellem Nutzen (INU), kollektivem Nutzen (KNU) und Identitätsnutzen (IDN) zusammen. Die Kombination erfolgt durch den Operator $\Psi$:
+\begin{equation}
+U = \Psi(U_{\text{INU}}, U_{\text{KNU}}, U_{\text{IDN}})
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[FEPSDE-Dimensionen: MA-ONT-08]
+\begin{equation}
+U_{\text{INU}} = \sum_{d \in \text{FEPSDE}} \omega_d \cdot u_d
+\end{equation}
+Der individuelle Nutzen hat sechs Dimensionen:
+\begin{itemize}
+    \item \textbf{F}inancial (Finanziell)
+    \item \textbf{E}motional (Emotional)
+    \item \textbf{P}hysical (Physisch)
+    \item \textbf{S}ocial (Sozial)
+    \item \textbf{D}igital (Digital)
+    \item \textbf{E}cological (Ökologisch)
+\end{itemize}
+\end{axiom}
+
+\subsection{Die 5-Ebenen-Hierarchie (MA-ONT-26)}
+
+Ein zentrales ontologisches Axiom definiert die hierarchische Struktur sozialer Realität:
+
+\begin{axiom}[BCM-Ebenen-Hierarchie: MA-ONT-26]
+\begin{equation}
+E = \{\text{META}, \text{MAKRO}, \text{MESO}, \text{MIKRO}, \text{IND}\}
+\end{equation}
+\begin{equation}
+\forall e_i, e_j \in E: i < j \Rightarrow e_i \text{ kontextualisiert } e_j
+\end{equation}
+\end{axiom}
+
+\begin{table}[h]
+\centering
+\caption{Die 5 BCM-Ebenen}
+\label{tab:ebenen}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Ebene} & \textbf{Beschreibung} & \textbf{Beispiele} \\
+\midrule
+META & Kulturelle Grundnormen & Individualismus vs. Kollektivismus \\
+MAKRO & Institutionelle Ebene & Staat, Recht, Demokratie \\
+MESO & Organisationsebene & Unternehmen, Vereine, Netzwerke \\
+MIKRO & Gruppenebene & Teams, Familien, Freundeskreise \\
+IND & Personenebene & Traits, Präferenzen, Identität \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Das Prinzip der Hierarchie lautet: \textit{Parameter auf höherer Ebene setzen Defaults für niedrigere Ebenen; niedrigere Ebenen können modulieren, aber nicht vollständig überschreiben.}
+
+%==============================================================================
+\section{Kategorie 2: Epistemologie (EPI)}
+%==============================================================================
+
+Die Epistemologie-Kategorie (37 Axiome: MA-EPI-01 bis MA-EPI-37) definiert, \textbf{was wir wissen können}, welche Grenzen Wissen hat, und welche systematischen Verzerrungen (Biases) existieren.
+
+\subsection{Grundlegende epistemische Axiome}
+
+\begin{axiom}[Unvollständiges Wissen: MA-EPI-01]
+\begin{equation}
+K(U) \subset U
+\end{equation}
+Wissen über den Nutzen $K(U)$ ist immer eine echte Teilmenge des tatsächlichen Nutzens $U$. Vollständiges Wissen ist unerreichbar.
+\end{axiom}
+
+\begin{axiom}[Bounded Rationality: MA-EPI-02]
+\begin{equation}
+\text{Rationalität}(\sigma) \leq R_{\max}(\text{Kapazität}, \text{Zeit}, \text{Information})
+\end{equation}
+Rationalität ist durch kognitive Kapazität, verfügbare Zeit und Information beschränkt (Simon, 1955).
+\end{axiom}
+
+\begin{axiom}[Zwei-Systeme-Theorie: MA-EPI-05]
+Kognition operiert in zwei Modi:
+\begin{itemize}
+    \item \textbf{System 1}: Schnell, automatisch, heuristisch
+    \item \textbf{System 2}: Langsam, deliberativ, analytisch
+\end{itemize}
+Die meisten Alltagsentscheidungen werden von System 1 getroffen.
+\end{axiom}
+
+\subsection{Systematische Biases (MA-EPI-12 bis MA-EPI-37)}
+
+Das \META-Modul formalisiert 26 kognitive Biases, die für das \BCM{} und \BEATRIX{} relevant sind:
+
+\subsubsection{Klassische Heuristiken und Biases}
+
+\begin{axiom}[Verfügbarkeitsheuristik: MA-EPI-12]
+\begin{equation}
+\hat{P}(E) = f(\text{Ease of Recall}(E))
+\end{equation}
+Die geschätzte Wahrscheinlichkeit eines Ereignisses korreliert mit der Leichtigkeit, Beispiele abzurufen.
+\end{axiom}
+
+\begin{axiom}[Framing-Effekte: MA-EPI-13]
+\begin{equation}
+U(V|\text{Frame}_A) \neq U(V|\text{Frame}_B)
+\end{equation}
+Identische Optionen werden unterschiedlich bewertet, abhängig von ihrer Darstellung.
+\end{axiom}
+
+\begin{axiom}[Anchoring: MA-EPI-14]
+\begin{equation}
+\mathbb{E}[X|\text{Anchor}] = f(\text{Anchor})
+\end{equation}
+Schätzungen werden systematisch von einem Ankerwert beeinflusst.
+\end{axiom}
+
+\begin{axiom}[Loss Aversion: MA-EPI-15]
+\begin{equation}
+|U(\text{Loss})| > |U(\text{Gain})| \quad \text{für } |\text{Loss}| = |\text{Gain}|
+\end{equation}
+Verluste wiegen subjektiv schwerer als betragsmäßig gleiche Gewinne. Typischerweise gilt $\lambda \approx 2$ (Kahneman \& Tversky, 1979).
+\end{axiom}
+
+\subsubsection{BCM-kritische Biases (Version 2.2)}
+
+Die folgenden Biases wurden in Version 2.2 des \META-Moduls hinzugefügt aufgrund ihrer besonderen Relevanz für \BEATRIX:
+
+\begin{axiom}[Base Rate Neglect: MA-EPI-26]
+\begin{equation}
+\hat{P}(H|E) \approx P(E|H), \quad \text{ignoriert } P(H)
+\end{equation}
+Prior-Wahrscheinlichkeiten (Base Rates) werden zugunsten von Einzelfall-Information ignoriert.
+
+\textbf{BCM-Relevanz}: Bei der LLM-basierten Typen-Klassifikation muss explizit auf Base Rates (z.B. 50\% Conditional Cooperators, 30\% Self-Interested, 10\% Altruisten nach Fischbacher et al., 2001) geachtet werden.
+\end{axiom}
+
+\begin{axiom}[Self-Serving Bias: MA-EPI-31]
+\begin{equation}
+P(\text{Internal}|\text{Success}) > P(\text{Internal}|\text{Failure})
+\end{equation}
+Erfolge werden internal attribuiert (``Ich bin gut''), Misserfolge external (``Die Umstände waren schuld'').
+
+\textbf{BCM-Relevanz}: Dies ist der Kern-Mechanismus für \textbf{Motivated Inference} im IDN-Modul. Agenten verzerren ihre Wahrnehmung der Norm $\phi$, um das Selbstbild zu schützen.
+\end{axiom}
+
+\begin{axiom}[Social Desirability Bias: MA-EPI-32]
+\begin{equation}
+\text{Report}(V) = V_{\text{true}} + \varepsilon_{SD}; \quad \varepsilon_{SD} = f(\text{Visibility}, \text{Norm})
+\end{equation}
+Selbstberichte sind systematisch in Richtung sozialer Erwünschtheit verzerrt.
+
+\textbf{BCM-Relevanz}: \textbf{Kritisch für BEATRIX}: Persona-Beschreibungen, die das LLM analysiert, enthalten systematische Verzerrungen. Das LLM muss zwischen ``stated values'' und ``revealed behavior'' unterscheiden.
+\end{axiom}
+
+\begin{axiom}[Moral Licensing: MA-EPI-34]
+\begin{equation}
+P(\text{BadAction}|\text{PriorGoodAction}) > P(\text{BadAction}|\text{NoPriorAction})
+\end{equation}
+Eine vorherige gute Tat ``lizenziert'' nachfolgende schlechte Taten.
+
+\textbf{BCM-Relevanz}: Erklärt Identitäts-Dynamik im IDN-Modul: Selbstbild-Kredit wird aufgebaut und kann ``ausgegeben'' werden.
+\end{axiom}
+
+\begin{axiom}[Scope Insensitivity: MA-EPI-36]
+\begin{equation}
+\frac{\partial U}{\partial N} \rightarrow 0 \quad \text{für } N \rightarrow \infty; \quad \text{WTP}(N) \approx \text{WTP}(1)
+\end{equation}
+Bewertung skaliert nicht proportional mit der Anzahl Betroffener.
+
+\textbf{BCM-Relevanz}: Kollektiver Nutzen (KNU) wird systematisch unterschätzt. Dies rechtfertigt Interventionen, die KNU salient machen.
+\end{axiom}
+
+\subsection{Vollständige Liste der EPI-Axiome}
+
+\begin{longtable}{@{}lll@{}}
+\caption{Alle 37 Epistemologie-Axiome} \\
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Referenz} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Referenz} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Fortsetzung auf nächster Seite}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+MA-EPI-01 & Unvollständiges Wissen & -- \\
+MA-EPI-02 & Bounded Rationality & Simon (1955) \\
+MA-EPI-03 & Irreduzible Unsicherheit & -- \\
+MA-EPI-04 & Adaptive Heuristiken & Gigerenzer \\
+MA-EPI-05 & Zwei-Systeme-Theorie & Kahneman (2011) \\
+MA-EPI-06 & Systematische Biases & Kahneman \& Tversky \\
+MA-EPI-07 & AWX: Awareness & -- \\
+MA-EPI-08 & WAX: Willingness & -- \\
+MA-EPI-09 & WTX: Transition & -- \\
+MA-EPI-10 & Sequenz AWX → WAX → WTX → V & -- \\
+MA-EPI-11 & Intention-Action Gap & -- \\
+MA-EPI-12 & Verfügbarkeitsheuristik & Tversky \& Kahneman \\
+MA-EPI-13 & Framing-Effekte & Tversky \& Kahneman (1981) \\
+MA-EPI-14 & Anchoring & -- \\
+MA-EPI-15 & Loss Aversion & Kahneman \& Tversky (1979) \\
+MA-EPI-16 & Present Bias & -- \\
+MA-EPI-17 & Status Quo Bias & -- \\
+MA-EPI-18 & Overconfidence & -- \\
+MA-EPI-19 & Lernen ist möglich & -- \\
+MA-EPI-20 & Feedback verbessert Schätzungen & -- \\
+MA-EPI-21 & Gewohnheiten reduzieren Kognition & -- \\
+MA-EPI-22 & Debiasing ist schwierig & -- \\
+MA-EPI-23 & Exponentielle Sättigung & -- \\
+MA-EPI-24 & Belief-Update folgt Bayes & -- \\
+MA-EPI-25 & Confirmation Bias & -- \\
+\midrule
+\multicolumn{3}{l}{\textit{Neu in Version 2.2:}} \\
+\midrule
+MA-EPI-26 & Base Rate Neglect & Kahneman \& Tversky (1973) \\
+MA-EPI-27 & Representativeness Heuristic & Kahneman \& Tversky (1972) \\
+MA-EPI-28 & Sunk Cost Fallacy & Arkes \& Blumer (1985) \\
+MA-EPI-29 & Endowment Effect & Thaler (1980) \\
+MA-EPI-30 & Optimism Bias & Weinstein (1980) \\
+MA-EPI-31 & Self-Serving Bias & Miller \& Ross (1975) \\
+MA-EPI-32 & Social Desirability Bias & Crowne \& Marlowe (1960) \\
+MA-EPI-33 & Omission Bias & Spranca et al. (1991) \\
+MA-EPI-34 & Moral Licensing & Merritt et al. (2010) \\
+MA-EPI-35 & Identifiable Victim Effect & Small \& Loewenstein (2003) \\
+MA-EPI-36 & Scope Insensitivity & Kahneman (1986) \\
+MA-EPI-37 & Affect Heuristic & Slovic et al. (2002) \\
+\end{longtable}
+
+%==============================================================================
+\section{Kategorie 3: Governance (GOV)}
+%==============================================================================
+
+Die Governance-Kategorie (25 Axiome: MA-GOV-01 bis MA-GOV-25) definiert, \textbf{was erlaubt ist} -- sowohl im Sinne von Verhaltens-Constraints als auch im Sinne ethischer Prinzipien für Interventionen.
+
+\subsection{Fundamentale Governance-Prinzipien}
+
+\begin{axiom}[Autonomie-Primat: MA-GOV-03]
+Individuelle Autonomie hat grundsätzlich Vorrang. Einschränkungen bedürfen der Rechtfertigung.
+\end{axiom}
+
+\begin{axiom}[Nicht-Normativität: MA-GOV-04]
+Das \BCM{} \textbf{beschreibt} Verhalten, es \textbf{schreibt nicht vor}. Die Wahl der Ziele liegt beim Auftraggeber, nicht beim Modell.
+\end{axiom}
+
+\begin{axiom}[Transparenz-Gebot: MA-GOV-05]
+Interventionen sollen transparent sein. Verdeckte Manipulation ist zu vermeiden.
+\end{axiom}
+
+\begin{axiom}[Subsidiarität: MA-GOV-06]
+Die \textbf{mildeste wirksame Intervention} ist zu wählen (Principle of Minimal Intervention).
+\end{axiom}
+
+\subsection{Interventions-Taxonomie}
+
+\begin{axiom}[8 Interventionstypen: MA-GOV-08]
+Das \BCM{} unterscheidet acht fundamentale Interventionstypen:
+\begin{enumerate}
+    \item \textbf{NUDGE}: Änderung der Choice Architecture
+    \item \textbf{BOOST}: Stärkung kognitiver Kompetenzen
+    \item \textbf{THINK}: Aktivierung von System 2
+    \item \textbf{INCENTIVE}: Materielle Anreize
+    \item \textbf{REGULATE}: Ge- und Verbote
+    \item \textbf{DESIGN}: Änderung des physischen Umfelds
+    \item \textbf{SOCIAL}: Soziale Normen und Peer Effects
+    \item \textbf{IDENTITY}: Aktivierung oder Änderung von Identitäten
+\end{enumerate}
+\end{axiom}
+
+\begin{axiom}[Freiheits-Hierarchie: MA-GOV-09]
+Die 8 Interventionstypen sind nach Freiheitsgrad geordnet:
+\begin{equation}
+\text{NUDGE} > \text{BOOST} > \text{THINK} > \text{INCENTIVE} > \text{SOCIAL} > \text{IDENTITY} > \text{DESIGN} > \text{REGULATE}
+\end{equation}
+wobei $>$ bedeutet ``mehr Wahlfreiheit erhaltend als''.
+\end{axiom}
+
+\begin{axiom}[Eskalations-Prinzip: MA-GOV-10]
+Interventionen sollen von mild nach stark eskalieren:
+\begin{equation}
+\text{NUDGE} \rightarrow \text{BOOST} \rightarrow \text{INCENTIVE} \rightarrow \text{REGULATE}
+\end{equation}
+Erst wenn mildere Interventionen versagen, sind stärkere gerechtfertigt.
+\end{axiom}
+
+\subsection{Ethische Constraints}
+
+\begin{axiom}[Distributive Gerechtigkeit: MA-GOV-12]
+Kosten und Nutzen einer Intervention sind fair zu verteilen. Interventionen dürfen keine systematische Benachteiligung erzeugen.
+\end{axiom}
+
+\begin{axiom}[Reversibilität: MA-GOV-13]
+Reversible Interventionen sind irreversiblen vorzuziehen.
+\end{axiom}
+
+\begin{axiom}[Crowding-Out vermeiden: MA-GOV-15]
+\begin{equation}
+\frac{\partial \text{Intrinsic}}{\partial \text{Extrinsic}} < 0 \quad \text{ist möglich}
+\end{equation}
+Extrinsische Anreize können intrinsische Motivation zerstören. Dies ist bei Interventionsdesign zu berücksichtigen.
+\end{axiom}
+
+%==============================================================================
+\section{Kategorie 4: Dynamik (DYN)}
+%==============================================================================
+
+Die Dynamik-Kategorie (25 Axiome: MA-DYN-01 bis MA-DYN-25) definiert, \textbf{wie sich Dinge verändern} -- zeitliche Prozesse, Gleichgewichte, Pfadabhängigkeiten und Evolution.
+
+\subsection{Temporale Grundstruktur}
+
+\begin{axiom}[Diskrete Events: MA-DYN-02]
+Entscheidungen sind diskrete Events in kontinuierlicher Zeit:
+\begin{equation}
+V(t) = \sum_i V_i \cdot \delta(t - t_i)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Pfadabhängigkeit: MA-DYN-03]
+\begin{equation}
+U(V, t) = f(V, \{V_\tau : \tau < t\})
+\end{equation}
+Der Nutzen einer Handlung hängt von der Geschichte ab, nicht nur vom aktuellen Zustand.
+\end{axiom}
+
+\subsection{Gleichgewichte und Stabilität}
+
+\begin{axiom}[Multiple Equilibria: MA-DYN-04]
+Es kann mehrere stabile Zustände geben. Das System kann in verschiedenen Gleichgewichten ``gefangen'' sein.
+\end{axiom}
+
+\begin{axiom}[Tipping Points: MA-DYN-06]
+Kritische Schwellen existieren, an denen kleine Änderungen große Zustandswechsel auslösen können.
+\end{axiom}
+
+\subsection{Gewohnheitsformation}
+
+\begin{axiom}[Habit Loop: MA-DYN-08]
+Gewohnheiten folgen dem Zyklus:
+\begin{equation}
+\text{Cue} \rightarrow \text{Routine} \rightarrow \text{Reward}
+\end{equation}
+Wiederholung stärkt die Assoziation zwischen Cue und Routine.
+\end{axiom}
+
+\subsection{Soziale Dynamik}
+
+\begin{axiom}[Soziale Diffusion: MA-DYN-10]
+\begin{equation}
+\frac{\partial P(V)}{\partial t} = \beta \cdot P(V) \cdot (1 - P(V)) \cdot f(\text{Network})
+\end{equation}
+Verhalten breitet sich sozial aus, analog zu epidemiologischen Modellen.
+\end{axiom}
+
+\begin{axiom}[Kritische Masse: MA-DYN-11]
+Ab einer Schwelle $P^* \approx 25\%$ (Centola, 2018) wird Verhalten selbstverstärkend.
+\end{axiom}
+
+\begin{axiom}[Norm-Kaskaden: MA-DYN-12]
+Normen können rapid kippen, wenn die kritische Masse erreicht wird.
+\end{axiom}
+
+\subsection{Temporale Biases}
+
+\begin{axiom}[Hyperbolisches Discounting: MA-DYN-14]
+\begin{equation}
+D(t) = \frac{1}{1 + k \cdot t} \quad \text{statt} \quad D(t) = e^{-\delta t}
+\end{equation}
+Die tatsächliche Diskontierung ist hyperbolisch, nicht exponentiell. Dies führt zu zeitinkonsistenten Präferenzen.
+\end{axiom}
+
+\begin{axiom}[Hedonic Treadmill: MA-DYN-20]
+\begin{equation}
+\lim_{t \rightarrow \infty} U(t|\text{Change}) = U_{\text{baseline}}
+\end{equation}
+Glück kehrt nach positiven oder negativen Events zur Baseline zurück (Kahneman, 1999).
+\end{axiom}
+
+%==============================================================================
+\section{Integration mit operativen Modulen}
+%==============================================================================
+
+\subsection{Validierungs-Beziehungen}
+
+Jedes \META-Axiom spezifiziert im Feld \texttt{validates}, welche operativen Module es fundiert:
+
+\begin{table}[h]
+\centering
+\caption{Validierungs-Matrix: META → Operative Module}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{META-Kategorie} & \textbf{INU} & \textbf{KNU} & \textbf{IDN} & \textbf{LAMBDA} \\
+\midrule
+ONT (26 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
+EPI (37 Axiome) & \checkmark & \checkmark & \checkmark & -- \\
+GOV (25 Axiome) & -- & -- & -- & -- \\
+DYN (25 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Die BCM 2.2 Kernformel}
+
+Die Integration aller Module kulminiert in der BCM 2.2 Kernformel für den effektiven Nutzen:
+
+\begin{equation}
+U_{\text{eff}} = (1-\lambda) \cdot U_{\text{INU}} + \lambda \cdot U_{\text{KNU}} + U_{\text{IDN}}(a, \sigma, \phi, \tilde{\mu}; F, s, m)
+\label{eq:bcm_core}
+\end{equation}
+
+wobei der Identitätsnutzen $U_{\text{IDN}}$ nach dem BCM 2.2 Vollmodell berechnet wird:
+
+\begin{equation}
+U_{\text{IDN}} = U_{\text{mat}} - \mu_{\text{ID}}\left[L_{\text{aff}} + \omega_1 \kappa (a - \phi)^2 + \omega_3 \psi \cdot \mathbb{E}[(\phi - \eta)^2]\right] - C_{\text{MI}}(\tilde{\mu}) - C_{\text{info}}(\sigma)
+\end{equation}
+
+\subsection{META-Axiome als Constraints}
+
+Die \META-Axiome fungieren als \textbf{Constraints} für die operativen Module:
+
+\begin{itemize}
+    \item \textbf{ONT-Constraints}: Definieren, welche Entitäten (Subjekte, Gruppen, Identitäten) modelliert werden können
+    \item \textbf{EPI-Constraints}: Definieren, welche kognitiven Verzerrungen berücksichtigt werden müssen
+    \item \textbf{GOV-Constraints}: Definieren, welche Interventionen ethisch zulässig sind
+    \item \textbf{DYN-Constraints}: Definieren, welche zeitlichen Prozesse modelliert werden müssen
+\end{itemize}
+
+%==============================================================================
+\section{META im BEATRIX-System}
+%==============================================================================
+
+\subsection{Rolle bei der LLM-basierten Estimation}
+
+Das \BEATRIX-System verwendet ein LLM zur Parameterschätzung. Das \META-Modul informiert diesen Prozess auf mehreren Ebenen:
+
+\begin{enumerate}
+    \item \textbf{Base Rate Awareness (MA-EPI-26)}: Das LLM muss empirische Base Rates für Typen-Verteilungen berücksichtigen
+    \item \textbf{Social Desirability Korrektur (MA-EPI-32)}: Persona-Beschreibungen müssen auf systematische Verzerrungen geprüft werden
+    \item \textbf{Anchoring-Prävention (MA-EPI-14)}: Few-Shot Anchoring im Prompt verhindert willkürliche Schätzungen
+\end{enumerate}
+
+\subsection{Constrained Generation Pipeline}
+
+Die \BEATRIX{} Estimation Pipeline (ESTIMATION-Modul) implementiert die epistemologischen Constraints:
+
+\begin{enumerate}
+    \item \textbf{PreFlight}: Prüfung auf plausibles Szenario (verhindert Halluzination)
+    \item \textbf{Few-Shot Anchoring}: Kalibrierungsskalen im Prompt
+    \item \textbf{Pydantic Schema}: Strukturierte Outputs
+    \item \textbf{Ensemble Voting}: N parallele Runs, Median-Aggregation
+    \item \textbf{IRR-Check}: Inter-Rater Reliability > 0.85
+\end{enumerate}
+
+\subsection{Ambiguity Detection}
+
+Die Unterscheidung zwischen \textbf{Unsicherheit} (unimodale Verteilung) und \textbf{Wertekonflikt} (bimodale Verteilung) basiert auf:
+
+\begin{equation}
+BC = \frac{s^2 + 1}{k + 3 \cdot \frac{(n-1)^2}{(n-2)(n-3)}}
+\end{equation}
+
+wobei $s$ = Schiefe, $k$ = Kurtosis. Bei $BC > 0.555$ liegt Polarisierung vor.
+
+%==============================================================================
+\section{Zusammenfassung und Ausblick}
+%==============================================================================
+
+\subsection{Kernbeiträge des META-Moduls}
+
+Das \META-Modul leistet folgende Beiträge zum \BCM:
+
+\begin{enumerate}
+    \item \textbf{Axiomatische Fundierung}: 113 explizite Annahmen machen das Modell transparent und kritisierbar
+    \item \textbf{Interdisziplinäre Verankerung}: Die vier Kategorien (ONT, EPI, GOV, DYN) verbinden Verhaltensökonomie mit klassischen philosophischen Disziplinen
+    \item \textbf{Bias-Katalog}: 37 formalisierte kognitive Biases ermöglichen systematische Berücksichtigung menschlicher Irrationalität
+    \item \textbf{Ethische Leitplanken}: Die GOV-Kategorie definiert klare Prinzipien für Interventionsdesign
+    \item \textbf{LLM-Guidance}: Die EPI-Axiome informieren die BEATRIX-Parameterschätzung
+\end{enumerate}
+
+\subsection{Versionierung}
+
+\begin{table}[h]
+\centering
+\caption{META-Modul Versionshistorie}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Version} & \textbf{Datum} & \textbf{Axiome} & \textbf{Änderungen} \\
+\midrule
+1.0 & 2023 & 100 & Initiale Version \\
+2.0 & 2024 & 100 & BCM 2.2 Integration \\
+2.1 & Dez 2024 & 101 & MA-ONT-26: 5-Ebenen-Hierarchie \\
+2.2 & Dez 2024 & 113 & +12 Biases (EPI-26 bis EPI-37) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Zukünftige Erweiterungen}
+
+Geplante Erweiterungen für \META{} 3.0:
+\begin{itemize}
+    \item Integration von Affekt-Dynamik-Axiomen
+    \item Formalisierung von Sozialkapital-Konzepten
+    \item Erweiterung der Governance-Kategorie um KI-spezifische Ethik
+    \item Cross-kulturelle Validierung der Bias-Universalität
+\end{itemize}
+
+%==============================================================================
+% References
+%==============================================================================
+
+\section*{Literaturverzeichnis}
+
+\begin{itemize}[leftmargin=*]
+    \item Akerlof, G. A., \& Kranton, R. E. (2000). Economics and identity. \textit{Quarterly Journal of Economics}, 115(3), 715-753.
+    \item Arkes, H. R., \& Blumer, C. (1985). The psychology of sunk cost. \textit{Organizational Behavior and Human Decision Processes}, 35(1), 124-140.
+    \item Centola, D. (2018). \textit{How Behavior Spreads}. Princeton University Press.
+    \item Crowne, D. P., \& Marlowe, D. (1960). A new scale of social desirability. \textit{Journal of Consulting Psychology}, 24(4), 349-354.
+    \item Fehr, E., \& Schmidt, K. M. (1999). A theory of fairness, competition, and cooperation. \textit{Quarterly Journal of Economics}, 114(3), 817-868.
+    \item Fischbacher, U., Gächter, S., \& Fehr, E. (2001). Are people conditionally cooperative? \textit{Economics Letters}, 71(3), 397-404.
+    \item Kahneman, D. (2011). \textit{Thinking, Fast and Slow}. Farrar, Straus and Giroux.
+    \item Kahneman, D., \& Tversky, A. (1979). Prospect theory: An analysis of decision under risk. \textit{Econometrica}, 47(2), 263-291.
+    \item Merritt, A. C., Effron, D. A., \& Monin, B. (2010). Moral self-licensing. \textit{Social and Personality Psychology Compass}, 4(5), 344-357.
+    \item Miller, D. T., \& Ross, M. (1975). Self-serving biases in the attribution of causality. \textit{Psychological Bulletin}, 82(2), 213-225.
+    \item Simon, H. A. (1955). A behavioral model of rational choice. \textit{Quarterly Journal of Economics}, 69(1), 99-118.
+    \item Slovic, P., Finucane, M., Peters, E., \& MacGregor, D. G. (2002). The affect heuristic. In T. Gilovich et al. (Eds.), \textit{Heuristics and Biases} (pp. 397-420). Cambridge University Press.
+    \item Small, D. A., \& Loewenstein, G. (2003). Helping a victim or helping the victim. \textit{Journal of Risk and Uncertainty}, 26(1), 5-16.
+    \item Thaler, R. (1980). Toward a positive theory of consumer choice. \textit{Journal of Economic Behavior \& Organization}, 1(1), 39-60.
+    \item Tversky, A., \& Kahneman, D. (1981). The framing of decisions and the psychology of choice. \textit{Science}, 211(4481), 453-458.
+    \item Weinstein, N. D. (1980). Unrealistic optimism about future life events. \textit{Journal of Personality and Social Psychology}, 39(5), 806-820.
+\end{itemize}
+
+%==============================================================================
+% Appendix
+%==============================================================================
+
+\appendix
+
+\section{Vollständige Axiom-Liste nach ID}
+
+\subsection{Ontologie (ONT): 26 Axiome}
+\begin{enumerate}[label=MA-ONT-\arabic*:, leftmargin=3cm]
+    \item $\exists \sigma$: Subjekt existiert
+    \item $\exists V$: Verhalten existiert
+    \item $\exists U$: Nutzen existiert
+    \item $\exists \rho$: Kontext existiert
+    \item $\exists \tau$: Zeit existiert
+    \item $\exists \Gamma$: Constraints existieren
+    \item $U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}}$
+    \item FEPSDE: 6 Nutzen-Dimensionen
+    \item $\exists I$: Identitäten sind multipel
+    \item $\exists G$: Gruppen existieren
+    \item $\exists N$: Normen existieren
+    \item $\exists \kappa$: Komplementarität existiert
+    \item $\Psi$: Kohärenz-Operator
+    \item $\lambda$: Kooperations-Regulator
+    \item $\lambda \in [0,1]$: Hybrid-Kontinuum
+    \item $\omega$: Gewichtungsfunktion
+    \item $\pi$: Identitäts-Aktivierung
+    \item $A$: Alignment-Funktion
+    \item $\partial U / \partial \tau$: Nutzen ist zeitabhängig
+    \item Habituation existiert
+    \item Feedback-Schleifen existieren
+    \item Spillover existiert
+    \item Identitäten evolvieren
+    \item Normen evolvieren
+    \item Meta-Evolution existiert
+    \item \textbf{BCM operiert auf 5 hierarchischen Ebenen}
+\end{enumerate}
+
+\subsection{Epistemologie (EPI): 37 Axiome}
+\begin{enumerate}[label=MA-EPI-\arabic*:, leftmargin=3cm]
+    \item Unvollständiges Wissen
+    \item Bounded Rationality
+    \item Unsicherheit ist irreduzibel
+    \item Heuristiken sind adaptiv
+    \item Zwei Systeme (System 1 / System 2)
+    \item Biases sind systematisch
+    \item AWX: Awareness
+    \item WAX: Willingness
+    \item WTX: Transition
+    \item Sequenz: AWX → WAX → WTX → V
+    \item Intention-Action Gap
+    \item Verfügbarkeitsheuristik
+    \item Framing-Effekte
+    \item Anchoring
+    \item Loss Aversion
+    \item Present Bias
+    \item Status Quo Bias
+    \item Overconfidence
+    \item Lernen ist möglich
+    \item Feedback verbessert Schätzungen
+    \item Gewohnheiten reduzieren Kognition
+    \item Debiasing ist schwierig
+    \item Exponentielle Sättigung
+    \item Belief-Update folgt Bayes
+    \item Confirmation Bias
+    \item \textbf{Base Rate Neglect}
+    \item \textbf{Representativeness Heuristic}
+    \item \textbf{Sunk Cost Fallacy}
+    \item \textbf{Endowment Effect}
+    \item \textbf{Optimism Bias}
+    \item \textbf{Self-Serving Bias}
+    \item \textbf{Social Desirability Bias}
+    \item \textbf{Omission Bias}
+    \item \textbf{Moral Licensing}
+    \item \textbf{Identifiable Victim Effect}
+    \item \textbf{Scope Insensitivity}
+    \item \textbf{Affect Heuristic}
+\end{enumerate}
+
+\end{document}
