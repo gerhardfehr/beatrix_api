@@ -18,6 +18,7 @@
 \usepackage{tikz}
 \usepackage{epigraph}
 \usepackage{csquotes}
+\usepackage{tcolorbox}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 
 \geometry{margin=2.5cm}
@@ -1486,6 +1487,134 @@ Die Gesamtarchitektur des \BCM{} 2.2 lässt sich als Schichtenmodell darstellen:
 \caption{Schichtenarchitektur des BCM 2.2}
 \label{fig:architecture}
 \end{figure}
+
+\subsection{Was ist das META-Modul? Eine Übersicht}
+
+\epigraph{\textit{``Give me a place to stand, and I will move the Earth.''}}{--- Archimedes von Syrakus (ca. 287--212 v. Chr.)}
+
+Bevor wir in die Details der einzelnen Kategorien eintauchen, ist es hilfreich, das \META-Modul als Ganzes zu verstehen: Was ist es, warum brauchen wir es, und wie funktioniert es im Zusammenspiel mit \BEATRIX?
+
+\subsubsection{Die Kernidee: Explizite Fundamente}
+
+Die Verhaltensökonomie seit Kahneman \& Tversky (1979) hat viele Effekte dokumentiert -- Loss Aversion, Framing, Anchoring, Present Bias -- aber \textbf{nie ein kohärentes alternatives Theoriegebäude} zum Homo Oeconomicus formuliert. Die Disziplin blieb eine Sammlung von Anomalien, ein ``Kuriositätenkabinett'' ohne architektonische Einheit.
+
+Das \META-Modul schließt diese Lücke. Es macht \textbf{explizit, was bisher implizit} blieb -- und schafft damit die Voraussetzung für maschinelle Operationalisierung.
+
+\begin{table}[h]
+\centering
+\caption{Die vier Kategorien des META-Moduls}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Kategorie} & \textbf{Axiome} & \textbf{Kernfrage} & \textbf{Beispiele} \\
+\midrule
+\textbf{ONT} (Ontologie) & 26 & Was existiert? & Subjekt, Verhalten, FEPSDE, 5-Ebenen \\
+\textbf{EPI} (Epistemologie) & 38 & Was können wir wissen? & Biases, System 1/2, AWX-WAX-WTX \\
+\textbf{GOV} (Governance) & 25 & Was ist erlaubt? & Autonomie, 8 Interventionstypen \\
+\textbf{DYN} (Dynamik) & 25 & Wie verändern sich Dinge? & Tipping Points, Habit Loops \\
+\midrule
+\textbf{Total} & \textbf{114} & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Die historische Analogie}
+
+Das \META-Modul steht in einer langen Tradition axiomatischer Wissenschaft:
+
+\begin{table}[h]
+\centering
+\caption{Axiomatische Fundamente in der Wissenschaftsgeschichte}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Disziplin} & \textbf{Axiomatisierung} & \textbf{Axiome} & \textbf{Konsequenz} \\
+\midrule
+Geometrie & Euklid (300 v. Chr.) & 5 Postulate & 465 Sätze ableitbar \\
+Arithmetik & Peano (1889) & 5 Axiome & Alle natürlichen Zahlen \\
+Wahrscheinlichkeit & Kolmogorov (1933) & 3 Axiome & Moderne Stochastik \\
+Entscheidungstheorie & vNM (1944) & 4 Axiome & Expected Utility \\
+\textbf{Verhaltensökonomie} & \textbf{BCM META (2024)} & \textbf{114 Axiome} & \textbf{BEATRIX-System} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Lektion aus der Wissenschaftsgeschichte: \textbf{Explizite Axiome ermöglichen systematische Variation.} Nur weil Euklid das Parallelenpostulat explizit machte, konnten Lobatschewski und Riemann es ändern und nicht-euklidische Geometrien entdecken. Implizite Annahmen können nicht systematisch variiert werden -- man weiß nicht einmal, dass man sie macht.
+
+\subsubsection{Die vier Kernfragen}
+
+Jede der vier Kategorien adressiert eine fundamentale Frage der Verhaltensmodellierung:
+
+\paragraph{ONT: Was existiert?}
+Die Ontologie definiert die ``Möbel'' des verhaltensökonomischen Universums:
+\begin{itemize}
+    \item \textbf{Subjekte} ($\sigma$): Wer trifft Entscheidungen?
+    \item \textbf{Verhalten} ($V$): Was können Subjekte tun?
+    \item \textbf{Nutzen} ($U$): Was bewerten Subjekte?
+    \item \textbf{Dimensionen} (FEPSDE): Financial, Emotional, Physical, Social, Digital, Ecological
+    \item \textbf{Ebenen}: META $\rightarrow$ MAKRO $\rightarrow$ MESO $\rightarrow$ MIKRO $\rightarrow$ IND
+\end{itemize}
+
+\paragraph{EPI: Was können wir wissen?}
+Die Epistemologie definiert die Grenzen menschlicher Rationalität:
+\begin{itemize}
+    \item \textbf{Bounded Rationality}: Rationalität ist durch Kapazität, Zeit und Information beschränkt
+    \item \textbf{Zwei-Systeme-Theorie}: System 1 (schnell, automatisch) vs. System 2 (langsam, deliberativ)
+    \item \textbf{Systematische Biases}: 26 formalisierte kognitive Verzerrungen
+    \item \textbf{AWX-WAX-WTX}: Der Pfad von Awareness über Willingness zu Transition
+    \item \textbf{Evidenzhierarchie}: Klassifikation der Robustheit von Parametern
+\end{itemize}
+
+\paragraph{GOV: Was ist erlaubt?}
+Die Governance definiert ethische Leitplanken für Interventionen:
+\begin{itemize}
+    \item \textbf{Autonomie-Primat}: Individuelle Freiheit hat Vorrang
+    \item \textbf{Nicht-Normativität}: Das BCM beschreibt, es schreibt nicht vor
+    \item \textbf{Transparenz}: Verdeckte Manipulation ist zu vermeiden
+    \item \textbf{Subsidiarität}: Die mildeste wirksame Intervention ist zu wählen
+    \item \textbf{8 Interventionstypen}: NUDGE, BOOST, THINK, INCENTIVE, REGULATE, DESIGN, SOCIAL, IDENTITY
+\end{itemize}
+
+\paragraph{DYN: Wie verändern sich Dinge?}
+Die Dynamik definiert zeitliche Prozesse und Veränderungsmechanismen:
+\begin{itemize}
+    \item \textbf{Pfadabhängigkeit}: Geschichte beeinflusst Gegenwart
+    \item \textbf{Multiple Equilibria}: Es gibt mehrere stabile Zustände
+    \item \textbf{Tipping Points}: Kleine Änderungen können große Wirkungen haben
+    \item \textbf{Habit Loops}: Cue $\rightarrow$ Routine $\rightarrow$ Reward
+    \item \textbf{Hyperbolic Discounting}: Zeitinkonsistente Präferenzen
+\end{itemize}
+
+\subsubsection{Die Rolle im BEATRIX-System}
+
+Das \META-Modul erfüllt vier kritische Funktionen für \BEATRIX:
+
+\begin{enumerate}
+    \item \textbf{Constraining the LLM}: Die 114 Axiome geben dem LLM ``Leitplanken''. Es kann nicht beliebig halluzinieren, sondern muss innerhalb des axiomatischen Rahmens operieren. Wenn \BEATRIX{} einen Parameter schätzt, muss diese Schätzung mit den \META-Axiomen konsistent sein.
+
+    \item \textbf{Base Rates}: Die EPI-Axiome liefern empirisch fundierte Default-Werte. Zum Beispiel:
+    \begin{itemize}
+        \item 50\% Conditional Cooperators (Fischbacher et al., 2001)
+        \item Loss Aversion $\lambda \approx 2.0$ (Kahneman \& Tversky, 1979)
+        \item Present Bias $\beta \approx 0.7$ (Laibson et al., 1997)
+    \end{itemize}
+    Das LLM startet nicht bei Null, sondern bei wissenschaftlich fundierten Ankerwerten.
+
+    \item \textbf{Evidenzhierarchie}: Das neue Axiom MA-EPI-38 klassifiziert, wie robust welche Parameter sind:
+    \begin{itemize}
+        \item $\star\star\star\star$: Labor + Feld konvergent (z.B. Loss Aversion als Mechanismus)
+        \item $\star\star\star$: Replizierte Labor-RCTs (z.B. Conditional Cooperators)
+        \item $\star\star$: Einzelne RCTs (z.B. spezifische Nudge-Effekte)
+        \item $\star$: Nur theoretische Ableitung (z.B. FEPSDE-Gewichtungen)
+    \end{itemize}
+    \BEATRIX{} kann Konfidenzintervalle der Evidenzqualität anpassen.
+
+    \item \textbf{Ethische Grenzen}: Die GOV-Axiome definieren, welche Interventionen \BEATRIX{} vorschlagen darf und welche nicht. Das System kann keine manipulativen oder autonomieverletzenden Maßnahmen empfehlen, ohne die Governance-Constraints zu verletzen.
+\end{enumerate}
+
+\subsubsection{Zusammenfassung: Das META-Modul auf einen Blick}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Das META-Modul in einem Satz]
+Das \META-Modul ist das \textbf{axiomatische Fundament} des BCM -- 114 explizite Annahmen über Existenz (ONT), Wissen (EPI), Erlaubtes (GOV) und Veränderung (DYN), die alle operativen Module validieren und dem \BEATRIX-LLM wissenschaftlich fundierte Leitplanken geben.
+\end{tcolorbox}
 
 \subsection{Die Meta-Formel}
 
