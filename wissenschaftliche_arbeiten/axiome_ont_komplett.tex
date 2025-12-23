@@ -1,0 +1,862 @@
+% =============================================================================
+% ONT-AXIOME (ONTOLOGIE) - Vollständige Ausformulierung
+% BCM 2.2 META-Modul
+% =============================================================================
+
+\section{Ontologie-Axiome (MA-ONT)}
+
+Die ONT-Axiome definieren die fundamentalen Entitäten und Beziehungen des BCM.
+Sie beantworten die Frage: \textit{Was existiert?}
+
+%==============================================================================
+% MA-ONT-01: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-ONT-02: Existenz von Verhalten
+%==============================================================================
+
+\subsubsection*{MA-ONT-02: Existenz von Verhalten}
+
+\textbf{Statement:} Es existieren beobachtbare Verhaltensweisen $V$.
+
+\textbf{Formel:}
+\begin{equation}
+V \in \mathcal{V}, \quad |\mathcal{V}| \geq 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Verhalten umfasst alle beobachtbaren Handlungen eines Subjekts. Dazu gehören manifestes Verhalten (Kauf, Wahl, Bewegung), aber auch Unterlassungen (Nicht-Handeln als Handlung). Verhalten ist die abhängige Variable des BCM -- das, was erklärt und beeinflusst werden soll.
+
+\textbf{BCM-Relevanz:}
+Ohne beobachtbares Verhalten wäre das BCM nicht falsifizierbar. Alle Module (INU, KNU, IDN) haben Verhalten als Output. Die WTX-Komponente (Willingness to X) beschreibt die Transition von Intention zu Verhalten.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX sagt Verhaltenswahrscheinlichkeiten vorher. Das LLM analysiert die Persona und schätzt $P(V_i)$ für alternative Verhaltensweisen. Die Verhaltensoptionen müssen dem LLM explizit präsentiert werden (Choice Set).
+
+\textbf{Konsequenz bei Fehlen:}
+Das BCM wäre ein reines Präferenzmodell ohne Handlungsbezug. Es könnte nur erklären, was Menschen wollen, nicht was sie tun. Die Intention-Action-Gap (MA-EPI-11) wäre nicht modellierbar.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-01 (Subjekt existiert)
+
+\textbf{Literatur:} Ajzen (1991); Fishbein \& Ajzen (1975)
+
+%==============================================================================
+% MA-ONT-03: Existenz von Nutzen
+%==============================================================================
+
+\subsubsection*{MA-ONT-03: Existenz von Nutzen}
+
+\textbf{Statement:} Subjekte haben Nutzenfunktionen $U$.
+
+\textbf{Formel:}
+\begin{equation}
+U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}
+\end{equation}
+
+\textbf{Beschreibung:}
+Jedes Subjekt bewertet jedes mögliche Verhalten mit einem skalaren Nutzenwert. Diese Bewertung ist subjektiv und kann von objektiven Ergebnissen abweichen. Der Nutzen ist nicht direkt beobachtbar, sondern wird aus Verhalten erschlossen (revealed preferences).
+
+\textbf{BCM-Relevanz:}
+Nutzen ist die zentrale erklärende Variable. Das BCM postuliert (schwache) Nutzenmaximierung: Subjekte wählen tendenziell Verhaltensweisen mit höherem erwarteten Nutzen. Die Stärke der Präferenz wird durch Nutzendifferenzen ausgedrückt.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Nutzenparameter aus Persona-Beschreibungen. Die FEPSDE-Dimensionen (MA-ONT-08) strukturieren den individuellen Nutzen. Das LLM verwendet die geschätzten Parameter zur Verhaltensvorhersage.
+
+\textbf{Konsequenz bei Fehlen:}
+Kein Optimierungsmodell möglich. Verhalten wäre zufällig oder rein reaktiv. Keine Grundlage für Präferenzanalyse, Trade-off-Modellierung oder Interventionsdesign.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-ONT-01, MA-ONT-02
+
+\textbf{Literatur:} von Neumann \& Morgenstern (1944); Samuelson (1938)
+
+%==============================================================================
+% MA-ONT-04: Existenz von Kontext
+%==============================================================================
+
+\subsubsection*{MA-ONT-04: Existenz von Kontext}
+
+\textbf{Statement:} Verhalten findet in Kontexten $\rho$ statt.
+
+\textbf{Formel:}
+\begin{equation}
+\rho \in \mathcal{P}, \quad |\mathcal{P}| \geq 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Kontext umfasst alle situativen Faktoren: physische Umgebung, soziales Setting, zeitlicher Rahmen, institutioneller Kontext. Derselbe Mensch verhält sich in verschiedenen Kontexten unterschiedlich. Kontext aktiviert spezifische Identitäten und Normen.
+
+\textbf{BCM-Relevanz:}
+Kontextabhängigkeit ist fundamental. Der $\lambda$-Parameter, Identitätsaktivierung und Normensalienz sind alle kontextabhängig. Das 5-Ebenen-Modell (MA-ONT-26) strukturiert Kontexte hierarchisch.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX erhält Kontextinformationen als Input. Das LLM muss wissen: Wo? Wann? Mit wem? Unter welchen Regeln? Ohne Kontext sind Parameter-Schätzungen unspezifisch und ungenau.
+
+\textbf{Konsequenz bei Fehlen:}
+Trait-only-Modell. Verhalten wäre rein personenabhängig, situative Faktoren ignoriert. Ecological validity würde massiv sinken. Interventionen könnten nicht kontextspezifisch designt werden.
+
+\textbf{Validiert:} INU, KNU, IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-02
+
+\textbf{Literatur:} Mischel \& Shoda (1995); Ross \& Nisbett (1991)
+
+%==============================================================================
+% MA-ONT-05: Existenz von Zeit
+%==============================================================================
+
+\subsubsection*{MA-ONT-05: Existenz von Zeit}
+
+\textbf{Statement:} Verhalten hat eine temporale Dimension $\tau$.
+
+\textbf{Formel:}
+\begin{equation}
+\tau \in T, \quad T \subseteq \mathbb{R}^+
+\end{equation}
+
+\textbf{Beschreibung:}
+Zeit ist nicht nur Hintergrund, sondern aktiver Faktor. Entscheidungen haben zeitliche Konsequenzen (sofort vs. später). Präferenzen können sich über Zeit ändern (dynamische Inkonsistenz). Gewohnheiten bilden sich über Wiederholung.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht das DYN-Modul. Ohne Zeit keine Dynamik: keine Habituation (MA-ONT-20), keine Diskontierung (MA-DYN-13), keine Evolution von Normen (MA-ONT-24). Zeit ist die unabhängige Variable der Veränderung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt temporale Aspekte:
+\begin{itemize}
+    \item Zeithorizont der Entscheidung (kurzfristig vs. langfristig)
+    \item Zeitpunkt der Intervention
+    \item Historische Verhaltensmuster der Persona
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statisches Modell. Keine Verhaltensänderung modellierbar. Keine Gewohnheitsbildung, keine Lerneffekte, keine Trendvorhersagen. Das BCM wäre ein Snapshot ohne Dynamik.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-02
+
+\textbf{Literatur:} Strotz (1955); Frederick et al. (2002)
+
+%==============================================================================
+% MA-ONT-06: Existenz von Constraints
+%==============================================================================
+
+\subsubsection*{MA-ONT-06: Existenz von Constraints}
+
+\textbf{Statement:} Es gibt Beschränkungen für Verhalten $\Gamma$.
+
+\textbf{Formel:}
+\begin{equation}
+\Gamma: \mathcal{V} \rightarrow \{0, 1\}
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht alles, was gewollt wird, kann getan werden. Constraints umfassen: Budget (finanzielle Grenzen), Zeit (24h/Tag), physische Grenzen (Körper), rechtliche Grenzen (Verbote), soziale Grenzen (Sanktionen). Verhalten wird aus der Menge der feasible options gewählt.
+
+\textbf{BCM-Relevanz:}
+Unterscheidet Präferenzen von Verhalten. Das BCM modelliert Optimierung unter Nebenbedingungen. Das GOV-Modul (Governance) operiert primär durch Constraint-Manipulation: Erweiterung (Ermöglichung) oder Einschränkung (Regulierung).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX muss Constraints kennen, um realistische Vorhersagen zu machen. Das LLM prüft: Ist das Verhalten überhaupt möglich? Welche Barrieren existieren? Interventionen können auf Constraint-Reduktion zielen.
+
+\textbf{Konsequenz bei Fehlen:}
+Wunschmodell statt Verhaltensmodell. Alle gewünschten Verhaltensweisen würden als möglich angenommen. Interventionen würden Barrieren ignorieren. Feasibility-Checks wären nicht möglich.
+
+\textbf{Validiert:} GOV
+
+\textbf{Abhängigkeiten:} MA-ONT-02
+
+\textbf{Literatur:} Becker (1965); Lancaster (1966)
+
+%==============================================================================
+% MA-ONT-07: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-ONT-08: FEPSDE-Dimensionen
+%==============================================================================
+
+\subsubsection*{MA-ONT-08: FEPSDE-Dimensionen}
+
+\textbf{Statement:} Der individuelle Nutzen hat sechs Dimensionen: Financial, Emotional, Physical, Social, Digital, Ecological.
+
+\textbf{Formel:}
+\begin{equation}
+U_{\text{INU}} = \sum_{d \in \text{FEPSDE}} \omega_d \cdot u_d, \quad \sum_d \omega_d = 1
+\end{equation}
+
+\textbf{Beschreibung:}
+FEPSDE ist ein erschöpfendes Kategoriensystem für individuelle Nutzendimensionen:
+\begin{itemize}
+    \item \textbf{F}inancial: Geld, Vermögen, materielle Ressourcen
+    \item \textbf{E}motional: Gefühle, Wohlbefinden, Stressreduktion
+    \item \textbf{P}hysical: Gesundheit, körperliche Unversehrtheit, Energie
+    \item \textbf{S}ocial: Beziehungen, Status, Anerkennung
+    \item \textbf{D}igital: Online-Präsenz, digitale Assets, Reputation
+    \item \textbf{E}cological: Umwelt, Nachhaltigkeit, Naturerlebnis
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Strukturiert das INU-Modul. Jede Verhaltensalternative hat Konsequenzen in allen sechs Dimensionen. Die Gewichte $\omega_d$ sind personenspezifisch und kontextabhängig. Trade-offs zwischen Dimensionen sind explizit modellierbar.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt die $\omega_d$-Gewichte aus Persona-Beschreibungen. Das LLM analysiert: Was ist dieser Person wichtig? Welche Dimensionen dominieren? Die Schätzung erfolgt als 6-dimensionaler Vektor mit Summe = 1.
+
+\textbf{Konsequenz bei Fehlen:}
+Eindimensionaler Nutzen (meist: Geld). Emotionale, soziale und ökologische Motive wären nicht modellierbar. Viele Verhaltensweisen (Ehrenamt, Umweltschutz) wären unerklärlich.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-ONT-07
+
+\textbf{Literatur:} Eigenes Konstrukt, aufbauend auf Maslow (1943); Max-Neef (1991)
+
+%==============================================================================
+% MA-ONT-09: Multiple Identitäten
+%==============================================================================
+
+\subsubsection*{MA-ONT-09: Multiple Identitäten}
+
+\textbf{Statement:} Subjekte haben multiple Identitäten.
+
+\textbf{Formel:}
+\begin{equation}
+I_\sigma = \{I_1, I_2, ..., I_n\}, \quad n \geq 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Ein Mensch ist nicht ``eine'' Identität, sondern ein Portfolio. Die Identitäten können sein: beruflich (Arzt), familiär (Vater), kulturell (Europäer), politisch (Grüne), religiös (Muslim), Hobby (Läufer). Verschiedene Identitäten können konfligierende Normen haben.
+
+\textbf{BCM-Relevanz:}
+Fundament des IDN-Moduls. Identitäten haben Präskriptionen (was sollte ich tun?). Verhalten, das zur aktivierten Identität passt, gibt Identitätsnutzen. Konflikte zwischen Identitäten erzeugen kognitives Unbehagen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX extrahiert das Identitätsportfolio aus Persona-Beschreibungen. Das LLM identifiziert: Welche Identitäten hat diese Person? Welche sind zentral? Dies ermöglicht die Berechnung von $U_{\text{IDN}}$.
+
+\textbf{Konsequenz bei Fehlen:}
+Monolithisches Selbstbild. Identitätsbasierte Interventionen (IDENTITY-Typ) wären nicht begründbar. Konflikte zwischen Rollen (Arbeit vs. Familie) wären nicht modellierbar.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-01
+
+\textbf{Literatur:} Akerlof \& Kranton (2000); Burke \& Stets (2009)
+
+%==============================================================================
+% MA-ONT-10: Existenz von Gruppen
+%==============================================================================
+
+\subsubsection*{MA-ONT-10: Existenz von Gruppen}
+
+\textbf{Statement:} Subjekte gehören zu Gruppen $G$.
+
+\textbf{Formel:}
+\begin{equation}
+G \subseteq \mathcal{P}(\Sigma), \quad \sigma \in G_i
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen sind soziale Wesen. Sie gehören zu Familien, Teams, Unternehmen, Vereinen, Nationen. Gruppenzugehörigkeit beeinflusst Normen, Identität und Kooperationsbereitschaft. Ein Subjekt kann mehreren Gruppen angehören (nested groups).
+
+\textbf{BCM-Relevanz:}
+Fundament des KNU-Moduls (Kollektiver Nutzen). Gruppen definieren, wer ``wir'' ist. Der $\lambda$-Parameter regelt, wie stark Gruppeninteressen vs. Eigeninteressen gewichtet werden. In-group/Out-group-Differenzierung ist zentral.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX identifiziert Gruppenzugehörigkeiten aus Persona-Beschreibungen:
+\begin{itemize}
+    \item Primärgruppen (Familie, enge Freunde)
+    \item Sekundärgruppen (Arbeitgeber, Vereine)
+    \item Kategoriale Gruppen (Nation, Geschlecht)
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Atomistisches Menschenbild. Soziale Präferenzen, Kooperation und Normenkonformität wären nicht modellierbar. Das BCM würde auf homo oeconomicus reduziert.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-01
+
+\textbf{Literatur:} Tajfel \& Turner (1979); Brewer (1991)
+
+%==============================================================================
+% MA-ONT-11: Existenz von Normen
+%==============================================================================
+
+\subsubsection*{MA-ONT-11: Existenz von Normen}
+
+\textbf{Statement:} Gruppen haben soziale Normen $N$.
+
+\textbf{Formel:}
+\begin{equation}
+N: G \times \mathcal{V} \rightarrow [0, 1]
+\end{equation}
+
+\textbf{Beschreibung:}
+Normen sind informelle Regeln: ``Was tut man in dieser Gruppe?'' Sie können deskriptiv (was andere tun) oder injunktiv (was andere erwarten) sein. Normen werden durch Sozialisation gelernt und durch Sanktionen (Lob, Tadel) durchgesetzt.
+
+\textbf{BCM-Relevanz:}
+Normen sind der Hauptmechanismus für KNU-Effekte. Die SOCIAL-Intervention (MA-GOV-07) wirkt durch Normenaktivierung. Conditional Cooperators orientieren sich an wahrgenommenen Normen. $\lambda$ steigt, wenn Kooperationsnormen salient sind.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Normensalienz und -stärke:
+\begin{itemize}
+    \item Welche Normen gelten in den Gruppen der Persona?
+    \item Wie norm-konform ist die Persona typischerweise?
+    \item Welche Sanktionen drohen bei Normverletzung?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur individuelle Präferenzen, keine sozialen. Konformität wäre unerklärlich. SOCIAL-Interventionen hätten keine theoretische Basis.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-10
+
+\textbf{Literatur:} Cialdini et al. (1990); Bicchieri (2006)
+
+%==============================================================================
+% MA-ONT-12: Existenz von Komplementarität
+%==============================================================================
+
+\subsubsection*{MA-ONT-12: Existenz von Komplementarität}
+
+\textbf{Statement:} Gegensätze bedingen sich gegenseitig ($\kappa$).
+
+\textbf{Formel:}
+\begin{equation}
+\kappa: (A, B) \rightarrow \mathbb{R}, \quad \kappa(A, B) = \kappa(B, A)
+\end{equation}
+
+\textbf{Beschreibung:}
+Individuum und Kollektiv sind keine Gegensätze, sondern komplementär. Eigennutz kann Kollektivnutzen fördern (unsichtbare Hand), Kooperation kann Eigennutz steigern (Reziprozität). Der $\kappa$-Operator misst diese Synergie.
+
+\textbf{BCM-Relevanz:}
+Überwindet falsche Dichotomien. Das BCM modelliert nicht ``Egoismus vs. Altruismus'', sondern Synergien. Der $\lambda$-Parameter regelt nicht ``gut vs. böse'', sondern den optimalen Mix für die jeweilige Situation.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX erkennt Win-Win-Situationen:
+\begin{itemize}
+    \item Wann fördert Kooperation auch den Eigennutz?
+    \item Wann ist Defektieren selbstschädigend (Tragedy of Commons)?
+    \item Synergien werden positiv, Trade-offs negativ bewertet.
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Zero-Sum-Denken. Jeder Gewinn des Kollektivs wäre ein Verlust für das Individuum. Kooperation wäre nur durch Altruismus erklärbar. Win-Win-Interventionen wären nicht identifizierbar.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-07
+
+\textbf{Literatur:} Smith (1776); Ostrom (1990); Nowak (2006)
+
+%==============================================================================
+% MA-ONT-13: Kohärenz-Operator Ψ
+%==============================================================================
+
+\subsubsection*{MA-ONT-13: Kohärenz-Operator $\Psi$}
+
+\textbf{Statement:} Die Kombination von Nutzen ist nicht-additiv.
+
+\textbf{Formel:}
+\begin{equation}
+\Psi(U) \neq \sum_i U_i \quad \text{(im Allgemeinen)}
+\end{equation}
+
+\textbf{Beschreibung:}
+INU, KNU und IDN werden nicht einfach addiert. Der $\Psi$-Operator modelliert Interaktionen: Ein Verhalten kann hohen INU haben, aber bei negativem IDN-Alignment trotzdem vermieden werden. Es gibt Schwelleneffekte und Vetos.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht die Modellierung von:
+\begin{itemize}
+    \item Identitätsvetos: Trotz hohem INU wird nicht gehandelt
+    \item Kooperationsbonus: KNU potenziert INU bei Reziprozität
+    \item Kohärenzdruck: Inkonsistenz zwischen Komponenten erzeugt Unbehagen
+\end{itemize}
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verwendet nicht-lineare Kombinationsformeln. Das LLM wird instruiert, auch ``unerwartete'' Entscheidungen zu generieren, wenn Komponentenkonflikte vorliegen.
+
+\textbf{Konsequenz bei Fehlen:}
+Einfache Addition würde systematisch falsche Vorhersagen generieren. Identitätsbasiertes Verhalten (gegen Eigeninteresse) wäre nicht modellierbar.
+
+\textbf{Validiert:} META, WAX
+
+\textbf{Abhängigkeiten:} MA-ONT-07
+
+\textbf{Literatur:} Arrow (1951); Sen (1977)
+
+%==============================================================================
+% MA-ONT-14: Kooperations-Regulator λ
+%==============================================================================
+
+\subsubsection*{MA-ONT-14: Kooperations-Regulator $\lambda$}
+
+\textbf{Statement:} $\lambda$ reguliert die lokale vs. globale Orientierung.
+
+\textbf{Formel:}
+\begin{equation}
+U_{\text{eff}} = (1-\lambda) \cdot U_{\text{lok}} + \lambda \cdot \kappa(U_{\text{lok}}, U_{\text{komp}})
+\end{equation}
+
+\textbf{Beschreibung:}
+$\lambda$ ist der zentrale Parameter für soziale Präferenzen:
+\begin{itemize}
+    \item $\lambda = 0$: Pure Eigennutz-Maximierung
+    \item $\lambda = 0.5$: Balancierte Berücksichtigung
+    \item $\lambda = 1$: Reine Kollektivorientierung
+\end{itemize}
+$\lambda$ ist nicht fix, sondern kontextabhängig (MA-ONT-15).
+
+\textbf{BCM-Relevanz:}
+$\lambda$ ist DER Parameter für individuelle Unterschiede in Kooperationsbereitschaft. Er klassifiziert Verhaltenstypen: Self-Interested ($\lambda < 0.3$), Conditional Cooperators ($\lambda \approx 0.5$), Altruisten ($\lambda > 0.7$).
+
+\textbf{BEATRIX-Relevanz:}
+$\lambda$-Schätzung ist eine Kernaufgabe. Das LLM analysiert:
+\begin{itemize}
+    \item Hinweise auf Kooperationsbereitschaft in Persona
+    \item Gruppenbezug und Kollektividentität
+    \item Historisches Kooperationsverhalten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Differenzierung von Kooperationstypen. Alle Menschen würden gleich modelliert. Die empirisch robuste Heterogenität (CC vs. SI vs. ALT) wäre nicht abbildbar.
+
+\textbf{Validiert:} WAX
+
+\textbf{Abhängigkeiten:} MA-ONT-12, MA-ONT-13
+
+\textbf{Literatur:} Fehr \& Schmidt (1999); Fischbacher et al. (2001)
+
+%==============================================================================
+% MA-ONT-15: Hybrid-Kontinuum
+%==============================================================================
+
+\subsubsection*{MA-ONT-15: Hybrid-Kontinuum}
+
+\textbf{Statement:} $\lambda \in [0, 1]$ und ist kontextabhängig.
+
+\textbf{Formel:}
+\begin{equation}
+\lambda = f(\rho, \sigma, \tau)
+\end{equation}
+
+\textbf{Beschreibung:}
+$\lambda$ ist keine Persönlichkeitskonstante. Dieselbe Person kann in verschiedenen Situationen unterschiedliche $\lambda$-Werte zeigen:
+\begin{itemize}
+    \item Anonymität senkt $\lambda$
+    \item Beobachtung erhöht $\lambda$
+    \item In-Group-Kontext erhöht $\lambda$
+    \item Stress kann $\lambda$ senken oder erhöhen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Überwindet die Trait-vs-State-Debatte. $\lambda$ hat eine Trait-Komponente (Basis-Kooperativität) und eine State-Komponente (situative Modulation). Das LAMBDA-Modul modelliert diese Interaktion.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt kontextspezifisches $\lambda$:
+\begin{itemize}
+    \item Basis-$\lambda$ aus Persona-Traits
+    \item Kontext-Adjustment aus Situationsbeschreibung
+    \item Finales $\lambda = \lambda_{\text{basis}} + \Delta\lambda(\rho)$
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Fixes $\lambda$ würde situative Variabilität ignorieren. Kontextinterventionen (Beobachtung, Feedback) hätten keine Wirkung.
+
+\textbf{Validiert:} WAX
+
+\textbf{Abhängigkeiten:} MA-ONT-14
+
+\textbf{Literatur:} Haley \& Fessler (2005); List (2006)
+
+%==============================================================================
+% MA-ONT-16: Gewichtungsfunktion ω
+%==============================================================================
+
+\subsubsection*{MA-ONT-16: Gewichtungsfunktion $\omega$}
+
+\textbf{Statement:} FEPSDE-Dimensionen haben Gewichte.
+
+\textbf{Formel:}
+\begin{equation}
+\omega: D \rightarrow [0, 1], \quad \sum_d \omega_d = 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht alle Nutzendimensionen sind gleich wichtig. Für manche dominiert Financial (Unternehmer), für andere Emotional (Künstler) oder Ecological (Aktivist). Die Gewichte sind personenspezifisch und können sich über Zeit ändern.
+
+\textbf{BCM-Relevanz:}
+Personalisierung des INU-Moduls. Zwei Personen können bei gleichem Verhalten verschiedene Nutzen empfinden, weil sie die Dimensionen unterschiedlich gewichten.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt den $\omega$-Vektor als 6 Werte, die sich zu 1 summieren. Das LLM analysiert Wertvorstellungen, Lebensstil und explizite Prioritäten in der Persona.
+
+\textbf{Konsequenz bei Fehlen:}
+Gleiche Gewichtung für alle würde individuelle Unterschiede ignorieren. Interventionen könnten nicht personalisiert werden.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-ONT-08
+
+\textbf{Literatur:} Schwartz (1992); Inglehart (1997)
+
+%==============================================================================
+% MA-ONT-17: Identitäts-Aktivierung π
+%==============================================================================
+
+\subsubsection*{MA-ONT-17: Identitäts-Aktivierung $\pi$}
+
+\textbf{Statement:} Identitäten haben kontextabhängige Aktivierungswahrscheinlichkeiten.
+
+\textbf{Formel:}
+\begin{equation}
+\pi: I \times \rho \rightarrow [0, 1], \quad \sum_j \pi_j = 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht alle Identitäten sind gleichzeitig aktiv. Der Kontext bestimmt, welche Identität salient ist: Im Büro ``Manager'', zu Hause ``Vater'', im Verein ``Trainer''. Die aktivierte Identität bestimmt relevante Normen und Präskriptionen.
+
+\textbf{BCM-Relevanz:}
+Erklärt situative Verhaltensvariation ohne Persönlichkeitsänderung. Die Person bleibt gleich, aber verschiedene Identitäten mit verschiedenen Normen werden aktiviert.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berechnet $\pi_j$ für jede Identität gegeben den Kontext:
+\begin{itemize}
+    \item Welche Identitäts-Cues enthält die Situation?
+    \item Welche Identität ist chronisch salient?
+    \item Priming-Effekte durch vorherige Interaktionen?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Identitäten immer gleich aktiv -- unrealistisch. Identitätsbasierte Interventionen (Priming) wären nicht modellierbar.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-09
+
+\textbf{Literatur:} Stryker \& Burke (2000); Oyserman (2009)
+
+%==============================================================================
+% MA-ONT-18: Alignment-Funktion A
+%==============================================================================
+
+\subsubsection*{MA-ONT-18: Alignment-Funktion $A$}
+
+\textbf{Statement:} Verhalten hat Alignment mit Identität.
+
+\textbf{Formel:}
+\begin{equation}
+A: \mathcal{V} \times I \rightarrow [-1, 1]
+\end{equation}
+
+\textbf{Beschreibung:}
+Jedes Verhalten passt mehr oder weniger zur aktivierten Identität:
+\begin{itemize}
+    \item $A = +1$: Perfekt kongruent (``Das bin ich!'')
+    \item $A = 0$: Neutral (identitätsirrelevant)
+    \item $A = -1$: Diametral entgegengesetzt (Identitätsverletzung)
+\end{itemize}
+$U_{\text{IDN}}$ ist proportional zu $A$.
+
+\textbf{BCM-Relevanz:}
+Operationalisiert Identitätsnutzen. Identitätskongruentes Verhalten gibt positiven Nutzen, inkongruentes negativen. Dies kann INU-Nutzen übertrumpfen (Identitätsveto).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berechnet $A(V, I_j)$ für jede Verhaltensalternative und aktivierte Identität. Das LLM fragt: ``Wie würde ein typischer [Identität] handeln?''
+
+\textbf{Konsequenz bei Fehlen:}
+Identität wäre nur Label ohne Verhaltenskonsequenz. Identitätsbasierte Motivation (``Ich tue das, weil ich Umweltschützer bin'') wäre nicht modellierbar.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-09, MA-ONT-02
+
+\textbf{Literatur:} Akerlof \& Kranton (2000); Oyserman (2015)
+
+%==============================================================================
+% MA-ONT-19: Zeitabhängigkeit des Nutzens
+%==============================================================================
+
+\subsubsection*{MA-ONT-19: Zeitabhängigkeit des Nutzens}
+
+\textbf{Statement:} Nutzen verändert sich über Zeit.
+
+\textbf{Formel:}
+\begin{equation}
+U(\tau + \Delta\tau) = U(\tau) + \frac{\partial U}{\partial \tau} \cdot \Delta\tau + \varepsilon
+\end{equation}
+
+\textbf{Beschreibung:}
+Präferenzen sind nicht statisch. Was heute wichtig ist, kann morgen irrelevant sein. Verändernde Faktoren: Alter, Lebensereignisse, gesellschaftlicher Wandel, Erfahrungen. Die Veränderung hat systematische und stochastische Komponenten.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht dynamische Modellierung. Erklärt Präferenzwandel, Werteverschiebung und life-stage Effekte. Ohne dies wäre das BCM ein statisches Snapshot-Modell.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt zeitliche Entwicklung:
+\begin{itemize}
+    \item Lebensphase der Persona
+    \item Präferenzstabilität vs. -wandel
+    \item Erwartete zukünftige Verschiebungen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Modellierung von Präferenzwandel. Langfristige Vorhersagen wären statisch extrapoliert. Life-Cycle-Effekte ignoriert.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-03, MA-ONT-05
+
+\textbf{Literatur:} Becker \& Murphy (1988); Loewenstein et al. (2003)
+
+%==============================================================================
+% MA-ONT-20: Habituation
+%==============================================================================
+
+\subsubsection*{MA-ONT-20: Habituation}
+
+\textbf{Statement:} Wiederholung reduziert Nutzen.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial U}{\partial n} < 0 \quad \text{für } n \rightarrow \infty
+\end{equation}
+
+\textbf{Beschreibung:}
+Der erste Bissen schmeckt am besten. Wiederholte Exposition führt zu abnehmendem Grenznutzen. Dies gilt für Konsum, aber auch für Interventionen: Nudges verlieren Wirkung bei Wiederholung.
+
+\textbf{BCM-Relevanz:}
+Erklärt Variety Seeking und die Notwendigkeit von Interventions-Variation. Ein statischer Nudge wird habituiert und verliert Wirkung. Das DYN-Modul modelliert diese Adaptation.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Habituationseffekte:
+\begin{itemize}
+    \item Wie oft wurde das Verhalten bereits gezeigt?
+    \item Wie lange wurde die Intervention bereits eingesetzt?
+    \item Wann ist Interventions-Refresh nötig?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Überschätzung der Langzeitwirkung von Interventionen. Keine Erklärung für Novelty Seeking. Statische Nutzenmodelle würden dominieren.
+
+\textbf{Validiert:} INU, WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-19
+
+\textbf{Literatur:} McSweeney \& Swindell (1999); Frederick \& Loewenstein (1999)
+
+%==============================================================================
+% MA-ONT-21: Feedback-Schleifen
+%==============================================================================
+
+\subsubsection*{MA-ONT-21: Feedback-Schleifen}
+
+\textbf{Statement:} Verhalten beeinflusst zukünftigen Nutzen.
+
+\textbf{Formel:}
+\begin{equation}
+U(\tau + 1) = f(U(\tau), V(\tau))
+\end{equation}
+
+\textbf{Beschreibung:}
+Verhalten hat Konsequenzen, die zukünftige Präferenzen beeinflussen:
+\begin{itemize}
+    \item Positive Erfahrung → Präferenzstärkung
+    \item Negative Erfahrung → Aversion
+    \item Gewohnheitsbildung durch Wiederholung
+\end{itemize}
+Das System ist rekursiv: Entscheidungen heute beeinflussen den Entscheider von morgen.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht die Modellierung von Lerneffekten und Pfadabhängigkeiten. Interventionen können langfristige Verhaltensänderung auslösen, indem sie Feedback-Loops anstoßen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Feedback-Effekte für Interventionsplanung:
+\begin{itemize}
+    \item Welche Verstärkungseffekte sind zu erwarten?
+    \item Wie kann positives Feedback designt werden?
+    \item Wann drohen Abwärtsspiralen?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Lerneffekte modellierbar. Verhalten wäre nur vom aktuellen Zustand abhängig. Dynamische Interventionsstrategien wären nicht planbar.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-19
+
+\textbf{Literatur:} Herrnstein (1997); Staddon \& Cerutti (2003)
+
+%==============================================================================
+% MA-ONT-22: Spillover
+%==============================================================================
+
+\subsubsection*{MA-ONT-22: Spillover}
+
+\textbf{Statement:} Verhalten in einem Bereich beeinflusst andere.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial U_j}{\partial V_i} \neq 0 \quad \text{für } i \neq j
+\end{equation}
+
+\textbf{Beschreibung:}
+Verhaltensänderungen sind nicht isoliert:
+\begin{itemize}
+    \item Positiver Spillover: Recycling → andere Umweltverhaltensweisen
+    \item Negativer Spillover (Moral Licensing): ``Ich habe ja schon...''
+    \item Cross-Domain: Sport → bessere Ernährung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt systemische Effekte von Interventionen. Eine gezielte Intervention kann unbeabsichtigte (positive oder negative) Effekte in anderen Bereichen haben. Das BCM modelliert diese Interdependenzen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft auf Spillover-Potenzial:
+\begin{itemize}
+    \item Welche anderen Verhaltensweisen könnten beeinflusst werden?
+    \item Risiko von Moral Licensing?
+    \item Synergien mit anderen Interventionen?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Isolierte Betrachtung von Verhaltensweisen. Systemische Effekte und unbeabsichtigte Konsequenzen würden übersehen.
+
+\textbf{Validiert:} INU, KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-21
+
+\textbf{Literatur:} Thøgersen \& Ölander (2003); Truelove et al. (2014)
+
+%==============================================================================
+% MA-ONT-23: Identitäten evolvieren
+%==============================================================================
+
+\subsubsection*{MA-ONT-23: Identitäten evolvieren}
+
+\textbf{Statement:} Die Identitätslandschaft verändert sich über Zeit.
+
+\textbf{Formel:}
+\begin{equation}
+I(\tau + \Delta\tau) \neq I(\tau)
+\end{equation}
+
+\textbf{Beschreibung:}
+Identitäten sind nicht fix:
+\begin{itemize}
+    \item Neue Identitäten entstehen (``Ich bin jetzt Veganer'')
+    \item Alte Identitäten verblassen (``Früher war ich Raucher'')
+    \item Hierarchien verschieben sich (Karriere → Familie)
+\end{itemize}
+Lebensereignisse (Heirat, Kind, Jobwechsel) katalysieren Identitätswandel.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht die Modellierung von Identitätsinterventionen. IDENTITY-Interventionen zielen auf die Modifikation der Identitätslandschaft, nicht nur auf Aktivierung bestehender Identitäten.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX kann Identitätsentwicklung modellieren:
+\begin{itemize}
+    \item Welche Identitäten sind im Aufbau?
+    \item Welche neigen zum Verblassen?
+    \item Wie kann eine gewünschte Identität gestärkt werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statische Identität würde Lebenslauf-Veränderungen nicht abbilden. IDENTITY-Interventionen wären auf Priming beschränkt.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-09, MA-ONT-05
+
+\textbf{Literatur:} McAdams (2001); Ibarra \& Barbulescu (2010)
+
+%==============================================================================
+% MA-ONT-24: Normen evolvieren
+%==============================================================================
+
+\subsubsection*{MA-ONT-24: Normen evolvieren}
+
+\textbf{Statement:} Soziale Normen verändern sich über Zeit.
+
+\textbf{Formel:}
+\begin{equation}
+N(\tau + \Delta\tau) = N(\tau) + \mu_N \cdot \Delta N
+\end{equation}
+
+\textbf{Beschreibung:}
+Was einmal normal war, kann inakzeptabel werden (Rauchen im Büro) und umgekehrt (gleichgeschlechtliche Ehe). Normenwandel kann langsam (Generationenwechsel) oder schnell (Tipping Points) sein. Normentrepreneure treiben Wandel voran.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht die Modellierung von gesellschaftlichem Wandel. SOCIAL-Interventionen können auf Normenwandel zielen, nicht nur auf Konformität mit bestehenden Normen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Normendynamik:
+\begin{itemize}
+    \item In welche Richtung entwickeln sich relevante Normen?
+    \item Wie resilient sind aktuelle Normen?
+    \item Gibt es emergente Normen?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statische Normen würden gesellschaftlichen Wandel nicht abbilden. Langfristige Interventionsplanung wäre ahistorisch.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-11, MA-ONT-05
+
+\textbf{Literatur:} Centola et al. (2018); Bicchieri (2016)
+
+%==============================================================================
+% MA-ONT-25: Meta-Evolution
+%==============================================================================
+
+\subsubsection*{MA-ONT-25: Meta-Evolution}
+
+\textbf{Statement:} Die Regeln der Veränderung verändern sich selbst.
+
+\textbf{Formel:}
+\begin{equation}
+\mu(\tau + \Delta\tau) \neq \mu(\tau)
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht nur Parameter ändern sich, sondern auch die Änderungsraten:
+\begin{itemize}
+    \item Beschleunigter Wandel in digitalen Kontexten
+    \item Verlangsamung durch Institutionalisierung
+    \item Phasenübergänge in der Veränderungsdynamik
+\end{itemize}
+Das System lernt zu lernen (Meta-Lernen).
+
+\textbf{BCM-Relevanz:}
+Höchstes Abstraktionsniveau. Ermöglicht die Modellierung von Systemtransformationen, nicht nur Parameterveränderungen. Relevant für langfristige Prognosen und fundamentale Interventionen.
+
+\textbf{BEATRIX-Relevanz:}
+Für die meisten Anwendungen irrelevant (zu abstrakt). Relevant nur bei:
+\begin{itemize}
+    \item Sehr langfristigen Szenarien
+    \item Fundamentalen Systemtransformationen
+    \item Meta-Interventionen (``Wie ändere ich die Änderungsrate?'')
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statische Änderungsraten würden Phasenübergänge verpassen. Beschleunigungs- und Verlangsamungsmuster wären nicht modellierbar.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-19
+
+\textbf{Literatur:} Kauffman (1993); Holland (1995)
+
+%==============================================================================
+% MA-ONT-26: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\textit{Ende der ONT-Axiome. Alle 26 Ontologie-Axiome sind nun vollständig dokumentiert.}

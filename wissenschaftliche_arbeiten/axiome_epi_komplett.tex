@@ -1,0 +1,1427 @@
+% =============================================================================
+% EPI-AXIOME (EPISTEMOLOGIE) - Vollständige Ausformulierung
+% BCM 2.2 META-Modul
+% =============================================================================
+
+\section{Epistemologie-Axiome (MA-EPI)}
+
+Die EPI-Axiome definieren die Grenzen des Wissens, Biases und kognitive Prozesse.
+Sie beantworten die Frage: \textit{Was wissen wir?}
+
+%==============================================================================
+% MA-EPI-01: Unvollständiges Wissen
+%==============================================================================
+
+\subsubsection*{MA-EPI-01: Unvollständiges Wissen}
+
+\textbf{Statement:} Wissen über Nutzen ist immer unvollständig.
+
+\textbf{Formel:}
+\begin{equation}
+K(U) \subset U
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen kennen nicht alle ihre Präferenzen, nicht alle Konsequenzen ihrer Handlungen und nicht alle verfügbaren Optionen. Das subjektive Wissen $K(U)$ ist eine echte Teilmenge des objektiven Nutzens $U$. Diese Lücke ist fundamental, nicht nur praktisch.
+
+\textbf{BCM-Relevanz:}
+Epistemologisches Fundament für alle EPI-Axiome. Ohne dieses Axiom wäre vollständige Rationalität möglich. Alle kognitiven Biases sind Konsequenzen dieser fundamentalen Wissenslücke.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX arbeitet mit geschätzten, nicht wahren Parametern:
+\begin{itemize}
+    \item LLM-Schätzungen sind Approximationen
+    \item Unsicherheitsintervalle müssen kommuniziert werden
+    \item Persona-Beschreibungen sind unvollständig
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Perfektes Wissen würde perfekte Entscheidungen ermöglichen. Informationsinterventionen wären trivial. Die gesamte Verhaltensökonomie wäre irrelevant.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-ONT-03 (Nutzen existiert)
+
+\textbf{Literatur:} Knight (1921); Hayek (1945)
+
+%==============================================================================
+% MA-EPI-02: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-EPI-03: Irreduzible Unsicherheit
+%==============================================================================
+
+\subsubsection*{MA-EPI-03: Irreduzible Unsicherheit}
+
+\textbf{Statement:} Es gibt fundamentale, nicht eliminierbare Unsicherheit.
+
+\textbf{Formel:}
+\begin{equation}
+\exists \varepsilon: P(\varepsilon) > 0 \quad \forall \text{ Modelle}
+\end{equation}
+
+\textbf{Beschreibung:}
+Selbst mit unbegrenzten Ressourcen bleibt Unsicherheit:
+\begin{itemize}
+    \item Ontologische Unsicherheit: Die Zukunft ist nicht determiniert
+    \item Epistemische Unsicherheit: Grenzen der Messbarkeit
+    \item Modell-Unsicherheit: Jedes Modell ist vereinfachend
+\end{itemize}
+Diese Unsicherheit ist nicht ``noch nicht gelöst'', sondern prinzipiell irreduzibel.
+
+\textbf{BCM-Relevanz:}
+Begründet Demut gegenüber Vorhersagen. Das BCM kann Wahrscheinlichkeiten angeben, nie Gewissheit. Übermäßiges Vertrauen in Modelle wird strukturell verhindert.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX-Outputs sind probabilistisch:
+\begin{itemize}
+    \item Keine deterministischen Vorhersagen
+    \item Konfidenzintervalle immer angeben
+    \item ``Unentscheidbar'' als legitimes Ergebnis
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Hybris der Vorhersagbarkeit. Modelle würden als deterministische Wahrheiten behandelt. Risiken würden unterschätzt.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} -- (fundamentales epistemisches Axiom)
+
+\textbf{Literatur:} Knight (1921); Taleb (2007)
+
+%==============================================================================
+% MA-EPI-04: Adaptive Heuristiken
+%==============================================================================
+
+\subsubsection*{MA-EPI-04: Adaptive Heuristiken}
+
+\textbf{Statement:} Heuristiken können ökologisch rational sein.
+
+\textbf{Formel:}
+\begin{equation}
+E[U|\text{Heuristik}] \geq E[U|\text{Optimierung}] \quad \text{in } \rho
+\end{equation}
+
+\textbf{Beschreibung:}
+Heuristiken sind nicht per se Fehler. In bestimmten Umgebungen (hohe Unsicherheit, Zeitdruck) können einfache Regeln komplexe Algorithmen übertreffen. ``Fast and frugal'' Heuristiken nutzen die Struktur der Umwelt aus.
+
+\textbf{BCM-Relevanz:}
+Differenziert zwischen adaptiven und maladaptiven Abweichungen von Rationalität. Nicht jede Vereinfachung ist ein Bias. BOOST-Interventionen stärken adaptive Heuristiken.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX unterscheidet:
+\begin{itemize}
+    \item Adaptive Heuristik → Nicht korrigieren
+    \item Maladaptiver Bias → Intervention möglich
+    \item Kontextabhängigkeit beachten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Heuristiken wären Fehler. Debiasing wäre immer angezeigt. Die ökologische Intelligenz einfacher Regeln würde übersehen.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-02
+
+\textbf{Literatur:} Gigerenzer et al. (1999); Todd \& Gigerenzer (2012)
+
+%==============================================================================
+% MA-EPI-05: Zwei Systeme
+%==============================================================================
+
+\subsubsection*{MA-EPI-05: Zwei-Systeme-Kognition}
+
+\textbf{Statement:} Kognition operiert in zwei Modi: System 1 (schnell, automatisch) und System 2 (langsam, deliberativ).
+
+\textbf{Formel:}
+\begin{equation}
+K = K_{S1} \cup K_{S2}
+\end{equation}
+
+\textbf{Beschreibung:}
+System 1: Intuitiv, assoziativ, parallelverarbeitend, mühelos, emotional getrieben.
+System 2: Analytisch, regelbasiert, seriell, anstrengend, rational kontrolliert.
+Die meisten Alltagsentscheidungen sind System-1-getrieben. System 2 kann aktiviert werden, ist aber ressourcenbeschränkt.
+
+\textbf{BCM-Relevanz:}
+Fundamentale Unterscheidung für Interventionsdesign:
+\begin{itemize}
+    \item NUDGE: Wirkt auf System 1
+    \item BOOST: Stärkt System 1 oder System 2
+    \item THINK: Aktiviert System 2
+\end{itemize}
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX bewertet Entscheidungsmodus:
+\begin{itemize}
+    \item Welches System dominiert bei dieser Persona/Situation?
+    \item Interventionen auf richtigen Modus abstimmen
+    \item Cognitive Load beachten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Einheitliches Kognitionsmodell. Unterschied zwischen automatischen und deliberativen Entscheidungen nicht modellierbar. Interventionstypen nicht differenzierbar.
+
+\textbf{Validiert:} AWX, WAX
+
+\textbf{Abhängigkeiten:} MA-EPI-02
+
+\textbf{Literatur:} Kahneman (2011); Stanovich \& West (2000)
+
+%==============================================================================
+% MA-EPI-06: Systematische Biases
+%==============================================================================
+
+\subsubsection*{MA-EPI-06: Systematische Biases}
+
+\textbf{Statement:} Kognitive Verzerrungen sind systematisch und vorhersagbar.
+
+\textbf{Formel:}
+\begin{equation}
+E[\text{Bias}] \neq 0
+\end{equation}
+
+\textbf{Beschreibung:}
+Biases sind nicht zufällige Fehler, sondern haben Richtung:
+\begin{itemize}
+    \item Überschätzung (Overconfidence)
+    \item Unterschätzung (Neglect)
+    \item Systematische Verzerrung (Framing)
+\end{itemize}
+Weil sie systematisch sind, sind sie vorhersagbar und potenziell korrigierbar.
+
+\textbf{BCM-Relevanz:}
+Fundament für alle spezifischen Bias-Axiome (EPI-12 bis EPI-37). Biases sind keine ``Fehler'', sondern Eigenschaften des kognitiven Systems. Das BCM integriert sie als Parameter, nicht als Störterme.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Biases explizit:
+\begin{itemize}
+    \item Bias-Anfälligkeit als Persona-Parameter
+    \item Kontextuelle Bias-Aktivierung
+    \item Debiasing-Potenzial bewerten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Biases wären zufällig und nicht modellierbar. Nudges und Debiasing-Strategien hätten keine theoretische Grundlage.
+
+\textbf{Validiert:} INU, AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-05
+
+\textbf{Literatur:} Kahneman \& Tversky (1974); Ariely (2008)
+
+%==============================================================================
+% MA-EPI-07: AWX (Awareness)
+%==============================================================================
+
+\subsubsection*{MA-EPI-07: AWX (Awareness)}
+
+\textbf{Statement:} Bewusstsein über Optionen und Konsequenzen variiert.
+
+\textbf{Formel:}
+\begin{equation}
+AWX = f(K_V, K_C)
+\end{equation}
+
+\textbf{Beschreibung:}
+AWX (Awareness) ist die erste Stufe im Verhaltenstrichter:
+\begin{itemize}
+    \item $K_V$: Wissen über Verhaltensoptionen (Was kann ich tun?)
+    \item $K_C$: Wissen über Konsequenzen (Was passiert dann?)
+\end{itemize}
+Ohne Awareness keine Entscheidung. Viele Verhaltensdefizite sind Awareness-Defizite.
+
+\textbf{BCM-Relevanz:}
+Erste Variable im AWX → WAX → WTX → V Trichter. Interventionen können auf jeder Stufe ansetzen. Information und Bildung erhöhen AWX.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt AWX-Level:
+\begin{itemize}
+    \item Wie informiert ist die Persona?
+    \item Welche Optionen sind ihr bekannt?
+    \item Werden Konsequenzen korrekt antizipiert?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kein Unterschied zwischen ``nicht wissen'' und ``nicht wollen''. Informationsinterventionen wären nicht gezielt einsetzbar.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-01
+
+\textbf{Literatur:} Prochaska \& DiClemente (1983)
+
+%==============================================================================
+% MA-EPI-08: WAX (Willingness)
+%==============================================================================
+
+\subsubsection*{MA-EPI-08: WAX (Willingness)}
+
+\textbf{Statement:} Bereitschaft zu handeln ist eine eigenständige Variable.
+
+\textbf{Formel:}
+\begin{equation}
+WAX = f(AWX, U, \Gamma)
+\end{equation}
+
+\textbf{Beschreibung:}
+WAX (Willingness to Act) hängt ab von:
+\begin{itemize}
+    \item AWX: Muss wissen, dass Option existiert
+    \item U: Muss Nutzen sehen
+    \item $\Gamma$: Constraints müssen erfüllt sein
+\end{itemize}
+WAX ist Verhaltensintention, noch nicht Verhalten selbst.
+
+\textbf{BCM-Relevanz:}
+Zweite Stufe im Trichter. WAX kann hoch sein ohne Verhalten (Intention-Action Gap). Motivationsinterventionen erhöhen WAX.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX bewertet WAX:
+\begin{itemize}
+    \item Ist die Person motiviert?
+    \item Welche Barrieren senken WAX?
+    \item Interventionen zur WAX-Steigerung identifizieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Motivation und Verhalten würden nicht unterschieden. Die wichtige Lücke zwischen ``wollen'' und ``tun'' wäre unsichtbar.
+
+\textbf{Validiert:} WAX
+
+\textbf{Abhängigkeiten:} MA-EPI-07, MA-ONT-03
+
+\textbf{Literatur:} Ajzen (1991); Schwarzer (2008)
+
+%==============================================================================
+% MA-EPI-09: WTX (Transition)
+%==============================================================================
+
+\subsubsection*{MA-EPI-09: WTX (Willingness to Transition)}
+
+\textbf{Statement:} Der Übergang von Absicht zu Verhalten ist probabilistisch.
+
+\textbf{Formel:}
+\begin{equation}
+P(V|WAX) = WTX
+\end{equation}
+
+\textbf{Beschreibung:}
+WTX modelliert die ``letzte Meile'': Von der Intention zur Handlung. Selbst bei hohem WAX kann WTX niedrig sein:
+\begin{itemize}
+    \item Prokrastination
+    \item Selbstkontrollversagen
+    \item Situative Barrieren
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Dritte Stufe im Trichter. WTX ist der kritische Übergangspunkt. Commitment Devices (MA-DYN-09) und Implementation Intentions (MA-DYN-18) erhöhen WTX.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt WTX:
+\begin{itemize}
+    \item Wie wahrscheinlich ist die Umsetzung?
+    \item Welche Transitonsbarrieren existieren?
+    \item Braucht es einen ``letzten Schubs''?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Intention würde mit Verhalten gleichgesetzt. Die Intention-Action Gap (MA-EPI-11) wäre nicht modellierbar.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-08
+
+\textbf{Literatur:} Sheeran (2002); Gollwitzer \& Sheeran (2006)
+
+%==============================================================================
+% MA-EPI-10: AWX-WAX-WTX Sequenz
+%==============================================================================
+
+\subsubsection*{MA-EPI-10: Verhaltenssequenz AWX → WAX → WTX → V}
+
+\textbf{Statement:} Verhalten folgt einer sequenziellen Kette.
+
+\textbf{Formel:}
+\begin{equation}
+V = WTX(WAX(AWX(K)))
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Kette ist kausal geordnet:
+\begin{enumerate}
+    \item Ohne AWX kein WAX (Was ich nicht kenne, kann ich nicht wollen)
+    \item Ohne WAX kein WTX (Ohne Motivation keine Handlung)
+    \item Ohne WTX kein V (Ohne Umsetzung kein Verhalten)
+\end{enumerate}
+Jede Stufe ist notwendig, keine ist hinreichend.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht Diagnose: Wo liegt das Problem? Interventionen müssen auf die richtige Stufe zielen:
+\begin{itemize}
+    \item AWX-Defizit → Information
+    \item WAX-Defizit → Motivation
+    \item WTX-Defizit → Facilitation
+\end{itemize}
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX identifiziert den Engpass:
+\begin{itemize}
+    \item Welche Stufe ist der Bottleneck?
+    \item Interventionen entsprechend priorisieren
+    \item Kaskadeneffekte modellieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Verhaltensdefizite würden gleich behandelt. Intervention ohne Diagnose.
+
+\textbf{Validiert:} AWX, WAX, WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-07, MA-EPI-08, MA-EPI-09
+
+\textbf{Literatur:} Michie et al. (2011)
+
+%==============================================================================
+% MA-EPI-11: Intention-Action Gap
+%==============================================================================
+
+\subsubsection*{MA-EPI-11: Intention-Action Gap}
+
+\textbf{Statement:} Absicht führt nicht immer zu Verhalten.
+
+\textbf{Formel:}
+\begin{equation}
+P(V|WAX=1) < 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Selbst bei maximaler Motivation wird das Verhalten nicht immer umgesetzt:
+\begin{itemize}
+    \item 47\% der Intentions werden nicht umgesetzt (Sheeran, 2002)
+    \item Gründe: Vergessen, Aufschub, situative Hindernisse
+    \item Chronische Gap bei Gesundheits- und Umweltverhalten
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Zentral für WTX-Forschung. Die Gap ist nicht Motivationsdefizit, sondern Ausführungsdefizit. Andere Interventionen nötig: Commitment, Defaults, Erinnerungen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX quantifiziert die Gap:
+\begin{itemize}
+    \item Wie groß ist die typische Gap bei dieser Persona/Verhalten?
+    \item Welche Interventionen schließen die Gap?
+    \item Modelliert als $P(V|WAX)$
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+$WAX = 1$ würde $V = 1$ implizieren. Umsetzungsprobleme wären unsichtbar.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-09
+
+\textbf{Literatur:} Sheeran (2002); Webb \& Sheeran (2006)
+
+%==============================================================================
+% MA-EPI-12: Verfügbarkeitsheuristik
+%==============================================================================
+
+\subsubsection*{MA-EPI-12: Verfügbarkeitsheuristik}
+
+\textbf{Statement:} Leicht Abrufbares wird als wahrscheinlicher eingeschätzt.
+
+\textbf{Formel:}
+\begin{equation}
+P_{\text{subj}}(E) = f(\text{Accessibility}(E))
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Verfügbarkeitsheuristik ersetzt ``Wie wahrscheinlich?'' durch ``Wie leicht fällt mir ein Beispiel ein?'':
+\begin{itemize}
+    \item Medial präsente Risiken (Terror) überschätzt
+    \item Alltägliche Risiken (Autounfall) unterschätzt
+    \item Persönliche Erfahrungen übergewichtet
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt systematische Risikofehleinschätzungen. Kann für Interventionen genutzt werden: Saliente Beispiele erhöhen wahrgenommene Wahrscheinlichkeit.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Verfügbarkeit:
+\begin{itemize}
+    \item Welche Beispiele sind für die Persona salient?
+    \item Welche Medienexposition?
+    \item Können saliente Counter-Examples präsentiert werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Wahrscheinlichkeitsurteile wären Bayes-rational. Media-Effekte auf Risikowahrnehmung unerklärlich.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-05
+
+\textbf{Literatur:} Tversky \& Kahneman (1973)
+
+%==============================================================================
+% MA-EPI-13: Framing-Effekte
+%==============================================================================
+
+\subsubsection*{MA-EPI-13: Framing-Effekte}
+
+\textbf{Statement:} Die Darstellung beeinflusst die Entscheidung.
+
+\textbf{Formel:}
+\begin{equation}
+U(V|\text{Frame}_A) \neq U(V|\text{Frame}_B)
+\end{equation}
+
+\textbf{Beschreibung:}
+Dieselbe Information, unterschiedlich präsentiert, führt zu unterschiedlichen Entscheidungen:
+\begin{itemize}
+    \item ``90\% Überlebensrate'' vs. ``10\% Sterberate''
+    \item ``500€ Rabatt'' vs. ``500€ weniger zahlen''
+    \item Gewinn-Frame vs. Verlust-Frame
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Mächtiges Interventionsinstrument. NUDGE-Interventionen nutzen häufig Framing. Ethisch: Transparenz über Frame-Wahl nötig.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX analysiert Frame-Sensitivität:
+\begin{itemize}
+    \item Wie Frame-sensitiv ist die Persona?
+    \item Welcher Frame ist für das Zielverhalten optimal?
+    \item Ethische Bewertung des Framings
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Präsentation wäre irrelevant. Nur Inhalt zählt (homo oeconomicus). Kommunikationsdesign hätte keinen Wert.
+
+\textbf{Validiert:} INU, AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Tversky \& Kahneman (1981)
+
+%==============================================================================
+% MA-EPI-14: Anchoring
+%==============================================================================
+
+\subsubsection*{MA-EPI-14: Anchoring}
+
+\textbf{Statement:} Anker beeinflussen numerische Schätzungen.
+
+\textbf{Formel:}
+\begin{equation}
+E[X|\text{Anchor}] = f(\text{Anchor})
+\end{equation}
+
+\textbf{Beschreibung:}
+Beliebige Zahlen (auch irrelevante) ziehen Schätzungen in ihre Richtung:
+\begin{itemize}
+    \item Preisverhandlungen: Erstes Angebot dominiert
+    \item Spendenaufrufe: Vorgeschlagene Beträge wirken als Anker
+    \item Selbst offensichtlich irrelevante Zahlen haben Wirkung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Wird in NUDGE-Interventionen genutzt. Default-Werte sind Anker. Ethik: Anker sollten nicht manipulativ sein.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Ankereffekte:
+\begin{itemize}
+    \item Welche Anker sind in der Situation präsent?
+    \item Wie kann Anchoring für positive Verhaltensänderung genutzt werden?
+    \item Debiasing durch multiple Anker
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Schätzungen wären unbeeinflussbar durch Kontext. Defaults und Vorschläge hätten keine Wirkung.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Tversky \& Kahneman (1974); Ariely et al. (2003)
+
+%==============================================================================
+% MA-EPI-15: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-EPI-16: Present Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-16: Present Bias}
+
+\textbf{Statement:} Die Gegenwart wird übergewichtet.
+
+\textbf{Formel:}
+\begin{equation}
+\delta_{\text{now}} > \delta_{\text{future}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Unmittelbare Belohnungen werden unverhältnismäßig stark gewichtet:
+\begin{itemize}
+    \item ``Jetzt 50€'' wird ``in einer Woche 55€'' vorgezogen
+    \item Aber: ``In einem Jahr 50€'' vs. ``in einem Jahr + einer Woche 55€'' -- hier wird gewartet
+    \item Dies ist zeitinkonsistent (dynamische Inkonsistenz)
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Prokrastination, Suchtverhalten und Spar-Defizite. Present Bias ist der Kern von MA-DYN-14 (hyperbolisches Discounting).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Present-Bias-Stärke:
+\begin{itemize}
+    \item Hinweise auf Impulsivität in Persona
+    \item Interventionen mit sofortiger vs. verzögerter Belohnung
+    \item Commitment Devices für Hochimpulsive
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Exponentielles Discounting (zeitkonsistent). Prokrastination wäre unerklärlich. Commitment Devices nutzlos.
+
+\textbf{Validiert:} INU, WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-05
+
+\textbf{Literatur:} Laibson (1997); O'Donoghue \& Rabin (1999)
+
+%==============================================================================
+% MA-EPI-17: Status Quo Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-17: Status Quo Bias}
+
+\textbf{Statement:} Der aktuelle Zustand wird bevorzugt.
+
+\textbf{Formel:}
+\begin{equation}
+U(\text{Status Quo}) + \text{Bias} > U(\text{Alternative})
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen bleiben bei dem, was sie haben, selbst wenn Alternativen objektiv besser sind:
+\begin{itemize}
+    \item Nichtwechseln von Stromanbietern
+    \item Beibehalten suboptimaler Voreinstellungen
+    \item Festhalten an Investitionsentscheidungen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt die Macht von Defaults. Wenn der Default ``Organspende'' ist, spenden mehr. Status Quo Bias + Loss Aversion verstärken sich.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX nutzt Status Quo Bias:
+\begin{itemize}
+    \item Was ist der aktuelle Default?
+    \item Kann der Default geändert werden?
+    \item Bei SQ-Bias-anfälliger Persona: Opt-Out statt Opt-In
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Defaults wären irrelevant. Alle Optionen würden neutral bewertet.
+
+\textbf{Validiert:} INU, WAX
+
+\textbf{Abhängigkeiten:} MA-EPI-15
+
+\textbf{Literatur:} Samuelson \& Zeckhauser (1988); Kahneman et al. (1991)
+
+%==============================================================================
+% MA-EPI-18: Overconfidence
+%==============================================================================
+
+\subsubsection*{MA-EPI-18: Overconfidence}
+
+\textbf{Statement:} Eigene Fähigkeiten werden überschätzt.
+
+\textbf{Formel:}
+\begin{equation}
+P_{\text{subj}}(\text{Success}) > P_{\text{obj}}(\text{Success})
+\end{equation}
+
+\textbf{Beschreibung:}
+Die meisten Menschen glauben, überdurchschnittlich zu sein:
+\begin{itemize}
+    \item 93\% der US-Fahrer halten sich für ``überdurchschnittlich''
+    \item Überschätzung eigener Prognosegenauigkeit
+    \item ``Planning Fallacy'': Projekte dauern länger als geplant
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Overconfidence beeinflusst Risikobereitschaft und Planungsverhalten. Kann zu suboptimalen Entscheidungen führen (Unternehmensgründungen, Investitionen).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Overconfidence:
+\begin{itemize}
+    \item Persona mit hohem Overconfidence → Risikowarnung
+    \item Zeitschätzungen nach oben korrigieren
+    \item Objektive Benchmarks präsentieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Selbsteinschätzungen würden als akkurat behandelt. Unrealistische Pläne blieben unkorrigiert.
+
+\textbf{Validiert:} INU, AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Moore \& Healy (2008); Buehler et al. (1994)
+
+%==============================================================================
+% MA-EPI-19: Lernen ist möglich
+%==============================================================================
+
+\subsubsection*{MA-EPI-19: Lernen ist möglich}
+
+\textbf{Statement:} Wissen kann akkumuliert werden.
+
+\textbf{Formel:}
+\begin{equation}
+K(\tau + \Delta\tau) \supseteq K(\tau)
+\end{equation}
+
+\textbf{Beschreibung:}
+Trotz fundamentaler Wissensgrenzen (MA-EPI-01) kann Wissen erweitert werden:
+\begin{itemize}
+    \item Erfahrungslernen
+    \item Instruktion und Bildung
+    \item Feedback-basiertes Lernen
+\end{itemize}
+Die Wissensmenge ist monoton nicht-abnehmend (Vergessen ignoriert).
+
+\textbf{BCM-Relevanz:}
+Begründet BOOST- und THINK-Interventionen. Wenn Lernen unmöglich wäre, könnten nur Constraints und Nudges wirken.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Lernpotenzial:
+\begin{itemize}
+    \item Wie lernfähig ist die Persona?
+    \item Welche Lerninterventionen sind effektiv?
+    \item Erwartete Wissensakkumulation über Zeit
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statisches Wissen. Bildungsinterventionen wären wirkungslos. Keine Kompetenzentwicklung modellierbar.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-01, MA-ONT-05
+
+\textbf{Literatur:} Anderson (1982); Ericsson \& Charness (1994)
+
+%==============================================================================
+% MA-EPI-20: Feedback verbessert Schätzungen
+%==============================================================================
+
+\subsubsection*{MA-EPI-20: Feedback verbessert Schätzungen}
+
+\textbf{Statement:} Mit Feedback werden Prognosen akkurater.
+
+\textbf{Formel:}
+\begin{equation}
+|K(\tau+1) - U| < |K(\tau) - U| \quad \text{mit Feedback}
+\end{equation}
+
+\textbf{Beschreibung:}
+Feedback ermöglicht Kalibrierung:
+\begin{itemize}
+    \item Überprüfung von Vorhersagen an der Realität
+    \item Korrektur systematischer Biases
+    \item Verbesserung der Metakognition
+\end{itemize}
+Voraussetzung: Feedback muss zeitnah, spezifisch und glaubwürdig sein.
+
+\textbf{BCM-Relevanz:}
+Begründet Feedback-Interventionen. Real-time Feedback (Stromverbrauch, Fitness) kann Verhalten ändern.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt Feedback-Mechanismen:
+\begin{itemize}
+    \item Welches Feedback wäre hilfreich?
+    \item Wie schnell und spezifisch sollte es sein?
+    \item Feedback-Loop in Interventionsdesign integrieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Feedback wäre wirkungslos. Keine Lernkurven. Statische Biases.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-19
+
+\textbf{Literatur:} Kluger \& DeNisi (1996); Hattie \& Timperley (2007)
+
+%==============================================================================
+% MA-EPI-21: Gewohnheiten reduzieren Kognition
+%==============================================================================
+
+\subsubsection*{MA-EPI-21: Gewohnheiten reduzieren kognitive Last}
+
+\textbf{Statement:} Automatisierung spart kognitive Ressourcen.
+
+\textbf{Formel:}
+\begin{equation}
+K_{\text{needed}}(V_{\text{habit}}) < K_{\text{needed}}(V_{\text{new}})
+\end{equation}
+
+\textbf{Beschreibung:}
+Gewohnheiten sind kognitiv effizient:
+\begin{itemize}
+    \item Automatische Ausführung ohne bewusste Entscheidung
+    \item Freisetzung kognitiver Ressourcen für andere Aufgaben
+    \item Stabilität auch unter Stress
+\end{itemize}
+Nachteile: Schwer zu ändern, können maladaptiv sein.
+
+\textbf{BCM-Relevanz:}
+Erklärt Persistenz von Verhalten. Gewohnheitsänderung erfordert temporär erhöhte kognitive Ressourcen. DESIGN-Interventionen können Habit-Cues unterbrechen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX analysiert Gewohnheitsgrad:
+\begin{itemize}
+    \item Ist das Verhalten habituiert?
+    \item Welche Cues triggern die Gewohnheit?
+    \item Interventionsstrategie: Habit Disruption oder Habit Formation
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Entscheidungen würden deliberativ behandelt. Automatisches Verhalten nicht modellierbar.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-05
+
+\textbf{Literatur:} Wood \& Neal (2007); Verplanken \& Wood (2006)
+
+%==============================================================================
+% MA-EPI-22: Debiasing ist schwierig
+%==============================================================================
+
+\subsubsection*{MA-EPI-22: Debiasing ist schwierig}
+
+\textbf{Statement:} Kognitive Biases sind persistent.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial \text{Bias}}{\partial \text{Intervention}} < \text{expected}
+\end{equation}
+
+\textbf{Beschreibung:}
+Biases lassen sich nicht einfach ``wegtrainieren'':
+\begin{itemize}
+    \item Wissen über einen Bias schützt nicht davor
+    \item Effekte von Debiasing-Training sind kurzlebig
+    \item Biases kehren unter Stress zurück
+\end{itemize}
+Besser: Umgebungen designen, die Biases irrelevant machen.
+
+\textbf{BCM-Relevanz:}
+Erklärt Grenzen von THINK-Interventionen. Reine Aufklärung reicht nicht. DESIGN-Interventionen, die Bias-Effekte neutralisieren, sind oft wirksamer.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX warnt vor Überoptimismus bezüglich Debiasing:
+\begin{itemize}
+    \item Debiasing-Interventionen mit Vorsicht empfehlen
+    \item Alternative: Choice Architecture
+    \item Langfristige Wirkung skeptisch bewerten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Biases würden als leicht korrigierbar angenommen. Überinvestition in Aufklärung statt Umgebungsdesign.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Fischhoff (1982); Lilienfeld et al. (2009)
+
+%==============================================================================
+% MA-EPI-23: Exponentielle Sättigung
+%==============================================================================
+
+\subsubsection*{MA-EPI-23: Exponentielle Sättigung (MA\_0.ES)}
+
+\textbf{Statement:} Systeme mit proportionaler Unsicherheitsreduktion konvergieren exponentiell.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{dU}{dt} = -k \cdot U \quad \Rightarrow \quad U(t) = U_0 \cdot e^{-kt}
+\end{equation}
+
+\textbf{Beschreibung:}
+Wenn Unsicherheit proportional zu sich selbst reduziert wird:
+\begin{itemize}
+    \item Schneller Anfangsprogress
+    \item Asymptotische Annäherung an Null
+    \item Übergangspunkt bei ~63\% Abbau (Rest $\approx 1/e$)
+\end{itemize}
+Anwendung: Lernkurven, Informationsakkumulation, Habituation.
+
+\textbf{BCM-Relevanz:}
+Mathematische Grundlage für viele dynamische Prozesse im BCM. Erklärt, warum initiale Interventionseffekte groß sind, dann abnehmen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Sättigungseffekte:
+\begin{itemize}
+    \item Wann ist der Übergangspunkt erreicht?
+    \item Ab wann lohnen weitere Interventionen nicht mehr?
+    \item Optimaler Interventionszeitpunkt
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Lineare Extrapolation statt Sättigung. Langfristprognosen wären falsch.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-EPI-19
+
+\textbf{Literatur:} Eigenes Konstrukt; vgl. Newell \& Rosenbloom (1981)
+
+%==============================================================================
+% MA-EPI-24: Bayes'sches Updating
+%==============================================================================
+
+\subsubsection*{MA-EPI-24: Bayes'sches Updating}
+
+\textbf{Statement:} Rationale Belief-Updates folgen dem Bayes-Theorem.
+
+\textbf{Formel:}
+\begin{equation}
+P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}
+\end{equation}
+
+\textbf{Beschreibung:}
+Bayes beschreibt, wie Überzeugungen angesichts neuer Evidenz aktualisiert werden sollten:
+\begin{itemize}
+    \item Prior $P(H)$: Vorherige Überzeugung
+    \item Likelihood $P(E|H)$: Wie wahrscheinlich ist die Evidenz unter der Hypothese?
+    \item Posterior $P(H|E)$: Aktualisierte Überzeugung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Normativer Benchmark für Lernprozesse. Abweichungen von Bayes (Base Rate Neglect, Confirmation Bias) sind als Biases modelliert.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verwendet Bayes für:
+\begin{itemize}
+    \item Eigene Inferenz über Persona-Parameter
+    \item Modellierung, wie die Persona lernt
+    \item Benchmark für Bias-Identifikation
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kein normativer Standard für Lernen. Biases wären nicht als Abweichungen identifizierbar.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-19
+
+\textbf{Literatur:} Bayes (1763); Edwards et al. (1963)
+
+%==============================================================================
+% MA-EPI-25: Confirmation Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-25: Confirmation Bias}
+
+\textbf{Statement:} Bestätigende Information wird bevorzugt gesucht und verarbeitet.
+
+\textbf{Formel:}
+\begin{equation}
+P(\text{Search}|\text{Confirms}) > P(\text{Search}|\text{Disconfirms})
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen suchen aktiv nach Information, die bestehende Überzeugungen bestätigt:
+\begin{itemize}
+    \item Selektive Mediennutzung (Echo Chambers)
+    \item Asymmetrische Evidenzbewertung
+    \item Immunisierung gegen Gegenargumente
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Persistenz von Fehlüberzeugungen. Information allein ändert Beliefs nicht. Dialogische Interventionen nötig.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Confirmation Bias:
+\begin{itemize}
+    \item Welche Überzeugungen hat die Persona?
+    \item Wird neue Information abgelehnt werden?
+    \item Framing so, dass es nicht als Angriff wirkt
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Information würde neutral verarbeitet. Fake News und Polarisierung unerklärlich.
+
+\textbf{Validiert:} AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Nickerson (1998); Klayman (1995)
+
+%==============================================================================
+% MA-EPI-26: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-EPI-27: Representativeness Heuristic
+%==============================================================================
+
+\subsubsection*{MA-EPI-27: Representativeness Heuristic}
+
+\textbf{Statement:} Urteile basieren auf Ähnlichkeit zu Prototypen.
+
+\textbf{Formel:}
+\begin{equation}
+\hat{P}(A \in \text{Category}) = f(\text{Similarity}(A, \text{Prototype}))
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Repräsentativitätsheuristik ersetzt Wahrscheinlichkeit durch Ähnlichkeit:
+\begin{itemize}
+    \item ``Linda Problem'': Konjunktionsfehlschluss
+    \item Stereotypen-basierte Urteile
+    \item Ignorieren von Base Rates (MA-EPI-26)
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Fundamental für Typenklassifikation. Menschen kategorisieren andere (und sich selbst) nach Prototypen. Kann zu systematischen Fehlklassifikationen führen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Representativeness:
+\begin{itemize}
+    \item Prototypen explizit definieren
+    \item Base Rates gewichten
+    \item Vorsicht bei ``passt perfekt''-Urteilen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kategorisierung wäre rein probabilistisch. Intuitive Typisierung nicht modellierbar.
+
+\textbf{Validiert:} AWX, ESTIMATION
+
+\textbf{Abhängigkeiten:} MA-EPI-04
+
+\textbf{Literatur:} Kahneman \& Tversky (1972)
+
+%==============================================================================
+% MA-EPI-28: Sunk Cost Fallacy
+%==============================================================================
+
+\subsubsection*{MA-EPI-28: Sunk Cost Fallacy}
+
+\textbf{Statement:} Versunkene Kosten beeinflussen zukünftige Entscheidungen.
+
+\textbf{Formel:}
+\begin{equation}
+U(\text{Continue}|\text{SunkCost}) > U(\text{Continue}|\text{NoSunkCost})
+\end{equation}
+
+\textbf{Beschreibung:}
+Rationale Entscheidungen sollten nur zukünftige Kosten und Nutzen berücksichtigen. Aber:
+\begin{itemize}
+    \item ``Ich habe schon so viel investiert''
+    \item Weitermachen bei gescheiterten Projekten
+    \item Essen aufessen ``weil bezahlt''
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt irrationale Persistenz. Relevant für Commitment und Eskalation. Kann Verhaltensänderung blockieren (``habe schon so lange geraucht'').
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX identifiziert Sunk-Cost-Fallen:
+\begin{itemize}
+    \item Welche vergangenen Investitionen blockieren Änderung?
+    \item Reframing: Zukunftsorientierte Perspektive fördern
+    \item ``Sunk Costs sind sunk'' -- Debiasing-Intervention
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Vergangene Investitionen wären irrelevant. Eskalation von Commitment unerklärlich.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-15
+
+\textbf{Literatur:} Arkes \& Blumer (1985); Thaler (1980)
+
+%==============================================================================
+% MA-EPI-29: Endowment Effect
+%==============================================================================
+
+\subsubsection*{MA-EPI-29: Endowment Effect}
+
+\textbf{Statement:} Eigene Güter werden höher bewertet als identische fremde.
+
+\textbf{Formel:}
+\begin{equation}
+WTA > WTP, \quad \text{typisch: } WTA/WTP \approx 2
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Verkaufsbereitschaft (WTA = Willingness to Accept) ist systematisch höher als die Kaufbereitschaft (WTP = Willingness to Pay) für dasselbe Gut:
+\begin{itemize}
+    \item Kaffeebecherexperiment: WTA 2x so hoch wie WTP
+    \item ``Mein Kind ist das klügste''
+    \item Überbewertung eigener Ideen/Arbeit
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Konsequenz von Loss Aversion (MA-EPI-15). Abgeben ist ein Verlust. Erklärt Marktfriktionen und suboptimalen Handel.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Endowment:
+\begin{itemize}
+    \item Was ``besitzt'' die Persona (materiell und immateriell)?
+    \item Wie stark ist der Endowment Effect bei ihr?
+    \item Interventionen: Probebesitz vs. direkter Kauf
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+WTA = WTP (ökonomisches Standardmodell). Besitzeffekte unerklärlich.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-15
+
+\textbf{Literatur:} Kahneman, Knetsch \& Thaler (1990)
+
+%==============================================================================
+% MA-EPI-30: Optimism Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-30: Optimism Bias}
+
+\textbf{Statement:} Positive Outcomes werden für sich selbst überschätzt.
+
+\textbf{Formel:}
+\begin{equation}
+\hat{P}(\text{Positive}|\text{Self}) > P(\text{Positive})
+\end{equation}
+
+\textbf{Beschreibung:}
+Unrealistischer Optimismus für eigene Zukunft:
+\begin{itemize}
+    \item ``Mir passiert das nicht'' (Unfälle, Krankheiten)
+    \item Überschätzung von Karrierechancen
+    \item Unterschätzung eigener Risiken
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Unterversicherung, Risikoignoranz und mangelnde Prävention. Optimism Bias ist adaptiv (Wohlbefinden), aber kann zu Fehlentscheidungen führen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Optimism Bias:
+\begin{itemize}
+    \item Risikowahrnehmung nach oben korrigieren
+    \item Personalisierte Risikostatistiken präsentieren
+    \item ``Das kann mir passieren''-Interventionen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Selbst-Risiken würden korrekt geschätzt. Präventionslücken unerklärlich.
+
+\textbf{Validiert:} AWX, IDN
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Weinstein (1980); Sharot (2011)
+
+%==============================================================================
+% MA-EPI-31: Self-Serving Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-31: Self-Serving Bias}
+
+\textbf{Statement:} Erfolge werden internal, Misserfolge external attribuiert.
+
+\textbf{Formel:}
+\begin{equation}
+P(\text{Internal}|\text{Success}) > P(\text{Internal}|\text{Failure})
+\end{equation}
+
+\textbf{Beschreibung:}
+Attributionsmuster zum Selbstwertschutz:
+\begin{itemize}
+    \item Erfolg: ``Ich bin gut''
+    \item Misserfolg: ``Pech gehabt'' oder ``unfair''
+\end{itemize}
+Dient der Selbstwerterhaltung, behindert aber Lernen aus Fehlern.
+
+\textbf{BCM-Relevanz:}
+Kern-Mechanismus für Motivated Inference im IDN-Modul. Identitätsschutz durch selektive Attribution. Relevant für Feedback-Interventionen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Self-Serving Bias:
+\begin{itemize}
+    \item Wie wird die Persona Misserfolge attribuieren?
+    \item Feedback so gestalten, dass Selbstwert nicht bedroht wird
+    \item Lernen aus Fehlern ermöglichen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Symmetrische Attribution. Selbstwertschutz-Dynamik nicht modellierbar.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Miller \& Ross (1975); Mezulis et al. (2004)
+
+%==============================================================================
+% MA-EPI-32: Social Desirability Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-32: Social Desirability Bias}
+
+\textbf{Statement:} Selbstberichte sind Richtung sozialer Erwünschtheit verzerrt.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Report}(V) = V_{\text{true}} + \varepsilon_{SD}, \quad \varepsilon_{SD} = f(\text{Visibility}, \text{Norm})
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen berichten nicht wahrheitsgemäß, wenn die Wahrheit sozial unerwünscht ist:
+\begin{itemize}
+    \item Übertreibung von prosozialem Verhalten
+    \item Untertreibung von Tabus (Alkohol, Rassismus)
+    \item Stärker bei beobachteten Antworten
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+\textbf{Kritisch für BEATRIX!} Persona-Beschreibungen sind systematisch verzerrt. Das LLM sieht eine ``aufgehübschte'' Version.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Social Desirability:
+\begin{itemize}
+    \item Persona-Angaben diskontieren
+    \item Verhalten > Selbstbericht gewichten
+    \item ``True self'' liegt näher am Mittelwert
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Persona-Beschreibungen würden für bare Münze genommen. Systematische Überschätzung von ``guten'' Eigenschaften.
+
+\textbf{Validiert:} AWX, ESTIMATION
+
+\textbf{Abhängigkeiten:} MA-EPI-06, MA-ONT-11
+
+\textbf{Literatur:} Crowne \& Marlowe (1960); Paulhus (1984)
+
+%==============================================================================
+% MA-EPI-33: Omission Bias
+%==============================================================================
+
+\subsubsection*{MA-EPI-33: Omission Bias}
+
+\textbf{Statement:} Unterlassung wird milder bewertet als aktive Handlung.
+
+\textbf{Formel:}
+\begin{equation}
+U(\text{Outcome}|\text{Omission}) > U(\text{Outcome}|\text{Commission})
+\end{equation}
+
+\textbf{Beschreibung:}
+Bei gleichem negativen Outcome wird Nichtstun weniger negativ bewertet als aktives Handeln:
+\begin{itemize}
+    \item Trolley-Problem: Nicht-Umleiten vs. aktives Stoßen
+    \item Impfverweigerung: ``Nebenwirkung durch Impfung'' > ``Krankheit durch Nicht-Impfen''
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Relevant für ethische Bewertung von Interventionen. Opt-Out wird anders bewertet als Opt-In, selbst bei gleichem Ergebnis.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX nutzt Omission Bias:
+\begin{itemize}
+    \item Default-Interventionen sind ``Omission'' für den Nutzer
+    \item Aktive Entscheidung fühlt sich ``riskanter'' an
+    \item Framing: ``Nichtstun hat Konsequenzen''
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Handlung und Unterlassung würden gleich bewertet. Default-Effekte wären rein durch Effort erklärbar.
+
+\textbf{Validiert:} GOV, IDN
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Spranca, Minsk \& Baron (1991); Ritov \& Baron (1990)
+
+%==============================================================================
+% MA-EPI-34: Moral Licensing
+%==============================================================================
+
+\subsubsection*{MA-EPI-34: Moral Licensing}
+
+\textbf{Statement:} Gute Taten lizenzieren nachfolgende schlechte.
+
+\textbf{Formel:}
+\begin{equation}
+P(\text{BadAction}|\text{PriorGoodAction}) > P(\text{BadAction}|\text{NoPriorAction})
+\end{equation}
+
+\textbf{Beschreibung:}
+Moral Licensing ist ein negativer Spillover-Effekt:
+\begin{itemize}
+    \item ``Ich habe Sport gemacht, also kann ich jetzt Kuchen essen''
+    \item ``Ich habe gespendet, also muss ich nicht recyceln''
+    \item Selbstbild-Kredit wird aufgebaut und ausgegeben
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Identitäts-Dynamik: Gute Taten stärken das Selbstbild als ``guter Mensch'', was temporär schlechtes Verhalten erlaubt. Wichtig für Interventionskombinationen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX warnt vor Moral Licensing:
+\begin{itemize}
+    \item Nach erfolgreicher Intervention 1: Risiko für Backlash in Bereich 2
+    \item Nicht mehrere ``gute'' Verhaltensweisen simultan einfordern
+    \item Identitätsbasierte Interventionen können Licensing auslösen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Positiver Spillover würde überschätzt. Interventionspakete könnten kontraproduktiv sein.
+
+\textbf{Validiert:} IDN, KNU
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Merritt, Effron \& Monin (2010)
+
+%==============================================================================
+% MA-EPI-35: Identifiable Victim Effect
+%==============================================================================
+
+\subsubsection*{MA-EPI-35: Identifiable Victim Effect}
+
+\textbf{Statement:} Ein identifizierbares Opfer erzeugt mehr Empathie als statistische Opfer.
+
+\textbf{Formel:}
+\begin{equation}
+U_{\text{empathy}}(1_{\text{identified}}) > U_{\text{empathy}}(N_{\text{statistical}})
+\end{equation}
+
+\textbf{Beschreibung:}
+``Ein Toter ist eine Tragödie, eine Million Tote sind eine Statistik'' (Stalin zugeschrieben):
+\begin{itemize}
+    \item Spendenbereitschaft höher für Einzelschicksale
+    \item Namen und Gesichter aktivieren Empathie
+    \item Abstrakte Zahlen lassen kalt
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt asymmetrische Ressourcenallokation. Medial präsente Einzelfälle bekommen mehr als statistisch größere Probleme.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX nutzt Identifiable Victim Effect:
+\begin{itemize}
+    \item Personalisierte Beispiele statt Statistiken
+    \item ``Das könnte [Name] sein'' statt ``X\% Betroffene''
+    \item Aber: Ethische Grenzen der Emotionalisierung
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Empathie wäre proportional zu Anzahl Betroffener. Fundraising-Strategien wären anders.
+
+\textbf{Validiert:} KNU, IDN
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Small \& Loewenstein (2003); Slovic (2007)
+
+%==============================================================================
+% MA-EPI-36: Scope Insensitivity
+%==============================================================================
+
+\subsubsection*{MA-EPI-36: Scope Insensitivity}
+
+\textbf{Statement:} Bewertungen skalieren nicht proportional mit der Anzahl Betroffener.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial U}{\partial N} \rightarrow 0 \quad \text{für } N \rightarrow \infty
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Zahlungsbereitschaft für Rettung von 2000 Vögeln ist kaum höher als für 200:
+\begin{itemize}
+    \item WTP für 2k, 20k, 200k Vögel: \$80, \$78, \$88
+    \item ``Psychic numbing'': Große Zahlen werden nicht gefühlt
+    \item 1 \approx 2 \approx viele
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Kollektiver Nutzen (KNU) wird systematisch unterschätzt. Je größer das Problem, desto mehr wird ignoriert (Klimawandel, Pandemie).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Scope Insensitivity:
+\begin{itemize}
+    \item Große Zahlen herunterbrechen (``pro Kopf'')
+    \item Visualisierungen statt abstrakte Zahlen
+    \item KNU explizit hochrechnen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nutzen wäre linear in Anzahl Betroffener. Kollektive Probleme würden angemessen gewichtet.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-EPI-35
+
+\textbf{Literatur:} Kahneman (1986); Desvousges et al. (1993)
+
+%==============================================================================
+% MA-EPI-37: Affect Heuristic
+%==============================================================================
+
+\subsubsection*{MA-EPI-37: Affect Heuristic}
+
+\textbf{Statement:} Emotionale Reaktionen bestimmen Risiko- und Nutzenurteile.
+
+\textbf{Formel:}
+\begin{equation}
+\hat{U}_{\text{risk}} = f(\text{Affect}), \quad \hat{U}_{\text{benefit}} = g(\text{Affect})
+\end{equation}
+\begin{equation}
+\text{Corr}(\hat{U}_{\text{risk}}, \hat{U}_{\text{benefit}}) < 0
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Affect Heuristic ersetzt analytische Bewertung durch Bauchgefühl:
+\begin{itemize}
+    \item Positives Gefühl → niedriges Risiko, hoher Nutzen
+    \item Negatives Gefühl → hohes Risiko, niedriger Nutzen
+    \item Dies erzeugt negative Korrelation, die objektiv nicht existiert
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt emotionale Bewertung von Technologien (Kernenergie: emotional negativ → Risiko hoch, Nutzen niedrig; Solar: umgekehrt). Emotions-basierte Interventionen nutzen dies.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Affect:
+\begin{itemize}
+    \item Welche Emotionen sind mit dem Verhalten assoziiert?
+    \item Können positive Affekte aktiviert werden?
+    \item Emotionale vs. analytische Persona-Typen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Risiko und Nutzen wären unabhängig bewertet. Emotionale Komponente von Entscheidungen unsichtbar.
+
+\textbf{Validiert:} AWX, INU
+
+\textbf{Abhängigkeiten:} MA-EPI-05
+
+\textbf{Literatur:} Slovic et al. (2002); Finucane et al. (2000)
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\textit{Ende der EPI-Axiome. Alle 37 Epistemologie-Axiome sind nun vollständig dokumentiert.}

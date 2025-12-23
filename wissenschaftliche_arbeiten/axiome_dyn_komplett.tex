@@ -1,0 +1,967 @@
+% =============================================================================
+% DYN-AXIOME (DYNAMIK) - Vollständige Ausformulierung
+% BCM 2.2 META-Modul
+% =============================================================================
+
+\section{Dynamik-Axiome (MA-DYN)}
+
+Die DYN-Axiome definieren zeitliche Prozesse, Veränderungen und Evolution.
+Sie beantworten die Frage: \textit{Wie verändert es sich?}
+
+%==============================================================================
+% MA-DYN-01: Zeit ist kontinuierlich
+%==============================================================================
+
+\subsubsection*{MA-DYN-01: Zeit ist kontinuierlich}
+
+\textbf{Statement:} Verhalten findet in kontinuierlicher Zeit statt.
+
+\textbf{Formel:}
+\begin{equation}
+\tau \in \mathbb{R}^+
+\end{equation}
+
+\textbf{Beschreibung:}
+Zeit ist nicht diskret, sondern fließend:
+\begin{itemize}
+    \item Zustände ändern sich stetig
+    \item Übergänge sind graduell
+    \item Differentialgleichungen sind angemessene Modelle
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ermöglicht dynamische Modellierung mit kontinuierlichen Funktionen. Habituation, Lernen und Evolution sind als stetige Prozesse modellierbar.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX arbeitet mit diskreten Zeitpunkten (Snapshot), aber:
+\begin{itemize}
+    \item Interpolation zwischen Zeitpunkten möglich
+    \item Trajektorien statt Zustände modellieren
+    \item Zeitliche Glättung bei Messungen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur diskrete Zustände. Keine kontinuierliche Dynamik. Sprunghafte Übergänge statt gradueller.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-05
+
+\textbf{Literatur:} Newton (1687); Strogatz (2015)
+
+%==============================================================================
+% MA-DYN-02: Diskrete Events
+%==============================================================================
+
+\subsubsection*{MA-DYN-02: Diskrete Events}
+
+\textbf{Statement:} Entscheidungen sind diskrete Ereignisse in kontinuierlicher Zeit.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Decision}_i \text{ at } \tau_i \in T
+\end{equation}
+
+\textbf{Beschreibung:}
+Obwohl Zeit kontinuierlich ist, sind Entscheidungen punktuell:
+\begin{itemize}
+    \item Kaufentscheidung: Zeitpunkt $\tau_k$
+    \item Wahlentscheidung: Zeitpunkt $\tau_w$
+    \item Sequenz von Decisions: $\{\tau_1, \tau_2, ..., \tau_n\}$
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Verbindet kontinuierliche Dynamik mit diskreten Handlungen. Interventionen zielen auf Entscheidungszeitpunkte.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX fokussiert auf Decision Points:
+\begin{itemize}
+    \item Wann fällt die Entscheidung?
+    \item Interventions-Timing optimieren
+    \item Sequenz von Entscheidungen modellieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Unterscheidung Prozess/Event. Entscheidungen wären stetig statt punktuell.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-01
+
+\textbf{Literatur:} Ross (1983)
+
+%==============================================================================
+% MA-DYN-03: Pfadabhängigkeit
+%==============================================================================
+
+\subsubsection*{MA-DYN-03: Pfadabhängigkeit}
+
+\textbf{Statement:} Geschichte beeinflusst Gegenwart.
+
+\textbf{Formel:}
+\begin{equation}
+\text{State}(\tau) = f(\text{History}(0..\tau))
+\end{equation}
+
+\textbf{Beschreibung:}
+Der aktuelle Zustand ist nicht nur von aktuellen Bedingungen abhängig:
+\begin{itemize}
+    \item Frühere Entscheidungen schaffen Pfade
+    \item Lock-In-Effekte: QWERTY-Tastatur
+    \item Gewohnheiten sind akkumulierte Geschichte
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Persistenz von Verhalten. Verhaltensänderung erfordert ``Pfadbruch''. Frühe Intervention hat höheren Hebel.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Verhaltensgeschichte:
+\begin{itemize}
+    \item Wie lange besteht das Verhalten schon?
+    \item Welche Lock-Ins existieren?
+    \item Historische Daten für bessere Vorhersage nutzen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Zustand nur von aktuellen Bedingungen abhängig. Markov-Annahme. Geschichte irrelevant.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-01
+
+\textbf{Literatur:} Arthur (1989); David (1985)
+
+%==============================================================================
+% MA-DYN-04: Multiple Equilibria
+%==============================================================================
+
+\subsubsection*{MA-DYN-04: Multiple Equilibria}
+
+\textbf{Statement:} Es kann mehrere stabile Zustände geben.
+
+\textbf{Formel:}
+\begin{equation}
+|\{\text{State}: \frac{d\text{State}}{dt} = 0\}| \geq 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Systeme können mehrere Gleichgewichte haben:
+\begin{itemize}
+    \item Kooperation vs. Defektion als stabile Zustände
+    \item ``Gute'' vs. ``schlechte'' Gewohnheit
+    \item Gesellschaftliche Normen A vs. B
+\end{itemize}
+Welches Gleichgewicht erreicht wird, hängt von Anfangsbedingungen ab.
+
+\textbf{BCM-Relevanz:}
+Erklärt, warum ähnliche Populationen unterschiedliche Normen haben können. Interventionen können Gleichgewichtswechsel auslösen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX analysiert Gleichgewichte:
+\begin{itemize}
+    \item In welchem Gleichgewicht befindet sich die Persona/Gruppe?
+    \item Ist ein Wechsel zu einem besseren Gleichgewicht möglich?
+    \item Welche Intervention löst den Wechsel aus?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Einziges Gleichgewicht. Keine alternativen Attraktoren. Deterministische Konvergenz.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-03
+
+\textbf{Literatur:} Schelling (1978); Young (1998)
+
+%==============================================================================
+% MA-DYN-05: Hysterese
+%==============================================================================
+
+\subsubsection*{MA-DYN-05: Hysterese möglich}
+
+\textbf{Statement:} Systemzustand hängt von der Richtung der Veränderung ab.
+
+\textbf{Formel:}
+\begin{equation}
+\text{State}(\uparrow) \neq \text{State}(\downarrow) \quad \text{bei gleichem Trigger}
+\end{equation}
+
+\textbf{Beschreibung:}
+Der Weg zählt:
+\begin{itemize}
+    \item Gewohnheit aufbauen ist leichter als abbauen
+    \item Vertrauen aufbauen dauert, zerstören geht schnell
+    \item Norm-Etablierung vs. Norm-Erosion asymmetrisch
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Asymmetrie von Aufbau und Abbau. Positive Verhaltensänderung kann andere Schwellen haben als Rückfall.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Hysterese:
+\begin{itemize}
+    \item Unterschiedliche Schwellen für Veränderung vs. Rückfall
+    \item Stabilisierung nach Verhaltensänderung nötig
+    \item Warnung vor ``zu schnellem'' Absetzen von Interventionen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Symmetrische Dynamik angenommen. Richtungsunabhängigkeit.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-03
+
+\textbf{Literatur:} Scheffer (2009)
+
+%==============================================================================
+% MA-DYN-06: Tipping Points
+%==============================================================================
+
+\subsubsection*{MA-DYN-06: Tipping Points existieren}
+
+\textbf{Statement:} Es gibt kritische Schwellen für qualitative Zustandswechsel.
+
+\textbf{Formel:}
+\begin{equation}
+\exists \theta: \text{State}(x < \theta) \neq \text{State}(x > \theta) \quad \text{qualitativ}
+\end{equation}
+
+\textbf{Beschreibung:}
+Kleine Änderungen können große Wirkung haben -- wenn sie eine Schwelle überschreiten:
+\begin{itemize}
+    \item Epidemiologischer Tipping Point: $R > 1$
+    \item Soziale Tipping Points: Norm-Kaskaden
+    \item Individuelle Tipping Points: Verhaltensumbruch
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Nicht-Linearität. Kleine Interventionen können große Effekte haben -- wenn sie den Tipping Point erreichen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX identifiziert Tipping Points:
+\begin{itemize}
+    \item Wie nah ist das System am Tipping Point?
+    \item Welche Intervention erreicht den Kipppunkt?
+    \item Warnung vor instabilen Zuständen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Lineare Extrapolation. Sprunghafte Veränderungen unerwartet.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-04
+
+\textbf{Literatur:} Gladwell (2000); Scheffer et al. (2012)
+
+%==============================================================================
+% MA-DYN-07: Gewohnheitsformation
+%==============================================================================
+
+\subsubsection*{MA-DYN-07: Gewohnheitsformation}
+
+\textbf{Statement:} Wiederholung führt zu Automatisierung.
+
+\textbf{Formel:}
+\begin{equation}
+P(V_{\text{auto}}|\text{Repetition}) \uparrow \text{ mit } n
+\end{equation}
+
+\textbf{Beschreibung:}
+Gewohnheiten bilden sich durch Wiederholung:
+\begin{itemize}
+    \item Ca. 66 Tage für automatisches Verhalten (Lally et al.)
+    \item Exponentieller Anstieg der Automatisierung
+    \item Plateau nach Stabilisierung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ziel vieler Interventionen: Gewohnheitsbildung. Einmalige Verhaltensänderung ist weniger wertvoll als dauerhafte.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX plant für Gewohnheitsbildung:
+\begin{itemize}
+    \item Wie oft muss das Verhalten wiederholt werden?
+    \item Welche Cues etablieren die Gewohnheit?
+    \item Tracking der Gewohnheitsstärke
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Automatisierung. Jede Entscheidung deliberativ.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-21
+
+\textbf{Literatur:} Lally et al. (2010); Wood \& Rünger (2016)
+
+%==============================================================================
+% MA-DYN-08: Habit Loop
+%==============================================================================
+
+\subsubsection*{MA-DYN-08: Habit Loop}
+
+\textbf{Statement:} Gewohnheiten folgen dem Cue-Routine-Reward-Muster.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Habit} = f(\text{Cue}, \text{Routine}, \text{Reward})
+\end{equation}
+
+\textbf{Beschreibung:}
+Der Habit Loop nach Duhigg:
+\begin{enumerate}
+    \item \textbf{Cue}: Trigger (Zeit, Ort, Emotion, andere Personen)
+    \item \textbf{Routine}: Das automatische Verhalten
+    \item \textbf{Reward}: Belohnung, die den Loop verstärkt
+\end{enumerate}
+
+\textbf{BCM-Relevanz:}
+Interventionsansatz: Bestehenden Cue mit neuer Routine verbinden. ``Habit stacking''. Reward engineering.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX analysiert Habit Loops:
+\begin{itemize}
+    \item Welche Cues triggern welches Verhalten?
+    \item Welche Rewards verstärken es?
+    \item Wie kann der Loop umgestaltet werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Struktur für Gewohnheitsänderung. Nur globale Verhaltensänderung statt gezielter Manipulation.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-DYN-07
+
+\textbf{Literatur:} Duhigg (2012); Wood \& Neal (2007)
+
+%==============================================================================
+% MA-DYN-09: Commitment Devices
+%==============================================================================
+
+\subsubsection*{MA-DYN-09: Commitment Devices}
+
+\textbf{Statement:} Selbstbindung ist möglich und kann rational sein.
+
+\textbf{Formel:}
+\begin{equation}
+U(\text{Commit}) > U(\text{NoCommit}) \quad \text{wenn } \delta_{\text{now}} > \delta_{\text{future}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen können sich selbst binden, um zukünftige Schwäche zu überwinden:
+\begin{itemize}
+    \item Ulysses und die Sirenen
+    \item Sparverträge mit Strafe bei vorzeitiger Auflösung
+    \item Öffentliche Ankündigungen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Lösung für zeitinkonsistente Präferenzen (MA-DYN-14). Commitment ist keine Irrationalität, sondern Metarationalität.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt Commitment Devices:
+\begin{itemize}
+    \item Welche Form der Selbstbindung passt zur Persona?
+    \item Soziale vs. finanzielle Commitments
+    \item Stärke des Commitments kalibrieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Lösung für Present Bias. Zeitinkonsistenz bleibt unaddressiert.
+
+\textbf{Validiert:} WAX
+
+\textbf{Abhängigkeiten:} MA-EPI-16
+
+\textbf{Literatur:} Elster (1979); Bryan et al. (2010)
+
+%==============================================================================
+% MA-DYN-10: Soziale Diffusion
+%==============================================================================
+
+\subsubsection*{MA-DYN-10: Soziale Diffusion}
+
+\textbf{Statement:} Verhalten breitet sich sozial aus.
+
+\textbf{Formel:}
+\begin{equation}
+P(V_i|V_{\text{neighbors}}) = f(\text{Density}(V_{\text{neighbors}}))
+\end{equation}
+
+\textbf{Beschreibung:}
+Verhalten ist ansteckend:
+\begin{itemize}
+    \item Peer Effects: Freunde beeinflussen Verhalten
+    \item Netzwerk-Diffusion: Von Early Adopters zur Mehrheit
+    \item Kaskaden: Kleine Anfänge, große Wirkung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Grundlage für SOCIAL-Interventionen. Der $\lambda$-Parameter hängt von wahrgenommener Kooperation anderer ab.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Netzwerkeffekte:
+\begin{itemize}
+    \item Wer sind die relevanten Peers der Persona?
+    \item Welche Diffusionsstrategien sind effektiv?
+    \item Seed-Auswahl für maximale Verbreitung
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Individualistisches Modell. Soziale Ansteckung nicht abbildbar.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-10
+
+\textbf{Literatur:} Rogers (2003); Centola \& Macy (2007)
+
+%==============================================================================
+% MA-DYN-11: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-DYN-12: Norm-Kaskaden
+%==============================================================================
+
+\subsubsection*{MA-DYN-12: Norm-Kaskaden}
+
+\textbf{Statement:} Normen können rapid kippen.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{dN}{dt} \text{ kann sprunghaft sein}
+\end{equation}
+
+\textbf{Beschreibung:}
+Normenwandel ist oft nicht graduell:
+\begin{itemize}
+    \item Raucher-Norm: von ``cool'' zu ``uncool'' in einer Generation
+    \item Gleichgeschlechtliche Ehe: rapide Akzeptanzsteigerung
+    \item ``Preference falsification'' → plötzliches Offenlegen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Dynamische Ergänzung zu MA-ONT-24 (Normen evolvieren). Nicht nur dass, sondern wie: Sprünge statt lineare Trends.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX erkennt Kaskadenrisiken:
+\begin{itemize}
+    \item Ist eine Norm-Kaskade im Gange?
+    \item Kann eine Intervention die Kaskade auslösen?
+    \item Timing für maximalen Impact
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur gradueller Normenwandel modelliert. Plötzliche Umbrüche überraschen.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-24, MA-DYN-11
+
+\textbf{Literatur:} Kuran (1995); Bicchieri (2016)
+
+%==============================================================================
+% MA-DYN-13: Discounting
+%==============================================================================
+
+\subsubsection*{MA-DYN-13: Discounting}
+
+\textbf{Statement:} Zukünftiger Nutzen wird diskontiert.
+
+\textbf{Formel:}
+\begin{equation}
+U_{\text{present}}(U_{\text{future}}) = \delta^t \cdot U_{\text{future}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Ein Euro heute ist mehr wert als ein Euro morgen:
+\begin{itemize}
+    \item Zeitpräferenz: Gegenwart wird vorgezogen
+    \item Unsicherheit: Zukunft ist ungewiss
+    \item Opportunity Cost: Verzicht auf heutige Nutzung
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Fundamental für intertemporale Entscheidungen. Erklärt Unterinvestition in Zukunft (Sparen, Prävention, Klimaschutz).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Diskontrate:
+\begin{itemize}
+    \item Wie stark diskontiert die Persona?
+    \item Kurzfristige Belohnungen vs. langfristiger Nutzen
+    \item Interventionen mit optimiertem zeitlichen Profil
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Zeitpräferenz. Gegenwart und Zukunft gleichwertig.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-16
+
+\textbf{Literatur:} Samuelson (1937); Frederick et al. (2002)
+
+%==============================================================================
+% MA-DYN-14: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-DYN-15: Projection Bias
+%==============================================================================
+
+\subsubsection*{MA-DYN-15: Projection Bias}
+
+\textbf{Statement:} Aktuelle Zustände werden in die Zukunft projiziert.
+
+\textbf{Formel:}
+\begin{equation}
+E[U_{\text{future}}|\text{State}_{\text{now}}] \text{ biased toward State}_{\text{now}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen überschätzen die Persistenz aktueller Zustände:
+\begin{itemize}
+    \item Hungrig einkaufen: Zu viel kaufen
+    \item Gute Laune: Optimistische Prognosen
+    \item Schlechte Laune: Pessimistische Prognosen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt systematische Fehlplanung. Zukünftige Zustände (Hunger, Motivation, Energie) werden falsch antizipiert.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX korrigiert für Projection Bias:
+\begin{itemize}
+    \item In welchem Zustand befindet sich die Persona jetzt?
+    \item Wie würde sie in anderem Zustand entscheiden?
+    \item Interventionen nicht in extremen Zuständen planen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Aktuelle Zustände würden als repräsentativ für zukünftige gelten.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-06
+
+\textbf{Literatur:} Loewenstein et al. (2003)
+
+%==============================================================================
+% MA-DYN-16: Hot-Cold Empathy Gap
+%==============================================================================
+
+\subsubsection*{MA-DYN-16: Hot-Cold Empathy Gap}
+
+\textbf{Statement:} In ``cold'' Zuständen werden ``hot'' Zustände unterschätzt.
+
+\textbf{Formel:}
+\begin{equation}
+E[U_{\text{hot}}|\text{State}_{\text{cold}}] < U_{\text{hot, actual}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Intensität emotionaler Zustände wird nicht antizipiert:
+\begin{itemize}
+    \item Nüchtern: Unterschätzen von Alkohol-Verlangen
+    \item Satt: Unterschätzen von Hunger
+    \item Ruhig: Unterschätzen von Wut
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Scheitern von ``cold'' geplanten Vorsätzen in ``hot'' Situationen. Commitment Devices helfen, wenn Cold-Self den Hot-Self bindet.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Hot-Cold Gap:
+\begin{itemize}
+    \item Plane Interventionen für den ``hot'' Zustand
+    \item Commitments in ``cold'' Zuständen eingehen lassen
+    \item Warnung vor Hot-State-Entscheidungen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Emotionale Zustände würden korrekt antizipiert. Vorsätze würden immer halten.
+
+\textbf{Validiert:} INU, AWX
+
+\textbf{Abhängigkeiten:} MA-DYN-15
+
+\textbf{Literatur:} Loewenstein (1996, 2005)
+
+%==============================================================================
+% MA-DYN-17: Ego Depletion
+%==============================================================================
+
+\subsubsection*{MA-DYN-17: Ego Depletion}
+
+\textbf{Statement:} Selbstkontrolle ist eine erschöpfliche Ressource.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Willpower}(t) \downarrow \text{ mit Nutzung}
+\end{equation}
+
+\textbf{Beschreibung:}
+Selbstkontrolle funktioniert wie ein Muskel:
+\begin{itemize}
+    \item Ermüdet durch Nutzung
+    \item Regeneriert durch Ruhe
+    \item Kann durch Training gestärkt werden
+\end{itemize}
+Hinweis: Effekt ist umstritten (Replication Crisis), aber praktisch relevant.
+
+\textbf{BCM-Relevanz:}
+Erklärt Selbstkontrollversagen am Abend, nach Stress. Interventionen sollten Willpower-Status berücksichtigen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Ego Depletion:
+\begin{itemize}
+    \item Wann ist die Persona wahrscheinlich depleted?
+    \item Interventionen mit geringem Willpower-Bedarf bevorzugen
+    \item Timing für Willpower-intensive Entscheidungen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Konstante Selbstkontrolle angenommen. Ermüdung ignoriert.
+
+\textbf{Validiert:} WAX, WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-05
+
+\textbf{Literatur:} Baumeister et al. (1998); (umstritten: Carter \& McCullough, 2014)
+
+%==============================================================================
+% MA-DYN-18: Implementation Intentions
+%==============================================================================
+
+\subsubsection*{MA-DYN-18: Implementation Intentions}
+
+\textbf{Statement:} Wenn-Dann-Pläne erhöhen Umsetzungswahrscheinlichkeit.
+
+\textbf{Formel:}
+\begin{equation}
+P(V|\text{If-Then Plan}) > P(V|\text{Goal only})
+\end{equation}
+
+\textbf{Beschreibung:}
+Konkrete Wenn-Dann-Pläne schließen die Intention-Action-Gap:
+\begin{itemize}
+    \item ``Wenn X, dann tue ich Y''
+    \item Automatische Aktivierung durch Cue
+    \item Reduziert deliberativen Aufwand
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Effektive Intervention für WTX-Defizite. Kombiniert gut mit NUDGE (Default als Implementation Intention).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt Implementation Intentions:
+\begin{itemize}
+    \item Konkrete Wenn-Dann-Formulierungen generieren
+    \item Passende Cues für die Persona identifizieren
+    \item Als Teil von BOOST-Interventionen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur Ziele ohne Umsetzungspläne. Intention-Action-Gap bleibt.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-EPI-11
+
+\textbf{Literatur:} Gollwitzer (1999); Gollwitzer \& Sheeran (2006)
+
+%==============================================================================
+% MA-DYN-19: Adaptation
+%==============================================================================
+
+\subsubsection*{MA-DYN-19: Adaptation}
+
+\textbf{Statement:} Nutzen adaptiert an neuen Status Quo.
+
+\textbf{Formel:}
+\begin{equation}
+U(\text{State}) \rightarrow U_{\text{baseline}} \quad \text{as } \tau \rightarrow \infty
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen gewöhnen sich an alles:
+\begin{itemize}
+    \item Positive Veränderungen: Freude verblasst
+    \item Negative Veränderungen: Leid verblasst
+    \item Neuer Normalzustand wird Referenzpunkt
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt das Hedonic Treadmill (MA-DYN-20). Dauerhafte Nutzenänderung ist schwierig zu erreichen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Adaptation:
+\begin{itemize}
+    \item Erwartete Adaptationsrate modellieren
+    \item Nachhaltige vs. temporäre Nutzeneffekte
+    \item Intervention gegen Adaptation designen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Permanente Nutzenveränderungen angenommen. Überschätzung langfristiger Effekte.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-ONT-20
+
+\textbf{Literatur:} Helson (1964); Wilson \& Gilbert (2005)
+
+%==============================================================================
+% MA-DYN-20: Hedonic Treadmill
+%==============================================================================
+
+\subsubsection*{MA-DYN-20: Hedonic Treadmill}
+
+\textbf{Statement:} Glück kehrt zu einer individuellen Baseline zurück.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Happiness} \rightarrow \text{Baseline} \quad \text{nach positiven/negativen Events}
+\end{equation}
+
+\textbf{Beschreibung:}
+Das hedonistische Laufband:
+\begin{itemize}
+    \item Lottogewinner: Nach 1 Jahr wieder auf Ausgangsniveau
+    \item Querschnittslähmung: Nach 2 Jahren signifikante Erholung
+    \item Set Point Theory: Genetisch determinierte Baseline
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Relativiert materielle Interventionen. Mehr Geld macht nicht dauerhaft glücklicher. Fokus auf prozessuale statt ergebnisbasierte Interventionen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Hedonic Adaptation:
+\begin{itemize}
+    \item Welche Interventionen haben nachhaltige Effekte?
+    \item Prozess-Glück vs. Ergebnis-Glück
+    \item Warnung vor Überschätzung materieller Anreize
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Lineare Beziehung Ressourcen → Glück. Materielle Interventionen überschätzt.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-DYN-19
+
+\textbf{Literatur:} Brickman \& Campbell (1971); Diener et al. (2006)
+
+%==============================================================================
+% MA-DYN-21: Peak-End Rule
+%==============================================================================
+
+\subsubsection*{MA-DYN-21: Peak-End Rule}
+
+\textbf{Statement:} Erinnerung = Peak + End.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Recalled}_U = f(\max_U, \text{End}_U)
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Erinnerung an eine Erfahrung wird dominiert von:
+\begin{itemize}
+    \item Dem intensivsten Moment (Peak)
+    \item Dem Endmoment
+    \item Dauer spielt kaum eine Rolle
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt, warum Erfahrungen anders erinnert werden als erlebt. Interventionen können das Ende optimieren für bessere Gesamtbewertung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX nutzt Peak-End Rule:
+\begin{itemize}
+    \item Positive Enden für Interventionserfahrungen designen
+    \item Negative Peaks vermeiden
+    \item Dauer ist weniger wichtig als Qualität der Momente
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Dauer-gewichtete Durchschnitte angenommen. Peak und End-Effekte ignoriert.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-EPI-12
+
+\textbf{Literatur:} Kahneman et al. (1993); Kahneman (1999)
+
+%==============================================================================
+% MA-DYN-22: Identitäts-Shifts
+%==============================================================================
+
+\subsubsection*{MA-DYN-22: Identitäts-Shifts}
+
+\textbf{Statement:} Identitäten können sich fundamental ändern.
+
+\textbf{Formel:}
+\begin{equation}
+I(\tau + \Delta\tau) \not\subset I(\tau) \quad \text{möglich}
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht nur Evolution, sondern Transformation:
+\begin{itemize}
+    \item Konversion: Religiöse, politische
+    \item Life Events: Elternschaft, Scheidung, Krankheit
+    \item ``Ich bin nicht mehr derselbe Mensch''
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ermöglicht Modellierung fundamentaler Identitätsänderungen. IDENTITY-Interventionen können auf Shift zielen, nicht nur Salienz.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX erkennt Identitäts-Shift-Potenzial:
+\begin{itemize}
+    \item Steht die Persona vor einem Life Event?
+    \item Gibt es Anzeichen für Identitätskrise?
+    \item Interventionen für Übergangszeiten optimieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur graduelle Identitätsänderung. Fundamentale Transformationen nicht modellierbar.
+
+\textbf{Validiert:} IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-23
+
+\textbf{Literatur:} James (1902); Paloutzian (2005)
+
+%==============================================================================
+% MA-DYN-23: λ-Dynamik
+%==============================================================================
+
+\subsubsection*{MA-DYN-23: $\lambda$-Dynamik}
+
+\textbf{Statement:} Der Kooperationsparameter $\lambda$ verändert sich über Zeit.
+
+\textbf{Formel:}
+\begin{equation}
+\lambda(\tau + \Delta\tau) = f(\lambda(\tau), \text{Experience}, \text{Context})
+\end{equation}
+
+\textbf{Beschreibung:}
+$\lambda$ ist nicht statisch:
+\begin{itemize}
+    \item Positive Kooperationserfahrungen erhöhen $\lambda$
+    \item Betrug und Enttäuschung senken $\lambda$
+    \item Gesellschaftlicher Wandel beeinflusst Basis-$\lambda$
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Dynamische Erweiterung des $\lambda$-Konzepts. Erklärt, wie Kooperationsbereitschaft sich entwickelt.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert $\lambda$-Entwicklung:
+\begin{itemize}
+    \item Wie hat sich $\lambda$ entwickelt?
+    \item Welche Erfahrungen beeinflussen es?
+    \item Kann $\lambda$ durch Intervention erhöht werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statisches $\lambda$ als Trait. Keine Kooperations-Entwicklung modellierbar.
+
+\textbf{Validiert:} WAX
+
+\textbf{Abhängigkeiten:} MA-ONT-14
+
+\textbf{Literatur:} Ostrom (1998); Fehr \& Gächter (2000)
+
+%==============================================================================
+% MA-DYN-24: System-Evolution
+%==============================================================================
+
+\subsubsection*{MA-DYN-24: System-Evolution}
+
+\textbf{Statement:} Das BCM-Gesamtsystem evolviert.
+
+\textbf{Formel:}
+\begin{equation}
+\Phi(\tau + \Delta\tau) = \Phi(\tau) + \mu \cdot \Delta\Phi
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht nur Parameter ändern sich, sondern das System als Ganzes:
+\begin{itemize}
+    \item Neue Verhaltenskategorien entstehen (Digital Behavior)
+    \item Neue Interventionstypen werden entdeckt
+    \item Systemgrenzen verschieben sich
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Meta-Ebene: Das BCM selbst ist nicht statisch. Neue Forschung erweitert das Modell. Version 2.2 ≠ Version 3.0.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX wird kontinuierlich aktualisiert:
+\begin{itemize}
+    \item Neue Erkenntnisse integrieren
+    \item Modellparameter rekalibrieren
+    \item Systementwicklung dokumentieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statisches Modell. Keine Weiterentwicklung vorgesehen.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-25
+
+\textbf{Literatur:} Kuhn (1962); Lakatos (1978)
+
+%==============================================================================
+% MA-DYN-25: Meta-Stabilität
+%==============================================================================
+
+\subsubsection*{MA-DYN-25: Meta-Stabilität}
+
+\textbf{Statement:} Fundamentale Struktur bleibt erhalten, auch wenn Inhalte sich ändern.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial \text{Structure}}{\partial \tau} \rightarrow 0 \quad \text{auch wenn } \frac{\partial \text{Content}}{\partial \tau} \neq 0
+\end{equation}
+
+\textbf{Beschreibung:}
+Trotz aller Dynamik gibt es Invarianten:
+\begin{itemize}
+    \item Menschen haben Präferenzen (welche auch immer)
+    \item Soziale Normen existieren (welche auch immer)
+    \item Biases sind systematisch (welche auch immer)
+\end{itemize}
+Die Struktur des BCM bleibt stabil, die Inhalte variieren.
+
+\textbf{BCM-Relevanz:}
+Ontologisches Fundament. Das BCM ist nicht nur ein historisches Snapshot, sondern beschreibt tiefere Strukturen, die invariant sind.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verlässt sich auf Meta-Stabilität:
+\begin{itemize}
+    \item Strukturannahmen sind robust
+    \item Parameter-Aktualisierung, nicht Modell-Austausch
+    \item Vertrauen in Grundarchitektur
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alles wäre in Fluss. Kein stabiler Rahmen für Modellierung. Beliebigkeit.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-DYN-24
+
+\textbf{Literatur:} Eigen (1971); Kauffman (1993)
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\textit{Ende der DYN-Axiome. Alle 25 Dynamik-Axiome sind nun vollständig dokumentiert.}

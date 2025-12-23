@@ -1,0 +1,979 @@
+% =============================================================================
+% GOV-AXIOME (GOVERNANCE) - Vollständige Ausformulierung
+% BCM 2.2 META-Modul
+% =============================================================================
+
+\section{Governance-Axiome (MA-GOV)}
+
+Die GOV-Axiome definieren die Regeln, Constraints und ethischen Leitplanken.
+Sie beantworten die Frage: \textit{Was ist erlaubt?}
+
+%==============================================================================
+% MA-GOV-01: Constraints existieren
+%==============================================================================
+
+\subsubsection*{MA-GOV-01: Constraints existieren}
+
+\textbf{Statement:} Es gibt Beschränkungen für Verhalten.
+
+\textbf{Formel:}
+\begin{equation}
+\Gamma \neq \emptyset
+\end{equation}
+
+\textbf{Beschreibung:}
+Nicht alles ist erlaubt oder möglich. Constraints umfassen:
+\begin{itemize}
+    \item Physische Grenzen (Zeit, Raum, Körper)
+    \item Rechtliche Grenzen (Gesetze, Verbote)
+    \item Soziale Grenzen (Normen, Sanktionen)
+    \item Ökonomische Grenzen (Budget, Ressourcen)
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Fundament des GOV-Moduls. Das BCM modelliert Verhalten unter Nebenbedingungen. REGULATE-Interventionen wirken durch Constraint-Manipulation.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX muss Constraints kennen:
+\begin{itemize}
+    \item Welche Constraints limitieren die Persona?
+    \item Sind Verhaltensoptionen feasible?
+    \item Können Constraints gelockert werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Verhaltensweisen wären möglich. Keine Beschränkungen modellierbar. Regulierung hätte keine Grundlage.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-06
+
+\textbf{Literatur:} Becker (1968); North (1990)
+
+%==============================================================================
+% MA-GOV-02: Kontextabhängigkeit von Constraints
+%==============================================================================
+
+\subsubsection*{MA-GOV-02: Constraints sind kontextabhängig}
+
+\textbf{Statement:} Erlaubtes hängt vom Kontext ab.
+
+\textbf{Formel:}
+\begin{equation}
+\Gamma = f(\rho)
+\end{equation}
+
+\textbf{Beschreibung:}
+Was in einem Kontext erlaubt ist, kann in einem anderen verboten sein:
+\begin{itemize}
+    \item Alkohol: erlaubt privat, verboten am Steuer
+    \item Kleidung: angemessen im Büro ≠ am Strand
+    \item Kommunikation: informell unter Freunden ≠ formell im Gericht
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ermöglicht kontextspezifische Governance. Das 5-Ebenen-Modell (MA-ONT-26) strukturiert Kontexte hierarchisch.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft kontextspezifische Constraints:
+\begin{itemize}
+    \item Welche Regeln gelten in diesem spezifischen Kontext?
+    \item Gibt es Kontextwechsel, die Constraints ändern?
+    \item Kontextspezifische Interventionen designen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Universelle Constraints. Kontextsensitivität von Regeln nicht abbildbar.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-01, MA-ONT-04
+
+\textbf{Literatur:} Ostrom (2005); Crawford \& Ostrom (1995)
+
+%==============================================================================
+% MA-GOV-03: Autonomie-Primat
+%==============================================================================
+
+\subsubsection*{MA-GOV-03: Autonomie-Primat}
+
+\textbf{Statement:} Individuelle Autonomie hat Vorrang.
+
+\textbf{Formel:}
+\begin{equation}
+\forall \Gamma: \min(\text{Einschränkung}) \quad \text{s.t. } \max(\text{Zielerreichung})
+\end{equation}
+
+\textbf{Beschreibung:}
+Das BCM ist nicht paternalistisch. Autonomie ist ein Wert an sich:
+\begin{itemize}
+    \item Menschen haben das Recht auf eigene Entscheidungen
+    \item Auch ``schlechte'' Entscheidungen sind zu respektieren
+    \item Interventionen nur bei klarem Mehrwert und minimal invasiv
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ethisches Leitprinzip. Begrenzt den Interventionsraum. Begründet die Präferenz für Nudges über Verbote.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX respektiert Autonomie:
+\begin{itemize}
+    \item Keine manipulativen Interventionen empfehlen
+    \item Transparenz über Interventionsziele
+    \item Opt-Out-Möglichkeiten vorsehen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine ethische Grenze für Interventionen. Paternalismus würde legitimiert.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-01
+
+\textbf{Literatur:} Mill (1859); Sunstein (2014)
+
+%==============================================================================
+% MA-GOV-04: Nicht-Normativität
+%==============================================================================
+
+\subsubsection*{MA-GOV-04: Nicht-Normativität}
+
+\textbf{Statement:} Das BCM beschreibt, schreibt nicht vor.
+
+\textbf{Formel:}
+\begin{equation}
+\text{BCM}: \text{is} \rightarrow \text{is}, \quad \text{nicht: is} \rightarrow \text{ought}
+\end{equation}
+
+\textbf{Beschreibung:}
+Das BCM ist ein deskriptives, kein normatives System:
+\begin{itemize}
+    \item Es sagt, wie Menschen sich verhalten, nicht wie sie sich verhalten sollen
+    \item Es ist wertfrei bezüglich der Inhalte
+    \item Die Ziele der Intervention werden extern gesetzt
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Wichtige Abgrenzung. Das BCM kann für viele Ziele eingesetzt werden. Es ist ein Werkzeug, keine Weltanschauung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX ist agnostisch bezüglich Zielen:
+\begin{itemize}
+    \item Das Zielverhalten wird vom Nutzer vorgegeben
+    \item BEATRIX optimiert für das vorgegebene Ziel
+    \item Ethische Bewertung des Ziels ist Nutzer-Verantwortung
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Das BCM würde bestimmte Verhaltensweisen als ``richtig'' definieren. Ideologische Aufladung.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} -- (meta-ethisches Axiom)
+
+\textbf{Literatur:} Weber (1917); Hume (1739)
+
+%==============================================================================
+% MA-GOV-05: Transparenz-Gebot
+%==============================================================================
+
+\subsubsection*{MA-GOV-05: Transparenz-Gebot}
+
+\textbf{Statement:} Interventionen sollen transparent sein.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Transparency}(I) \rightarrow \max
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen haben ein Recht zu wissen, dass und wie sie beeinflusst werden:
+\begin{itemize}
+    \item Offenlegung von Nudges
+    \item Erklärung von Default-Setzungen
+    \item Keine verdeckte Manipulation
+\end{itemize}
+Transparenz kann Wirkung reduzieren, ist aber ethisch geboten.
+
+\textbf{BCM-Relevanz:}
+Ethische Grenze für Interventionsdesign. ``Libertarian Paternalism'' verlangt Transparenz als Legitimationsbedingung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt transparente Interventionen:
+\begin{itemize}
+    \item Interventionen, die bei Offenlegung noch wirken, bevorzugen
+    \item Warnung bei verdeckten Interventionen
+    \item Transparenz-Score als Bewertungskriterium
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Verdeckte Manipulation wäre legitimiert. Vertrauensverlust bei Bekanntwerden.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-03
+
+\textbf{Literatur:} Thaler \& Sunstein (2008); Hansen \& Jespersen (2013)
+
+%==============================================================================
+% MA-GOV-06: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-GOV-07: 8 Interventionstypen
+%==============================================================================
+
+\subsubsection*{MA-GOV-07: Acht Interventionstypen}
+
+\textbf{Statement:} Es gibt acht grundlegende Interventionstypen.
+
+\textbf{Formel:}
+\begin{equation}
+I \in \{\text{NUDGE, BOOST, THINK, INCENTIVE, REGULATE, DESIGN, SOCIAL, IDENTITY}\}
+\end{equation}
+
+\textbf{Beschreibung:}
+Die acht Typen decken das Interventionsspektrum ab:
+\begin{itemize}
+    \item \textbf{NUDGE}: Entscheidungsarchitektur ändern
+    \item \textbf{BOOST}: Kompetenz stärken
+    \item \textbf{THINK}: Reflexion anregen
+    \item \textbf{INCENTIVE}: Anreize setzen
+    \item \textbf{REGULATE}: Regeln setzen/durchsetzen
+    \item \textbf{DESIGN}: Physische Umgebung ändern
+    \item \textbf{SOCIAL}: Soziale Normen aktivieren
+    \item \textbf{IDENTITY}: Identität ansprechen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Taxonomie für Interventionsplanung. Jeder Typ hat charakteristische Stärken und Grenzen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX klassifiziert und empfiehlt Interventionstypen:
+\begin{itemize}
+    \item Welcher Typ passt zur Persona und zum Kontext?
+    \item Kombination verschiedener Typen planen
+    \item Trade-offs zwischen Typen explizit machen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine systematische Klassifikation von Interventionen. Ad-hoc-Interventionsdesign.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-06
+
+\textbf{Literatur:} Eigene Taxonomie, aufbauend auf Thaler \& Sunstein (2008); Hertwig \& Grüne-Yanoff (2017)
+
+%==============================================================================
+% MA-GOV-08: Freiheits-Hierarchie
+%==============================================================================
+
+\subsubsection*{MA-GOV-08: Freiheits-Hierarchie}
+
+\textbf{Statement:} Interventionen haben unterschiedliche Freiheitsgrade.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Freedom}: \text{BOOST} > \text{THINK} > \text{NUDGE} > \text{DESIGN} > \text{SOCIAL} > \text{IDENTITY} > \text{INCENTIVE} > \text{REGULATE}
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Ranking ordnet Interventionen nach Autonomieeinschränkung:
+\begin{itemize}
+    \item BOOST: Erweitert Fähigkeiten, maximale Freiheit
+    \item THINK: Aktiviert eigene Reflexion
+    \item NUDGE: Sanfter Schubs, leicht überwindbar
+    \item ...
+    \item REGULATE: Verbot/Gebot, minimale Freiheit
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Operationalisierung des Subsidiaritätsprinzips (MA-GOV-06). Gibt klare Eskalationsreihenfolge vor.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verwendet die Hierarchie:
+\begin{itemize}
+    \item Empfehlungen mit Freedom-Score versehen
+    \item Bei mehreren wirksamen Optionen: höhere Freiheit bevorzugen
+    \item Trade-off Freiheit vs. Effektivität transparent machen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Ordnung von Interventionen nach Freiheit. Subsidiarität wäre nicht operationalisierbar.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-07
+
+\textbf{Literatur:} Eigenes Konstrukt; vgl. Sunstein (2016)
+
+%==============================================================================
+% MA-GOV-09: Eskalations-Prinzip
+%==============================================================================
+
+\subsubsection*{MA-GOV-09: Eskalations-Prinzip}
+
+\textbf{Statement:} Von mild nach stark eskalieren.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Try}(I_n) \text{ before } \text{Try}(I_{n+1}) \quad \text{where } \text{Freedom}(I_n) > \text{Freedom}(I_{n+1})
+\end{equation}
+
+\textbf{Beschreibung:}
+Die Interventionsleiter wird von oben nach unten abgearbeitet:
+\begin{enumerate}
+    \item Erst BOOST versuchen
+    \item Wenn unwirksam: NUDGE
+    \item Wenn unwirksam: INCENTIVE
+    \item Nur als letztes: REGULATE
+\end{enumerate}
+
+\textbf{BCM-Relevanz:}
+Prozedurale Norm für ethisches Interventionsdesign. Verhindert vorschnelle Regulierung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt Eskalationspfade:
+\begin{itemize}
+    \item Startpunkt: mildeste wirksame Intervention
+    \item Fallback-Optionen bei Unwirksamkeit definieren
+    \item Monitoring für Eskalationsentscheidung
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Interventionen könnten mit der härtesten Stufe beginnen. Unverhältnismäßigkeit.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-08, MA-GOV-06
+
+\textbf{Literatur:} Sunstein (2014)
+
+%==============================================================================
+% MA-GOV-10: 28 Interventions-Dimensionen
+%==============================================================================
+
+\subsubsection*{MA-GOV-10: 28 Interventions-Dimensionen}
+
+\textbf{Statement:} Interventionen werden über 28 Dimensionen in 9 Kategorien charakterisiert.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Dim} = \{\text{Freiheit}, \text{Psychologie}, \text{Zeit}, \text{Reichweite}, \text{Kontext}, \text{Ethik}, \text{Implementation}, \text{Effekt}, \text{Dynamik}\}
+\end{equation}
+
+\textbf{Beschreibung:}
+Jede Intervention kann auf 28 Dimensionen bewertet werden:
+\begin{itemize}
+    \item \textbf{Freiheit}: Restrictiveness, Opt-Out, Reversibility
+    \item \textbf{Psychologie}: Target System (1/2), Mechanism, Awareness
+    \item \textbf{Zeit}: Duration, Onset, Decay
+    \item ...
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ermöglicht präzise Charakterisierung und Vergleich von Interventionen. Systematische Planung statt Intuition.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verwendet die Dimensionen für:
+\begin{itemize}
+    \item Detaillierte Beschreibung empfohlener Interventionen
+    \item Matching Intervention-Persona-Kontext
+    \item Trade-off-Analyse zwischen Dimensionen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Grobe Klassifikation nur nach Typ. Nuancen zwischen Interventionen nicht erfassbar.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-07
+
+\textbf{Literatur:} Eigenes Konstrukt
+
+%==============================================================================
+% MA-GOV-11: Distributive Gerechtigkeit
+%==============================================================================
+
+\subsubsection*{MA-GOV-11: Distributive Gerechtigkeit}
+
+\textbf{Statement:} Kosten und Nutzen fair verteilen.
+
+\textbf{Formel:}
+\begin{equation}
+\forall \sigma: \text{Burden}(\sigma) \propto \text{Capacity}(\sigma)
+\end{equation}
+
+\textbf{Beschreibung:}
+Interventionen sollen nicht systematisch bestimmte Gruppen benachteiligen:
+\begin{itemize}
+    \item Wer profitiert, wer trägt die Kosten?
+    \item Vulnerable Gruppen besonders schützen
+    \item Progressivität: Stärkere Schultern tragen mehr
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Gerechtigkeitsprinzip für Interventionsdesign. Verhindert, dass Interventionen bestehende Ungleichheiten verstärken.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft distributive Effekte:
+\begin{itemize}
+    \item Wer ist von der Intervention betroffen?
+    \item Sind vulnerable Gruppen überproportional belastet?
+    \item Alternative Designs mit besserer Verteilung?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Interventionen könnten systematisch ungerecht sein. Verstärkung von Ungleichheit.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-03
+
+\textbf{Literatur:} Rawls (1971); Sen (2009)
+
+%==============================================================================
+% MA-GOV-12: Reversibilität bevorzugen
+%==============================================================================
+
+\subsubsection*{MA-GOV-12: Reversibilität bevorzugen}
+
+\textbf{Statement:} Reversible Interventionen sind vorzuziehen.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Prefer}(I_{\text{reversible}}) \text{ over } I_{\text{irreversible}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Interventionen sollten rückgängig machbar sein:
+\begin{itemize}
+    \item Wenn sie nicht wirken: Abbruch möglich
+    \item Wenn unerwünschte Effekte: Korrektur möglich
+    \item Experimentation wird ermöglicht
+\end{itemize}
+Irreversible Interventionen erfordern höhere Evidenzschwellen.
+
+\textbf{BCM-Relevanz:}
+Risikominimierung bei Unsicherheit. Ermöglicht iteratives Vorgehen (MA-GOV-20).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX bewertet Reversibilität:
+\begin{itemize}
+    \item Reversibility-Score für jede Intervention
+    \item Bei Unsicherheit: reversible Option wählen
+    \item Warnung bei irreversiblen Empfehlungen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Irreversible Interventionen ohne besondere Vorsicht. Keine Korrekturmöglichkeit bei Fehlern.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-06
+
+\textbf{Literatur:} Arrow \& Fisher (1974); Sunstein (2005)
+
+%==============================================================================
+% MA-GOV-13: Manipulation vermeiden
+%==============================================================================
+
+\subsubsection*{MA-GOV-13: Manipulation vermeiden}
+
+\textbf{Statement:} Keine verdeckte, täuschende Beeinflussung.
+
+\textbf{Formel:}
+\begin{equation}
+\text{If } \text{Hidden}(I) \land \text{Deceptive}(I) \rightarrow \text{Reject}(I)
+\end{equation}
+
+\textbf{Beschreibung:}
+Manipulation = verdeckt + täuschend. Nicht jeder Nudge ist Manipulation:
+\begin{itemize}
+    \item Offener Nudge: OK
+    \item Verdeckter, aber wahrhaftiger Nudge: Grauzone
+    \item Verdeckter + täuschender Nudge: Manipulation = NICHT OK
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ethische Grenze. Das BCM lehnt Manipulation ab, nicht Beeinflussung per se. Der Unterschied ist Transparenz und Wahrhaftigkeit.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft auf Manipulation:
+\begin{itemize}
+    \item Ist die Intervention bei Offenlegung noch vertretbar?
+    \item Werden falsche Informationen verwendet?
+    \item Manipulation-Flag bei Grenzfällen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Keine Grenze zwischen Nudge und Manipulation. Ethische Kritik berechtigt.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-05
+
+\textbf{Literatur:} Sunstein (2016); Bovens (2009)
+
+%==============================================================================
+% MA-GOV-14: Bereits in axiom_beispiele.tex
+%==============================================================================
+
+%==============================================================================
+% MA-GOV-15: Reaktanz beachten
+%==============================================================================
+
+\subsubsection*{MA-GOV-15: Reaktanz beachten}
+
+\textbf{Statement:} Einschränkungen können psychologische Reaktanz auslösen.
+
+\textbf{Formel:}
+\begin{equation}
+P(\text{Resistance}|\text{Restriction}) > 0
+\end{equation}
+
+\textbf{Beschreibung:}
+Reaktanz ist die psychologische Gegenwehr gegen wahrgenommene Freiheitseinschränkung:
+\begin{itemize}
+    \item ``Verbotene Frucht'' wird attraktiver
+    \item ``Trotzreaktion'': das Verbotene tun
+    \item Besonders stark bei autonomieorientierten Personen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt kontraproduktive Effekte von Regulierung. REGULATE kann Backlash erzeugen. Reaktanz ist besonders relevant bei IDN-starken Personen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Reaktanz-Risiko:
+\begin{itemize}
+    \item Wie reaktanz-anfällig ist die Persona?
+    \item Wie freiheitsbeschränkend ist die Intervention?
+    \item Alternativen mit weniger Reaktanz-Risiko?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur positive Interventionseffekte modelliert. Backlash-Risiko ignoriert.
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-GOV-01
+
+\textbf{Literatur:} Brehm (1966); Steindl et al. (2015)
+
+%==============================================================================
+% MA-GOV-16: Ausweichverhalten beachten
+%==============================================================================
+
+\subsubsection*{MA-GOV-16: Ausweichverhalten beachten}
+
+\textbf{Statement:} Regulierung kann zu Umgehung führen.
+
+\textbf{Formel:}
+\begin{equation}
+P(\text{Evasion}|\text{REGULATE}) > 0
+\end{equation}
+
+\textbf{Beschreibung:}
+Verbote werden nicht immer befolgt -- oft wird nach Schlupflöchern gesucht:
+\begin{itemize}
+    \item Steuerregeln → Steuervermeidung
+    \item Geschwindigkeitsbegrenzung → Radarwarner
+    \item Drogenverbot → illegaler Markt
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Begrenzt die Wirksamkeit von REGULATE. Bei hoher Evasion-Wahrscheinlichkeit sind andere Interventionstypen vorzuziehen.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt Evasion-Wahrscheinlichkeit:
+\begin{itemize}
+    \item Wie einfach ist Umgehung?
+    \item Wie hoch ist die Entdeckungswahrscheinlichkeit?
+    \item Ist die Regulierung durchsetzbar?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Perfekte Compliance angenommen. Regulierungs-Illusionen.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-GOV-07
+
+\textbf{Literatur:} Becker (1968); Slemrod (2007)
+
+%==============================================================================
+% MA-GOV-17: Opt-Out-Prinzip
+%==============================================================================
+
+\subsubsection*{MA-GOV-17: Opt-Out-Prinzip}
+
+\textbf{Statement:} Austritt muss möglich sein (außer bei REGULATE).
+
+\textbf{Formel:}
+\begin{equation}
+\forall I \neq \text{REGULATE}: \text{OptOut}(I) = \text{possible}
+\end{equation}
+
+\textbf{Beschreibung:}
+Alle Interventionen außer REGULATE müssen Opt-Out erlauben:
+\begin{itemize}
+    \item Default kann überschrieben werden
+    \item Nudge kann ignoriert werden
+    \item Incentive kann abgelehnt werden
+\end{itemize}
+REGULATE ist die Ausnahme -- Gesetze gelten für alle.
+
+\textbf{BCM-Relevanz:}
+Operationalisiert Autonomie-Primat (MA-GOV-03). Unterscheidet ``libertarian paternalism'' von echtem Paternalismus.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX stellt Opt-Out sicher:
+\begin{itemize}
+    \item Jede Intervention außer REGULATE hat Opt-Out-Weg
+    \item Opt-Out muss praktisch möglich sein (nicht nur theoretisch)
+    \item Warnung bei de-facto nicht-überwindbaren Defaults
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Alle Interventionen wären de facto Zwang. Verlust des libertären Elements.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-03
+
+\textbf{Literatur:} Thaler \& Sunstein (2008)
+
+%==============================================================================
+% MA-GOV-18: Informed Consent
+%==============================================================================
+
+\subsubsection*{MA-GOV-18: Informed Consent}
+
+\textbf{Statement:} Informierte Zustimmung bei Interventionen.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Legitimate}(I) \rightarrow \text{Informed}(\sigma) \land \text{Consenting}(\sigma)
+\end{equation}
+
+\textbf{Beschreibung:}
+Ideale Intervention: Die Zielperson versteht und akzeptiert sie:
+\begin{itemize}
+    \item Informed: Weiß, dass und wie sie beeinflusst wird
+    \item Consenting: Stimmt der Beeinflussung zu
+\end{itemize}
+Bei öffentlichen Interventionen: implizite Zustimmung durch demokratische Legitimation.
+
+\textbf{BCM-Relevanz:}
+Höchster ethischer Standard. In der Praxis oft abgeschwächt, aber als Ideal wichtig.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX bewertet Consent-Level:
+\begin{itemize}
+    \item Ist explizite Zustimmung möglich/nötig?
+    \item Ist implizite Zustimmung ausreichend?
+    \item Wie kann Informiertheit erhöht werden?
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Interventionen ohne jede Zustimmung legitim. Paternalismus pur.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-05
+
+\textbf{Literatur:} Faden \& Beauchamp (1986)
+
+%==============================================================================
+% MA-GOV-19: Interventionen habituieren
+%==============================================================================
+
+\subsubsection*{MA-GOV-19: Interventionen habituieren}
+
+\textbf{Statement:} Interventionswirkung lässt über Zeit nach.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial \text{Effect}(I)}{\partial \tau} < 0 \quad \text{für } \tau \rightarrow \infty
+\end{equation}
+
+\textbf{Beschreibung:}
+Die meisten Interventionen verlieren Wirkung:
+\begin{itemize}
+    \item Nudges werden habituiert (``Blindheit'' für Hinweise)
+    \item Incentives verlieren Neuheit
+    \item Nur REGULATE und DESIGN bleiben stabil
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Erklärt Langzeit-Ineffektivität von Interventionen. Begründet Notwendigkeit von Iteration (MA-GOV-20).
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert Decay:
+\begin{itemize}
+    \item Erwartete Wirkdauer der Intervention
+    \item Wann ist Refresh nötig?
+    \item Decay-resistente Interventionstypen bevorzugen für Langzeiteffekte
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Konstante Interventionswirkung angenommen. Überschätzung von Langzeiteffekten.
+
+\textbf{Validiert:} WTX
+
+\textbf{Abhängigkeiten:} MA-ONT-20
+
+\textbf{Literatur:} Allcott \& Rogers (2014)
+
+%==============================================================================
+% MA-GOV-20: Iteration notwendig
+%==============================================================================
+
+\subsubsection*{MA-GOV-20: Iteration notwendig}
+
+\textbf{Statement:} Interventionen müssen iterativ angepasst werden.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Optimal}(I) \text{ requires Feedback-Loop}
+\end{equation}
+
+\textbf{Beschreibung:}
+``Set and forget'' funktioniert nicht:
+\begin{itemize}
+    \item Erstimplementierung ist selten optimal
+    \item Kontexte ändern sich
+    \item Habituation erfordert Variation
+\end{itemize}
+PDCA-Zyklus: Plan-Do-Check-Act.
+
+\textbf{BCM-Relevanz:}
+Prozessprinzip. Interventionen sind keine einmaligen Events, sondern laufende Optimierung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt iteratives Design:
+\begin{itemize}
+    \item Monitoring-Metriken definieren
+    \item Anpassungszeitpunkte festlegen
+    \item A/B-Test-Optionen vorsehen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statische Interventionen. Keine Lernschleifen. Suboptimale Langzeitergebnisse.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-19
+
+\textbf{Literatur:} Deming (1986); Haynes et al. (2012)
+
+%==============================================================================
+% MA-GOV-21: Evaluation notwendig
+%==============================================================================
+
+\subsubsection*{MA-GOV-21: Evaluation notwendig}
+
+\textbf{Statement:} Wirksamkeit muss gemessen werden.
+
+\textbf{Formel:}
+\begin{equation}
+\forall I: \text{Measure}(\text{Effect}(I))
+\end{equation}
+
+\textbf{Beschreibung:}
+Keine Intervention ohne Evaluation:
+\begin{itemize}
+    \item Wurde das Zielverhalten erreicht?
+    \item War die Intervention ursächlich?
+    \item Gibt es unbeabsichtigte Effekte?
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Wissenschaftliches Prinzip. Das BCM verlangt Evidenzbasierung, nicht nur Plausibilität.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX integriert Evaluation:
+\begin{itemize}
+    \item KPIs für jede Intervention definieren
+    \item Evaluationsdesign (RCT, Quasi-Experiment) vorschlagen
+    \item Datenquellen identifizieren
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Intuitionsbasierte Interventionen. Keine Lernfähigkeit. Persistenz unwirksamer Maßnahmen.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-20
+
+\textbf{Literatur:} Campbell \& Stanley (1966); Shadish et al. (2002)
+
+%==============================================================================
+% MA-GOV-22: A/B-Testing bevorzugen
+%==============================================================================
+
+\subsubsection*{MA-GOV-22: A/B-Testing bevorzugen}
+
+\textbf{Statement:} Experimentelle Evaluation wenn möglich.
+
+\textbf{Formel:}
+\begin{equation}
+\text{RCT} > \text{Observational} \quad \text{für Kausalität}
+\end{equation}
+
+\textbf{Beschreibung:}
+Randomisierte Kontrollversuche (RCT) liefern kausale Evidenz:
+\begin{itemize}
+    \item Zufällige Zuweisung eliminiert Selektionsbias
+    \item Vergleich Treatment vs. Control
+    \item Gold-Standard für Wirksamkeitsnachweis
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Methodisches Ideal. Wo RCTs nicht möglich: Quasi-experimentelle Designs, natürliche Experimente.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX empfiehlt Testdesigns:
+\begin{itemize}
+    \item Ist ein RCT möglich?
+    \item Sample-Size-Berechnung
+    \item Alternative Designs bei RCT-Unmöglichkeit
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Korrelation = Kausalität-Fehler. Überschätzung von Interventionseffekten.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-GOV-21
+
+\textbf{Literatur:} Fisher (1935); Duflo et al. (2008)
+
+%==============================================================================
+% MA-GOV-23: Spillover messen
+%==============================================================================
+
+\subsubsection*{MA-GOV-23: Spillover messen}
+
+\textbf{Statement:} Nicht-intendierte Effekte müssen erfasst werden.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Measure}(\text{Effect}_{\text{unintended}}) \text{ alongside } \text{Effect}_{\text{intended}}
+\end{equation}
+
+\textbf{Beschreibung:}
+Interventionen haben oft unbeabsichtigte Nebenwirkungen:
+\begin{itemize}
+    \item Positiver Spillover: Andere Verhaltensweisen verbessern sich
+    \item Negativer Spillover: Moral Licensing, Ausweichverhalten
+    \item Spillover auf Nicht-Zielpersonen
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Ganzheitliche Evaluation. Eine Intervention, die das Zielverhalten verbessert, aber Schlimmeres verursacht, ist netto negativ.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft auf Spillover:
+\begin{itemize}
+    \item Welche anderen Verhaltensweisen könnten beeinflusst werden?
+    \item Spillover-Metriken in Evaluation aufnehmen
+    \item Warnung bei hohem negativen Spillover-Risiko
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Nur Zieleffekt betrachtet. Systemische Auswirkungen ignoriert.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-22, MA-GOV-21
+
+\textbf{Literatur:} Dolan \& Galizzi (2015)
+
+%==============================================================================
+% MA-GOV-24: Langfristeffekte beachten
+%==============================================================================
+
+\subsubsection*{MA-GOV-24: Langfristeffekte beachten}
+
+\textbf{Statement:} Kurzfristige Wirkung $\neq$ Langfristige Wirkung.
+
+\textbf{Formel:}
+\begin{equation}
+\text{Effect}(\tau = \text{short}) \neq \text{Effect}(\tau = \text{long})
+\end{equation}
+
+\textbf{Beschreibung:}
+Interventionen können unterschiedliche Kurz- und Langzeiteffekte haben:
+\begin{itemize}
+    \item Initial stark, dann Decay (NUDGE)
+    \item Initial schwach, dann Wachstum (BOOST)
+    \item Langfristige Backlash-Risiken
+\end{itemize}
+
+\textbf{BCM-Relevanz:}
+Temporale Differenzierung. Kurze Studien überschätzen möglicherweise langfristige Wirkung.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert zeitliche Dynamik:
+\begin{itemize}
+    \item Erwartete Effektkurve über Zeit
+    \item Langzeit-Follow-Up empfehlen
+    \item Warnung bei bekannten Decay-Patterns
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kurzfristeffekte extrapoliert. Systematische Überschätzung von Langzeitwirkung.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-05, MA-GOV-21
+
+\textbf{Literatur:} Allcott \& Rogers (2014); Brandon et al. (2017)
+
+%==============================================================================
+% MA-GOV-25: Governance evolviert
+%==============================================================================
+
+\subsubsection*{MA-GOV-25: Governance evolviert}
+
+\textbf{Statement:} Regeln und Constraints passen sich an.
+
+\textbf{Formel:}
+\begin{equation}
+\Gamma(\tau + \Delta\tau) = f(\Gamma(\tau), \text{Feedback})
+\end{equation}
+
+\textbf{Beschreibung:}
+Governance ist nicht statisch:
+\begin{itemize}
+    \item Gesetze werden reformiert
+    \item Normen wandeln sich
+    \item Best Practices entwickeln sich
+\end{itemize}
+Das GOV-Modul selbst ist Gegenstand von Evolution.
+
+\textbf{BCM-Relevanz:}
+Meta-Dynamik. Die Regeln für Interventionen ändern sich. Ethische Standards entwickeln sich.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt Governance-Evolution:
+\begin{itemize}
+    \item Sind aktuelle Best Practices noch aktuell?
+    \item Trends in der Interventionsforschung beobachten
+    \item Empfehlungen können veralten
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Statische Governance-Annahmen. Keine Anpassung an veränderte Rahmenbedingungen.
+
+\textbf{Validiert:} META
+
+\textbf{Abhängigkeiten:} MA-ONT-25
+
+\textbf{Literatur:} Ostrom (1990); North (1990)
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\textit{Ende der GOV-Axiome. Alle 25 Governance-Axiome sind nun vollständig dokumentiert.}
