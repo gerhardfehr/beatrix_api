@@ -65,7 +65,7 @@
 \maketitle
 
 \begin{abstract}
-Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 113 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 37 kognitiven Biases (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
+Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 114 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 38 kognitiven und methodologischen Axiomen (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND), der Evidenzhierarchie für BCM-Parameter (Labor-Feld-Triangulation) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
 \end{abstract}
 
 \tableofcontents
@@ -161,7 +161,7 @@ Die Lektion für die Verhaltensökonomie: Implizite Annahmen können nicht syste
 
 Giuseppe Peano formalisierte die natürlichen Zahlen in fünf Axiomen. Das erste: \textit{0 ist eine natürliche Zahl.} Das zweite: \textit{Jede natürliche Zahl hat einen Nachfolger.} Aus diesen minimalen Annahmen folgt die gesamte Arithmetik.
 
-Die Eleganz der Peano-Axiome liegt in ihrer \textit{Minimalität}: Sie machen genau die Annahmen, die nötig sind -- nicht mehr und nicht weniger. Das \META-Modul strebt dasselbe Ideal an: 113 Axiome, die das Minimum an Annahmen darstellen, um menschliches Verhalten konsistent zu modellieren.
+Die Eleganz der Peano-Axiome liegt in ihrer \textit{Minimalität}: Sie machen genau die Annahmen, die nötig sind -- nicht mehr und nicht weniger. Das \META-Modul strebt dasselbe Ideal an: 114 Axiome, die das Minimum an Annahmen darstellen, um menschliches Verhalten konsistent zu modellieren.
 
 \paragraph{Kolmogorovs Wahrscheinlichkeitstheorie (1933).}
 
@@ -1473,7 +1473,7 @@ Die Gesamtarchitektur des \BCM{} 2.2 lässt sich als Schichtenmodell darstellen:
     arrow/.style={-{Stealth}, thick}
 ]
     % Layers
-    \node[layer, fill=blue!10] (meta) at (0,4) {\textbf{META} (113 Axiome) \\ ONT | EPI | GOV | DYN};
+    \node[layer, fill=blue!10] (meta) at (0,4) {\textbf{META} (114 Axiome) \\ ONT | EPI | GOV | DYN};
     \node[layer, fill=green!10] (ops) at (0,2.5) {\textbf{Operative Module} \\ INU | KNU | IDN | LAMBDA};
     \node[layer, fill=orange!10] (est) at (0,1) {\textbf{ESTIMATION} (55 Axiome) \\ LLM-basierte Parameterschätzung};
     \node[layer, fill=red!10] (app) at (0,-0.5) {\textbf{BEATRIX Application} \\ Verhaltensvorhersage \& Intervention};
@@ -1704,7 +1704,7 @@ Das 5-Ebenen-Modell ist zentral für die \BEATRIX-Parameterschätzung: (1) \text
 
 \epigraph{\textit{``Ich weiß, dass ich nichts weiß.''}}{--- Sokrates, nach Platon, \textit{Apologie}}
 
-Die Epistemologie-Kategorie (37 Axiome: MA-EPI-01 bis MA-EPI-37) definiert, \textbf{was wir wissen können}, welche Grenzen Wissen hat, und welche systematischen Verzerrungen (Biases) existieren.
+Die Epistemologie-Kategorie (38 Axiome: MA-EPI-01 bis MA-EPI-38) definiert, \textbf{was wir wissen können}, welche Grenzen Wissen hat, und welche systematischen Verzerrungen (Biases) existieren.
 
 \subsection{Philosophischer Hintergrund: Von Platon zu Kahneman}
 
@@ -1955,10 +1955,142 @@ Bewertung skaliert nicht proportional mit der Anzahl Betroffener.
 \textbf{BCM-Relevanz}: Kollektiver Nutzen (KNU) wird systematisch unterschätzt. Dies rechtfertigt Interventionen, die KNU salient machen.
 \end{axiom}
 
+\subsection{Evidenzhierarchie und die Labor-Feld-Debatte}
+
+\epigraph{\textit{``We argue that many recent objections against lab experiments are misguided and that even more lab experiments should be conducted.''}}{--- Falk \& Heckman, \textit{Science} (2009)}
+
+Eine fundamentale epistemische Frage für das \BCM{} lautet: \textbf{Woher stammen die Parameter, und wie robust sind sie?} Diese Frage berührt eine zentrale methodologische Debatte der Verhaltensökonomie.
+
+\subsubsection{Die methodologische Kontroverse}
+
+\paragraph{Die Kritik an Laborexperimenten.}
+Levitt \& List (2007) formulierten einflussreiche Einwände gegen die externe Validität von Laborexperimenten:
+\begin{itemize}
+    \item \textbf{Selektion}: Laborprobanden sind typischerweise WEIRD (Western, Educated, Industrialized, Rich, Democratic) -- insbesondere Studierende
+    \item \textbf{Stakes}: Laborauszahlungen sind oft trivial im Vergleich zu realen Entscheidungen
+    \item \textbf{Scrutiny}: Probanden wissen, dass sie beobachtet werden (Hawthorne-Effekt)
+    \item \textbf{Kontext}: Das Labor abstrahiert von den sozialen und institutionellen Faktoren realer Entscheidungen
+\end{itemize}
+
+\paragraph{Die Verteidigung des Labors.}
+Falk \& Heckman (2009) verteidigten Laborexperimente in \textit{Science}:
+\begin{itemize}
+    \item \textbf{Kontrolle}: Nur im Labor können Schlüsselaspekte des Kontexts systematisch variiert werden
+    \item \textbf{Kausalität}: Randomisierung ermöglicht kausale Inferenz, die aus Beobachtungsdaten nicht möglich ist
+    \item \textbf{Mechanismus-Identifikation}: Ohne Labor wüssten wir nicht, \textit{dass} Loss Aversion existiert oder \textit{wie} sie funktioniert
+    \item \textbf{Replikation}: Laborergebnisse sind replizierbar unter kontrollierten Bedingungen
+\end{itemize}
+
+Ihre Kernthese: ``The objection that experiments are artificial misses the point. Any data set can be used to get a specific estimate only to the extent that the variation in the data can be controlled for extraneous factors.''
+
+\paragraph{Die moderne Synthese: Triangulation.}
+Die zeitgenössische Position -- reflektiert im Nobelpreis 2021 für Card, Angrist und Imbens -- ist:
+
+\begin{center}
+\textbf{Labor + Feld-RCT + Natürliche Experimente + Strukturelle Modelle}\\[0.3em]
+$\downarrow$\\[0.3em]
+\textbf{TRIANGULATION}\\[0.3em]
+$\downarrow$\\[0.3em]
+\textbf{Robustes Kausalwissen}
+\end{center}
+
+Konvergente Befunde über verschiedene Methoden hinweg erhöhen das Vertrauen in die Robustheit eines Effekts dramatisch.
+
+\subsubsection{Implikationen für BCM-Parameter}
+
+Die BCM-Base-Rates stammen primär aus Laborexperimenten. Dies hat Implikationen:
+
+\begin{table}[h]
+\centering
+\caption{Validierungsstatus zentraler BCM-Parameter}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Labor-Evidenz} & \textbf{Feld-Evidenz} & \textbf{Status} \\
+\midrule
+$\lambda \approx 2.25$ (Loss Aversion) & Kahneman \& Tversky (1979) & Variiert nach Kontext & Mechanismus robust \\
+$\beta \approx 0.7$ (Present Bias) & Laibson et al. (1997) & Kontextabhängig & Mechanismus robust \\
+50\% Conditional Cooperators & Fischbacher et al. (2001) & Kulturelle Variation & Robust in WEIRD \\
+Nudge-Effekte +15\% & Diverse Meta-Analysen & DellaVigna \& Linos: +2\% & \textbf{Lab-Field Gap!} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Der Lab-Field Gap.}
+DellaVigna \& Linos (2022) dokumentierten systematisch, dass Nudge-Effekte in Feld-Implementierungen oft nur 10--20\% der Labor-Effektstärken erreichen. Mögliche Gründe:
+\begin{itemize}
+    \item \textbf{Compliance}: Im Labor folgen 100\% den Instruktionen; im Feld deutlich weniger
+    \item \textbf{Konkurrenz}: Im Feld konkurrieren Nudges mit vielen anderen Einflüssen
+    \item \textbf{Heterogenität}: Labor-Effekte sind Durchschnitte; Feld-Populationen sind heterogener
+    \item \textbf{Implementation}: Perfekte Labor-Implementierung vs. reale Umsetzungsprobleme
+\end{itemize}
+
+\begin{axiom}[Evidenzhierarchie für BCM-Parameter: MA-EPI-38]
+BCM-Parameter sind nach Evidenzqualität zu klassifizieren:
+
+\begin{enumerate}
+    \item \textbf{Höchste Evidenz} ($\star\star\star\star$): Konvergenz von Labor-RCT + Feld-RCT + Natürlichem Experiment
+    \begin{itemize}
+        \item Beispiel: Loss Aversion als Mechanismus
+        \item Interpretation: Robuster Parameter, direkt verwendbar
+    \end{itemize}
+
+    \item \textbf{Hohe Evidenz} ($\star\star\star$): Replizierte Labor-RCTs mit theoretischer Fundierung
+    \begin{itemize}
+        \item Beispiel: 50\% Conditional Cooperators (Fischbacher et al.)
+        \item Interpretation: Mechanismus validiert, Effektstärke kontextabhängig
+    \end{itemize}
+
+    \item \textbf{Mittlere Evidenz} ($\star\star$): Einzelne Labor-RCTs oder nicht-replizierte Feldstudien
+    \begin{itemize}
+        \item Beispiel: Spezifische Nudge-Effektstärken
+        \item Interpretation: Vorläufiger Parameter, Validierung nötig
+    \end{itemize}
+
+    \item \textbf{Niedrige Evidenz} ($\star$): Beobachtungsstudien oder theoretische Ableitung
+    \begin{itemize}
+        \item Beispiel: FEPSDE-Gewichtungen
+        \item Interpretation: Arbeitshypothese, empirische Validierung erforderlich
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{BEATRIX-Implikation.}
+Das System sollte bei Parameterschätzungen die Evidenzstufe kommunizieren und bei niedrigerer Evidenz breitere Konfidenzintervalle verwenden.
+\end{axiom}
+
+\subsubsection{Die Rolle von Armin Falk}
+
+Die Entwicklung von Armin Falk selbst illustriert die methodologische Evolution:
+
+\begin{table}[h]
+\centering
+\caption{Armin Falks methodologische Entwicklung}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Jahr} & \textbf{Studie} & \textbf{Methode} & \textbf{Beitrag} \\
+\midrule
+2001 & Fehr, Fischbacher, Falk & Labor-Experiment & Punishment in Public Goods \\
+2009 & Falk \& Heckman & Meta-Artikel & Verteidigung des Labors \\
+2018 & Global Preference Survey & Feld-Survey (76 Länder) & Kulturelle Variation dokumentiert \\
+2023 & Diverse Policy-Evaluationen & Natürliche Experimente & Reale Policy-Effekte \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Einsicht: Das Labor ist \textbf{notwendig aber nicht hinreichend}. Es identifiziert Mechanismen; Feld-Validierung quantifiziert reale Effektstärken.
+
+\paragraph{Implikation für das BCM.}
+Das \BCM{} verwendet Labor-Base-Rates als \textit{Default}-Werte, sollte aber:
+\begin{enumerate}
+    \item Transparenz über die Evidenzquelle herstellen
+    \item Kontextuelle Anpassung ermöglichen (z.B. kulturelle Kalibrierung)
+    \item Konfidenzintervalle der Evidenzqualität anpassen
+    \item Feld-Validierung aktiv fördern und integrieren
+\end{enumerate}
+
 \subsection{Vollständige Liste der EPI-Axiome}
 
 \begin{longtable}{@{}lll@{}}
-\caption{Alle 37 Epistemologie-Axiome} \\
+\caption{Alle 38 Epistemologie-Axiome} \\
 \toprule
 \textbf{ID} & \textbf{Statement} & \textbf{Referenz} \\
 \midrule
@@ -2012,6 +2144,7 @@ MA-EPI-34 & Moral Licensing & Merritt et al. (2010) \\
 MA-EPI-35 & Identifiable Victim Effect & Small \& Loewenstein (2003) \\
 MA-EPI-36 & Scope Insensitivity & Kahneman (1986) \\
 MA-EPI-37 & Affect Heuristic & Slovic et al. (2002) \\
+MA-EPI-38 & Evidenzhierarchie für BCM-Parameter & Falk \& Heckman (2009) \\
 \end{longtable}
 
 %==============================================================================
@@ -2342,7 +2475,7 @@ Jedes \META-Axiom spezifiziert im Feld \texttt{validates}, welche operativen Mod
 \textbf{META-Kategorie} & \textbf{INU} & \textbf{KNU} & \textbf{IDN} & \textbf{LAMBDA} \\
 \midrule
 ONT (26 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
-EPI (37 Axiome) & \checkmark & \checkmark & \checkmark & -- \\
+EPI (38 Axiome) & \checkmark & \checkmark & \checkmark & -- \\
 GOV (25 Axiome) & -- & -- & -- & -- \\
 DYN (25 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
 \bottomrule
@@ -2420,7 +2553,7 @@ wobei $s$ = Schiefe, $k$ = Kurtosis. Bei $BC > 0.555$ liegt Polarisierung vor.
 Das \META-Modul leistet folgende Beiträge zum \BCM:
 
 \begin{enumerate}
-    \item \textbf{Axiomatische Fundierung}: 113 explizite Annahmen machen das Modell transparent und kritisierbar
+    \item \textbf{Axiomatische Fundierung}: 114 explizite Annahmen machen das Modell transparent und kritisierbar
     \item \textbf{Interdisziplinäre Verankerung}: Die vier Kategorien (ONT, EPI, GOV, DYN) verbinden Verhaltensökonomie mit klassischen philosophischen Disziplinen
     \item \textbf{Bias-Katalog}: 37 formalisierte kognitive Biases ermöglichen systematische Berücksichtigung menschlicher Irrationalität
     \item \textbf{Ethische Leitplanken}: Die GOV-Kategorie definiert klare Prinzipien für Interventionsdesign
@@ -2439,7 +2572,7 @@ Das \META-Modul leistet folgende Beiträge zum \BCM:
 1.0 & 2023 & 100 & Initiale Version \\
 2.0 & 2024 & 100 & BCM 2.2 Integration \\
 2.1 & Dez 2024 & 101 & MA-ONT-26: 5-Ebenen-Hierarchie \\
-2.2 & Dez 2024 & 113 & +12 Biases (EPI-26 bis EPI-37) \\
+2.2 & Dez 2024 & 114 & +12 Biases (EPI-26 bis EPI-37), +Evidenzhierarchie (EPI-38) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2791,7 +2924,7 @@ Geplante Erweiterungen für \META{} 3.0:
 
 \section{Detaillierte Axiom-Dokumentation}
 
-Die folgenden Abschnitte enthalten die vollständige 9-Felder-Dokumentation aller 113 BCM META-Axiome. Jedes Axiom wird systematisch beschrieben mit:
+Die folgenden Abschnitte enthalten die vollständige 9-Felder-Dokumentation aller 114 BCM META-Axiome. Jedes Axiom wird systematisch beschrieben mit:
 
 \begin{enumerate}
     \item \textbf{Statement}: Kernaussage des Axioms
