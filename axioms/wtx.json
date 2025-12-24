@@ -1,0 +1,164 @@
+{
+  "module": "WTX",
+  "id": "7259",
+  "version": "2.0",
+  "axiom_count": 20,
+  "meta_formula": "P(V|WAX) = WTX · f(Trigger, Habit, Context)",
+  "categories": {
+    "transition": {
+      "range": [1, 8],
+      "prefix": "TRN",
+      "description": "Übergang von Intention zu Verhalten"
+    },
+    "trigger": {
+      "range": [9, 14],
+      "prefix": "TRG",
+      "description": "Trigger, Cues, Prompts"
+    },
+    "habit": {
+      "range": [15, 20],
+      "prefix": "HAB",
+      "description": "Gewohnheiten, Automatisierung"
+    }
+  },
+  "axioms": [
+    {
+      "id": "WTX-TRN-01",
+      "category": "transition",
+      "level": "foundation",
+      "statement": "Intention-Action Gap",
+      "description": "Absicht führt nicht automatisch zu Verhalten",
+      "formula": "P(V|WAX=max) < 1",
+      "dependencies": ["MA-EPI-11"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRN-02",
+      "category": "transition",
+      "level": "foundation",
+      "statement": "WTX-Wahrscheinlichkeit",
+      "description": "WTX ist Übergangswahrscheinlichkeit",
+      "formula": "WTX = P(V|WAX)",
+      "dependencies": ["MA-EPI-09"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRN-03",
+      "category": "transition",
+      "level": "structure",
+      "statement": "WTX-Faktoren",
+      "description": "WTX hängt von Trigger, Kontext, Habit ab",
+      "formula": "WTX = f(Trigger, Context, Habit, Opportunity)",
+      "dependencies": ["WTX-TRN-02"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRN-04",
+      "category": "transition",
+      "level": "structure",
+      "statement": "Opportunity Window",
+      "description": "Verhalten braucht Gelegenheitsfenster",
+      "formula": "P(V) = 0 wenn Opportunity = 0",
+      "dependencies": ["WTX-TRN-03"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRN-05",
+      "category": "transition",
+      "level": "operation",
+      "statement": "Implementation Intentions",
+      "description": "Wenn-Dann-Pläne erhöhen WTX",
+      "formula": "WTX(If-Then) > WTX(No Plan)",
+      "dependencies": ["MA-DYN-18"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRG-01",
+      "category": "trigger",
+      "level": "foundation",
+      "statement": "Trigger aktivieren Verhalten",
+      "description": "Cues initiieren Verhaltenssequenzen",
+      "formula": "P(V|Trigger) > P(V|No Trigger)",
+      "dependencies": ["WTX-TRN-03"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRG-02",
+      "category": "trigger",
+      "level": "structure",
+      "statement": "Trigger Types",
+      "description": "Externe vs. interne Trigger",
+      "formula": "Trigger = T_external ∪ T_internal",
+      "dependencies": ["WTX-TRG-01"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRG-03",
+      "category": "trigger",
+      "level": "operation",
+      "statement": "Timing matters",
+      "description": "Trigger-Timing ist entscheidend",
+      "formula": "Effectiveness(T) = f(Timing)",
+      "dependencies": ["WTX-TRG-01"],
+      "testable": true
+    },
+    {
+      "id": "WTX-TRG-04",
+      "category": "trigger",
+      "level": "operation",
+      "statement": "Reminder-Effektivität",
+      "description": "Erinnerungen erhöhen WTX temporär",
+      "formula": "WTX(t|Reminder) > WTX(t|No Reminder), decay over time",
+      "dependencies": ["WTX-TRG-01"],
+      "testable": true
+    },
+    {
+      "id": "WTX-HAB-01",
+      "category": "habit",
+      "level": "foundation",
+      "statement": "Habits erhöhen WTX",
+      "description": "Gewohnheiten automatisieren Verhalten",
+      "formula": "WTX(Habit) >> WTX(No Habit)",
+      "dependencies": ["MA-DYN-07"],
+      "testable": true
+    },
+    {
+      "id": "WTX-HAB-02",
+      "category": "habit",
+      "level": "structure",
+      "statement": "Habit Loop",
+      "description": "Cue → Routine → Reward",
+      "formula": "Habit = f(Cue, Routine, Reward)",
+      "dependencies": ["MA-DYN-08"],
+      "testable": true
+    },
+    {
+      "id": "WTX-HAB-03",
+      "category": "habit",
+      "level": "structure",
+      "statement": "Habit Formation Time",
+      "description": "Gewohnheiten brauchen Zeit zur Bildung",
+      "formula": "Habit_Strength = f(Repetitions, Time)",
+      "dependencies": ["WTX-HAB-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "HAB-1",
+          "statement": "~66 Tage für automatisches Verhalten (Lally et al.)",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "WTX-HAB-04",
+      "category": "habit",
+      "level": "operation",
+      "statement": "Habit Stacking",
+      "description": "Neue Habits an bestehende koppeln",
+      "formula": "P(New_Habit|Existing_Habit) > P(New_Habit|Standalone)",
+      "dependencies": ["WTX-HAB-02"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 13 von 20 Axiomen - weitere nach Bedarf hinzufügen"
+}

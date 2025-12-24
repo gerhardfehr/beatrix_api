@@ -1,0 +1,627 @@
+{
+  "module": "BASERATES",
+  "id": "7246",
+  "version": "1.0",
+  "axiom_count": 35,
+  "description": "Empirische Base Rates für BCM 2.2: Literatur-kalibrierte Parameter mit Quellen und Konfidenz-Bewertung",
+  "purpose": "Wissenschaftliche Fundierung - Jeder Parameter hat eine Literatur-Referenz und einen empirischen Benchmark",
+  "calibration_principle": "Θ* = argmin_Θ Σᵢ wᵢ(Prediction_i(Θ) - Target_i)²",
+  "categories": {
+    "fairness": {
+      "range": [1, 6],
+      "prefix": "BR-FS",
+      "description": "Fehr/Schmidt Fairness-Parameter"
+    },
+    "identity": {
+      "range": [7, 12],
+      "prefix": "BR-ID",
+      "description": "Identitätsnutzen-Gewichtungen"
+    },
+    "types": {
+      "range": [13, 20],
+      "prefix": "BR-TYP",
+      "description": "Verhaltenstypen und λ-Baselines"
+    },
+    "benchmarks": {
+      "range": [21, 28],
+      "prefix": "BR-BM",
+      "description": "Benchmark-Targets aus Meta-Analysen"
+    },
+    "context": {
+      "range": [29, 35],
+      "prefix": "BR-CTX",
+      "description": "Kontext-Modifikatoren (Δλ Ranges)"
+    }
+  },
+  "axioms": [
+    {
+      "id": "BR-FS-01",
+      "category": "fairness",
+      "level": "foundation",
+      "statement": "Neid-Parameter α aus Fehr/Schmidt",
+      "description": "Disutility aus nachteiliger Ungleichheit (ich bekomme weniger)",
+      "parameter": "α",
+      "value": 2.0,
+      "range": [0.5, 4.0],
+      "formula": "U_FS = x_i - α·max(x_j - x_i, 0) - β·max(x_i - x_j, 0)",
+      "constraint": "α ≥ β (empirisch validiert)",
+      "confidence": "high",
+      "source": "Fehr & Schmidt (1999), QJE",
+      "evidence": "Fitted to UG rejection rates and DG giving"
+    },
+    {
+      "id": "BR-FS-02",
+      "category": "fairness",
+      "level": "foundation",
+      "statement": "Schuld-Parameter β aus Fehr/Schmidt",
+      "description": "Disutility aus vorteilhafter Ungleichheit (ich bekomme mehr)",
+      "parameter": "β",
+      "value": 0.6,
+      "range": [0.0, 0.6],
+      "constraint": "0 ≤ β < 1 (sonst würde Agent Geld verbrennen)",
+      "confidence": "high",
+      "source": "Fehr & Schmidt (1999), QJE",
+      "evidence": "Fitted to DG giving patterns"
+    },
+    {
+      "id": "BR-FS-03",
+      "category": "fairness",
+      "level": "structure",
+      "statement": "Asymmetrie α > β ist universell",
+      "description": "Menschen reagieren stärker auf Benachteiligung als auf Bevorteilung",
+      "formula": "α/β ≈ 3.3 (typisch)",
+      "rationale": "Loss aversion im sozialen Vergleich",
+      "confidence": "high",
+      "source": "Fehr & Schmidt (1999), repliziert in >100 Studien",
+      "testable": true
+    },
+    {
+      "id": "BR-FS-04",
+      "category": "fairness",
+      "level": "structure",
+      "statement": "Heterogenität in α und β",
+      "description": "Erhebliche individuelle Unterschiede in Fairness-Präferenzen",
+      "distribution": {
+        "alpha": "Rechtsschief, Median < Mean",
+        "beta": "Viele bei 0, Peak bei ~0.4",
+        "correlation": "r(α,β) ≈ 0.3-0.5"
+      },
+      "confidence": "high",
+      "source": "Blanco et al. (2011), GEB"
+    },
+    {
+      "id": "BR-FS-05",
+      "category": "fairness",
+      "level": "operation",
+      "statement": "Kontextabhängigkeit von α und β",
+      "description": "Fairness-Parameter sind nicht stabil über Kontexte",
+      "modifiers": {
+        "anonymity": "Mehr Anonymität → niedrigere effektive α, β",
+        "earned_vs_windfall": "Earned Endowment → niedrigere β",
+        "market_frame": "Markt-Frame → niedrigere α, β"
+      },
+      "formula": "α_eff = α · ρ(F,m); β_eff = β · ρ(F,m)",
+      "confidence": "medium",
+      "source": "Cherry et al. (2002), Hoffman et al. (1994)"
+    },
+    {
+      "id": "BR-FS-06",
+      "category": "fairness",
+      "level": "operation",
+      "statement": "Integration mit BCM 2.2: Context-Gated F/S",
+      "description": "ρ(F,m) aktiviert F/S-Präferenzen kontextabhängig",
+      "formula": "L_aff = ρ(F,m) · [α·max(x_j-x_i,0) + β·max(x_i-x_j,0)]",
+      "rho_values": {
+        "face_to_face": 1.0,
+        "anonymous_lab": 0.7,
+        "online_market": 0.3,
+        "pure_consumption": 0.1
+      },
+      "confidence": "medium",
+      "source": "BCM 2.2 Integration, basierend auf Hoffman et al. (1994)"
+    },
+    {
+      "id": "BR-ID-01",
+      "category": "identity",
+      "level": "foundation",
+      "statement": "Handlungskonsistenz-Gewicht ω₁",
+      "description": "Gewicht für (a - φ)² Term - Kosten wenn Handlung von subjektiver Norm abweicht",
+      "parameter": "ω₁",
+      "value": 0.4,
+      "range": [0.3, 0.5],
+      "formula": "L_action = ω₁ · κ · (a - φ)²",
+      "confidence": "medium",
+      "source": "Akerlof & Kranton (2000), kalibriert auf Identitäts-Experimente",
+      "note": "Σωᵢ = 1 Normalisierung"
+    },
+    {
+      "id": "BR-ID-02",
+      "category": "identity",
+      "level": "foundation",
+      "statement": "Self-Image-Gewicht ω₂",
+      "description": "Gewicht für Self-Image Maintenance - Kosten bei Selbstbild-Verletzung",
+      "parameter": "ω₂",
+      "value": 0.2,
+      "range": [0.1, 0.3],
+      "formula": "L_image = ω₂ · (θ̂ - θ_perceived)²",
+      "confidence": "medium",
+      "source": "Bénabou & Tirole (2011), QJE",
+      "note": "Niedriger als ω₁ und ω₃, aber wichtig für Self-Deception"
+    },
+    {
+      "id": "BR-ID-03",
+      "category": "identity",
+      "level": "foundation",
+      "statement": "Normtreue-Gewicht ω₃",
+      "description": "Gewicht für (φ - η)² Term - Kosten wenn subjektive Norm von objektiver abweicht",
+      "parameter": "ω₃",
+      "value": 0.4,
+      "range": [0.3, 0.5],
+      "formula": "L_norm = ω₃ · ψ · 𝔼[(φ - η)²]",
+      "confidence": "medium",
+      "source": "Konow (2000), AER",
+      "note": "Zusammen mit ω₁ dominierend"
+    },
+    {
+      "id": "BR-ID-04",
+      "category": "identity",
+      "level": "structure",
+      "statement": "Identitätssalienz μ_ID",
+      "description": "Wie stark Identitätskosten aktiviert sind",
+      "parameter": "μ_ID",
+      "baseline": 1.0,
+      "range": [0.0, 2.0],
+      "modifiers": {
+        "moral_regime": "μ_ID(moral) ≈ 1.0",
+        "market_regime": "μ_ID(market) ≈ 0.3",
+        "anonymous": "μ_ID reduziert",
+        "public": "μ_ID erhöht"
+      },
+      "formula": "μ_ID(F,m) = baseline × regime_factor × visibility_factor",
+      "confidence": "medium",
+      "source": "BCM 2.2, basierend auf Ariely et al. (2009)"
+    },
+    {
+      "id": "BR-ID-05",
+      "category": "identity",
+      "level": "structure",
+      "statement": "Motivated Inference Kostenfaktor δ",
+      "description": "Kosten für Verzerrung des Beliefs über η",
+      "parameter": "δ",
+      "value": 1.0,
+      "range": [0.5, 2.0],
+      "formula": "C_MI(μ̃) = (δ/2)(μ̃ - μ_η)²",
+      "interpretation": {
+        "low_delta": "Billiges Lügen zu sich selbst",
+        "high_delta": "Teures Lügen, Realitätsbindung"
+      },
+      "confidence": "medium",
+      "source": "Bénabou & Tirole (2016), JEP"
+    },
+    {
+      "id": "BR-ID-06",
+      "category": "identity",
+      "level": "operation",
+      "statement": "Information Cost Faktor c",
+      "description": "Kosten für das Beschaffen von Information",
+      "parameter": "c",
+      "value": 0.5,
+      "range": [0.1, 2.0],
+      "formula": "C_info(σ) = c · σ",
+      "interpretation": {
+        "low_c": "Information ist billig → σ* höher",
+        "high_c": "Information ist teuer → Strategic Ignorance wahrscheinlicher"
+      },
+      "confidence": "low",
+      "source": "Grossman & van der Weele (2017), JEEA",
+      "note": "Stark kontextabhängig"
+    },
+    {
+      "id": "BR-TYP-01",
+      "category": "types",
+      "level": "foundation",
+      "statement": "Typ-Verteilung nach Fischbacher et al.",
+      "description": "Grundlegende Verhaltenstypen in Public Goods Games",
+      "distribution": {
+        "conditional_cooperator": {"share": 0.50, "description": "Kooperiert wenn andere kooperieren"},
+        "free_rider": {"share": 0.30, "description": "Kooperiert nie/selten"},
+        "altruist": {"share": 0.14, "description": "Kooperiert immer"},
+        "other": {"share": 0.06, "description": "Inkonsistent, Hump-shaped, etc."}
+      },
+      "confidence": "high",
+      "source": "Fischbacher et al. (2001), Economics Letters",
+      "replications": ">50 Studien, robuste Verteilung"
+    },
+    {
+      "id": "BR-TYP-02",
+      "category": "types",
+      "level": "foundation",
+      "statement": "λ_Person Baseline für Conditional Cooperator",
+      "description": "Kooperationsneigung des häufigsten Typs",
+      "parameter": "λ_Person",
+      "type": "conditional_cooperator",
+      "value": 0.65,
+      "range": [0.55, 0.75],
+      "behavior": "Startet kooperativ, passt sich an Gruppenverhalten an",
+      "confidence": "high",
+      "source": "Fischbacher & Gächter (2010), AER"
+    },
+    {
+      "id": "BR-TYP-03",
+      "category": "types",
+      "level": "foundation",
+      "statement": "λ_Person Baseline für Free Rider",
+      "description": "Kooperationsneigung des egoistischen Typs",
+      "parameter": "λ_Person",
+      "type": "free_rider",
+      "value": 0.15,
+      "range": [0.05, 0.25],
+      "behavior": "Minimale Kooperation, nutzt andere aus",
+      "confidence": "high",
+      "source": "Fischbacher et al. (2001)"
+    },
+    {
+      "id": "BR-TYP-04",
+      "category": "types",
+      "level": "foundation",
+      "statement": "λ_Person Baseline für Altruist",
+      "description": "Kooperationsneigung des kooperativen Typs",
+      "parameter": "λ_Person",
+      "type": "altruist",
+      "value": 0.85,
+      "range": [0.75, 0.95],
+      "behavior": "Kooperiert unabhängig von anderen",
+      "confidence": "high",
+      "source": "Fischbacher et al. (2001)"
+    },
+    {
+      "id": "BR-TYP-05",
+      "category": "types",
+      "level": "structure",
+      "statement": "Typ → BCM 2.2 Multiplikatoren Mapping",
+      "description": "Verhaltenstyp determiniert κ_mult, ψ_mult, ξ",
+      "mappings": {
+        "FAIR": {
+          "lambda_person": 0.65,
+          "kappa_mult": 1.0,
+          "psi_mult": 1.0,
+          "xi": 1.0,
+          "description": "Baseline, ehrliche Normevaluation"
+        },
+        "SELF_DECEPTIVE": {
+          "lambda_person": 0.50,
+          "kappa_mult": 1.5,
+          "psi_mult": 0.15,
+          "xi": 2.0,
+          "description": "Hohe Handlungskonsistenz, niedrige Normtreue, hohe MI-Kosten"
+        },
+        "SELFISH": {
+          "lambda_person": 0.15,
+          "kappa_mult": 0.3,
+          "psi_mult": 0.1,
+          "xi": 0.5,
+          "description": "Geringe Identitätskosten insgesamt"
+        },
+        "COMPLEX": {
+          "lambda_person": 0.40,
+          "kappa_mult": 1.0,
+          "psi_mult": 0.5,
+          "xi": 1.5,
+          "description": "Situativ, inkonsistent, moderate Werte"
+        }
+      },
+      "confidence": "medium",
+      "source": "BCM 2.2 Kalibrierung, basierend auf Fischbacher & Konow"
+    },
+    {
+      "id": "BR-TYP-06",
+      "category": "types",
+      "level": "structure",
+      "statement": "Typ-Stabilität über Zeit",
+      "description": "Verhaltenstypen sind relativ stabil, aber nicht perfekt",
+      "stability": {
+        "same_context": "r ≈ 0.6-0.7 über Wiederholungen",
+        "different_context": "r ≈ 0.3-0.5 über verschiedene Spiele",
+        "long_term": "Trait-Komponente + situative Variation"
+      },
+      "confidence": "medium",
+      "source": "Volk et al. (2012), Blanco et al. (2011)"
+    },
+    {
+      "id": "BR-TYP-07",
+      "category": "types",
+      "level": "operation",
+      "statement": "Regime-Switch Parameter γ",
+      "description": "Sensitivität des Market/Moral Regime-Wechsels",
+      "parameter": "γ",
+      "value": 3.0,
+      "range": [2.0, 5.0],
+      "formula": "P(m=market|s,F) = Λ(γ(s - s̄(F)))",
+      "interpretation": {
+        "low_gamma": "Gradueller Übergang",
+        "high_gamma": "Scharfer Umschlag (nahe Step-Function)"
+      },
+      "confidence": "medium",
+      "source": "Gneezy & Rustichini (2000), Frey & Jegen (2001)"
+    },
+    {
+      "id": "BR-TYP-08",
+      "category": "types",
+      "level": "operation",
+      "statement": "Crowding-Out Threshold s̄",
+      "description": "Incentive-Stärke ab der Moral-Crowding beginnt",
+      "parameter": "s̄",
+      "typical_value": "Kontextabhängig",
+      "examples": {
+        "blood_donation": "s̄ ≈ kleine Beträge (schon $5-10 crowden out)",
+        "work_tasks": "s̄ ≈ moderate Beträge",
+        "pure_market": "s̄ ≈ sehr niedrig (fast alles ist 'Markt')"
+      },
+      "confidence": "medium",
+      "source": "Gneezy & Rustichini (2000), Mellström & Johannesson (2008)"
+    },
+    {
+      "id": "BR-BM-01",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Dictator Game: Mean Giving",
+      "description": "Durchschnittliche Gabe im Standard-DG",
+      "target": 0.28,
+      "range": [0.24, 0.32],
+      "conditions": "Standard: 10€ Endowment, anonym, one-shot",
+      "confidence": "high",
+      "source": "Engel (2011), Meta-Analyse, 129 Studien, N>41,000"
+    },
+    {
+      "id": "BR-BM-02",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Dictator Game: Zero Giving",
+      "description": "Anteil der Diktatoren, die nichts geben",
+      "target": 0.36,
+      "range": [0.30, 0.42],
+      "interpretation": "~1/3 verhält sich rein egoistisch",
+      "confidence": "high",
+      "source": "Engel (2011)"
+    },
+    {
+      "id": "BR-BM-03",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Dictator Game: Fair Split (50/50)",
+      "description": "Anteil der Diktatoren, die 50/50 teilen",
+      "target": 0.17,
+      "range": [0.12, 0.22],
+      "interpretation": "~1/6 teilt 'perfekt fair'",
+      "confidence": "high",
+      "source": "Engel (2011)"
+    },
+    {
+      "id": "BR-BM-04",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Ultimatum Game: Modal Offer",
+      "description": "Häufigstes Angebot des Proposers",
+      "target": 0.45,
+      "range": [0.40, 0.50],
+      "interpretation": "Nahe 50/50, strategisch leicht darunter",
+      "confidence": "high",
+      "source": "Güth et al. (1982), Oosterbeek et al. (2004) Meta-Analyse"
+    },
+    {
+      "id": "BR-BM-05",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Ultimatum Game: Rejection at 20%",
+      "description": "Ablehnungsrate bei unfairem 80/20 Angebot",
+      "target": 0.50,
+      "range": [0.40, 0.60],
+      "interpretation": "~Hälfte lehnt 'unfaire' Angebote ab, trotz positivem Payoff",
+      "confidence": "high",
+      "source": "Güth et al. (1982), Camerer (2003)"
+    },
+    {
+      "id": "BR-BM-06",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Public Goods Game: Ohne Punishment",
+      "description": "Kooperationsverlauf ohne Sanktionsmöglichkeit",
+      "trajectory": {
+        "round_1": 0.40,
+        "round_5": 0.25,
+        "round_10": 0.15
+      },
+      "pattern": "Decay - startet moderat, zerfällt auf Free-Rider-Niveau",
+      "confidence": "high",
+      "source": "Fehr & Gächter (2000), AER"
+    },
+    {
+      "id": "BR-BM-07",
+      "category": "benchmarks",
+      "level": "foundation",
+      "statement": "Public Goods Game: Mit Punishment",
+      "description": "Kooperationsverlauf mit Peer-Punishment-Option",
+      "trajectory": {
+        "round_1": 0.40,
+        "round_5": 0.70,
+        "round_10": 0.90
+      },
+      "pattern": "Increase - Punishment etabliert Kooperationsnorm",
+      "confidence": "high",
+      "source": "Fehr & Gächter (2000, 2002)"
+    },
+    {
+      "id": "BR-BM-08",
+      "category": "benchmarks",
+      "level": "structure",
+      "statement": "Antisoziale Bestrafung: Kulturelle Variation",
+      "description": "Bestrafung von Kooperateuren variiert stark nach Kultur",
+      "range": {
+        "low": "0-5% (Nordeuropa, USA, Australien)",
+        "medium": "10-20% (Südeuropa)",
+        "high": "30-80% (Arabische Länder, Griechenland, Russland)"
+      },
+      "correlation": "r = -0.67 mit Civic Cooperation / Social Trust",
+      "confidence": "high",
+      "source": "Herrmann, Thöni & Gächter (2008), Science"
+    },
+    {
+      "id": "BR-CTX-01",
+      "category": "context",
+      "level": "foundation",
+      "statement": "Δλ für Soziale Distanz",
+      "description": "Kooperationsneigung variiert mit Beziehungsnähe",
+      "parameter": "Δλ_Distanz",
+      "values": {
+        "intimate": "+0.25 (Familie, Partner)",
+        "peer": "+0.15 (Freunde, Kollegen)",
+        "community": "+0.05 (Nachbarn)",
+        "organization": "0.00 (Baseline)",
+        "society": "-0.10 (Anonyme)"
+      },
+      "confidence": "medium",
+      "source": "Jones & Rachlin (2006), Strombach et al. (2015)"
+    },
+    {
+      "id": "BR-CTX-02",
+      "category": "context",
+      "level": "foundation",
+      "statement": "Δλ für Sichtbarkeit",
+      "description": "Beobachtung erhöht Kooperationsbereitschaft",
+      "parameter": "Δλ_Sichtbarkeit",
+      "values": {
+        "observed": "+0.15",
+        "private": "0.00"
+      },
+      "mechanism": "Reputation Concern, Self-Signaling",
+      "confidence": "high",
+      "source": "Ariely et al. (2009), Kraft-Todd et al. (2015)"
+    },
+    {
+      "id": "BR-CTX-03",
+      "category": "context",
+      "level": "foundation",
+      "statement": "Δλ für Anonymität",
+      "description": "Anonymität reduziert Kooperationsbereitschaft",
+      "parameter": "Δλ_Anonymität",
+      "values": {
+        "anonymous": "-0.10",
+        "identifiable": "0.00"
+      },
+      "mechanism": "Weniger Accountability, weniger Image Concern",
+      "confidence": "high",
+      "source": "Hoffman et al. (1994), Andreoni & Petrie (2004)"
+    },
+    {
+      "id": "BR-CTX-04",
+      "category": "context",
+      "level": "structure",
+      "statement": "Δλ für Kultur/Trust",
+      "description": "Kulturelles Vertrauen moduliert Kooperations-Baseline",
+      "parameter": "Δλ_Kultur",
+      "values": {
+        "high_trust": "+0.15 (Nordeuropa, Skandinavien)",
+        "medium_trust": "0.00 (Baseline - Westeuropa, USA)",
+        "low_trust": "-0.10 (Mittelmeer, Nahost)"
+      },
+      "correlation": "Korreliert mit Rule of Law, Democracy, Social Trust",
+      "confidence": "high",
+      "source": "Herrmann et al. (2008), Algan & Cahuc (2010)"
+    },
+    {
+      "id": "BR-CTX-05",
+      "category": "context",
+      "level": "structure",
+      "statement": "Δλ für Wiederholung",
+      "description": "Wiederholte Interaktion erhöht Kooperation",
+      "parameter": "Δλ_Wiederholung",
+      "values": {
+        "one_shot": "0.00 (Baseline)",
+        "finite_repeated": "+0.10",
+        "indefinite_repeated": "+0.20"
+      },
+      "mechanism": "Shadow of the future, Reputation",
+      "confidence": "high",
+      "source": "Dal Bó & Fréchette (2018), JEL Survey"
+    },
+    {
+      "id": "BR-CTX-06",
+      "category": "context",
+      "level": "operation",
+      "statement": "Δλ für Stakes",
+      "description": "Höhere Stakes können Kooperation reduzieren",
+      "parameter": "Δλ_Stakes",
+      "values": {
+        "hypothetical": "+0.05 (etwas kooperativer)",
+        "low_real": "0.00 (Baseline)",
+        "medium_real": "-0.05",
+        "high_real": "-0.10 bis -0.15"
+      },
+      "pattern": "Non-linear: Sehr hohe Stakes aktivieren egoistisches Verhalten",
+      "confidence": "medium",
+      "source": "Forsythe et al. (1994), Andersen et al. (2011)"
+    },
+    {
+      "id": "BR-CTX-07",
+      "category": "context",
+      "level": "operation",
+      "statement": "Δλ Aggregation",
+      "description": "Kombinierte Kontexteffekte sind additiv (erste Approximation)",
+      "formula": "Δλ_Kontext = Σᵢ Δλᵢ",
+      "constraint": "λ_0 = clip(λ_Person + Δλ_Kontext, 0, 1)",
+      "interaction_note": "Echte Interaktionseffekte existieren, aber additives Modell ist robust",
+      "confidence": "medium",
+      "source": "BCM 2.2 Modellierungsentscheidung"
+    }
+  ],
+  "references": [
+    {
+      "id": "Fehr_Schmidt_1999",
+      "citation": "Fehr, E., & Schmidt, K. M. (1999). A theory of fairness, competition, and cooperation. Quarterly Journal of Economics, 114(3), 817-868."
+    },
+    {
+      "id": "Engel_2011",
+      "citation": "Engel, C. (2011). Dictator games: A meta study. Experimental Economics, 14(4), 583-610."
+    },
+    {
+      "id": "Fischbacher_2001",
+      "citation": "Fischbacher, U., Gächter, S., & Fehr, E. (2001). Are people conditionally cooperative? Evidence from a public goods experiment. Economics Letters, 71(3), 397-404."
+    },
+    {
+      "id": "Fehr_Gaechter_2000",
+      "citation": "Fehr, E., & Gächter, S. (2000). Cooperation and punishment in public goods experiments. American Economic Review, 90(4), 980-994."
+    },
+    {
+      "id": "Herrmann_2008",
+      "citation": "Herrmann, B., Thöni, C., & Gächter, S. (2008). Antisocial punishment across societies. Science, 319(5868), 1362-1367."
+    },
+    {
+      "id": "Gueth_1982",
+      "citation": "Güth, W., Schmittberger, R., & Schwarze, B. (1982). An experimental analysis of ultimatum bargaining. Journal of Economic Behavior & Organization, 3(4), 367-388."
+    },
+    {
+      "id": "Akerlof_Kranton_2000",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and identity. Quarterly Journal of Economics, 115(3), 715-753."
+    },
+    {
+      "id": "Benabou_Tirole_2011",
+      "citation": "Bénabou, R., & Tirole, J. (2011). Identity, morals, and taboos: Beliefs as assets. Quarterly Journal of Economics, 126(2), 805-855."
+    },
+    {
+      "id": "Konow_2000",
+      "citation": "Konow, J. (2000). Fair shares: Accountability and cognitive dissonance in allocation decisions. American Economic Review, 90(4), 1072-1091."
+    },
+    {
+      "id": "Dana_2007",
+      "citation": "Dana, J., Weber, R. A., & Kuang, J. X. (2007). Exploiting moral wiggle room: experiments demonstrating an illusory preference for fairness. Economic Theory, 33(1), 67-80."
+    },
+    {
+      "id": "Grossman_vanderWeele_2017",
+      "citation": "Grossman, Z., & van der Weele, J. J. (2017). Self-image and willful ignorance in social decisions. Journal of the European Economic Association, 15(1), 173-217."
+    },
+    {
+      "id": "Gneezy_Rustichini_2000",
+      "citation": "Gneezy, U., & Rustichini, A. (2000). Pay enough or don't pay at all. Quarterly Journal of Economics, 115(3), 791-810."
+    }
+  ]
+}

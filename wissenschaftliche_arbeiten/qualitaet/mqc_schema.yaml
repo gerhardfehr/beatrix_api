@@ -1,0 +1,566 @@
+# =============================================================================
+# META-QUALITÄTS-CONTAINER (MQC) - Schema Definition
+# =============================================================================
+# Version: 1.0
+# Datum: Dezember 2024
+# Beschreibung: Konfigurierbares Qualitätsframework für BCM/BEATRIX Dokumentation
+# =============================================================================
+
+schema_version: "1.0"
+name: "Meta-Qualitäts-Container"
+beschreibung: |
+  Der MQC definiert 13 Qualitätsdimensionen, die pro Kapitel konfiguriert
+  und pro Zielgruppe kalibriert werden können.
+
+# =============================================================================
+# TEIL 1: DIMENSIONEN (D1-D13)
+# =============================================================================
+
+dimensionen:
+
+  # ---------------------------------------------------------------------------
+  # URSPRÜNGLICHE 6 DIMENSIONEN
+  # ---------------------------------------------------------------------------
+
+  D01_wissenschaft:
+    name: "Wissenschaftliche Rigorosität"
+    beschreibung: "Qualität der wissenschaftlichen Fundierung"
+    kriterien:
+      quellenqualitaet:
+        beschreibung: "Anteil peer-reviewed Quellen"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+      quellenaktualitaet:
+        beschreibung: "Anteil Quellen der letzten 10 Jahre"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.4, gut: 0.6, exzellent: 0.8 }
+      argumentationskette:
+        beschreibung: "Jede Behauptung hat Evidenz und Schlussfolgerung"
+        typ: "boolean_pro_behauptung"
+        schwellenwerte: { minimal: 0.7, gut: 0.85, exzellent: 0.95 }
+      methodentransparenz:
+        beschreibung: "Methodik explizit dokumentiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+
+  D02_bcm_spezifik:
+    name: "BCM/BEATRIX Spezifität"
+    beschreibung: "Integration mit dem BCM-Framework"
+    kriterien:
+      axiom_vollstaendigkeit:
+        beschreibung: "Alle relevanten Axiome dokumentiert"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.8, gut: 0.9, exzellent: 1.0 }
+      axiom_format:
+        beschreibung: "Jedes Axiom hat: ID, Formel, Beschreibung, Beispiel, Quelle"
+        typ: "checkliste"
+        elemente: ["id", "formel", "beschreibung", "beispiel", "quelle"]
+        schwellenwerte: { minimal: 3, gut: 4, exzellent: 5 }
+      parameter_dokumentation:
+        beschreibung: "Parameter haben: Name, Range, Default, Einheit, Bedeutung"
+        typ: "checkliste"
+        elemente: ["name", "range_min", "range_max", "default", "einheit", "bedeutung"]
+        schwellenwerte: { minimal: 4, gut: 5, exzellent: 6 }
+      modul_mapping:
+        beschreibung: "Explizite Zuordnung Axiom → Operatives Modul"
+        typ: "boolean_pro_axiom"
+        schwellenwerte: { minimal: 0.6, gut: 0.8, exzellent: 1.0 }
+      constraint_formalisierung:
+        beschreibung: "Constraints formal spezifiziert (mathematisch oder Code)"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+
+  D03_didaktik:
+    name: "Didaktische Qualität"
+    beschreibung: "Lehr- und Lerneignung des Kapitels"
+    kriterien:
+      beispieldichte:
+        beschreibung: "Anzahl konkreter Beispiele pro Konzept"
+        typ: "ratio"
+        schwellenwerte: { minimal: 1.0, gut: 2.0, exzellent: 3.0 }
+      beispieltypen:
+        beschreibung: "Verschiedene Beispieltypen vorhanden"
+        typ: "checkliste"
+        elemente: ["abstrakt", "konkret_alltag", "konkret_bcm", "code"]
+        schwellenwerte: { minimal: 2, gut: 3, exzellent: 4 }
+      progression:
+        beschreibung: "Aufbau von einfach zu komplex"
+        typ: "ordinal"
+        stufen: ["keine", "teilweise", "durchgängig"]
+        schwellenwerte: { minimal: "teilweise", exzellent: "durchgängig" }
+      visualisierungen:
+        beschreibung: "Angemessene Visualisierungen (Tabellen, Diagramme, Formeln)"
+        typ: "count_pro_1000_zeilen"
+        schwellenwerte: { minimal: 2, gut: 4, exzellent: 6 }
+      analogien:
+        beschreibung: "Alltagsanalogien für komplexe Konzepte"
+        typ: "count_pro_hauptkonzept"
+        schwellenwerte: { minimal: 0.5, gut: 1.0, exzellent: 1.5 }
+
+  D04_anwendbarkeit:
+    name: "Praktische Anwendbarkeit"
+    beschreibung: "Umsetzbarkeit in die Praxis"
+    kriterien:
+      handlungsanweisungen:
+        beschreibung: "Schritt-für-Schritt Anleitungen vorhanden"
+        typ: "boolean_pro_konzept"
+        schwellenwerte: { minimal: 0.3, gut: 0.6, exzellent: 0.9 }
+      code_beispiele:
+        beschreibung: "Funktionierende Code-Beispiele (wo relevant)"
+        typ: "count"
+        schwellenwerte: { minimal: 0, gut: 2, exzellent: 5 }
+      warnungen_grenzen:
+        beschreibung: "Explizite Warnungen und Grenzen dokumentiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+      checklisten:
+        beschreibung: "Operationalisierbare Checklisten"
+        typ: "count"
+        schwellenwerte: { minimal: 0, gut: 1, exzellent: 3 }
+      negativbeispiele:
+        beschreibung: "Was passiert wenn man X nicht beachtet?"
+        typ: "count_pro_hauptkonzept"
+        schwellenwerte: { minimal: 0.3, gut: 0.5, exzellent: 1.0 }
+
+  D05_konsistenz:
+    name: "Konsistenz & Notation"
+    beschreibung: "Einheitlichkeit innerhalb des Kapitels und zum Gesamtdokument"
+    kriterien:
+      terminologie:
+        beschreibung: "Alle Fachbegriffe definiert bei Erstnennung"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.8, gut: 0.9, exzellent: 1.0 }
+      notation_mathematik:
+        beschreibung: "Alle Symbole in Symboltabelle"
+        typ: "prozent"
+        schwellenwerte: { minimal: 0.9, gut: 0.95, exzellent: 1.0 }
+      axiom_id_format:
+        beschreibung: "Axiom-IDs folgen MA-XXX-## Format"
+        typ: "prozent"
+        schwellenwerte: { minimal: 1.0 }
+      cross_referenzen:
+        beschreibung: "Verweise auf andere Kapitel korrekt"
+        typ: "prozent"
+        schwellenwerte: { minimal: 1.0 }
+      format_einheitlichkeit:
+        beschreibung: "Einheitliche Formatierung (Boxen, Tabellen, etc.)"
+        typ: "ordinal"
+        stufen: ["inkonsistent", "meist_konsistent", "vollständig_konsistent"]
+        schwellenwerte: { minimal: "meist_konsistent", exzellent: "vollständig_konsistent" }
+
+  D06_zielgruppe:
+    name: "Zielgruppen-Adäquatheit"
+    beschreibung: "Anpassung an verschiedene Lesergruppen"
+    kriterien:
+      laien_zugaenglichkeit:
+        beschreibung: "Mind. 1 Absatz für Nicht-Experten verständlich"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+      executive_summary:
+        beschreibung: "Kernaussagen-Box am Anfang"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+      experten_tiefe:
+        beschreibung: "Technische Details für Fachleute"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+      lesezeit_angabe:
+        beschreibung: "Geschätzte Lesezeit dokumentiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      track_hinweise:
+        beschreibung: "Hinweise für verschiedene Lese-Tracks"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+
+  # ---------------------------------------------------------------------------
+  # NEUE 7 DIMENSIONEN
+  # ---------------------------------------------------------------------------
+
+  D07_epistemische_reflexion:
+    name: "Epistemische Selbst-Reflexion"
+    beschreibung: "Transparenz über Wissensgrenzen und Unsicherheiten"
+    kriterien:
+      grenzen_dokumentiert:
+        beschreibung: "Explizite 'Was wir NICHT wissen' Sektion"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      unsicherheit_kommuniziert:
+        beschreibung: "Unsicherheiten bei Aussagen quantifiziert"
+        typ: "prozent_der_claims"
+        schwellenwerte: { minimal: 0.3, gut: 0.6, exzellent: 0.9 }
+      offene_fragen:
+        beschreibung: "Offene Forschungsfragen explizit benannt"
+        typ: "count"
+        schwellenwerte: { minimal: 1, gut: 3, exzellent: 5 }
+      falsifizierbarkeit:
+        beschreibung: "Bedingungen angegeben, unter denen Axiom falsch wäre"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.2, gut: 0.5, exzellent: 0.8 }
+      replikationsstatus:
+        beschreibung: "Replikationsstatus der Studien dokumentiert"
+        typ: "prozent_der_studien"
+        schwellenwerte: { minimal: 0.3, gut: 0.5, exzellent: 0.8 }
+
+  D08_validierung:
+    name: "Validierungs-Dimension"
+    beschreibung: "Empirische und theoretische Absicherung"
+    kriterien:
+      evidenztyp_dokumentiert:
+        beschreibung: "Für jedes Axiom: Labor/Feld/Meta-Analyse/Theorie"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.7, gut: 0.9, exzellent: 1.0 }
+      evidenzstufe_angegeben:
+        beschreibung: "MA-EPI-38 Evidenzhierarchie referenziert"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+      effektstaerken:
+        beschreibung: "Effektstärken wo verfügbar angegeben"
+        typ: "prozent_der_empirischen_claims"
+        schwellenwerte: { minimal: 0.3, gut: 0.5, exzellent: 0.8 }
+      konfidenzintervalle:
+        beschreibung: "Konfidenzintervalle bei quantitativen Aussagen"
+        typ: "prozent_der_zahlen"
+        schwellenwerte: { minimal: 0.2, gut: 0.5, exzellent: 0.8 }
+      validierungsmethode:
+        beschreibung: "Methode der Validierung beschrieben"
+        typ: "boolean_pro_axiom"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+
+  D09_abhaengigkeiten:
+    name: "Abhängigkeits-Struktur"
+    beschreibung: "Beziehungen zwischen Axiomen und Konzepten"
+    kriterien:
+      voraussetzungen_explizit:
+        beschreibung: "Axiom-Voraussetzungen dokumentiert"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+      hierarchie_klar:
+        beschreibung: "Fundamental vs. abgeleitete Axiome unterschieden"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      konflikte_adressiert:
+        beschreibung: "Potenzielle Axiom-Konflikte diskutiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      dependency_graph:
+        beschreibung: "Visuelle Darstellung der Abhängigkeiten"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      kapitel_querverweise:
+        beschreibung: "Verweise auf abhängige/vorausgesetzte Kapitel"
+        typ: "count"
+        schwellenwerte: { minimal: 1, gut: 3, exzellent: 5 }
+
+  D10_evolution:
+    name: "Evolutionäre Dimension"
+    beschreibung: "Versionierung und Entwicklungshistorie"
+    kriterien:
+      versionshistorie:
+        beschreibung: "Änderungen über Versionen dokumentiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      rueckwaertskompatibilitaet:
+        beschreibung: "Breaking Changes gekennzeichnet"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      deprecation_hinweise:
+        beschreibung: "Veraltete Konzepte als deprecated markiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      zukunft_roadmap:
+        beschreibung: "Geplante Erweiterungen dokumentiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      aenderungsgruende:
+        beschreibung: "Begründung für Änderungen dokumentiert"
+        typ: "prozent_der_aenderungen"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+
+  D11_operationalisierung:
+    name: "Operationalisierungs-Tiefe"
+    beschreibung: "Umsetzbarkeit in messbare/testbare Form"
+    kriterien:
+      messbarkeit:
+        beschreibung: "Axiom ist messbar/testbar"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+      code_uebersetzung:
+        beschreibung: "Axiom kann in Code übersetzt werden"
+        typ: "prozent_der_axiome"
+        schwellenwerte: { minimal: 0.4, gut: 0.6, exzellent: 0.8 }
+      automatisierte_pruefung:
+        beschreibung: "Automatische Constraint-Prüfung möglich"
+        typ: "prozent_der_constraints"
+        schwellenwerte: { minimal: 0.3, gut: 0.5, exzellent: 0.8 }
+      testfaelle:
+        beschreibung: "Konkrete Testfälle dokumentiert"
+        typ: "count_pro_axiom"
+        schwellenwerte: { minimal: 0.5, gut: 1.0, exzellent: 2.0 }
+      json_schema:
+        beschreibung: "JSON/Pydantic Schema für Parameter"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+
+  D12_narrative:
+    name: "Narrative & Engagement"
+    beschreibung: "Erzählerische Qualität und Lesermotivation"
+    kriterien:
+      roter_faden:
+        beschreibung: "Durchgängiger narrativer Zusammenhang"
+        typ: "ordinal"
+        stufen: ["fragmentiert", "erkennbar", "stark"]
+        schwellenwerte: { minimal: "erkennbar", exzellent: "stark" }
+      motivation_leser:
+        beschreibung: "Warum sollte der Leser weiterlesen?"
+        typ: "boolean_pro_abschnitt"
+        schwellenwerte: { minimal: 0.5, gut: 0.7, exzellent: 0.9 }
+      spannungsbogen:
+        beschreibung: "Aufbau von Spannung/Interesse"
+        typ: "ordinal"
+        stufen: ["flach", "vorhanden", "gut_strukturiert"]
+        schwellenwerte: { minimal: "vorhanden", exzellent: "gut_strukturiert" }
+      hooks:
+        beschreibung: "Interessante Einstiege/Aufhänger"
+        typ: "count"
+        schwellenwerte: { minimal: 1, gut: 3, exzellent: 5 }
+      cliffhanger:
+        beschreibung: "Überleitung zum nächsten Kapitel"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+
+  D13_meta_reflexivitaet:
+    name: "Meta-Reflexivität"
+    beschreibung: "Anwendung der eigenen Prinzipien auf das Dokument"
+    kriterien:
+      selbstanwendung:
+        beschreibung: "Dokument nutzt BCM-Prinzipien für eigene Darstellung"
+        typ: "ordinal"
+        stufen: ["keine", "teilweise", "durchgängig"]
+        schwellenwerte: { minimal: "teilweise", exzellent: "durchgängig" }
+      framing_bewusst:
+        beschreibung: "Framing-Entscheidungen explizit reflektiert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      bias_transparenz:
+        beschreibung: "Eigene Biases/Perspektiven offengelegt"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+      axiom_konsistenz:
+        beschreibung: "Dokument widerspricht keinem eigenen Axiom"
+        typ: "boolean"
+        schwellenwerte: { minimal: true }
+      interessenkonflikte:
+        beschreibung: "Potenzielle Interessenkonflikte deklariert"
+        typ: "boolean"
+        schwellenwerte: { minimal: false, gut: true }
+
+# =============================================================================
+# TEIL 2: KAPITEL-TYPEN
+# =============================================================================
+
+kapitel_typen:
+
+  rahmen_kapitel:
+    beschreibung: "Orientierung, Einführung, Zusammenfassung (Kapitel 0, 1, 10)"
+    standard_gewichtung:
+      D01_wissenschaft: 0.5
+      D02_bcm_spezifik: 0.4
+      D03_didaktik: 1.0
+      D04_anwendbarkeit: 0.6
+      D05_konsistenz: 0.8
+      D06_zielgruppe: 1.0
+      D07_epistemische_reflexion: 0.5
+      D08_validierung: 0.3
+      D09_abhaengigkeiten: 0.7
+      D10_evolution: 0.6
+      D11_operationalisierung: 0.3
+      D12_narrative: 1.0
+      D13_meta_reflexivitaet: 0.8
+
+  axiom_kapitel:
+    beschreibung: "ONT, EPI, GOV, DYN (Kapitel 2, 3, 4, 5)"
+    standard_gewichtung:
+      D01_wissenschaft: 1.0
+      D02_bcm_spezifik: 1.0
+      D03_didaktik: 0.7
+      D04_anwendbarkeit: 0.6
+      D05_konsistenz: 1.0
+      D06_zielgruppe: 0.6
+      D07_epistemische_reflexion: 0.9
+      D08_validierung: 1.0
+      D09_abhaengigkeiten: 0.9
+      D10_evolution: 0.7
+      D11_operationalisierung: 0.8
+      D12_narrative: 0.5
+      D13_meta_reflexivitaet: 0.6
+
+  integration_kapitel:
+    beschreibung: "Integration, META im BEATRIX-System (Kapitel 6, 7)"
+    standard_gewichtung:
+      D01_wissenschaft: 0.6
+      D02_bcm_spezifik: 1.0
+      D03_didaktik: 0.7
+      D04_anwendbarkeit: 1.0
+      D05_konsistenz: 1.0
+      D06_zielgruppe: 0.5
+      D07_epistemische_reflexion: 0.5
+      D08_validierung: 0.6
+      D09_abhaengigkeiten: 1.0
+      D10_evolution: 0.8
+      D11_operationalisierung: 1.0
+      D12_narrative: 0.4
+      D13_meta_reflexivitaet: 0.7
+
+  transformation_kapitel:
+    beschreibung: "Von Handwerk zu Engineering (Kapitel 9)"
+    standard_gewichtung:
+      D01_wissenschaft: 0.7
+      D02_bcm_spezifik: 0.8
+      D03_didaktik: 0.9
+      D04_anwendbarkeit: 1.0
+      D05_konsistenz: 0.8
+      D06_zielgruppe: 0.7
+      D07_epistemische_reflexion: 0.6
+      D08_validierung: 0.5
+      D09_abhaengigkeiten: 0.7
+      D10_evolution: 0.9
+      D11_operationalisierung: 1.0
+      D12_narrative: 0.8
+      D13_meta_reflexivitaet: 0.7
+
+# =============================================================================
+# TEIL 3: ZIELGRUPPEN-KALIBRIERUNG
+# =============================================================================
+
+zielgruppen:
+
+  verhaltensoekonom:
+    beschreibung: "Akademische Verhaltensökonomen, Forscher"
+    multiplikatoren:
+      D01_wissenschaft: 1.5
+      D02_bcm_spezifik: 1.2
+      D03_didaktik: 0.7
+      D04_anwendbarkeit: 0.5
+      D07_epistemische_reflexion: 1.3
+      D08_validierung: 1.5
+      D13_meta_reflexivitaet: 1.2
+
+  ki_engineer:
+    beschreibung: "KI/ML Entwickler, Software Engineers"
+    multiplikatoren:
+      D01_wissenschaft: 0.6
+      D02_bcm_spezifik: 1.0
+      D03_didaktik: 0.7
+      D04_anwendbarkeit: 1.5
+      D11_operationalisierung: 1.5
+      D05_konsistenz: 1.2
+
+  business_stakeholder:
+    beschreibung: "C-Level, Produktmanager, Business Development"
+    multiplikatoren:
+      D01_wissenschaft: 0.4
+      D02_bcm_spezifik: 0.5
+      D03_didaktik: 1.3
+      D06_zielgruppe: 1.5
+      D12_narrative: 1.4
+      D04_anwendbarkeit: 1.2
+
+  regulator_ethiker:
+    beschreibung: "Regulierungsbehörden, Ethikkommissionen"
+    multiplikatoren:
+      D01_wissenschaft: 1.0
+      D07_epistemische_reflexion: 1.4
+      D08_validierung: 1.2
+      D13_meta_reflexivitaet: 1.5
+      D04_anwendbarkeit: 1.3  # Grenzen, Warnungen
+
+  berater_praktiker:
+    beschreibung: "Unternehmensberater, Praktiker"
+    multiplikatoren:
+      D03_didaktik: 1.2
+      D04_anwendbarkeit: 1.5
+      D12_narrative: 1.1
+      D06_zielgruppe: 1.2
+      D11_operationalisierung: 1.0
+
+# =============================================================================
+# TEIL 4: BEWERTUNGS-ALGORITHMUS
+# =============================================================================
+
+bewertung:
+
+  formel: |
+    Score(Kapitel, Zielgruppe) =
+      Σ (Dimension_Score × Kapitel_Gewicht × Zielgruppen_Multiplikator)
+      / Σ (Kapitel_Gewicht × Zielgruppen_Multiplikator)
+
+  schwellenwerte:
+    nicht_akzeptabel: 0.0 - 0.4
+    verbesserungswuerdig: 0.4 - 0.6
+    akzeptabel: 0.6 - 0.75
+    gut: 0.75 - 0.9
+    exzellent: 0.9 - 1.0
+
+  minimale_anforderungen:
+    - "Alle 'minimal: true' Kriterien müssen erfüllt sein"
+    - "Kein Dimension-Score unter 0.3"
+    - "Gesamt-Score mindestens 0.6 für Veröffentlichung"
+
+# =============================================================================
+# TEIL 5: ESL-INTEGRATION (Behauptungs-Evidenz-Kalibrierung)
+# =============================================================================
+
+esl_integration:
+
+  beschreibung: |
+    Integration des Empirical System of Language (ESL) in das MQC-Framework.
+    ESL misst die Kalibrierung zwischen Behauptungsstärke (B) und Evidenzstärke (E).
+
+  kernformel: "K = 1 - |B - E|"
+
+  referenz: "methodik/ESL_operationalisierung.yaml"
+
+  anwendung_in_dimensionen:
+
+    D01_wissenschaft:
+      esl_anteil: 0.50
+      beschreibung: "50% des D01-Scores basiert auf ESL K-Werten"
+      methodik: |
+        1. Identifiziere Kernaussagen des Kapitels
+        2. Berechne K für jede Aussage
+        3. D01_ESL = mean(K_i)
+        4. D01_final = 0.5 * D01_ESL + 0.5 * D01_klassisch
+
+    D07_epistemische_reflexion:
+      esl_anteil: 0.30
+      beschreibung: "ESL prüft ob Unsicherheiten kalibriert sind"
+      methodik: |
+        - Werden K-Werte explizit angegeben?
+        - Wird zwischen Hypothese (K < 0.6) und Evidenz (K >= 0.8) unterschieden?
+
+    D08_validierung:
+      esl_anteil: 0.50
+      beschreibung: "50% des D08-Scores basiert auf ESL"
+      methodik: |
+        1. Für jedes Konstrukt/Parameter: K berechnen
+        2. D08_ESL = count(K >= 0.6) / count(alle_konstrukte)
+
+  meta_check:
+
+    beschreibung: |
+      Wendet ESL auf die MQC-Scores selbst an.
+      Frage: Wie kalibriert sind unsere Qualitätsaussagen?
+
+    berechnung: |
+      Für jeden Dimension-Score:
+      - B = Score-Wert (implizite Behauptung über Qualität)
+      - E = Konfidenz des Scores (aus Hybrid-Methodik)
+      - K_meta = 1 - |B - E|
+
+    aggregation: "MQC_meta_K = mean(K_meta_i)"
+
+    interpretation:
+      hoch: "MQC_meta_K >= 0.8: Qualitätsmessung gut kalibriert"
+      mittel: "0.6 <= MQC_meta_K < 0.8: Akzeptabel"
+      niedrig: "MQC_meta_K < 0.6: Scores selbst fragwürdig"

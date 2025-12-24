@@ -1,0 +1,1334 @@
+{
+  "module": "LAMBDA",
+  "id": "7244",
+  "version": "2.6",
+  "axiom_count": 88,
+  "meta_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
+  "description": "Formalisierung des Kooperations-Regulators λ basierend auf Fehr, Gächter, Fischbacher, Herrmann, Thöni et al.",
+  "context_formula": "Δλ_Kontext = Δλ_STR + Δλ_REL + Δλ_SIT + Δλ_RES + Δλ_TEM + Δλ_PSY",
+  "trajectory_formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t), wobei λ_0 = λ_Person + Σ Δλ_Kontext",
+  "integration_formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + U_IDN(a,σ,φ,μ̃;F,s,m)",
+  "integration_note": "IDN ist BCM 2.2 Vollmodell mit Regime-Switch, Motivated Inference, Strategic Ignorance (siehe idn.json v2.2)",
+  "bcm_2_2_reference": {
+    "U_IDN": "U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+    "control_variables": ["σ (Info-Präzision)", "a (Handlung)", "μ̃ (Motivated Mean)", "φ (Subjektive Norm)"],
+    "regime": "m ∈ {moral, market} mit P(market|s,F) = Λ(γ(s-s̄))"
+  },
+  "categories": {
+    "foundation": {
+      "range": [1, 8],
+      "prefix": "LAM",
+      "description": "Grundlegende λ-Definition und Zwei-Ebenen-Modell"
+    },
+    "types": {
+      "range": [9, 16],
+      "prefix": "TYP",
+      "description": "Verhaltenstypen nach Fischbacher/Gächter/Fehr"
+    },
+    "dynamics": {
+      "range": [17, 24],
+      "prefix": "DYN",
+      "description": "Zeitliche Dynamik von λ"
+    },
+    "institutions": {
+      "range": [25, 35],
+      "prefix": "INS",
+      "description": "Institutionelle Verstärkung und Peer Punishment"
+    },
+    "antisocial": {
+      "range": [36, 46],
+      "prefix": "ANT",
+      "description": "Anti-soziale Bestrafung nach Herrmann/Thöni/Gächter (2008)"
+    },
+    "context": {
+      "range": [47, 68],
+      "prefix": "CTX",
+      "description": "22 Kontext-Dimensionen für Δλ_Kontext",
+      "subgroups": {
+        "structural": {
+          "prefix": "STR",
+          "dimensions": ["BCM-Ebene", "Kultur", "Domäne"],
+          "description": "Strukturelle Rahmenbedingungen"
+        },
+        "relational": {
+          "prefix": "REL",
+          "dimensions": ["Soziale Distanz", "Ingroup/Outgroup", "Macht/Status", "Vertrauen", "Reziprozitäts-Historie"],
+          "description": "Beziehung zwischen Akteuren"
+        },
+        "situational": {
+          "prefix": "SIT",
+          "dimensions": ["Sichtbarkeit", "Anonymität", "Gruppengröße", "Kommunikation", "Freiwilligkeit", "Default"],
+          "description": "Situative Faktoren"
+        },
+        "resources": {
+          "prefix": "RES",
+          "dimensions": ["Knappheit", "Stakes"],
+          "description": "Ressourcen-Bedingungen"
+        },
+        "temporal": {
+          "prefix": "TEM",
+          "dimensions": ["Temporalität", "Wiederholung"],
+          "description": "Zeitliche Faktoren"
+        },
+        "psychological": {
+          "prefix": "PSY",
+          "dimensions": ["Emotion", "Fairness", "Framing", "Komplexität"],
+          "description": "Psychologische Zustände"
+        }
+      }
+    },
+    "trajectory": {
+      "range": [69, 78],
+      "prefix": "TRJ",
+      "description": "Temporale Trajektorie: λ_0, λ(t), λ_∞",
+      "states": {
+        "initial": "λ_0 - Startwert vor Feedback",
+        "situative": "λ(t) - Aktueller Wert in Runde t",
+        "equilibrium_good": "λ_∞^gut ≈ 0.90 - Mit wirksamer Institution",
+        "equilibrium_bad": "λ_∞^schlecht ≈ 0.20 - Ohne Institution",
+        "equilibrium_neutral": "λ_∞^neutral ≈ 0.50 - Antisozial neutralisiert"
+      },
+      "phases": ["START", "FRÜH", "MITTE", "SPÄT", "EQUILIBRIUM"]
+    },
+    "integration": {
+      "range": [79, 88],
+      "prefix": "INT",
+      "description": "Integration von λ mit INU, KNU, IDN (BCM 2.2)",
+      "coupling": {
+        "INU": "Individueller Nutzen - gewichtet mit (1-λ)",
+        "KNU": "Kollektiver Nutzen - gewichtet mit λ",
+        "IDN": "Identitätsnutzen - BCM 2.2 Vollmodell, additiv, unabhängig von λ"
+      },
+      "bcm_2_2_idn": {
+        "formula": "U_IDN = U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+        "components": {
+          "σ": "Informationspräzision ∈ [0,1] - endogen gewählt",
+          "a": "Handlung ∈ [0,1]",
+          "μ̃": "Motivated mean ∈ [0,1] - subjektiver Norm-Anker",
+          "φ": "Subjektive Norm ∈ [0,1] - 'was ich mir als fair erzähle'",
+          "m": "Regime ∈ {moral, market} - Crowding-Out",
+          "L_aff": "Context-gated Fehr/Schmidt: ρ(F,m)·L_FS(x)",
+          "C_MI": "Motivated Inference Kosten",
+          "C_info": "Informationskosten"
+        },
+        "closed_forms": {
+          "φ*": "(ω₁κ·a + ω₃ψ·μ̃) / (ω₁κ + ω₃ψ)",
+          "μ̃*": "(K·a + H·μ_η) / (K + H)",
+          "σ*": "KKT: V'(σ*)=0 oder Rand (Strategic Ignorance wenn σ*=0)"
+        },
+        "reference": "idn.json v2.2"
+      }
+    }
+  },
+  "axioms": [
+    {
+      "id": "LAM-LAM-01",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ ∈ [0, 1]: Kontinuum zwischen Eigennutz und Kollektiv",
+      "description": "Lambda ist ein kontinuierlicher Parameter auf dem Intervall [0, 1]",
+      "formula": "λ: Σ × P × T → [0, 1]",
+      "dependencies": ["MA-ONT-14"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-02",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ = 0: Homo oeconomicus (rein eigennützig)",
+      "description": "Bei λ = 0 maximiert das Subjekt nur individuellen Nutzen",
+      "formula": "U_eff|_{λ=0} = U_INU",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-03",
+      "category": "foundation",
+      "level": "foundation",
+      "statement": "λ = 1: Homo socialis (rein kollektivistisch)",
+      "description": "Bei λ = 1 wird Nutzen durch schwächstes Glied bestimmt",
+      "formula": "U_eff|_{λ=1} = min(U_INU, U_KNU, U_IDN)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-04",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "Zwei-Ebenen-Modell: λ_eff = λ_Person + Δλ_Kontext",
+      "description": "Effektives Lambda setzt sich aus Trait und State zusammen",
+      "formula": "λ_eff(σ, ρ) = λ_Person(σ) + Δλ_Kontext(ρ), constraint: λ_eff ∈ [0, 1]",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-05",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "λ_Person: Stabile Grundorientierung (Trait)",
+      "description": "Personengebundenes Lambda ist relativ stabil über Zeit",
+      "formula": "Var(λ_Person) << Var(λ_Kontext) über kurze Zeiträume",
+      "dependencies": ["LAM-LAM-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-06",
+      "category": "foundation",
+      "level": "structure",
+      "statement": "Δλ_Kontext: Situative Modulation (State)",
+      "description": "Kontext moduliert Lambda typischerweise um ±0.2 bis ±0.3",
+      "formula": "|Δλ_Kontext| ≤ 0.3 typisch",
+      "dependencies": ["LAM-LAM-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-LAM-07",
+      "category": "foundation",
+      "level": "operation",
+      "statement": "Kontext-Faktoren für Δλ",
+      "description": "Öffentlichkeit, Gruppengröße, Anonymität beeinflussen Δλ",
+      "formula": "Δλ = f(Öffentlichkeit, Gruppengröße, Anonymität, Emotion)",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "LAM-07a",
+          "statement": "Öffentlichkeit erhöht λ: Δλ_öffentlich ≈ +0.15",
+          "testable": true
+        },
+        {
+          "id": "LAM-07b",
+          "statement": "Anonymität senkt λ: Δλ_anonym ≈ -0.10",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-LAM-08",
+      "category": "foundation",
+      "level": "operation",
+      "statement": "λ-Messung durch Public Goods Game",
+      "description": "Lambda approximierbar durch Beitragsverhalten",
+      "formula": "λ ≈ C_i / Endowment (im PGG-Kontext)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-TYP-01",
+      "category": "types",
+      "level": "foundation",
+      "statement": "Drei Verhaltenstypen nach λ-Charakteristik",
+      "description": "Population teilt sich in Altruisten, Conditional Cooperators, Self-Interested",
+      "formula": "Population = {ALTRUIST, CONDITIONAL, SELF_INTERESTED}",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fischbacher, Gächter & Fehr (2001)"]
+    },
+    {
+      "id": "LAM-TYP-02",
+      "category": "types",
+      "level": "foundation",
+      "statement": "ALTRUIST: λ hoch und konstant (~10%)",
+      "description": "Altruisten kooperieren unabhängig vom Verhalten anderer",
+      "formula": "λ_ALTRUIST = const ≈ 0.8-1.0, ∂λ/∂Belief = 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-02a",
+          "statement": "Anteil ALTRUIST ≈ 10% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-03",
+      "category": "types",
+      "level": "foundation",
+      "statement": "CONDITIONAL COOPERATOR: λ = f(Belief) (~50%)",
+      "description": "Conditional Cooperators passen λ an erwartetes Verhalten anderer an",
+      "formula": "λ_CC = f(E[λ_andere]), ∂λ/∂Belief > 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-03a",
+          "statement": "Anteil CONDITIONAL ≈ 50% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-04",
+      "category": "types",
+      "level": "foundation",
+      "statement": "SELF-INTERESTED: λ ≈ 0 (~30%)",
+      "description": "Self-Interested maximieren Eigennutz unabhängig von anderen",
+      "formula": "λ_SI ≈ 0, ∂λ/∂Belief = 0",
+      "dependencies": ["LAM-TYP-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "TYP-04a",
+          "statement": "Anteil SELF_INTERESTED ≈ 30% der Population",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-TYP-05",
+      "category": "types",
+      "level": "structure",
+      "statement": "Conditional Cooperator: Zwei Subtypen",
+      "description": "Strategisch (leicht unter anderen) vs. Altruistisch (matching)",
+      "formula": "CC_strategisch: C_i = E[C_andere] - ε; CC_altruistisch: C_i ≈ E[C_andere]",
+      "dependencies": ["LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-06",
+      "category": "types",
+      "level": "structure",
+      "statement": "Belief über λ_andere ist entscheidend für CC",
+      "description": "Conditional Cooperators reagieren auf Belief, nicht auf tatsächliches Verhalten",
+      "formula": "λ_CC = f(Belief[λ_andere]), nicht f(λ_andere_tatsächlich)",
+      "dependencies": ["LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-07",
+      "category": "types",
+      "level": "operation",
+      "statement": "Pluralistic Ignorance: Belief ≠ Realität",
+      "description": "Menschen unterschätzen oft Kooperationsbereitschaft anderer",
+      "formula": "E[Belief[λ_andere]] < E[λ_andere_tatsächlich] typisch",
+      "dependencies": ["LAM-TYP-06"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TYP-08",
+      "category": "types",
+      "level": "operation",
+      "statement": "Social Proof korrigiert Belief",
+      "description": "Information über tatsächliches Verhalten erhöht Belief und damit λ_CC",
+      "formula": "Δλ_CC = α × (λ_tatsächlich - Belief[λ]), α > 0",
+      "dependencies": ["LAM-TYP-06", "LAM-TYP-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-01",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "λ ist zeitabhängig: λ = f(t)",
+      "description": "Lambda verändert sich über Interaktionsrunden",
+      "formula": "λ(t+1) = λ(t) + Δλ(Feedback_t)",
+      "dependencies": ["LAM-LAM-01"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-DYN-02",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "Ohne Institution: λ(t) sinkt",
+      "description": "Ohne Sanktionsmechanismus sinkt λ über Runden",
+      "formula": "dλ/dt < 0 ohne Punishment",
+      "dependencies": ["LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "DYN-02a",
+          "statement": "λ sinkt von ~0.55 auf ~0.20 über 6 Runden (Fehr & Gächter)",
+          "testable": true
+        },
+        {
+          "id": "DYN-02b",
+          "statement": "Δλ/Runde ≈ -0.07 ohne Punishment",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-DYN-03",
+      "category": "dynamics",
+      "level": "foundation",
+      "statement": "Mit Peer Punishment + Institution: λ(t) steigt",
+      "description": "Mit Sanktionsmechanismus (verstärkt) steigt λ über Runden",
+      "formula": "dλ/dt > 0 mit Punishment (multipliziert)",
+      "dependencies": ["LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "DYN-03a",
+          "statement": "λ steigt von ~0.55 auf ~0.90 über 6 Runden (Fehr & Gächter)",
+          "testable": true
+        },
+        {
+          "id": "DYN-03b",
+          "statement": "Δλ/Runde ≈ +0.07 mit Punishment",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-DYN-04",
+      "category": "dynamics",
+      "level": "structure",
+      "statement": "Mechanismus des λ-Verfalls (ohne Punishment)",
+      "description": "Conditional Cooperators sehen Free Rider und passen Belief an",
+      "formula": "Belief(t+1) = Belief(t) - β × FreeRiding_beobachtet, β > 0",
+      "dependencies": ["LAM-DYN-02", "LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-05",
+      "category": "dynamics",
+      "level": "structure",
+      "statement": "Mechanismus des λ-Anstiegs (mit Punishment)",
+      "description": "Free Rider werden bestraft → weniger Free Riding → Belief steigt",
+      "formula": "Belief(t+1) = Belief(t) + γ × Punishment_beobachtet, γ > 0",
+      "dependencies": ["LAM-DYN-03", "LAM-TYP-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-06",
+      "category": "dynamics",
+      "level": "operation",
+      "statement": "Positive Feedback-Schleife mit Punishment",
+      "description": "Mehr Punishment → weniger Free Riding → höherer Belief → mehr Kooperation",
+      "formula": "Punishment ↑ → FreeRiding ↓ → Belief ↑ → λ_CC ↑ → Kooperation ↑",
+      "dependencies": ["LAM-DYN-05"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-07",
+      "category": "dynamics",
+      "level": "operation",
+      "statement": "Negative Feedback-Schleife ohne Punishment",
+      "description": "Free Riding → Belief sinkt → weniger Kooperation → mehr Free Riding",
+      "formula": "FreeRiding ↑ → Belief ↓ → λ_CC ↓ → Kooperation ↓ → FreeRiding ↑",
+      "dependencies": ["LAM-DYN-04"],
+      "testable": true
+    },
+    {
+      "id": "LAM-DYN-08",
+      "category": "dynamics",
+      "level": "dynamics",
+      "statement": "Langfristige Equilibria",
+      "description": "Zwei stabile Gleichgewichte: λ→0 oder λ→1",
+      "formula": "lim_{t→∞} λ(t) ∈ {~0.2, ~0.9} abhängig von Institution",
+      "dependencies": ["LAM-DYN-06", "LAM-DYN-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-01",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Peer Punishment allein ist unvollständig",
+      "description": "Reines Peer Punishment (1:1) ist zu kostspielig",
+      "formula": "Punishment_Effektivität(1:1) < Punishment_Effektivität(1:M), M > 1",
+      "dependencies": ["LAM-DYN-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-02",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Institution als Multiplikator: M > 1",
+      "description": "Institution verstärkt Peer Punishment um Faktor M",
+      "formula": "Schaden_Ziel = M × Kosten_Punisher, M > 1",
+      "dependencies": ["LAM-INS-01"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "INS-02a",
+          "statement": "Fehr & Gächter: M = 3 (1:3 Ratio)",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-INS-03",
+      "category": "institutions",
+      "level": "foundation",
+      "statement": "Kombination: Peer entscheidet WER, Institution verstärkt WIE STARK",
+      "description": "Optimale Kooperation braucht dezentrale Entscheidung + zentrale Verstärkung",
+      "formula": "λ_max = f(Peer_Entscheidung × Institution_Multiplikator)",
+      "dependencies": ["LAM-INS-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-04",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Peer-Komponente liefert Information",
+      "description": "Peers wissen lokal, wer Free Rider ist",
+      "formula": "Info_FreerRider = f(lokale_Beobachtung)",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-05",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Institution liefert Durchsetzung",
+      "description": "Institution macht Bestrafung glaubwürdig und effektiv",
+      "formula": "Glaubwürdigkeit = f(Multiplikator, Konsistenz)",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-06",
+      "category": "institutions",
+      "level": "structure",
+      "statement": "Second-Order Free Rider Problem",
+      "description": "Bestrafung selbst ist Public Good - Free Riding bei Bestrafung möglich",
+      "formula": "P(Bestrafen) < 1, auch wenn Bestrafung kollektiv optimal",
+      "dependencies": ["LAM-INS-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-07",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Altruistische Bestrafung existiert",
+      "description": "~60% bestrafen Free Rider trotz eigener Kosten",
+      "formula": "P(Bestrafen | Kosten > 0) ≈ 0.6",
+      "dependencies": ["LAM-INS-06"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "LAM-INS-08",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Bestrafung korreliert mit Normverletzung",
+      "description": "Je stärker Abweichung von Norm, desto härter Bestrafung",
+      "formula": "Punishment_ij = f(c_i - c_j), steigend für c_i > c_j",
+      "dependencies": ["LAM-INS-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-09",
+      "category": "institutions",
+      "level": "operation",
+      "statement": "Minimaler Multiplikator für Effektivität",
+      "description": "Es gibt einen Schwellenwert für M, unter dem Peer Punishment nicht wirkt",
+      "formula": "∃ M_min: ∀ M < M_min: λ_equilibrium → 0",
+      "dependencies": ["LAM-INS-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-10",
+      "category": "institutions",
+      "level": "dynamics",
+      "statement": "Institution kann Peer Punishment crowden out",
+      "description": "Zu starke zentrale Sanktion kann Peer-Motivation reduzieren",
+      "formula": "∂(Peer_Punishment)/∂(Institution_Stärke) < 0 für hohe Institution_Stärke",
+      "dependencies": ["LAM-INS-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-INS-11",
+      "category": "institutions",
+      "level": "dynamics",
+      "statement": "Optimale Kombination: Peer + moderate Institution",
+      "description": "Maximum λ bei Kombination aus Peer-Entscheidung und moderater Verstärkung",
+      "formula": "λ_max bei M ∈ [2, 4], nicht bei M → ∞",
+      "dependencies": ["LAM-INS-10", "LAM-INS-09"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-01",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Anti-soziale Bestrafung existiert",
+      "description": "Free Rider bestrafen Kooperatoren (nicht nur umgekehrt)",
+      "formula": "∃ P_antisocial: FreeRider → bestraft → Kooperator",
+      "dependencies": ["LAM-INS-07"],
+      "testable": true,
+      "references": ["Herrmann, Thöni & Gächter (2008)"]
+    },
+    {
+      "id": "LAM-ANT-02",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Zwei Bestrafungstypen: Pro-sozial vs. Anti-sozial",
+      "description": "Bestrafung ist nicht einheitlich - es gibt normerhaltende und normzerstörende",
+      "formula": "P_total = P_prosocial + P_antisocial",
+      "dependencies": ["LAM-ANT-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-03",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Pro-soziale Bestrafung ist universell",
+      "description": "Kooperatoren bestrafen Free Rider in allen Gesellschaften",
+      "formula": "P_prosocial > 0 ∀ Kulturen",
+      "dependencies": ["LAM-ANT-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-04",
+      "category": "antisocial",
+      "level": "foundation",
+      "statement": "Anti-soziale Bestrafung variiert stark zwischen Kulturen",
+      "description": "Kulturelle Unterschiede in anti-sozialer Bestrafung sind enorm",
+      "formula": "Var(P_antisocial | Kultur) >> Var(P_prosocial | Kultur)",
+      "dependencies": ["LAM-ANT-02"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-04a",
+          "statement": "Boston/Kopenhagen: Ratio pro:anti ≈ 6:1 bis 10:1",
+          "testable": true
+        },
+        {
+          "id": "ANT-04b",
+          "statement": "Athen/Riad/Muscat: Ratio pro:anti ≈ 1:1",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-05",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Netto-Effekt = Pro-sozial minus Anti-sozial",
+      "description": "Effekt von Peer Punishment auf λ hängt vom Netto-Effekt ab",
+      "formula": "Δλ_punishment = α × P_prosocial - β × P_antisocial",
+      "dependencies": ["LAM-ANT-02", "LAM-DYN-03"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-06",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Anti-soziale Bestrafung neutralisiert pro-soziale",
+      "description": "Bei hoher anti-sozialer Bestrafung kann Netto-Effekt null oder negativ sein",
+      "formula": "Wenn P_antisocial ≈ P_prosocial: Δλ_punishment → 0",
+      "dependencies": ["LAM-ANT-05"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-06a",
+          "statement": "Boston: λ_end ≈ 0.90 (hoher Netto-Effekt)",
+          "testable": true
+        },
+        {
+          "id": "ANT-06b",
+          "statement": "Muscat: λ_end ≈ 0.30 (neutralisiert)",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-07",
+      "category": "antisocial",
+      "level": "structure",
+      "statement": "Korrelate anti-sozialer Bestrafung",
+      "description": "Anti-soziale Bestrafung korreliert mit institutionellen Faktoren",
+      "formula": "P_antisocial = f(RuleOfLaw⁻¹, Trust⁻¹, CivicNorms⁻¹, Democracy⁻¹)",
+      "dependencies": ["LAM-ANT-04"],
+      "testable": true,
+      "corollaries": [
+        {
+          "id": "ANT-07a",
+          "statement": "Schwache Rechtsstaatlichkeit → hohe anti-soziale Bestrafung",
+          "testable": true
+        },
+        {
+          "id": "ANT-07b",
+          "statement": "Niedriges Vertrauen → hohe anti-soziale Bestrafung",
+          "testable": true
+        }
+      ]
+    },
+    {
+      "id": "LAM-ANT-08",
+      "category": "antisocial",
+      "level": "operation",
+      "statement": "Motive für anti-soziale Bestrafung",
+      "description": "Vergeltung, Neid, Normkonflikt, Ehre/Gesichtsverlust",
+      "formula": "P_antisocial = f(Vergeltung, Neid, Normkonflikt, Ehre)",
+      "dependencies": ["LAM-ANT-01"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-09",
+      "category": "antisocial",
+      "level": "operation",
+      "statement": "Vergeltungs-Motiv: Bestrafung provoziert Gegen-Bestrafung",
+      "description": "Wer bestraft wurde, bestraft zurück - unabhängig vom eigenen Beitrag",
+      "formula": "P_antisocial(t+1) = f(P_received(t))",
+      "dependencies": ["LAM-ANT-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-10",
+      "category": "antisocial",
+      "level": "dynamics",
+      "statement": "Negative Spirale bei hoher anti-sozialer Bestrafung",
+      "description": "Anti-soziale Bestrafung kann Kooperation zerstören statt aufbauen",
+      "formula": "Wenn P_antisocial > P_prosocial: dλ/dt < 0 TROTZ Punishment",
+      "dependencies": ["LAM-ANT-05", "LAM-ANT-09"],
+      "testable": true
+    },
+    {
+      "id": "LAM-ANT-11",
+      "category": "antisocial",
+      "level": "dynamics",
+      "statement": "Kontext-Check vor Peer Punishment Empfehlung",
+      "description": "Peer Punishment nur empfehlen wenn P_antisocial niedrig",
+      "formula": "Empfehle Peer Punishment nur wenn E[P_prosocial/P_antisocial] > 3",
+      "dependencies": ["LAM-ANT-06", "LAM-ANT-07"],
+      "testable": false
+    },
+    {
+      "id": "LAM-CTX-01",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "BCM-Ebene moduliert λ",
+      "description": "5 Ebenen: META, MAKRO, MESO, MIKRO, IND mit unterschiedlichen λ-Baseline (definiert in MA-ONT-26)",
+      "formula": "Δλ_Ebene = {META: ±0.2, MAKRO: ±0.15, MESO: ±0.10, MIKRO: ±0.15, IND: 0}",
+      "dependencies": ["LAM-LAM-06", "MA-ONT-26"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-01a", "statement": "META: Kulturelle Grundnormen, λ variiert 0.3-0.8 zwischen Kulturen"},
+        {"id": "CTX-01b", "statement": "MAKRO: Institutionelle Ebene, f(RuleOfLaw, Democracy)"},
+        {"id": "CTX-01c", "statement": "MESO: Organisationsebene, Organisationskultur"},
+        {"id": "CTX-01d", "statement": "MIKRO: Gruppenebene, Reputation + Wiederholung"},
+        {"id": "CTX-01e", "statement": "IND: Personenebene = λ_Person (Trait)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-02",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "Kultur moduliert λ",
+      "description": "Individualistisch vs. Kollektivistisch als Grundorientierung",
+      "formula": "Δλ_Kultur ∈ [-0.2, +0.2]; kollektivistisch → +Δλ",
+      "dependencies": ["LAM-CTX-01"],
+      "testable": true,
+      "references": ["Hofstede (1980)", "Herrmann et al. (2008)"],
+      "corollaries": [
+        {"id": "CTX-02a", "statement": "Nordeuropa/Angelsächsisch: λ_Kultur ≈ +0.15"},
+        {"id": "CTX-02b", "statement": "Mittelmeer/Nahost: λ_Kultur ≈ -0.10 (mehr anti-soziale Bestrafung)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-03",
+      "category": "context",
+      "subgroup": "structural",
+      "level": "foundation",
+      "statement": "Domäne moduliert λ",
+      "description": "Unterschiedliche λ-Werte je nach Lebensbereich",
+      "formula": "Δλ_Domäne = f(Domäne); Domäne ∈ {Arbeit, Freizeit, Konsum, Gesundheit, Umwelt}",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-03a", "statement": "Umwelt: λ hoch wenn kollektive Betroffenheit salient"},
+        {"id": "CTX-03b", "statement": "Konsum: λ oft niedrig (individuelle Entscheidung)"},
+        {"id": "CTX-03c", "statement": "Gesundheit: λ variabel (Impfen hoch, Ernährung niedrig)"},
+        {"id": "CTX-03d", "statement": "Arbeit: λ abhängig von Team vs. Individual-Incentives"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-04",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "foundation",
+      "statement": "Soziale Distanz moduliert λ",
+      "description": "Je näher die Beziehung, desto höher λ",
+      "formula": "Δλ_Distanz = -α × SozialeDistanz; α > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-04a", "statement": "Intim (Familie, Partner): Δλ ≈ +0.25"},
+        {"id": "CTX-04b", "statement": "Peer (Freunde, Kollegen): Δλ ≈ +0.15"},
+        {"id": "CTX-04c", "statement": "Community (Nachbarn): Δλ ≈ +0.05"},
+        {"id": "CTX-04d", "statement": "Organisation: Δλ ≈ 0"},
+        {"id": "CTX-04e", "statement": "Gesellschaft (Anonyme): Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-05",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "foundation",
+      "statement": "Ingroup/Outgroup moduliert λ",
+      "description": "Höhere Kooperation mit Ingroup-Mitgliedern",
+      "formula": "Δλ_Gruppe = +β wenn Ingroup, -β wenn Outgroup; β ≈ 0.15",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Tajfel & Turner (1979)"]
+    },
+    {
+      "id": "LAM-CTX-06",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Macht/Status moduliert λ",
+      "description": "Machtasymmetrie beeinflusst Kooperationsbereitschaft",
+      "formula": "Δλ_Macht = f(Machtdifferenz); nicht-monoton",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Fiske (1992)"],
+      "corollaries": [
+        {"id": "CTX-06a", "statement": "Symmetrisch: λ höher (Peer-Kooperation)"},
+        {"id": "CTX-06b", "statement": "Asymmetrisch: λ_mächtig oft niedriger, λ_schwach variabel"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-07",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Vertrauen moduliert λ",
+      "description": "Baseline-Vertrauen erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Trust = γ × Trust; γ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-ANT-07"],
+      "testable": true,
+      "references": ["Herrmann et al. (2008)"],
+      "corollaries": [
+        {"id": "CTX-07a", "statement": "High-Trust-Gesellschaft: Δλ ≈ +0.15"},
+        {"id": "CTX-07b", "statement": "Low-Trust-Gesellschaft: Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-08",
+      "category": "context",
+      "subgroup": "relational",
+      "level": "structure",
+      "statement": "Reziprozitäts-Historie moduliert λ",
+      "description": "Positive Erfahrungen erhöhen λ, negative senken es",
+      "formula": "Δλ_History = δ × Σ(vergangene_Kooperation); δ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "references": ["Axelrod (1984)"]
+    },
+    {
+      "id": "LAM-CTX-09",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Sichtbarkeit moduliert λ",
+      "description": "Beobachtung erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Sichtbarkeit = +0.15 wenn beobachtet, 0 wenn privat",
+      "dependencies": ["LAM-LAM-07"],
+      "testable": true,
+      "references": ["Ariely et al. (2009)"]
+    },
+    {
+      "id": "LAM-CTX-10",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Anonymität moduliert λ",
+      "description": "Anonymität reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Anonymität = -0.10 wenn anonym, 0 wenn identifizierbar",
+      "dependencies": ["LAM-LAM-07"],
+      "testable": true
+    },
+    {
+      "id": "LAM-CTX-11",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Gruppengröße moduliert λ",
+      "description": "Größere Gruppen reduzieren individuelle Kooperationsbereitschaft",
+      "formula": "Δλ_Größe = -ε × log(n); ε > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Olson (1965)"],
+      "corollaries": [
+        {"id": "CTX-11a", "statement": "n=2-4: Δλ ≈ 0 (Baseline)"},
+        {"id": "CTX-11b", "statement": "n=10-20: Δλ ≈ -0.05"},
+        {"id": "CTX-11c", "statement": "n>100: Δλ ≈ -0.15"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-12",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Kommunikation moduliert λ",
+      "description": "Kommunikationsmöglichkeit erhöht Kooperation",
+      "formula": "Δλ_Kommunikation = +0.20 wenn möglich, 0 wenn keine",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Sally (1995)"]
+    },
+    {
+      "id": "LAM-CTX-13",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Freiwilligkeit moduliert λ",
+      "description": "Freiwillige Teilnahme erhöht intrinsische Motivation",
+      "formula": "Δλ_Freiwilligkeit = +0.10 wenn freiwillig, -0.05 wenn erzwungen",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Deci & Ryan (1985)"]
+    },
+    {
+      "id": "LAM-CTX-14",
+      "category": "context",
+      "subgroup": "situational",
+      "level": "operation",
+      "statement": "Default moduliert λ",
+      "description": "Opt-out Default erhöht Kooperationsrate",
+      "formula": "Δλ_Default = +0.25 bei Opt-out vs. Opt-in",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Thaler & Sunstein (2008)"]
+    },
+    {
+      "id": "LAM-CTX-15",
+      "category": "context",
+      "subgroup": "resources",
+      "level": "structure",
+      "statement": "Knappheit moduliert λ",
+      "description": "Ressourcenknappheit reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Scarcity = -ζ × Scarcity; ζ > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Mullainathan & Shafir (2013)"],
+      "corollaries": [
+        {"id": "CTX-15a", "statement": "Überfluss: Δλ ≈ +0.05"},
+        {"id": "CTX-15b", "statement": "Moderate Knappheit: Δλ ≈ -0.10"},
+        {"id": "CTX-15c", "statement": "Extreme Knappheit: Δλ ≈ -0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-16",
+      "category": "context",
+      "subgroup": "resources",
+      "level": "structure",
+      "statement": "Stakes moduliert λ",
+      "description": "Höhere Einsätze können λ senken oder erhöhen",
+      "formula": "Δλ_Stakes = nicht-monoton; oft ↓ bei sehr hohen Stakes",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Camerer & Hogarth (1999)"]
+    },
+    {
+      "id": "LAM-CTX-17",
+      "category": "context",
+      "subgroup": "temporal",
+      "level": "structure",
+      "statement": "Temporalität moduliert λ",
+      "description": "Langfrist-Orientierung erhöht Kooperationsbereitschaft",
+      "formula": "Δλ_Zeit = +η × Zeithorizont; η > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-17a", "statement": "Kurzfristig: Δλ ≈ -0.10"},
+        {"id": "CTX-17b", "statement": "Langfristig: Δλ ≈ +0.10"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-18",
+      "category": "context",
+      "subgroup": "temporal",
+      "level": "structure",
+      "statement": "Wiederholung moduliert λ",
+      "description": "Wiederholte Interaktion ermöglicht Reputation und Reziprozität",
+      "formula": "Δλ_Repeat = +θ × (1 - 1/E[Runden]); θ > 0",
+      "dependencies": ["LAM-LAM-06", "LAM-DYN-01"],
+      "testable": true,
+      "references": ["Axelrod (1984)"],
+      "corollaries": [
+        {"id": "CTX-18a", "statement": "Einmalig (Runde=1): Δλ = 0"},
+        {"id": "CTX-18b", "statement": "Wiederholt (Runden>10): Δλ ≈ +0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-19",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Emotionaler Zustand moduliert λ",
+      "description": "Emotionen beeinflussen Kooperationsbereitschaft bidirektional",
+      "formula": "Δλ_Emotion = f(Valenz, Arousal); komplex",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-19a", "statement": "Positive Emotion: Δλ ≈ +0.10"},
+        {"id": "CTX-19b", "statement": "Wut/Frustration: Δλ ≈ -0.15"},
+        {"id": "CTX-19c", "statement": "Angst: Δλ variabel (↑ bei Solidaritäts-Frame)"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-20",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Fairness-Wahrnehmung moduliert λ",
+      "description": "Wahrgenommene Unfairness reduziert Kooperationsbereitschaft",
+      "formula": "Δλ_Fairness = +ι × FairnessPerception; ι > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Fehr & Schmidt (1999)"],
+      "corollaries": [
+        {"id": "CTX-20a", "statement": "Fair: Δλ ≈ +0.10"},
+        {"id": "CTX-20b", "statement": "Unfair: Δλ ≈ -0.20"}
+      ]
+    },
+    {
+      "id": "LAM-CTX-21",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Framing moduliert λ",
+      "description": "Kooperations-Frame vs. Wettbewerbs-Frame",
+      "formula": "Δλ_Framing = +0.15 bei Kooperations-Frame, -0.15 bei Wettbewerbs-Frame",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "references": ["Liberman et al. (2004)"]
+    },
+    {
+      "id": "LAM-CTX-22",
+      "category": "context",
+      "subgroup": "psychological",
+      "level": "operation",
+      "statement": "Komplexität moduliert λ",
+      "description": "Hohe Komplexität reduziert strategisches Kooperieren",
+      "formula": "Δλ_Komplexität = -κ × Komplexität; κ > 0",
+      "dependencies": ["LAM-LAM-06"],
+      "testable": true,
+      "corollaries": [
+        {"id": "CTX-22a", "statement": "Einfach (klare Payoffs): Δλ ≈ 0"},
+        {"id": "CTX-22b", "statement": "Komplex (unsichere Outcomes): Δλ ≈ -0.10"}
+      ]
+    },
+    {
+      "id": "LAM-TRJ-01",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ_0: Initialer Kooperations-Zustand",
+      "description": "Startwert vor jeglichem Feedback oder Intervention",
+      "formula": "λ_0 = λ_Person + Σ Δλ_Kontext(ρ_i)",
+      "dependencies": ["LAM-LAM-04", "LAM-LAM-06"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-02",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ(t): Situativer Kooperations-Zustand",
+      "description": "Aktueller Wert nach t Runden Feedback",
+      "formula": "λ(t) = λ_∞ + (λ_0 - λ_∞) × e^(-k×t)",
+      "dependencies": ["LAM-TRJ-01", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "TRJ-02a", "statement": "k ≈ 0.3/Runde typische Konvergenzrate"},
+        {"id": "TRJ-02b", "statement": "Nach ~7 Runden: 90% Konvergenz erreicht"}
+      ]
+    },
+    {
+      "id": "LAM-TRJ-03",
+      "category": "trajectory",
+      "level": "foundation",
+      "statement": "λ_∞: Equilibrium-Zustand",
+      "description": "Stabiler Endzustand abhängig von institutionellem Setting",
+      "formula": "λ_∞ = f(Institution, Antisozial) ∈ {0.20, 0.50, 0.90}",
+      "dependencies": ["LAM-DYN-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-04",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Gutes Equilibrium: λ_∞^gut ≈ 0.90",
+      "description": "Erreichbar mit wirksamer Institution und niedriger anti-sozialer Bestrafung",
+      "formula": "λ_∞^gut ≈ 0.90 wenn Institution(M>2) UND P_prosocial/P_antisocial > 3",
+      "dependencies": ["LAM-TRJ-03", "LAM-INS-02", "LAM-ANT-06"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)", "Boston/Copenhagen in Herrmann et al. (2008)"]
+    },
+    {
+      "id": "LAM-TRJ-05",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Schlechtes Equilibrium: λ_∞^schlecht ≈ 0.20",
+      "description": "Ohne Institution oder mit hoher anti-sozialer Bestrafung",
+      "formula": "λ_∞^schlecht ≈ 0.20 wenn KEINE Institution ODER P_prosocial/P_antisocial < 1.5",
+      "dependencies": ["LAM-TRJ-03", "LAM-DYN-02", "LAM-ANT-10"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002) No-Punishment", "Muscat in Herrmann et al. (2008)"]
+    },
+    {
+      "id": "LAM-TRJ-06",
+      "category": "trajectory",
+      "level": "structure",
+      "statement": "Neutrales Equilibrium: λ_∞^neutral ≈ 0.50",
+      "description": "Anti-soziale Bestrafung neutralisiert institutionellen Effekt",
+      "formula": "λ_∞^neutral ≈ 0.50 wenn Institution(M>2) UND P_prosocial/P_antisocial ∈ [1.5, 3]",
+      "dependencies": ["LAM-TRJ-03", "LAM-ANT-05"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-07",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Phasen-Identifikation",
+      "description": "5 temporale Phasen zur Zustandsdiagnose",
+      "formula": "Phase = {START: t=0, FRÜH: t∈[1,3], MITTE: t∈[4,7], SPÄT: t≥8, EQUILIBRIUM: |dλ/dt|<0.02}",
+      "dependencies": ["LAM-TRJ-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-08",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Trajektorie-Identifikation",
+      "description": "Richtung der λ-Entwicklung",
+      "formula": "Trajektorie = {AUFWÄRTS: dλ/dt > 0.02, STABIL: |dλ/dt| ≤ 0.02, ABWÄRTS: dλ/dt < -0.02}",
+      "dependencies": ["LAM-TRJ-02"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-09",
+      "category": "trajectory",
+      "level": "operation",
+      "statement": "Früherkennung des Ziel-Equilibriums",
+      "description": "Nach 2-3 Runden ist Ziel-Equilibrium prognostizierbar",
+      "formula": "E[λ_∞] = λ(t=3) + 0.5 × sign(dλ/dt) × (1 - λ(t=3)) mit 80% Konfidenz",
+      "dependencies": ["LAM-TRJ-02", "LAM-TRJ-08"],
+      "testable": true
+    },
+    {
+      "id": "LAM-TRJ-10",
+      "category": "trajectory",
+      "level": "dynamics",
+      "statement": "Interventions-Timing",
+      "description": "Optimaler Zeitpunkt für Intervention abhängig von Phase",
+      "formula": "Intervention_Effektivität = f(Phase); Maximum bei FRÜH, Minimum bei EQUILIBRIUM",
+      "dependencies": ["LAM-TRJ-07"],
+      "testable": true,
+      "corollaries": [
+        {"id": "TRJ-10a", "statement": "START: Maximale Gestaltbarkeit, Institution etablieren"},
+        {"id": "TRJ-10b", "statement": "FRÜH: Social Proof wirksam, Belief korrigierbar"},
+        {"id": "TRJ-10c", "statement": "MITTE: Trend verstärken oder umkehren noch möglich"},
+        {"id": "TRJ-10d", "statement": "SPÄT: Schwer umkehrbar, hoher Aufwand"},
+        {"id": "TRJ-10e", "statement": "EQUILIBRIUM: Strukturelle Änderung nötig für Umkehr"}
+      ]
+    },
+    {
+      "id": "LAM-INT-01",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "λ reguliert INU vs. KNU; IDN additiv als BCM 2.2 Vollmodell",
+      "description": "Lambda gewichtet INU und KNU; U_IDN ist BCM 2.2 mit Regime-Switch, Motivated Inference, Strategic Ignorance",
+      "formula": "U_eff = (1-λ) × U_INU + λ × U_KNU + U_IDN(a,σ,φ,μ̃;F,s,m)",
+      "dependencies": ["LAM-LAM-01", "MA-ONT-14", "IDN-OPT-01"],
+      "testable": true,
+      "validates": ["META", "INU", "KNU", "IDN"],
+      "references": ["BCM 2.2", "idn.json v2.2"]
+    },
+    {
+      "id": "LAM-INT-02",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "Bei λ=0: INU-Maximierer, aber IDN bleibt aktiv",
+      "description": "Selbst homo oeconomicus hat Identität - IDN wirkt unabhängig von λ",
+      "formula": "U_eff|_{λ=0} = U_INU + I_IDN; ∂U_eff/∂U_KNU = 0, aber ∂U_eff/∂I_IDN = 1",
+      "dependencies": ["LAM-INT-01", "LAM-LAM-02"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-02a", "statement": "Selbst ohne Kooperationsmotiv kann Identität Verhalten beeinflussen"},
+        {"id": "INT-02b", "statement": "Erklärt 'irrationales' Verhalten bei Egoisten mit starker Gruppenidentität"}
+      ]
+    },
+    {
+      "id": "LAM-INT-03",
+      "category": "integration",
+      "level": "foundation",
+      "statement": "Bei λ=1: Volle KNU-Gewichtung plus IDN",
+      "description": "Maximale Kooperationsbereitschaft: KNU dominiert INU, IDN addiert sich",
+      "formula": "U_eff|_{λ=1} = U_KNU + I_IDN",
+      "dependencies": ["LAM-INT-01", "LAM-LAM-03"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-03a", "statement": "Altruisten maximieren KNU, IDN kann Richtung vorgeben"},
+        {"id": "INT-03b", "statement": "Welches Kollektiv (Ingroup) hängt von Identität ab"}
+      ]
+    },
+    {
+      "id": "LAM-INT-04",
+      "category": "integration",
+      "level": "structure",
+      "statement": "U_IDN Berechnung nach BCM 2.2",
+      "description": "Identitätsnutzen mit Regime-Switch, Motivated Inference und Strategic Ignorance",
+      "formula": "U_IDN = U_mat - μ_ID[L_aff + ω₁κ(a-φ)² + ω₃ψ·𝔼[(φ-η)²]] - C_MI(μ̃) - C_info(σ)",
+      "dependencies": ["LAM-INT-01", "IDN-OPT-01"],
+      "testable": true,
+      "references": ["BCM 2.2", "idn.json v2.2"],
+      "corollaries": [
+        {"id": "INT-04a", "statement": "L_aff = ρ(F,m)·L_FS(x): Context-gated Fehr/Schmidt"},
+        {"id": "INT-04b", "statement": "φ* = (ω₁κ·a + ω₃ψ·μ̃)/(ω₁κ+ω₃ψ): Optimale subjektive Norm"},
+        {"id": "INT-04c", "statement": "μ̃*: Motivated mean für Self-Deception"},
+        {"id": "INT-04d", "statement": "σ*: Endogene Informationswahl (Strategic Ignorance wenn σ*=0)"}
+      ]
+    },
+    {
+      "id": "LAM-INT-05",
+      "category": "integration",
+      "level": "structure",
+      "statement": "INU-KNU Trade-off",
+      "description": "Klassisches Kooperations-Dilemma: INU ↑ oft KNU ↓",
+      "formula": "∂U_INU/∂Aktion × ∂U_KNU/∂Aktion < 0 bei Dilemma-Situationen",
+      "dependencies": ["LAM-INT-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-05a", "statement": "Free Riding: INU ↑, KNU ↓"},
+        {"id": "INT-05b", "statement": "Kooperation: INU ↓ (kurzfristig), KNU ↑"}
+      ]
+    },
+    {
+      "id": "LAM-INT-06",
+      "category": "integration",
+      "level": "structure",
+      "statement": "IDN als Trade-off-Auflöser (unabhängig von λ)",
+      "description": "Identitätsnutzen kann INU-KNU Dilemma auflösen - auch bei λ=0 Egoisten",
+      "formula": "Wenn P_c(Kooperation) ∈ Präskription: I_IDN(Kooperation) > I_IDN(Defection) → U_eff(Kooperation) ↑",
+      "dependencies": ["LAM-INT-01", "LAM-INT-04", "LAM-INT-05"],
+      "testable": true,
+      "references": ["Akerlof & Kranton (2000)"],
+      "corollaries": [
+        {"id": "INT-06a", "statement": "Soldier: Kooperation durch Identität auch bei λ=0 möglich"},
+        {"id": "INT-06b", "statement": "Identitäts-basierte Intervention wirksam bei allen λ-Typen"},
+        {"id": "INT-06c", "statement": "Erklärt Gruppenkonformität ohne altruistische Motivation"}
+      ]
+    },
+    {
+      "id": "LAM-INT-07",
+      "category": "integration",
+      "level": "operation",
+      "statement": "λ-abhängige Interventions-Wahl",
+      "description": "Interventionstyp muss zu λ der Zielgruppe passen",
+      "formula": "Intervention = f(λ, INU_gap, KNU_gap, IDN_gap)",
+      "dependencies": ["LAM-INT-01", "LAM-TYP-01"],
+      "testable": false,
+      "corollaries": [
+        {"id": "INT-07a", "statement": "λ niedrig (Self-Int.): INCENTIVE auf INU"},
+        {"id": "INT-07b", "statement": "λ mittel (Conditional): SOCIAL PROOF auf Belief"},
+        {"id": "INT-07c", "statement": "λ hoch (Altruist): IDENTITY verstärken, kein Crowding-out"}
+      ]
+    },
+    {
+      "id": "LAM-INT-08",
+      "category": "integration",
+      "level": "operation",
+      "statement": "Feedback-Loop: U_eff → λ",
+      "description": "Erlebter Gesamt-Nutzen beeinflusst zukünftiges λ",
+      "formula": "Δλ_Feedback = β × (U_eff_erlebt - U_eff_erwartet); β > 0 wenn Kooperation",
+      "dependencies": ["LAM-INT-01", "LAM-DYN-01"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-08a", "statement": "Kooperation lohnt sich → λ steigt"},
+        {"id": "INT-08b", "statement": "Kooperation wird ausgenutzt → λ sinkt"},
+        {"id": "INT-08c", "statement": "Verstärkung der Verhaltenstypen über Zeit"}
+      ]
+    },
+    {
+      "id": "LAM-INT-09",
+      "category": "integration",
+      "level": "structure",
+      "statement": "Identitätskategorien (c) und Präskriptionen (P)",
+      "description": "Zentrale Akerlof/Kranton Konzepte: Soziale Kategorien definieren erwartetes Verhalten",
+      "formula": "c ∈ {Beruf, Geschlecht, Ethnie, Religion, Organisation, Hobby, ...}; P_c: c → {erlaubte_Aktionen}",
+      "dependencies": ["LAM-INT-04"],
+      "testable": true,
+      "references": ["Akerlof & Kranton (2000, 2010)"],
+      "corollaries": [
+        {"id": "INT-09a", "statement": "Mehrfache Kategorien: Individuum hat meist mehrere aktive Identitäten"},
+        {"id": "INT-09b", "statement": "Salienz-Variation: Kontext aktiviert verschiedene Kategorien"},
+        {"id": "INT-09c", "statement": "Präskriptions-Konflikt: Verschiedene Kategorien können widersprüchliche P haben"},
+        {"id": "INT-09d", "statement": "Identitäts-Bedrohung: Andere können eigene Kategoriezugehörigkeit in Frage stellen"}
+      ]
+    },
+    {
+      "id": "LAM-INT-10",
+      "category": "integration",
+      "level": "operation",
+      "statement": "Identitäts-basierte Interventionen",
+      "description": "Verhaltensänderung durch Aktivierung oder Änderung von Identitätskategorien",
+      "formula": "ΔU_eff = Δt_c × L_c(a, P_c) + t_c × ΔL_c; Zwei Hebel: Salienz oder Präskription ändern",
+      "dependencies": ["LAM-INT-04", "LAM-INT-09"],
+      "testable": true,
+      "corollaries": [
+        {"id": "INT-10a", "statement": "Salienz-Intervention: Bestimmte Identität aktivieren (z.B. 'Als Schweizer...')"},
+        {"id": "INT-10b", "statement": "Präskriptions-Intervention: Neue Norm für Kategorie etablieren"},
+        {"id": "INT-10c", "statement": "Kategorisierungs-Intervention: Neue Identitätsgruppe schaffen"}
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "FG2002",
+      "citation": "Fehr, E., & Gächter, S. (2002). Altruistic punishment in humans. Nature, 415(6868), 137-140.",
+      "key_findings": [
+        "Peer punishment (1:3) raises cooperation from 20% to 90%",
+        "~60% engage in costly punishment",
+        "Punishment correlates with norm violation"
+      ]
+    },
+    {
+      "id": "FGF2001",
+      "citation": "Fischbacher, U., Gächter, S., & Fehr, E. (2001). Are people conditionally cooperative? Economics Letters, 71(3), 397-404.",
+      "key_findings": [
+        "~50% Conditional Cooperators",
+        "~30% Self-Interested",
+        "~10% Altruists"
+      ]
+    },
+    {
+      "id": "HTG2008",
+      "citation": "Herrmann, B., Thöni, C., & Gächter, S. (2008). Antisocial punishment across societies. Science, 319(5868), 1362-1367.",
+      "key_findings": [
+        "Anti-social punishment (Free Riders punishing Cooperators) exists",
+        "Pro-social punishment universal, anti-social varies by culture",
+        "Boston/Copenhagen: ratio pro:anti ≈ 6:1 to 10:1",
+        "Athens/Riyadh/Muscat: ratio pro:anti ≈ 1:1",
+        "Cooperation in round 10: Boston ~90%, Muscat ~30%",
+        "Anti-social correlates with weak rule of law, low trust",
+        "Anti-social punishment can neutralize or reverse positive effect"
+      ],
+      "locations_studied": [
+        "Zürich", "Boston", "Copenhagen", "Melbourne", "Nottingham",
+        "St. Gallen", "Bonn", "Athens", "Istanbul", "Riyadh",
+        "Muscat", "Minsk", "Samara", "Dnipropetrovsk", "Seoul", "Chengdu"
+      ]
+    },
+    {
+      "id": "AK2000",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and Identity. Quarterly Journal of Economics, 115(3), 715-753.",
+      "key_findings": [
+        "Identity is a separate, additive term in the utility function",
+        "Utility: U = U(actions) + I(actions; categories, characteristics, prescriptions)",
+        "Social categories (c) define expected behavior (prescriptions P)",
+        "Identity utility I decreases when actions violate prescriptions",
+        "Multiple identities: individuals belong to multiple categories",
+        "Salience: context determines which identity is activated"
+      ],
+      "bcm_relevance": "Fundamental für IDN-Modul: Identität tritt additiv und unabhängig von λ in Nutzenfunktion ein"
+    },
+    {
+      "id": "AK2010",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2010). Identity Economics: How Our Identities Shape Our Work, Wages, and Well-Being. Princeton University Press.",
+      "key_findings": [
+        "Extended identity economics to labor markets, education, organizations",
+        "Insider/Outsider dynamics in firms",
+        "School identity affects educational outcomes",
+        "Identity norms can substitute for monetary incentives"
+      ],
+      "bcm_relevance": "Anwendung auf verschiedene BCM-Domänen (Arbeit, Bildung, Organisationen)"
+    }
+  ]
+}

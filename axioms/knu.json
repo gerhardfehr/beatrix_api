@@ -1,0 +1,177 @@
+{
+  "module": "KNU",
+  "id": "7235",
+  "version": "2.0",
+  "axiom_count": 46,
+  "meta_formula": "Φ_KNU = U_kol · ρ_K · Ψ_IDN · Ψ_INST · Ψ_DEST",
+  "categories": {
+    "social_norms": {
+      "range": [1, 15],
+      "prefix": "NRM",
+      "description": "Soziale Normen, Konformität, Peer-Einfluss"
+    },
+    "cooperation": {
+      "range": [16, 28],
+      "prefix": "COP",
+      "description": "Kooperation, Reziprozität, Vertrauen"
+    },
+    "punishment": {
+      "range": [29, 38],
+      "prefix": "PUN",
+      "description": "Bestrafung, Sanktionen, Enforcement"
+    },
+    "destruction": {
+      "range": [39, 46],
+      "prefix": "DES",
+      "description": "Destruktion, Anti-soziales Verhalten"
+    }
+  },
+  "axioms": [
+    {
+      "id": "KNU-NRM-01",
+      "category": "social_norms",
+      "level": "foundation",
+      "statement": "Normen existieren",
+      "description": "Gruppen haben implizite und explizite Verhaltensregeln",
+      "formula": "N_G: V → [approved, neutral, disapproved]",
+      "dependencies": ["MA-ONT-11"],
+      "testable": true
+    },
+    {
+      "id": "KNU-NRM-02",
+      "category": "social_norms",
+      "level": "foundation",
+      "statement": "Deskriptive vs. Injunktive Normen",
+      "description": "Was Leute tun vs. was sie tun sollten",
+      "formula": "N = N_descriptive ∪ N_injunctive",
+      "dependencies": ["KNU-NRM-01"],
+      "testable": true,
+      "references": ["Cialdini (1990)"]
+    },
+    {
+      "id": "KNU-NRM-03",
+      "category": "social_norms",
+      "level": "structure",
+      "statement": "Social Proof",
+      "description": "Verhalten anderer beeinflusst eigenes",
+      "formula": "P(V_i|V_others) = f(Density(V_others))",
+      "dependencies": ["KNU-NRM-02"],
+      "testable": true,
+      "references": ["Cialdini (1984)"]
+    },
+    {
+      "id": "KNU-NRM-04",
+      "category": "social_norms",
+      "level": "structure",
+      "statement": "Konformitätsdruck",
+      "description": "Abweichung von Norm ist psychologisch kostspielig",
+      "formula": "Cost(Deviation) = f(|V - N|, GroupSize, Visibility)",
+      "dependencies": ["KNU-NRM-01"],
+      "testable": true
+    },
+    {
+      "id": "KNU-NRM-05",
+      "category": "social_norms",
+      "level": "operation",
+      "statement": "Pluralistic Ignorance",
+      "description": "Private Ablehnung bei öffentlicher Konformität",
+      "formula": "Belief_private ≠ Behavior_public",
+      "dependencies": ["KNU-NRM-04"],
+      "testable": true
+    },
+    {
+      "id": "KNU-COP-01",
+      "category": "cooperation",
+      "level": "foundation",
+      "statement": "Kooperation ist bedingt",
+      "description": "Kooperation hängt von Erwartungen ab",
+      "formula": "Coop(i) = f(E[Coop(others)])",
+      "dependencies": ["MA-ONT-10"],
+      "testable": true
+    },
+    {
+      "id": "KNU-COP-02",
+      "category": "cooperation",
+      "level": "foundation",
+      "statement": "Reziprozität",
+      "description": "Tit-for-Tat ist stabile Strategie",
+      "formula": "V(t+1) = V_other(t)",
+      "dependencies": ["KNU-COP-01"],
+      "testable": true,
+      "references": ["Axelrod (1984)"]
+    },
+    {
+      "id": "KNU-COP-03",
+      "category": "cooperation",
+      "level": "structure",
+      "statement": "Fairness-Präferenz",
+      "description": "Menschen haben Präferenz für faire Verteilung",
+      "formula": "U(Fair) > U(Unfair) auch bei Kosten",
+      "dependencies": ["KNU-COP-01"],
+      "testable": true,
+      "references": ["Fehr & Schmidt (1999)"]
+    },
+    {
+      "id": "KNU-COP-04",
+      "category": "cooperation",
+      "level": "structure",
+      "statement": "Vertrauen",
+      "description": "Vertrauen ermöglicht Kooperation ohne Kontrolle",
+      "formula": "Coop = f(Trust) ohne Enforcement",
+      "dependencies": ["KNU-COP-01"],
+      "testable": true
+    },
+    {
+      "id": "KNU-PUN-01",
+      "category": "punishment",
+      "level": "foundation",
+      "statement": "Altruistische Bestrafung",
+      "description": "Menschen bestrafen Norm-Verletzer auch unter Kosten",
+      "formula": "Punish(Violator) even when Cost(Punish) > 0",
+      "dependencies": ["KNU-NRM-01"],
+      "testable": true,
+      "references": ["Fehr & Gächter (2002)"]
+    },
+    {
+      "id": "KNU-PUN-02",
+      "category": "punishment",
+      "level": "structure",
+      "statement": "Sanktions-Effektivität",
+      "description": "Sanktionen erhöhen Norm-Compliance",
+      "formula": "∂Compliance/∂Sanction > 0",
+      "dependencies": ["KNU-PUN-01"],
+      "testable": true
+    },
+    {
+      "id": "KNU-PUN-03",
+      "category": "punishment",
+      "level": "operation",
+      "statement": "Sanktions-Kosten",
+      "description": "Zu hohe Sanktionen können backfiren",
+      "formula": "∂Compliance/∂Sanction < 0 für Sanction > θ",
+      "dependencies": ["KNU-PUN-02"],
+      "testable": true
+    },
+    {
+      "id": "KNU-DES-01",
+      "category": "destruction",
+      "level": "foundation",
+      "statement": "Anti-soziales Verhalten existiert",
+      "description": "Destruktives Verhalten auch unter Kosten",
+      "formula": "∃ V: U_self < 0 ∧ U_other << 0",
+      "dependencies": ["MA-ONT-02"],
+      "testable": true
+    },
+    {
+      "id": "KNU-DES-02",
+      "category": "destruction",
+      "level": "structure",
+      "statement": "Spite",
+      "description": "Schaden zufügen um Status zu erhöhen",
+      "formula": "U(Harm_other) > 0 when Status_relative ↑",
+      "dependencies": ["KNU-DES-01"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 14 von 46 Axiomen - weitere nach Bedarf hinzufügen"
+}

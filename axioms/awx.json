@@ -1,0 +1,127 @@
+{
+  "module": "AWX",
+  "id": "7240",
+  "version": "2.0",
+  "axiom_count": 25,
+  "meta_formula": "AWX = f(Knowledge_V, Knowledge_C, Salience)",
+  "categories": {
+    "awareness": {
+      "range": [1, 10],
+      "prefix": "AWR",
+      "description": "Bewusstsein über Optionen und Konsequenzen"
+    },
+    "attention": {
+      "range": [11, 18],
+      "prefix": "ATT",
+      "description": "Aufmerksamkeit, Salienz, Framing"
+    },
+    "knowledge": {
+      "range": [19, 25],
+      "prefix": "KNW",
+      "description": "Wissen, Information, Kompetenz"
+    }
+  },
+  "axioms": [
+    {
+      "id": "AWX-AWR-01",
+      "category": "awareness",
+      "level": "foundation",
+      "statement": "Awareness ist Voraussetzung",
+      "description": "Ohne Awareness kein intentionales Verhalten",
+      "formula": "P(V_intentional|AWX=0) = 0",
+      "dependencies": ["MA-EPI-07"],
+      "testable": true
+    },
+    {
+      "id": "AWX-AWR-02",
+      "category": "awareness",
+      "level": "foundation",
+      "statement": "Optionen-Awareness",
+      "description": "Wissen über verfügbare Verhaltensoptionen",
+      "formula": "AWX_options = |Known_V| / |Available_V|",
+      "dependencies": ["AWX-AWR-01"],
+      "testable": true
+    },
+    {
+      "id": "AWX-AWR-03",
+      "category": "awareness",
+      "level": "foundation",
+      "statement": "Konsequenzen-Awareness",
+      "description": "Wissen über Konsequenzen von Verhalten",
+      "formula": "AWX_consequences = Quality(E[Outcome|V])",
+      "dependencies": ["AWX-AWR-01"],
+      "testable": true
+    },
+    {
+      "id": "AWX-AWR-04",
+      "category": "awareness",
+      "level": "structure",
+      "statement": "AWX-Skala",
+      "description": "Awareness auf 5-Punkt-Skala messbar",
+      "formula": "AWX ∈ {1, 2, 3, 4, 5}",
+      "dependencies": ["AWX-AWR-01"],
+      "testable": true
+    },
+    {
+      "id": "AWX-AWR-05",
+      "category": "awareness",
+      "level": "operation",
+      "statement": "AWX < 3 = Awareness-Defizit",
+      "description": "Bei niedrigem AWX erst Awareness erhöhen",
+      "formula": "If AWX < 3: Intervention = BOOST/THINK",
+      "dependencies": ["AWX-AWR-04"],
+      "testable": true
+    },
+    {
+      "id": "AWX-ATT-01",
+      "category": "attention",
+      "level": "foundation",
+      "statement": "Attention ist limitiert",
+      "description": "Aufmerksamkeit ist knappe Ressource",
+      "formula": "Σ Attention ≤ Budget",
+      "dependencies": ["MA-EPI-02"],
+      "testable": true
+    },
+    {
+      "id": "AWX-ATT-02",
+      "category": "attention",
+      "level": "structure",
+      "statement": "Salienz erhöht Attention",
+      "description": "Saliente Informationen bekommen mehr Aufmerksamkeit",
+      "formula": "Attention = f(Salience)",
+      "dependencies": ["AWX-ATT-01"],
+      "testable": true
+    },
+    {
+      "id": "AWX-ATT-03",
+      "category": "attention",
+      "level": "operation",
+      "statement": "Framing beeinflusst Salienz",
+      "description": "Wie Information präsentiert wird beeinflusst Wahrnehmung",
+      "formula": "Salience = f(Frame)",
+      "dependencies": ["AWX-ATT-02", "MA-EPI-13"],
+      "testable": true
+    },
+    {
+      "id": "AWX-KNW-01",
+      "category": "knowledge",
+      "level": "foundation",
+      "statement": "Wissen ist akkumulierbar",
+      "description": "Wissen kann durch Lernen erhöht werden",
+      "formula": "Knowledge(τ+Δτ) ≥ Knowledge(τ)",
+      "dependencies": ["MA-EPI-19"],
+      "testable": true
+    },
+    {
+      "id": "AWX-KNW-02",
+      "category": "knowledge",
+      "level": "structure",
+      "statement": "BOOST erhöht AWX",
+      "description": "Kompetenz-Interventionen erhöhen Awareness",
+      "formula": "∂AWX/∂BOOST > 0",
+      "dependencies": ["AWX-KNW-01", "MA-GOV-07"],
+      "testable": true
+    }
+  ],
+  "_note": "Skeleton mit 10 von 25 Axiomen - weitere nach Bedarf hinzufügen"
+}

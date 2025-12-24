@@ -1,0 +1,464 @@
+# =============================================================================
+# SCORING-METHODIK: D03 Didaktische Qualität
+# =============================================================================
+# Version: 1.0
+# Status: PROTOTYP - Template für alle Dimensionen
+# =============================================================================
+
+dimension:
+  id: "D03"
+  name: "Didaktische Qualität"
+  beschreibung: |
+    Misst die Lehr- und Lerneignung eines Kapitels.
+    Wie effektiv kann ein Leser die Inhalte verstehen und behalten?
+
+# =============================================================================
+# KRITERIUM 1: Beispieldichte
+# =============================================================================
+
+kriterien:
+
+  beispieldichte:
+
+    id: "D03.1"
+    name: "Beispieldichte"
+
+    # ----- DEFINITION -----
+    definition: |
+      Anzahl konkreter Beispiele pro eingeführtem Hauptkonzept.
+      Ein "Hauptkonzept" ist ein Begriff/Konstrukt, das erstmals definiert wird.
+      Ein "Beispiel" ist eine konkrete Illustration des Konzepts.
+
+    # ----- WAS ZÄHLT ALS... -----
+    operationalisierung:
+
+      hauptkonzept:
+        zaehlt_als:
+          - "Erstmalige Definition eines Fachbegriffs"
+          - "Einführung eines neuen Axioms"
+          - "Vorstellung eines neuen Parameters"
+          - "Erklärung eines neuen Mechanismus"
+        zaehlt_nicht:
+          - "Wiederholung eines bereits definierten Begriffs"
+          - "Verweis auf externes Konzept ohne Erklärung"
+        marker_im_text:
+          - "\\begin{definition}"
+          - "\\begin{axiom}"
+          - "definieren wir als"
+          - "bezeichnet"
+          - "ist definiert als"
+
+      beispiel:
+        zaehlt_als:
+          - "Konkretes Szenario mit Namen/Zahlen"
+          - "Fallbeispiel aus der Praxis"
+          - "Numerisches Rechenbeispiel"
+          - "Code-Snippet das Konzept illustriert"
+          - "Visualisierung mit konkreten Werten"
+        zaehlt_nicht:
+          - "Abstrakte Umschreibung ohne Konkretisierung"
+          - "Verweis auf Beispiel in anderem Kapitel"
+          - "Hypothetisches 'man könnte...'"
+        marker_im_text:
+          - "Beispiel:"
+          - "Konkret:"
+          - "z.B."
+          - "etwa:"
+          - "Anna ist"  # Persona-Beispiele
+          - "\\begin{example}"
+          - "\\begin{lstlisting}"
+
+    # ----- MESSMETHODE -----
+    messmethode:
+      typ: "ratio"
+      formel: "count(beispiele) / count(hauptkonzepte)"
+      einheit: "Beispiele pro Konzept"
+
+      automatisierbarkeit:
+        grad: "teilweise"
+        automatisch:
+          - "Zählung von Beispiel-Markern (Regex)"
+          - "Zählung von Definition-Umgebungen"
+        manuell:
+          - "Prüfung ob Marker tatsächlich Beispiel/Konzept ist"
+          - "Qualität der Beispiele"
+
+      pruefskript: |
+        # Pseudo-Code für automatische Vorprüfung
+        beispiel_marker = grep -c "Beispiel:|z\.B\.|Konkret:" $file
+        konzept_marker = grep -c "\\begin{definition}|\\begin{axiom}" $file
+        ratio = beispiel_marker / max(konzept_marker, 1)
+
+    # ----- SKALA -----
+    skala:
+      bereiche:
+        - score: 0.0
+          label: "Keine Beispiele"
+          bedingung: "ratio = 0"
+
+        - score: 0.3
+          label: "Sehr wenige Beispiele"
+          bedingung: "0 < ratio < 0.5"
+
+        - score: 0.5
+          label: "Einige Beispiele"
+          bedingung: "0.5 <= ratio < 1.0"
+
+        - score: 0.7
+          label: "Gute Beispieldichte"
+          bedingung: "1.0 <= ratio < 2.0"
+
+        - score: 0.9
+          label: "Sehr gute Beispieldichte"
+          bedingung: "2.0 <= ratio < 3.0"
+
+        - score: 1.0
+          label: "Exzellente Beispieldichte"
+          bedingung: "ratio >= 3.0"
+
+    # ----- ANKERBEISPIELE -----
+    ankerbeispiele:
+
+      score_0.0:
+        beschreibung: "Konzept ohne jede Illustration"
+        text_beispiel: |
+          "Loss Aversion bezeichnet die Tendenz, Verluste stärker zu
+          gewichten als äquivalente Gewinne. Der Parameter λ quantifiziert
+          diesen Effekt."
+        problem: "Leser hat keine Vorstellung, was λ=2.0 praktisch bedeutet"
+
+      score_0.3:
+        beschreibung: "Konzept mit vager Illustration"
+        text_beispiel: |
+          "Loss Aversion bezeichnet die Tendenz, Verluste stärker zu
+          gewichten als äquivalente Gewinne. Man denke etwa an Situationen,
+          wo der Verlust von 100€ mehr schmerzt als die Freude über
+          100€ Gewinn."
+        problem: "Illustration zu abstrakt, keine konkreten Zahlen/Personen"
+
+      score_0.7:
+        beschreibung: "Konzept mit konkretem Beispiel"
+        text_beispiel: |
+          "Loss Aversion bezeichnet die Tendenz, Verluste stärker zu
+          gewichten als äquivalente Gewinne.
+
+          Beispiel: Anna (λ=2.3) empfindet den Verlust von 50€ so negativ
+          wie einen entgangenen Gewinn von 115€ (50 × 2.3). Bei einer
+          Preiserhöhung von 5% gewichtet sie diesen 'Verlust' entsprechend
+          stark."
+        staerke: "Konkreter Name, konkrete Zahlen, nachvollziehbar"
+
+      score_0.9:
+        beschreibung: "Konzept mit mehreren Beispieltypen"
+        text_beispiel: |
+          "Loss Aversion bezeichnet die Tendenz, Verluste stärker zu
+          gewichten als äquivalente Gewinne.
+
+          Abstrakt: Bei λ=2, wiegt ein Verlust von x doppelt so schwer
+          wie ein Gewinn von x.
+
+          Konkret: Anna (λ=2.3) empfindet den Verlust von 50€ so negativ
+          wie einen entgangenen Gewinn von 115€.
+
+          Code:
+          ```python
+          def loss_aversion_weight(amount, lambda_=2.0):
+              if amount < 0:  # Verlust
+                  return amount * lambda_
+              return amount
+          ```"
+        staerke: "Abstrakt + Konkret + Code = drei Zugänge"
+
+  # ===========================================================================
+  # KRITERIUM 2: Beispieltypen-Vielfalt
+  # ===========================================================================
+
+  beispieltypen:
+
+    id: "D03.2"
+    name: "Beispieltypen-Vielfalt"
+
+    definition: |
+      Anzahl verschiedener Beispieltypen, die verwendet werden.
+      Verschiedene Leser lernen auf verschiedene Arten.
+
+    operationalisierung:
+      typen:
+        abstrakt:
+          beschreibung: "Mathematische/formale Illustration"
+          marker: ["formal:", "mathematisch:", "allgemein:"]
+          beispiel: "Bei λ>1 gilt: U(loss) < -U(gain) für |loss|=|gain|"
+
+        konkret_alltag:
+          beschreibung: "Alltagsbeispiel ohne BCM-Bezug"
+          marker: ["im Alltag:", "jeder kennt:"]
+          beispiel: "Wie wenn man 20€ verliert vs. 20€ findet"
+
+        konkret_bcm:
+          beschreibung: "BCM-spezifisches Anwendungsbeispiel"
+          marker: ["im BCM:", "BEATRIX berechnet:"]
+          beispiel: "Anna mit λ=2.3 bei 5% Preiserhöhung..."
+
+        code:
+          beschreibung: "Ausführbares Code-Beispiel"
+          marker: ["\\begin{lstlisting}", "```python"]
+          beispiel: "def calculate_utility(...):"
+
+        visuell:
+          beschreibung: "Diagramm, Graph, Tabelle mit Werten"
+          marker: ["\\begin{figure}", "\\begin{tikzpicture}"]
+          beispiel: "Kurve der Value Function mit eingezeichneten Werten"
+
+    messmethode:
+      typ: "count"
+      formel: "count(distinct typen verwendet)"
+      minimum: 0
+      maximum: 5
+
+    skala:
+      bereiche:
+        - score: 0.0
+          bedingung: "0 Typen"
+        - score: 0.3
+          bedingung: "1 Typ"
+        - score: 0.5
+          bedingung: "2 Typen"
+        - score: 0.7
+          bedingung: "3 Typen"
+        - score: 0.9
+          bedingung: "4 Typen"
+        - score: 1.0
+          bedingung: "5 Typen (alle)"
+
+  # ===========================================================================
+  # KRITERIUM 3: Progression
+  # ===========================================================================
+
+  progression:
+
+    id: "D03.3"
+    name: "Didaktische Progression"
+
+    definition: |
+      Aufbau von einfachen zu komplexen Konzepten.
+      Voraussetzungen werden vor abhängigen Konzepten erklärt.
+
+    operationalisierung:
+      pruefung:
+        - "Wird jeder Fachbegriff vor seiner Verwendung eingeführt?"
+        - "Werden einfache Axiome vor komplexen erklärt?"
+        - "Gibt es einen erkennbaren Aufbau?"
+
+      anti_patterns:
+        - "Forward Reference: Begriff verwendet vor Definition"
+        - "Komplexitätssprung: Plötzlich viel schwieriger"
+        - "Voraussetzungs-Lücke: Konzept A braucht B, B nicht erklärt"
+
+    messmethode:
+      typ: "ordinal"
+      kategorien:
+        keine:
+          beschreibung: "Kein erkennbarer Aufbau"
+          indikatoren:
+            - "> 3 Forward References"
+            - "Komplexe Konzepte vor einfachen"
+
+        teilweise:
+          beschreibung: "Grundsätzlicher Aufbau, aber Brüche"
+          indikatoren:
+            - "1-3 Forward References"
+            - "Meist einfach vor komplex"
+
+        durchgaengig:
+          beschreibung: "Konsistenter Aufbau"
+          indikatoren:
+            - "0 Forward References"
+            - "Klare Progression erkennbar"
+
+    skala:
+      bereiche:
+        - score: 0.3
+          bedingung: "keine"
+        - score: 0.6
+          bedingung: "teilweise"
+        - score: 1.0
+          bedingung: "durchgaengig"
+
+  # ===========================================================================
+  # KRITERIUM 4: Visualisierungsdichte
+  # ===========================================================================
+
+  visualisierungen:
+
+    id: "D03.4"
+    name: "Visualisierungsdichte"
+
+    definition: |
+      Anzahl hilfreicher Visualisierungen pro 1000 Zeilen Text.
+      Visualisierungen: Tabellen, Diagramme, Formeln in Display-Mode.
+
+    operationalisierung:
+      zaehlt_als:
+        - "\\begin{table}"
+        - "\\begin{figure}"
+        - "\\begin{tikzpicture}"
+        - "\\begin{equation}"
+        - "\\begin{align}"
+        - "tcolorbox (Info-Boxen)"
+      zaehlt_nicht:
+        - "Inline-Formeln ($...$)"
+        - "Leere Tabellen-Hüllen"
+        - "Dekorative Elemente ohne Informationswert"
+
+    messmethode:
+      typ: "ratio"
+      formel: "count(visualisierungen) / (zeilen / 1000)"
+      einheit: "Visualisierungen pro 1000 Zeilen"
+
+      automatisierbarkeit:
+        grad: "hoch"
+        skript: |
+          viz_count = grep -c "\\begin{table}\|\\begin{figure}\|\\begin{tikz}" $file
+          line_count = wc -l < $file
+          ratio = viz_count / (line_count / 1000)
+
+    skala:
+      bereiche:
+        - score: 0.0
+          bedingung: "ratio = 0"
+        - score: 0.3
+          bedingung: "0 < ratio < 1"
+        - score: 0.5
+          bedingung: "1 <= ratio < 2"
+        - score: 0.7
+          bedingung: "2 <= ratio < 4"
+        - score: 0.9
+          bedingung: "4 <= ratio < 6"
+        - score: 1.0
+          bedingung: "ratio >= 6"
+
+  # ===========================================================================
+  # KRITERIUM 5: Analogien
+  # ===========================================================================
+
+  analogien:
+
+    id: "D03.5"
+    name: "Alltagsanalogien"
+
+    definition: |
+      Anzahl Analogien zu Alltagserfahrungen pro Hauptkonzept.
+      Analogien machen abstrakte Konzepte greifbar.
+
+    operationalisierung:
+      zaehlt_als:
+        - "Vergleich mit Alltagssituation"
+        - "'...ist wie...'"
+        - "'...ähnlich wie...'"
+        - "'...stellen Sie sich vor...'"
+        - "Metapher für abstraktes Konzept"
+
+      qualitaetskriterien:
+        gut:
+          - "Analogie ist treffend"
+          - "Zieldomäne ist bekannt"
+          - "Mapping ist klar"
+        schlecht:
+          - "Analogie verwirrt mehr als sie klärt"
+          - "Zu technische Vergleichsdomäne"
+
+      marker_im_text:
+        - "ist wie"
+        - "ähnlich wie"
+        - "vergleichbar mit"
+        - "stellen Sie sich vor"
+        - "man denke an"
+
+    messmethode:
+      typ: "ratio"
+      formel: "count(analogien) / count(hauptkonzepte)"
+      einheit: "Analogien pro Konzept"
+
+    skala:
+      bereiche:
+        - score: 0.0
+          bedingung: "ratio = 0"
+        - score: 0.5
+          bedingung: "0 < ratio < 0.5"
+        - score: 0.7
+          bedingung: "0.5 <= ratio < 1.0"
+        - score: 0.9
+          bedingung: "1.0 <= ratio < 1.5"
+        - score: 1.0
+          bedingung: "ratio >= 1.5"
+
+    ankerbeispiele:
+      score_0.7:
+        konzept: "Drei-Phasen-Architektur"
+        analogie: |
+          "BCM ist für menschliches Verhalten, was die Finite-Elemente-
+          Methode für Ingenieure ist: Ein mathematisches Framework, das
+          komplexe Realität in berechenbare Modelle übersetzt."
+
+# =============================================================================
+# AGGREGATION
+# =============================================================================
+
+aggregation:
+
+  methode: "gewichteter_durchschnitt"
+
+  gewichte:
+    beispieldichte: 0.30
+    beispieltypen: 0.20
+    progression: 0.25
+    visualisierungen: 0.15
+    analogien: 0.10
+
+  formel: |
+    D03_score =
+      0.30 * beispieldichte +
+      0.20 * beispieltypen +
+      0.25 * progression +
+      0.15 * visualisierungen +
+      0.10 * analogien
+
+# =============================================================================
+# PRÜFPROTOKOLL
+# =============================================================================
+
+pruefprotokoll:
+
+  schritt_1:
+    name: "Automatische Vorprüfung"
+    aktionen:
+      - "Zähle Beispiel-Marker"
+      - "Zähle Definition-Marker"
+      - "Zähle Visualisierungs-Umgebungen"
+      - "Berechne Zeilen"
+    output: "Rohdaten für manuelle Prüfung"
+
+  schritt_2:
+    name: "Manuelle Validierung"
+    aktionen:
+      - "Prüfe: Sind gezählte Marker tatsächlich Beispiele?"
+      - "Prüfe: Sind Beispiele qualitativ gut?"
+      - "Prüfe: Ist Progression vorhanden?"
+      - "Identifiziere Forward References"
+    output: "Validierte Counts"
+
+  schritt_3:
+    name: "Score-Berechnung"
+    aktionen:
+      - "Berechne Ratio für jedes Kriterium"
+      - "Mappe auf Skala"
+      - "Aggregiere mit Gewichten"
+    output: "D03 Score"
+
+  schritt_4:
+    name: "Dokumentation"
+    aktionen:
+      - "Fülle Bewertungs-YAML"
+      - "Dokumentiere Stärken"
+      - "Dokumentiere Verbesserungspotential"
+    output: "kapitel_XX_bewertung.yaml"

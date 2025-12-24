@@ -1,0 +1,234 @@
+%==============================================================================
+% KAPITEL 0: ORIENTIERUNG
+% Einzufügen nach \tableofcontents und vor \section{Einführung}
+%==============================================================================
+
+\section*{Orientierung: Über dieses Dokument}
+\addcontentsline{toc}{section}{Orientierung: Über dieses Dokument}
+
+%------------------------------------------------------------------------------
+\subsection*{Executive Summary}
+\addcontentsline{toc}{subsection}{Executive Summary}
+%------------------------------------------------------------------------------
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Das Wichtigste in 60 Sekunden]
+
+\textbf{Was ist das Problem?}\\
+Die Verhaltensökonomie hat in 50 Jahren hunderte Effekte dokumentiert (Loss Aversion, Framing, Anchoring...), aber nie ein kohärentes Fundament gebaut. Das macht systematische Anwendung unmöglich.
+
+\textbf{Was ist die Lösung?}\\
+Das \textbf{Behavioral Change Model (BCM)} formalisiert menschliches Verhalten in einem axiomatischen Framework mit 115 expliziten Annahmen. Das \textbf{META-Modul} dokumentiert diese Fundamente.
+
+\textbf{Was ist neu?}\\
+\textbf{BEATRIX} nutzt Large Language Models (LLMs), um BCM für Nicht-Experten zugänglich zu machen: Natürliche Sprache rein, quantifizierte Verhaltensprognosen raus.
+
+\textbf{Warum ist das wichtig?}\\
+Erstmals können verhaltensökonomische Analysen \textit{skalierbar}, \textit{konsistent} und \textit{nachvollziehbar} durchgeführt werden -- von der Persona-Beschreibung bis zur Handlungsempfehlung.
+
+\end{tcolorbox}
+
+%------------------------------------------------------------------------------
+\subsection*{Was ist BCM/BEATRIX?}
+\addcontentsline{toc}{subsection}{Was ist BCM/BEATRIX?}
+%------------------------------------------------------------------------------
+
+\paragraph{Der Elevator Pitch}
+
+\begin{quote}
+\textit{``BCM ist für menschliches Verhalten, was die Finite-Elemente-Methode für Ingenieure ist: Ein mathematisches Framework, das komplexe Realität in berechenbare Modelle übersetzt. BEATRIX ist die Benutzeroberfläche, die dieses Framework für Nicht-Mathematiker zugänglich macht.''}
+\end{quote}
+
+\paragraph{Ein konkretes Beispiel}
+
+\textbf{Frage:} ``Wie reagiert Anna (45, Lehrerin, umweltbewusst, preissensitiv) auf eine 5\% Preiserhöhung unseres Produkts?''
+
+\textbf{Ohne BCM/BEATRIX:}
+\begin{itemize}
+    \item Befragung (teuer, langsam, Bias-anfällig)
+    \item Bauchgefühl des Produktmanagers (HiPPO-Problem)
+    \item Historische Daten (falls vorhanden)
+\end{itemize}
+
+\textbf{Mit BEATRIX:}
+\begin{enumerate}
+    \item LLM extrahiert BCM-Parameter aus Persona-Beschreibung ($\lambda = 2.3$, $w_{\text{eco}} = 0.4$, ...)
+    \item BCM berechnet Churn-Wahrscheinlichkeit: $4.2\%$ [CI: 2.8\%--5.9\%]
+    \item LLM erklärt: ``Anna's hohe Verlustaversion ($\lambda = 2.3$) macht sie preissensitiver als der Durchschnitt, aber ihre ökologischen Werte könnten bei `grüner' Kommunikation als Puffer wirken.''
+\end{enumerate}
+
+\paragraph{Was BCM/BEATRIX NICHT ist}
+
+\begin{itemize}
+    \item \textbf{Keine Kristallkugel:} BCM liefert probabilistische Prognosen mit Konfidenzintervallen, keine Gewissheiten
+    \item \textbf{Kein Ersatz für Empirie:} BCM-Prognosen sollten durch Feldexperimente validiert werden
+    \item \textbf{Kein Manipulationswerkzeug:} Die Governance-Axiome (Kapitel 4) definieren ethische Grenzen
+    \item \textbf{Keine Black Box:} Jede Prognose ist durch Axiome und Parameter nachvollziehbar
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection*{Für wen ist dieses Dokument?}
+\addcontentsline{toc}{subsection}{Für wen ist dieses Dokument?}
+%------------------------------------------------------------------------------
+
+\begin{table}[h]
+\centering
+\caption{Zielgruppen und Leseempfehlungen}
+\begin{tabular}{@{}p{3.5cm}p{5cm}p{3cm}p{2cm}@{}}
+\toprule
+\textbf{Zielgruppe} & \textbf{Interesse} & \textbf{Kapitel} & \textbf{Lesezeit} \\
+\midrule
+\textbf{Verhaltens-ökonomen} & Theoretische Fundierung, Axiomatik & 1--5, 10 & 2--3 Std \\
+\textbf{KI/ML Engineers} & Technische Implementation, LLM-Integration & 6, 7, 9 & 1--2 Std \\
+\textbf{Business Stakeholder} & Value Proposition, Anwendungsfälle & 0, 1.9, 10 & 30 Min \\
+\textbf{Regulatoren, Ethiker} & Governance, Transparenz, Grenzen & 4, 1.9 & 1 Std \\
+\textbf{Berater, Praktiker} & Praxisanwendung, Methodologie & 1.9, 9 & 1 Std \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%------------------------------------------------------------------------------
+\subsection*{Wie lese ich dieses Dokument?}
+\addcontentsline{toc}{subsection}{Wie lese ich dieses Dokument?}
+%------------------------------------------------------------------------------
+
+\paragraph{Track A: Schnelldurchlauf (30 Minuten)}
+Für Entscheider, die verstehen wollen, worum es geht:
+\begin{enumerate}
+    \item Diese Orientierung (Kapitel 0)
+    \item Motivation und Value Proposition (Kapitel 1.1, 1.9)
+    \item Zusammenfassung (Kapitel 10)
+\end{enumerate}
+
+\paragraph{Track B: Konzeptuelles Verständnis (2--3 Stunden)}
+Für Fachleute, die das Framework verstehen wollen:
+\begin{enumerate}
+    \item Track A, plus:
+    \item Die vier Axiom-Kategorien (Kapitel 2--5)
+    \item Evidenzhierarchie und Biases (Kapitel 3.5, 3.4)
+\end{enumerate}
+
+\paragraph{Track C: Technische Tiefe (4--5 Stunden)}
+Für Entwickler und Implementierer:
+\begin{enumerate}
+    \item Track B, plus:
+    \item Integration mit operativen Modulen (Kapitel 6)
+    \item META im BEATRIX-System (Kapitel 7)
+    \item Von Handwerk zu Engineering (Kapitel 9)
+\end{enumerate}
+
+\paragraph{Track D: Vollständig (1 Tag)}
+Für Wissenschaftler und tiefe Analyse:
+\begin{enumerate}
+    \item Alle Kapitel sequentiell
+    \item Vollständige Axiom-Listen im Anhang
+    \item Literaturverzeichnis
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+\subsection*{Dokumentstruktur auf einen Blick}
+\addcontentsline{toc}{subsection}{Dokumentstruktur auf einen Blick}
+%------------------------------------------------------------------------------
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    chapter/.style={rectangle, draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center, font=\small},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Foundation
+\node[chapter, fill=gray!20] (c0) at (0, 0) {0. Orientierung};
+
+% Core Theory
+\node[chapter, fill=blue!15] (c1) at (0, -1.2) {1. Einführung \& Motivation};
+\node[chapter, fill=green!15] (c2) at (-4, -2.4) {2. Ontologie};
+\node[chapter, fill=green!15] (c3) at (-1.3, -2.4) {3. Epistemologie};
+\node[chapter, fill=green!15] (c4) at (1.3, -2.4) {4. Governance};
+\node[chapter, fill=green!15] (c5) at (4, -2.4) {5. Dynamik};
+
+% Integration
+\node[chapter, fill=orange!15] (c6) at (-2, -3.6) {6. Integration};
+\node[chapter, fill=orange!15] (c7) at (2, -3.6) {7. META in BEATRIX};
+
+% Transformation
+\node[chapter, fill=purple!15] (c9) at (0, -4.8) {9. Transformation};
+
+% Conclusion
+\node[chapter, fill=gray!20] (c10) at (0, -6) {10. Zusammenfassung};
+
+% Arrows
+\draw[arrow] (c0) -- (c1);
+\draw[arrow] (c1) -- (c2);
+\draw[arrow] (c1) -- (c3);
+\draw[arrow] (c1) -- (c4);
+\draw[arrow] (c1) -- (c5);
+\draw[arrow] (c2) -- (c6);
+\draw[arrow] (c3) -- (c6);
+\draw[arrow] (c4) -- (c7);
+\draw[arrow] (c5) -- (c6);
+\draw[arrow] (c6) -- (c9);
+\draw[arrow] (c7) -- (c9);
+\draw[arrow] (c9) -- (c10);
+
+% Legend
+\node[right=0.5cm of c5, font=\footnotesize, align=left] {
+    \textcolor{gray!60}{$\blacksquare$} Rahmen\\
+    \textcolor{blue!50}{$\blacksquare$} Motivation\\
+    \textcolor{green!50}{$\blacksquare$} Axiom-Kategorien\\
+    \textcolor{orange!50}{$\blacksquare$} Integration\\
+    \textcolor{purple!50}{$\blacksquare$} Transformation
+};
+
+\end{tikzpicture}
+\caption{Kapitelstruktur und Abhängigkeiten des META-Modul Papers}
+\end{figure}
+
+%------------------------------------------------------------------------------
+\subsection*{Konventionen und Notation}
+\addcontentsline{toc}{subsection}{Konventionen und Notation}
+%------------------------------------------------------------------------------
+
+\paragraph{Axiom-Nummerierung}
+
+Alle Axiome folgen dem Schema \texttt{MA-XXX-\#\#}:
+\begin{itemize}
+    \item \texttt{MA} = Meta-Axiom
+    \item \texttt{XXX} = Kategorie (ONT, EPI, GOV, DYN, INF)
+    \item \texttt{\#\#} = Laufende Nummer
+\end{itemize}
+Beispiel: \texttt{MA-EPI-12} = Meta-Axiom, Kategorie Epistemologie, Nummer 12 (Availability Bias)
+
+\paragraph{Abkürzungen}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}ll|ll@{}}
+\toprule
+\textbf{Kürzel} & \textbf{Bedeutung} & \textbf{Kürzel} & \textbf{Bedeutung} \\
+\midrule
+BCM & Behavioral Change Model & META & Meta-Axiome Modul \\
+INU & Individual Utility & KNU & Contextual Utility \\
+IDN & Identity Utility & $\lambda$ & Loss Aversion Parameter \\
+BEATRIX & BCM + LLM System & LLM & Large Language Model \\
+FEPSDE & Financial, Emotional, Physical, Social, Digital, Ecological \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Hervorhebungen}
+
+\begin{itemize}
+    \item \textbf{Fettdruck}: Wichtige Begriffe bei Erstnennung
+    \item \textit{Kursiv}: Zitate, fremdsprachliche Begriffe
+    \item \texttt{Monospace}: Code, Parameter, Axiom-IDs
+    \item Farbige Boxen: Kernaussagen, Warnungen, Zusammenfassungen
+\end{itemize}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Bereit?]
+Sie haben nun alle Informationen, um dieses Dokument effektiv zu nutzen. Wählen Sie Ihren Track (A--D) und beginnen Sie mit Kapitel 1 -- oder springen Sie direkt zu den für Sie relevanten Abschnitten.
+\end{tcolorbox}
+
+\newpage

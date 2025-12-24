@@ -1,0 +1,296 @@
+# =============================================================================
+# QUALITÄTSBEWERTUNG: Kapitel 0 - Orientierung
+# =============================================================================
+# Bewertet nach MQC Schema v1.0
+# Datum: Dezember 2024
+# Status: Erstbewertung
+# =============================================================================
+
+kapitel:
+  id: "00"
+  name: "Orientierung"
+  typ: "rahmen_kapitel"
+  zeilen: ~180
+
+# =============================================================================
+# DIMENSIONSBEWERTUNG
+# =============================================================================
+
+dimensionen:
+
+  D01_wissenschaft:
+    score: 0.4
+    bewertung:
+      quellenqualitaet:
+        wert: 0.3
+        notiz: "Wenige direkte Quellen, eher Übersichtscharakter"
+      quellenaktualitaet:
+        wert: 0.5
+        notiz: "Referenzen auf aktuelle Entwicklungen (2023/2024)"
+      argumentationskette:
+        wert: 0.5
+        notiz: "Überblick, keine tiefe Argumentation nötig"
+      methodentransparenz:
+        wert: true
+        notiz: "Zweck des Kapitels klar"
+    verbesserungen:
+      - "Könnte Schlüsselquellen für BCM kurz nennen"
+
+  D02_bcm_spezifik:
+    score: 0.6
+    bewertung:
+      axiom_vollstaendigkeit:
+        wert: "n/a"
+        notiz: "Orientierungskapitel, keine Axiome erwartet"
+      parameter_dokumentation:
+        wert: 0.7
+        notiz: "λ, w_eco etc. im Beispiel erwähnt mit Werten"
+      modul_mapping:
+        wert: 0.5
+        notiz: "INU, KNU, IDN erwähnt aber nicht erklärt"
+    verbesserungen:
+      - "Kurze Erklärung der Modul-Abkürzungen"
+      - "Verweis auf Glossar"
+
+  D03_didaktik:
+    score: 0.85
+    bewertung:
+      beispieldichte:
+        wert: 2.0
+        notiz: "Anna-Beispiel, Elevator Pitch, Tracks"
+      beispieltypen:
+        wert: ["abstrakt", "konkret_alltag", "konkret_bcm"]
+        notiz: "3 von 4 Typen (Code fehlt - ok für Kap 0)"
+      progression:
+        wert: "durchgängig"
+        notiz: "Was → Für wen → Wie → Struktur"
+      visualisierungen:
+        wert: 3
+        notiz: "TikZ-Diagramm, Tabellen, Boxen"
+      analogien:
+        wert: 1.0
+        notiz: "FEM-Analogie für BCM"
+    verbesserungen:
+      - "Zweite Analogie für BEATRIX (z.B. 'BEATRIX ist wie...')"
+
+  D04_anwendbarkeit:
+    score: 0.7
+    bewertung:
+      handlungsanweisungen:
+        wert: 0.8
+        notiz: "Klare Lese-Tracks A-D"
+      code_beispiele:
+        wert: 0
+        notiz: "Nicht erwartet für Orientierung"
+      warnungen_grenzen:
+        wert: true
+        notiz: "'Was BCM/BEATRIX NICHT ist' Sektion vorhanden"
+      checklisten:
+        wert: 0
+        notiz: "Keine Checkliste (für Kap 0 ok)"
+    verbesserungen:
+      - "Quick-Reference Card am Ende?"
+
+  D05_konsistenz:
+    score: 0.9
+    bewertung:
+      terminologie:
+        wert: 0.9
+        notiz: "Abkürzungstabelle vorhanden"
+      notation_mathematik:
+        wert: 0.8
+        notiz: "λ, w erklärt"
+      axiom_id_format:
+        wert: 1.0
+        notiz: "MA-XXX-## Format dokumentiert"
+      cross_referenzen:
+        wert: 0.9
+        notiz: "Kapitelverweise korrekt"
+    verbesserungen:
+      - "Verweis auf vollständiges Glossar im Anhang"
+
+  D06_zielgruppe:
+    score: 0.95
+    bewertung:
+      laien_zugaenglichkeit:
+        wert: true
+        notiz: "Executive Summary in 60 Sekunden"
+      executive_summary:
+        wert: true
+        notiz: "Blaue Box am Anfang"
+      experten_tiefe:
+        wert: true
+        notiz: "Hinweise auf technische Kapitel"
+      lesezeit_angabe:
+        wert: true
+        notiz: "Tabelle mit Lesezeiten pro Zielgruppe"
+      track_hinweise:
+        wert: true
+        notiz: "4 Tracks A-D definiert"
+    verbesserungen:
+      - "Perfekt für Orientierungskapitel"
+
+  D07_epistemische_reflexion:
+    score: 0.5
+    bewertung:
+      grenzen_dokumentiert:
+        wert: true
+        notiz: "'Was BCM NICHT ist' vorhanden"
+      unsicherheit_kommuniziert:
+        wert: 0.3
+        notiz: "CI im Beispiel, aber keine allgemeine Diskussion"
+      offene_fragen:
+        wert: 0
+        notiz: "Keine offenen Fragen genannt"
+    verbesserungen:
+      - "Kurzer Hinweis: 'Dieses Dokument ist Work in Progress'"
+      - "Verweis auf offene Forschungsfragen in Kapitel 10"
+
+  D08_validierung:
+    score: 0.3
+    bewertung:
+      evidenztyp_dokumentiert:
+        wert: "n/a"
+        notiz: "Orientierungskapitel, keine Validierung erwartet"
+      evidenzstufe_angegeben:
+        wert: 0.2
+        notiz: "Im Beispiel CI erwähnt"
+    verbesserungen:
+      - "Hinweis dass Evidenzstufen in Kap 3 dokumentiert sind"
+
+  D09_abhaengigkeiten:
+    score: 0.8
+    bewertung:
+      voraussetzungen_explizit:
+        wert: "n/a"
+        notiz: "Kein Vorwissen vorausgesetzt"
+      hierarchie_klar:
+        wert: true
+        notiz: "Kapiteldiagramm zeigt Hierarchie"
+      dependency_graph:
+        wert: true
+        notiz: "TikZ-Diagramm der Kapitelstruktur"
+      kapitel_querverweise:
+        wert: 5
+        notiz: "Alle Kapitel referenziert"
+    verbesserungen:
+      - "Legende für Kapiteltypen (Farben) hinzufügen"
+
+  D10_evolution:
+    score: 0.4
+    bewertung:
+      versionshistorie:
+        wert: false
+        notiz: "Keine Versionshistorie in Kap 0"
+      zukunft_roadmap:
+        wert: false
+        notiz: "Kein Verweis auf Roadmap"
+    verbesserungen:
+      - "Kurzer Hinweis: 'Version 2.3, siehe Kap 10 für Historie'"
+      - "Verweis auf geplante Erweiterungen"
+
+  D11_operationalisierung:
+    score: 0.3
+    bewertung:
+      notiz: "Nicht relevant für Orientierungskapitel"
+    verbesserungen: []
+
+  D12_narrative:
+    score: 0.85
+    bewertung:
+      roter_faden:
+        wert: "stark"
+        notiz: "Problem → Lösung → Struktur → Konventionen"
+      motivation_leser:
+        wert: 0.9
+        notiz: "Klare Antwort auf 'Warum weiterlesen?'"
+      spannungsbogen:
+        wert: "vorhanden"
+        notiz: "Aufbau von Neugier"
+      hooks:
+        wert: 3
+        notiz: "60-Sekunden-Box, Anna-Beispiel, Tracks"
+      cliffhanger:
+        wert: true
+        notiz: "'Bereit?' Box am Ende"
+    verbesserungen:
+      - "Stärkerer Hook am Anfang? Provokante Frage?"
+
+  D13_meta_reflexivitaet:
+    score: 0.6
+    bewertung:
+      selbstanwendung:
+        wert: "teilweise"
+        notiz: "Nutzt Framing (Boxen), aber nicht explizit reflektiert"
+      framing_bewusst:
+        wert: false
+        notiz: "Framing-Entscheidungen nicht diskutiert"
+      bias_transparenz:
+        wert: false
+        notiz: "Eigene Perspektive nicht reflektiert"
+      axiom_konsistenz:
+        wert: true
+        notiz: "Kein Widerspruch zu Axiomen"
+    verbesserungen:
+      - "Fußnote: 'Wir nutzen bewusst Framing-Techniken aus BCM'"
+      - "Transparenz über Verfasser-Perspektive"
+
+# =============================================================================
+# ZUSAMMENFASSUNG
+# =============================================================================
+
+zusammenfassung:
+
+  gesamt_score_roh: 0.64
+
+  scores_nach_dimension:
+    D01_wissenschaft: 0.40
+    D02_bcm_spezifik: 0.60
+    D03_didaktik: 0.85
+    D04_anwendbarkeit: 0.70
+    D05_konsistenz: 0.90
+    D06_zielgruppe: 0.95
+    D07_epistemische_reflexion: 0.50
+    D08_validierung: 0.30
+    D09_abhaengigkeiten: 0.80
+    D10_evolution: 0.40
+    D11_operationalisierung: 0.30
+    D12_narrative: 0.85
+    D13_meta_reflexivitaet: 0.60
+
+  gewichteter_score:
+    als_rahmen_kapitel: 0.71  # Gut
+    fuer_business_stakeholder: 0.78  # Gut
+    fuer_ki_engineer: 0.58  # Akzeptabel
+
+  staerken:
+    - "Exzellente Zielgruppen-Adäquatheit (0.95)"
+    - "Starke didaktische Qualität (0.85)"
+    - "Guter narrativer Aufbau (0.85)"
+    - "Hohe Konsistenz (0.90)"
+
+  schwaechen:
+    - "Validierung niedrig (0.30) - aber für Kap 0 akzeptabel"
+    - "Operationalisierung niedrig (0.30) - nicht relevant für Kap 0"
+    - "Evolution nicht dokumentiert (0.40)"
+    - "Wissenschaftliche Tiefe begrenzt (0.40) - gewollt"
+
+  prioritaere_verbesserungen:
+    - prio: 1
+      was: "Versionshinweis hinzufügen"
+      aufwand: "5 Minuten"
+    - prio: 2
+      was: "Verweis auf offene Fragen in Kap 10"
+      aufwand: "5 Minuten"
+    - prio: 3
+      was: "Meta-Reflexivität: Fußnote zu Framing"
+      aufwand: "10 Minuten"
+
+  fazit: |
+    Kapitel 0 erfüllt seinen Zweck als Orientierungskapitel sehr gut.
+    Die niedrigen Scores bei Validierung und Operationalisierung sind
+    für diesen Kapiteltyp nicht relevant. Die Zielgruppen-Adäquatheit
+    ist exzellent. Kleine Verbesserungen bei Meta-Reflexivität und
+    Versionierung würden den Score auf ~0.75 heben.
+
+  status: "AKZEPTABEL - bereit für Integration"

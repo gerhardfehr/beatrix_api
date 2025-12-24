@@ -1,0 +1,907 @@
+{
+  "module": "ESTIMATION",
+  "id": "7245",
+  "version": "1.1",
+  "axiom_count": 55,
+  "description": "BEATRIX Estimation Workflow: LLM-basierte Parameterschätzung mit Delta-Qualifikation, Constrained Generation und Ambiguity Detection für BCM 2.2",
+  "architecture": {
+    "static_parameters": {
+      "description": "Einmal kalibriert, nie verändert",
+      "parameters": ["ω₁", "ω₂", "ω₃", "α", "β", "δ", "α⁺", "α⁻"],
+      "type_profiles": ["κ_mult", "ψ_mult", "ξ"],
+      "source": "Literatur + Benchmark-Kalibrierung"
+    },
+    "dynamic_parameters": {
+      "description": "LLM-Schätzung pro Entscheidung",
+      "parameters": ["η", "η_benign", "Var(η)", "I", "ρ", "θ̂", "Typ", "InfoType"],
+      "qualification": "Δ mit Confidence, Range, Reasoning"
+    }
+  },
+  "workflow": {
+    "steps": [
+      "1. Fixe Parameter (Literatur)",
+      "2. LLM-Schätzung mit Δ-Qualifikation",
+      "3. Typ → Multiplikatoren",
+      "4. BCM 2.2 Computation",
+      "5. Sensitivitätsanalyse (optional)",
+      "6. Audit Trail"
+    ]
+  },
+  "categories": {
+    "estimation": {
+      "range": [1, 16],
+      "prefix": "EST",
+      "description": "LLM-Schätzungsprozess und Parameter-Definitionen"
+    },
+    "calibration": {
+      "range": [17, 24],
+      "prefix": "CAL",
+      "description": "Statische Kalibrierung der fixen Parameter"
+    },
+    "audit": {
+      "range": [25, 32],
+      "prefix": "AUD",
+      "description": "Audit Trail und Reproduzierbarkeit"
+    },
+    "sensitivity": {
+      "range": [33, 42],
+      "prefix": "SEN",
+      "description": "Sensitivitätsanalyse und Unsicherheitsbehandlung"
+    },
+    "validation": {
+      "range": [43, 49],
+      "prefix": "VAL",
+      "description": "Constrained Generation: Technische Robustheit der LLM-Schätzung"
+    },
+    "ambiguity": {
+      "range": [50, 55],
+      "prefix": "AMB",
+      "description": "Ambiguity Detection: Konsens vs. Polarisierung aus Ensemble-Verteilung"
+    }
+  },
+  "axioms": [
+    {
+      "id": "EST-01",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "LLM schätzt kontextabhängige Parameter pro Entscheidung",
+      "description": "Jede Entscheidungssituation erfordert neue Schätzung der dynamischen Parameter",
+      "formula": "Θ_dynamic = LLM(Kontext, Persona, Entscheidung)",
+      "parameters": {
+        "input": ["context_description", "persona_description", "decision_description"],
+        "output": ["η", "η_benign", "InfoType", "Var(η)", "I", "ρ", "Typ", "θ̂"]
+      },
+      "dependencies": [],
+      "testable": true
+    },
+    {
+      "id": "EST-02",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Objektive Norm η ∈ [0, 1]",
+      "description": "Was wäre in dieser Situation objektiv fair als Handlung?",
+      "formula": "η = f(Earned/Windfall, Need, Merit, Frame, Anonymität)",
+      "interpretation": {
+        "0": "Handlung ist definitiv unfair",
+        "1": "Handlung ist definitiv fair"
+      },
+      "dependencies": ["EST-01"],
+      "testable": true,
+      "references": ["Konow (2000)", "Cappelen et al. (2007)"]
+    },
+    {
+      "id": "EST-03",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Optimistischer Prior η_benign ∈ [0, 1]",
+      "description": "Was würde jemand GLAUBEN WOLLEN, wenn er nicht genau hinschaut?",
+      "formula": "η_benign = E[η | self-serving belief]",
+      "interpretation": "Ermöglicht Motivated Inference: μ̃ kann Richtung η_benign verzerrt werden",
+      "dependencies": ["EST-02"],
+      "testable": true,
+      "references": ["Bénabou & Tirole (2016)"]
+    },
+    {
+      "id": "EST-04",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Informationstyp klassifiziert Informationsumgebung",
+      "description": "Art der verfügbaren Information bestimmt Strategic Ignorance Möglichkeit",
+      "formula": "InfoType ∈ {TRANSPARENT, AMBIGUOUS, RISK, NONE}",
+      "types": {
+        "TRANSPARENT": "Wahrheit ist klar sichtbar, σ=1 erzwungen",
+        "AMBIGUOUS": "Vage Information, Varianz bleibt, σ wählbar",
+        "RISK": "Lotterie, wird bei Entscheidung aufgelöst",
+        "NONE": "Keine Information verfügbar"
+      },
+      "dependencies": ["EST-01"],
+      "testable": true,
+      "references": ["Dana et al. (2007)", "Grossman & van der Weele (2017)"]
+    },
+    {
+      "id": "EST-05",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Varianz Var(η) ∈ [0, 0.3] quantifiziert Norm-Unsicherheit",
+      "description": "Wie unsicher ist die objektive Norm in diesem Kontext?",
+      "formula": "Var(η) = τ²_η(F, σ)",
+      "interpretation": {
+        "0": "Völlig klar was fair ist",
+        "0.3": "Sehr unklar, viel Interpretationsspielraum"
+      },
+      "dependencies": ["EST-02", "EST-04"],
+      "testable": true
+    },
+    {
+      "id": "EST-06",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Incentive-Salienz I ∈ [0, 1]",
+      "description": "Wie stark ist der materielle Anreiz im Vordergrund?",
+      "formula": "I = Salienz(materielle_Incentives)",
+      "interpretation": {
+        "0": "Kein Fokus auf Geld/Material",
+        "0.7": "Sale-Kontext, Preis dominant",
+        "1": "Dominanter materieller Fokus"
+      },
+      "crowding_effect": "Hoher I → höhere P(m=market) → geringere μ_ID Aktivierung",
+      "dependencies": ["EST-01"],
+      "testable": true,
+      "references": ["Gneezy & Rustichini (2000)", "Frey & Jegen (2001)"]
+    },
+    {
+      "id": "EST-07",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "F/S Aktivierung ρ ∈ [0, 1]",
+      "description": "Wie direkt/emotional ist die Interaktion?",
+      "formula": "ρ = ρ(F, m) = Aktivierungsgrad Fehr/Schmidt",
+      "interpretation": {
+        "0": "Anonym, abstrakt (z.B. Konsum)",
+        "0.5": "Indirekte Interaktion",
+        "1": "Direkt, emotional (face-to-face Verhandlung)"
+      },
+      "effect": "L_aff = ρ × L_FS(x)",
+      "dependencies": ["EST-01"],
+      "testable": true,
+      "references": ["Fehr & Schmidt (1999)"]
+    },
+    {
+      "id": "EST-08",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Typ-Zuweisung klassifiziert Agenten",
+      "description": "Basierend auf Persona, welcher Verhaltenstyp passt am besten?",
+      "formula": "Typ ∈ {FAIR, SELF_DECEPTIVE, SELFISH, COMPLEX}",
+      "types": {
+        "FAIR": "Handelt nach Prinzipien, sucht Information aktiv",
+        "SELF_DECEPTIVE": "Will gut sein, vermeidet aber unbequeme Wahrheiten",
+        "SELFISH": "Maximiert Material, Moral ist sekundär",
+        "COMPLEX": "Situativ, inkonsistent, mehrere Modi"
+      },
+      "dependencies": ["EST-01"],
+      "testable": true,
+      "references": ["Fischbacher et al. (2001)", "Konow (2000)"]
+    },
+    {
+      "id": "EST-09",
+      "category": "estimation",
+      "level": "foundation",
+      "statement": "Self-Image θ̂ ∈ [0, 1]",
+      "description": "Wie moralisch sieht sich die Persona selbst?",
+      "formula": "θ̂ = subjektives Moralitäts-Selbstbild",
+      "interpretation": {
+        "0.3": "Sieht sich als pragmatisch/egoistisch",
+        "0.5": "Neutral, durchschnittlich",
+        "0.7": "Sieht sich als moralisch",
+        "0.9": "Starke moralische Identität"
+      },
+      "effect": "Hoher θ̂ + niedriger a → hohe Dissonanz → SD oder Handlungsänderung",
+      "dependencies": ["EST-01", "EST-08"],
+      "testable": true,
+      "references": ["Bénabou & Tirole (2011)"]
+    },
+    {
+      "id": "EST-10",
+      "category": "estimation",
+      "level": "structure",
+      "statement": "Δ-Qualifikation für jeden geschätzten Parameter",
+      "description": "LLM muss Unsicherheit quantifizieren und begründen",
+      "formula": "Δ(param) = {confidence, range, reasoning}",
+      "schema": {
+        "confidence": "[0, 1] - Wie sicher ist die Schätzung?",
+        "range": "[low, high] - Plausibles Intervall",
+        "reasoning": "Chain of Thought Begründung"
+      },
+      "dependencies": ["EST-01"],
+      "testable": true
+    },
+    {
+      "id": "EST-11",
+      "category": "estimation",
+      "level": "structure",
+      "statement": "Confidence-Score Interpretation",
+      "description": "Wie mit verschiedenen Confidence-Levels umgehen",
+      "formula": "Action = f(Confidence)",
+      "thresholds": {
+        "> 0.85": "Sehr sicher → Parameter direkt verwenden",
+        "0.7 - 0.85": "Sicher → Parameter verwenden, Range beachten",
+        "0.5 - 0.7": "Unsicher → Sensitivitätsanalyse empfohlen",
+        "< 0.5": "Sehr unsicher → Mehr Kontext nötig oder Default"
+      },
+      "dependencies": ["EST-10"],
+      "testable": true
+    },
+    {
+      "id": "EST-12",
+      "category": "estimation",
+      "level": "structure",
+      "statement": "Typ → Multiplikatoren Mapping",
+      "description": "LLM-Typ-Zuweisung determiniert BCM 2.2 Multiplikatoren",
+      "formula": "Typ → (κ_mult, ψ_mult, ξ)",
+      "mappings": {
+        "FAIR": {"κ_mult": 1.0, "ψ_mult": 1.0, "ξ": 1.0, "description": "Baseline, ehrliche Normevaluation"},
+        "SELF_DECEPTIVE": {"κ_mult": 1.5, "ψ_mult": 0.15, "ξ": 2.0, "description": "Hohe Handlungskonsistenz, niedrige Normtreue"},
+        "SELFISH": {"κ_mult": 0.3, "ψ_mult": 0.1, "ξ": 0.5, "description": "Geringe Identitätskosten"},
+        "COMPLEX": {"κ_mult": 1.0, "ψ_mult": 0.5, "ξ": 1.5, "description": "Situativ, moderate Werte"}
+      },
+      "dependencies": ["EST-08"],
+      "testable": true
+    },
+    {
+      "id": "EST-13",
+      "category": "estimation",
+      "level": "structure",
+      "statement": "Strukturierter Prompt erzwingt systematische Analyse",
+      "description": "Prompt-Design als Disziplinierungsmechanismus",
+      "formula": "Quality(Estimate) ∝ Structure(Prompt)",
+      "prompt_requirements": [
+        "Explizite Parameter-Definition mit Interpretation",
+        "Forced-Choice für kategoriale Parameter",
+        "Numerische Ranges für kontinuierliche Parameter",
+        "Begründungspflicht (Chain of Thought)",
+        "Δ-Qualifikation mandatory"
+      ],
+      "dependencies": ["EST-01", "EST-10"],
+      "testable": true
+    },
+    {
+      "id": "EST-14",
+      "category": "estimation",
+      "level": "operation",
+      "statement": "Kontext-Analyse vor Parameter-Schätzung",
+      "description": "LLM muss Kontext strukturiert analysieren",
+      "formula": "η = g(Earned, Need, Merit, Frame, Anon, Info); g: {0,1}⁶ → [0,1]",
+      "analysis_dimensions": {
+        "earned_windfall": "Wer hat zum Outcome beigetragen?",
+        "need": "Wer braucht es mehr?",
+        "merit": "Wer verdient es?",
+        "frame": "Markt vs. Gemeinschaft?",
+        "anonymity": "Ist der Andere sichtbar?",
+        "information": "Was ist bekannt/unbekannt?"
+      },
+      "dependencies": ["EST-01"],
+      "testable": false
+    },
+    {
+      "id": "EST-15",
+      "category": "estimation",
+      "level": "operation",
+      "statement": "Persona-Analyse für Typ und θ̂",
+      "description": "LLM analysiert Persona-Beschreibung systematisch",
+      "formula": "(Typ, θ̂) = h(StatedValues, RevealedBehavior, Consistency, WiggleRoom, InfoSeeking)",
+      "analysis_dimensions": {
+        "stated_values": "Was sagt die Person über sich?",
+        "revealed_behavior": "Was tut sie tatsächlich?",
+        "consistency": "Stimmen Werte und Verhalten überein?",
+        "wiggle_room_language": "Verwendet sie vage Rechtfertigungen?",
+        "information_seeking": "Sucht sie aktiv nach Wahrheit?"
+      },
+      "dependencies": ["EST-08", "EST-09"],
+      "testable": false
+    },
+    {
+      "id": "EST-16",
+      "category": "estimation",
+      "level": "operation",
+      "statement": "Output-Schema als JSON",
+      "description": "Standardisiertes Output-Format für Parsing und Audit",
+      "schema": {
+        "eta": {"value": "float", "confidence": "float", "range": "[float, float]", "reasoning": "string"},
+        "eta_benign": {"value": "float", "confidence": "float", "range": "[float, float]", "reasoning": "string"},
+        "info_type": {"value": "enum", "confidence": "float", "reasoning": "string"},
+        "variance": {"value": "float", "confidence": "float", "range": "[float, float]", "reasoning": "string"},
+        "incentive_salience": {"value": "float", "confidence": "float", "range": "[float, float]", "reasoning": "string"},
+        "rho_fs": {"value": "float", "confidence": "float", "reasoning": "string"},
+        "agent_type": {"value": "enum", "confidence": "float", "reasoning": "string"},
+        "theta_hat": {"value": "float", "confidence": "float", "range": "[float, float]", "reasoning": "string"}
+      },
+      "dependencies": ["EST-01", "EST-10"],
+      "testable": true
+    },
+    {
+      "id": "CAL-01",
+      "category": "calibration",
+      "level": "foundation",
+      "statement": "Statische Parameter werden einmal kalibriert",
+      "description": "Fixe Parameter aus Literatur und Benchmark-Kalibrierung",
+      "formula": "Θ_static = {ω₁, ω₂, ω₃, α, β, δ, α⁺, α⁻}",
+      "method": "Grid-Search auf Benchmark-Daten (DG, UG, PGG)",
+      "dependencies": [],
+      "testable": true
+    },
+    {
+      "id": "CAL-02",
+      "category": "calibration",
+      "level": "foundation",
+      "statement": "Gewichtungsparameter ω aus Literatur",
+      "description": "ω₁ (Handlungskonsistenz), ω₂ (Self-Image), ω₃ (Normtreue)",
+      "formula": "ω₁ + ω₂ + ω₃ = 1; typisch ω₁=0.4, ω₂=0.2, ω₃=0.4",
+      "source": "Akerlof & Kranton (2000), Bénabou & Tirole (2011)",
+      "dependencies": ["CAL-01"],
+      "testable": true
+    },
+    {
+      "id": "CAL-03",
+      "category": "calibration",
+      "level": "foundation",
+      "statement": "Fehr/Schmidt Parameter α, β aus Literatur",
+      "description": "Neid (α) und Schuld (β) Parameter",
+      "formula": "α ∈ [0.5, 4], β ∈ [0, 0.6]; typisch α=2, β=0.6",
+      "source": "Fehr & Schmidt (1999)",
+      "dependencies": ["CAL-01"],
+      "testable": true
+    },
+    {
+      "id": "CAL-04",
+      "category": "calibration",
+      "level": "foundation",
+      "statement": "Motivated Inference Kostenfunktion",
+      "description": "Kosten für Verzerrung der Beliefs",
+      "formula": "C_MI(μ̃) = (δ/2)(μ̃ - μ_η)²; δ kalibriert",
+      "typical_value": "δ ≈ 1.0",
+      "dependencies": ["CAL-01"],
+      "testable": true,
+      "references": ["Bénabou & Tirole (2016)"]
+    },
+    {
+      "id": "CAL-05",
+      "category": "calibration",
+      "level": "structure",
+      "statement": "Typ-Profile als statische Multiplikatoren",
+      "description": "Vordefinierte Profile für jeden Verhaltenstyp",
+      "formula": "Profile(Typ) = (κ_mult, ψ_mult, ξ)",
+      "profiles": {
+        "FAIR": {"κ_mult": 1.0, "ψ_mult": 1.0, "ξ": 1.0},
+        "SELF_DECEPTIVE": {"κ_mult": 1.5, "ψ_mult": 0.15, "ξ": 2.0},
+        "SELFISH": {"κ_mult": 0.3, "ψ_mult": 0.1, "ξ": 0.5},
+        "COMPLEX": {"κ_mult": 1.0, "ψ_mult": 0.5, "ξ": 1.5}
+      },
+      "calibration_source": "Fischbacher et al. (2001), Konow (2000)",
+      "dependencies": ["CAL-01", "EST-08"],
+      "testable": true
+    },
+    {
+      "id": "CAL-06",
+      "category": "calibration",
+      "level": "structure",
+      "statement": "Benchmark-Kalibrierung auf klassische Spiele",
+      "description": "Grid-Search optimiert Parameter auf DG, UG, PGG Targets",
+      "formula": "Θ* = argmin_Θ Σᵢ wᵢ(Prediction_i(Θ) - Target_i)²",
+      "benchmarks": {
+        "dictator_game": {"target": "28% average giving", "source": "Engel (2011)"},
+        "ultimatum_game": {"target": "50% rejection at 20/80", "source": "Güth et al. (1982)"},
+        "public_goods_game": {"target": "15%→90% with punishment", "source": "Fehr & Gächter (2000)"}
+      },
+      "dependencies": ["CAL-01"],
+      "testable": true
+    },
+    {
+      "id": "CAL-07",
+      "category": "calibration",
+      "level": "structure",
+      "statement": "Regime-Switch Parameter γ",
+      "description": "Sensitivität des Market/Moral Switch",
+      "formula": "P(m=market|s,F) = Λ(γ(s - s̄(F))); γ kalibriert",
+      "typical_value": "γ ≈ 3.0",
+      "dependencies": ["CAL-01"],
+      "testable": true
+    },
+    {
+      "id": "CAL-08",
+      "category": "calibration",
+      "level": "operation",
+      "statement": "Kalibrierung ist einmalig und versioniert",
+      "description": "Statische Parameter ändern sich nur bei Major Version Updates",
+      "formula": "∂Θ_static/∂t = 0 für t ∈ [v_n, v_{n+1}); Änderung nur bei Major Version",
+      "versioning": {
+        "current": "BCM 2.2",
+        "parameters_locked": true,
+        "next_recalibration": "Bei neuen Meta-Analysen oder BCM 3.0"
+      },
+      "dependencies": ["CAL-01"],
+      "testable": false
+    },
+    {
+      "id": "AUD-01",
+      "category": "audit",
+      "level": "foundation",
+      "statement": "Jede Schätzung erhält eindeutige ID und Timestamp",
+      "description": "Grundlage für Reproduzierbarkeit",
+      "schema": {
+        "estimation_id": "UUID",
+        "timestamp": "ISO 8601",
+        "model": "LLM Model ID",
+        "temperature": "float",
+        "seed": "int (wenn verfügbar)"
+      },
+      "dependencies": [],
+      "testable": true
+    },
+    {
+      "id": "AUD-02",
+      "category": "audit",
+      "level": "foundation",
+      "statement": "Input vollständig dokumentiert",
+      "description": "Kontext, Persona, Entscheidung werden gespeichert",
+      "schema": {
+        "input": {
+          "context": "string",
+          "persona": "string",
+          "decision": "string"
+        }
+      },
+      "dependencies": ["AUD-01"],
+      "testable": true
+    },
+    {
+      "id": "AUD-03",
+      "category": "audit",
+      "level": "foundation",
+      "statement": "LLM-Schätzungen mit Δ dokumentiert",
+      "description": "Alle geschätzten Parameter mit Qualifikation",
+      "schema": {
+        "llm_estimates": {
+          "eta": {"value": "float", "confidence": "float", "range": "[float, float]"},
+          "eta_benign": {"value": "float", "confidence": "float", "range": "[float, float]"},
+          "info_type": {"value": "enum", "confidence": "float"},
+          "variance": {"value": "float", "confidence": "float", "range": "[float, float]"},
+          "incentive_salience": {"value": "float", "confidence": "float"},
+          "rho_fs": {"value": "float", "confidence": "float"},
+          "agent_type": {"value": "enum", "confidence": "float"},
+          "theta_hat": {"value": "float", "confidence": "float", "range": "[float, float]"}
+        }
+      },
+      "dependencies": ["AUD-01", "EST-16"],
+      "testable": true
+    },
+    {
+      "id": "AUD-04",
+      "category": "audit",
+      "level": "structure",
+      "statement": "Abgeleitete Parameter dokumentiert",
+      "description": "Vom Typ abgeleitete Multiplikatoren und berechnete Werte",
+      "schema": {
+        "derived_parameters": {
+          "kappa_mult": "float",
+          "psi_mult": "float",
+          "xi": "float",
+          "P_market": "float",
+          "kappa_m": "float",
+          "psi_m": "float"
+        }
+      },
+      "dependencies": ["AUD-01", "EST-12"],
+      "testable": true
+    },
+    {
+      "id": "AUD-05",
+      "category": "audit",
+      "level": "structure",
+      "statement": "Berechnungsergebnis dokumentiert",
+      "description": "Output der BCM 2.2 Computation",
+      "schema": {
+        "computation_result": {
+          "U_IDN": "float",
+          "phi_star": "float",
+          "E_eta_sigma": "float",
+          "action_probability": "float"
+        }
+      },
+      "dependencies": ["AUD-01"],
+      "testable": true
+    },
+    {
+      "id": "AUD-06",
+      "category": "audit",
+      "level": "structure",
+      "statement": "Chain of Thought gespeichert",
+      "description": "Vollständiges Reasoning des LLM für Nachvollziehbarkeit",
+      "schema": {
+        "chain_of_thought": "string (full reasoning)"
+      },
+      "purpose": "Ermöglicht Peer Review der Schätzungslogik",
+      "dependencies": ["AUD-01"],
+      "testable": true
+    },
+    {
+      "id": "AUD-07",
+      "category": "audit",
+      "level": "operation",
+      "statement": "Audit Trail ermöglicht Reproduktion",
+      "description": "Mit gespeicherten Inputs und Parametern kann Berechnung wiederholt werden",
+      "formula": "Reproduce(AuditTrail) ≈ OriginalResult",
+      "caveat": "LLM-Schätzung kann variieren, aber deterministische Computation ist exakt",
+      "dependencies": ["AUD-01", "AUD-02", "AUD-03"],
+      "testable": true
+    },
+    {
+      "id": "AUD-08",
+      "category": "audit",
+      "level": "operation",
+      "statement": "Versionierung aller Komponenten",
+      "description": "BCM Version, Axiom Versions, Prompt Version dokumentiert",
+      "schema": {
+        "versions": {
+          "bcm_version": "2.2",
+          "estimation_prompt_version": "1.0",
+          "idn_axioms_version": "2.2",
+          "lambda_axioms_version": "2.5"
+        }
+      },
+      "dependencies": ["AUD-01"],
+      "testable": true
+    },
+    {
+      "id": "SEN-01",
+      "category": "sensitivity",
+      "level": "foundation",
+      "statement": "Sensitivitätsanalyse bei niedriger Confidence",
+      "description": "Bei Confidence < 0.7 werden Low/Mid/High Szenarien berechnet",
+      "formula": "If Confidence(param) < 0.7: compute scenarios",
+      "trigger": "Automatisch bei unsicheren Schätzungen",
+      "dependencies": ["EST-11"],
+      "testable": true
+    },
+    {
+      "id": "SEN-02",
+      "category": "sensitivity",
+      "level": "foundation",
+      "statement": "Drei-Szenario-Analyse",
+      "description": "Low, Mid, High Case basierend auf geschätzten Ranges",
+      "scenarios": {
+        "low": "Pessimistisch für Agent (niedriger η, weniger Wiggle Room)",
+        "mid": "Punkt-Schätzung (value)",
+        "high": "Optimistisch für Agent (höherer η, mehr Wiggle Room)"
+      },
+      "dependencies": ["SEN-01"],
+      "testable": true
+    },
+    {
+      "id": "SEN-03",
+      "category": "sensitivity",
+      "level": "structure",
+      "statement": "Range-Mapping für Szenarien",
+      "description": "Wie Ranges auf Szenarien abgebildet werden",
+      "formula": "low = range[0], mid = value, high = range[1]",
+      "example": {
+        "eta": {"value": 0.25, "range": [0.15, 0.35]},
+        "scenarios": {"low": 0.15, "mid": 0.25, "high": 0.35}
+      },
+      "dependencies": ["SEN-02"],
+      "testable": true
+    },
+    {
+      "id": "SEN-04",
+      "category": "sensitivity",
+      "level": "structure",
+      "statement": "Unabhängige BCM 2.2 Berechnung pro Szenario",
+      "description": "Vollständige U_IDN Berechnung für jedes Szenario",
+      "formula": "U_IDN_scenario = BCM_2_2(params_scenario)",
+      "output": {
+        "low": {"U_IDN": "float", "action_probability": "float"},
+        "mid": {"U_IDN": "float", "action_probability": "float"},
+        "high": {"U_IDN": "float", "action_probability": "float"}
+      },
+      "dependencies": ["SEN-03"],
+      "testable": true
+    },
+    {
+      "id": "SEN-05",
+      "category": "sensitivity",
+      "level": "structure",
+      "statement": "Robustheit als Qualitätskriterium",
+      "description": "Ergebnis ist robust wenn Low/Mid/High ähnliche Prognosen geben",
+      "formula": "Robust = |P_high - P_low| < threshold",
+      "interpretation": {
+        "robust": "Alle Szenarien führen zu gleicher Handlungsprognose",
+        "sensitive": "Ergebnis hängt stark von unsicheren Parametern ab"
+      },
+      "dependencies": ["SEN-04"],
+      "testable": true
+    },
+    {
+      "id": "SEN-06",
+      "category": "sensitivity",
+      "level": "operation",
+      "statement": "Kritische Parameter identifizieren",
+      "description": "Welche Parameter haben größten Einfluss auf Ergebnis?",
+      "method": "Partial derivative oder One-at-a-time Variation",
+      "formula": "Kritisch(param) ∝ |∂U_IDN/∂param| × Range(param)",
+      "dependencies": ["SEN-04"],
+      "testable": true
+    },
+    {
+      "id": "SEN-07",
+      "category": "sensitivity",
+      "level": "operation",
+      "statement": "Konfidenz-gewichtete Prognose",
+      "description": "Alternative: Weighted Average über Szenarien",
+      "formula": "P_weighted = Σ w_i × P_i; w_i ∝ Confidence",
+      "use_case": "Wenn einzelne Punktschätzung benötigt wird",
+      "dependencies": ["SEN-04", "EST-11"],
+      "testable": true
+    },
+    {
+      "id": "SEN-08",
+      "category": "sensitivity",
+      "level": "operation",
+      "statement": "Sensitivität im Audit Trail",
+      "description": "Sensitivitätsanalyse wird dokumentiert wenn durchgeführt",
+      "schema": {
+        "sensitivity": {
+          "triggered": "bool",
+          "trigger_params": ["list of params with confidence < 0.7"],
+          "low": {"U_IDN": "float", "action_probability": "float"},
+          "mid": {"U_IDN": "float", "action_probability": "float"},
+          "high": {"U_IDN": "float", "action_probability": "float"},
+          "robust": "bool"
+        }
+      },
+      "dependencies": ["SEN-04", "AUD-01"],
+      "testable": true
+    },
+    {
+      "id": "SEN-09",
+      "category": "sensitivity",
+      "level": "operation",
+      "statement": "Empfehlung bei nicht-robustem Ergebnis",
+      "description": "Was tun wenn Sensitivität hoch?",
+      "formula": "If |P_high - P_low| > τ_robust: Action ∈ {RequestContext, UseDefault, FlagUncertain}",
+      "recommendations": [
+        "Mehr Kontext anfordern",
+        "Persona-Beschreibung vertiefen",
+        "Default zu mittlerem Szenario mit Disclaimer",
+        "Explizit kommunizieren: Prognose unsicher"
+      ],
+      "dependencies": ["SEN-05"],
+      "testable": false
+    },
+    {
+      "id": "SEN-10",
+      "category": "sensitivity",
+      "level": "operation",
+      "statement": "Monte Carlo Option für komplexe Fälle",
+      "description": "Bei vielen unsicheren Parametern: Sampling aus Ranges",
+      "method": "Sample N Parameter-Kombinationen, berechne Verteilung von U_IDN",
+      "formula": "P_action = Σ I(U_IDN_i > threshold) / N",
+      "use_case": "Forschung, nicht Standard-Workflow",
+      "dependencies": ["SEN-04"],
+      "testable": true
+    },
+    {
+      "id": "VAL-01",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Pre-Flight Plausibilitätsprüfung",
+      "description": "Vor Parameterschätzung: Ist das Szenario eine realistische Entscheidungssituation?",
+      "formula": "VALID = PreFlight(Scenario) ∈ {True, False}; If False: Abort",
+      "rationale": "Verhindert Halluzination bei unsinnigen Inputs (Garbage In, Garbage Out)",
+      "dependencies": [],
+      "testable": true
+    },
+    {
+      "id": "VAL-02",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Few-Shot Anchoring mit Referenzskalen",
+      "description": "Kalibrierungsskala im Prompt definiert semantische Ankerpunkte",
+      "formula": "Scale(param) = {(v₀, example₀), (v₁, example₁), ..., (v_n, example_n)}",
+      "example": {
+        "budget_pressure": {
+          "0.0": "Elon Musk - Geld spielt keine Rolle",
+          "0.2": "Upper Class - achtet auf Preise",
+          "0.5": "Mittelschicht - vergleicht, kann Fair Trade leisten",
+          "0.8": "Student/Geringverdiener - Fair Trade tut weh",
+          "1.0": "Existenzminimum - jeder Cent zählt"
+        }
+      },
+      "effect": "LLM mappt semantisch auf Skala statt zu halluzinieren",
+      "dependencies": ["EST-01"],
+      "testable": true
+    },
+    {
+      "id": "VAL-03",
+      "category": "validation",
+      "level": "foundation",
+      "statement": "Pydantic Schema-Enforcement",
+      "description": "Strukturierte Outputs erzwingen korrektes JSON-Format",
+      "formula": "Output = LLM(Prompt, response_model=Schema); Schema validates Output",
+      "implementation": {
+        "library": "pydantic + instructor",
+        "mechanism": "response_model Parameter erzwingt Schema",
+        "error_handling": "Bei Formatfehler: Self-Correction Loop"
+      },
+      "dependencies": ["EST-16"],
+      "testable": true
+    },
+    {
+      "id": "VAL-04",
+      "category": "validation",
+      "level": "structure",
+      "statement": "Ensemble Voting für Robustheit",
+      "description": "N≥3 parallele LLM-Runs, Median als Schätzung",
+      "formula": "θ̂_robust = Median({θ̂₁, θ̂₂, ..., θ̂_N}); N ≥ 3",
+      "rationale": "Einzelner Run kann 'Bad Day' haben - Ausreißer werden ignoriert",
+      "effect": "Reduziert Varianz, erhöht Inter-Rater Reliability",
+      "typical_N": 5,
+      "temperature": 0.3,
+      "dependencies": ["EST-01"],
+      "testable": true
+    },
+    {
+      "id": "VAL-05",
+      "category": "validation",
+      "level": "structure",
+      "statement": "Self-Correction Loop bei Formatfehlern",
+      "description": "Bei JSONDecodeError: Fehler ans LLM zurückschicken zur Korrektur",
+      "formula": "If ParseError(Output): Output = LLM(Prompt + ErrorMessage); max 3 retries",
+      "implementation": "Pydantic ValidationError wird als Feedback gesendet",
+      "dependencies": ["VAL-03"],
+      "testable": true
+    },
+    {
+      "id": "VAL-06",
+      "category": "validation",
+      "level": "operation",
+      "statement": "Inter-Rater Reliability Threshold",
+      "description": "Ensemble-Übereinstimmung muss Schwellenwert erreichen",
+      "formula": "IRR = 1 - (σ_ensemble / Range); IRR > 0.85 required",
+      "interpretation": {
+        "> 0.85": "Hohe Übereinstimmung - Schätzung vertrauenswürdig",
+        "0.7 - 0.85": "Moderate Übereinstimmung - Vorsicht geboten",
+        "< 0.7": "Niedrige Übereinstimmung - mehr Kontext nötig"
+      },
+      "dependencies": ["VAL-04"],
+      "testable": true
+    },
+    {
+      "id": "VAL-07",
+      "category": "validation",
+      "level": "operation",
+      "statement": "Constrained Generation Pipeline",
+      "description": "Vollständige Pipeline: PreFlight → Anchoring → Pydantic → Ensemble → IRR-Check",
+      "formula": "θ̂_final = Pipeline(PreFlight, Anchoring, Schema, Ensemble, IRR)",
+      "sequence": [
+        "1. PreFlight: VALID?",
+        "2. Anchoring: Skalen im Prompt",
+        "3. Schema: Pydantic-Validierung",
+        "4. Ensemble: N Runs parallel",
+        "5. IRR-Check: Übereinstimmung prüfen",
+        "6. Output: Median + Audit"
+      ],
+      "dependencies": ["VAL-01", "VAL-02", "VAL-03", "VAL-04", "VAL-06"],
+      "testable": true
+    },
+    {
+      "id": "AMB-01",
+      "category": "ambiguity",
+      "level": "foundation",
+      "statement": "Endogene Ambiguität aus Ensemble-Verteilung",
+      "description": "τ²_η wird aus der Varianz der N Ensemble-Schätzungen abgeleitet",
+      "formula": "τ²_η = Var({η̂₁, η̂₂, ..., η̂_N})",
+      "rationale": "Hohe Ensemble-Varianz = hohe normative Unsicherheit = mehr Wiggle Room",
+      "dependencies": ["VAL-04"],
+      "testable": true,
+      "references": ["Grossman & van der Weele (2017)"]
+    },
+    {
+      "id": "AMB-02",
+      "category": "ambiguity",
+      "level": "foundation",
+      "statement": "Bimodalitäts-Koeffizient erkennt Polarisierung",
+      "description": "Unterscheidung zwischen Unsicherheit (unimodal) und Wertekonflikt (bimodal)",
+      "formula": "BC = (s² + 1) / (k + 3((n-1)²/((n-2)(n-3)))); s=skew, k=kurtosis",
+      "threshold": "BC > 0.555 oder (Var > 0.15 ∧ k < -1.0) → Polarisierung",
+      "dependencies": ["AMB-01"],
+      "testable": true
+    },
+    {
+      "id": "AMB-03",
+      "category": "ambiguity",
+      "level": "structure",
+      "statement": "Konsens-Fall: Unimodale Verteilung",
+      "description": "Bei Konsens ist die Norm verrauscht aber singular",
+      "formula": "If ¬Polarized: μ_η = Median(η̂_j), τ²_η = Var(η̂_j)",
+      "interpretation": "Normales Rauschen - Agent hat moderate Wiggle Room",
+      "example": "Fast Fashion: Diffuse aber nicht gespaltene Meinungen",
+      "dependencies": ["AMB-02"],
+      "testable": true
+    },
+    {
+      "id": "AMB-04",
+      "category": "ambiguity",
+      "level": "structure",
+      "statement": "Polarisierungs-Fall: Bimodale Verteilung",
+      "description": "Bei Polarisierung existieren zwei konfliktäre Normen",
+      "formula": "If Polarized: τ²_η = max{Var} + λ_conflict × |μ_high - μ_low|",
+      "interpretation": "Wertekonflikt - Agent kann sich Peak aussuchen",
+      "example": "Containern: 50% 'Diebstahl', 50% 'Heldentum'",
+      "dependencies": ["AMB-02"],
+      "testable": true
+    },
+    {
+      "id": "AMB-05",
+      "category": "ambiguity",
+      "level": "operation",
+      "statement": "Strategische Peak-Wahl bei Polarisierung",
+      "description": "Self-Deceptive Agent wählt den selbstdienlichen Peak als Norm",
+      "formula": "μ_perceived = μ_favorable = argmax_{μ_low, μ_high} U(a, μ)",
+      "mechanism": "Agent rechtfertigt sich mit 'Ich halte mich an die Gruppe, die sagt es ist okay'",
+      "moral_consequence": "Agent fühlt sich moralisch im Recht trotz 50% Gesellschafts-Ablehnung",
+      "dependencies": ["AMB-04"],
+      "testable": true,
+      "references": ["Konow (2000)"]
+    },
+    {
+      "id": "AMB-06",
+      "category": "ambiguity",
+      "level": "operation",
+      "statement": "AmbiguityEngine: Automatische Klassifikation",
+      "description": "Algorithmus klassifiziert Ensemble-Verteilung und liefert BCM-Parameter",
+      "formula": "NormSignal = AmbiguityEngine(η̂_ensemble) → (μ_perceived, τ²_η, is_polarized)",
+      "output_schema": {
+        "mu_perceived": "Norm-Wert den Agent 'sieht'",
+        "tau_squared": "Wiggle Room (Varianz)",
+        "is_polarized": "Flag für Audit/Reporting",
+        "description": "Menschenlesbare Erklärung"
+      },
+      "dependencies": ["AMB-03", "AMB-04", "AMB-05"],
+      "testable": true
+    }
+  ],
+  "references": [
+    {
+      "id": "Akerlof_Kranton_2000",
+      "citation": "Akerlof, G. A., & Kranton, R. E. (2000). Economics and identity. Quarterly Journal of Economics, 115(3), 715-753."
+    },
+    {
+      "id": "Benabou_Tirole_2011",
+      "citation": "Bénabou, R., & Tirole, J. (2011). Identity, morals, and taboos: Beliefs as assets. Quarterly Journal of Economics, 126(2), 805-855."
+    },
+    {
+      "id": "Benabou_Tirole_2016",
+      "citation": "Bénabou, R., & Tirole, J. (2016). Mindful economics: The production, consumption, and value of beliefs. Journal of Economic Perspectives, 30(3), 141-164."
+    },
+    {
+      "id": "Dana_2007",
+      "citation": "Dana, J., Weber, R. A., & Kuang, J. X. (2007). Exploiting moral wiggle room: experiments demonstrating an illusory preference for fairness. Economic Theory, 33(1), 67-80."
+    },
+    {
+      "id": "Fehr_Schmidt_1999",
+      "citation": "Fehr, E., & Schmidt, K. M. (1999). A theory of fairness, competition, and cooperation. Quarterly Journal of Economics, 114(3), 817-868."
+    },
+    {
+      "id": "Fischbacher_2001",
+      "citation": "Fischbacher, U., Gächter, S., & Fehr, E. (2001). Are people conditionally cooperative? Evidence from a public goods experiment. Economics Letters, 71(3), 397-404."
+    },
+    {
+      "id": "Grossman_vanderWeele_2017",
+      "citation": "Grossman, Z., & van der Weele, J. J. (2017). Self-image and willful ignorance in social decisions. Journal of the European Economic Association, 15(1), 173-217."
+    },
+    {
+      "id": "Konow_2000",
+      "citation": "Konow, J. (2000). Fair shares: Accountability and cognitive dissonance in allocation decisions. American Economic Review, 90(4), 1072-1091."
+    }
+  ]
+}
