@@ -1,0 +1,917 @@
+\documentclass[12pt,a4paper]{article}
+
+% =====================================================================
+% PACKAGES
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{authblk}
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, fit, backgrounds}
+
+% =====================================================================
+% LAYOUT
+% =====================================================================
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\onehalfspacing
+
+% =====================================================================
+% COLORS & LINKS
+% =====================================================================
+\definecolor{darkblue}{RGB}{0,51,102}
+\definecolor{codegreen}{RGB}{0,128,0}
+\definecolor{codegray}{RGB}{128,128,128}
+\definecolor{codepurple}{RGB}{128,0,128}
+\definecolor{backcolour}{RGB}{245,245,245}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    citecolor=darkblue,
+    urlcolor=darkblue
+}
+
+% =====================================================================
+% CODE LISTINGS
+% =====================================================================
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=Python
+}
+\lstset{style=pythonstyle}
+
+% =====================================================================
+% SECTION FORMATTING
+% =====================================================================
+\titleformat{\section}{\Large\bfseries\color{darkblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{darkblue!80}}{\thesubsection}{1em}{}
+
+% =====================================================================
+% HEADER & FOOTER
+% =====================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\color{gray}BEATRIX Drei-Phasen-Architektur}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% =====================================================================
+% DOCUMENT INFO
+% =====================================================================
+\title{
+{\LARGE\bfseries Technisches Dokument}\\[0.4cm]
+{\Large Die Drei-Phasen-Architektur von BEATRIX}\\[0.2cm]
+{\large LLM-Orchestrierung für verhaltensökonomische Modellierung}
+}
+
+\author[1]{Gerhard Fehr}
+\author[1]{Andrea Fehr}
+\affil[1]{FehrAdvice \& Partners AG, Zürich}
+\date{Dezember 2025 | Version 1.0}
+
+% =====================================================================
+% DOCUMENT
+% =====================================================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Dieses technische Dokument beschreibt die Drei-Phasen-Architektur von BEATRIX, die eine nahtlose Integration von Large Language Models (LLMs) mit dem Behavioral Change Model (BCM 2.2) ermöglicht.
+Die Architektur löst ein fundamentales Problem der Pre-LLM-Ära: Das BCM konnte berechnet werden, war aber für Nicht-Experten schwer zugänglich.
+BEATRIX orchestriert LLMs und deterministischen Code in drei Phasen: (1) LLM-basierte Extraktion von BCM-Parametern aus natürlicher Sprache, (2) deterministische BCM-Berechnung via Code Interpreter, (3) LLM-basierte Interpretation der Ergebnisse.
+Wir dokumentieren die historische Entwicklung der enabling technologies (möglich seit Juni 2023, production-ready seit August 2024), die wissenschaftlichen Grundlagen aus zehn Forschungsbereichen, und drei technische Implementierungsvarianten mit konkreten Code-Beispielen.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Einleitung: Das Problem und die Lösung}
+% =====================================================================
+
+\subsection{Das Pre-LLM Problem}
+
+Das Behavioral Change Model (BCM) existiert seit 2023 als mathematisches Framework zur Modellierung menschlichen Verhaltens.
+Die Kernformel für den effektiven Nutzen lautet:
+
+\begin{equation}
+U_{\text{eff}} = (1-\lambda) \cdot U_{\text{INU}} + \lambda \cdot U_{\text{KNU}} + U_{\text{IDN}}(a, \sigma, \phi, \tilde{\mu}; F, s, m)
+\end{equation}
+
+Das BCM konnte immer \textbf{berechnet} werden -- gegeben die richtigen Parameter, liefert die Mathematik deterministische Ergebnisse.
+Das Problem lag an zwei Stellen:
+
+\begin{enumerate}
+    \item \textbf{Input-Problem}: Wie kommt man von einer Persona-Beschreibung (``Anna ist 45, Lehrerin, umweltbewusst...'') zu den Modellparametern ($\lambda = 2.2$, $\alpha = 0.88$, ...)?
+
+    \item \textbf{Output-Problem}: Wie erklärt man einem Nicht-Experten, was ``$U_{\text{eff}} = -0.34$ mit Sensitivität $\partial U / \partial \lambda = 0.6$'' bedeutet?
+\end{enumerate}
+
+Vor LLMs erforderten beide Schritte \textbf{menschliche Experten} -- Verhaltensökonomen, die Parameter schätzen und Ergebnisse interpretieren konnten.
+Dies machte BCM-Analysen langsam, teuer und nicht skalierbar.
+
+\subsection{Die BEATRIX-Lösung: Drei Phasen}
+
+BEATRIX löst dieses Problem durch eine orchestrierte Drei-Phasen-Architektur:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    phase/.style={rectangle, draw, rounded corners, minimum width=3.5cm, minimum height=2cm, align=center},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Phases
+\node[phase, fill=blue!15] (p1) at (0, 0) {\textbf{Phase 1}\\LLM\\[0.2em]\footnotesize Input-Parsing};
+\node[phase, fill=green!15] (p2) at (5, 0) {\textbf{Phase 2}\\Code Interpreter\\[0.2em]\footnotesize BCM-Berechnung};
+\node[phase, fill=orange!15] (p3) at (10, 0) {\textbf{Phase 3}\\LLM\\[0.2em]\footnotesize Interpretation};
+
+% Input/Output
+\node[above=0.8cm of p1, align=center] (input) {\footnotesize ``Anna ist 45,\\Lehrerin, ...''};
+\node[above=0.8cm of p2, align=center] (params) {\footnotesize $\lambda=2.2$, $\alpha=0.88$\\$w_F=0.35$, ...};
+\node[above=0.8cm of p3, align=center] (results) {\footnotesize Churn: 4.2\%\\CI: [2.8\%, 5.9\%]};
+\node[below=0.8cm of p3, align=center] (output) {\footnotesize ``Bei 5\% Preiserhöhung\\erwarten wir...''};
+
+% Arrows
+\draw[arrow] (input) -- (p1);
+\draw[arrow] (p1) -- node[above, font=\footnotesize] {JSON} (p2);
+\draw[arrow] (p2) -- node[above, font=\footnotesize] {Dict} (p3);
+\draw[arrow] (p3) -- (output);
+
+% Labels below
+\node[below=0.5cm of p1, font=\footnotesize\itshape, text=gray] {Probabilistisch};
+\node[below=0.5cm of p2, font=\footnotesize\itshape, text=gray] {Deterministisch};
+\node[below=0.5cm of p3, font=\footnotesize\itshape, text=gray] {Probabilistisch};
+
+\end{tikzpicture}
+\caption{Die Drei-Phasen-Architektur von BEATRIX. LLMs übernehmen die ``Übersetzung'' zwischen natürlicher Sprache und Modellparametern; die eigentliche Berechnung erfolgt deterministisch.}
+\label{fig:three-phases}
+\end{figure}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=darkblue, title=Kernprinzip]
+Das LLM ist \textbf{kein Taschenrechner} -- es führt keine BCM-Berechnungen durch.\\
+Das LLM ist ein \textbf{Übersetzer}:
+\begin{itemize}
+    \item Phase 1: Mensch $\rightarrow$ Modell (natürliche Sprache $\rightarrow$ Parameter)
+    \item Phase 3: Modell $\rightarrow$ Mensch (Ergebnisse $\rightarrow$ Narrative)
+\end{itemize}
+Die \textbf{Mathematik bleibt deterministisch} im Code Interpreter (Phase 2).
+\end{tcolorbox}
+
+% =====================================================================
+\section{Historische Entwicklung: Seit wann ist das möglich?}
+% =====================================================================
+
+Die Drei-Phasen-Architektur wurde erst durch eine Konvergenz mehrerer technologischer Entwicklungen möglich.
+Dieser Abschnitt dokumentiert die relevanten Meilensteine.
+
+\subsection{Timeline der Enabling Technologies}
+
+\begin{table}[h]
+\centering
+\caption{Meilensteine der LLM-Entwicklung für BEATRIX}
+\small
+\begin{tabular}{@{}llp{7cm}@{}}
+\toprule
+\textbf{Datum} & \textbf{Entwicklung} & \textbf{Bedeutung für BEATRIX} \\
+\midrule
+Jun 2017 & Transformer (Vaswani et al.) & Grundarchitektur für alle modernen LLMs \\
+Jun 2018 & GPT-1 (117M Parameter) & Erstes generatives Pre-Training \\
+Jun 2020 & GPT-3 (175B Parameter) & In-Context Learning entdeckt \\
+\midrule
+\textbf{Mär 2022} & \textbf{InstructGPT / ChatGPT} & \textbf{Instruction Following wird zuverlässig} \\
+& & $\rightarrow$ Phase 1 (Input) wird möglich \\
+Dez 2022 & Chain-of-Thought (Wei et al.) & Reasoning-Fähigkeiten verbessert \\
+\midrule
+Mär 2023 & GPT-4 & Deutlich verbesserte Reasoning-Qualität \\
+\textbf{Jun 2023} & \textbf{Function Calling (OpenAI)} & \textbf{Strukturierte Outputs werden zuverlässig} \\
+& & $\rightarrow$ JSON-Parameter-Extraktion möglich \\
+\textbf{Jul 2023} & \textbf{Code Interpreter (ChatGPT)} & \textbf{Python-Ausführung in Sandbox} \\
+& & $\rightarrow$ Phase 2 wird nahtlos integrierbar \\
+Jul 2023 & Claude 2 + Tool Use & Alternative zu OpenAI, 100k Kontext \\
+\midrule
+Mär 2024 & Claude 3 (Opus, Sonnet, Haiku) & 200k Kontext, robustere Tool Use \\
+\textbf{Aug 2024} & \textbf{Structured Outputs (OpenAI)} & \textbf{JSON Schema Enforcement} \\
+& & $\rightarrow$ \textbf{Garantierte} Struktur \\
+Okt 2024 & Claude 3.5 Sonnet & Verbesserte Reasoning-Fähigkeiten \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Kritische Schwellenwerte}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black, title=Zeitliche Einordnung]
+\textbf{Frühester Zeitpunkt} (Proof of Concept): \textbf{Juni 2023}\\
+Mit Function Calling und Code Interpreter waren alle drei Phasen grundsätzlich umsetzbar.
+
+\textbf{Production-Ready Zeitpunkt}: \textbf{August 2024}\\
+Mit Structured Outputs (JSON Schema Enforcement) werden Parameter-Extraktionen \textit{garantiert} strukturiert -- nicht nur ``wahrscheinlich''.
+
+\textbf{BEATRIX-Architektur ist erst seit $\approx$18 Monaten praktisch umsetzbar.}
+\end{tcolorbox}
+
+\subsection{Warum nicht früher?}
+
+Vor den genannten Entwicklungen fehlten kritische Fähigkeiten:
+
+\begin{table}[h]
+\centering
+\caption{Fehlende Fähigkeiten vor 2023}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Phase} & \textbf{Benötigte Fähigkeit} & \textbf{Verfügbar seit} \\
+\midrule
+Phase 1 & Zuverlässiges Instruction Following & März 2022 \\
+Phase 1 & Strukturierte JSON-Outputs & Juni 2023 \\
+Phase 1 & Garantierte Schema-Konformität & August 2024 \\
+Phase 2 & Code-Ausführung in LLM-Kontext & Juli 2023 \\
+Phase 3 & Lange Kontexte (>50k Tokens) & Juli 2023 \\
+Phase 3 & Grounded Generation (weniger Halluzination) & 2024 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Wissenschaftliche Grundlagen}
+% =====================================================================
+
+Die Drei-Phasen-Architektur stützt sich auf Erkenntnisse aus zehn Forschungsbereichen.
+
+\subsection{Phase 1: Natural Language $\rightarrow$ Parameter}
+
+\subsubsection{Information Extraction (IE)}
+
+Die Extraktion strukturierter Information aus unstrukturiertem Text ist ein klassisches NLP-Problem:
+
+\begin{itemize}
+    \item \textbf{Named Entity Recognition (NER)}: Identifikation von Entitäten (Personen, Orte, Organisationen)
+    \item \textbf{Relation Extraction}: Identifikation von Beziehungen zwischen Entitäten
+    \item \textbf{Slot Filling}: Extraktion von Attributwerten für vordefinierte Slots
+\end{itemize}
+
+BEATRIX nutzt LLMs für eine erweiterte Form von Slot Filling: Die ``Slots'' sind BCM-Parameter, und die ``Werte'' sind numerische Schätzungen mit Reasoning.
+
+\textbf{Schlüsselliteratur}: Jurafsky \& Martin (2024), Kapitel 17.
+
+\subsubsection{Semantic Parsing}
+
+Semantic Parsing transformiert natürliche Sprache in formale Repräsentationen:
+
+\begin{quote}
+``Anna ist preisbewusst'' $\rightarrow$ \texttt{w\_financial: 0.4, lambda: 2.3}
+\end{quote}
+
+Klassische Ansätze nutzten Grammatiken und regelbasierte Systeme.
+LLMs ermöglichen \textbf{zero-shot} Semantic Parsing durch In-Context Learning.
+
+\textbf{Schlüsselliteratur}: Liang (2016), ``Learning Executable Semantic Parsers''.
+
+\subsubsection{In-Context Learning}
+
+Brown et al. (2020) zeigten, dass LLMs neue Aufgaben ohne Finetuning erlernen können, allein durch Beispiele im Prompt:
+
+\begin{lstlisting}
+# Few-Shot Prompting für Parameter-Extraktion
+Beispiel 1:
+Input: "Max ist 25, Student, technikaffin"
+Output: {"lambda": 1.8, "w_digital": 0.5, ...}
+
+Beispiel 2:
+Input: "Petra ist 60, Rentnerin, konservativ"
+Output: {"lambda": 2.4, "w_financial": 0.3, ...}
+
+Jetzt du:
+Input: "Anna ist 45, Lehrerin, umweltbewusst"
+Output: ?
+\end{lstlisting}
+
+\textbf{Schlüsselliteratur}: Brown et al. (2020), GPT-3 Paper; Min et al. (2022), ``Rethinking In-Context Learning''.
+
+\subsubsection{Instruction Tuning}
+
+RLHF (Reinforcement Learning from Human Feedback) transformiert Base-Modelle in Instruction-Following-Assistenten:
+
+\begin{itemize}
+    \item \textbf{Supervised Fine-Tuning (SFT)}: Training auf Instruction-Response-Paaren
+    \item \textbf{Reward Modeling}: Lernen menschlicher Präferenzen
+    \item \textbf{PPO/DPO}: Optimierung auf Reward-Signal
+\end{itemize}
+
+Ohne Instruction Tuning würden LLMs Text fortsetzen, aber nicht strukturiert antworten.
+
+\textbf{Schlüsselliteratur}: Ouyang et al. (2022), InstructGPT; Bai et al. (2022), Constitutional AI.
+
+\subsection{Phase 2: Parameter $\rightarrow$ Berechnung}
+
+\subsubsection{Behavioral Economics Models}
+
+Das BCM integriert Erkenntnisse aus vier Jahrzehnten verhaltensökonomischer Forschung:
+
+\begin{itemize}
+    \item \textbf{Prospect Theory}: Referenzpunkte, Loss Aversion, Probability Weighting (Kahneman \& Tversky, 1979)
+    \item \textbf{Reference-Dependent Utility}: Expectations as Reference Points (K\H{o}szegi \& Rabin, 2006)
+    \item \textbf{Social Preferences}: Inequity Aversion, Reciprocity (Fehr \& Schmidt, 1999)
+    \item \textbf{Identity Utility}: Social Identity, Group Membership (Akerlof \& Kranton, 2000)
+\end{itemize}
+
+\textbf{Schlüsselliteratur}: BCM 2.2 Technical Report (Fehr \& Fehr, 2024).
+
+\subsubsection{Uncertainty Quantification}
+
+BCM-Berechnungen müssen Unsicherheit propagieren:
+
+\begin{itemize}
+    \item \textbf{Monte Carlo Simulation}: Sampling aus Parameterverteilungen
+    \item \textbf{Sensitivity Analysis}: $\partial U / \partial \theta$ für jeden Parameter
+    \item \textbf{Confidence Intervals}: Quantile der Output-Verteilung
+\end{itemize}
+
+\textbf{Schlüsselliteratur}: Saltelli et al. (2008), ``Global Sensitivity Analysis''.
+
+\subsubsection{Tool-Augmented LLMs}
+
+LLMs können externe Tools aufrufen, um ihre Limitierungen zu überwinden:
+
+\begin{itemize}
+    \item \textbf{Toolformer} (Schick et al., 2023): LLMs lernen, wann Tools nützlich sind
+    \item \textbf{PAL} (Gao et al., 2023): Program-Aided Language Models für mathematische Aufgaben
+    \item \textbf{Code Interpreter}: Native Integration von Python-Ausführung
+\end{itemize}
+
+\textbf{Kerninsight}: LLMs sind schlecht in exakter Arithmetik, aber gut darin zu erkennen, \textit{wann} Arithmetik nötig ist.
+
+\textbf{Schlüsselliteratur}: Schick et al. (2023), ``Toolformer''; Gao et al. (2023), ``PAL''.
+
+\subsection{Phase 3: Ergebnis $\rightarrow$ Narrative}
+
+\subsubsection{Natural Language Generation (NLG)}
+
+Data-to-Text Generation transformiert strukturierte Daten in natürliche Sprache:
+
+\begin{quote}
+\texttt{\{churn: 0.042, ci: [0.028, 0.059]\}} $\rightarrow$ ``Wir erwarten etwa 4\% Churn, mit einer Spanne von 3-6\%.''
+\end{quote}
+
+Klassische NLG-Systeme waren regelbasiert und domänenspezifisch.
+LLMs ermöglichen flexible, kontextsensitive Generierung.
+
+\textbf{Schlüsselliteratur}: Reiter \& Dale (2000), ``Building NLG Systems''; Gatt \& Krahmer (2018), ``Survey of NLG''.
+
+\subsubsection{Explainable AI (XAI)}
+
+Erklärungen müssen für den Empfänger verständlich sein:
+
+\begin{itemize}
+    \item \textbf{Contrastive Explanations}: ``Warum 4\% und nicht 2\%?''
+    \item \textbf{Counterfactual Explanations}: ``Was müsste anders sein für 2\%?''
+    \item \textbf{Feature Attribution}: ``$\lambda$ erklärt 60\% der Unsicherheit''
+\end{itemize}
+
+\textbf{Schlüsselliteratur}: Miller (2019), ``Explanation in AI''; Molnar (2022), ``Interpretable ML''.
+
+\subsubsection{Grounded Generation}
+
+LLM-Outputs müssen auf den tatsächlichen BCM-Ergebnissen basieren, nicht halluziniert sein:
+
+\begin{itemize}
+    \item \textbf{Factual Consistency}: Aussagen müssen mit Input konsistent sein
+    \item \textbf{Source Attribution}: ``Laut BCM-Berechnung...''
+    \item \textbf{Uncertainty Communication}: Konfidenzintervalle müssen kommuniziert werden
+\end{itemize}
+
+\textbf{Schlüsselliteratur}: Ji et al. (2023), ``Survey of Hallucination in NLG''.
+
+% =====================================================================
+\section{Technische Implementierung}
+% =====================================================================
+
+Wir beschreiben drei Implementierungsvarianten mit steigender Komplexität und Kontrolle.
+
+\subsection{Variante A: Monolithisch (Prototyping)}
+
+Die einfachste Variante nutzt ChatGPT oder Claude mit Code Interpreter direkt:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    box/.style={rectangle, draw, rounded corners, minimum width=8cm, minimum height=1cm, align=center}
+]
+
+\node[box, fill=gray!10] (llm) at (0, 0) {LLM (ChatGPT/Claude mit Code Interpreter)};
+\node[above=0.5cm of llm] (input) {User Input};
+\node[below=0.5cm of llm] (output) {Interpretation};
+
+\draw[->] (input) -- (llm);
+\draw[->] (llm) -- (output);
+
+\node[right=0.5cm of llm, align=left, font=\footnotesize] {
+    1. LLM parst Input\\
+    2. LLM schreibt BCM-Code\\
+    3. Code wird ausgeführt\\
+    4. LLM interpretiert Output
+};
+
+\end{tikzpicture}
+\caption{Monolithische Architektur: Alles in einer LLM-Session.}
+\end{figure}
+
+\textbf{Vorteile}:
+\begin{itemize}
+    \item Sehr schnell zu implementieren
+    \item Gut für Exploration und Demos
+    \item Keine Backend-Infrastruktur nötig
+\end{itemize}
+
+\textbf{Nachteile}:
+\begin{itemize}
+    \item BCM-Code wird jedes Mal neu generiert (Fehleranfällig)
+    \item Keine Validierung der Parameter
+    \item Nicht reproduzierbar
+    \item Schwer zu debuggen
+\end{itemize}
+
+\textbf{Eignung}: Proof of Concept, Demos, Exploration.
+
+\subsection{Variante B: API-Orchestriert (Production)}
+
+Die Production-Variante trennt die drei Phasen explizit:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1cm,
+    phase/.style={rectangle, draw, rounded corners, minimum width=3cm, minimum height=1.5cm, align=center, font=\small},
+    arrow/.style={->, thick}
+]
+
+\node[phase, fill=blue!10] (p1) at (0, 0) {Phase 1\\LLM API};
+\node[phase, fill=green!10] (p2) at (4.5, 0) {Phase 2\\BCM Engine};
+\node[phase, fill=orange!10] (p3) at (9, 0) {Phase 3\\LLM API};
+
+\node[above=0.8cm of p2, draw, dashed, minimum width=10cm, minimum height=0.8cm] (orch) {BEATRIX Orchestrator (Python)};
+
+\draw[arrow] (p1) -- node[above, font=\footnotesize] {JSON} (p2);
+\draw[arrow] (p2) -- node[above, font=\footnotesize] {Dict} (p3);
+
+\draw[arrow, dashed] (orch) -- (p1);
+\draw[arrow, dashed] (orch) -- (p2);
+\draw[arrow, dashed] (orch) -- (p3);
+
+\end{tikzpicture}
+\caption{API-orchestrierte Architektur: Explizite Trennung der Phasen.}
+\end{figure}
+
+\subsubsection{Phase 1: Parameter-Extraktion}
+
+\begin{lstlisting}[caption={Phase 1: LLM-basierte Parameter-Extraktion}]
+from anthropic import Anthropic
+from pydantic import BaseModel, Field
+
+class BCMParameters(BaseModel):
+    """Pydantic Schema fuer strukturierte Outputs"""
+    lambda_loss_aversion: float = Field(
+        ge=1.0, le=3.0,
+        description="Loss Aversion Koeffizient"
+    )
+    alpha: float = Field(
+        ge=0.0, le=1.0,
+        description="Value Function Parameter (Gewinne)"
+    )
+    beta: float = Field(
+        ge=0.0, le=1.0,
+        description="Value Function Parameter (Verluste)"
+    )
+    w_financial: float = Field(ge=0.0, le=1.0)
+    w_emotional: float = Field(ge=0.0, le=1.0)
+    w_ecological: float = Field(ge=0.0, le=1.0)
+    reasoning: str = Field(
+        description="Chain-of-Thought Begruendung"
+    )
+
+def extract_parameters(persona: str) -> BCMParameters:
+    client = Anthropic()
+
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=4096,
+        system="""Du bist ein BCM-Parameter-Extraktor.
+
+        Base Rates (Anker):
+        - lambda (Loss Aversion): 2.0 [1.0-3.0]
+        - alpha (Gains): 0.88 [0.7-1.0]
+        - beta (Losses): 0.88 [0.7-1.0]
+
+        Dokumentiere dein Reasoning.""",
+        messages=[{
+            "role": "user",
+            "content": f"Extrahiere BCM-Parameter:\n{persona}"
+        }],
+        tools=[{
+            "name": "extract_bcm",
+            "input_schema": BCMParameters.model_json_schema()
+        }],
+        tool_choice={"type": "tool", "name": "extract_bcm"}
+    )
+
+    return BCMParameters(**response.content[0].input)
+\end{lstlisting}
+
+\subsubsection{Phase 2: BCM-Berechnung}
+
+\begin{lstlisting}[caption={Phase 2: Deterministische BCM-Berechnung}]
+import numpy as np
+from typing import Dict
+
+def calculate_bcm(
+    params: BCMParameters,
+    scenario: Dict
+) -> Dict:
+    """Deterministische BCM 2.2 Berechnung"""
+
+    # Prospect Theory Value Function
+    def value_function(x, alpha, beta, lambda_):
+        if x >= 0:
+            return x ** alpha
+        else:
+            return -lambda_ * ((-x) ** beta)
+
+    # Berechne Utilities
+    delta_price = scenario.get("price_change", 0.05)
+
+    # Individual Utility (vereinfacht)
+    U_INU = value_function(
+        -delta_price,  # Preiserhoehung = Verlust
+        params.alpha,
+        params.beta,
+        params.lambda_loss_aversion
+    )
+
+    # FEPSDE-gewichteter Utility
+    fepsde_weights = np.array([
+        params.w_financial,
+        params.w_emotional,
+        0.1,  # Physical (default)
+        0.15, # Social (default)
+        0.1,  # Digital (default)
+        params.w_ecological
+    ])
+    fepsde_weights = fepsde_weights / fepsde_weights.sum()
+
+    # Monte Carlo fuer Unsicherheit
+    n_samples = 10000
+    samples = []
+
+    for _ in range(n_samples):
+        # Sample Parameter mit Unsicherheit
+        l = np.random.normal(
+            params.lambda_loss_aversion, 0.2
+        )
+        l = np.clip(l, 1.0, 3.0)
+
+        u = value_function(-delta_price, params.alpha,
+                          params.beta, l)
+        samples.append(u)
+
+    samples = np.array(samples)
+
+    # Churn-Wahrscheinlichkeit (Logit-Transform)
+    churn_prob = 1 / (1 + np.exp(-samples * 10))
+
+    return {
+        "U_eff": float(np.mean(samples)),
+        "churn_probability": float(np.mean(churn_prob)),
+        "confidence_interval": [
+            float(np.percentile(churn_prob, 5)),
+            float(np.percentile(churn_prob, 95))
+        ],
+        "sensitivity": {
+            "lambda": float(np.std(churn_prob) / 0.2),
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Phase 3: Interpretation}
+
+\begin{lstlisting}[caption={Phase 3: LLM-basierte Interpretation}]
+def interpret_results(
+    params: BCMParameters,
+    results: Dict,
+    persona: str,
+    scenario: Dict
+) -> str:
+    """LLM interpretiert BCM-Ergebnisse"""
+
+    client = Anthropic()
+
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=2048,
+        system="""Du bist ein Verhaltensoekonimie-Berater.
+
+        Regeln:
+        - Erklaere Ergebnisse verstaendlich
+        - Vermeide Fachjargon
+        - Gib konkrete Handlungsempfehlungen
+        - Kommuniziere Unsicherheit ehrlich
+        - Beziehe dich auf die Persona""",
+        messages=[{
+            "role": "user",
+            "content": f"""
+Persona: {persona}
+
+Szenario: {scenario}
+
+Extrahierte Parameter:
+- Loss Aversion (lambda): {params.lambda_loss_aversion}
+- Reasoning: {params.reasoning}
+
+BCM-Ergebnisse:
+- Erwarteter Churn: {results['churn_probability']:.1%}
+- Konfidenzintervall: [{results['confidence_interval'][0]:.1%},
+                       {results['confidence_interval'][1]:.1%}]
+- Sensitivitaet Lambda: {results['sensitivity']['lambda']:.2f}
+
+Bitte interpretiere diese Ergebnisse.
+            """
+        }]
+    )
+
+    return response.content[0].text
+\end{lstlisting}
+
+\subsubsection{Orchestrator}
+
+\begin{lstlisting}[caption={BEATRIX Orchestrator: Integration der drei Phasen}]
+def beatrix_analyze(
+    persona: str,
+    scenario: Dict
+) -> Dict:
+    """Hauptfunktion: Orchestriert alle drei Phasen"""
+
+    # Phase 1: Extract
+    print("Phase 1: Extrahiere Parameter...")
+    params = extract_parameters(persona)
+
+    # Validierung
+    assert 1.0 <= params.lambda_loss_aversion <= 3.0
+    assert params.w_financial + params.w_emotional + \
+           params.w_ecological <= 1.0
+
+    # Phase 2: Calculate
+    print("Phase 2: Berechne BCM...")
+    results = calculate_bcm(params, scenario)
+
+    # Phase 3: Interpret
+    print("Phase 3: Interpretiere Ergebnisse...")
+    interpretation = interpret_results(
+        params, results, persona, scenario
+    )
+
+    return {
+        "parameters": params.model_dump(),
+        "results": results,
+        "interpretation": interpretation,
+        "audit_trail": {
+            "phase1_model": "claude-sonnet-4-20250514",
+            "phase1_reasoning": params.reasoning,
+            "phase2_deterministic": True,
+            "phase3_model": "claude-sonnet-4-20250514",
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+
+# Beispielaufruf
+if __name__ == "__main__":
+    result = beatrix_analyze(
+        persona="Anna ist 45, Lehrerin, umweltbewusst, "
+                "preissensitiv, hat zwei Kinder",
+        scenario={"price_change": 0.05}
+    )
+    print(result["interpretation"])
+\end{lstlisting}
+
+\subsection{Variante C: Agentic (Autonomer Multi-Step)}
+
+Die fortgeschrittenste Variante nutzt einen autonomen Agenten:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1cm,
+    brain/.style={ellipse, draw, minimum width=3cm, minimum height=1.5cm, align=center, fill=purple!10},
+    tool/.style={rectangle, draw, rounded corners, minimum width=2.2cm, minimum height=1cm, align=center, fill=gray!10, font=\small}
+]
+
+\node[brain] (llm) at (0, 0) {LLM\\(Agent Brain)};
+
+\node[tool] (t1) at (-4, -2.5) {extract\_\\parameters};
+\node[tool] (t2) at (0, -2.5) {calculate\_\\bcm};
+\node[tool] (t3) at (4, -2.5) {explain\_\\results};
+
+\draw[->] (llm) -- (t1);
+\draw[->] (llm) -- (t2);
+\draw[->] (llm) -- (t3);
+
+\draw[->, dashed] (t1) to[bend left] (llm);
+\draw[->, dashed] (t2) -- (llm);
+\draw[->, dashed] (t3) to[bend right] (llm);
+
+\node[below=0.3cm of t2, font=\footnotesize\itshape] {Tools geben Ergebnisse zurück};
+\node[above=0.5cm of llm, font=\footnotesize\itshape] {Agent entscheidet nächsten Schritt};
+
+\end{tikzpicture}
+\caption{Agentic Architektur: LLM entscheidet autonom über Tool-Aufrufe.}
+\end{figure}
+
+\textbf{Vorteile}:
+\begin{itemize}
+    \item Kann Rückfragen stellen (``Welche Branche?'')
+    \item Kann iterieren (``Parameter unplausibel, nochmal prüfen'')
+    \item Flexibel bei unerwarteten Inputs
+\end{itemize}
+
+\textbf{Nachteile}:
+\begin{itemize}
+    \item Weniger vorhersehbar
+    \item Mehr LLM-Calls (höhere Kosten)
+    \item Schwerer zu testen
+\end{itemize}
+
+\textbf{Eignung}: Komplexe Szenarien, interaktive Beratung, explorative Analysen.
+
+% =====================================================================
+\section{Validierung und Qualitätssicherung}
+% =====================================================================
+
+\subsection{Phase 1: Parameter-Validierung}
+
+\begin{table}[h]
+\centering
+\caption{Validierungsregeln für BCM-Parameter}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Range} & \textbf{Base Rate} & \textbf{Plausibilitätscheck} \\
+\midrule
+$\lambda$ & [1.0, 3.0] & 2.0 & $|\lambda - 2.0| < 1.0$ typisch \\
+$\alpha$ & [0.0, 1.0] & 0.88 & $\alpha > 0.7$ typisch \\
+$\beta$ & [0.0, 1.0] & 0.88 & $\beta \geq \alpha$ (Loss Aversion) \\
+$\sum w_i$ & = 1.0 & -- & Normalisierung erforderlich \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Phase 2: Berechnungs-Validierung}
+
+\begin{itemize}
+    \item \textbf{Unit Tests}: Bekannte Input-Output-Paare
+    \item \textbf{Constraint Checks}: $\beta_{FS} \leq \alpha$, etc.
+    \item \textbf{Boundary Tests}: Extremwerte der Parameter
+    \item \textbf{Determinismus-Test}: Gleicher Input $\rightarrow$ gleiches Output
+\end{itemize}
+
+\subsection{Phase 3: Output-Validierung}
+
+\begin{itemize}
+    \item \textbf{Factual Consistency}: Zahlen im Text = Zahlen im Result
+    \item \textbf{Uncertainty Communication}: CI muss erwähnt werden
+    \item \textbf{No Hallucination}: Keine erfundenen Fakten
+\end{itemize}
+
+% =====================================================================
+\section{Zusammenfassung und Ausblick}
+% =====================================================================
+
+\subsection{Kernbeiträge}
+
+Dieses Dokument hat die Drei-Phasen-Architektur von BEATRIX dokumentiert:
+
+\begin{enumerate}
+    \item \textbf{Historische Einordnung}: Die Architektur ist erst seit Juni 2023 grundsätzlich möglich, seit August 2024 production-ready.
+
+    \item \textbf{Wissenschaftliche Fundierung}: Zehn Forschungsbereiche liefern die theoretischen Grundlagen.
+
+    \item \textbf{Technische Implementierung}: Drei Varianten mit steigender Komplexität und Kontrolle.
+
+    \item \textbf{Kernprinzip}: LLMs als Übersetzer, nicht als Rechner. Die BCM-Mathematik bleibt deterministisch.
+\end{enumerate}
+
+\subsection{Ausblick}
+
+Zukünftige Entwicklungen:
+
+\begin{itemize}
+    \item \textbf{Finetuning}: Spezialisierte LLMs für BCM-Parameter-Extraktion
+    \item \textbf{Multi-Modal}: Integration von Bildern, Audio (Interview-Transkripte)
+    \item \textbf{Real-Time}: Streaming-Outputs für interaktive Anwendungen
+    \item \textbf{Feedback Loop}: Automatische Kalibrierung basierend auf Outcomes
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Schlussfolgerung]
+Die Drei-Phasen-Architektur von BEATRIX transformiert das BCM von einem Experten-Tool zu einem zugänglichen System:
+
+\textbf{Pre-BEATRIX}: Experte $\rightarrow$ Parameter $\rightarrow$ Excel $\rightarrow$ Experte $\rightarrow$ Bericht
+
+\textbf{Mit BEATRIX}: User $\rightarrow$ LLM $\rightarrow$ BCM $\rightarrow$ LLM $\rightarrow$ Verständlicher Output
+
+Der Schlüssel ist die \textbf{kluge Arbeitsteilung}: LLMs für Sprache, Code für Mathematik.
+\end{tcolorbox}
+
+% =====================================================================
+\section*{Literaturverzeichnis}
+% =====================================================================
+
+\begin{thebibliography}{99}
+
+\bibitem[Akerlof \& Kranton, 2000]{akerlof2000}
+Akerlof, G. A., \& Kranton, R. E. (2000). Economics and Identity. \textit{Quarterly Journal of Economics, 115}(3), 715--753.
+
+\bibitem[Bai et al., 2022]{bai2022}
+Bai, Y., et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv:2212.08073.
+
+\bibitem[Brown et al., 2020]{brown2020}
+Brown, T., et al. (2020). Language Models are Few-Shot Learners. \textit{NeurIPS 2020}.
+
+\bibitem[Fehr \& Fehr, 2024]{fehr2024}
+Fehr, G., \& Fehr, A. (2024). Behavioral Change Modelling (BCM 2.2). FehrAdvice Technical Report.
+
+\bibitem[Fehr \& Schmidt, 1999]{fehr1999}
+Fehr, E., \& Schmidt, K. M. (1999). A Theory of Fairness, Competition, and Cooperation. \textit{Quarterly Journal of Economics, 114}(3), 817--868.
+
+\bibitem[Gao et al., 2023]{gao2023}
+Gao, L., et al. (2023). PAL: Program-Aided Language Models. \textit{ICML 2023}.
+
+\bibitem[Gatt \& Krahmer, 2018]{gatt2018}
+Gatt, A., \& Krahmer, E. (2018). Survey of the State of the Art in Natural Language Generation. \textit{JAIR, 61}, 65--170.
+
+\bibitem[Ji et al., 2023]{ji2023}
+Ji, Z., et al. (2023). Survey of Hallucination in Natural Language Generation. \textit{ACM Computing Surveys, 55}(12).
+
+\bibitem[Jurafsky \& Martin, 2024]{jurafsky2024}
+Jurafsky, D., \& Martin, J. H. (2024). \textit{Speech and Language Processing} (3rd ed.). Online Draft.
+
+\bibitem[Kahneman \& Tversky, 1979]{kahneman1979}
+Kahneman, D., \& Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. \textit{Econometrica, 47}(2), 263--291.
+
+\bibitem[K\H{o}szegi \& Rabin, 2006]{koszegi2006}
+K\H{o}szegi, B., \& Rabin, M. (2006). A Model of Reference-Dependent Preferences. \textit{Quarterly Journal of Economics, 121}(4), 1133--1165.
+
+\bibitem[Liang, 2016]{liang2016}
+Liang, P. (2016). Learning Executable Semantic Parsers for Natural Language Understanding. \textit{CACM, 59}(9), 68--76.
+
+\bibitem[Miller, 2019]{miller2019}
+Miller, T. (2019). Explanation in Artificial Intelligence: Insights from the Social Sciences. \textit{Artificial Intelligence, 267}, 1--38.
+
+\bibitem[Min et al., 2022]{min2022}
+Min, S., et al. (2022). Rethinking the Role of Demonstrations: What Makes In-Context Learning Work? \textit{EMNLP 2022}.
+
+\bibitem[Molnar, 2022]{molnar2022}
+Molnar, C. (2022). \textit{Interpretable Machine Learning} (2nd ed.). Online Book.
+
+\bibitem[Ouyang et al., 2022]{ouyang2022}
+Ouyang, L., et al. (2022). Training Language Models to Follow Instructions with Human Feedback. \textit{NeurIPS 2022}.
+
+\bibitem[Reiter \& Dale, 2000]{reiter2000}
+Reiter, E., \& Dale, R. (2000). \textit{Building Natural Language Generation Systems}. Cambridge University Press.
+
+\bibitem[Saltelli et al., 2008]{saltelli2008}
+Saltelli, A., et al. (2008). \textit{Global Sensitivity Analysis: The Primer}. Wiley.
+
+\bibitem[Schick et al., 2023]{schick2023}
+Schick, T., et al. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. \textit{NeurIPS 2023}.
+
+\bibitem[Vaswani et al., 2017]{vaswani2017}
+Vaswani, A., et al. (2017). Attention Is All You Need. \textit{NeurIPS 2017}.
+
+\end{thebibliography}
+
+\end{document}
