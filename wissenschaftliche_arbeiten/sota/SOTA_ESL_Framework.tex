@@ -1,0 +1,199 @@
+\documentclass[11pt, a4paper]{article}
+
+% =====================================================================
+% PAKETE & EINSTELLUNGEN
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath, amssymb, amsfonts} % Für die Formeln
+\usepackage{geometry}
+\usepackage{booktabs} % Schöne Tabellen
+\usepackage{xcolor}
+\usepackage{hyperref} % Klickbare Links
+\usepackage{microtype} % Typografische Feinheiten
+\usepackage{tcolorbox} % Für Definitionen
+\usepackage{fancyhdr} % Kopfzeilen
+\usepackage{setspace}
+
+% Seitenränder
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\onehalfspacing
+
+% Farben definieren
+\definecolor{eslblue}{RGB}{0, 51, 102}
+\definecolor{eslgray}{RGB}{240, 240, 240}
+
+% Hyperlink-Stil
+\hypersetup{
+    colorlinks=true,
+    linkcolor=eslblue,
+    citecolor=eslblue,
+    urlcolor=eslblue,
+    pdftitle={SOTA: Empirical System of Language},
+    pdfauthor={Fehr & Fehr}
+}
+
+% Kopf- und Fußzeilen
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \textit{State of the Art Report}}
+\fancyhead[R]{\small \textbf{ESL Framework v1.0}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% =====================================================================
+% TITELSEITE
+% =====================================================================
+\title{
+    \vspace{-2cm}
+    \rule{\linewidth}{0.5mm}\\[0.4cm]
+    {\huge \bfseries \color{eslblue} Das Empirical System of Language (ESL)}\\[0.2cm]
+    {\Large Ein theoretisches Framework zur Operationalisierung}\\[0.1cm]
+    {\Large wissenschaftlicher Sprachstabilität}\\[0.4cm]
+    \rule{\linewidth}{0.5mm}
+}
+
+\author{
+    \textbf{Gerhard Fehr} \& \textbf{Andrea Fehr}\\
+    \textit{FehrAdvice \& Partners AG}\\
+    \small Zürich, Schweiz
+}
+
+\date{\today}
+
+% =====================================================================
+% DOKUMENT
+% =====================================================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \noindent \textbf{Zusammenfassung.} Dieser Bericht stellt das \textit{Empirical System of Language} (ESL) als konzeptionellen Ansatz zur empirischen Bewertung wissenschaftlicher Sprache vor. Das ESL postuliert, dass Sprache nicht lediglich als Kommunikationsmedium, sondern als messbares Substrat der Erkenntnis betrachtet werden kann. Kern des Modells ist die Kalibrierungsfunktion $K$, die darauf abzielt, die Diskrepanz zwischen sprachlicher Behauptungsstärke ($B$) und empirischer Evidenz ($E$) zu quantifizieren. Der Bericht ordnet das ESL in den wissenschaftstheoretischen Kontext ein, skizziert die vorgeschlagene Fünf-Ebenen-Architektur und diskutiert das Potenzial von Large Language Models (LLMs) als methodische Sensoren zur Messung dieser Variablen. Die Arbeit versteht sich als theoretische Fundierung, deren empirische Validierung in Folgestudien zu erbringen ist.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Einleitung: Das Problem der Kalibrierung}
+% =====================================================================
+
+Die Wissenschaft steht vor einer fundamentalen Herausforderung, die oft als \glqq Replikationskrise\grqq{} bezeichnet wird. Während experimentelle Methoden zunehmend standardisiert wurden, fehlt es bislang an einem formalisierten Rahmen, um die \textit{sprachliche} Präsentation von Ergebnissen systematisch zu bewerten.
+
+Das hier vorgestellte \textit{Empirical System of Language} (ESL) schlägt ein Modell vor, um diese Lücke zu schließen. Es basiert auf der Hypothese, dass wissenschaftliche \glqq Wahrheit\grqq{} (im pragmatischen Sinne) als eine Funktion der Stabilität zwischen Behauptung und Evidenz modelliert werden kann.
+
+% =====================================================================
+\section{Theoretischer Rahmen}
+% =====================================================================
+
+\subsection{Die Kernmetrik $K$}
+
+Das ESL definiert \textit{Sprachstabilität} ($K$) nicht als binären Zustand (wahr/falsch), sondern als kontinuierlichen Wert, der das Gleichgewicht zwischen zwei Variablen beschreibt.
+
+\begin{tcolorbox}[colback=eslgray, colframe=eslblue, title=Definition: Die Kalibrierungsfunktion]
+Das Modell definiert den Kalibrierungswert $K$ formal als:
+\begin{equation}
+    K = 1 - \frac{|B - E|}{B_{\max}}
+\end{equation}
+wobei:
+\begin{itemize}
+    \item $B \in [0, 1]$: Die linguistische \textbf{Behauptungsstärke} (Claim Strength)
+    \item $E \in [0, 1]$: Die zugrundeliegende \textbf{Evidenzstärke} (Evidence Strength)
+\end{itemize}
+\end{tcolorbox}
+
+Ein Wert von $K \to 1$ indiziert eine perfekt kalibrierte Aussage. Wichtig ist hierbei: Auch eine theoretische Aussage ohne Daten ($E \approx 0.2$) kann stabil sein ($K \approx 1.0$), sofern sie sprachlich vorsichtig formuliert ist ($B \approx 0.2$).
+
+\subsection{Kategorisierung}
+
+Zur praktischen Anwendung schlägt das Framework folgende interpretative Kategorien vor (vgl. Tab. 1):
+
+\begin{table}[h]
+    \centering
+    \caption{Vorgeschlagene Interpretationsmatrix für $K$-Werte}
+    \vspace{0.2cm}
+    \begin{tabular}{llp{7cm}}
+        \toprule
+        \textbf{K-Wert} & \textbf{Kategorie} & \textbf{Interpretation} \\
+        \midrule
+        $\geq 0.80$ & \textbf{Stabil} & Aussage ist durch Evidenz adäquat gedeckt. \\
+        $0.60 - 0.79$ & \textbf{Teilstabil} & Leichte Diskrepanz; Überarbeitung empfohlen. \\
+        $0.40 - 0.59$ & \textbf{Interpretativ} & Signifikante Lücke zwischen Anspruch und Beleg. \\
+        $< 0.40$ & \textbf{Spekulativ} & Behauptung übersteigt Evidenz massiv (oder unterschreitet sie). \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Methodische Umsetzung}
+% =====================================================================
+
+\subsection{Messung von $B$ (Behauptungsstärke)}
+
+Die Variable $B$ wird im ESL-Modell durch linguistische Marker operationalisiert. Wir postulieren, dass sich die Stärke einer Behauptung aus drei Komponenten zusammensetzt:
+\begin{enumerate}
+    \item \textbf{Modale Operatoren:} Verben wie \textit{muss, beweist, zeigt} erhöhen $B$, während \textit{könnte, legt nahe, deutet an} $B$ senken.
+    \item \textbf{Quantoren:} \textit{Alle, jeder, immer} maximieren $B$; \textit{manche, gelegentlich} minimieren $B$.
+    \item \textbf{Hedging:} Sprachliche Abschwächungen (\textit{unter Vorbehalt, vermutlich}) wirken als Korrekturfaktor.
+\end{enumerate}
+
+\subsection{Messung von $E$ (Evidenzstärke)}
+
+Die Variable $E$ referenziert auf externe Standards der wissenschaftlichen Hierarchie (z.B. Evidence-Based Medicine Pyramide). In der aktuellen Version des Frameworks werden folgende Proxy-Werte angenommen:
+\begin{itemize}
+    \item $E \approx 0.95$: Meta-Analysen / Replizierte RCTs
+    \item $E \approx 0.65$: Beobachtungsstudien / Korrelationen
+    \item $E \approx 0.25$: Theoretische Herleitungen / Expertenmeinung
+    \item $E \approx 0.10$: Anekdotische Evidenz / Unbelegt
+\end{itemize}
+
+% =====================================================================
+\section{Technologische Perspektive: LLMs als Sensoren}
+% =====================================================================
+
+Eine zentrale Hypothese des ESL ist die Automatisierbarkeit dieser Messung. Large Language Models (LLMs) zeigen in ersten Voruntersuchungen die Fähigkeit, semantische Nuancen ($B$) und Evidenz-Marker ($E$) im Textkontext zu identifizieren.
+
+Das Framework sieht vor, LLMs nicht als generative Autoren, sondern als analytische Sensoren einzusetzen. Dabei gilt jedoch die Einschränkung: LLMs können keine Wahrheit verifizieren ("Fact Checking"), aber sie können die \textit{Konsistenz} zwischen sprachlichem Anspruch und referenzierter Quelle ("Claim Checking") mit hoher Präzision messen.
+
+% =====================================================================
+\section{Diskussion und Grenzen}
+% =====================================================================
+
+Es ist essenziell zu betonen, dass das ESL zum aktuellen Zeitpunkt ein \textit{theoretisches Konstrukt} darstellt. Folgende Limitationen müssen berücksichtigt werden:
+
+\begin{enumerate}
+    \item \textbf{Normativität:} Die Schwellenwerte für $K$ sind normative Setzungen und bedürfen der empirischen Kalibrierung durch Korpusanalysen.
+    \item \textbf{Kontextabhängigkeit:} Unterschiedliche Disziplinen (z.B. Physik vs. Soziologie) haben unterschiedliche Toleranzfenster für Varianz. Das ESL adressiert dies durch variable "Disziplin-Profile", deren Parameter jedoch noch definiert werden müssen.
+    \item \textbf{Selbstreferenz:} Die Anwendung des ESL auf sich selbst zeigt, dass es als "Theorie-Paper" klassifiziert werden muss ($E \approx 0.25$). Um einen hohen $K$-Wert zu erzielen, muss die Sprache entsprechend vorsichtig gewählt werden ("postuliert" statt "beweist").
+\end{enumerate}
+
+% =====================================================================
+\section{Fazit}
+% =====================================================================
+
+Das Empirical System of Language bietet einen vielversprechenden Ansatz, um wissenschaftliche Kommunikation objektivierbar zu machen. Indem es den Fokus von der reinen "Wahrheit" auf die "Stabilität" (Kalibrierung) verschiebt, ermöglicht es eine nuancierte Bewertung auch von theoretischen Arbeiten.
+
+Der nächste notwendige Schritt ist die empirische Validierung des $K$-Werts anhand eines Datensatzes von replizierten und nicht-replizierten Studien, um die Vorhersagekraft des Modells zu prüfen.
+
+% =====================================================================
+% LITERATURVERZEICHNIS
+% =====================================================================
+\begin{thebibliography}{9}
+
+\bibitem{carnap}
+Carnap, R. (1928). \textit{Der logische Aufbau der Welt}. Felix Meiner Verlag.
+
+\bibitem{popper}
+Popper, K. (1934). \textit{Logik der Forschung}. Springer.
+
+\bibitem{osc}
+Open Science Collaboration. (2015). Estimating the reproducibility of psychological science. \textit{Science}, 349(6251).
+
+\bibitem{fehr}
+Fehr, G., \& Fehr, A. (2025). \textit{The Empirical System of Language}. FehrAdvice Technical Report (Draft).
+
+\end{thebibliography}
+
+\end{document}
