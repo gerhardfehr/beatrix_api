@@ -1,0 +1,665 @@
+# =============================================================================
+# ESL OPERATIONALISIERUNG: Behauptungs-Evidenz-Kalibrierung
+# =============================================================================
+# Version: 1.0
+# Basis: Empirical System of Language (ESL)
+# Integration: D01, D07, D08 + Meta-Layer
+# =============================================================================
+
+meta:
+  version: "1.0"
+  datum: "2024-12"
+
+  kernformel: |
+    K = 1 - |B - E| / B_max
+
+    Wobei:
+    - B = Behauptungsstärke (0.0 - 1.0)
+    - E = Evidenzstärke (0.0 - 1.0)
+    - B_max = 1.0 (Normierung)
+    - K = Kalibrierungsgrad (0.0 - 1.0)
+
+  interpretation:
+    K_0.8_1.0: "Stabil - Behauptung durch Evidenz gedeckt"
+    K_0.6_0.8: "Teilstabil - Leichte Diskrepanz"
+    K_0.4_0.6: "Interpretativ - Signifikante Lücke"
+    K_0.0_0.4: "Spekulativ - Behauptung übersteigt Evidenz deutlich"
+
+  evidenzstufe: "⭐ Experteneinschätzung (erste Operationalisierung)"
+
+# =============================================================================
+# TEIL 1: B-SKALA (BEHAUPTUNGSSTÄRKE)
+# =============================================================================
+
+b_skala:
+
+  beschreibung: |
+    Misst die Stärke einer Behauptung basierend auf linguistischen Markern.
+    Höhere B-Werte = stärkere/absolutere Behauptungen.
+
+  # ---------------------------------------------------------------------------
+  # DIMENSION 1: Modalverben
+  # ---------------------------------------------------------------------------
+
+  modalverben:
+
+    beschreibung: "Modalverben signalisieren epistemische Sicherheit"
+
+    mapping:
+      # Starke Notwendigkeit (B = 0.90 - 1.00)
+      muss: 0.95
+      muss_zwingend: 1.00
+      ist_notwendig: 0.95
+      erfordert: 0.90
+
+      # Schwache Notwendigkeit (B = 0.75 - 0.90)
+      soll: 0.85
+      sollte: 0.80
+      wird_erwartet: 0.80
+
+      # Möglichkeit (B = 0.50 - 0.75)
+      kann: 0.60
+      mag: 0.55
+      dürfte: 0.65
+
+      # Schwache Möglichkeit (B = 0.30 - 0.50)
+      könnte: 0.45
+      möglicherweise: 0.40
+      eventuell: 0.35
+      vielleicht: 0.35
+
+      # Spekulation (B = 0.10 - 0.30)
+      hypothetisch: 0.25
+      spekulativ: 0.20
+      denkbar: 0.20
+
+    default: 0.70  # Wenn kein Modalverb vorhanden
+
+  # ---------------------------------------------------------------------------
+  # DIMENSION 2: Quantoren
+  # ---------------------------------------------------------------------------
+
+  quantoren:
+
+    beschreibung: "Quantoren bestimmen den Geltungsbereich"
+
+    mapping:
+      # Universell (B = 0.90 - 1.00)
+      alle: 0.95
+      jeder: 0.95
+      immer: 0.95
+      niemals: 0.95
+      kein: 0.95
+      ausnahmslos: 1.00
+
+      # Quasi-universell (B = 0.75 - 0.90)
+      fast_alle: 0.85
+      die_meisten: 0.80
+      überwiegend: 0.80
+      in_der_regel: 0.75
+      typischerweise: 0.75
+
+      # Partikular (B = 0.50 - 0.75)
+      viele: 0.65
+      häufig: 0.65
+      oft: 0.60
+      manchmal: 0.55
+
+      # Schwach partikular (B = 0.30 - 0.50)
+      einige: 0.45
+      manche: 0.45
+      gelegentlich: 0.40
+      selten: 0.35
+
+      # Existenziell (B = 0.10 - 0.30)
+      mindestens_ein: 0.25
+      es_gibt_fälle: 0.25
+      vereinzelt: 0.20
+
+    default: 0.70
+
+  # ---------------------------------------------------------------------------
+  # DIMENSION 3: Hedging-Marker
+  # ---------------------------------------------------------------------------
+
+  hedging:
+
+    beschreibung: "Hedging reduziert die Behauptungsstärke"
+
+    reduktoren:
+      # Starke Reduktion (-0.20 bis -0.30)
+      tendenziell: -0.25
+      ansatzweise: -0.25
+      unter_umständen: -0.30
+      in_gewisser_weise: -0.25
+
+      # Mittlere Reduktion (-0.10 bis -0.20)
+      relativ: -0.15
+      vergleichsweise: -0.15
+      eher: -0.15
+      gewissermaßen: -0.20
+
+      # Schwache Reduktion (-0.05 bis -0.10)
+      weitgehend: -0.10
+      größtenteils: -0.10
+      im_wesentlichen: -0.10
+
+    verstärker:
+      # Verstärkung (+0.05 bis +0.15)
+      eindeutig: +0.10
+      zweifellos: +0.15
+      offensichtlich: +0.10
+      nachweislich: +0.15
+      definitiv: +0.15
+      klar: +0.10
+
+  # ---------------------------------------------------------------------------
+  # B-BERECHNUNG
+  # ---------------------------------------------------------------------------
+
+  berechnung:
+
+    formel: |
+      B = clamp(
+        base_B(modalverb) * weight_modal +
+        base_B(quantor) * weight_quant +
+        sum(hedging_adjustments),
+        0.0, 1.0
+      )
+
+    gewichte:
+      modalverb: 0.50
+      quantor: 0.35
+      hedging: 0.15  # Additiv als Adjustment
+
+    beispiele:
+      - satz: "Alle Menschen müssen essen."
+        modalverb: "muss"  # B = 0.95
+        quantor: "alle"    # B = 0.95
+        hedging: null
+        B_berechnet: 0.95  # (0.95 * 0.50 + 0.95 * 0.35) = 0.808, gerundet
+
+      - satz: "Einige Nutzer könnten eventuell profitieren."
+        modalverb: "könnte"      # B = 0.45
+        quantor: "einige"        # B = 0.45
+        hedging: "eventuell"     # -0.35
+        B_berechnet: 0.35
+
+      - satz: "In der Regel funktioniert das System."
+        modalverb: null          # default 0.70
+        quantor: "in_der_regel"  # B = 0.75
+        hedging: null
+        B_berechnet: 0.61
+
+  # ---------------------------------------------------------------------------
+  # AUTOMATISCHE EXTRAKTION
+  # ---------------------------------------------------------------------------
+
+  automatisierung:
+
+    regex_patterns:
+      modalverben: |
+        \b(muss|müssen|soll|sollte|kann|können|mag|dürfte|könnte|möglicherweise)\b
+      quantoren: |
+        \b(alle|jeder|immer|niemals|die meisten|viele|einige|manche|selten)\b
+      hedging: |
+        \b(tendenziell|relativ|eher|weitgehend|eindeutig|zweifellos)\b
+
+    llm_prompt: |
+      Analysiere den folgenden Satz und extrahiere:
+      1. Modalverb (falls vorhanden)
+      2. Quantor (falls vorhanden)
+      3. Hedging-Marker (falls vorhanden)
+
+      Gib das Ergebnis als JSON zurück:
+      {"modalverb": "...", "quantor": "...", "hedging": [...]}
+
+      Satz: "{satz}"
+
+# =============================================================================
+# TEIL 2: E-SKALA (EVIDENZSTÄRKE)
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Misst die Stärke der Evidenz, die eine Behauptung stützt.
+    Basiert auf etablierten Evidenzhierarchien (analog MA-EPI-38).
+
+  # ---------------------------------------------------------------------------
+  # EVIDENZHIERARCHIE
+  # ---------------------------------------------------------------------------
+
+  hierarchie:
+
+    stufe_1:
+      name: "Systematische Reviews & Meta-Analysen"
+      E_range: [0.90, 1.00]
+      beschreibung: "Höchste Evidenzstufe"
+      beispiele:
+        - "Cochrane Review mit N > 10.000"
+        - "Meta-Analyse mehrerer RCTs"
+        - "Systematischer Review mit GRADE-Bewertung"
+      marker:
+        - "Meta-Analyse zeigt"
+        - "Systematischer Review von"
+        - "Gepoolte Effektgröße"
+
+    stufe_2:
+      name: "Randomisierte kontrollierte Studien (RCTs)"
+      E_range: [0.80, 0.90]
+      beschreibung: "Goldstandard für Kausalaussagen"
+      beispiele:
+        - "Doppelblind-RCT mit N > 500"
+        - "Präregistrierte Studie"
+        - "Replizierte RCT"
+      marker:
+        - "Randomisierte Studie"
+        - "Kontrollierte Intervention"
+        - "Experimentell gezeigt"
+
+    stufe_3:
+      name: "Quasi-experimentelle Studien"
+      E_range: [0.65, 0.80]
+      beschreibung: "Kontrollierte Beobachtung ohne Randomisierung"
+      beispiele:
+        - "Difference-in-Differences"
+        - "Regression Discontinuity"
+        - "Matched Cohort Study"
+      marker:
+        - "Quasi-experimentell"
+        - "Natürliches Experiment"
+        - "Kontrollierte Beobachtung"
+
+    stufe_4:
+      name: "Beobachtungsstudien"
+      E_range: [0.50, 0.65]
+      beschreibung: "Korrelative Evidenz"
+      beispiele:
+        - "Kohortenstudie"
+        - "Fall-Kontroll-Studie"
+        - "Längsschnittstudie"
+      marker:
+        - "Korrelation von r ="
+        - "Beobachtet wurde"
+        - "Längsschnittdaten zeigen"
+
+    stufe_5:
+      name: "Fallstudien & Qualitative Forschung"
+      E_range: [0.35, 0.50]
+      beschreibung: "Explorative Evidenz"
+      beispiele:
+        - "Einzelfallstudie"
+        - "Qualitative Interviews"
+        - "Ethnographie"
+      marker:
+        - "In einer Fallstudie"
+        - "Qualitative Analyse"
+        - "Explorative Untersuchung"
+
+    stufe_6:
+      name: "Experteneinschätzung & Theorie"
+      E_range: [0.20, 0.35]
+      beschreibung: "Nicht-empirische Begründung"
+      beispiele:
+        - "Expertenkonsens"
+        - "Theoretische Ableitung"
+        - "Delphi-Verfahren"
+      marker:
+        - "Experten gehen davon aus"
+        - "Theoretisch folgt"
+        - "Nach Einschätzung von"
+
+    stufe_7:
+      name: "Unbegründete Aussagen"
+      E_range: [0.00, 0.20]
+      beschreibung: "Keine erkennbare Evidenz"
+      beispiele:
+        - "Behauptung ohne Quelle"
+        - "Alltagswissen"
+        - "Anekdote"
+      marker:
+        - "Es ist bekannt, dass"
+        - "Offensichtlich"
+        - "Man weiß"
+
+  # ---------------------------------------------------------------------------
+  # MODIFIKATOREN
+  # ---------------------------------------------------------------------------
+
+  modifikatoren:
+
+    positiv:
+      repliziert: +0.10
+      praeregistriert: +0.05
+      grosses_n: +0.05       # N > 1000
+      peer_reviewed: +0.05
+      multi_center: +0.05
+
+    negativ:
+      nicht_repliziert: -0.15
+      kleines_n: -0.10       # N < 50
+      hohe_attrition: -0.10
+      conflict_of_interest: -0.10
+      preprint: -0.05
+
+  # ---------------------------------------------------------------------------
+  # E-BERECHNUNG
+  # ---------------------------------------------------------------------------
+
+  berechnung:
+
+    formel: |
+      E = clamp(
+        base_E(evidenzstufe) + sum(modifikatoren),
+        0.0, 1.0
+      )
+
+    beispiele:
+      - aussage: "Verlust-Aversion existiert (λ ≈ 2.0)"
+        evidenz:
+          - typ: "Meta-Analyse"
+            details: "Tversky & Kahneman repliziert in 100+ Studien"
+            base_E: 0.92
+            modifikatoren: [repliziert: +0.10]
+            E_final: 1.00  # capped
+        E_aggregiert: 0.95
+
+      - aussage: "BCM-Parameter sind stabil über Zeit"
+        evidenz:
+          - typ: "Beobachtungsstudie"
+            details: "Längsschnittstudie N=200"
+            base_E: 0.55
+            modifikatoren: [kleines_n: -0.10]
+            E_final: 0.45
+        E_aggregiert: 0.45
+
+      - aussage: "BEATRIX verbessert Entscheidungen"
+        evidenz:
+          - typ: "Keine"
+            details: "Hypothese ohne empirische Prüfung"
+            base_E: 0.10
+        E_aggregiert: 0.10
+
+  # ---------------------------------------------------------------------------
+  # AGGREGATION MULTIPLER QUELLEN
+  # ---------------------------------------------------------------------------
+
+  aggregation:
+
+    beschreibung: |
+      Wenn mehrere Evidenzquellen eine Aussage stützen,
+      werden diese gewichtet aggregiert.
+
+    methode: "gewichtetes_maximum"
+
+    formel: |
+      E_aggregiert = max(E_i) * 0.7 + mean(E_i) * 0.3
+
+    begründung: |
+      - Die stärkste Evidenz zählt am meisten (70%)
+      - Aber konsistente schwächere Evidenz addiert (30%)
+      - Vermeidet: Viele schlechte Studien = hohe E
+
+# =============================================================================
+# TEIL 3: K-BERECHNUNG UND INTERPRETATION
+# =============================================================================
+
+k_berechnung:
+
+  formel: |
+    K = 1 - |B - E| / B_max
+
+    Vereinfacht (da B_max = 1.0):
+    K = 1 - |B - E|
+
+  interpretation_matrix:
+
+    # B > E: Überbehauptung (häufigster Fall)
+    ueberbehauptung:
+      beschreibung: "Behauptung stärker als Evidenz"
+      typisch_fuer:
+        - "Wissenschaftliche Übertreibung"
+        - "Marketing-Sprache in Papers"
+        - "Theoretische Extrapolation"
+      beispiel:
+        B: 0.90  # "X muss Y verursachen"
+        E: 0.50  # Nur Korrelationsstudie
+        K: 0.60  # 1 - |0.90 - 0.50| = 0.60
+        bewertung: "🟠 Interpretativ"
+
+    # B < E: Unterbehauptung (seltener)
+    unterbehauptung:
+      beschreibung: "Behauptung schwächer als Evidenz"
+      typisch_fuer:
+        - "Übervorsichtige Formulierung"
+        - "Akademische Hedging-Kultur"
+        - "Konservative Interpretation"
+      beispiel:
+        B: 0.40  # "X könnte möglicherweise Y beeinflussen"
+        E: 0.85  # RCT zeigt klaren Effekt
+        K: 0.55  # 1 - |0.40 - 0.85| = 0.55
+        bewertung: "🟠 Unternutzte Evidenz"
+
+    # B ≈ E: Kalibriert (Zielzustand)
+    kalibriert:
+      beschreibung: "Behauptung passt zur Evidenz"
+      beispiel:
+        B: 0.75  # "X erhöht in der Regel Y"
+        E: 0.80  # Mehrere Beobachtungsstudien
+        K: 0.95  # 1 - |0.75 - 0.80| = 0.95
+        bewertung: "🟢 Stabil"
+
+  schwellenwerte:
+    stabil:
+      range: [0.80, 1.00]
+      label: "🟢 Stabil"
+      bedeutung: "Aussage gut kalibriert"
+
+    teilstabil:
+      range: [0.60, 0.80]
+      label: "🟡 Teilstabil"
+      bedeutung: "Leichte Diskrepanz, akzeptabel"
+
+    interpretativ:
+      range: [0.40, 0.60]
+      label: "🟠 Interpretativ"
+      bedeutung: "Signifikante Lücke, Vorsicht geboten"
+
+    spekulativ:
+      range: [0.00, 0.40]
+      label: "🔴 Spekulativ"
+      bedeutung: "Behauptung deutlich über Evidenz"
+
+# =============================================================================
+# TEIL 4: INTEGRATION IN MQC-DIMENSIONEN
+# =============================================================================
+
+mqc_integration:
+
+  D01_wissenschaft:
+
+    name: "Wissenschaftliche Fundierung"
+    esl_rolle: "Kernmethodik"
+
+    operationalisierung: |
+      1. Identifiziere Kernaussagen des Kapitels
+      2. Berechne B für jede Aussage
+      3. Berechne E für jede Aussage
+      4. Berechne K für jede Aussage
+      5. Aggregiere zu D01_score
+
+    scoring:
+      formel: |
+        D01_ESL = mean(K_i) für alle Kernaussagen
+
+      gewichtung:
+        esl_anteil: 0.50  # 50% des D01-Scores
+        klassisch_anteil: 0.50  # Quellenqualität, Zitationen
+
+      final: |
+        D01_score = 0.50 * D01_ESL + 0.50 * D01_klassisch
+
+  D07_epistemische_reflexion:
+
+    name: "Epistemische Reflexion"
+    esl_rolle: "Unterstützend"
+
+    operationalisierung: |
+      Prüfe: Werden Unsicherheiten explizit gemacht?
+      - Werden K-Werte oder Äquivalente angegeben?
+      - Wird zwischen Hypothese und Evidenz unterschieden?
+      - Werden Grenzen der Evidenz benannt?
+
+    scoring:
+      kriterien:
+        explizite_unsicherheit:
+          0.0: "Keine Unsicherheitsangaben"
+          0.5: "Qualitative Einschränkungen ('möglicherweise')"
+          1.0: "Quantifizierte Unsicherheit (K-Werte, Konfidenz)"
+
+        hypothesen_trennung:
+          0.0: "Hypothesen als Fakten dargestellt"
+          0.5: "Teilweise Unterscheidung"
+          1.0: "Klare Trennung Hypothese/Evidenz"
+
+  D08_validierung:
+
+    name: "Empirische Validierung"
+    esl_rolle: "Kernmethodik"
+
+    operationalisierung: |
+      1. Für jedes postulierte Konstrukt/Parameter:
+         - Hat es empirische Evidenz? (E-Wert)
+         - Wie stark ist die Behauptung? (B-Wert)
+         - K-Wert berechnen
+      2. Identifiziere Konstrukte mit K < 0.6
+      3. Bewerte Anteil validierter Konstrukte
+
+    scoring:
+      formel: |
+        D08_ESL = count(K >= 0.6) / count(alle_konstrukte)
+
+      interpretation:
+        1.0: "Alle Konstrukte ausreichend validiert"
+        0.7: "70% der Konstrukte validiert"
+        0.3: "Nur 30% validiert - erhebliche Lücken"
+
+# =============================================================================
+# TEIL 5: META-CHECK LAYER
+# =============================================================================
+
+meta_check:
+
+  beschreibung: |
+    Wendet ESL auf die MQC-Bewertungen selbst an.
+    Frage: Wie kalibriert sind unsere Qualitätsaussagen?
+
+  anwendung:
+
+    beispiel:
+      aussage: "Kapitel 0 hat D03_didaktik = 0.85"
+      B_analyse:
+        - "Score 0.85 impliziert: Kapitel ist didaktisch sehr gut"
+        - B_wert: 0.85
+      E_analyse:
+        - "Basiert auf: Hybrid-Methodik mit Expert-Adjustment"
+        - "Konfidenz des Scores: 0.65"
+        - E_wert: 0.65
+      K_berechnet: 0.80  # 1 - |0.85 - 0.65|
+      interpretation: "🟢 Teilstabil - Score ist akzeptabel kalibriert"
+
+  aggregation:
+
+    formel: |
+      MQC_meta_K = mean(K_i) für alle Dimension-Scores
+
+    interpretation:
+      hoch: "MQC_meta_K >= 0.8: Unsere Qualitätsmessung ist gut kalibriert"
+      mittel: "MQC_meta_K 0.6-0.8: Akzeptabel, aber Vorsicht"
+      niedrig: "MQC_meta_K < 0.6: Qualitätsscores selbst fragwürdig"
+
+  warnung: |
+    Der Meta-Check ist selbstreferentiell und damit inhärent begrenzt.
+    Er kann Inkonsistenzen aufdecken, aber nicht absolute Gültigkeit garantieren.
+
+# =============================================================================
+# TEIL 6: PRÜFPROTOKOLL
+# =============================================================================
+
+pruefprotokoll:
+
+  schritt_1:
+    name: "Kernaussagen identifizieren"
+    anleitung:
+      - "Lies das Kapitel"
+      - "Markiere alle Hauptbehauptungen (max. 10-15)"
+      - "Fokus auf: Definitionen, Kausalaussagen, Generalisierungen"
+    output: "Liste der Kernaussagen"
+
+  schritt_2:
+    name: "B-Werte zuweisen"
+    anleitung:
+      - "Für jede Kernaussage:"
+      - "  1. Identifiziere Modalverb → B_modal"
+      - "  2. Identifiziere Quantor → B_quant"
+      - "  3. Identifiziere Hedging → Adjustment"
+      - "  4. Berechne B = 0.5*B_modal + 0.35*B_quant + Adjustment"
+    output: "B-Wert pro Aussage"
+
+  schritt_3:
+    name: "E-Werte zuweisen"
+    anleitung:
+      - "Für jede Kernaussage:"
+      - "  1. Welche Evidenz wird angeführt?"
+      - "  2. Klassifiziere nach Evidenzhierarchie → E_base"
+      - "  3. Wende Modifikatoren an"
+      - "  4. Bei mehreren Quellen: Aggregiere"
+    output: "E-Wert pro Aussage"
+
+  schritt_4:
+    name: "K-Werte berechnen"
+    anleitung:
+      - "K = 1 - |B - E|"
+      - "Klassifiziere: stabil / teilstabil / interpretativ / spekulativ"
+    output: "K-Wert und Klassifikation pro Aussage"
+
+  schritt_5:
+    name: "Aggregieren und Dokumentieren"
+    anleitung:
+      - "Berechne Durchschnitt K über alle Aussagen"
+      - "Identifiziere Aussagen mit K < 0.6"
+      - "Dokumentiere in Bewertungs-YAML"
+    output: "ESL-Scores für D01, D07, D08"
+
+# =============================================================================
+# KALIBRIERUNG
+# =============================================================================
+
+kalibrierung:
+
+  status: "INITIAL - v1.0"
+
+  bekannte_limitationen:
+    - "B-Skala basiert auf linguistischer Intuition, nicht empirischer Validierung"
+    - "E-Hierarchie übernommen von Medizin, Anpassung für Sozialwissenschaft nötig"
+    - "Aggregationsmethode für E ist hypothetisch"
+    - "Schwellenwerte (0.8, 0.6, 0.4) sind normative Setzungen"
+
+  validierungsplan:
+    phase_1:
+      name: "Pilottest"
+      beschreibung: "ESL auf 5 Kapitel anwenden, Probleme identifizieren"
+    phase_2:
+      name: "Inter-Rater-Test"
+      beschreibung: "2 Prüfer bewerten gleiche Aussagen, Übereinstimmung messen"
+    phase_3:
+      name: "Schwellenwert-Kalibrierung"
+      beschreibung: "Korrelation K mit externen Qualitätsurteilen prüfen"
+
+  selbstanwendung:
+    diese_operationalisierung:
+      B_geschaetzt: 0.75  # "ESL operationalisiert B und E zuverlässig"
+      E_geschaetzt: 0.25  # Experteneinschätzung, keine empirische Validierung
+      K_berechnet: 0.50
+      bewertung: "🟠 Interpretativ - Diese Operationalisierung ist selbst ein Konzept"

@@ -506,3 +506,61 @@ bewertung:
     - "Alle 'minimal: true' Kriterien müssen erfüllt sein"
     - "Kein Dimension-Score unter 0.3"
     - "Gesamt-Score mindestens 0.6 für Veröffentlichung"
+
+# =============================================================================
+# TEIL 5: ESL-INTEGRATION (Behauptungs-Evidenz-Kalibrierung)
+# =============================================================================
+
+esl_integration:
+
+  beschreibung: |
+    Integration des Empirical System of Language (ESL) in das MQC-Framework.
+    ESL misst die Kalibrierung zwischen Behauptungsstärke (B) und Evidenzstärke (E).
+
+  kernformel: "K = 1 - |B - E|"
+
+  referenz: "methodik/ESL_operationalisierung.yaml"
+
+  anwendung_in_dimensionen:
+
+    D01_wissenschaft:
+      esl_anteil: 0.50
+      beschreibung: "50% des D01-Scores basiert auf ESL K-Werten"
+      methodik: |
+        1. Identifiziere Kernaussagen des Kapitels
+        2. Berechne K für jede Aussage
+        3. D01_ESL = mean(K_i)
+        4. D01_final = 0.5 * D01_ESL + 0.5 * D01_klassisch
+
+    D07_epistemische_reflexion:
+      esl_anteil: 0.30
+      beschreibung: "ESL prüft ob Unsicherheiten kalibriert sind"
+      methodik: |
+        - Werden K-Werte explizit angegeben?
+        - Wird zwischen Hypothese (K < 0.6) und Evidenz (K >= 0.8) unterschieden?
+
+    D08_validierung:
+      esl_anteil: 0.50
+      beschreibung: "50% des D08-Scores basiert auf ESL"
+      methodik: |
+        1. Für jedes Konstrukt/Parameter: K berechnen
+        2. D08_ESL = count(K >= 0.6) / count(alle_konstrukte)
+
+  meta_check:
+
+    beschreibung: |
+      Wendet ESL auf die MQC-Scores selbst an.
+      Frage: Wie kalibriert sind unsere Qualitätsaussagen?
+
+    berechnung: |
+      Für jeden Dimension-Score:
+      - B = Score-Wert (implizite Behauptung über Qualität)
+      - E = Konfidenz des Scores (aus Hybrid-Methodik)
+      - K_meta = 1 - |B - E|
+
+    aggregation: "MQC_meta_K = mean(K_meta_i)"
+
+    interpretation:
+      hoch: "MQC_meta_K >= 0.8: Qualitätsmessung gut kalibriert"
+      mittel: "0.6 <= MQC_meta_K < 0.8: Akzeptabel"
+      niedrig: "MQC_meta_K < 0.6: Scores selbst fragwürdig"

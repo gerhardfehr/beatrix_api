@@ -48,19 +48,37 @@ pruefprotokoll:             # Schritt-für-Schritt Anleitung
 
 | Dimension | Status | Datei |
 |-----------|--------|-------|
-| D01 Wissenschaft | ⏳ Ausstehend | - |
+| D01 Wissenschaft | 🔄 ESL-Integration | `ESL_operationalisierung.yaml` |
 | D02 BCM-Spezifik | ⏳ Ausstehend | - |
-| **D03 Didaktik** | ✅ **PROTOTYP** | `D03_didaktik.yaml` |
+| **D03 Didaktik** | ✅ **HYBRID v2** | `D03_didaktik_v2.yaml` |
 | D04 Anwendbarkeit | ⏳ Ausstehend | - |
 | D05 Konsistenz | ⏳ Ausstehend | - |
 | D06 Zielgruppe | ⏳ Ausstehend | - |
-| D07 Epist. Reflexion | ⏳ Ausstehend | - |
-| D08 Validierung | ⏳ Ausstehend | - |
+| D07 Epist. Reflexion | 🔄 ESL-Integration | `ESL_operationalisierung.yaml` |
+| D08 Validierung | 🔄 ESL-Integration | `ESL_operationalisierung.yaml` |
 | D09 Abhängigkeiten | ⏳ Ausstehend | - |
 | D10 Evolution | ⏳ Ausstehend | - |
 | D11 Operationalisierung | ⏳ Ausstehend | - |
 | D12 Narrative | ⏳ Ausstehend | - |
 | D13 Meta-Reflexivität | ⏳ Ausstehend | - |
+
+## ESL-Integration (NEU)
+
+Das **Empirical System of Language (ESL)** wurde als Kernmethodik integriert:
+
+```
+K = 1 - |B - E|
+
+B = Behauptungsstärke (Modalverben, Quantoren, Hedging)
+E = Evidenzstärke (Evidenzhierarchie, Modifikatoren)
+K = Kalibrierungsgrad (0.0 - 1.0)
+```
+
+Siehe `ESL_operationalisierung.yaml` für:
+- B-Skala (Modalverben, Quantoren, Hedging)
+- E-Skala (7-stufige Evidenzhierarchie)
+- Integration in D01, D07, D08
+- Meta-Check Layer
 
 ## Kernprinzipien
 
