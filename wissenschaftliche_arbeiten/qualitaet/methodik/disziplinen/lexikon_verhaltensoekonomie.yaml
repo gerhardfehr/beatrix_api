@@ -1,0 +1,908 @@
+# =============================================================================
+# ESL DISZIPLIN-LEXIKON: Verhaltensökonomie
+# =============================================================================
+# Fachbegriffe mit empirischen Kennzahlen und Evidenzstatus
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "verhaltensoekonomie"
+  name: "Verhaltensökonomie / Behavioral Economics"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  kategorien:
+    - id: "bias"
+      name: "Kognitive Verzerrungen (Biases)"
+    - id: "heuristik"
+      name: "Heuristiken"
+    - id: "effekt"
+      name: "Verhaltenseffekte"
+    - id: "intervention"
+      name: "Interventionen/Nudges"
+    - id: "praeferenz"
+      name: "Präferenzanomalien"
+    - id: "theorie"
+      name: "Theoretische Konstrukte"
+
+# =============================================================================
+# KOGNITIVE VERZERRUNGEN (BIASES)
+# =============================================================================
+
+begriffe:
+
+  # ─────────────────────────────────────────────────────────────────────────
+  loss_aversion:
+    term: "Loss Aversion"
+    deutsch: "Verlustaversion"
+    kategorie: "praeferenz"
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DREI DEFINITIONSEBENEN
+    # ═══════════════════════════════════════════════════════════════════════
+
+    definition_formal:
+      notation: |
+        Sei v: ℝ → ℝ die Wertfunktion über Outcomes relativ zu Referenzpunkt r.
+
+        v(x) = x^α           für x ≥ 0  (Gewinne)
+        v(x) = -λ(-x)^β      für x < 0  (Verluste)
+
+        wobei:
+        - α, β ∈ (0,1): Krümmungsparameter (typisch: α = β ≈ 0.88)
+        - λ > 1: Verlustaversionskoeffizient (typisch: λ ≈ 2.0)
+
+        Loss Aversion ⟺ λ > 1
+
+        Implikation:
+        |v(-x)| > v(x) für alle x > 0
+        d.h. |Disnutzen aus Verlust| > Nutzen aus äquivalentem Gewinn
+
+      axiomatisch: |
+        A1: Referenzpunkt-Abhängigkeit: U(x) = U(x|r) für Referenzpunkt r
+        A2: Verlust-Gewinn-Asymmetrie: ∂U/∂x|_{x<r} > ∂U/∂x|_{x>r}
+        A3: Stetigkeit an r mit Knick: lim_{x→r⁻} v'(x) > lim_{x→r⁺} v'(x)
+
+      messvorschrift: |
+        λ = -v(-x) / v(x) für marginale Änderungen nahe r
+        Operationalisierung: λ ≈ (WTA/WTP) in Endowment-Experimenten
+
+    definition_fachlich: |
+      Verlustaversion bezeichnet die empirisch beobachtete Tendenz von
+      Entscheidungsträgern, Verluste (relative zu einem Referenzpunkt)
+      stärker negativ zu bewerten als Gewinne gleicher absoluter Höhe
+      positiv bewertet werden.
+
+      Diese Asymmetrie manifestiert sich typischerweise in einem
+      Verlustaversionskoeffizienten λ ≈ 2.0, was bedeutet, dass ein
+      Verlust von x Einheiten subjektiv etwa doppelt so stark wiegt
+      wie ein Gewinn von x Einheiten.
+
+      Verlustaversion ist ein Kernkonzept der Prospect Theory
+      (Kahneman & Tversky, 1979) und erklärt Phänomene wie den
+      Endowment Effect, Status Quo Bias und Equity Premium Puzzle.
+
+    definition_alltagssprache: |
+      "Verluste tun mehr weh, als Gewinne freuen."
+
+      Einfach erklärt: Wenn Sie 100€ verlieren, fühlt sich das viel
+      schlimmer an, als wenn Sie 100€ gewinnen. Deshalb halten Menschen
+      oft an Dingen fest, die sie besitzen (selbst wenn sie diese
+      eigentlich nicht mehr brauchen), und gehen Risiken aus dem Weg,
+      auch wenn diese sich lohnen würden.
+
+      Beispiel: Die meisten Menschen lehnen eine Wette ab, bei der sie
+      mit 50% Chance 100€ gewinnen und mit 50% Chance 100€ verlieren –
+      obwohl der Erwartungswert null ist. Der mögliche Verlust wiegt
+      psychologisch schwerer als der mögliche Gewinn.
+
+    beispiele:
+      wissenschaftlich:
+        - "In unserer Studie zeigte sich ein Verlustaversionskoeffizient von λ = 2.3 (SE = 0.4)"
+
+      praktisch:
+        - "Kunden behalten ihr altes Produkt, obwohl das neue objektiv besser ist"
+        - "Anleger verkaufen Gewinner zu früh und halten Verlierer zu lange"
+
+      kommunikativ:
+        - "Menschen fürchten Verluste mehr als sie Gewinne schätzen"
+
+    schluesselparameter:
+      lambda:
+        symbol: "λ"
+        name: "Verlustaversionskoeffizient"
+        median_wert: 2.25
+        range: [1.5, 3.0]
+        quelle: "Tversky & Kahneman (1992)"
+
+      meta_analyse_lambda:
+        wert: 1.96
+        CI_95: [1.81, 2.11]
+        quelle: "Brown et al. (2024) Meta-Analyse"
+        n_studien: 150
+        heterogenitaet_I2: 0.72
+
+    empirische_evidenz:
+      replikationsstatus: "REPLIZIERT_MIT_EINSCHRAENKUNGEN"
+
+      meta_analysen:
+        - autor: "Walasek & Stewart (2015)"
+          befund: "λ kontextabhängig, nicht stabil"
+          effekt: "λ variiert 0.8 - 4.0 je nach Framing"
+
+        - autor: "Brown et al. (2024)"
+          befund: "Robuster Effekt, aber kleiner als ursprünglich"
+          lambda_mean: 1.96
+          heterogenitaet: "hoch (I² = 72%)"
+
+      kritik:
+        - "Gal & Rucker (2018): LA möglicherweise Artefakt"
+        - "Yechiam (2019): Nur bei Entscheidungen aus Erfahrung"
+        - "Ert & Erev (2013): Verschwindet bei wiederholten Entscheidungen"
+
+      moderatoren:
+        - name: "Stakes"
+          effekt: "Stärker bei hohen Beträgen"
+        - name: "Erfahrung"
+          effekt: "Schwächer bei wiederholten Entscheidungen"
+        - name: "Domain"
+          effekt: "Stärker bei Geld als bei Zeit"
+
+    E_wert:
+      basis: 0.72
+      begründung: "Repliziert, aber mit hoher Heterogenität und Kontextabhängigkeit"
+      modifikatoren:
+        labor_incentivized: +0.05
+        feld: +0.08
+        hypothetisch: -0.15
+
+    B_empfehlung:
+      max_B: 0.75
+      warnung: |
+        NICHT SAGEN: "Loss Aversion ist universell" (B=0.95)
+        BESSER: "Loss Aversion zeigt sich typischerweise mit λ ≈ 2" (B=0.75)
+        NOCH BESSER: "Unter bestimmten Bedingungen zeigt sich LA" (B=0.65)
+
+    bcm_axiom_referenz: ["A-003", "A-017"]  # Falls BCM-Axiome referenzieren
+
+  # ─────────────────────────────────────────────────────────────────────────
+  hyperbolic_discounting:
+    term: "Hyperbolic Discounting"
+    deutsch: "Hyperbolisches Diskontieren"
+    kategorie: "praeferenz"
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DREI DEFINITIONSEBENEN
+    # ═══════════════════════════════════════════════════════════════════════
+
+    definition_formal:
+      notation: |
+        Hyperbolische Diskontfunktion:
+        D(t) = 1 / (1 + kt)    (Mazur, 1987)
+
+        Quasi-hyperbolisch (β-δ Modell, Laibson 1997):
+        U₀ = u₀ + β Σₜ₌₁^∞ δᵗ uₜ
+
+        wobei:
+        - k > 0: Diskontierungsrate
+        - β ∈ (0,1): Present-Bias-Parameter (typisch: β ≈ 0.7)
+        - δ ∈ (0,1): Langfristiger Diskontfaktor (typisch: δ ≈ 0.99)
+
+        Präferenzumkehr-Bedingung:
+        ∃ t₁ < t₂, Δ > 0:
+        D(t₁) · x < D(t₂) · y  ABER  D(t₁ + Δ) · x > D(t₂ + Δ) · y
+
+        d.h. Präferenz zwischen x früher vs. y später kehrt sich um,
+        wenn beide Zeitpunkte gleich weit in die Zukunft verschoben werden.
+
+      axiomatisch: |
+        A1: Abnehmende Ungeduld: d²D/dt² > 0 (konvex, nicht linear wie exponentiell)
+        A2: Zeitinkonsistenz: Optimaler Plan zum Zeitpunkt 0 ≠ optimaler Plan zu t > 0
+        A3: Präferenzumkehr: Für hinreichend große Verzögerungen
+
+      messvorschrift: |
+        β = D(1) / D(0+)  (Gegenwarts-Diskont)
+        k = (1 - D(t)) / (t · D(t)) für hyperbolische Form
+        Operationalisierung: Titelwahl-Aufgaben mit zeitverzögerten Auszahlungen
+
+    definition_fachlich: |
+      Hyperbolisches Diskontieren beschreibt eine Form der Zeitpräferenz,
+      bei der zukünftige Ereignisse nicht mit einer konstanten Rate
+      (wie beim exponentiellen Diskontieren), sondern mit einer
+      abnehmenden Rate abgewertet werden.
+
+      Dies führt zu Zeitinkonsistenz: Entscheidungen, die aus heutiger
+      Sicht optimal erscheinen, werden morgen revidiert, weil die
+      Ungeduld zunimmt, je näher eine Belohnung rückt.
+
+      Das quasi-hyperbolische Modell vereinfacht dies durch einen
+      "Present Bias" (β < 1), der die besondere Gewichtung der
+      unmittelbaren Gegenwart gegenüber allen zukünftigen Zeitpunkten
+      erfasst.
+
+    definition_alltagssprache: |
+      "Heute ist immer wichtiger als morgen – aber morgen und übermorgen
+      sind fast gleich wichtig."
+
+      Einfach erklärt: Menschen haben Schwierigkeiten, geduldig zu sein,
+      besonders wenn es um die unmittelbare Gegenwart geht. Der Unterschied
+      zwischen "jetzt" und "in einer Stunde" fühlt sich größer an als
+      zwischen "in einem Jahr" und "in einem Jahr und einer Stunde".
+
+      Beispiel: Sie nehmen sich vor, ab morgen zu sparen – aber wenn
+      morgen kommt, verschieben Sie es wieder auf den nächsten Tag.
+      Das geplante Verhalten (sparen) erschien aus der Ferne leicht,
+      aber die Gegenwart gewinnt immer.
+
+      Das erklärt: Aufschieben, Überessen, zu wenig sparen, Suchtverhalten.
+
+    beispiele:
+      wissenschaftlich:
+        - "Der geschätzte Present-Bias-Parameter betrug β = 0.68 (95% CI: 0.61-0.75)"
+
+      praktisch:
+        - "Mitarbeiter wählen gesündere Snacks für nächste Woche, aber heute den Schokoriegel"
+        - "Vorsätze zum Jahreswechsel werden selten eingehalten"
+
+      kommunikativ:
+        - "Menschen sind ungeduldig, besonders bei Dingen, die sofort verfügbar sind"
+
+    schluesselparameter:
+      k:
+        symbol: "k"
+        name: "Diskontierungsrate"
+        typische_werte:
+          geld_klein: 0.5
+          geld_gross: 0.1
+          gesundheit: 0.05
+        quelle: "Frederick et al. (2002)"
+
+      beta_delta:
+        symbol: "β, δ"
+        name: "Quasi-hyperbolische Parameter"
+        beta_median: 0.70
+        beta_range: [0.5, 0.95]
+        delta_median: 0.99
+        quelle: "Laibson (1997)"
+
+    empirische_evidenz:
+      replikationsstatus: "REPLIZIERT"
+
+      meta_analysen:
+        - autor: "Frederick et al. (2002)"
+          befund: "Starke Evidenz für nicht-exponentielles Diskontieren"
+          heterogenitaet: "sehr hoch"
+
+        - autor: "Cohen et al. (2020)"
+          befund: "Neurobiologische Grundlage bestätigt"
+
+      kritik:
+        - "Andreoni & Sprenger (2012): Konvexe Budgets ändern Ergebnis"
+        - "Read et al. (2013): Subadditives Diskontieren alternativ"
+
+      moderatoren:
+        - name: "Betrag"
+          effekt: "Stärker bei kleinen Beträgen (Magnitude Effect)"
+        - name: "Vorzeichen"
+          effekt: "Stärker für Gewinne als Verluste (Sign Effect)"
+        - name: "Domain"
+          effekt: "Variiert stark zwischen Geld, Gesundheit, Umwelt"
+
+    E_wert:
+      basis: 0.78
+      begründung: "Robust repliziert, neurobiologisch fundiert"
+
+    B_empfehlung:
+      max_B: 0.80
+      warnung: "Parameter β und k sind sehr kontextabhängig"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  anchoring:
+    term: "Anchoring"
+    deutsch: "Ankereffekt"
+    kategorie: "heuristik"
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DREI DEFINITIONSEBENEN
+    # ═══════════════════════════════════════════════════════════════════════
+
+    definition_formal:
+      notation: |
+        Sei E[X] die wahre Schätzung und A der Anker.
+
+        Beobachtete Schätzung:
+        X̂ = E[X] + γ(A - E[X])
+
+        wobei:
+        - γ ∈ (0,1): Anchoring-Stärke (typisch: γ ≈ 0.4-0.6)
+        - γ = 0: Kein Anchoring
+        - γ = 1: Vollständiges Anchoring (Schätzung = Anker)
+
+        Anchoring Index (AI):
+        AI = (X̂_hoch - X̂_niedrig) / (A_hoch - A_niedrig)
+
+        wobei X̂_hoch, X̂_niedrig die Schätzungen bei hohem/niedrigem Anker sind.
+
+      axiomatisch: |
+        A1: Anker-Einfluss: ∂X̂/∂A > 0 (Schätzung steigt mit Anker)
+        A2: Unvollständige Adjustierung: X̂ ≠ E[X] bei A ≠ E[X]
+        A3: Proportionalität: Effekt proportional zur Anker-Distanz
+
+      messvorschrift: |
+        Experimentelles Design: Zufällige Zuweisung zu hohem/niedrigem Anker
+        Effekt: d = (M_hoch - M_niedrig) / SD_pooled
+        Anchoring Index: AI = (M_hoch - M_niedrig) / (A_hoch - A_niedrig)
+
+    definition_fachlich: |
+      Der Ankereffekt (Anchoring) beschreibt die systematische Tendenz,
+      numerische Schätzungen und Urteile in Richtung eines zuvor
+      präsentierten Wertes (Anker) zu verzerren, selbst wenn dieser
+      Anker offensichtlich irrelevant oder zufällig ist.
+
+      Zwei Mechanismen werden diskutiert:
+      1. Selective Accessibility: Der Anker aktiviert anker-konsistente
+         Informationen im Gedächtnis (Strack & Mussweiler, 1997)
+      2. Insufficient Adjustment: Ausgehend vom Anker wird unzureichend
+         zum korrekten Wert adjustiert (Tversky & Kahneman, 1974)
+
+      Der Effekt ist robust über viele Domänen (Preisschätzungen,
+      Wissensabfragen, Verhandlungen, juristische Urteile).
+
+    definition_alltagssprache: |
+      "Die erste Zahl, die wir hören, beeinflusst unser Urteil –
+      auch wenn sie völlig zufällig ist."
+
+      Einfach erklärt: Wenn jemand fragt "Glaubst du, der Preis ist
+      höher oder niedriger als 1000€?" und Sie dann schätzen sollen,
+      wird Ihre Schätzung näher an 1000€ liegen, als wenn die Frage
+      mit 100€ begonnen hätte – selbst wenn die Ausgangszahl
+      offensichtlich willkürlich war.
+
+      Beispiel: Immobilienmakler nennen absichtlich hohe Anfangspreise.
+      Selbst nach Verhandlung landen Käufer oft höher, als wenn der
+      Ausgangspreis niedriger gewesen wäre.
+
+      Das erklärt: Preisverhandlungen, erste Angebote bei Gehaltsverhandlungen,
+      "Statt 999€ nur 499€"-Marketing.
+
+    beispiele:
+      wissenschaftlich:
+        - "Der Anchoring Index betrug AI = 0.52 (SE = 0.08), d = 0.94"
+
+      praktisch:
+        - "Kunden schätzen Produkte teurer, wenn sie zuerst ein teures Produkt gesehen haben"
+        - "Richter geben höhere Strafen nach höherer Staatsanwalt-Forderung"
+
+      kommunikativ:
+        - "Erste Zahlen prägen unsere späteren Einschätzungen"
+
+    schluesselparameter:
+      anchoring_index:
+        symbol: "AI"
+        name: "Anchoring Index"
+        formel: "(Schätzung - Korrekter Wert) / (Anker - Korrekter Wert)"
+        typische_werte: [0.3, 0.6]
+        quelle: "Jacowitz & Kahneman (1995)"
+
+    empirische_evidenz:
+      replikationsstatus: "STARK_REPLIZIERT"
+
+      meta_analysen:
+        - autor: "Furnham & Boo (2011)"
+          befund: "Robuster Effekt über Domänen"
+          effektstaerke_d: 0.87
+          CI_95: [0.72, 1.02]
+          n_studien: 94
+
+        - autor: "ManyLabs (Klein et al., 2014)"
+          befund: "Repliziert in 36 Samples"
+          effekt_original: 1.24
+          effekt_replikation: 0.95
+
+      kritik:
+        - "Schwächer bei Experten"
+        - "Kann durch Motivation reduziert werden"
+
+    E_wert:
+      basis: 0.85
+      begründung: "Einer der am besten replizierten Effekte"
+
+    B_empfehlung:
+      max_B: 0.85
+      beispiel_gut: "Anchoring ist ein robuster Effekt mit d ≈ 0.9"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  framing_effect:
+    term: "Framing Effect"
+    deutsch: "Framing-Effekt"
+    kategorie: "bias"
+
+    definition: |
+      Unterschiedliche Entscheidungen bei logisch äquivalenten Optionen,
+      die unterschiedlich präsentiert werden (z.B. Gewinn vs. Verlust Frame).
+
+    schluesselparameter:
+      effektstaerke:
+        meta_d: 0.52
+        CI_95: [0.42, 0.62]
+        quelle: "Kühberger (1998)"
+
+    empirische_evidenz:
+      replikationsstatus: "REPLIZIERT"
+
+      meta_analysen:
+        - autor: "Kühberger (1998)"
+          befund: "Moderater bis starker Effekt"
+          n_studien: 136
+
+        - autor: "Piñon & Gambara (2005)"
+          befund: "Effekt kleiner als Original-Asian Disease"
+          d_mean: 0.31
+
+      klassiker:
+        asian_disease:
+          original_d: 1.10
+          replikation_d: 0.52
+          shrinkage: 0.47
+
+      moderatoren:
+        - name: "Risiko-Level"
+          effekt: "Stärker bei hohem Risiko"
+        - name: "Involvement"
+          effekt: "Schwächer bei hohem persönlichem Bezug"
+
+    E_wert:
+      basis: 0.75
+      begründung: "Repliziert, aber kleiner als klassische Studien"
+
+    B_empfehlung:
+      max_B: 0.75
+
+  # ─────────────────────────────────────────────────────────────────────────
+  default_effect:
+    term: "Default Effect"
+    deutsch: "Default-Effekt / Status-Quo-Bias"
+    kategorie: "effekt"
+
+    definition: |
+      Die Tendenz, bei der voreingestellten Option (Default) zu bleiben.
+      Kombiniert Status-Quo-Bias, Trägheit und implizite Empfehlung.
+
+    schluesselparameter:
+      effektstaerke:
+        typisch: "20-80 Prozentpunkte Unterschied"
+        organspende_beispiel:
+          opt_in: 0.15
+          opt_out: 0.90
+          quelle: "Johnson & Goldstein (2003)"
+
+    empirische_evidenz:
+      replikationsstatus: "STARK_REPLIZIERT"
+
+      meta_analysen:
+        - autor: "Jachimowicz et al. (2019)"
+          befund: "Robuster Effekt, kontextabhängig"
+          effekt_median: 0.68
+          heterogenitaet: "hoch"
+
+      feld_evidenz:
+        - domain: "Organspende"
+          effekt: "~75pp Unterschied"
+          quelle: "Johnson & Goldstein (2003)"
+
+        - domain: "Altersvorsorge"
+          effekt: "~50pp Unterschied"
+          quelle: "Madrian & Shea (2001)"
+
+        - domain: "Grüner Strom"
+          effekt: "~20pp Unterschied"
+          quelle: "Pichert & Katsikopoulos (2008)"
+
+      moderatoren:
+        - name: "Entscheidungskomplexität"
+          effekt: "Stärker bei komplexen Entscheidungen"
+        - name: "Persönliche Relevanz"
+          effekt: "Schwächer bei hoher Relevanz"
+
+    E_wert:
+      basis: 0.85
+      begründung: "Starke Feld-Evidenz, repliziert"
+
+    B_empfehlung:
+      max_B: 0.85
+      beispiel_gut: "Defaults haben typischerweise große Effekte (20-80pp)"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  nudging:
+    term: "Nudging"
+    deutsch: "Nudging / Verhaltensanstöße"
+    kategorie: "intervention"
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DREI DEFINITIONSEBENEN
+    # ═══════════════════════════════════════════════════════════════════════
+
+    definition_formal:
+      notation: |
+        Sei C = {c₁, c₂, ..., cₙ} die Menge verfügbarer Optionen.
+        Sei A: C → C die Entscheidungsarchitektur-Funktion.
+        Sei P(c|A) die Wahlwahrscheinlichkeit von c gegeben A.
+
+        Ein Nudge N ist eine Modifikation A → A' mit:
+
+        1. Keine Option entfernt: C(A') = C(A)
+        2. Keine wesentliche Anreizänderung: |U(c,A') - U(c,A)| < ε für alle c
+        3. Verhaltensänderung: ∃c: P(c|A') ≠ P(c|A)
+
+        Effektstärke:
+        Δ = P(Zielverhalten|A') - P(Zielverhalten|A)
+
+        Typische Effekte nach Nudge-Typ:
+        - Default-Nudge:    E[Δ] ≈ 0.25-0.50 (Prozentpunkte-Änderung)
+        - Social Norm:      E[Δ] ≈ 0.05-0.15
+        - Simplification:   E[Δ] ≈ 0.10-0.20
+        - Reminder:         E[Δ] ≈ 0.02-0.08
+
+      axiomatisch: |
+        A1: Freiheitserhalt: Alle Optionen bleiben verfügbar
+        A2: Anreiz-Neutralität: Keine wesentlichen monetären Konsequenzen
+        A3: Vorhersagbare Richtung: Systematischer Effekt auf Verhalten
+        A4: Leichte Vermeidbarkeit: Nudge kann einfach ignoriert werden
+
+      messvorschrift: |
+        Effekt = (Outcome_Treatment - Outcome_Control) / SD_pooled
+        Für binäre Outcomes: Δ = P_Treatment - P_Control
+        Standard: Randomisiertes Experiment mit Kontrollgruppe
+
+    definition_fachlich: |
+      Nudging bezeichnet die Gestaltung von Entscheidungskontexten
+      ("Entscheidungsarchitektur"), die menschliches Verhalten vorhersagbar
+      beeinflusst, ohne Optionen auszuschließen oder wirtschaftliche Anreize
+      wesentlich zu verändern (Thaler & Sunstein, 2008).
+
+      Nudges nutzen verhaltensökonomische Erkenntnisse über kognitive
+      Verzerrungen und Heuristiken, um Menschen zu Entscheidungen zu
+      "stupsen", die in ihrem eigenen Interesse liegen (libertärer
+      Paternalismus).
+
+      Haupttypen:
+      - Defaults (Voreinstellungen ändern)
+      - Simplification (Komplexität reduzieren)
+      - Social Norms (Soziale Vergleiche zeigen)
+      - Salience (Aufmerksamkeit lenken)
+      - Reminders (Erinnerungen senden)
+
+      WICHTIG: Meta-Analysen zeigen, dass Labor-Effekte die Feld-Effekte
+      um Faktor 2-3 überschätzen (DellaVigna & Linos, 2022).
+
+    definition_alltagssprache: |
+      "Die Umgebung so gestalten, dass gute Entscheidungen leichter fallen –
+      ohne zu zwingen oder zu bestrafen."
+
+      Einfach erklärt: Statt Verbote oder finanzielle Anreize zu nutzen,
+      werden kleine Änderungen im Umfeld vorgenommen, die Menschen
+      sanft in eine bestimmte Richtung "stupsen".
+
+      Beispiele:
+      - Die Treppe bunter und einladender gestalten als den Aufzug
+      - Obst auf Augenhöhe, Süßigkeiten weiter unten im Regal
+      - Organspende als Standard-Option (Widerspruchslösung)
+      - "Die meisten Ihrer Nachbarn haben ihre Steuern schon bezahlt"
+
+      ACHTUNG: In der Praxis sind die Effekte oft kleiner als erwartet:
+      Nicht 20-30%, sondern eher 1-5% Verhaltensänderung.
+
+    beispiele:
+      wissenschaftlich:
+        - "Der Default-Nudge erhöhte die Teilnahme um 23pp (95% CI: 18-28pp, d = 0.52)"
+
+      praktisch:
+        - "Opt-out statt Opt-in für betriebliche Altersvorsorge"
+        - "Energieverbrauch-Vergleich mit Nachbarn auf Stromrechnung"
+
+      kommunikativ:
+        - "Kleine Änderungen in der Umgebung können große Wirkung haben – aber erwarten Sie keine Wunder"
+
+    taxonomie:
+      typen:
+        - name: "Default-Nudges"
+          effekt_median: 0.68
+          evidenz: "stark"
+
+        - name: "Simplification"
+          effekt_median: 0.24
+          evidenz: "mittel"
+
+        - name: "Social Norms"
+          effekt_median: 0.18
+          evidenz: "mittel"
+
+        - name: "Framing"
+          effekt_median: 0.15
+          evidenz: "mittel"
+
+        - name: "Reminders"
+          effekt_median: 0.12
+          evidenz: "mittel"
+
+    empirische_evidenz:
+      replikationsstatus: "HETEROGEN"
+
+      meta_analysen:
+        - autor: "Hummel & Maedche (2019)"
+          befund: "Moderate Effekte, hohe Heterogenität"
+          d_mean: 0.45
+          n_studien: 100
+
+        - autor: "Mertens et al. (2022)"
+          befund: "Effekte kleiner in Feld vs. Labor"
+          d_labor: 0.49
+          d_feld: 0.24
+
+        - autor: "DellaVigna & Linos (2022)"
+          befund: "Megastudy: Effekte ~1/3 der akademischen Studien"
+          effekt_akademisch: 0.12
+          effekt_praxis: 0.04
+
+      warnung: |
+        KRITISCH: DellaVigna & Linos (2022) zeigen:
+        - Akademische Studien überschätzen Nudge-Effekte um Faktor 3
+        - Publikationsbias erheblich
+        - Praxis-Effekte oft ~1-4 Prozentpunkte
+
+    E_wert:
+      basis: 0.62
+      labor: 0.70
+      feld: 0.55
+      begründung: "Signifikante Labor-Feld-Diskrepanz, Publication Bias"
+
+    B_empfehlung:
+      max_B: 0.70
+      warnung: |
+        VORSICHT bei starken Nudging-Behauptungen!
+        Typische Praxis-Effekte sind 1-5pp, nicht 20-50pp wie in Studien.
+
+  # ─────────────────────────────────────────────────────────────────────────
+  overconfidence:
+    term: "Overconfidence"
+    deutsch: "Überkonfidenz"
+    kategorie: "bias"
+
+    definition: |
+      Systematische Überschätzung der eigenen Fähigkeiten, Wissen oder Vorhersagen.
+      Drei Formen: Overplacement, Overprecision, Overestimation.
+
+    schluesselparameter:
+      ueberkonfidenz_faktor:
+        name: "Kalibrierungsfehler"
+        typisch: "20-40% zu konfident"
+        beispiel: "Bei 90% Konfidenz nur 70% korrekt"
+
+    empirische_evidenz:
+      replikationsstatus: "REPLIZIERT_MIT_EINSCHRAENKUNGEN"
+
+      befunde:
+        - form: "Overprecision"
+          status: "stark repliziert"
+          effekt: "Konsistente Unterdispersion"
+
+        - form: "Overplacement"
+          status: "kontextabhängig"
+          effekt: "Nur bei einfachen Aufgaben"
+
+        - form: "Overestimation"
+          status: "schwach"
+          effekt: "Oft Unterschätzung bei schweren Aufgaben"
+
+      meta_analysen:
+        - autor: "Moore & Healy (2008)"
+          befund: "Hard-Easy Effect moderiert Richtung"
+
+      kritik:
+        - "Burson et al. (2006): Underplacement bei schweren Aufgaben"
+        - "Kruger (1999): Unskilled-Unaware Effekt kontrovers"
+
+    E_wert:
+      basis: 0.68
+      overprecision: 0.80
+      overplacement: 0.55
+
+    B_empfehlung:
+      max_B: 0.70
+      differenzierung_noetig: true
+
+  # ─────────────────────────────────────────────────────────────────────────
+  present_bias:
+    term: "Present Bias"
+    deutsch: "Gegenwartspräferenz"
+    kategorie: "praeferenz"
+
+    definition: |
+      Übergewichtung unmittelbarer Belohnungen/Kosten gegenüber zukünftigen.
+      Formalisiert durch β < 1 im β-δ Modell.
+
+    schluesselparameter:
+      beta:
+        symbol: "β"
+        name: "Present-Bias-Faktor"
+        median: 0.70
+        range: [0.4, 0.95]
+        quelle: "Laibson et al. (2003)"
+
+    empirische_evidenz:
+      replikationsstatus: "REPLIZIERT"
+
+      meta_analysen:
+        - autor: "O'Donoghue & Rabin (1999)"
+          typ: "Theoretisch"
+          befund: "Präferenzumkehr erklärbar"
+
+        - autor: "Augenblick et al. (2015)"
+          typ: "Incentivized Labor"
+          befund: "β ≈ 0.75 für Arbeitsaufwand"
+
+    E_wert:
+      basis: 0.75
+
+    B_empfehlung:
+      max_B: 0.75
+
+  # ─────────────────────────────────────────────────────────────────────────
+  social_preferences:
+    term: "Social Preferences"
+    deutsch: "Soziale Präferenzen"
+    kategorie: "praeferenz"
+
+    definition: |
+      Nicht-eigennützige Präferenzen: Altruismus, Fairness, Reziprozität,
+      Ungleichheitsaversion.
+
+    subtypen:
+      altruismus:
+        definition: "Nutzenerhöhung durch Wohlfahrt anderer"
+        anteil_population: 0.25
+
+      ungleichheitsaversion:
+        definition: "Disnutzen durch Ungleichheit"
+        parameter_alpha: 0.5  # Nachteilige Ungleichheit
+        parameter_beta: 0.25  # Vorteilhafte Ungleichheit
+        quelle: "Fehr & Schmidt (1999)"
+
+      reziprozitaet:
+        definition: "Vergeltung von Kooperation/Defektion"
+        anteil_conditional_cooperators: 0.50
+
+    empirische_evidenz:
+      replikationsstatus: "STARK_REPLIZIERT"
+
+      meta_analysen:
+        - autor: "Engel (2011) - Dictator Game"
+          befund: "28% durchschnittliche Gabe"
+          n_studien: 131
+
+        - autor: "Johnson & Mislin (2011) - Trust Game"
+          befund: "50% durchschnittliches Investment"
+          n_studien: 162
+
+      heterogenitaet:
+        typ: "Bevölkerungsverteilung"
+        befund: "40% Eigennutz, 30% Conditional Cooperators, 30% Altruisten"
+        quelle: "Fischbacher et al. (2001)"
+
+    E_wert:
+      basis: 0.82
+
+    B_empfehlung:
+      max_B: 0.75
+      warnung: "Hohe Heterogenität - Durchschnittswerte können irreführen"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  prospect_theory:
+    term: "Prospect Theory"
+    deutsch: "Prospect-Theorie"
+    kategorie: "theorie"
+
+    definition: |
+      Deskriptive Entscheidungstheorie (Kahneman & Tversky, 1979).
+      Kernelemente: Referenzpunktabhängigkeit, Loss Aversion,
+      Probability Weighting, Diminishing Sensitivity.
+
+    parameter:
+      alpha:
+        name: "Krümmung Gewinnbereich"
+        median: 0.88
+        quelle: "Tversky & Kahneman (1992)"
+      beta:
+        name: "Krümmung Verlustbereich"
+        median: 0.88
+      lambda:
+        name: "Verlustaversion"
+        median: 2.25
+      gamma:
+        name: "Probability Weighting (Gewinne)"
+        median: 0.61
+      delta:
+        name: "Probability Weighting (Verluste)"
+        median: 0.69
+
+    empirische_evidenz:
+      replikationsstatus: "FUNDAMENT_DER_DISZIPLIN"
+
+      stärken:
+        - "Erklärt >10 Anomalien der Expected Utility Theory"
+        - "Nobelpreis 2002"
+        - "Tausende Replikationen"
+
+      schwächen:
+        - "Parameter instabil über Kontexte"
+        - "Referenzpunkt-Bestimmung unklar"
+        - "Komplexe Entscheidungen schwer modellierbar"
+
+    E_wert:
+      basis: 0.85
+      begründung: "Theoretisches Fundament, aber Parameter variabel"
+
+    B_empfehlung:
+      max_B: 0.80
+      warnung: "Theorie robust, spezifische Parameterannahmen weniger"
+
+# =============================================================================
+# SCHNELLREFERENZ: EFFEKTSTÄRKEN
+# =============================================================================
+
+schnellreferenz:
+
+  nach_staerke:
+    stark_repliziert:  # E ≥ 0.80
+      - term: "Anchoring"
+        d: 0.87
+      - term: "Default Effect"
+        d: 0.68
+      - term: "Social Preferences"
+        heterogen: true
+      - term: "Prospect Theory"
+        theoretisch: true
+
+    moderat_repliziert:  # E 0.60-0.80
+      - term: "Loss Aversion"
+        d: "λ ≈ 2.0, aber variabel"
+      - term: "Hyperbolic Discounting"
+        beta: 0.70
+      - term: "Framing"
+        d: 0.52
+      - term: "Present Bias"
+        beta: 0.70
+
+    mit_einschraenkungen:  # E 0.40-0.60
+      - term: "Nudging"
+        warnung: "Feld-Effekte 3x kleiner als Labor"
+      - term: "Overconfidence"
+        warnung: "Nur Overprecision robust"
+
+  kritische_warnungen:
+    - begriff: "Nudging"
+      warnung: "DellaVigna & Linos (2022): Praxis-Effekte ~1/3 der Studien"
+
+    - begriff: "Loss Aversion"
+      warnung: "λ variiert 0.8-4.0 je nach Kontext"
+
+    - begriff: "Universelle Aussagen"
+      warnung: "~30-50% der Population zeigen typische Effekte NICHT"
+
+# =============================================================================
+# VALIDIERUNG
+# =============================================================================
+
+validierung:
+  status: "INITIAL"
+
+  quellen:
+    - "Handbook of Behavioral Economics (2018)"
+    - "Camerer et al. Replikationsstudien"
+    - "DellaVigna & Linos (2022)"
+    - "Brown et al. (2024) Loss Aversion Meta-Analysis"
+
+  naechste_schritte:
+    - "Parameter-Unsicherheiten quantifizieren"
+    - "Mehr Begriffe hinzufügen"
+    - "BCM-Axiom-Mapping vervollständigen"
