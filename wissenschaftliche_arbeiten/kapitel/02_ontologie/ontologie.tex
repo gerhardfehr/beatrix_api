@@ -1,0 +1,190 @@
+\section{Kategorie 1: Ontologie (ONT)}
+%==============================================================================
+
+\epigraph{\textit{``The question `What is there?' can be answered, moreover, in a word -- `Everything' -- and everyone will accept this answer as true.''}}{--- Willard Van Orman Quine, \textit{On What There Is} (1948)}
+
+Die Ontologie -- von griechisch \textit{on} (seiend) und \textit{logos} (Lehre) -- ist die philosophische Disziplin, die fragt: \textit{Was existiert?} Welche Entitäten, Eigenschaften und Beziehungen sind fundamental? Was ist die grundlegende Möblierung des Universums?
+
+Für das \BCM{} ist die Ontologie-Kategorie (26 Axiome: MA-ONT-01 bis MA-ONT-26) konstitutiv: Sie definiert die ``Möbel'' des verhaltensökonomischen Universums -- die Bausteine, aus denen alle weiteren Modellierungen zusammengesetzt werden.
+
+%------------------------------------------------------------------------------
+\subsection{Philosophischer Hintergrund: Von Aristoteles zu Quine}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``Being is said in many ways.''}}{--- Aristoteles, \textit{Metaphysik} IV.2 (ca. 350 v. Chr.)}
+
+Die ontologische Tradition in der westlichen Philosophie beginnt mit Aristoteles' \textit{Kategorienlehre}. Aristoteles unterschied zehn fundamentale Kategorien des Seins: Substanz, Quantität, Qualität, Relation, Ort, Zeit, Lage, Haben, Wirken und Leiden. Diese Kategorien sollten erschöpfend und gegenseitig exklusiv sein -- jedes Seiende fällt unter genau eine primäre Kategorie.
+
+Die moderne Ontologie wurde durch Quines Aufsatz ``On What There Is'' (1948) revolutioniert. Quine formulierte das berühmte Kriterium:
+
+\begin{quote}
+\textit{``To be is to be the value of a bound variable.''}
+\end{quote}
+
+Das bedeutet: Wir verpflichten uns ontologisch auf genau die Entitäten, über die wir in unseren besten Theorien quantifizieren. Das \BCM{} META-Modul folgt diesem quineanischen Ansatz: Die ONT-Axiome explizieren, auf welche Entitäten sich das \BCM{} ontologisch verpflichtet.
+
+%------------------------------------------------------------------------------
+\subsection{Fundamentale Entitäten: Das ontologische Fundament}
+%------------------------------------------------------------------------------
+
+Die ersten sechs ONT-Axiome etablieren die grundlegenden Existenzaussagen des \BCM:
+
+\begin{axiom}[Existenz des Subjekts: MA-ONT-01]
+\begin{equation}
+\exists \sigma: \sigma \in \Sigma, |\Sigma| \geq 1
+\end{equation}
+Es existiert mindestens ein Entscheidungssubjekt $\sigma$.
+\end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Dieses Axiom macht eine starke Annahme: Es gibt distinkte, identifizierbare Entscheidungsträger. Für das \BCM{} ist das Subjekt fundamental: Ohne Subjekte gibt es niemanden, der Entscheidungen trifft, Nutzen erfährt oder Verhalten zeigt.
+
+\paragraph{BCM-Relevanz.}
+Das Subjekt $\sigma$ ist der Anker aller weiteren Modellierung: Das INU-Modul modelliert den individuellen Nutzen \textit{dieses} Subjekts, das KNU-Modul modelliert, wie \textit{dieses} Subjekt den Nutzen anderer berücksichtigt, das IDN-Modul modelliert die Identität(en) \textit{dieses} Subjekts.
+
+\begin{axiom}[Existenz von Verhalten: MA-ONT-02]
+\begin{equation}
+\exists V: V \in \mathcal{V}, |\mathcal{V}| \geq 1
+\end{equation}
+Es gibt beobachtbare Verhaltensweisen $V$.
+\end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Dieses Axiom trennt das \BCM{} von rein mentalistischen Ansätzen. Verhalten ist \textit{beobachtbar} -- nicht nur subjektiv erlebt. Die Menge $\mathcal{V}$ enthält manifeste Handlungen, Unterlassungen, verbale Äußerungen, physiologische Reaktionen und digitale Interaktionen.
+
+\begin{axiom}[Existenz von Nutzen: MA-ONT-03]
+\begin{equation}
+U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}
+\end{equation}
+Subjekte haben Nutzenfunktionen, die Verhalten bewerten.
+\end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Das \BCM{} folgt der von-Neumann-Morgenstern-Tradition: Nutzen ist eine reellwertige Funktion, die Verhalten relativ zu einem Subjekt bewertet. Die Notation $U: \mathcal{V} \times \Sigma \rightarrow \mathbb{R}$ macht drei Dinge explizit: Nutzen ist \textit{verhaltensrelativ}, \textit{subjektrelativ} und \textit{reellwertig}.
+
+\begin{axiom}[Existenz von Kontext: MA-ONT-04]
+\begin{equation}
+\exists \rho: \rho \in \mathcal{P}, |\mathcal{P}| \geq 1
+\end{equation}
+Verhalten findet in Kontexten statt, die den Nutzen modulieren.
+\end{axiom}
+
+\paragraph{Philosophische Begründung.}
+Dieses Axiom kodifiziert eine der zentralen Einsichten der Verhaltensökonomie: \textit{Context matters}. Der Homo Oeconomicus war kontextblind -- seine Präferenzen waren stabil und situationsunabhängig. Die empirische Forschung hat diese Annahme widerlegt.
+
+\begin{axiom}[Existenz von Zeit: MA-ONT-05]
+\begin{equation}
+\exists \tau: \tau \in T, T \subseteq \mathbb{R}^+
+\end{equation}
+Entscheidungen und Verhalten finden in der Zeit statt.
+\end{axiom}
+
+\begin{axiom}[Existenz von Constraints: MA-ONT-06]
+\begin{equation}
+\exists \Gamma: \Gamma(\sigma, \rho) \rightarrow \mathcal{V}' \subseteq \mathcal{V}
+\end{equation}
+Nicht alle Verhaltensweisen sind für alle Subjekte in allen Kontexten verfügbar.
+\end{axiom}
+
+%------------------------------------------------------------------------------
+\subsection{Strukturelle Axiome: Die Architektur des Nutzens}
+%------------------------------------------------------------------------------
+
+\begin{axiom}[Drei-Komponenten-Nutzen: MA-ONT-07]
+\begin{equation}
+U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}}
+\end{equation}
+Der Gesamtnutzen setzt sich aus individuellem Nutzen (INU), kollektivem Nutzen (KNU) und Identitätsnutzen (IDN) zusammen.
+\end{axiom}
+
+\paragraph{Theoretischer Hintergrund.}
+Diese Dreiteilung synthetisiert drei Forschungstraditionen: (1) \textbf{Individueller Nutzen}: Die klassische ökonomische Tradition von Bentham bis Samuelson; (2) \textbf{Kollektiver Nutzen}: Die Forschung zu sozialen Präferenzen (Fehr \& Schmidt, 1999); (3) \textbf{Identitätsnutzen}: Die Identitätsökonomie (Akerlof \& Kranton, 2000).
+
+\begin{axiom}[FEPSDE-Dimensionen: MA-ONT-08]
+\begin{equation}
+U_{\text{INU}} = \sum_{d \in \text{FEPSDE}} \omega_d \cdot u_d, \quad \sum_{d \in \text{FEPSDE}} \omega_d = 1
+\end{equation}
+Der individuelle Nutzen hat sechs Dimensionen mit normierter Gewichtung.
+\end{axiom}
+
+\begin{table}[h]
+\centering
+\caption{Die FEPSDE-Nutzen-Dimensionen}
+\begin{tabular}{@{}lp{5cm}p{5cm}@{}}
+\toprule
+\textbf{Dimension} & \textbf{Beschreibung} & \textbf{Beispiele} \\
+\midrule
+\textbf{F}inancial & Monetärer/materieller Nutzen & Einkommen, Vermögen, Ersparnisse \\
+\textbf{E}motional & Affektiver Nutzen & Freude, Zufriedenheit, Stolz \\
+\textbf{P}hysical & Körperlicher Nutzen & Gesundheit, Energie, Schmerzfreiheit \\
+\textbf{S}ocial & Sozialer Nutzen & Zugehörigkeit, Status, Anerkennung \\
+\textbf{D}igital & Digitaler Nutzen & Convenience, Vernetzung, Datenschutz \\
+\textbf{E}cological & Ökologischer Nutzen & Nachhaltigkeit, Umweltschutz \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%------------------------------------------------------------------------------
+\subsection{Soziale Ontologie: Gruppen, Identitäten, Normen}
+%------------------------------------------------------------------------------
+
+\epigraph{\textit{``No man is an island, entire of itself.''}}{--- John Donne, \textit{Meditation XVII} (1624)}
+
+\begin{axiom}[Multiple Identitäten: MA-ONT-09]
+\begin{equation}
+\forall \sigma: I(\sigma) = \{i_1, i_2, \ldots, i_n\}, \quad n \geq 1
+\end{equation}
+Jedes Subjekt hat mindestens eine, typischerweise mehrere Identitäten.
+\end{axiom}
+
+\begin{axiom}[Existenz von Gruppen: MA-ONT-10]
+\begin{equation}
+\exists G: G \subseteq \Sigma, |G| \geq 2
+\end{equation}
+Es existieren Gruppen als Aggregate von Subjekten.
+\end{axiom}
+
+\begin{axiom}[Existenz von Normen: MA-ONT-11]
+\begin{equation}
+\exists N: N \in \mathcal{N}, \mathcal{N} = \{(V, G, \text{Sanktion})\}
+\end{equation}
+Normen sind Verhaltenserwartungen mit Sanktionen bei Abweichung.
+\end{axiom}
+
+%------------------------------------------------------------------------------
+\subsection{Die 5-Ebenen-Hierarchie (MA-ONT-26)}
+%------------------------------------------------------------------------------
+
+\begin{axiom}[BCM-Ebenen-Hierarchie: MA-ONT-26]
+\begin{equation}
+E = \{\text{META}, \text{MAKRO}, \text{MESO}, \text{MIKRO}, \text{IND}\}
+\end{equation}
+\begin{equation}
+\forall e_i, e_j \in E: i < j \Rightarrow e_i \text{ kontextualisiert } e_j
+\end{equation}
+\end{axiom}
+
+\begin{table}[h]
+\centering
+\caption{Die 5 BCM-Ebenen im Detail}
+\label{tab:ebenen_detail}
+\begin{tabular}{@{}lp{3.5cm}p{3.5cm}p{4cm}@{}}
+\toprule
+\textbf{Ebene} & \textbf{Beschreibung} & \textbf{Zeitskala} & \textbf{Beispiele} \\
+\midrule
+META & Kulturelle Tiefenstruktur & Generationen & Individualismus/Kollektivismus, Machtdistanz (Hofstede) \\
+MAKRO & Institutionelle Ordnung & Dekaden & Verfassung, Rechtssystem, Marktwirtschaft \\
+MESO & Organisationale Regeln & Jahre & Unternehmenskultur, Anreizsysteme \\
+MIKRO & Gruppenkontext & Monate & Teamdynamik, Familienstrukturen \\
+IND & Personenmerkmale & Stabil/variabel & Traits, Präferenzen, Identitäten \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Das Prinzip der Kontextualisierung.}
+Das Axiom postuliert: \textit{Höhere Ebenen kontextualisieren niedrigere Ebenen}. META setzt Defaults für alle tieferen Ebenen; MAKRO kann META-Defaults modulieren, aber nicht vollständig überschreiben; usw.
+
+\paragraph{BEATRIX-Relevanz.}
+Das 5-Ebenen-Modell ist zentral für die \BEATRIX-Parameterschätzung: (1) \textbf{Default-Kaskade}: Fehlende Information auf niedriger Ebene wird durch höhere Ebenen kompensiert; (2) \textbf{Plausibilitätsprüfung}: Schätzungen müssen mit höheren Ebenen konsistent sein; (3) \textbf{Interventionsdesign}: Die richtige Ebene für Interventionen muss identifiziert werden.
+
+%==============================================================================

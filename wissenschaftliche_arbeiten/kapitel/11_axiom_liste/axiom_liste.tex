@@ -1,0 +1,135 @@
+\section{Vollständige Axiom-Liste nach ID}
+
+\subsection{Ontologie (ONT): 26 Axiome}
+\begin{enumerate}[label=MA-ONT-\arabic*:, leftmargin=3cm]
+    \item $\exists \sigma$: Subjekt existiert
+    \item $\exists V$: Verhalten existiert
+    \item $\exists U$: Nutzen existiert
+    \item $\exists \rho$: Kontext existiert
+    \item $\exists \tau$: Zeit existiert
+    \item $\exists \Gamma$: Constraints existieren
+    \item $U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}}$
+    \item FEPSDE: 6 Nutzen-Dimensionen
+    \item $\exists I$: Identitäten sind multipel
+    \item $\exists G$: Gruppen existieren
+    \item $\exists N$: Normen existieren
+    \item $\exists \kappa$: Komplementarität existiert
+    \item $\Psi$: Kohärenz-Operator
+    \item $\lambda$: Kooperations-Regulator
+    \item $\lambda \in [0,1]$: Hybrid-Kontinuum
+    \item $\omega$: Gewichtungsfunktion
+    \item $\pi$: Identitäts-Aktivierung
+    \item $A$: Alignment-Funktion
+    \item $\partial U / \partial \tau$: Nutzen ist zeitabhängig
+    \item Habituation existiert
+    \item Feedback-Schleifen existieren
+    \item Spillover existiert
+    \item Identitäten evolvieren
+    \item Normen evolvieren
+    \item Meta-Evolution existiert
+    \item \textbf{BCM operiert auf 5 hierarchischen Ebenen}
+\end{enumerate}
+
+\subsection{Epistemologie (EPI): 37 Axiome}
+\begin{enumerate}[label=MA-EPI-\arabic*:, leftmargin=3cm]
+    \item Unvollständiges Wissen
+    \item Bounded Rationality
+    \item Unsicherheit ist irreduzibel
+    \item Heuristiken sind adaptiv
+    \item Zwei Systeme (System 1 / System 2)
+    \item Biases sind systematisch
+    \item AWX: Awareness
+    \item WAX: Willingness
+    \item WTX: Transition
+    \item Sequenz: AWX → WAX → WTX → V
+    \item Intention-Action Gap
+    \item Verfügbarkeitsheuristik
+    \item Framing-Effekte
+    \item Anchoring
+    \item Loss Aversion
+    \item Present Bias
+    \item Status Quo Bias
+    \item Overconfidence
+    \item Lernen ist möglich
+    \item Feedback verbessert Schätzungen
+    \item Gewohnheiten reduzieren Kognition
+    \item Debiasing ist schwierig
+    \item Exponentielle Sättigung
+    \item Belief-Update folgt Bayes
+    \item Confirmation Bias
+    \item \textbf{Base Rate Neglect}
+    \item \textbf{Representativeness Heuristic}
+    \item \textbf{Sunk Cost Fallacy}
+    \item \textbf{Endowment Effect}
+    \item \textbf{Optimism Bias}
+    \item \textbf{Self-Serving Bias}
+    \item \textbf{Social Desirability Bias}
+    \item \textbf{Omission Bias}
+    \item \textbf{Moral Licensing}
+    \item \textbf{Identifiable Victim Effect}
+    \item \textbf{Scope Insensitivity}
+    \item \textbf{Affect Heuristic}
+\end{enumerate}
+
+\subsection{Governance (GOV): 25 Axiome}
+\begin{enumerate}[label=MA-GOV-\arabic*:, leftmargin=3cm]
+    \item Verhalten unterliegt Constraints: $\Gamma: V \rightarrow \{0, 1\}$
+    \item Constraints sind kontextabhängig: $\Gamma = f(\rho)$
+    \item Autonomie-Primat: Individuelle Autonomie hat Vorrang
+    \item Nicht-Normativität: BCM beschreibt, schreibt nicht vor
+    \item Transparenz-Gebot: Interventionen sollen transparent sein
+    \item Subsidiarität: Mildeste wirksame Intervention wählen
+    \item 8 Interventionstypen: NUDGE, BOOST, THINK, INCENTIVE, REGULATE, DESIGN, SOCIAL, IDENTITY
+    \item Typenwahl kontextabhängig: $I^* = \arg\max_{I} E[Effect(I)|\rho, \sigma]$
+    \item Freiheits-Hierarchie: Ordnung nach Freiheitsgrad
+    \item Eskalations-Prinzip: Von mild nach stark eskalieren
+    \item Distributive Gerechtigkeit: $\forall \sigma: \text{Burden}(\sigma) \propto \text{Capacity}(\sigma)$
+    \item Kosten-Nutzen-Analyse: Interventionen müssen Nutzen > Kosten haben
+    \item Reversibilität: Reversible Interventionen bevorzugen
+    \item Crowding-Out vermeiden: $\partial U_{\text{intrinsic}}/\partial \text{Incentive} < 0$ möglich
+    \item Spillover beachten: Nicht-intendierte Effekte berücksichtigen
+    \item Ausweichverhalten beachten: $P(\text{Evasion}|\text{REGULATE}) > 0$
+    \item Opt-Out Prinzip: $\forall I \neq \text{REGULATE}: \text{OptOut}(I) = \text{possible}$
+    \item Informed Consent: $\text{Legitimate}(I) \rightarrow \text{Informed}(\sigma) \wedge \text{Consenting}(\sigma)$
+    \item Interventionen habituieren: $\partial \text{Effect}(I)/\partial \tau < 0$ für $\tau \rightarrow \infty$
+    \item Iteration notwendig: $\text{Optimal}(I)$ requires Feedback-Loop
+    \item Evaluation notwendig: $\forall I: \text{Measure}(\text{Effect}(I))$
+    \item A/B-Testing bevorzugen: RCT > Observational für Kausalität
+    \item Spillover messen: $\text{Measure}(\text{Effect}_{\text{unintended}})$ alongside $\text{Effect}_{\text{intended}}$
+    \item Langfristeffekte beachten: $\text{Effect}(\tau=\text{short}) \neq \text{Effect}(\tau=\text{long})$
+    \item Multi-Level Interventionen: Interventionen auf mehreren Ebenen kombinieren
+\end{enumerate}
+
+\subsection{Dynamik (DYN): 25 Axiome}
+\begin{enumerate}[label=MA-DYN-\arabic*:, leftmargin=3cm]
+    \item Zeit existiert: $\tau \in T, T \subseteq \mathbb{R}^+$
+    \item Diskrete Events: $V(t) = \sum_i V_i \cdot \delta(t - t_i)$
+    \item Pfadabhängigkeit: $U(V, t) = f(V, \{V_\tau : \tau < t\})$
+    \item Multiple Equilibria: Es kann mehrere stabile Zustände geben
+    \item Hysterese möglich: $\text{State}(\uparrow) \neq \text{State}(\downarrow)$ bei gleichem Trigger
+    \item Tipping Points: Kritische Schwellen existieren
+    \item Gewohnheitsformation: $P(V_{\text{auto}}|\text{Repetition}) \uparrow$ mit $n$
+    \item Habit Loop: Cue $\rightarrow$ Routine $\rightarrow$ Reward
+    \item Commitment Devices: $U(\text{Commit}) > U(\text{NoCommit})$ wenn $\delta_{\text{now}} > \delta_{\text{future}}$
+    \item Soziale Diffusion: $\partial P(V)/\partial t = \beta \cdot P(V) \cdot (1 - P(V)) \cdot f(\text{Network})$
+    \item Kritische Masse: Ab $P^* \approx 25\%$ wird Verhalten selbstverstärkend
+    \item Norm-Kaskaden: Normen können rapid kippen
+    \item Discounting: $U_{\text{present}}(U_{\text{future}}) = \delta^t \cdot U_{\text{future}}$
+    \item Hyperbolisches Discounting: $D(t) = 1/(1 + k \cdot t)$ statt $D(t) = e^{-\delta t}$
+    \item Projection Bias: $\mathbb{E}[U_{\text{future}}|\text{State}_{\text{now}}]$ biased toward $\text{State}_{\text{now}}$
+    \item Hot-Cold Empathy Gap: $\mathbb{E}[U_{\text{hot}}|\text{State}_{\text{cold}}] < U_{\text{hot,actual}}$
+    \item Ego Depletion: $\text{Willpower}(t) \downarrow$ mit Nutzung
+    \item Implementation Intentions: $P(V|\text{If-Then Plan}) > P(V|\text{Goal only})$
+    \item Adaptation: $U(\text{State}) \rightarrow U_{\text{baseline}}$ as $\tau \rightarrow \infty$
+    \item Hedonic Treadmill: $\lim_{t \rightarrow \infty} U(t|\text{Change}) = U_{\text{baseline}}$
+    \item Peak-End Rule: $\text{Recalled}_U = f(\text{Max}_U, \text{End}_U)$
+    \item Identitäts-Shifts: $I(\tau + \Delta\tau) \not\subset I(\tau)$ möglich
+    \item $\lambda$-Dynamik: $\lambda(\tau + \Delta\tau) = f(\lambda(\tau), \text{Experience}, \text{Context})$
+    \item System-Evolution: $\Phi(\tau + \Delta\tau) = \Phi(\tau) + \mu \cdot \Delta\Phi$
+    \item Feedback-Lags: Verzögerungen zwischen Aktion und Feedback
+\end{enumerate}
+
+%==============================================================================
+% Detaillierte Axiom-Dokumentation
+%==============================================================================
+

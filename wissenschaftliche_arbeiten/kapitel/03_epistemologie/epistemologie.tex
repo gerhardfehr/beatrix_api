@@ -1,0 +1,449 @@
+\section{Kategorie 2: Epistemologie (EPI)}
+%==============================================================================
+
+\epigraph{\textit{``Ich weiß, dass ich nichts weiß.''}}{--- Sokrates, nach Platon, \textit{Apologie}}
+
+Die Epistemologie-Kategorie (38 Axiome: MA-EPI-01 bis MA-EPI-38) definiert, \textbf{was wir wissen können}, welche Grenzen Wissen hat, und welche systematischen Verzerrungen (Biases) existieren.
+
+\subsection{Philosophischer Hintergrund: Von Platon zu Kahneman}
+
+\epigraph{\textit{``The mind is not a vessel to be filled, but a fire to be kindled.''}}{--- Plutarch, \textit{On Listening}}
+
+Die Frage nach den Grenzen menschlichen Wissens durchzieht die gesamte Philosophiegeschichte. Bereits Platons Höhlengleichnis illustriert, dass Menschen systematisch einer verzerrten Wahrnehmung der Realität unterliegen -- eine Einsicht, die in der modernen Kognitionspsychologie ihre empirische Bestätigung findet.
+
+\paragraph{Die rationalistische Tradition.}
+Descartes' \textit{cogito ergo sum} etablierte den methodischen Zweifel als epistemologisches Werkzeug. Interessanterweise führte der Rationalismus zu einer Überschätzung menschlicher Rationalität, die erst durch die Verhaltensökonomie korrigiert wurde. Leibniz' Konzept der \textit{petites perceptions} -- unbewusste Wahrnehmungen, die unser Denken beeinflussen -- nimmt jedoch bereits System-1-Prozesse vorweg.
+
+\paragraph{Der empiristische Einwand.}
+David Humes radikaler Empirismus stellte die Frage, ob \textit{irgendwelches} Wissen über kausale Zusammenhänge möglich sei. Seine Analyse der Induktion als psychologischer Gewohnheit (habit) statt logischer Notwendigkeit ist ein direkter Vorläufer der Heuristiken-Forschung. Wenn wir erwarten, dass die Sonne morgen aufgeht, tun wir dies nicht aus logischen Gründen, sondern aufgrund der \textit{Verfügbarkeitsheuristik} vergangener Sonnenaufgänge.
+
+\paragraph{Kants Synthese und die Grenzen der Vernunft.}
+Immanuel Kants \textit{Kritik der reinen Vernunft} etablierte, dass menschliche Erkenntnis durch die Struktur unseres Geistes geformt wird. Seine Kategorien der Anschauung (Raum, Zeit) und des Verstandes (Kausalität, Substanz) sind \textit{a priori} -- sie strukturieren unsere Erfahrung, bevor wir sie machen. Dies ist die philosophische Grundlage für die BCM-Annahme, dass Menschen die Realität nicht ``objektiv'' wahrnehmen, sondern durch kognitive Schemata.
+
+\paragraph{Der pragmatische Turn.}
+William James und John Dewey betonten, dass Wissen nicht Abbild der Realität ist, sondern Werkzeug zur Bewältigung von Problemen. Eine Überzeugung ist ``wahr'', wenn sie \textit{funktioniert}. Diese Perspektive legitimiert Heuristiken: Sie mögen logisch fehlerhaft sein, aber sie funktionieren ``gut genug'' in den meisten Situationen -- ein Kerngedanke von Gerd Gigerenzers ``ökologischer Rationalität''.
+
+\paragraph{Von der Philosophie zur Psychologie.}
+Der Übergang zur empirischen Kognitionspsychologie erfolgte durch:
+\begin{itemize}
+    \item \textbf{Herbert Simon (1955)}: Bounded Rationality als Alternative zum homo oeconomicus
+    \item \textbf{Amos Tversky \& Daniel Kahneman (1974)}: Systematische Dokumentation von Heuristiken und Biases
+    \item \textbf{Gerd Gigerenzer (1990er)}: Rehabilitation von Heuristiken als ``adaptiver Werkzeugkasten''
+    \item \textbf{Daniel Kahneman (2011)}: Synthese zur Zwei-Systeme-Theorie in \textit{Thinking, Fast and Slow}
+\end{itemize}
+
+Das \META-Modul integriert diese Traditionen: Es akzeptiert die \textit{Grenzen} menschlicher Rationalität (gegen den naiven Rationalismus), die \textit{Systematik} kognitiver Verzerrungen (gegen den naiven Empirismus), und die \textit{Funktionalität} von Heuristiken (mit dem Pragmatismus).
+
+\subsection{Grundlegende epistemische Axiome}
+
+\begin{axiom}[Unvollständiges Wissen: MA-EPI-01]
+\begin{equation}
+K(U) \subset U
+\end{equation}
+Wissen über den Nutzen $K(U)$ ist immer eine echte Teilmenge des tatsächlichen Nutzens $U$. Vollständiges Wissen ist unerreichbar.
+
+\paragraph{Philosophische Begründung.}
+Dies ist die epistemologische Kernaussage, die von Sokrates bis zu den Grenzen des Laplaceschen Dämons reicht. In der Ökonomie manifestiert sie sich als ``Informationsasymmetrie'' (Akerlof, 1970), in der Entscheidungstheorie als ``Unsicherheit vs. Risiko'' (Knight, 1921).
+
+\paragraph{BCM-Relevanz.}
+Jede Parameterschätzung im BCM muss mit Unsicherheit operieren. Die BEATRIX-Pipeline verwendet daher Ensemble-Methoden und berichtet Konfidenzintervalle, nicht Punktschätzungen.
+\end{axiom}
+
+\begin{axiom}[Bounded Rationality: MA-EPI-02]
+\begin{equation}
+\text{Rationalität}(\sigma) \leq R_{\max}(\text{Kapazität}, \text{Zeit}, \text{Information})
+\end{equation}
+Rationalität ist durch kognitive Kapazität, verfügbare Zeit und Information beschränkt (Simon, 1955).
+
+\paragraph{Philosophische Begründung.}
+Herbert Simon formulierte Bounded Rationality als Antwort auf das unrealistische Modell des homo oeconomicus. Menschen \textit{satisficen} (``gut genug'') statt zu optimieren. Dies ist keine Schwäche, sondern eine adaptive Strategie angesichts begrenzter Ressourcen.
+
+\paragraph{Empirische Evidenz.}
+Miller (1956) zeigte, dass das Arbeitsgedächtnis auf $7 \pm 2$ Chunks begrenzt ist. Cowan (2001) reduzierte diese Schätzung auf 4 Chunks. Diese fundamentale Kapazitätsbeschränkung erklärt, warum Menschen Heuristiken verwenden \textit{müssen}.
+
+\paragraph{BCM-Relevanz.}
+Das BCM modelliert keine perfekt rationalen Agenten, sondern ``boundedly rational'' Entscheider. Die Komplexität von Interventionen muss der kognitiven Kapazität der Zielgruppe angepasst sein.
+\end{axiom}
+
+\begin{axiom}[Zwei-Systeme-Theorie: MA-EPI-05]
+Kognition operiert in zwei Modi:
+\begin{itemize}
+    \item \textbf{System 1}: Schnell, automatisch, heuristisch, mühelos, emotional
+    \item \textbf{System 2}: Langsam, deliberativ, analytisch, anstrengend, rational
+\end{itemize}
+Die meisten Alltagsentscheidungen werden von System 1 getroffen.
+
+\paragraph{Philosophische Wurzeln.}
+Die Unterscheidung zwischen automatischem und deliberativem Denken findet sich bereits bei:
+\begin{itemize}
+    \item Aristoteles: \textit{hexis} (Gewohnheit) vs. \textit{phronesis} (praktische Klugheit)
+    \item Hume: Passion vs. Reason (``Reason is, and ought only to be the slave of the passions'')
+    \item Freud: Es vs. Ich (mit anderem Fokus, aber ähnlicher Struktur)
+    \item William James: Habit vs. Will
+\end{itemize}
+
+\paragraph{Empirische Operationalisierung.}
+Kahneman \& Frederick (2002) operationalisieren die Unterscheidung durch:
+\begin{itemize}
+    \item \textbf{Cognitive Reflection Test (CRT)}: ``Ein Schläger und ein Ball kosten zusammen 1.10€. Der Schläger kostet 1€ mehr als der Ball. Was kostet der Ball?'' (System-1-Antwort: 0.10€, korrekt: 0.05€)
+    \item \textbf{Response Time}: System-1-Antworten kommen schneller
+    \item \textbf{Pupillendilation}: System-2-Aktivierung korreliert mit Pupillenerweiterung
+\end{itemize}
+
+\paragraph{BCM-Relevanz.}
+Die Interventionstypen NUDGE und DESIGN zielen auf System 1, während BOOST und THINK System 2 aktivieren. Die Wahl des Interventionstyps muss berücksichtigen, welches System die Zielverhalten typischerweise steuert.
+\end{axiom}
+
+\subsection{Die AWX-WAX-WTX-Sequenz: Ein epistemischer Pfad}
+
+Das BCM modelliert die Transformation von Information zu Verhalten als dreistufige Sequenz:
+
+\begin{axiom}[AWX -- Awareness: MA-EPI-07]
+\begin{equation}
+\text{AWX}(\sigma, I) = \mathbb{P}(\sigma \text{ kennt Information } I)
+\end{equation}
+Awareness ist die Wahrscheinlichkeit, dass ein Agent $\sigma$ eine relevante Information $I$ überhaupt wahrnimmt.
+
+\paragraph{Kognitive Mechanismen.}
+Awareness wird beeinflusst durch:
+\begin{itemize}
+    \item \textbf{Aufmerksamkeit}: Selektive Wahrnehmung filtert >99\% der Umgebungsinformation
+    \item \textbf{Salienz}: Hervorstechende Stimuli werden eher wahrgenommen
+    \item \textbf{Priming}: Vorherige Aktivierung erhöht Wahrnehmungswahrscheinlichkeit
+    \item \textbf{Inattentional Blindness}: Gorilla-Experiment (Simons \& Chabris, 1999)
+\end{itemize}
+
+\paragraph{Interventions-Implikation.}
+Bevor komplexere Interventionen greifen können, muss \textit{überhaupt} Awareness geschaffen werden. Dies ist oft der Engpass.
+\end{axiom}
+
+\begin{axiom}[WAX -- Willingness: MA-EPI-08]
+\begin{equation}
+\text{WAX}(\sigma, V | I) = \mathbb{P}(\sigma \text{ ist bereit zu } V | \sigma \text{ kennt } I)
+\end{equation}
+Willingness ist die bedingte Wahrscheinlichkeit, dass ein Agent zur Verhaltensänderung bereit ist, gegeben er hat die relevante Information.
+
+\paragraph{Motivationale Determinanten.}
+Willingness wird bestimmt durch:
+\begin{itemize}
+    \item Wahrgenommene Kosten-Nutzen-Relation
+    \item Selbstwirksamkeitserwartung (Bandura, 1977)
+    \item Identitätskongruenz (passt die Handlung zu meinem Selbstbild?)
+    \item Soziale Normen (was tun andere?)
+    \item Emotionale Valenz der Information
+\end{itemize}
+
+\paragraph{Der Knowledge-Attitude Gap.}
+Empirisch ist $\text{WAX} \ll \text{AWX}$ häufig: Menschen \textit{wissen}, dass Rauchen schädlich ist, sind aber nicht \textit{bereit}, aufzuhören.
+\end{axiom}
+
+\begin{axiom}[WTX -- Willingness to Transit: MA-EPI-09]
+\begin{equation}
+\text{WTX}(\sigma, V | \text{WAX}) = \mathbb{P}(\sigma \text{ handelt } V | \sigma \text{ ist bereit})
+\end{equation}
+WTX ist die Wahrscheinlichkeit, dass aus Bereitschaft tatsächlich Handlung wird.
+
+\paragraph{Der Intention-Action Gap.}
+Der Übergang von Intention zu Handlung scheitert oft an:
+\begin{itemize}
+    \item \textbf{Procrastination}: Aufschieben trotz Intention (Present Bias)
+    \item \textbf{Friction}: Kleine Hindernisse blockieren große Intentionen
+    \item \textbf{Forgetting}: Die Intention wird ``vergessen'' im Moment der Entscheidung
+    \item \textbf{Self-Control Failure}: Kurzfristige Impulse überwinden langfristige Intentionen
+\end{itemize}
+
+\paragraph{Interventions-Implikation.}
+Interventionen, die nur AWX oder WAX adressieren, scheitern oft am WTX-Bottleneck. Implementation Intentions (``Wenn Situation X, dann Handlung Y'') können den Intention-Action Gap schließen.
+\end{axiom}
+
+\begin{axiom}[Die vollständige Sequenz: MA-EPI-10]
+\begin{equation}
+\mathbb{P}(V) = \text{AWX} \times \text{WAX} \times \text{WTX}
+\end{equation}
+Die Wahrscheinlichkeit eines Verhaltens ist das Produkt aller drei Faktoren.
+
+\paragraph{Diagnostische Implikation.}
+Wenn ein Zielverhalten nicht auftritt, muss diagnostiziert werden, \textit{wo} die Sequenz bricht:
+\begin{itemize}
+    \item AWX-Problem: ``Die wissen gar nicht, dass...'' $\rightarrow$ Information, Salienz
+    \item WAX-Problem: ``Die wollen einfach nicht...'' $\rightarrow$ Motivation, Framing, Identität
+    \item WTX-Problem: ``Die nehmen es sich vor, aber...'' $\rightarrow$ Friction, Defaults, Commitment
+\end{itemize}
+\end{axiom}
+
+\subsection{Systematische Biases (MA-EPI-12 bis MA-EPI-37)}
+
+Das \META-Modul formalisiert 26 kognitive Biases, die für das \BCM{} und \BEATRIX{} relevant sind:
+
+\subsubsection{Klassische Heuristiken und Biases}
+
+\begin{axiom}[Verfügbarkeitsheuristik: MA-EPI-12]
+\begin{equation}
+\hat{P}(E) = f(\text{Ease of Recall}(E))
+\end{equation}
+Die geschätzte Wahrscheinlichkeit eines Ereignisses korreliert mit der Leichtigkeit, Beispiele abzurufen.
+\end{axiom}
+
+\begin{axiom}[Framing-Effekte: MA-EPI-13]
+\begin{equation}
+U(V|\text{Frame}_A) \neq U(V|\text{Frame}_B)
+\end{equation}
+Identische Optionen werden unterschiedlich bewertet, abhängig von ihrer Darstellung.
+\end{axiom}
+
+\begin{axiom}[Anchoring: MA-EPI-14]
+\begin{equation}
+\mathbb{E}[X|\text{Anchor}] = f(\text{Anchor})
+\end{equation}
+Schätzungen werden systematisch von einem Ankerwert beeinflusst.
+\end{axiom}
+
+\begin{axiom}[Loss Aversion: MA-EPI-15]
+\begin{equation}
+|U(\text{Loss})| > |U(\text{Gain})| \quad \text{für } |\text{Loss}| = |\text{Gain}|
+\end{equation}
+Verluste wiegen subjektiv schwerer als betragsmäßig gleiche Gewinne. Typischerweise gilt $\lambda \approx 2$ (Kahneman \& Tversky, 1979).
+\end{axiom}
+
+\subsubsection{BCM-kritische Biases (Version 2.2)}
+
+Die folgenden Biases wurden in Version 2.2 des \META-Moduls hinzugefügt aufgrund ihrer besonderen Relevanz für \BEATRIX:
+
+\begin{axiom}[Base Rate Neglect: MA-EPI-26]
+\begin{equation}
+\hat{P}(H|E) \approx P(E|H), \quad \text{ignoriert } P(H)
+\end{equation}
+Prior-Wahrscheinlichkeiten (Base Rates) werden zugunsten von Einzelfall-Information ignoriert.
+
+\textbf{BCM-Relevanz}: Bei der LLM-basierten Typen-Klassifikation muss explizit auf Base Rates (z.B. 50\% Conditional Cooperators, 30\% Self-Interested, 10\% Altruisten nach Fischbacher et al., 2001) geachtet werden.
+\end{axiom}
+
+\begin{axiom}[Self-Serving Bias: MA-EPI-31]
+\begin{equation}
+P(\text{Internal}|\text{Success}) > P(\text{Internal}|\text{Failure})
+\end{equation}
+Erfolge werden internal attribuiert (``Ich bin gut''), Misserfolge external (``Die Umstände waren schuld'').
+
+\textbf{BCM-Relevanz}: Dies ist der Kern-Mechanismus für \textbf{Motivated Inference} im IDN-Modul. Agenten verzerren ihre Wahrnehmung der Norm $\phi$, um das Selbstbild zu schützen.
+\end{axiom}
+
+\begin{axiom}[Social Desirability Bias: MA-EPI-32]
+\begin{equation}
+\text{Report}(V) = V_{\text{true}} + \varepsilon_{SD}; \quad \varepsilon_{SD} = f(\text{Visibility}, \text{Norm})
+\end{equation}
+Selbstberichte sind systematisch in Richtung sozialer Erwünschtheit verzerrt.
+
+\textbf{BCM-Relevanz}: \textbf{Kritisch für BEATRIX}: Persona-Beschreibungen, die das LLM analysiert, enthalten systematische Verzerrungen. Das LLM muss zwischen ``stated values'' und ``revealed behavior'' unterscheiden.
+\end{axiom}
+
+\begin{axiom}[Moral Licensing: MA-EPI-34]
+\begin{equation}
+P(\text{BadAction}|\text{PriorGoodAction}) > P(\text{BadAction}|\text{NoPriorAction})
+\end{equation}
+Eine vorherige gute Tat ``lizenziert'' nachfolgende schlechte Taten.
+
+\textbf{BCM-Relevanz}: Erklärt Identitäts-Dynamik im IDN-Modul: Selbstbild-Kredit wird aufgebaut und kann ``ausgegeben'' werden.
+\end{axiom}
+
+\begin{axiom}[Scope Insensitivity: MA-EPI-36]
+\begin{equation}
+\frac{\partial U}{\partial N} \rightarrow 0 \quad \text{für } N \rightarrow \infty; \quad \text{WTP}(N) \approx \text{WTP}(1)
+\end{equation}
+Bewertung skaliert nicht proportional mit der Anzahl Betroffener.
+
+\textbf{BCM-Relevanz}: Kollektiver Nutzen (KNU) wird systematisch unterschätzt. Dies rechtfertigt Interventionen, die KNU salient machen.
+\end{axiom}
+
+\subsection{Evidenzhierarchie und die Labor-Feld-Debatte}
+
+\epigraph{\textit{``We argue that many recent objections against lab experiments are misguided and that even more lab experiments should be conducted.''}}{--- Falk \& Heckman, \textit{Science} (2009)}
+
+Eine fundamentale epistemische Frage für das \BCM{} lautet: \textbf{Woher stammen die Parameter, und wie robust sind sie?} Diese Frage berührt eine zentrale methodologische Debatte der Verhaltensökonomie.
+
+\subsubsection{Die methodologische Kontroverse}
+
+\paragraph{Die Kritik an Laborexperimenten.}
+Levitt \& List (2007) formulierten einflussreiche Einwände gegen die externe Validität von Laborexperimenten:
+\begin{itemize}
+    \item \textbf{Selektion}: Laborprobanden sind typischerweise WEIRD (Western, Educated, Industrialized, Rich, Democratic) -- insbesondere Studierende
+    \item \textbf{Stakes}: Laborauszahlungen sind oft trivial im Vergleich zu realen Entscheidungen
+    \item \textbf{Scrutiny}: Probanden wissen, dass sie beobachtet werden (Hawthorne-Effekt)
+    \item \textbf{Kontext}: Das Labor abstrahiert von den sozialen und institutionellen Faktoren realer Entscheidungen
+\end{itemize}
+
+\paragraph{Die Verteidigung des Labors.}
+Falk \& Heckman (2009) verteidigten Laborexperimente in \textit{Science}:
+\begin{itemize}
+    \item \textbf{Kontrolle}: Nur im Labor können Schlüsselaspekte des Kontexts systematisch variiert werden
+    \item \textbf{Kausalität}: Randomisierung ermöglicht kausale Inferenz, die aus Beobachtungsdaten nicht möglich ist
+    \item \textbf{Mechanismus-Identifikation}: Ohne Labor wüssten wir nicht, \textit{dass} Loss Aversion existiert oder \textit{wie} sie funktioniert
+    \item \textbf{Replikation}: Laborergebnisse sind replizierbar unter kontrollierten Bedingungen
+\end{itemize}
+
+Ihre Kernthese: ``The objection that experiments are artificial misses the point. Any data set can be used to get a specific estimate only to the extent that the variation in the data can be controlled for extraneous factors.''
+
+\paragraph{Die moderne Synthese: Triangulation.}
+Die zeitgenössische Position -- reflektiert im Nobelpreis 2021 für Card, Angrist und Imbens -- ist:
+
+\begin{center}
+\textbf{Labor + Feld-RCT + Natürliche Experimente + Strukturelle Modelle}\\[0.3em]
+$\downarrow$\\[0.3em]
+\textbf{TRIANGULATION}\\[0.3em]
+$\downarrow$\\[0.3em]
+\textbf{Robustes Kausalwissen}
+\end{center}
+
+Konvergente Befunde über verschiedene Methoden hinweg erhöhen das Vertrauen in die Robustheit eines Effekts dramatisch.
+
+\subsubsection{Implikationen für BCM-Parameter}
+
+Die BCM-Base-Rates stammen primär aus Laborexperimenten. Dies hat Implikationen:
+
+\begin{table}[h]
+\centering
+\caption{Validierungsstatus zentraler BCM-Parameter}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Labor-Evidenz} & \textbf{Feld-Evidenz} & \textbf{Status} \\
+\midrule
+$\lambda \approx 2.25$ (Loss Aversion) & Kahneman \& Tversky (1979) & Variiert nach Kontext & Mechanismus robust \\
+$\beta \approx 0.7$ (Present Bias) & Laibson et al. (1997) & Kontextabhängig & Mechanismus robust \\
+50\% Conditional Cooperators & Fischbacher et al. (2001) & Kulturelle Variation & Robust in WEIRD \\
+Nudge-Effekte +15\% & Diverse Meta-Analysen & DellaVigna \& Linos: +2\% & \textbf{Lab-Field Gap!} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Der Lab-Field Gap.}
+DellaVigna \& Linos (2022) dokumentierten systematisch, dass Nudge-Effekte in Feld-Implementierungen oft nur 10--20\% der Labor-Effektstärken erreichen. Mögliche Gründe:
+\begin{itemize}
+    \item \textbf{Compliance}: Im Labor folgen 100\% den Instruktionen; im Feld deutlich weniger
+    \item \textbf{Konkurrenz}: Im Feld konkurrieren Nudges mit vielen anderen Einflüssen
+    \item \textbf{Heterogenität}: Labor-Effekte sind Durchschnitte; Feld-Populationen sind heterogener
+    \item \textbf{Implementation}: Perfekte Labor-Implementierung vs. reale Umsetzungsprobleme
+\end{itemize}
+
+\begin{axiom}[Evidenzhierarchie für BCM-Parameter: MA-EPI-38]
+BCM-Parameter sind nach Evidenzqualität zu klassifizieren:
+
+\begin{enumerate}
+    \item \textbf{Höchste Evidenz} ($\star\star\star\star$): Konvergenz von Labor-RCT + Feld-RCT + Natürlichem Experiment
+    \begin{itemize}
+        \item Beispiel: Loss Aversion als Mechanismus
+        \item Interpretation: Robuster Parameter, direkt verwendbar
+    \end{itemize}
+
+    \item \textbf{Hohe Evidenz} ($\star\star\star$): Replizierte Labor-RCTs mit theoretischer Fundierung
+    \begin{itemize}
+        \item Beispiel: 50\% Conditional Cooperators (Fischbacher et al.)
+        \item Interpretation: Mechanismus validiert, Effektstärke kontextabhängig
+    \end{itemize}
+
+    \item \textbf{Mittlere Evidenz} ($\star\star$): Einzelne Labor-RCTs oder nicht-replizierte Feldstudien
+    \begin{itemize}
+        \item Beispiel: Spezifische Nudge-Effektstärken
+        \item Interpretation: Vorläufiger Parameter, Validierung nötig
+    \end{itemize}
+
+    \item \textbf{Niedrige Evidenz} ($\star$): Beobachtungsstudien oder theoretische Ableitung
+    \begin{itemize}
+        \item Beispiel: FEPSDE-Gewichtungen
+        \item Interpretation: Arbeitshypothese, empirische Validierung erforderlich
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{BEATRIX-Implikation.}
+Das System sollte bei Parameterschätzungen die Evidenzstufe kommunizieren und bei niedrigerer Evidenz breitere Konfidenzintervalle verwenden.
+\end{axiom}
+
+\subsubsection{Die Rolle von Armin Falk}
+
+Die Entwicklung von Armin Falk selbst illustriert die methodologische Evolution:
+
+\begin{table}[h]
+\centering
+\caption{Armin Falks methodologische Entwicklung}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Jahr} & \textbf{Studie} & \textbf{Methode} & \textbf{Beitrag} \\
+\midrule
+2001 & Fehr, Fischbacher, Falk & Labor-Experiment & Punishment in Public Goods \\
+2009 & Falk \& Heckman & Meta-Artikel & Verteidigung des Labors \\
+2018 & Global Preference Survey & Feld-Survey (76 Länder) & Kulturelle Variation dokumentiert \\
+2023 & Diverse Policy-Evaluationen & Natürliche Experimente & Reale Policy-Effekte \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Einsicht: Das Labor ist \textbf{notwendig aber nicht hinreichend}. Es identifiziert Mechanismen; Feld-Validierung quantifiziert reale Effektstärken.
+
+\paragraph{Implikation für das BCM.}
+Das \BCM{} verwendet Labor-Base-Rates als \textit{Default}-Werte, sollte aber:
+\begin{enumerate}
+    \item Transparenz über die Evidenzquelle herstellen
+    \item Kontextuelle Anpassung ermöglichen (z.B. kulturelle Kalibrierung)
+    \item Konfidenzintervalle der Evidenzqualität anpassen
+    \item Feld-Validierung aktiv fördern und integrieren
+\end{enumerate}
+
+\subsection{Vollständige Liste der EPI-Axiome}
+
+\begin{longtable}{@{}lll@{}}
+\caption{Alle 38 Epistemologie-Axiome} \\
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Referenz} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Referenz} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Fortsetzung auf nächster Seite}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+MA-EPI-01 & Unvollständiges Wissen & -- \\
+MA-EPI-02 & Bounded Rationality & Simon (1955) \\
+MA-EPI-03 & Irreduzible Unsicherheit & -- \\
+MA-EPI-04 & Adaptive Heuristiken & Gigerenzer \\
+MA-EPI-05 & Zwei-Systeme-Theorie & Kahneman (2011) \\
+MA-EPI-06 & Systematische Biases & Kahneman \& Tversky \\
+MA-EPI-07 & AWX: Awareness & -- \\
+MA-EPI-08 & WAX: Willingness & -- \\
+MA-EPI-09 & WTX: Transition & -- \\
+MA-EPI-10 & Sequenz AWX → WAX → WTX → V & -- \\
+MA-EPI-11 & Intention-Action Gap & -- \\
+MA-EPI-12 & Verfügbarkeitsheuristik & Tversky \& Kahneman \\
+MA-EPI-13 & Framing-Effekte & Tversky \& Kahneman (1981) \\
+MA-EPI-14 & Anchoring & -- \\
+MA-EPI-15 & Loss Aversion & Kahneman \& Tversky (1979) \\
+MA-EPI-16 & Present Bias & -- \\
+MA-EPI-17 & Status Quo Bias & -- \\
+MA-EPI-18 & Overconfidence & -- \\
+MA-EPI-19 & Lernen ist möglich & -- \\
+MA-EPI-20 & Feedback verbessert Schätzungen & -- \\
+MA-EPI-21 & Gewohnheiten reduzieren Kognition & -- \\
+MA-EPI-22 & Debiasing ist schwierig & -- \\
+MA-EPI-23 & Exponentielle Sättigung & -- \\
+MA-EPI-24 & Belief-Update folgt Bayes & -- \\
+MA-EPI-25 & Confirmation Bias & -- \\
+\midrule
+\multicolumn{3}{l}{\textit{Neu in Version 2.2:}} \\
+\midrule
+MA-EPI-26 & Base Rate Neglect & Kahneman \& Tversky (1973) \\
+MA-EPI-27 & Representativeness Heuristic & Kahneman \& Tversky (1972) \\
+MA-EPI-28 & Sunk Cost Fallacy & Arkes \& Blumer (1985) \\
+MA-EPI-29 & Endowment Effect & Thaler (1980) \\
+MA-EPI-30 & Optimism Bias & Weinstein (1980) \\
+MA-EPI-31 & Self-Serving Bias & Miller \& Ross (1975) \\
+MA-EPI-32 & Social Desirability Bias & Crowne \& Marlowe (1960) \\
+MA-EPI-33 & Omission Bias & Spranca et al. (1991) \\
+MA-EPI-34 & Moral Licensing & Merritt et al. (2010) \\
+MA-EPI-35 & Identifiable Victim Effect & Small \& Loewenstein (2003) \\
+MA-EPI-36 & Scope Insensitivity & Kahneman (1986) \\
+MA-EPI-37 & Affect Heuristic & Slovic et al. (2002) \\
+MA-EPI-38 & Evidenzhierarchie für BCM-Parameter & Falk \& Heckman (2009) \\
+\end{longtable}
+
+%==============================================================================

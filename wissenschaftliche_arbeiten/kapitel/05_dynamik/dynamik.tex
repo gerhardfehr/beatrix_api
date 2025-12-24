@@ -1,0 +1,177 @@
+\section{Kategorie 4: Dynamik (DYN)}
+%==============================================================================
+
+\epigraph{\textit{``Panta rhei'' -- Alles fließt.}}{--- Heraklit von Ephesus (ca. 500 v. Chr.)}
+
+Die Dynamik-Kategorie (25 Axiome: MA-DYN-01 bis MA-DYN-25) definiert, \textbf{wie sich Dinge verändern} -- zeitliche Prozesse, Gleichgewichte, Pfadabhängigkeiten und Evolution.
+
+\subsection{Philosophischer Hintergrund: Von Heraklit zur Komplexitätstheorie}
+
+\epigraph{\textit{``Time present and time past\\
+Are both perhaps present in time future,\\
+And time future contained in time past.''}}{--- T.S. Eliot, \textit{Four Quartets}}
+
+Die Frage nach der Natur von Veränderung und Zeit gehört zu den ältesten philosophischen Problemen. Das Dynamik-Modul des \META{} integriert Erkenntnisse aus Philosophie, Physik und Komplexitätswissenschaft.
+
+\paragraph{Die heraklitische Tradition.}
+Heraklit von Ephesus formulierte die radikale Position, dass \textit{alles} im Fluss ist: ``Man kann nicht zweimal in denselben Fluss steigen.'' Verhalten ist kein statischer Zustand, sondern ein kontinuierlicher Prozess. Diese Einsicht steht gegen die Tendenz der neoklassischen Ökonomie, Gleichgewichtszustände als ``normal'' zu betrachten.
+
+\paragraph{Der parmenidische Einwand.}
+Parmenides argumentierte dagegen, dass wahre Veränderung unmöglich sei -- was ist, kann nicht aufhören zu sein. Diese Position mag absurd erscheinen, enthält aber einen Kern: Viele ``Veränderungen'' sind nur scheinbar, sie sind Rekonfigurationen stabiler Elemente. Im BCM: Typen ($\tau$) ändern sich selten, aber ihre Manifestation in Verhalten variiert situativ.
+
+\paragraph{Aristoteles' Potentialität.}
+Aristoteles versöhnte die Positionen mit dem Konzept von \textit{dynamis} (Potentialität) und \textit{energeia} (Aktualität). Veränderung ist die Aktualisierung von Potential. Im BCM: Eine Person \textit{hat} das Potential zur Verhaltensänderung (AWX, WAX), aber die \textit{Aktualisierung} (WTX) erfordert den richtigen Kontext.
+
+\paragraph{Newtons Mechanik und die Idee der Vorhersagbarkeit.}
+Die newtonsche Physik suggerierte ein deterministisches Universum: Gegeben Anfangsbedingungen, ist die Zukunft vollständig bestimmt. Diese Idee beeinflusste die klassische Ökonomie mit ihren Gleichgewichtsmodellen. Laplace' Dämon könnte -- mit perfektem Wissen -- alle Zukunft vorhersagen.
+
+\paragraph{Poincaré, Lorenz und das Chaos.}
+Henri Poincaré (1890er) und Edward Lorenz (1963) zeigten, dass selbst deterministische Systeme \textit{praktisch} unvorhersagbar sein können -- der berühmte ``Schmetterlingseffekt''. Kleine Unterschiede in Anfangsbedingungen führen zu radikal unterschiedlichen Entwicklungen. Dies erklärt, warum Verhaltensvorhersagen fundamental unsicher sind.
+
+\paragraph{Komplexitätstheorie und Emergenz.}
+Die Santa Fe School (Holland, Arthur, Kauffman) etablierte, dass komplexe Systeme Eigenschaften zeigen, die nicht aus ihren Teilen vorhersagbar sind. Soziale Normen \textit{emergieren} aus individuellen Interaktionen. Tipping Points entstehen, wenn lokale Änderungen globale Kaskaden auslösen.
+
+\paragraph{Zeitliche Inkonsistenz und der gespaltene Wille.}
+Die philosophische Frage nach der personalen Identität über Zeit (Locke, Parfit) verbindet sich mit dem ökonomischen Problem der zeitlichen Inkonsistenz. Bin ``Ich heute'' derselbe wie ``Ich morgen''? Wenn nicht -- warum sollte Ich-heute für Ich-morgen sparen? Hyperbolic Discounting und Present Bias sind nicht ``irrational'', sondern reflektieren die genuine Pluralität des Selbst über Zeit.
+
+\subsection{Temporale Grundstruktur}
+
+\begin{axiom}[Diskrete Events: MA-DYN-02]
+Entscheidungen sind diskrete Events in kontinuierlicher Zeit:
+\begin{equation}
+V(t) = \sum_i V_i \cdot \delta(t - t_i)
+\end{equation}
+
+\paragraph{Philosophische Bedeutung.}
+Dies formalisiert die Intuition, dass Verhalten aus diskreten \textit{Handlungen} besteht, nicht aus kontinuierlichen Zuständen. Eine Entscheidung ist ein ``Sprung'' -- mathematisch eine Dirac-Delta-Funktion.
+
+\paragraph{Praktische Implikation.}
+Interventionen müssen auf diese Entscheidungspunkte zielen. Der ``Moment der Wahrheit'' ist der Zeitpunkt $t_i$, an dem die Entscheidung fällt.
+\end{axiom}
+
+\begin{axiom}[Pfadabhängigkeit: MA-DYN-03]
+\begin{equation}
+U(V, t) = f(V, \{V_\tau : \tau < t\})
+\end{equation}
+Der Nutzen einer Handlung hängt von der Geschichte ab, nicht nur vom aktuellen Zustand.
+
+\paragraph{Philosophische Begründung.}
+Dies ist die formale Ablehnung des ``markovianischen'' Menschenbilds. Menschen sind nicht gedächtnislos. Vergangene Entscheidungen beeinflussen zukünftige -- durch Gewohnheit, Identität, Sunk-Cost-Effekte und Pfadabhängigkeit.
+
+\paragraph{Empirische Evidenz.}
+Arthur (1989) zeigte, dass technologische ``Lock-ins'' (QWERTY-Tastatur, VHS vs. Betamax) durch Pfadabhängigkeit entstehen. Dasselbe gilt für Verhaltens-Lock-ins.
+\end{axiom}
+
+\subsection{Gleichgewichte und Stabilität}
+
+\begin{axiom}[Multiple Equilibria: MA-DYN-04]
+Es kann mehrere stabile Zustände geben. Das System kann in verschiedenen Gleichgewichten ``gefangen'' sein.
+
+\paragraph{Philosophische Bedeutung.}
+Dies widerspricht der Idee eines \textit{einzigen} optimalen Zustands. Gesellschaften können in ``guten'' oder ``schlechten'' Gleichgewichten stecken (z.B. hohe vs. niedrige Kooperation). Der aktuelle Zustand ist nicht notwendig der ``beste''.
+
+\paragraph{Interventions-Implikation.}
+Es genügt nicht, ein ``besseres'' Gleichgewicht zu kennen. Man muss den \textit{Übergang} orchestrieren -- und dieser kann eine kritische Masse erfordern.
+\end{axiom}
+
+\begin{axiom}[Tipping Points: MA-DYN-06]
+Kritische Schwellen existieren, an denen kleine Änderungen große Zustandswechsel auslösen können.
+
+\paragraph{Mathematische Grundlage.}
+Tipping Points sind Bifurkationspunkte in dynamischen Systemen. Am kritischen Punkt divergiert die ``Sensitivität'' gegen unendlich -- minimale Änderungen haben maximale Wirkung.
+
+\paragraph{Empirische Beispiele.}
+\begin{itemize}
+    \item \textbf{Soziale Normen}: Rauchen in Restaurants war in den 1980ern normal, kippte in den 2000ern
+    \item \textbf{Technologieadoption}: Elektroautos brauchten Jahre der Stagnation, dann exponentielles Wachstum
+    \item \textbf{Sprache}: Neue Begriffe (``Gender'', ``Climate Change'') kippen von Randphänomenen zum Mainstream
+\end{itemize}
+\end{axiom}
+
+\subsection{Gewohnheitsformation}
+
+\begin{axiom}[Habit Loop: MA-DYN-08]
+Gewohnheiten folgen dem Zyklus:
+\begin{equation}
+\text{Cue} \rightarrow \text{Routine} \rightarrow \text{Reward}
+\end{equation}
+Wiederholung stärkt die Assoziation zwischen Cue und Routine.
+
+\paragraph{Neurowissenschaftliche Grundlage.}
+Der Habit Loop ist im Basalganglien verankert (Yin \& Knowlton, 2006). Bei Gewohnheitsformation verschiebt sich die Aktivität von präfrontalem Kortex (deliberativ) zu Striatum (automatisch). Gewohnheiten werden ``ausgelagert'' -- sie erfordern keine bewusste Aufmerksamkeit mehr.
+
+\paragraph{Interventions-Implikation.}
+Gewohnheiten zu ändern erfordert, den \textit{Cue} zu identifizieren und entweder zu entfernen (DESIGN) oder mit einer neuen Routine zu verknüpfen (``habit substitution'').
+\end{axiom}
+
+\subsection{Soziale Dynamik}
+
+\begin{axiom}[Soziale Diffusion: MA-DYN-10]
+\begin{equation}
+\frac{\partial P(V)}{\partial t} = \beta \cdot P(V) \cdot (1 - P(V)) \cdot f(\text{Network})
+\end{equation}
+Verhalten breitet sich sozial aus, analog zu epidemiologischen Modellen.
+
+\paragraph{Mathematische Struktur.}
+Dies ist eine logistische Wachstumsgleichung. Der Term $P(V) \cdot (1-P(V))$ bedeutet: Diffusion ist maximal, wenn 50\% adoptiert haben. Am Anfang ist zu wenig ``Ansteckungspotential'', am Ende zu wenig ``Empfängliche''.
+
+\paragraph{Netzwerk-Effekte.}
+Die Funktion $f(\text{Network})$ modelliert, dass Diffusion netzwerkabhängig ist. In dichten, homogenen Netzwerken ist $\beta$ hoch; in fragmentierten Netzwerken kann Diffusion stagnieren.
+\end{axiom}
+
+\begin{axiom}[Kritische Masse: MA-DYN-11]
+Ab einer Schwelle $P^* \approx 25\%$ (Centola, 2018) wird Verhalten selbstverstärkend.
+
+\paragraph{Empirische Evidenz.}
+Centola (2018) zeigte in kontrollierten Experimenten, dass soziale Konventionen kippen, wenn ca. 25\% eine Alternative praktizieren. Dies ist robust über verschiedene Kontexte.
+
+\paragraph{Praktische Implikation.}
+Um eine Norm zu ändern, muss nicht die gesamte Population überzeugt werden -- nur eine kritische Minderheit. Dies macht Verhaltensänderung ``effizienter'' als es erscheint.
+\end{axiom}
+
+\begin{axiom}[Norm-Kaskaden: MA-DYN-12]
+Normen können rapid kippen, wenn die kritische Masse erreicht wird.
+
+\paragraph{Historische Beispiele.}
+\begin{itemize}
+    \item \textbf{Fall der Berliner Mauer} (1989): Jahrzehntelange Stabilität, dann Kollaps innerhalb von Wochen
+    \item \textbf{MeToo-Bewegung} (2017): Jahrzehntelange Toleranz für Belästigung, dann rapides Kippen
+    \item \textbf{Gay Marriage}: Von Mehrheitsablehnung zu Mehrheitsakzeptanz innerhalb einer Generation
+\end{itemize}
+
+\paragraph{Theoretische Erklärung.}
+Kuran (1989) sprach von ``preference falsification'': Menschen verbergen ihre wahren Präferenzen, wenn sie glauben, in der Minderheit zu sein. Kaskaden entstehen, wenn ``pluralistische Ignoranz'' aufgedeckt wird.
+\end{axiom}
+
+\subsection{Temporale Biases}
+
+\begin{axiom}[Hyperbolisches Discounting: MA-DYN-14]
+\begin{equation}
+D(t) = \frac{1}{1 + k \cdot t} \quad \text{statt} \quad D(t) = e^{-\delta t}
+\end{equation}
+Die tatsächliche Diskontierung ist hyperbolisch, nicht exponentiell. Dies führt zu zeitinkonsistenten Präferenzen.
+
+\paragraph{Philosophische Implikation.}
+Hyperbolisches Discounting bedeutet, dass Präferenzen zeitinkonsistent sind: Heute präferiere ich 100€ heute über 110€ morgen, aber gleichzeitig 110€ in 31 Tagen über 100€ in 30 Tagen. Dies ist ``irrational'' im Sinne der Erwartungsnutzentheorie, aber universell.
+
+\paragraph{Evolutionäre Erklärung.}
+In der evolutionären Umgebung war die Zukunft radikal unsicher. Immediate Belohnung hatte Überlebenswert. Die ``Irrationalität'' ist ein evolutionäres Erbe.
+
+\paragraph{Interventions-Implikation.}
+Commitment Devices (Odysseus am Mast) helfen, die ``irrationale'' zukünftige Person zu binden. Pre-Commitment ist eine rationale Strategie für ein irrationales Selbst.
+\end{axiom}
+
+\begin{axiom}[Hedonic Treadmill: MA-DYN-20]
+\begin{equation}
+\lim_{t \rightarrow \infty} U(t|\text{Change}) = U_{\text{baseline}}
+\end{equation}
+Glück kehrt nach positiven oder negativen Events zur Baseline zurück (Kahneman, 1999).
+
+\paragraph{Philosophische Bedeutung.}
+Dies ist eine empirische Bestätigung der stoischen und buddhistischen Intuition, dass externe Güter kein dauerhaftes Glück bringen. Hedonic Adaptation bedeutet: Lottogewinner sind langfristig nicht glücklicher, Querschnittsgelähmte nicht unglücklicher.
+
+\paragraph{Interventions-Implikation.}
+Interventionen, die auf dauerhaftes ``Glück'' durch Konsum zielen, sind zum Scheitern verurteilt. Nachhaltige Wohlbefindenssteigerung erfordert andere Strategien (Flow, Meaning, Relationships).
+\end{axiom}
+
+%==============================================================================

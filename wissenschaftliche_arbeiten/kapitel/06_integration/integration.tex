@@ -1,0 +1,49 @@
+\section{Integration mit operativen Modulen}
+%==============================================================================
+
+\subsection{Validierungs-Beziehungen}
+
+Jedes \META-Axiom spezifiziert im Feld \texttt{validates}, welche operativen Module es fundiert:
+
+\begin{table}[h]
+\centering
+\caption{Validierungs-Matrix: META → Operative Module}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{META-Kategorie} & \textbf{INU} & \textbf{KNU} & \textbf{IDN} & \textbf{LAMBDA} \\
+\midrule
+ONT (26 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
+EPI (38 Axiome) & \checkmark & \checkmark & \checkmark & -- \\
+GOV (25 Axiome) & -- & -- & -- & -- \\
+DYN (25 Axiome) & \checkmark & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Die BCM 2.2 Kernformel}
+
+Die Integration aller Module kulminiert in der BCM 2.2 Kernformel für den effektiven Nutzen:
+
+\begin{equation}
+U_{\text{eff}} = (1-\lambda) \cdot U_{\text{INU}} + \lambda \cdot U_{\text{KNU}} + U_{\text{IDN}}(a, \sigma, \phi, \tilde{\mu}; F, s, m)
+\label{eq:bcm_core}
+\end{equation}
+
+wobei der Identitätsnutzen $U_{\text{IDN}}$ nach dem BCM 2.2 Vollmodell berechnet wird:
+
+\begin{equation}
+U_{\text{IDN}} = U_{\text{mat}} - \mu_{\text{ID}}\left[L_{\text{aff}} + \omega_1 \kappa (a - \phi)^2 + \omega_3 \psi \cdot \mathbb{E}[(\phi - \eta)^2]\right] - C_{\text{MI}}(\tilde{\mu}) - C_{\text{info}}(\sigma)
+\end{equation}
+
+\subsection{META-Axiome als Constraints}
+
+Die \META-Axiome fungieren als \textbf{Constraints} für die operativen Module:
+
+\begin{itemize}
+    \item \textbf{ONT-Constraints}: Definieren, welche Entitäten (Subjekte, Gruppen, Identitäten) modelliert werden können
+    \item \textbf{EPI-Constraints}: Definieren, welche kognitiven Verzerrungen berücksichtigt werden müssen
+    \item \textbf{GOV-Constraints}: Definieren, welche Interventionen ethisch zulässig sind
+    \item \textbf{DYN-Constraints}: Definieren, welche zeitlichen Prozesse modelliert werden müssen
+\end{itemize}
+
+%==============================================================================

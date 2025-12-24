@@ -1,0 +1,399 @@
+% 10 Beispiel-Axiome mit vollständiger 9-Felder-Struktur
+% Zur Integration in Meta_Modul_Paper.tex Appendix
+
+%==============================================================================
+% Custom Environment für Axiom-Definitionen
+%==============================================================================
+
+% Füge dies in die Präambel ein:
+% \newenvironment{axiomdef}[1]{%
+%   \begin{tcolorbox}[colback=blue!5,colframe=blue!40,title=\textbf{#1}]
+% }{%
+%   \end{tcolorbox}
+% }
+
+%==============================================================================
+% BEISPIEL 1: MA-ONT-01 (Fundamentales Ontologie-Axiom)
+%==============================================================================
+
+\subsubsection*{MA-ONT-01: Existenz des Subjekts}
+
+\textbf{Statement:} Es existiert mindestens ein Entscheidungssubjekt $\sigma$.
+
+\textbf{Formel:}
+\begin{equation}
+\exists \sigma: \sigma \in \Sigma, \quad |\Sigma| \geq 1
+\end{equation}
+
+\textbf{Beschreibung:}
+Dieses Axiom postuliert die Existenz von Entscheidungsträgern als fundamentale Voraussetzung für Verhaltensmodellierung. Ein Subjekt $\sigma$ ist eine Entität, die Präferenzen hat, Informationen verarbeitet und Entscheidungen trifft. Die Menge aller Subjekte $\Sigma$ kann Individuen, Haushalte oder Organisationen umfassen.
+
+\textbf{BCM-Relevanz:}
+Ohne Subjekte gibt es kein Verhalten zu modellieren. Dieses Axiom ist die ontologische Grundlage für alle BCM-Module. Es ermöglicht die Definition von Nutzenfunktionen (INU), sozialen Präferenzen (KNU) und Identitäten (IDN). Das BCM ist subjektzentriert -- alle Formeln haben mindestens ein $\sigma$ als Argument.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX operiert immer mit mindestens einer Persona als Subjekt. Das LLM analysiert Persona-Beschreibungen und inferiert Parameter für dieses spezifische $\sigma$. Bei Populationsanalysen werden multiple Subjekte $\sigma_1, \sigma_2, ..., \sigma_n$ modelliert. Die Persona-Definition ist der Input für EST-INF-01 (Persona Parsing).
+
+\textbf{Konsequenz bei Fehlen:}
+Ohne dieses Axiom wäre das BCM ein abstraktes mathematisches System ohne Anwendungsbezug. Es gäbe keine Entität, deren Verhalten vorhergesagt oder beeinflusst werden könnte. Interventionen hätten kein Ziel. Die gesamte BCM-Architektur würde kollabieren.
+
+\textbf{Validiert:} INU, KNU, IDN
+
+\textbf{Abhängigkeiten:} -- (fundamentales Axiom ohne Abhängigkeiten)
+
+\textbf{Literatur:} Grundlegende Annahme der Entscheidungstheorie; vgl. von Neumann \& Morgenstern (1944)
+
+%==============================================================================
+% BEISPIEL 2: MA-ONT-07 (Drei-Komponenten-Nutzen)
+%==============================================================================
+
+\subsubsection*{MA-ONT-07: Drei-Komponenten-Nutzen}
+
+\textbf{Statement:} Der Gesamtnutzen setzt sich aus drei Komponenten zusammen: INU, KNU und IDN.
+
+\textbf{Formel:}
+\begin{equation}
+U = U_{\text{INU}} \oplus U_{\text{KNU}} \oplus U_{\text{IDN}} = \Psi(U_{\text{INU}}, U_{\text{KNU}}, U_{\text{IDN}})
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen maximieren nicht nur ihren individuellen Nutzen (INU), sondern berücksichtigen auch kollektive Ergebnisse (KNU) und Identitätskongruenz (IDN). Der Operator $\Psi$ kombiniert diese drei Komponenten nicht-linear. Die relative Gewichtung hängt von Kontext, Person und aktivierter Identität ab.
+
+\textbf{BCM-Relevanz:}
+Dies ist das Herzstück des BCM. Es überwindet die Beschränkung klassischer Ökonomie auf Eigennutz (homo oeconomicus). Das BCM modelliert hybride Akteure, die situativ zwischen Eigeninteresse und Kooperation wechseln. Der $\lambda$-Parameter reguliert die INU-KNU-Balance.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt alle drei Komponenten separat. Das LLM analysiert:
+\begin{itemize}
+    \item INU: Individuelle Präferenzen (FEPSDE-Dimensionen)
+    \item KNU: Kooperationsbereitschaft, $\lambda$-Wert
+    \item IDN: Identitätslandschaft, $\mu_{ID}$-Sensitivität
+\end{itemize}
+Die Kombination erfolgt durch die BCM 2.2 Kernformel.
+
+\textbf{Konsequenz bei Fehlen:}
+Reduktion auf homo oeconomicus. Kooperatives Verhalten (Public Goods, Organspende, Klimaschutz) wäre nicht erklärbar. Conditional Cooperators (~50\% der Population) würden als irrational fehlklassifiziert. Interventionen, die auf soziale Normen oder Identität setzen, hätten keine theoretische Grundlage.
+
+\textbf{Validiert:} INU, KNU, IDN
+
+\textbf{Abhängigkeiten:} MA-ONT-03 (Existenz von Nutzen)
+
+\textbf{Literatur:} Fehr \& Schmidt (1999); Akerlof \& Kranton (2000)
+
+%==============================================================================
+% BEISPIEL 3: MA-ONT-26 (5-Ebenen-Hierarchie)
+%==============================================================================
+
+\subsubsection*{MA-ONT-26: BCM-Ebenen-Hierarchie}
+
+\textbf{Statement:} Das BCM operiert auf 5 hierarchischen Ebenen sozialer Realität.
+
+\textbf{Formel:}
+\begin{equation}
+E = \{\text{META}, \text{MAKRO}, \text{MESO}, \text{MIKRO}, \text{IND}\}
+\end{equation}
+\begin{equation}
+\forall e_i, e_j \in E: i < j \Rightarrow e_i \text{ kontextualisiert } e_j
+\end{equation}
+
+\textbf{Beschreibung:}
+Soziale Realität ist geschichtet. META umfasst kulturelle Grundnormen (Individualismus vs. Kollektivismus), MAKRO institutionelle Strukturen (Staat, Recht), MESO Organisationen (Unternehmen, Vereine), MIKRO Gruppen (Teams, Familien), IND die Personenebene. Höhere Ebenen setzen Defaults für niedrigere.
+
+\textbf{BCM-Relevanz:}
+Ermöglicht kontextspezifische Parametrisierung. Ein $\lambda$-Wert in einer kollektivistischen Kultur (META) ist anders zu interpretieren als in einer individualistischen. Die Hierarchie erklärt, warum dieselbe Person in verschiedenen Kontexten unterschiedlich handelt.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX verwendet das LAMBDA-Modul zur Kontextualisierung. Bei der Parameterschätzung fragt das LLM:
+\begin{itemize}
+    \item Welche kulturellen Defaults gelten? (META)
+    \item In welchem institutionellen Rahmen? (MAKRO)
+    \item Welche Organisationskultur? (MESO)
+    \item Welche Gruppennormen? (MIKRO)
+    \item Welche individuellen Traits? (IND)
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kontextblindheit. BEATRIX würde dieselben Parameter für alle Situationen schätzen. Kulturelle Unterschiede (z.B. WEIRD vs. non-WEIRD Populationen) würden ignoriert. Interventionen wären nicht lokal anpassbar. Ecological validity der Vorhersagen würde massiv sinken.
+
+\textbf{Validiert:} LAMBDA, IDN, KNU
+
+\textbf{Abhängigkeiten:} MA-ONT-04 (Existenz von Kontext)
+
+\textbf{Literatur:} Bronfenbrenner (1979); Hofstede (2001); Henrich et al. (2010)
+
+%==============================================================================
+% BEISPIEL 4: MA-EPI-02 (Bounded Rationality)
+%==============================================================================
+
+\subsubsection*{MA-EPI-02: Bounded Rationality}
+
+\textbf{Statement:} Rationalität ist durch kognitive Kapazität, Zeit und Information begrenzt.
+
+\textbf{Formel:}
+\begin{equation}
+R_{\text{actual}} < R_{\text{optimal}}
+\end{equation}
+\begin{equation}
+R_{\text{actual}} = f(\text{Kapazität}, \text{Zeit}, \text{Information})
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen sind keine perfekten Optimierer. Sie haben begrenzte Aufmerksamkeit, beschränktes Arbeitsgedächtnis und limitierte Verarbeitungsgeschwindigkeit. Statt globaler Optimierung verwenden sie ``Satisficing'' -- sie wählen die erste Option, die ein Aspirationsniveau erreicht.
+
+\textbf{BCM-Relevanz:}
+Rechtfertigt das gesamte BCM-Paradigma. Wenn Menschen vollständig rational wären, bräuchte es keine Verhaltensökonomie. Bounded Rationality erklärt, warum Heuristiken (MA-EPI-04), Biases (MA-EPI-06) und System-1-Denken (MA-EPI-05) existieren. Es ist die epistemologische Grundlage für alle weiteren EPI-Axiome.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX modelliert keine perfekt rationalen Agenten. Das LLM berücksichtigt bei der Parameterschätzung:
+\begin{itemize}
+    \item Cognitive Load des Entscheidungskontexts
+    \item Zeitdruck und Entscheidungskomplexität
+    \item Informationsverfügbarkeit und -qualität
+\end{itemize}
+Hoher Zeitdruck → mehr System-1 → höhere Bias-Anfälligkeit.
+
+\textbf{Konsequenz bei Fehlen:}
+Das BCM würde zu einem neoklassischen Modell degenerieren. Nudges, Defaults, Framing -- alles wäre wirkungslos bei perfekt rationalen Agenten. Die empirische Evidenz für systematische Abweichungen von Rationalität (Kahneman, Thaler) wäre nicht integrierbar.
+
+\textbf{Validiert:} INU, AWX
+
+\textbf{Abhängigkeiten:} MA-EPI-01 (Unvollständiges Wissen)
+
+\textbf{Literatur:} Simon (1955, 1957); Gigerenzer \& Selten (2001)
+
+%==============================================================================
+% BEISPIEL 5: MA-EPI-15 (Loss Aversion)
+%==============================================================================
+
+\subsubsection*{MA-EPI-15: Loss Aversion}
+
+\textbf{Statement:} Verluste wiegen subjektiv schwerer als betragsmäßig gleiche Gewinne.
+
+\textbf{Formel:}
+\begin{equation}
+|U(\text{Loss})| > |U(\text{Gain})| \quad \text{für } |\text{Loss}| = |\text{Gain}|
+\end{equation}
+Typisch: $\lambda_{\text{LA}} \approx 2$ (Verluste wiegen doppelt so schwer)
+
+\textbf{Beschreibung:}
+Menschen bewerten Outcomes relativ zu einem Referenzpunkt (meist Status Quo). Die Nutzenfunktion ist im Verlustbereich steiler als im Gewinnbereich. Ein Verlust von 100€ schmerzt mehr als ein Gewinn von 100€ freut. Dies erklärt Risikoaversion bei Gewinnen und Risikofreude bei Verlusten.
+
+\textbf{BCM-Relevanz:}
+Zentral für das INU-Modul. Loss Aversion erklärt:
+\begin{itemize}
+    \item Status Quo Bias (MA-EPI-17): Besitz wird überbewertet
+    \item Endowment Effect (MA-EPI-29): WTA > WTP
+    \item Framing-Effekte (MA-EPI-13): ``90\% Überlebensrate'' vs. ``10\% Sterberate''
+\end{itemize}
+Der $\lambda_{\text{LA}}$-Parameter ist ein zentraler BCM-Parameter.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt $\lambda_{\text{LA}}$ für jede Persona. Das LLM achtet auf:
+\begin{itemize}
+    \item Hinweise auf Risikoaversion in der Persona-Beschreibung
+    \item Framing der Entscheidungssituation (Gewinn vs. Verlust)
+    \item Referenzpunkt-Verankerung
+\end{itemize}
+Interventionen können Loss Framing nutzen (``Sie verlieren X'' statt ``Sie gewinnen Y'').
+
+\textbf{Konsequenz bei Fehlen:}
+Symmetrische Nutzenfunktion wie in klassischer Ökonomie. Framing wäre irrelevant. Status Quo Bias unerklärlich. Interventionsdesign würde auf ein mächtiges Tool (Loss Framing) verzichten. Organspende-Defaults wären nicht begründbar.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-ONT-03 (Existenz von Nutzen)
+
+\textbf{Literatur:} Kahneman \& Tversky (1979); Tversky \& Kahneman (1991)
+
+%==============================================================================
+% BEISPIEL 6: MA-EPI-26 (Base Rate Neglect)
+%==============================================================================
+
+\subsubsection*{MA-EPI-26: Base Rate Neglect}
+
+\textbf{Statement:} Prior-Wahrscheinlichkeiten werden zugunsten von Einzelfall-Information ignoriert.
+
+\textbf{Formel:}
+\begin{equation}
+\hat{P}(H|E) \approx P(E|H), \quad \text{ignoriert } P(H)
+\end{equation}
+Bayes-korrekt wäre: $P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$
+
+\textbf{Beschreibung:}
+Menschen überschätzen die diagnostische Kraft von Einzelfall-Evidenz und unterschätzen Basisraten. Wenn 1\% der Population eine Krankheit hat und ein Test 90\% sensitiv ist, wird ein positives Ergebnis massiv überinterpretiert. Der ``Lawyer/Engineer''-Fall von Kahneman \& Tversky ist klassisch.
+
+\textbf{BCM-Relevanz:}
+Erklärt systematische Fehleinschätzungen bei Typenklassifikation. Wenn 50\% Conditional Cooperators, 30\% Self-Interested und 10\% Altruisten in der Population sind, dürfen diese Base Rates nicht ignoriert werden. Sonst werden seltene Typen (Altruisten) überschätzt.
+
+\textbf{BEATRIX-Relevanz:}
+\textbf{Kritisch!} Das LLM muss explizit auf Base Rates kalibriert werden:
+\begin{itemize}
+    \item EST-CAL-03 implementiert Few-Shot Anchoring mit empirischen Verteilungen
+    \item Prompt enthält: ``Beachte: ~50\% CC, ~30\% SI, ~10\% ALT in typischen Populationen''
+    \item Ohne dies würde das LLM zu viele Altruisten ``sehen''
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Systematische Überschätzung seltener Typen. LLM-Outputs wären unplausibel verteilt. Interventionen würden für die falsche Zielgruppe designt. Die IRR (Inter-Rater Reliability) würde sinken, da verschiedene Prompts unterschiedliche Base Rate Assumptions hätten.
+
+\textbf{Validiert:} AWX, ESTIMATION
+
+\textbf{Abhängigkeiten:} MA-EPI-24 (Bayes'sches Updating)
+
+\textbf{Literatur:} Kahneman \& Tversky (1973); Bar-Hillel (1980)
+
+%==============================================================================
+% BEISPIEL 7: MA-GOV-06 (Subsidiarität)
+%==============================================================================
+
+\subsubsection*{MA-GOV-06: Subsidiarität (Principle of Minimal Intervention)}
+
+\textbf{Statement:} Die mildeste wirksame Intervention ist zu wählen.
+
+\textbf{Formel:}
+\begin{equation}
+I^* = \arg\min_{I} \text{Restrictiveness}(I) \quad \text{s.t. } \text{Effectiveness}(I) \geq \theta
+\end{equation}
+
+\textbf{Beschreibung:}
+Interventionen sollen so wenig wie möglich in die individuelle Freiheit eingreifen. Ein Nudge ist einem Verbot vorzuziehen, wenn beide das Ziel erreichen. Die Eskalationsleiter lautet: NUDGE → BOOST → THINK → INCENTIVE → REGULATE. Nur wenn mildere Stufen versagen, sind stärkere gerechtfertigt.
+
+\textbf{BCM-Relevanz:}
+Ethisches Leitprinzip für Interventionsdesign. Das BCM ist deskriptiv (beschreibt Verhalten), aber die GOV-Axiome geben normative Leitplanken für die \textit{Anwendung} des BCM. Subsidiarität verhindert Überregulierung und wahrt Autonomie.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX generiert Interventionsvorschläge mit Freiheitsgrad-Ranking:
+\begin{itemize}
+    \item Output enthält: ``Intervention X (NUDGE, Freedom: High)''
+    \item Bei mehreren wirksamen Optionen wird die mildeste priorisiert
+    \item Warnung, wenn nur REGULATE-Level Interventionen wirksam sind
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Paternalismus-Gefahr. Interventionen könnten systematisch zu restriktiv sein. Vertrauensverlust bei Zielgruppen. Ethische Kritik am System (``Manipulation''). Reaktanz und Backlash bei Betroffenen. Langfristige Akzeptanzprobleme.
+
+\textbf{Validiert:} META (Governance-Rahmen)
+
+\textbf{Abhängigkeiten:} MA-GOV-03 (Autonomie-Primat)
+
+\textbf{Literatur:} Thaler \& Sunstein (2008); Sunstein (2014); Hausman \& Welch (2010)
+
+%==============================================================================
+% BEISPIEL 8: MA-GOV-14 (Crowding Out)
+%==============================================================================
+
+\subsubsection*{MA-GOV-14: Crowding-Out vermeiden}
+
+\textbf{Statement:} Extrinsische Anreize können intrinsische Motivation zerstören.
+
+\textbf{Formel:}
+\begin{equation}
+\frac{\partial U_{\text{intrinsic}}}{\partial \text{Incentive}} < 0 \quad \text{ist möglich}
+\end{equation}
+
+\textbf{Beschreibung:}
+Wenn Menschen für eine Tätigkeit bezahlt werden, die sie vorher aus intrinsischer Motivation getan haben, kann die Motivation sinken. Das Blutspende-Paradox: Bezahlung reduziert Spenden, weil der ``Warm Glow'' des Altruismus durch monetäre Transaktion ersetzt wird. Der Effekt ist kontextabhängig.
+
+\textbf{BCM-Relevanz:}
+Warnung vor naivem Incentive-Design. Das BCM modelliert nicht nur INU (extrinsisch), sondern auch IDN (intrinsisch). Incentives können die IDN-Komponente beschädigen. Die Interaktion zwischen INU und IDN ist nicht-additiv: $U \neq U_{\text{INU}} + U_{\text{IDN}}$.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX prüft bei INCENTIVE-Interventionen auf Crowding-Out-Risiko:
+\begin{itemize}
+    \item Hohe intrinsische Motivation der Persona? → Warnung
+    \item Domäne mit starken Identitätsnormen (Ehrenamt, Pflege)? → Warnung
+    \item Alternativen: IDENTITY oder SOCIAL statt INCENTIVE vorschlagen
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Kontraproduktive Interventionen. Bezahlung von Ehrenamtlichen könnte deren Engagement zerstören. Kindern Geld für Lesen zu geben könnte Lesefreude töten. Langfristig höhere Kosten, da intrinsische Motivation nicht wiederherstellbar.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-GOV-07 (8 Interventionstypen)
+
+\textbf{Literatur:} Frey \& Jegen (2001); Deci et al. (1999); Gneezy et al. (2011)
+
+%==============================================================================
+% BEISPIEL 9: MA-DYN-11 (Kritische Masse)
+%==============================================================================
+
+\subsubsection*{MA-DYN-11: Kritische Masse}
+
+\textbf{Statement:} Ab einer Schwelle wird Verhalten selbstverstärkend.
+
+\textbf{Formel:}
+\begin{equation}
+\exists \theta: \frac{dP(V)}{dt} > 0 \quad \forall P(V) > \theta
+\end{equation}
+Empirisch: $\theta \approx 25\%$ (Centola, 2018)
+
+\textbf{Beschreibung:}
+Soziale Diffusion folgt S-Kurven. Bis zur kritischen Masse ist Adoption langsam und fragil. Nach Überschreiten der Schwelle wird das Verhalten zur neuen Norm und breitet sich selbstverstärkend aus. Conditional Cooperators warten auf ``genug andere'' bevor sie kooperieren.
+
+\textbf{BCM-Relevanz:}
+Erklärt Nicht-Linearität von Verhaltensänderung. Kleine Interventionen vor der Schwelle haben minimalen Effekt; nach der Schwelle explodiert die Wirkung. Das BCM modelliert diese Dynamik durch $\lambda$-Abhängigkeit von wahrgenommener Kooperation anderer.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX berücksichtigt kritische Masse bei Interventionsplanung:
+\begin{itemize}
+    \item Bei $P(V) < \theta$: Fokus auf Early Adopters, Seed-Interventionen
+    \item Bei $P(V) \approx \theta$: Maximaler Hebel, ``Tipping''-Strategien
+    \item Bei $P(V) > \theta$: Selbstläufer, nur Stabilisierung nötig
+\end{itemize}
+
+\textbf{Konsequenz bei Fehlen:}
+Lineare Extrapolation von Pilotprojekten. Erfolg in kleinen Gruppen würde fälschlich auf Populationen hochgerechnet. Interventionen würden zu früh abgebrochen (vor Erreichen der Schwelle) oder zu lange fortgesetzt (nach Selbstläufer-Phase).
+
+\textbf{Validiert:} KNU
+
+\textbf{Abhängigkeiten:} MA-DYN-10 (Soziale Diffusion), MA-DYN-06 (Tipping Points)
+
+\textbf{Literatur:} Centola (2018); Granovetter (1978); Schelling (1978)
+
+%==============================================================================
+% BEISPIEL 10: MA-DYN-14 (Hyperbolisches Discounting)
+%==============================================================================
+
+\subsubsection*{MA-DYN-14: Hyperbolisches Discounting}
+
+\textbf{Statement:} Die tatsächliche Diskontierung ist hyperbolisch, nicht exponentiell.
+
+\textbf{Formel:}
+\begin{equation}
+D(t) = \frac{1}{1 + kt} \quad \text{statt} \quad D(t) = e^{-\delta t}
+\end{equation}
+
+\textbf{Beschreibung:}
+Menschen diskontieren die nahe Zukunft stärker als die ferne. Die Präferenz zwischen ``heute 100€'' und ``morgen 110€'' ist anders als zwischen ``in 365 Tagen 100€'' und ``in 366 Tagen 110€'', obwohl der Zeitabstand identisch ist. Dies führt zu zeitinkonsistenten Präferenzen und Prokrastination.
+
+\textbf{BCM-Relevanz:}
+Fundamentale Abweichung vom ökonomischen Standardmodell (exponentielles Discounting). Erklärt:
+\begin{itemize}
+    \item Warum gute Vorsätze scheitern
+    \item Warum Commitment Devices funktionieren (MA-DYN-09)
+    \item Warum Present Bias (MA-EPI-16) existiert
+\end{itemize}
+Der Parameter $k$ ist individuell und kontextabhängig.
+
+\textbf{BEATRIX-Relevanz:}
+BEATRIX schätzt den $k$-Parameter für Personas:
+\begin{itemize}
+    \item Hinweise auf Impulsivität → höheres $k$
+    \item Langfristplanung in Persona → niedrigeres $k$
+    \item Interventionsdesign: Immediate Rewards vs. Delayed Consequences
+\end{itemize}
+Bei hohem $k$: NUDGE mit sofortiger Gratifikation effektiver.
+
+\textbf{Konsequenz bei Fehlen:}
+Überschätzung der Wirksamkeit langfristiger Anreize. ``Rente mit 67'' motiviert 25-Jährige nicht. Präventionsmaßnahmen (Gesundheit, Klimaschutz) würden überschätzt. Interventionen bräuchten keine zeitliche Nähe zur Handlung.
+
+\textbf{Validiert:} INU
+
+\textbf{Abhängigkeiten:} MA-DYN-13 (Discounting existiert)
+
+\textbf{Literatur:} Laibson (1997); Frederick et al. (2002); O'Donoghue \& Rabin (1999)
+
+%==============================================================================
+% Ende der 10 Beispiele
+%==============================================================================

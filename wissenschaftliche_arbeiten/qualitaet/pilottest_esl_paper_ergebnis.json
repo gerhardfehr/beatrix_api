@@ -1,0 +1,213 @@
+{
+  "analysen": [
+    {
+      "aussage": "Das ESL behandelt Sprache nicht als neutrales Kommunikationsmedium, sondern als empirisches Substrat der Erkenntnis selbst.",
+      "K": 0.575,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.275,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Experteneinschätzung/Theorie"
+      }
+    },
+    {
+      "aussage": "Durch die Kalibrierungsfunktion K wird das Verhältnis zwischen sprachlicher Behauptung und empirischer Evidenz quantifizierbar.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Die Sprache, in der wissenschaftliche Erkenntnisse formuliert werden, blieb bisher selbst unkalibriert.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Viele publizierte Befunde lassen sich nicht reproduzieren.",
+      "K": 0.7,
+      "kategorie": "🟡 Teilstabil",
+      "B": 0.65,
+      "E": 0.95,
+      "diskrepanz_typ": "unterbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": "viele",
+        "evidenz_stufe": "Meta-Analyse/Systematic Review"
+      }
+    },
+    {
+      "aussage": "Eine Aussage gilt als empirisch stabil, wenn K >= 0.8.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Das ESL strukturiert wissenschaftliche Sprache in fünf hierarchische Ebenen.",
+      "K": 0.575,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.275,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Experteneinschätzung/Theorie"
+      }
+    },
+    {
+      "aussage": "Die Stabilität wissenschaftlicher Sprache entsteht aus Verstärkungseffekten zwischen den Ebenen.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Grosse Sprachmodelle (LLMs) ermöglichen erstmals die systematische Messung sprachlicher Strukturen.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "LLMs analysieren semantische Räume, Begriffsrelationen und argumentative Strukturen -- und machen diese empirisch zugänglich.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Der Mensch verursacht den Temperaturanstieg hat B=0.95, E=0.92, K=0.97.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Wissenschaftliche Wahrheit ist eine Funktion sprachlicher Präzision.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Das ESL macht wissenschaftliche Redlichkeit messbar.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Die Operationalisierung von Behauptungs- und Evidenzstärke bleibt methodisch anspruchsvoll.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Die Schwellenwerte (K >= 0.8) sind letztlich normative Setzungen.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    },
+    {
+      "aussage": "Mit dem ESL wird nun auch die Sprache der Wissenschaft empirisch.",
+      "K": 0.4,
+      "kategorie": "🟠 Interpretativ",
+      "B": 0.7,
+      "E": 0.1,
+      "diskrepanz_typ": "überbehauptung",
+      "details": {
+        "modalverb": null,
+        "quantor": null,
+        "evidenz_stufe": "Keine Evidenz/Unbegründet"
+      }
+    }
+  ],
+  "aggregation": {
+    "anzahl": 15,
+    "K_mean": 0.44333333333333347,
+    "K_min": 0.4,
+    "K_max": 0.7000000000000001,
+    "B_mean": 0.6966666666666665,
+    "E_mean": 0.18000000000000005,
+    "kategorien": {
+      "🟠 Interpretativ": 14,
+      "🟡 Teilstabil": 1
+    },
+    "anteil_stabil": 0.0,
+    "anteil_kritisch": 0.9333333333333333
+  }
+}

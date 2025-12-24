@@ -1,0 +1,92 @@
+# =============================================================================
+# ESL PILOTTEST: Selbstanwendung auf ESL-Paper
+# =============================================================================
+# Meta-reflexiver Test: ESL bewertet seine eigene Dokumentation
+# =============================================================================
+
+meta:
+  dokument: "SOTA: Empirical System of Language (ESL)"
+  autor: "Fehr & Fehr"
+  datum: "Dezember 2025"
+  zweck: "Pilottest der ESL-Operationalisierung"
+
+aussagen:
+
+  # ===========================================================================
+  # KERNBEHAUPTUNGEN DES ESL
+  # ===========================================================================
+
+  - id: "ESL-01"
+    aussage: "Das ESL behandelt Sprache nicht als neutrales Kommunikationsmedium, sondern als empirisches Substrat der Erkenntnis selbst."
+    evidenz: "Theoretische Ableitung, basierend auf Carnap, Popper, Kuhn, Latour"
+    kontext: "Abstract"
+
+  - id: "ESL-02"
+    aussage: "Durch die Kalibrierungsfunktion K wird das Verhältnis zwischen sprachlicher Behauptung und empirischer Evidenz quantifizierbar."
+    evidenz: "Mathematische Definition, keine empirische Validierung der Formel"
+    kontext: "Abstract/Kernarchitektur"
+
+  - id: "ESL-03"
+    aussage: "Die Sprache, in der wissenschaftliche Erkenntnisse formuliert werden, blieb bisher selbst unkalibriert."
+    evidenz: "Historische Analyse, Verweis auf Replikationskrise"
+    kontext: "Einleitung"
+
+  - id: "ESL-04"
+    aussage: "Viele publizierte Befunde lassen sich nicht reproduzieren."
+    evidenz: "Meta-Analyse: Open Science Collaboration 2015, Science"
+    kontext: "Stand der Forschung"
+
+  - id: "ESL-05"
+    aussage: "Eine Aussage gilt als empirisch stabil, wenn K >= 0.8."
+    evidenz: "Normative Setzung, keine empirische Validierung des Schwellenwerts"
+    kontext: "Kernarchitektur"
+
+  - id: "ESL-06"
+    aussage: "Das ESL strukturiert wissenschaftliche Sprache in fünf hierarchische Ebenen."
+    evidenz: "Theoretisches Modell, angelehnt an linguistische Hierarchien"
+    kontext: "Kernarchitektur"
+
+  - id: "ESL-07"
+    aussage: "Die Stabilität wissenschaftlicher Sprache entsteht aus Verstärkungseffekten zwischen den Ebenen."
+    evidenz: "Hypothese, keine empirische Messung der Komplementaritätswerte"
+    kontext: "Kernarchitektur"
+
+  - id: "ESL-08"
+    aussage: "Grosse Sprachmodelle (LLMs) ermöglichen erstmals die systematische Messung sprachlicher Strukturen."
+    evidenz: "LLMs existieren und können Text analysieren, aber keine Validierung als ESL-Sensoren"
+    kontext: "LLMs als Sensoren"
+
+  - id: "ESL-09"
+    aussage: "LLMs analysieren semantische Räume, Begriffsrelationen und argumentative Strukturen -- und machen diese empirisch zugänglich."
+    evidenz: "NLP-Forschung zeigt LLM-Fähigkeiten, aber nicht spezifisch für ESL-Anwendung validiert"
+    kontext: "LLMs als Sensoren"
+
+  - id: "ESL-10"
+    aussage: "Der Mensch verursacht den Temperaturanstieg hat B=0.95, E=0.92, K=0.97."
+    evidenz: "Beispiel-Werte sind postuliert, nicht gemessen. Woher kommt E=0.92?"
+    kontext: "Anwendungsbeispiel"
+
+  - id: "ESL-11"
+    aussage: "Wissenschaftliche Wahrheit ist eine Funktion sprachlicher Präzision."
+    evidenz: "Philosophische These, keine empirische Operationalisierung"
+    kontext: "Anwendungsbeispiel"
+
+  - id: "ESL-12"
+    aussage: "Das ESL macht wissenschaftliche Redlichkeit messbar."
+    evidenz: "Konzeptioneller Anspruch, keine Validierungsstudie"
+    kontext: "Kritische Würdigung"
+
+  - id: "ESL-13"
+    aussage: "Die Operationalisierung von Behauptungs- und Evidenzstärke bleibt methodisch anspruchsvoll."
+    evidenz: "Selbstkritik im Paper - Grenzen werden eingeräumt"
+    kontext: "Kritische Würdigung"
+
+  - id: "ESL-14"
+    aussage: "Die Schwellenwerte (K >= 0.8) sind letztlich normative Setzungen."
+    evidenz: "Explizite Einräumung im Paper"
+    kontext: "Kritische Würdigung"
+
+  - id: "ESL-15"
+    aussage: "Mit dem ESL wird nun auch die Sprache der Wissenschaft empirisch."
+    evidenz: "Programmatische Behauptung, Umsetzung noch ausstehend"
+    kontext: "Fazit"

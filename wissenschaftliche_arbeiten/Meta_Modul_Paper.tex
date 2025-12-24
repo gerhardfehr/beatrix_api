@@ -1,0 +1,163 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{epigraph}
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{listings}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, backgrounds}
+
+% Code Listings Style für BEATRIX
+\definecolor{codegreen}{RGB}{0,128,0}
+\definecolor{codegray}{RGB}{128,128,128}
+\definecolor{codepurple}{RGB}{128,0,128}
+\definecolor{backcolour}{RGB}{245,245,245}
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=Python
+}
+\lstset{style=pythonstyle}
+
+\geometry{margin=2.5cm}
+
+% Epigraph styling
+\setlength{\epigraphwidth}{0.85\textwidth}
+\setlength{\epigraphrule}{0pt}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Korollar}[theorem]
+
+% Custom commands
+\newcommand{\BCM}{\textsc{BCM}}
+\newcommand{\META}{\textsc{META}}
+\newcommand{\BEATRIX}{\textsc{BEATRIX}}
+\newcommand{\module}[1]{\textsc{#1}}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{META-Modul im BCM 2.2}
+\lhead{FehrAdvice}
+\rfoot{\thepage}
+
+\title{%
+    \Large \textbf{Das META-Modul: Axiomatische Grundlagen des Behavioral Change Model} \\[0.5em]
+    \large Formale Spezifikation der ontologischen, epistemologischen, governancebezogenen und dynamischen Fundamente
+}
+
+\author{%
+    BEATRIX Research Team \\
+    FehrAdvice \& Partners AG \\[0.5em]
+    \small Version 2.2 | Dezember 2024
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 115 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 38 kognitiven und methodologischen Axiomen (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND), der Evidenzhierarchie für BCM-Parameter (Labor-Feld-Triangulation) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%==============================================================================
+% KAPITEL
+%==============================================================================
+
+% Kapitel 1: Einführung
+\input{kapitel/01_einfuehrung/einfuehrung}
+
+% Kapitel 2: Ontologie (ONT)
+\input{kapitel/02_ontologie/ontologie}
+
+% Kapitel 3: Epistemologie (EPI)
+\input{kapitel/03_epistemologie/epistemologie}
+
+% Kapitel 4: Governance (GOV)
+\input{kapitel/04_governance/governance}
+
+% Kapitel 5: Dynamik (DYN)
+\input{kapitel/05_dynamik/dynamik}
+
+% Kapitel 6: Integration mit operativen Modulen
+\input{kapitel/06_integration/integration}
+
+% Kapitel 7: META im BEATRIX-System
+\input{kapitel/07_meta_beatrix/meta_beatrix}
+
+% Kapitel 8: Von Handwerk zu Engineering - Die BEATRIX-Transformation
+\input{kapitel/09_transformation/transformation}
+
+% Kapitel 9: Zusammenfassung und Ausblick
+\input{kapitel/10_ausblick/zusammenfassung}
+
+% Kapitel 10: Vollständige Axiom-Liste
+\input{kapitel/11_axiom_liste/axiom_liste}
+
+%==============================================================================
+% DETAILLIERTE AXIOM-DOKUMENTATION
+%==============================================================================
+
+\section{Detaillierte Axiom-Dokumentation}
+
+Die folgenden Abschnitte enthalten die vollständige 9-Felder-Dokumentation aller 115 BCM META-Axiome. Jedes Axiom wird systematisch beschrieben mit:
+
+\begin{enumerate}
+    \item \textbf{Statement}: Kernaussage des Axioms
+    \item \textbf{Formel}: Mathematische Formalisierung
+    \item \textbf{Beschreibung}: Ausführliche Erläuterung
+    \item \textbf{BCM-Relevanz}: Bedeutung für das Behavioral Change Model
+    \item \textbf{BEATRIX-Relevanz}: Implementierung im LLM-basierten System
+    \item \textbf{Konsequenz bei Fehlen}: Was passiert, wenn dieses Axiom nicht gilt
+    \item \textbf{Validiert}: Welche Module durch dieses Axiom validiert werden
+    \item \textbf{Abhängigkeiten}: Vorausgesetzte Axiome
+    \item \textbf{Literatur}: Wissenschaftliche Referenzen
+\end{enumerate}
+
+% Einbinden der detaillierten Axiom-Dokumentation
+\input{axiome_ont_komplett}
+\input{axiome_epi_komplett}
+\input{axiome_gov_komplett}
+\input{axiome_dyn_komplett}
+
+\end{document}

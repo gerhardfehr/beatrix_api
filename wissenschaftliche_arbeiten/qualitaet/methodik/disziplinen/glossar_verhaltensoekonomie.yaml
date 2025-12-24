@@ -1,0 +1,545 @@
+# =============================================================================
+# ESL DISZIPLIN-GLOSSAR: Verhaltensökonomie
+# =============================================================================
+# Mathematisch formalisiertes Glossar mit empirischen Base-Rates
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "verhaltensoekonomie"
+  name: "Verhaltensökonomie / Behavioral Economics"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  quellen_base_rates:
+    - id: "OSC2015"
+      name: "Open Science Collaboration (2015)"
+      titel: "Estimating the reproducibility of psychological science"
+      replikationsrate: 0.39  # 39% der Studien repliziert
+
+    - id: "Camerer2016"
+      name: "Camerer et al. (2016)"
+      titel: "Evaluating replicability of laboratory experiments in economics"
+      replikationsrate: 0.61  # 61% in Ökonomie
+
+    - id: "Camerer2018"
+      name: "Camerer et al. (2018)"
+      titel: "Evaluating the replicability of social science experiments"
+      replikationsrate: 0.62  # Nature/Science Studien
+
+    - id: "ManyLabs2"
+      name: "Klein et al. (2018)"
+      titel: "Many Labs 2"
+      replikationsrate: 0.54
+
+# =============================================================================
+# EMPIRISCHE BASE-RATES
+# =============================================================================
+
+base_rates:
+
+  # Replikationsraten nach Studientyp
+  replikation:
+    beschreibung: |
+      P(Replikation | Studientyp) - Wahrscheinlichkeit erfolgreicher Replikation
+      basierend auf Meta-Analysen der Replikationskrise
+
+    raten:
+      meta_analyse:
+        P_replikation: 0.85
+        konfidenz: "hoch"
+        quelle: "Aggregation multipler Studien"
+        n_studien: ">50"
+
+      praeregistriertes_feldexperiment:
+        P_replikation: 0.75
+        konfidenz: "mittel-hoch"
+        quelle: "Camerer2018, geschätzt"
+        n_studien: "~30"
+
+      labor_incentivized:
+        P_replikation: 0.61
+        konfidenz: "hoch"
+        quelle: "Camerer2016"
+        n_studien: "18"
+
+      labor_hypothetisch:
+        P_replikation: 0.45
+        konfidenz: "mittel"
+        quelle: "OSC2015, angepasst"
+        n_studien: "~100"
+
+      survey_stated_preference:
+        P_replikation: 0.40
+        konfidenz: "niedrig"
+        quelle: "Schätzung basierend auf OSC2015"
+        n_studien: "~50"
+
+      fallstudie_qualitativ:
+        P_replikation: null  # Nicht anwendbar
+        konfidenz: "n/a"
+        note: "Qualitative Studien haben andere Gültigkeitskriterien"
+
+  # Effektgrößen-Shrinkage
+  effektgroessen_shrinkage:
+    beschreibung: |
+      Typischer Shrinkage-Faktor bei Replikation
+      Original-Effekt × Shrinkage = Erwarteter Replikations-Effekt
+
+    global:
+      shrinkage_faktor: 0.50  # Effekte schrumpfen auf ~50%
+      quelle: "OSC2015, Camerer2016"
+
+    nach_p_wert:
+      p_001:
+        shrinkage: 0.70
+        note: "Stärkere Originaleffekte schrumpfen weniger"
+      p_01:
+        shrinkage: 0.55
+      p_05:
+        shrinkage: 0.40
+        note: "Grenzwertige Signifikanz → stärkerer Shrinkage"
+
+  # Publication Bias Korrekturfaktoren
+  publication_bias:
+    beschreibung: |
+      Korrekturfaktoren für Publication Bias
+      Anwendung: E_korrigiert = E_publiziert × (1 - bias_faktor)
+
+    faktoren:
+      top_journal:
+        bias_faktor: 0.15
+        note: "Nature/Science haben Bias zu positiven Ergebnissen"
+
+      field_journal:
+        bias_faktor: 0.25
+        note: "Typischer Bias in Fachzeitschriften"
+
+      working_paper:
+        bias_faktor: 0.10
+        note: "Weniger selektiert, aber weniger peer review"
+
+      praeregistriert:
+        bias_faktor: 0.05
+        note: "Präregistrierung reduziert Bias erheblich"
+
+# =============================================================================
+# GLOSSAR: EVIDENZ-TERME
+# =============================================================================
+
+glossar_evidenz:
+
+  # --- Höchste Evidenz ---
+
+  meta_analyse:
+    term: "Meta-Analyse"
+    synonyme: ["systematic review", "gepoolte Analyse", "Cochrane Review"]
+    definition: |
+      Statistische Zusammenfassung mehrerer unabhängiger Studien
+      zum gleichen Forschungsgegenstand.
+
+    mathematische_formalisierung:
+      E_base: 0.94
+      formel: "E = 0.94 × (1 - heterogenitaet_penalty)"
+      heterogenitaet_penalty:
+        I2_niedrig: 0.00   # I² < 25%
+        I2_mittel: 0.08    # I² 25-75%
+        I2_hoch: 0.15      # I² > 75%
+
+    base_rate:
+      P_korrekt: 0.85
+      konfidenz: "hoch"
+      begründung: "Meta-Analysen aggregieren Evidenz, aber Garbage-In-Garbage-Out"
+
+    marker: ["meta-analyse", "systematic review", "gepoolte effektgröße", "k = "]
+
+    beispiel_gut: "Meta-Analyse von 50 Studien (k=50, N=15000, I²=30%)"
+    beispiel_schlecht: "Meta-Analyse (k=3, hohe Heterogenität)"
+
+  praeregistriertes_experiment:
+    term: "Präregistriertes Experiment"
+    synonyme: ["pre-registered study", "registered report"]
+    definition: |
+      Experiment mit vorab festgelegtem Analyseplan,
+      reduziert Researcher Degrees of Freedom.
+
+    mathematische_formalisierung:
+      E_base: 0.83
+      formel: "E = E_studientyp + 0.08"  # Präregistrierung als Bonus
+      bonus_praeregistrierung: 0.08
+
+    base_rate:
+      P_replikation: 0.75
+      konfidenz: "mittel-hoch"
+      begründung: "Camerer et al. zeigen höhere Replikationsraten"
+
+    marker: ["präregistriert", "pre-registered", "registered report", "OSF"]
+
+  feldexperiment:
+    term: "Feldexperiment"
+    synonyme: ["field experiment", "natürliches Experiment", "RCT im Feld"]
+    definition: |
+      Randomisiertes Experiment in realer Umgebung mit echten Konsequenzen.
+
+    mathematische_formalisierung:
+      E_base: 0.83
+      formel: "E = 0.83 × externe_validitaet_bonus"
+      externe_validitaet_bonus: 1.05  # Höhere externe Validität
+
+    base_rate:
+      P_replikation: 0.65
+      P_generalisierung: 0.50  # Kontextabhängigkeit
+      konfidenz: "mittel"
+      begründung: "Externe Validität hoch, aber kontextspezifisch"
+
+    marker: ["feldexperiment", "field experiment", "reale entscheidung", "A/B-Test"]
+
+  laborexperiment_incentivized:
+    term: "Labor-Experiment (incentivized)"
+    synonyme: ["incentivized choice", "experimental economics"]
+    definition: |
+      Kontrolliertes Experiment mit monetären Anreizen für Teilnehmer.
+
+    mathematische_formalisierung:
+      E_base: 0.72
+      formel: "E = 0.72 × anreiz_staerke"
+      anreiz_staerke:
+        hoch: 1.05      # Hohe Stakes
+        mittel: 1.00    # Standard
+        niedrig: 0.90   # Geringe Stakes
+
+    base_rate:
+      P_replikation: 0.61
+      konfidenz: "hoch"
+      quelle: "Camerer2016"
+
+    marker: ["labor", "incentivized", "anreizkompatibel", "bezahlt"]
+
+  # --- Mittlere Evidenz ---
+
+  beobachtungsstudie:
+    term: "Beobachtungsstudie"
+    synonyme: ["observational study", "Kohortenstudie", "Paneldaten"]
+    definition: |
+      Nicht-experimentelle Studie, die Zusammenhänge beobachtet
+      ohne randomisierte Intervention.
+
+    mathematische_formalisierung:
+      E_base: 0.57
+      formel: "E = 0.57 × konfundierungs_penalty"
+      konfundierungs_penalty:
+        kontrolliert: 1.00
+        teilweise: 0.85
+        unkontrolliert: 0.70
+
+    base_rate:
+      P_kausal_korrekt: 0.30  # Beobachtung ≠ Kausalität
+      konfidenz: "mittel"
+      begründung: "Korrelation wird oft fälschlich als Kausalität interpretiert"
+
+    warnung: |
+      VORSICHT: Kausale Aussagen aus Beobachtungsstudien sind hochriskant.
+      P(kausale Interpretation korrekt) ≈ 0.30
+
+    marker: ["beobachtung", "korrelation", "zusammenhang", "paneldaten"]
+
+  survey_stated_preference:
+    term: "Survey / Stated Preference"
+    synonyme: ["Befragung", "hypothetische Wahl", "Vignettenstudie"]
+    definition: |
+      Befragungsstudie mit hypothetischen Szenarien,
+      misst angegebene (nicht tatsächliche) Präferenzen.
+
+    mathematische_formalisierung:
+      E_base: 0.50
+      formel: "E = 0.50 × hypothetisch_penalty"
+      hypothetisch_penalty: 0.80  # 20% Abzug für hypothetische Fragen
+
+    base_rate:
+      P_verhaltens_vorhersage: 0.35  # Stated ≠ Revealed Preferences
+      konfidenz: "niedrig"
+      begründung: "Verhaltensökonomie zeigt: Stated ≠ Revealed Preferences"
+
+    warnung: |
+      Stated Preferences überschätzen systematisch:
+      - Prosoziales Verhalten (+30-50%)
+      - Langfristorientierung (+20-40%)
+      - Willingness-to-pay (+100-300%)
+
+    marker: ["survey", "befragung", "hypothetisch", "würden sie"]
+
+  # --- Niedrige Evidenz ---
+
+  axiomatische_ableitung:
+    term: "Axiomatische Ableitung"
+    synonyme: ["formale Ableitung", "Theorem", "mathematischer Beweis"]
+    definition: |
+      Logische Ableitung aus etablierten Axiomen oder Theoremen.
+      In BCM: Ableitungen aus den 115 Meta-Axiomen.
+
+    mathematische_formalisierung:
+      E_base: 0.38
+      formel: "E = 0.30 + 0.5 × E_axiom"
+      erlaeuterung: |
+        Die Ableitung erbt teilweise die Evidenz des Basis-Axioms.
+        Wenn das Axiom empirisch validiert ist (E_axiom hoch),
+        steigt auch E der Ableitung.
+
+    base_rate:
+      P_empirisch_korrekt: 0.50  # Theorie ≠ Empirie
+      konfidenz: "kontextabhängig"
+      begründung: |
+        Axiome sind normative Setzungen.
+        Ihre empirische Gültigkeit variiert stark.
+
+    bcm_spezifisch:
+      axiom_kategorien:
+        ontologisch:
+          E_bonus: 0.00
+          note: "Definitionen, nicht empirisch prüfbar"
+        verhaltensbezogen:
+          E_bonus: 0.10
+          note: "Teilweise empirisch fundiert"
+        empirisch_validiert:
+          E_bonus: 0.25
+          note: "Durch Studien gestützt"
+
+    marker: ["axiom", "folgt aus", "abgeleitet", "theorem", "bcm"]
+
+  experteneinschaetzung:
+    term: "Experteneinschätzung"
+    synonyme: ["expert opinion", "Konsens", "Delphi-Methode"]
+    definition: |
+      Einschätzung basierend auf Expertise ohne formale empirische Prüfung.
+
+    mathematische_formalisierung:
+      E_base: 0.28
+      formel: "E = 0.28 × konsens_faktor × expertise_faktor"
+      konsens_faktor:
+        stark: 1.20
+        mittel: 1.00
+        schwach: 0.70
+      expertise_faktor:
+        domain_expert: 1.10
+        generalist: 0.90
+
+    base_rate:
+      P_korrekt: 0.65  # Experten liegen oft falsch
+      P_kalibriert: 0.40  # Experten sind oft überkonfident
+      konfidenz: "niedrig"
+      begründung: "Tetlock (2005): Experten sind schlecht kalibriert"
+
+    warnung: |
+      Experteneinschätzungen sind systematisch überkonfident.
+      Typische Überkonfidenz: 20-40%
+
+    marker: ["experten", "einschätzung", "nach meinung", "konsens"]
+
+# =============================================================================
+# GLOSSAR: BEHAUPTUNGS-TERME
+# =============================================================================
+
+glossar_behauptung:
+
+  # --- Universelle Quantoren ---
+
+  alle:
+    term: "alle"
+    synonyme: ["jeder", "ausnahmslos", "universal"]
+    B_wert: 0.95
+
+    mathematische_formalisierung:
+      interpretation: "∀x: P(x)"
+      falsifizierbarkeit: "Ein Gegenbeispiel reicht"
+
+    base_rate:
+      P_wahr_verhaltensoek: 0.05  # Fast nie wahr in Sozialwiss.
+      konfidenz: "hoch"
+      begründung: |
+        Universelle Aussagen in Verhaltensökonomie sind fast immer falsch.
+        Es gibt IMMER individuelle Unterschiede.
+
+    warnung: |
+      KRITISCH: "Alle" ist in Verhaltensökonomie fast nie gerechtfertigt.
+      Empfehlung: Ersetzen durch "die meisten" oder "typischerweise"
+
+    beispiel_problematisch: "Alle Menschen zeigen Loss Aversion"
+    beispiel_korrekt: "Die meisten Menschen zeigen Loss Aversion (ca. 70-80%)"
+
+  die_meisten:
+    term: "die meisten"
+    synonyme: ["majority", "überwiegend", ">50%"]
+    B_wert: 0.80
+
+    mathematische_formalisierung:
+      interpretation: "P(x) > 0.50 für die Population"
+
+    base_rate:
+      P_wahr_verhaltensoek: 0.60
+      konfidenz: "mittel"
+      begründung: "Moderatere Behauptung, oft zutreffend"
+
+  robust:
+    term: "robust"
+    synonyme: ["stabil", "konsistent", "reliable"]
+    B_wert: 0.85
+
+    mathematische_formalisierung:
+      interpretation: |
+        Effekt ist:
+        1. Über Studien repliziert
+        2. Über Kontexte generalisierbar
+        3. Über Messmethoden stabil
+
+    base_rate:
+      P_wirklich_robust: 0.40  # Viele "robuste" Effekte replizieren nicht
+      konfidenz: "mittel"
+      begründung: "Replikationskrise hat viele 'robuste' Effekte in Frage gestellt"
+
+    warnung: |
+      "Robust" erfordert:
+      - Mindestens 3 unabhängige Replikationen
+      - Verschiedene Populationen
+      - Verschiedene Operationalisierungen
+
+      Ohne diese Nachweise: B_wert reduzieren auf 0.65
+
+  signifikant:
+    term: "signifikant"
+    synonyme: ["statistisch signifikant", "p < 0.05"]
+    B_wert: 0.80
+
+    mathematische_formalisierung:
+      interpretation: "P(Daten | H0) < α"
+      warnung: "Signifikanz ≠ Praktische Bedeutsamkeit"
+
+    base_rate:
+      P_replikation_gegeben_p05: 0.50  # Nur 50% replizieren!
+      P_replikation_gegeben_p001: 0.70
+      konfidenz: "hoch"
+      quelle: "Camerer et al., OSC"
+
+    korrekturfaktoren:
+      p_wert_0_05:
+        E_multiplikator: 0.85
+      p_wert_0_01:
+        E_multiplikator: 0.95
+      p_wert_0_001:
+        E_multiplikator: 1.00
+
+    warnung: |
+      p < 0.05 allein ist KEINE starke Evidenz.
+      Positive Predictive Value bei niedriger Prior-Wahrscheinlichkeit
+      kann unter 50% fallen (Ioannidis, 2005).
+
+  # --- Modalverben ---
+
+  muss:
+    term: "muss"
+    synonyme: ["zwingend", "notwendig", "erfordert"]
+    B_wert: 0.95
+
+    mathematische_formalisierung:
+      interpretation: "□P (notwendig P)"
+
+    base_rate:
+      P_wahr_verhaltensoek: 0.10
+      konfidenz: "hoch"
+      begründung: |
+        Strikte Notwendigkeit ist in Verhaltensökonomie selten.
+        Menschen können fast immer anders handeln.
+
+    warnung: |
+      "Muss" impliziert universelle Notwendigkeit.
+      In Sozialwissenschaften fast nie gerechtfertigt.
+
+  koennte:
+    term: "könnte"
+    synonyme: ["möglicherweise", "potenziell", "eventuell"]
+    B_wert: 0.45
+
+    mathematische_formalisierung:
+      interpretation: "◇P (möglich P)"
+
+    base_rate:
+      P_wahr: 0.70  # Schwache Behauptungen sind oft wahr
+      konfidenz: "mittel"
+      begründung: "Hedging macht Aussagen schwerer falsifizierbar"
+
+# =============================================================================
+# KALIBRIERUNGS-REGELN
+# =============================================================================
+
+kalibrierung:
+
+  regel_1_base_rate_korrektur:
+    name: "Base-Rate Korrektur"
+    formel: |
+      E_korrigiert = E_base × P_replikation × (1 - publication_bias)
+
+    beispiel:
+      beschreibung: "Laborexperiment, incentivized, in field journal"
+      berechnung:
+        E_base: 0.72
+        P_replikation: 0.61
+        publication_bias: 0.25
+        E_korrigiert: "0.72 × 0.61 × 0.75 = 0.33"
+      interpretation: "Effektive Evidenz deutlich niedriger als naive Schätzung"
+
+  regel_2_aussage_anpassung:
+    name: "Aussagestärke-Anpassung"
+    formel: |
+      B_korrigiert = B_base × P_aussage_wahr_in_disziplin
+
+    beispiel:
+      beschreibung: "'Alle Menschen zeigen Loss Aversion'"
+      berechnung:
+        B_base: 0.95
+        P_aussage_wahr: 0.05
+        B_korrigiert: "0.95 × 0.05 = 0.0475 → Empfehlung: Umformulieren!"
+      interpretation: "Aussage ist zu stark für die Domäne"
+
+  regel_3_replikations_bonus:
+    name: "Replikations-Bonus"
+    formel: |
+      E_final = E_base + replikations_bonus
+
+      replikations_bonus:
+        1_replikation: +0.05
+        2_replikationen: +0.10
+        3+_replikationen: +0.15
+        multi_lab: +0.20
+
+  regel_4_heterogenitaets_penalty:
+    name: "Heterogenitäts-Strafe"
+    formel: |
+      Wenn I² bekannt (Meta-Analysen):
+      E_final = E_base × (1 - 0.002 × I²)
+
+      Bei I² = 75%: E_final = E_base × 0.85
+
+# =============================================================================
+# VALIDIERUNG
+# =============================================================================
+
+validierung:
+  status: "INITIAL - empirisch zu validieren"
+
+  naechste_schritte:
+    - "Inter-Rater-Reliabilität der Glossar-Anwendung testen"
+    - "Kalibrierung gegen bekannte Replikationsstudien"
+    - "Feedback von Verhaltensökonomen einholen"
+
+  bekannte_limitationen:
+    - "Base-Rates basieren auf aggregierten Studien, nicht domänenspezifisch"
+    - "Einige Schätzungen sind interpoliert"
+    - "BCM-spezifische Axiom-Evidenz noch nicht validiert"
+
+  selbstanwendung:
+    diese_datei:
+      aussage: "Dieses Glossar verbessert ESL-Kalibrierung"
+      B: 0.65  # "verbessert" ist moderate Behauptung
+      E: 0.30  # Experteneinschätzung, nicht empirisch getestet
+      K: 0.65
+      kategorie: "🟡 Teilstabil"
+      empfehlung: "Empirische Validierung erforderlich"

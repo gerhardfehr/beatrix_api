@@ -1,0 +1,463 @@
+# =============================================================================
+# SCORING-METHODIK: D03 Didaktische Qualität (v2 - HYBRID)
+# =============================================================================
+# Version: 2.0
+# Ansatz: Automatische Vorprüfung + Expert-Adjustment
+# =============================================================================
+
+meta:
+  version: "2.0"
+  ansatz: "hybrid"
+
+  philosophie: |
+    Diese Methodik kombiniert:
+    1. AUTOMATISCHE VORPRÜFUNG: Schnelle, reproduzierbare Basismessung
+    2. EXPERT-ADJUSTMENT: Qualitative Korrektur durch menschlichen Prüfer
+    3. KONFIDENZ-ANGABE: Transparenz über Unsicherheit des Scores
+
+  limitationen:
+    - "Schwellenwerte sind v1.0 - empirische Kalibrierung ausstehend"
+    - "Gewichtungen basieren auf Experteneinschätzung, nicht Lernforschung"
+    - "Inter-Rater-Reliabilität noch nicht getestet"
+
+  evidenzstufe: "⭐ Experteneinschätzung (MA-EPI-38 Stufe 1)"
+
+# =============================================================================
+# PHASE 1: AUTOMATISCHE VORPRÜFUNG
+# =============================================================================
+
+phase_1_automatisch:
+
+  beschreibung: |
+    Schnelle, reproduzierbare Messung durch Skript.
+    Liefert ROHDATEN, keine finalen Scores.
+
+  # ---------------------------------------------------------------------------
+  # METRIK 1: Beispiel-Marker-Dichte
+  # ---------------------------------------------------------------------------
+
+  beispiel_marker:
+
+    was_wird_gezaehlt:
+      primaer:
+        - pattern: "Beispiel:"
+          gewicht: 1.0
+        - pattern: "Konkret:"
+          gewicht: 1.0
+        - pattern: "\\begin{example}"
+          gewicht: 1.0
+      sekundaer:
+        - pattern: "z\\.B\\."
+          gewicht: 0.5  # Oft false positive
+        - pattern: "etwa:"
+          gewicht: 0.5
+      code:
+        - pattern: "\\begin{lstlisting}"
+          gewicht: 1.0
+        - pattern: "```python"
+          gewicht: 1.0
+
+    output:
+      name: "raw_beispiel_count"
+      typ: "float"
+      formel: "sum(count(pattern) * gewicht)"
+
+  # ---------------------------------------------------------------------------
+  # METRIK 2: Konzept-Marker-Dichte
+  # ---------------------------------------------------------------------------
+
+  konzept_marker:
+
+    was_wird_gezaehlt:
+      - pattern: "\\begin{definition}"
+        gewicht: 1.0
+      - pattern: "\\begin{axiom}"
+        gewicht: 1.0
+      - pattern: "definieren wir"
+        gewicht: 0.7
+      - pattern: "bezeichnet"
+        gewicht: 0.5
+
+    output:
+      name: "raw_konzept_count"
+      typ: "float"
+
+  # ---------------------------------------------------------------------------
+  # METRIK 3: Visualisierungs-Dichte
+  # ---------------------------------------------------------------------------
+
+  visualisierungen:
+
+    was_wird_gezaehlt:
+      - pattern: "\\begin{figure}"
+      - pattern: "\\begin{table}"
+      - pattern: "\\begin{tikzpicture}"
+      - pattern: "\\begin{tcolorbox}"
+      - pattern: "\\begin{equation}"
+
+    output:
+      name: "raw_viz_count"
+      typ: "int"
+
+  # ---------------------------------------------------------------------------
+  # METRIK 4: Zeilen
+  # ---------------------------------------------------------------------------
+
+  zeilen:
+    output:
+      name: "line_count"
+      typ: "int"
+
+  # ---------------------------------------------------------------------------
+  # AUTOMATISCHE RATIOS
+  # ---------------------------------------------------------------------------
+
+  berechnete_ratios:
+
+    beispiel_ratio:
+      formel: "raw_beispiel_count / max(raw_konzept_count, 1)"
+      interpretation: "Beispiele pro Konzept (Näherung)"
+
+    viz_ratio:
+      formel: "raw_viz_count / (line_count / 1000)"
+      interpretation: "Visualisierungen pro 1000 Zeilen"
+
+  # ---------------------------------------------------------------------------
+  # SKRIPT
+  # ---------------------------------------------------------------------------
+
+  skript: |
+    #!/bin/bash
+    # mqc_autocheck.sh <datei.tex>
+
+    FILE=$1
+
+    # Beispiel-Marker (gewichtet)
+    BEISPIEL=$(grep -c "Beispiel:\|Konkret:\|\\\\begin{example}" "$FILE")
+    BEISPIEL_WEAK=$(grep -c "z\.B\.\|etwa:" "$FILE")
+    RAW_BEISPIEL=$(echo "$BEISPIEL + 0.5 * $BEISPIEL_WEAK" | bc)
+
+    # Konzept-Marker
+    KONZEPT=$(grep -c "\\\\begin{definition}\|\\\\begin{axiom}" "$FILE")
+    KONZEPT_WEAK=$(grep -c "definieren wir\|bezeichnet" "$FILE")
+    RAW_KONZEPT=$(echo "$KONZEPT + 0.5 * $KONZEPT_WEAK" | bc)
+
+    # Visualisierungen
+    VIZ=$(grep -c "\\\\begin{figure}\|\\\\begin{table}\|\\\\begin{tikz}" "$FILE")
+
+    # Zeilen
+    LINES=$(wc -l < "$FILE")
+
+    # Ratios
+    BEISPIEL_RATIO=$(echo "scale=2; $RAW_BEISPIEL / ($RAW_KONZEPT + 0.001)" | bc)
+    VIZ_RATIO=$(echo "scale=2; $VIZ / ($LINES / 1000)" | bc)
+
+    echo "=== AUTOMATISCHE VORPRÜFUNG ==="
+    echo "Datei: $FILE"
+    echo "Zeilen: $LINES"
+    echo ""
+    echo "Beispiel-Marker (roh): $RAW_BEISPIEL"
+    echo "Konzept-Marker (roh): $RAW_KONZEPT"
+    echo "Beispiel-Ratio: $BEISPIEL_RATIO"
+    echo ""
+    echo "Visualisierungen: $VIZ"
+    echo "Viz-Ratio (pro 1000 Zeilen): $VIZ_RATIO"
+    echo ""
+    echo "⚠️  Dies sind ROHDATEN - Expert-Adjustment erforderlich!"
+
+# =============================================================================
+# PHASE 2: EXPERT-ADJUSTMENT
+# =============================================================================
+
+phase_2_expert:
+
+  beschreibung: |
+    Menschlicher Prüfer korrigiert die automatischen Rohdaten.
+    Dokumentiert Anpassungen und Begründungen.
+
+  # ---------------------------------------------------------------------------
+  # ADJUSTMENT 1: False Positive Korrektur
+  # ---------------------------------------------------------------------------
+
+  false_positive_korrektur:
+
+    frage: "Wie viele der gezählten Marker sind KEINE echten Beispiele/Konzepte?"
+
+    anleitung:
+      - "Öffne die Datei"
+      - "Suche nach den Markern"
+      - "Prüfe: Ist das wirklich ein Beispiel/Konzept?"
+      - "Zähle False Positives"
+
+    beispiele_false_positive:
+      - "'z.B.' in 'Dies ist z.B. nicht möglich' (kein Beispiel folgt)"
+      - "'bezeichnet' in 'wird als X bezeichnet' (keine neue Definition)"
+
+    output:
+      beispiel_fp: "Anzahl False Positives bei Beispielen"
+      konzept_fp: "Anzahl False Positives bei Konzepten"
+
+    korrektur:
+      adj_beispiel: "raw_beispiel_count - beispiel_fp"
+      adj_konzept: "raw_konzept_count - konzept_fp"
+
+  # ---------------------------------------------------------------------------
+  # ADJUSTMENT 2: Qualitäts-Multiplikator
+  # ---------------------------------------------------------------------------
+
+  qualitaets_adjustment:
+
+    frage: "Wie ist die QUALITÄT der gefundenen Beispiele?"
+
+    skala:
+      0.5:
+        label: "Schwach"
+        kriterien:
+          - "Beispiele sind vage/abstrakt"
+          - "Keine konkreten Namen/Zahlen"
+          - "Schwer nachvollziehbar"
+      0.75:
+        label: "Akzeptabel"
+        kriterien:
+          - "Beispiele sind verständlich"
+          - "Teilweise konkret"
+          - "Grundsätzlich hilfreich"
+      1.0:
+        label: "Gut"
+        kriterien:
+          - "Beispiele sind konkret"
+          - "Namen, Zahlen, Szenarien"
+          - "Gut nachvollziehbar"
+      1.25:
+        label: "Sehr gut"
+        kriterien:
+          - "Beispiele sind exzellent"
+          - "Mehrere Perspektiven"
+          - "Memorable, einprägsam"
+      1.5:
+        label: "Exzellent"
+        kriterien:
+          - "Beispiele sind herausragend"
+          - "Innovativ, überraschend"
+          - "Werden lange erinnert"
+
+    output:
+      quality_mult: "Qualitäts-Multiplikator (0.5 - 1.5)"
+
+    korrektur:
+      qual_adj_beispiel: "adj_beispiel * quality_mult"
+
+  # ---------------------------------------------------------------------------
+  # ADJUSTMENT 3: Fehlende Elemente
+  # ---------------------------------------------------------------------------
+
+  fehlende_elemente:
+
+    frage: "Welche wichtigen Konzepte haben KEIN Beispiel?"
+
+    anleitung:
+      - "Liste die Hauptkonzepte des Kapitels"
+      - "Prüfe für jedes: Gibt es ein Beispiel?"
+      - "Notiere fehlende Beispiele"
+
+    output:
+      konzepte_ohne_beispiel: "Liste der Konzepte ohne Beispiel"
+      coverage_ratio: "Anteil Konzepte MIT Beispiel"
+
+  # ---------------------------------------------------------------------------
+  # ADJUSTMENT 4: Progression
+  # ---------------------------------------------------------------------------
+
+  progression_check:
+
+    frage: "Ist die didaktische Progression gut?"
+
+    pruefpunkte:
+      - frage: "Werden Begriffe vor ihrer Verwendung definiert?"
+        typ: "boolean"
+      - frage: "Gibt es Forward References?"
+        typ: "count"
+      - frage: "Ist der Aufbau einfach → komplex?"
+        typ: "ordinal"
+        optionen: ["nein", "teilweise", "ja"]
+
+    output:
+      forward_refs: "Anzahl Forward References"
+      progression_ordinal: "nein | teilweise | ja"
+
+# =============================================================================
+# PHASE 3: SCORE-BERECHNUNG
+# =============================================================================
+
+phase_3_scoring:
+
+  # ---------------------------------------------------------------------------
+  # TEIL-SCORES
+  # ---------------------------------------------------------------------------
+
+  teil_scores:
+
+    beispieldichte:
+      formel: |
+        adj_ratio = qual_adj_beispiel / max(adj_konzept, 1)
+
+        if adj_ratio >= 3.0: score = 1.0
+        elif adj_ratio >= 2.0: score = 0.9
+        elif adj_ratio >= 1.0: score = 0.7
+        elif adj_ratio >= 0.5: score = 0.5
+        elif adj_ratio > 0: score = 0.3
+        else: score = 0.0
+
+      gewicht: 0.35
+
+    beispiel_coverage:
+      formel: |
+        score = coverage_ratio  # Direkt als Score (0.0 - 1.0)
+
+      gewicht: 0.20
+
+    visualisierungen:
+      formel: |
+        if viz_ratio >= 6: score = 1.0
+        elif viz_ratio >= 4: score = 0.9
+        elif viz_ratio >= 2: score = 0.7
+        elif viz_ratio >= 1: score = 0.5
+        elif viz_ratio > 0: score = 0.3
+        else: score = 0.0
+
+      gewicht: 0.20
+
+    progression:
+      formel: |
+        base = {"nein": 0.3, "teilweise": 0.6, "ja": 1.0}[progression_ordinal]
+        penalty = min(forward_refs * 0.1, 0.3)  # Max 0.3 Abzug
+        score = max(base - penalty, 0.0)
+
+      gewicht: 0.25
+
+  # ---------------------------------------------------------------------------
+  # GESAMT-SCORE
+  # ---------------------------------------------------------------------------
+
+  gesamt_score:
+    formel: |
+      D03_score = (
+        0.35 * beispieldichte_score +
+        0.20 * beispiel_coverage_score +
+        0.20 * visualisierungen_score +
+        0.25 * progression_score
+      )
+
+  # ---------------------------------------------------------------------------
+  # KONFIDENZ
+  # ---------------------------------------------------------------------------
+
+  konfidenz:
+
+    beschreibung: |
+      Die Konfidenz gibt an, wie sicher wir uns beim Score sind.
+      Niedrige Konfidenz = mehr Expert-Adjustment war nötig.
+
+    berechnung:
+      formel: |
+        # Basis-Konfidenz
+        base_conf = 0.7
+
+        # Abzug wenn viele False Positives
+        fp_ratio = (beispiel_fp + konzept_fp) / (raw_beispiel + raw_konzept + 1)
+        fp_penalty = min(fp_ratio * 0.3, 0.2)
+
+        # Abzug wenn extremer Qualitäts-Adjustment
+        qual_deviation = abs(quality_mult - 1.0)
+        qual_penalty = qual_deviation * 0.2
+
+        konfidenz = max(base_conf - fp_penalty - qual_penalty, 0.3)
+
+    interpretation:
+      hoch: "konfidenz >= 0.7: Automatische Messung war zuverlässig"
+      mittel: "0.5 <= konfidenz < 0.7: Signifikante Korrekturen nötig"
+      niedrig: "konfidenz < 0.5: Score stark von Expert abhängig"
+
+# =============================================================================
+# PHASE 4: DOKUMENTATION
+# =============================================================================
+
+phase_4_dokumentation:
+
+  template: |
+    # D03 Didaktik Bewertung: Kapitel {kapitel_id}
+
+    ## Phase 1: Automatische Vorprüfung
+    - Zeilen: {line_count}
+    - Beispiel-Marker (roh): {raw_beispiel_count}
+    - Konzept-Marker (roh): {raw_konzept_count}
+    - Visualisierungen: {raw_viz_count}
+
+    ## Phase 2: Expert-Adjustment
+    - False Positives Beispiele: {beispiel_fp}
+    - False Positives Konzepte: {konzept_fp}
+    - Qualitäts-Multiplikator: {quality_mult} ({quality_label})
+    - Konzepte ohne Beispiel: {konzepte_ohne_beispiel}
+    - Forward References: {forward_refs}
+    - Progression: {progression_ordinal}
+
+    ## Phase 3: Score
+    - Beispieldichte: {beispieldichte_score:.2f}
+    - Coverage: {coverage_score:.2f}
+    - Visualisierungen: {viz_score:.2f}
+    - Progression: {progression_score:.2f}
+
+    **GESAMT D03: {D03_score:.2f}** (Konfidenz: {konfidenz:.2f})
+
+    ## Begründung
+    {begruendung}
+
+    ## Verbesserungsvorschläge
+    {verbesserungen}
+
+# =============================================================================
+# KALIBRIERUNG
+# =============================================================================
+
+kalibrierung:
+
+  status: "AUSSTEHEND"
+
+  plan:
+    - schritt: "Gold-Standard definieren"
+      beschreibung: "3 Kapitel als Referenz bewerten (niedrig/mittel/hoch)"
+
+    - schritt: "Inter-Rater-Test"
+      beschreibung: "2 Prüfer bewerten unabhängig, Abweichung messen"
+
+    - schritt: "Schwellenwert-Anpassung"
+      beschreibung: "Schwellenwerte anpassen basierend auf Gold-Standard"
+
+    - schritt: "Gewichtungs-Validierung"
+      beschreibung: "Korrelation Teil-Scores mit Gesamt-Qualität prüfen"
+
+  referenz_kapitel:
+    niedrig: null  # TODO: Identifizieren
+    mittel: null   # TODO: Identifizieren
+    hoch: "kapitel/00_orientierung"  # Kandidat
+
+# =============================================================================
+# META-REFLEXIVITÄT
+# =============================================================================
+
+meta_reflexivitaet:
+
+  selbstkritik:
+    - "Diese Methodik ist v2.0 - noch nicht empirisch validiert"
+    - "Schwellenwerte basieren auf Experteneinschätzung"
+    - "Inter-Rater-Reliabilität unbekannt"
+    - "Gewichtungen sind hypothetisch"
+
+  was_wir_nicht_wissen:
+    - "Optimale Beispieldichte für verschiedene Zielgruppen"
+    - "Relative Wichtigkeit von Progression vs. Beispielen"
+    - "Ob automatische Marker-Zählung valide ist"
+
+  evidenzstufe: |
+    Nach MA-EPI-38: ⭐ Experteneinschätzung
+    Ziel: ⭐⭐ Beobachtungsstudie (Inter-Rater-Reliabilität)

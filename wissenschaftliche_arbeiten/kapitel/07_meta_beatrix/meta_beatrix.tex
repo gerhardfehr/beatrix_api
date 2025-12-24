@@ -1,0 +1,36 @@
+\section{META im BEATRIX-System}
+%==============================================================================
+
+\subsection{Rolle bei der LLM-basierten Estimation}
+
+Das \BEATRIX-System verwendet ein LLM zur Parameterschätzung. Das \META-Modul informiert diesen Prozess auf mehreren Ebenen:
+
+\begin{enumerate}
+    \item \textbf{Base Rate Awareness (MA-EPI-26)}: Das LLM muss empirische Base Rates für Typen-Verteilungen berücksichtigen
+    \item \textbf{Social Desirability Korrektur (MA-EPI-32)}: Persona-Beschreibungen müssen auf systematische Verzerrungen geprüft werden
+    \item \textbf{Anchoring-Prävention (MA-EPI-14)}: Few-Shot Anchoring im Prompt verhindert willkürliche Schätzungen
+\end{enumerate}
+
+\subsection{Constrained Generation Pipeline}
+
+Die \BEATRIX{} Estimation Pipeline (ESTIMATION-Modul) implementiert die epistemologischen Constraints:
+
+\begin{enumerate}
+    \item \textbf{PreFlight}: Prüfung auf plausibles Szenario (verhindert Halluzination)
+    \item \textbf{Few-Shot Anchoring}: Kalibrierungsskalen im Prompt
+    \item \textbf{Pydantic Schema}: Strukturierte Outputs
+    \item \textbf{Ensemble Voting}: N parallele Runs, Median-Aggregation
+    \item \textbf{IRR-Check}: Inter-Rater Reliability > 0.85
+\end{enumerate}
+
+\subsection{Ambiguity Detection}
+
+Die Unterscheidung zwischen \textbf{Unsicherheit} (unimodale Verteilung) und \textbf{Wertekonflikt} (bimodale Verteilung) basiert auf:
+
+\begin{equation}
+BC = \frac{s^2 + 1}{k + 3 \cdot \frac{(n-1)^2}{(n-2)(n-3)}}
+\end{equation}
+
+wobei $s$ = Schiefe, $k$ = Kurtosis. Bei $BC > 0.555$ liegt Polarisierung vor.
+
+%==============================================================================
