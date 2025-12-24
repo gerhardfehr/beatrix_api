@@ -1,0 +1,762 @@
+# =============================================================================
+# PRIMITIVE DER SOZIALPSYCHOLOGIE
+# =============================================================================
+#
+# Axiomatisches Fundament: 22 orthogonale Primitive in 6 Kategorien
+# Grundlage für sozialpsychologische Theorie und Forschung
+#
+# Version: 1.0
+# Autor: FehrAdvice & Partners AG
+# Datum: 2024-12-24
+# =============================================================================
+
+meta:
+  titel: "Primitive Ontologie der Sozialpsychologie"
+  untertitel: "Grundbegriffe sozialer Kognition und Interaktion"
+  version: "1.0"
+
+  beschreibung: |
+    Die Sozialpsychologie untersucht, wie Menschen denken, fühlen und
+    sich verhalten in Bezug auf andere Menschen. Diese Primitive bilden
+    das konzeptuelle Fundament der Disziplin.
+
+  abgrenzung:
+    zur_kognitionspsychologie: |
+      Fokus auf SOZIALE Aspekte: Wie andere Menschen Kognition beeinflussen.
+    zur_soziologie: |
+      Fokus auf INDIVIDUUM in sozialem Kontext, nicht auf soziale Strukturen.
+    zur_verhaltensoekonomie: |
+      Mehr Fokus auf Affekt, Identität, Gruppenprozesse; weniger auf Entscheidungen.
+
+  klassiker:
+    - "Allport (1954): The Nature of Prejudice"
+    - "Festinger (1957): A Theory of Cognitive Dissonance"
+    - "Milgram (1963): Obedience to Authority"
+    - "Asch (1951): Conformity Studies"
+    - "Tajfel & Turner (1979): Social Identity Theory"
+    - "Bandura (1977): Social Learning Theory"
+
+  notation_konventionen:
+    einstellungen: "A (Attitude)"
+    verhalten: "B (Behavior)"
+    kognition: "C (Cognition)"
+    gruppen: "G, Gin, Gout"
+    selbst: "S (Self)"
+    affekt: "E (Emotion)"
+
+
+# =============================================================================
+# KATEGORIE 1: SOZIALE KOGNITION (5 Primitive)
+# =============================================================================
+# Frage: Wie denken Menschen über andere?
+# Theorien: Attribution Theory, Schema Theory, Social Cognition
+# =============================================================================
+
+kategorien:
+
+  SOZIALE_KOGNITION:
+    frage: "Wie nehmen Menschen andere wahr und interpretieren soziale Information?"
+    theorien: ["Attribution Theory", "Schema Theory", "Social Cognition"]
+    primitive_count: 5
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      ATTITUDE:
+        name: "Einstellung"
+        symbol: "A"
+        kategorie: "SOZIALE_KOGNITION"
+
+        definition_formal:
+          notation: |
+            A: O → [-1, +1]
+
+            wobei:
+            - O: Einstellungsobjekt (Person, Gruppe, Idee, Objekt)
+            - A(o) ∈ [-1, +1]: Bewertung (negativ bis positiv)
+
+            Drei-Komponenten-Modell:
+            A = f(Affekt, Kognition, Verhalten)
+            - Affektiv: Gefühle gegenüber o
+            - Kognitiv: Überzeugungen über o
+            - Konativ: Verhaltenstendenzen bzgl. o
+
+          messung:
+            explizit: "Likert-Skalen, Semantic Differential"
+            implizit: "IAT (Implicit Association Test), Priming"
+
+        eigenschaften:
+          - "Valenz: positiv/negativ"
+          - "Stärke: schwach bis stark"
+          - "Zugänglichkeit: wie schnell aktivierbar"
+          - "Ambivalenz: gemischte Bewertungen möglich"
+
+        klassiker: |
+          Allport (1935): "Einstellung ist ein mentaler Zustand der
+          Bereitschaft, der durch Erfahrung organisiert ist und einen
+          direktiven Einfluss auf die Reaktion des Individuums ausübt."
+
+      # ─────────────────────────────────────────────────────────────────────
+      ATTRIBUTION:
+        name: "Attribution"
+        symbol: "Attr(E)"
+        kategorie: "SOZIALE_KOGNITION"
+
+        definition_formal:
+          notation: |
+            Attr: E → C
+
+            wobei:
+            - E: Beobachtetes Ereignis/Verhalten
+            - C: Zugeschriebene Ursache
+
+            Kovariationsmodell (Kelley, 1967):
+            Attr(E) = f(Konsens, Distinktheit, Konsistenz)
+
+            - Hoher Konsens + Hohe Distinktheit → Externe Attribution
+            - Niedriger Konsens + Niedrige Distinktheit → Interne Attribution
+
+          dimensionen:
+            locus: "Intern (Person) vs. Extern (Situation)"
+            stabilitaet: "Stabil vs. Variabel"
+            kontrollierbarkeit: "Kontrollierbar vs. Unkontrollierbar"
+
+        bias:
+          fundamentaler_attributionsfehler: |
+            Tendenz, Verhalten anderer auf Disposition (intern) zu
+            attribuieren und situative Faktoren zu unterschätzen.
+            (Ross, 1977)
+
+          actor_observer_bias: |
+            Eigenes Verhalten: situativ erklärt
+            Verhalten anderer: dispositional erklärt
+
+          self_serving_bias: |
+            Erfolge: intern attribuiert
+            Misserfolge: extern attribuiert
+
+      # ─────────────────────────────────────────────────────────────────────
+      SCHEMA:
+        name: "Schema"
+        symbol: "Σ"
+        kategorie: "SOZIALE_KOGNITION"
+
+        definition_formal:
+          notation: |
+            Σ: Kognitive Struktur zur Organisation von Wissen
+
+            Schema enthält:
+            - Slots (Attribute)
+            - Default-Werte
+            - Verknüpfungen zu anderen Schemata
+
+            Aktivierung: Σ(stimulus) → Inferenzen, Erwartungen
+
+          typen:
+            personen_schema: "Wissen über Personen-Typen"
+            rollen_schema: "Erwartungen an soziale Rollen"
+            ereignis_schema: "Scripts für typische Abläufe"
+            selbst_schema: "Wissen über sich selbst"
+
+        funktion: |
+          - Effiziente Informationsverarbeitung
+          - Lücken füllen (Default-Inferenzen)
+          - Erwartungen generieren
+          - ABER: Kann zu Verzerrungen führen
+
+      # ─────────────────────────────────────────────────────────────────────
+      STEREOTYP:
+        name: "Stereotyp"
+        symbol: "St(G)"
+        kategorie: "SOZIALE_KOGNITION"
+
+        definition_formal:
+          notation: |
+            St: G → {Traits}
+
+            Stereotyp als Gruppen-Schema:
+            St(G) = {t₁, t₂, ..., tₙ} mit P(tᵢ|G) > P(tᵢ)
+
+            "Überzeugungen über typische Eigenschaften einer Gruppe"
+
+          eigenschaften:
+            - "Übergeneralisierung: Gilt für alle Mitglieder"
+            - "Homogenitätseffekt: Outgroup homogener wahrgenommen"
+            - "Automatisch aktiviert (bei Kategorisierung)"
+
+        abgrenzung:
+          vorurteil: "Stereotyp = kognitiv; Vorurteil = affektiv (negativ)"
+          diskriminierung: "Diskriminierung = Verhalten basierend auf Stereotyp/Vorurteil"
+
+        messung:
+          explizit: "Trait-Listen, Adjektiv-Checklisten"
+          implizit: "IAT, Priming-Maße"
+
+      # ─────────────────────────────────────────────────────────────────────
+      PERSON_PERCEPTION:
+        name: "Personwahrnehmung"
+        symbol: "PP"
+        kategorie: "SOZIALE_KOGNITION"
+
+        definition_formal:
+          notation: |
+            PP: Cues → Impression
+
+            Eindrucksbildung:
+            I(Person) = f(zentrale Traits, periphere Traits, Kontext)
+
+            Asch (1946): "warm/cold" als zentrale Traits
+
+          prozesse:
+            - "Primacy Effect: Erste Information gewichtiger"
+            - "Halo Effect: Ein Trait beeinflusst Gesamteindruck"
+            - "Implicit Personality Theory: Trait-Kovariationen"
+
+        modelle:
+          kontinuum_modell: |
+            Fiske & Neuberg (1990):
+            Kategorisierung (schnell) → Individuation (aufwändig)
+            Bei Motivation/Ressourcen: Mehr Individuation
+
+
+  # =============================================================================
+  # KATEGORIE 2: SOZIALER EINFLUSS (4 Primitive)
+  # =============================================================================
+  # Frage: Wie beeinflussen Menschen einander?
+  # Theorien: Persuasion, Conformity, Obedience, Compliance
+  # =============================================================================
+
+  SOZIALER_EINFLUSS:
+    frage: "Wie beeinflussen Menschen das Denken, Fühlen und Verhalten anderer?"
+    theorien: ["Elaboration Likelihood Model", "Social Impact Theory"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      KONFORMITAET:
+        name: "Konformität"
+        symbol: "Conf"
+        kategorie: "SOZIALER_EINFLUSS"
+
+        definition_formal:
+          notation: |
+            Conf: Anpassung von Verhalten/Meinung an Gruppennorm
+
+            P(Konformität) = f(Gruppengröße, Einstimmigkeit,
+                               Commitment, Status, Kultur)
+
+            Asch-Paradigma: ~37% Konformität bei eindeutig falscher Mehrheit
+
+          typen:
+            normativ: "Konformität um akzeptiert zu werden (Compliance)"
+            informational: "Konformität weil andere als Informationsquelle (Internalisierung)"
+
+        klassiker: |
+          Asch (1951): Linienexperimente
+          Sherif (1936): Autokinetischer Effekt
+
+        moderatoren:
+          - "Gruppengröße (bis ~4, dann Plateau)"
+          - "Einstimmigkeit (ein Dissident reduziert stark)"
+          - "Kultur (kollektivistisch > individualistisch)"
+          - "Öffentlichkeit der Antwort"
+
+      # ─────────────────────────────────────────────────────────────────────
+      GEHORSAM:
+        name: "Gehorsam"
+        symbol: "Obed"
+        kategorie: "SOZIALER_EINFLUSS"
+
+        definition_formal:
+          notation: |
+            Obed: Befolgung von Anweisungen einer Autorität
+
+            P(Gehorsam) = f(Legitimität, Proximität,
+                            Verantwortungsdiffusion, Eskalation)
+
+            Milgram (1963): 65% bis maximaler Schock bei Basisparadigma
+
+          faktoren:
+            erhoehend:
+              - "Legitimität der Autorität"
+              - "Nähe zur Autorität"
+              - "Distanz zum Opfer"
+              - "Graduelle Eskalation"
+            senkend:
+              - "Physische Nähe zum Opfer"
+              - "Widersprüchliche Autoritäten"
+              - "Peer-Rebellion beobachten"
+
+        klassiker: |
+          Milgram (1963): Obedience experiments
+          "The banality of evil" - gewöhnliche Menschen folgen Autoritäten
+
+        ethik: |
+          Milgram-Studien sind heute ethisch nicht mehr durchführbar.
+          Nachfolgestudien (Burger, 2009) mit modifiziertem Design.
+
+      # ─────────────────────────────────────────────────────────────────────
+      PERSUASION:
+        name: "Überzeugung/Persuasion"
+        symbol: "Pers"
+        kategorie: "SOZIALER_EINFLUSS"
+
+        definition_formal:
+          notation: |
+            Pers: M × R → ΔA
+
+            wobei:
+            - M: Message (Botschaft)
+            - R: Receiver (Empfänger)
+            - ΔA: Einstellungsänderung
+
+            Elaboration Likelihood Model (Petty & Cacioppo, 1986):
+
+            Zentrale Route: Hohe Elaboration → stabile Änderung
+            Periphere Route: Niedrige Elaboration → instabile Änderung
+
+          faktoren:
+            quelle: "Glaubwürdigkeit, Attraktivität, Ähnlichkeit"
+            botschaft: "Argumente, Emotionen, Framing, Sidedness"
+            empfaenger: "Need for Cognition, Involvement, Vorwissen"
+            kanal: "Face-to-face > Medien"
+
+        compliance_techniken:
+          foot_in_the_door: "Kleine Bitte → Große Bitte"
+          door_in_the_face: "Große Bitte (Ablehnung) → Kleine Bitte"
+          lowballing: "Günstiges Angebot → Verschlechterung"
+
+      # ─────────────────────────────────────────────────────────────────────
+      NORMEN:
+        name: "Soziale Normen"
+        symbol: "N"
+        kategorie: "SOZIALER_EINFLUSS"
+
+        definition_formal:
+          notation: |
+            N: G × C → Verhaltensstandard
+
+            Typen:
+            - Deskriptive Norm: N_d = "Was tun andere?" (is)
+            - Injunktive Norm: N_i = "Was sollte man tun?" (ought)
+
+            Cialdini et al. (1990): Focus Theory of Normative Conduct
+            - Normen wirken nur wenn sie salient (aktiviert) sind
+
+          wirkung: |
+            N_d: Informational ("Wenn alle es tun, ist es wohl richtig")
+            N_i: Normativ ("Wenn man es tun soll, sollte ich auch")
+
+        anwendung_nudging: |
+          "Die meisten Ihrer Nachbarn haben bereits bezahlt"
+          - Aktiviert deskriptive Norm
+          - Erhöht Compliance
+
+
+  # =============================================================================
+  # KATEGORIE 3: SELBST UND IDENTITÄT (4 Primitive)
+  # =============================================================================
+  # Frage: Wie sehen Menschen sich selbst?
+  # Theorien: Self-Concept, Self-Esteem, Social Identity Theory
+  # =============================================================================
+
+  SELBST:
+    frage: "Wie konstruieren Menschen ihr Selbstbild und Selbstwert?"
+    theorien: ["Self-Concept", "Social Identity Theory", "Self-Perception Theory"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      SELF_CONCEPT:
+        name: "Selbstkonzept"
+        symbol: "SC"
+        kategorie: "SELBST"
+
+        definition_formal:
+          notation: |
+            SC: Gesamtheit der Überzeugungen über sich selbst
+
+            SC = {Self-Schemas} = {SC_akademisch, SC_sozial, SC_physisch, ...}
+
+            Markus (1977): Self-Schemas als kognitive Strukturen
+
+          quellen:
+            - "Selbstbeobachtung (Self-Perception Theory)"
+            - "Sozialer Vergleich"
+            - "Feedback von anderen (Reflected Appraisal)"
+            - "Kulturelle Einbettung"
+
+          arten:
+            actual_self: "Wie ich bin"
+            ideal_self: "Wie ich sein möchte"
+            ought_self: "Wie ich sein sollte"
+
+        kulturelle_unterschiede: |
+          Markus & Kitayama (1991):
+          - Independent Self (westlich): Autonom, einzigartig
+          - Interdependent Self (östlich): Verbunden, kontextabhängig
+
+      # ─────────────────────────────────────────────────────────────────────
+      SELF_ESTEEM:
+        name: "Selbstwert"
+        symbol: "SE"
+        kategorie: "SELBST"
+
+        definition_formal:
+          notation: |
+            SE: SC → [-1, +1]
+
+            Selbstwert = Bewertung des Selbstkonzepts
+
+            Rosenberg (1965): "Favorable or unfavorable attitude toward oneself"
+
+          komponenten:
+            global: "Allgemeiner Selbstwert"
+            domain_specific: "Bereichsspezifisch (akademisch, sozial, ...)"
+
+          quellen:
+            - "Erfolge und Misserfolge"
+            - "Sozialer Vergleich"
+            - "Akzeptanz durch andere"
+            - "Gruppenidentifikation"
+
+        motive:
+          self_enhancement: "Streben nach positivem Selbstwert"
+          self_verification: "Streben nach konsistentem Selbstbild"
+          self_assessment: "Streben nach akkuratem Selbstbild"
+
+      # ─────────────────────────────────────────────────────────────────────
+      SOCIAL_IDENTITY:
+        name: "Soziale Identität"
+        symbol: "SI"
+        kategorie: "SELBST"
+
+        definition_formal:
+          notation: |
+            SI: Teil des Selbstkonzepts, der aus Gruppenmitgliedschaften stammt
+
+            SI = {(G₁, V₁), (G₂, V₂), ...}
+            - Gᵢ: Gruppe
+            - Vᵢ: Bewertung der Mitgliedschaft
+
+            Tajfel & Turner (1979): Social Identity Theory
+
+          prozesse:
+            kategorisierung: "Einteilung in Ingroup/Outgroup"
+            identifikation: "Selbst mit Gruppe verknüpfen"
+            vergleich: "Ingroup vs. Outgroup vergleichen"
+
+        minimal_group_paradigm: |
+          Tajfel (1971): Selbst willkürliche Gruppenzuordnung führt zu:
+          - Ingroup-Favoritism
+          - Outgroup-Diskriminierung
+
+      # ─────────────────────────────────────────────────────────────────────
+      COGNITIVE_DISSONANCE:
+        name: "Kognitive Dissonanz"
+        symbol: "CD"
+        kategorie: "SELBST"
+
+        definition_formal:
+          notation: |
+            CD: Aversiver Zustand bei inkonsistenten Kognitionen
+
+            CD = f(Wichtigkeit × Diskrepanz)
+
+            Festinger (1957): "Dissonance is psychologically uncomfortable"
+
+            Reduktionsstrategien:
+            1. Kognition ändern
+            2. Verhalten ändern
+            3. Neue konsistente Kognition hinzufügen
+            4. Wichtigkeit reduzieren
+
+          klassische_paradigmen:
+            induced_compliance: "$1 vs. $20 Lüge → $1 mehr Einstellungsänderung"
+            free_choice: "Post-Decision Spreading of Alternatives"
+            effort_justification: "Mehr Aufwand → Höhere Bewertung"
+
+        revisions:
+          self_affirmation: "Dissonanz durch Selbstbestätigung in anderem Bereich reduzierbar"
+          self_standards: "Dissonanz nur bei Bedrohung wichtiger Selbst-Standards"
+
+
+  # =============================================================================
+  # KATEGORIE 4: GRUPPE (4 Primitive)
+  # =============================================================================
+  # Frage: Wie funktionieren Gruppen?
+  # Theorien: Group Dynamics, Intergroup Relations
+  # =============================================================================
+
+  GRUPPE:
+    frage: "Wie beeinflussen Gruppen Individuen und wie interagieren Gruppen?"
+    theorien: ["Group Dynamics", "Intergroup Contact Theory", "Realistic Conflict Theory"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      INGROUP_OUTGROUP:
+        name: "Ingroup/Outgroup"
+        symbol: "Gᵢₙ / Gₒᵤₜ"
+        kategorie: "GRUPPE"
+
+        definition_formal:
+          notation: |
+            Gᵢₙ: Gruppe, der man selbst angehört
+            Gₒᵤₜ: Gruppe, der man nicht angehört
+
+            Basale Kategorisierung → Automatische Konsequenzen:
+            - Ingroup Favoritism: E(Gᵢₙ) > E(Gₒᵤₜ)
+            - Outgroup Homogeneity: Var(Gₒᵤₜ) < Var(Gᵢₙ) (wahrgenommen)
+
+          effekte:
+            ingroup_favoritism: "Bevorzugung der Eigengruppe"
+            outgroup_homogeneity: "Fremdgruppe als homogener wahrgenommen"
+            ultimate_attribution_error: "Positive Outgroup-Handlungen situativ erklärt"
+
+      # ─────────────────────────────────────────────────────────────────────
+      GROUP_DYNAMICS:
+        name: "Gruppendynamik"
+        symbol: "GD"
+        kategorie: "GRUPPE"
+
+        definition_formal:
+          notation: |
+            GD: Prozesse innerhalb von Gruppen
+
+            Lewin (1951): "A group is more than the sum of its parts"
+
+          phaenomene:
+            social_facilitation: |
+              Anwesenheit anderer verbessert einfache Aufgaben,
+              verschlechtert komplexe (Zajonc, 1965)
+            social_loafing: |
+              Weniger Anstrengung in Gruppen wenn individueller
+              Beitrag nicht identifizierbar (Latané, 1979)
+            groupthink: |
+              Übermäßige Konformität in kohäsiven Gruppen →
+              Schlechte Entscheidungen (Janis, 1972)
+            group_polarization: |
+              Gruppendiskussion verstärkt initiale Tendenz
+              (Risky Shift / Cautious Shift)
+
+      # ─────────────────────────────────────────────────────────────────────
+      INTERGROUP_RELATIONS:
+        name: "Intergruppenbeziehungen"
+        symbol: "IGR"
+        kategorie: "GRUPPE"
+
+        definition_formal:
+          notation: |
+            IGR: Beziehungen zwischen sozialen Gruppen
+
+            Realistic Conflict Theory (Sherif, 1966):
+            Wettbewerb um Ressourcen → Intergruppenkonflikte
+
+            Contact Hypothesis (Allport, 1954):
+            Kontakt unter günstigen Bedingungen → Vorurteilsreduktion
+            Bedingungen: Gleicher Status, Kooperation, Institutionelle Unterstützung
+
+          prozesse:
+            - "Kategorisierung"
+            - "Stereotypisierung"
+            - "Vorurteil"
+            - "Diskriminierung"
+
+        interventionen:
+          recategorization: "Gemeinsame Obergruppe schaffen"
+          decategorization: "Individuierung statt Kategorisierung"
+          mutual_differentiation: "Positive Distinktheit beider Gruppen"
+
+      # ─────────────────────────────────────────────────────────────────────
+      DEINDIVIDUATION:
+        name: "Deindividuation"
+        symbol: "DeInd"
+        kategorie: "GRUPPE"
+
+        definition_formal:
+          notation: |
+            DeInd: Verlust individueller Selbstaufmerksamkeit in Gruppen
+
+            → Reduzierte Hemmungen
+            → Normgeleitetes Verhalten (Gruppennorm)
+
+            Zimbardo (1969): Anonymität + Diffusion → Antisoziales Verhalten
+            ABER: Kann auch prosozial sein (wenn Gruppennorm prosozial)
+
+          faktoren:
+            - "Anonymität"
+            - "Gruppengröße"
+            - "Erregung"
+            - "Reduzierte Selbstaufmerksamkeit"
+
+
+  # =============================================================================
+  # KATEGORIE 5: PROSOZIALES VERHALTEN (3 Primitive)
+  # =============================================================================
+  # Frage: Warum helfen Menschen einander?
+  # Theorien: Empathy-Altruism, Social Exchange, Evolutionary Psychology
+  # =============================================================================
+
+  PROSOZIAL:
+    frage: "Warum und wann helfen Menschen anderen?"
+    theorien: ["Empathy-Altruism Hypothesis", "Kin Selection", "Reciprocal Altruism"]
+    primitive_count: 3
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      HELPING:
+        name: "Hilfeverhalten"
+        symbol: "H"
+        kategorie: "PROSOZIAL"
+
+        definition_formal:
+          notation: |
+            H: Verhalten mit Intention, einer anderen Person zu nützen
+
+            P(H) = f(Kosten, Nutzen, Normen, Empathie, Situation)
+
+          typen:
+            altruismus: "Helfen ohne erwartete Gegenleistung"
+            reziprozitaet: "Helfen mit Erwartung zukünftiger Gegenleistung"
+            kin_selection: "Helfen genetisch Verwandter"
+
+        bystander_effect: |
+          Latané & Darley (1968): Mehr Anwesende → Weniger Hilfe
+
+          Mechanismen:
+          - Verantwortungsdiffusion
+          - Pluralistische Ignoranz
+          - Bewertungsangst
+
+      # ─────────────────────────────────────────────────────────────────────
+      EMPATHIE:
+        name: "Empathie"
+        symbol: "Emp"
+        kategorie: "PROSOZIAL"
+
+        definition_formal:
+          notation: |
+            Emp: Andere-orientierte emotionale Reaktion
+
+            Batson (1991): Empathy-Altruism Hypothesis
+            Empathie → Altruistische Motivation → Hilfe (auch bei Fluchtmöglichkeit)
+
+          komponenten:
+            affektiv: "Mitfühlen mit dem Zustand des anderen"
+            kognitiv: "Perspektivübernahme (Theory of Mind)"
+
+        abgrenzung:
+          personal_distress: |
+            Selbst-orientierte aversive Reaktion
+            → Egoistische Motivation (Flucht oder Hilfe zur Reduktion)
+
+      # ─────────────────────────────────────────────────────────────────────
+      AGGRESSION:
+        name: "Aggression"
+        symbol: "Agg"
+        kategorie: "PROSOZIAL"  # Antisoziales Gegenstück
+
+        definition_formal:
+          notation: |
+            Agg: Verhalten mit Intention, einer anderen Person zu schaden
+
+            Typen:
+            - Hostile Aggression: Schaden als Ziel
+            - Instrumental Aggression: Schaden als Mittel
+
+          theorien:
+            frustrations_aggressions: "Frustration → Aggression (Dollard, 1939)"
+            social_learning: "Aggression durch Beobachtung gelernt (Bandura)"
+            general_aggression_model: "Integration kognitiver, affektiver, Erregungsfaktoren"
+
+        moderatoren:
+          - "Provokation"
+          - "Erregung/Arousal"
+          - "Aggressive Cues"
+          - "Alkohol"
+          - "Hitze"
+
+
+  # =============================================================================
+  # KATEGORIE 6: ATTRAKTION UND BEZIEHUNGEN (2 Primitive)
+  # =============================================================================
+  # Frage: Was macht Menschen attraktiv und wie funktionieren Beziehungen?
+  # =============================================================================
+
+  ATTRAKTION:
+    frage: "Was bestimmt interpersonale Attraktion und Beziehungsqualität?"
+    theorien: ["Social Exchange Theory", "Attachment Theory"]
+    primitive_count: 2
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      INTERPERSONAL_ATTRACTION:
+        name: "Interpersonale Attraktion"
+        symbol: "Attr"
+        kategorie: "ATTRAKTION"
+
+        definition_formal:
+          notation: |
+            Attr: (P₁, P₂) → [-1, +1]
+
+            Positive Bewertung einer anderen Person
+
+          determinanten:
+            proximity: "Nähe erhöht Kontakt → Mere Exposure"
+            similarity: "Ähnlichkeit in Einstellungen, Werten"
+            physical_attractiveness: "Halo-Effekt, Evolutionäre Perspektive"
+            reciprocity: "Mögen derer, die uns mögen"
+
+        mere_exposure: |
+          Zajonc (1968): Wiederholte Exposition → Erhöhte Präferenz
+          (auch ohne bewusste Erinnerung)
+
+      # ─────────────────────────────────────────────────────────────────────
+      CLOSE_RELATIONSHIPS:
+        name: "Enge Beziehungen"
+        symbol: "Rel"
+        kategorie: "ATTRAKTION"
+
+        definition_formal:
+          notation: |
+            Rel: Interdependente Verbindung zwischen Personen
+
+            Social Exchange: Rel = f(Rewards - Costs, Comparison Level)
+
+            Investitionsmodell (Rusbult):
+            Commitment = Zufriedenheit + Investitionen - Alternativen
+
+          attachment_styles:
+            secure: "Positives Selbst- und Fremdbild"
+            anxious: "Negatives Selbstbild, Verlustangst"
+            avoidant: "Negatives Fremdbild, Distanz"
+
+
+# =============================================================================
+# ZUSAMMENFASSUNG
+# =============================================================================
+
+zusammenfassung:
+  total_primitive: 22
+  kategorien: 6
+
+  liste:
+    SOZIALE_KOGNITION: ["ATTITUDE", "ATTRIBUTION", "SCHEMA", "STEREOTYP", "PERSON_PERCEPTION"]
+    SOZIALER_EINFLUSS: ["KONFORMITAET", "GEHORSAM", "PERSUASION", "NORMEN"]
+    SELBST: ["SELF_CONCEPT", "SELF_ESTEEM", "SOCIAL_IDENTITY", "COGNITIVE_DISSONANCE"]
+    GRUPPE: ["INGROUP_OUTGROUP", "GROUP_DYNAMICS", "INTERGROUP_RELATIONS", "DEINDIVIDUATION"]
+    PROSOZIAL: ["HELPING", "EMPATHIE", "AGGRESSION"]
+    ATTRAKTION: ["INTERPERSONAL_ATTRACTION", "CLOSE_RELATIONSHIPS"]
+
+  methodische_besonderheiten:
+    - "Starke experimentelle Tradition"
+    - "WEIRD-Samples (Western, Educated, Industrialized, Rich, Democratic)"
+    - "Replikationskrise hat Disziplin stark betroffen"
+    - "Präregistrierung zunehmend Standard"
+    - "Viele klassische Effekte kleiner als ursprünglich berichtet"

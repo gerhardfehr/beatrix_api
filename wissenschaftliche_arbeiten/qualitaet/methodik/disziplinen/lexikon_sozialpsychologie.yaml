@@ -1,0 +1,535 @@
+# =============================================================================
+# ESL DISZIPLIN-LEXIKON: Sozialpsychologie
+# =============================================================================
+# Erweitertes Lexikon mit Gebrauchskontext, Beispielsätzen und Kollokationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "sozialpsychologie"
+  name: "Sozialpsychologie / Social Psychology"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  zweck: |
+    Erweitertes Lexikon für sozialpsychologische Forschung mit:
+    - Beispielsätzen aus der Fachliteratur
+    - Typischen Kollokationen und Phrasen
+    - Kontext-spezifischer Verwendung
+    - Replikations-sensitiven Formulierungen
+
+
+# =============================================================================
+# KERNKONZEPTE MIT ERWEITERTEM KONTEXT
+# =============================================================================
+
+eintraege:
+
+  # ---------------------------------------------------------------------------
+  # SOZIALE KOGNITION
+  # ---------------------------------------------------------------------------
+
+  einstellung:
+    lemma: "Einstellung"
+    wortart: "Substantiv, f."
+    englisch: "attitude"
+    plural: "Einstellungen"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Bewertende Reaktion gegenüber einem Objekt, die aus affektiven,
+          kognitiven und verhaltensbezogenen Komponenten besteht.
+        fachgebiet: "Soziale Kognition"
+        beispielsaetze:
+          - "Die Einstellung gegenüber der Impfung war in der Treatment-Gruppe positiver."
+          - "Implizite und explizite Einstellungen können divergieren."
+          - "Die Einstellungs-Verhaltens-Korrelation betrug r = .42."
+
+    kollokationen:
+      haeufig:
+        - "implizite Einstellung"
+        - "explizite Einstellung"
+        - "Einstellungsänderung"
+        - "Einstellungsmessung"
+        - "Einstellungsobjekt"
+        - "ambivalente Einstellung"
+      verben:
+        - "eine Einstellung messen"
+        - "Einstellungen ändern"
+        - "eine Einstellung aktivieren"
+        - "Einstellungen vorhersagen"
+
+    typische_phrasen:
+      - "Die Einstellung gegenüber X wurde mit einer 7-Punkt-Likert-Skala erfasst."
+      - "Einstellungen sagten das Verhalten signifikant vorher."
+      - "Es zeigte sich eine positive Einstellung gegenüber..."
+      - "Die Einstellungsänderung war in der Treatment-Gruppe größer."
+
+    methodische_hinweise:
+      - "Explizite Einstellungen: Selbstbericht (Likert, Semantic Differential)"
+      - "Implizite Einstellungen: IAT, Priming, AMP"
+      - "Einstellungs-Verhaltens-Gap beachten: r ≈ .38"
+
+
+  # ---------------------------------------------------------------------------
+  attribution:
+    lemma: "Attribution"
+    wortart: "Substantiv, f."
+    englisch: "attribution"
+    plural: "Attributionen"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Kausale Zuschreibung: Prozess der Ursachenerklärung für beobachtetes
+          Verhalten oder Ereignisse.
+        fachgebiet: "Soziale Kognition"
+        beispielsaetze:
+          - "Teilnehmer attribuierten das Verhalten internal."
+          - "Die Attribution auf den Charakter war stärker als auf die Situation."
+          - "Erfolg wurde internal, Misserfolg external attribuiert."
+
+    kollokationen:
+      haeufig:
+        - "internale/externale Attribution"
+        - "kausale Attribution"
+        - "Attributionsfehler"
+        - "Attributionsmuster"
+        - "dispositionelle Attribution"
+        - "situationale Attribution"
+      verben:
+        - "auf ... attribuieren"
+        - "eine Attribution vornehmen"
+        - "Ursachen attribuieren"
+
+    typische_phrasen:
+      - "Das Verhalten wurde internal attribuiert."
+      - "Die Attribution auf dispositionelle Faktoren war stärker."
+      - "Konsistent mit dem fundamentalen Attributionsfehler..."
+      - "Die Teilnehmer zeigten einen Self-Serving Bias in ihren Attributionen."
+
+    abgrenzung:
+      inference: "Inference ist allgemeiner; Attribution spezifisch für Ursachenzuschreibung"
+
+
+  # ---------------------------------------------------------------------------
+  stereotyp:
+    lemma: "Stereotyp"
+    wortart: "Substantiv, n."
+    englisch: "stereotype"
+    plural: "Stereotype"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Kognitive Struktur: Generalisierte Überzeugungen über typische
+          Eigenschaften von Mitgliedern einer sozialen Gruppe.
+        fachgebiet: "Intergruppenbeziehungen"
+        beispielsaetze:
+          - "Das Stereotyp wurde automatisch aktiviert."
+          - "Die Aktivierung des Stereotyps beeinflusste die Beurteilung."
+          - "Stereotype können auch positiv sein (z.B. 'Asiaten sind gut in Mathe')."
+
+    kollokationen:
+      haeufig:
+        - "Stereotyp aktivieren"
+        - "implizites Stereotyp"
+        - "Stereotypgenauigkeit"
+        - "Stereotypbedrohung"
+        - "Stereotypisierung"
+      verben:
+        - "ein Stereotyp aktivieren"
+        - "Stereotype anwenden"
+        - "gegen Stereotype vorgehen"
+
+    typische_phrasen:
+      - "Die Aktivierung des Stereotyps führte zu..."
+      - "Konsistent mit dem Stereotyp-Inhalt..."
+      - "Stereotype Bedrohung reduzierte die Leistung."
+      - "Das implizite Stereotyp wurde mittels IAT gemessen."
+
+    abgrenzung:
+      vorurteil: |
+        Stereotyp = Kognition (Überzeugungen)
+        Vorurteil = Affekt (negative Bewertung)
+        Diskriminierung = Verhalten
+
+
+  # ---------------------------------------------------------------------------
+  # SOZIALER EINFLUSS
+  # ---------------------------------------------------------------------------
+
+  konformitaet:
+    lemma: "Konformität"
+    wortart: "Substantiv, f."
+    englisch: "conformity"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Anpassung des eigenen Urteils, der Meinung oder des Verhaltens
+          an die Mehrheitsmeinung oder soziale Norm.
+        fachgebiet: "Sozialer Einfluss"
+        beispielsaetze:
+          - "37% der Teilnehmer zeigten Konformität mit der falschen Mehrheit."
+          - "Konformität war höher bei öffentlichen als bei privaten Antworten."
+          - "Die Konformitätsrate sank, wenn ein Verbündeter die korrekte Antwort gab."
+
+    kollokationen:
+      haeufig:
+        - "Konformitätsdruck"
+        - "Konformitätsrate"
+        - "normative Konformität"
+        - "informationale Konformität"
+        - "Konformitätsexperiment"
+      verben:
+        - "Konformität zeigen"
+        - "sich konform verhalten"
+        - "Konformität induzieren"
+
+    typische_phrasen:
+      - "Die Konformitätsrate betrug X%."
+      - "Konformität war unter der Bedingung X höher."
+      - "Im Einklang mit Aschs klassischen Befunden..."
+      - "Die Anwesenheit eines Verbündeten reduzierte Konformität."
+
+
+  # ---------------------------------------------------------------------------
+  persuasion:
+    lemma: "Überzeugung/Persuasion"
+    wortart: "Substantiv, f."
+    englisch: "persuasion"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Prozess der Einstellungs- oder Verhaltensänderung durch
+          Kommunikation.
+        fachgebiet: "Sozialer Einfluss"
+        beispielsaetze:
+          - "Die persuasive Botschaft führte zu einer Einstellungsänderung."
+          - "Über die zentrale Route war die Einstellungsänderung stabiler."
+          - "Periphere Hinweisreize erhöhten die Überzeugungskraft."
+
+    kollokationen:
+      haeufig:
+        - "persuasive Kommunikation"
+        - "persuasive Botschaft"
+        - "Persuasionstechnik"
+        - "Elaboration Likelihood"
+        - "zentrale/periphere Route"
+      verben:
+        - "überzeugen"
+        - "persuadieren"
+        - "Einstellungen ändern"
+
+    typische_phrasen:
+      - "Im Einklang mit dem Elaboration Likelihood Model..."
+      - "Die zentrale Route der Persuasion führte zu..."
+      - "Unter hoher Elaboration waren die Argumente entscheidend."
+      - "Periphere Cues wie Attraktivität der Quelle..."
+
+
+  # ---------------------------------------------------------------------------
+  soziale_norm:
+    lemma: "Soziale Norm"
+    wortart: "Substantiv, f."
+    englisch: "social norm"
+    plural: "Soziale Normen"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Implizite oder explizite Verhaltensregel, die in einer Gruppe
+          oder Gesellschaft gilt.
+        fachgebiet: "Sozialer Einfluss"
+        beispielsaetze:
+          - "Die deskriptive Norm wurde durch Feedback salient gemacht."
+          - "Injunktive Normen hatten einen stärkeren Effekt als deskriptive."
+          - "Die Aktivierung der sozialen Norm erhöhte umweltfreundliches Verhalten."
+
+    kollokationen:
+      haeufig:
+        - "deskriptive Norm"
+        - "injunktive Norm"
+        - "Normaktivierung"
+        - "Normverletzung"
+        - "pro-soziale Norm"
+      verben:
+        - "eine Norm aktivieren"
+        - "Normen verletzen"
+        - "Normen internalisieren"
+
+    typische_phrasen:
+      - "Die deskriptive Norm ('Was tun andere?') wurde aktiviert durch..."
+      - "Im Einklang mit der Focus Theory of Normative Conduct..."
+      - "Die Salienz der Norm moderierte den Effekt."
+
+    anwendung_nudging: |
+      "Die meisten Ihrer Nachbarn haben bereits bezahlt."
+      - Aktiviert deskriptive Norm
+      - Erhöht Compliance um ca. 5-15 Prozentpunkte
+
+
+  # ---------------------------------------------------------------------------
+  # SELBST UND IDENTITÄT
+  # ---------------------------------------------------------------------------
+
+  selbstkonzept:
+    lemma: "Selbstkonzept"
+    wortart: "Substantiv, n."
+    englisch: "self-concept"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Gesamtheit der Überzeugungen, die eine Person über sich selbst hat.
+        fachgebiet: "Selbst"
+        beispielsaetze:
+          - "Das akademische Selbstkonzept sagte Studienleistungen vorher."
+          - "Das Selbstkonzept ist kulturell geprägt."
+          - "Independent vs. interdependent self-construal unterscheiden sich."
+
+    kollokationen:
+      haeufig:
+        - "akademisches Selbstkonzept"
+        - "physisches Selbstkonzept"
+        - "Selbstkonzeptklarheit"
+        - "kollektives Selbstkonzept"
+      verben:
+        - "das Selbstkonzept messen"
+        - "das Selbstkonzept beeinflussen"
+
+    typische_phrasen:
+      - "Das Selbstkonzept wurde mit dem Twenty Statements Test erfasst."
+      - "Personen mit interdependentem Selbstkonzept..."
+      - "Die Manipulation bedrohte das positive Selbstkonzept."
+
+
+  # ---------------------------------------------------------------------------
+  soziale_identitaet:
+    lemma: "Soziale Identität"
+    wortart: "Substantiv, f."
+    englisch: "social identity"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Teil des Selbstkonzepts, der aus der Zugehörigkeit zu sozialen
+          Gruppen und deren emotionaler Bedeutung stammt.
+        fachgebiet: "Intergruppenbeziehungen"
+        beispielsaetze:
+          - "Die soziale Identität als Teammitglied wurde aktiviert."
+          - "Nach der Social Identity Theory streben Menschen nach positiver Distinktheit."
+          - "Die Identifikation mit der Gruppe sagte Ingroup-Favorismus vorher."
+
+    kollokationen:
+      haeufig:
+        - "Social Identity Theory"
+        - "Gruppenidentifikation"
+        - "positive Distinktheit"
+        - "Identitätsbedrohung"
+      verben:
+        - "eine Identität aktivieren"
+        - "sich mit einer Gruppe identifizieren"
+
+    typische_phrasen:
+      - "Im Einklang mit der Social Identity Theory..."
+      - "Die Salienz der sozialen Identität wurde manipuliert durch..."
+      - "Hohe Identifikation mit der Ingroup führte zu..."
+
+
+  # ---------------------------------------------------------------------------
+  kognitive_dissonanz:
+    lemma: "Kognitive Dissonanz"
+    wortart: "Substantiv, f."
+    englisch: "cognitive dissonance"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Unangenehmer Spannungszustand, der durch Widersprüche zwischen
+          Kognitionen (Überzeugungen, Einstellungen, Verhalten) entsteht.
+        fachgebiet: "Selbst"
+        beispielsaetze:
+          - "Die Dissonanz wurde durch Einstellungsänderung reduziert."
+          - "Konsistent mit der Theorie der kognitiven Dissonanz..."
+          - "Im $1-Bedingung zeigte sich mehr Einstellungsänderung als in der $20-Bedingung."
+
+    kollokationen:
+      haeufig:
+        - "Dissonanzreduktion"
+        - "Dissonanz erzeugen"
+        - "induced compliance"
+        - "Nachentscheidungs-Dissonanz"
+      verben:
+        - "Dissonanz erleben"
+        - "Dissonanz reduzieren"
+        - "Dissonanz induzieren"
+
+    typische_phrasen:
+      - "Im Einklang mit der Dissonanztheorie..."
+      - "Dissonanz wurde induziert durch..."
+      - "Zur Reduktion der Dissonanz änderten die Teilnehmer..."
+
+
+  # ---------------------------------------------------------------------------
+  # GRUPPE
+  # ---------------------------------------------------------------------------
+
+  ingroup_bias:
+    lemma: "Ingroup-Bias / Eigengruppenfavorisierung"
+    wortart: "Substantiv, m./f."
+    englisch: "ingroup bias / ingroup favoritism"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Tendenz, die eigene Gruppe positiver zu bewerten und zu behandeln
+          als Fremdgruppen.
+        fachgebiet: "Intergruppenbeziehungen"
+        beispielsaetze:
+          - "Ingroup-Favorismus trat selbst bei minimalen Gruppen auf."
+          - "Der Ingroup-Bias war stärker bei hoher Gruppenidentifikation."
+          - "Ressourcen wurden zugunsten der Ingroup verteilt."
+
+    kollokationen:
+      haeufig:
+        - "Ingroup-Favorismus"
+        - "Eigengruppenpräferenz"
+        - "Minimal Group Paradigm"
+        - "Outgroup-Diskriminierung"
+      verben:
+        - "die Ingroup bevorzugen"
+        - "Ingroup-Bias zeigen"
+
+    typische_phrasen:
+      - "Im Einklang mit Befunden zum Minimal Group Paradigm..."
+      - "Ingroup-Favorismus zeigte sich in der Ressourcenverteilung."
+      - "Der Effekt war robust über verschiedene abhängige Variablen."
+
+
+  # ---------------------------------------------------------------------------
+  bystander_effekt:
+    lemma: "Bystander-Effekt"
+    wortart: "Substantiv, m."
+    englisch: "bystander effect"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Phänomen reduzierter Hilfsbereitschaft in Anwesenheit anderer
+          potenzieller Helfer.
+        fachgebiet: "Prosoziales Verhalten"
+        beispielsaetze:
+          - "Der Bystander-Effekt zeigte sich in einer negativen Korrelation zwischen Gruppengröße und Hilfsrate."
+          - "Verantwortungsdiffusion erklärte den Bystander-Effekt."
+          - "Bei hoher Gefährlichkeit kehrte sich der Effekt um."
+
+    kollokationen:
+      haeufig:
+        - "Verantwortungsdiffusion"
+        - "pluralistische Ignoranz"
+        - "Hilfsbereitschaft"
+        - "Notfallsituation"
+      verben:
+        - "Hilfe leisten"
+        - "eingreifen"
+        - "passiv bleiben"
+
+    typische_phrasen:
+      - "Im Einklang mit dem klassischen Bystander-Effekt..."
+      - "Die Hilfsrate sank mit zunehmender Gruppengröße."
+      - "Entgegen dem Bystander-Effekt..."  # Bei Moderatoren
+
+    wichtiger_hinweis: |
+      Meta-Analyse (Fischer et al., 2011) zeigt: Bei gefährlichen
+      Situationen kann Effekt verschwinden oder sich umkehren.
+      Laboreffekt überschätzt Real-World-Relevanz.
+
+
+# =============================================================================
+# FACHSPRACHLICHE WENDUNGEN
+# =============================================================================
+
+wendungen:
+
+  einleitung:
+    - "In der vorliegenden Studie untersuchten wir..."
+    - "Basierend auf der Theorie von X, sagten wir vorher, dass..."
+    - "Im Einklang mit früheren Befunden hypothetisierten wir..."
+    - "Wir erweiterten frühere Forschung, indem..."
+
+  hypothesen:
+    - "Wir sagten vorher, dass..."
+    - "Hypothese 1: X führt zu Y."
+    - "Basierend auf Z erwarteten wir..."
+    - "In Übereinstimmung mit der Theorie..."
+
+  methodik:
+    - "Die Teilnehmer wurden zufällig einer von X Bedingungen zugewiesen."
+    - "Die abhängige Variable wurde erfasst durch..."
+    - "Als Manipulation Check..."
+    - "Wir rekrutierten N = X Teilnehmer über..."
+
+  ergebnisse:
+    - "Wie vorhergesagt, zeigte sich..."
+    - "Entgegen unserer Hypothese..."
+    - "Der Effekt war signifikant, t(df) = X, p < .05, d = Y."
+    - "Die Interaktion war signifikant, F(df1, df2) = X, p < .05."
+
+  diskussion:
+    - "Diese Befunde sind konsistent mit..."
+    - "Eine mögliche Erklärung ist..."
+    - "Limitationen dieser Studie umfassen..."
+    - "Zukünftige Forschung sollte..."
+
+  replikations_sensibel:
+    - "Diese Befunde bedürfen der Replikation."
+    - "Im Einklang mit der präregistrierten Hypothese..."
+    - "Die Effektgröße war kleiner als in der Originalstudie."
+    - "In einer direkten Replikation von X (Jahr)..."
+
+
+# =============================================================================
+# TYPISCHE SATZSTRUKTUREN MIT B-WERTEN
+# =============================================================================
+
+satzstrukturen:
+
+  stark_kausal:
+    muster: "X verursacht Y"
+    B_wert: 0.95
+    beispiel: "Die Manipulation verursachte eine Einstellungsänderung."
+    warnung: "Nur bei experimentellem Design + Replikation angemessen"
+
+  experimentell:
+    muster: "X führte zu Y"
+    B_wert: 0.80
+    beispiel: "Die Aktivierung des Stereotyps führte zu langsameren Reaktionszeiten."
+
+  korrelativ:
+    muster: "X war assoziiert mit Y / X korrelierte mit Y"
+    B_wert: 0.50
+    beispiel: "Selbstwert korrelierte positiv mit Lebenszufriedenheit, r = .45."
+
+  konsistent_mit:
+    muster: "Die Befunde sind konsistent mit..."
+    B_wert: 0.55
+    beispiel: "Die Befunde sind konsistent mit der Social Identity Theory."
+
+  legt_nahe:
+    muster: "Die Daten legen nahe, dass..."
+    B_wert: 0.45
+    beispiel: "Die Daten legen nahe, dass Gruppenzugehörigkeit Urteile beeinflusst."
+
+  hypothetisch:
+    muster: "X könnte Y beeinflussen"
+    B_wert: 0.30
+    beispiel: "Stereotype könnten unbewusst Verhalten beeinflussen."
+
+  replikation_noetig:
+    muster: "Diese vorläufigen Befunde bedürfen der Replikation"
+    B_wert: 0.35
+    beispiel: "Diese Befunde bedürfen der Replikation in anderen Stichproben."

@@ -1,0 +1,536 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Sozialpsychologie
+# =============================================================================
+# Für: Sozialpsychologische Forschung, experimentelle Studien, Feldforschung
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "sozialpsychologie"
+  name: "Sozialpsychologie"
+  name_en: "Social Psychology"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Sozialpsychologie.
+    Besondere Charakteristika:
+    - Stark von Replikationskrise betroffen (OSC 2015: 39% Replikation)
+    - Hohe Abhängigkeit von Laborexperimenten mit WEIRD-Stichproben
+    - Kontexteffekte und kulturelle Variation wichtig
+    - Klassische Effekte unter Revision (Priming, Ego Depletion)
+    - Strenge methodische Standards seit 2011 (Bem-Affäre)
+
+  anwendungsbereich:
+    - "Einstellungsforschung (Attitudes)"
+    - "Soziale Kognition (Attribution, Stereotypen)"
+    - "Sozialer Einfluss (Konformität, Gehorsam)"
+    - "Gruppenpsychologie (Identität, Intergruppen)"
+    - "Prosoziales Verhalten (Altruismus, Aggression)"
+    - "Interpersonale Attraktion"
+
+  wissenschaftstyp: "Empirische Sozialwissenschaft (experimentell + feldbasiert)"
+  toleranzfenster: 0.18  # Weiter als Ökonomie wegen inhärenter Variabilität
+
+  verwandte_profile:
+    - id: "verhaltensoekonomie"
+      beziehung: "Überlappend"
+      unterschied: "Verhaltensökonomie fokussiert auf ökonomische Entscheidungen"
+    - id: "kognitionspsychologie"
+      beziehung: "Ergänzend"
+      unterschied: "Kognition fokussiert auf individuelle Prozesse, nicht soziale"
+
+
+# =============================================================================
+# E-SKALA: Sozialpsychologie-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Evidenzhierarchie für sozialpsychologische Forschung.
+    Post-Replikationskrise: Präregistrierung und statistische Power
+    sind zentrale Qualitätskriterien. Direkte Replikationen haben
+    höheren Stellenwert als konzeptuelle Replikationen.
+
+  stufen:
+
+    stufe_1:
+      name: "Meta-Analyse mit Bias-Korrektur"
+      E_range: [0.82, 1.00]
+      beschreibung: |
+        Systematische Synthese mit Publication-Bias-Korrektur.
+        PET-PEESE, p-curve, oder ähnliche Methoden angewendet.
+      beispiele:
+        - "Meta-Analyse mit PET-PEESE Korrektur"
+        - "p-curve Analyse zeigt evidential value"
+        - "Registered Report Meta-Analyse"
+      marker:
+        - "meta-analyse"
+        - "publication bias"
+        - "p-curve"
+        - "pet-peese"
+        - "trim-and-fill"
+      modifikatoren:
+        bias_korrigiert: +0.05
+        heterogenitaet_hoch: -0.10
+        nur_publizierte_studien: -0.08
+
+    stufe_2:
+      name: "Präregistrierte Replikation (direkt)"
+      E_range: [0.75, 0.85]
+      beschreibung: |
+        Direkte Replikation mit Präregistrierung und adequate Power.
+        Standard: ManyLabs, Registered Replication Reports.
+      beispiele:
+        - "ManyLabs Replikation"
+        - "Registered Replication Report (RRR)"
+        - "Direkte Replikation mit N > 200 pro Zelle"
+      marker:
+        - "direkte replikation"
+        - "präregistriert"
+        - "osf"
+        - "registered report"
+        - "manylabs"
+      modifikatoren:
+        multi_lab: +0.05
+        power_90: +0.03
+        original_autoren_beteiligt: -0.02
+
+    stufe_3:
+      name: "Präregistrierte Originalstudie"
+      E_range: [0.65, 0.78]
+      beschreibung: |
+        Neue Studie mit Präregistrierung und a-priori Power-Analyse.
+        Hypothesen und Analyseplan vor Datenerhebung festgelegt.
+      beispiele:
+        - "Registered Report (Stage 1 akzeptiert)"
+        - "Präregistrierte Studie auf OSF/AsPredicted"
+        - "Preregistered Replication + Extension"
+      marker:
+        - "präregistriert"
+        - "pre-registration"
+        - "osf.io"
+        - "aspredicted"
+        - "power analyse"
+      modifikatoren:
+        registered_report: +0.05
+        power_80_plus: +0.03
+        explorative_analysen_getrennt: +0.02
+
+    stufe_4:
+      name: "Nicht-präregistrierte Studie (gut gepowert)"
+      E_range: [0.50, 0.65]
+      beschreibung: |
+        Klassische Studie ohne Präregistrierung, aber mit
+        ausreichender statistischer Power (N > 100 pro Zelle).
+      beispiele:
+        - "Laborexperiment mit N > 200"
+        - "Feldexperiment ohne Präregistrierung"
+        - "Gut gepowerte Korrelationsstudie"
+      marker:
+        - "experiment"
+        - "studie"
+        - "n ="
+        - "teilnehmer"
+      modifikatoren:
+        grosses_n: +0.05
+        mehrere_studien: +0.05
+        effect_size_berichtet: +0.03
+        p_hacking_verdacht: -0.12
+
+    stufe_5:
+      name: "Underpowered Studie / Konzeptuelle Replikation"
+      E_range: [0.35, 0.52]
+      beschreibung: |
+        Studie mit geringer Power oder konzeptuelle (nicht direkte)
+        Replikation. Hohe Unsicherheit über wahre Effektgröße.
+      beispiele:
+        - "Studie mit N < 50 pro Zelle"
+        - "Konzeptuelle Replikation mit Variation"
+        - "Pilotstudie"
+      marker:
+        - "pilot"
+        - "explorativ"
+        - "konzeptuelle replikation"
+        - "analog"
+        - "ähnlich"
+      modifikatoren:
+        n_unter_30: -0.10
+        nur_signifikante_ergebnisse: -0.08
+        viele_bedingungen_wenig_n: -0.12
+
+    stufe_6:
+      name: "Korrelationsstudien / Survey"
+      E_range: [0.28, 0.42]
+      beschreibung: |
+        Nicht-experimentelle Designs. Keine kausale Interpretation
+        möglich. Self-Report anfällig für Biases.
+      beispiele:
+        - "Cross-sectional Survey"
+        - "Korrelationsstudie mit Fragebogen"
+        - "Strukturgleichungsmodell (querschnittlich)"
+      marker:
+        - "korrelation"
+        - "zusammenhang"
+        - "fragebogen"
+        - "selbstbericht"
+        - "cross-sectional"
+      modifikatoren:
+        longitudinal: +0.08
+        objektive_masse: +0.05
+        nur_selbstbericht: -0.05
+
+    stufe_7:
+      name: "Qualitative Forschung / Einzelfallstudien"
+      E_range: [0.18, 0.32]
+      beschreibung: |
+        Qualitative Methoden, Interviews, Beobachtungen.
+        Hypothesengenerierend, nicht -testend.
+      beispiele:
+        - "Qualitative Interviews"
+        - "Fallstudie"
+        - "Ethnographie"
+        - "Inhaltsanalyse"
+      marker:
+        - "interview"
+        - "qualitativ"
+        - "fallstudie"
+        - "beobachtung"
+        - "explorativ"
+      modifikatoren:
+        systematisch_kodiert: +0.05
+        triangulation: +0.05
+        einzelfall: -0.08
+
+    stufe_8:
+      name: "Theoretische Argumentation"
+      E_range: [0.10, 0.22]
+      beschreibung: |
+        Theoriebildung ohne direkte empirische Prüfung.
+        Konzeptuelle Analyse, Literaturintegration.
+      beispiele:
+        - "Theoretischer Review"
+        - "Konzeptpapier"
+        - "Modellentwicklung"
+      marker:
+        - "theoretisch"
+        - "konzeptuell"
+        - "wir argumentieren"
+        - "framework"
+        - "modell"
+
+    stufe_9:
+      name: "Unbelegte Behauptung / Spekulation"
+      E_range: [0.00, 0.10]
+      beschreibung: |
+        Aussagen ohne empirische oder theoretische Fundierung.
+      beispiele:
+        - "Allgemeinwissen-Behauptung"
+        - "Unbelegte Generalisierung"
+      marker:
+        - "bekannt"
+        - "offensichtlich"
+        - "jeder weiß"
+        - "natürlich"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Sozialpsychologie
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Sozialpsychologie erfordert nach der Replikationskrise strenge
+    Evidenzstandards. Gleichzeitig ist inhärente Variabilität hoch
+    (Kontexteffekte, kulturelle Unterschiede). K-Schwellenwerte
+    reflektieren diese Balance.
+
+  kategorien:
+    stabil:
+      range: [0.72, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch solide Evidenz gedeckt"
+      aktion: "Publikationsreif für etablierte Journals"
+      beispiel: "Präregistrierte Replikation bestätigt Effekt"
+
+    teilstabil:
+      range: [0.52, 0.72]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz, Hedging empfohlen"
+      aktion: "Limitationen diskutieren, Replikation anregen"
+      beispiel: "Gut gepowerte Studie ohne Präregistrierung"
+
+    interpretativ:
+      range: [0.32, 0.52]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Starkes Hedging erforderlich, 'deutet an' statt 'zeigt'"
+      beispiel: "Einzelne underpowerte Studie"
+
+    spekulativ:
+      range: [0.00, 0.32]
+      label: "Spekulativ"
+      bedeutung: "Behauptung nicht durch Evidenz gedeckt"
+      aktion: "Als Hypothese kennzeichnen oder überarbeiten"
+      beispiel: "Unbelegte Generalisierung aus Alltagsbeobachtung"
+
+  vergleich:
+    naturwissenschaft:
+      stabil_threshold: 0.85
+      kommentar: "Strenger wegen höherer Reproduzierbarkeit"
+    oekonomie:
+      stabil_threshold: 0.78
+      kommentar: "Strenger wegen formaler Tradition"
+    sozialpsychologie:
+      stabil_threshold: 0.72
+      kommentar: "Post-Replikationskrise, aber inhärente Variabilität"
+    verhaltensoekonomie:
+      stabil_threshold: 0.75
+      kommentar: "Ähnlich, aber incentivierte Experimente"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Sozialpsychologische Fachsprache enthält spezifische Marker.
+    Post-Replikationskrise: Vorsichtige Formulierungen werden erwartet.
+    Kausale Sprache erfordert experimentelle Evidenz.
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "beweist"
+        delta_B: +0.28
+        beispiel: "Die Studie beweist, dass..."
+        warnung: "In Sozialpsychologie fast nie angemessen"
+
+      - marker: "kausal"
+        delta_B: +0.22
+        beispiel: "Der kausale Effekt von X auf Y..."
+
+      - marker: "zeigt eindeutig"
+        delta_B: +0.20
+        beispiel: "Die Daten zeigen eindeutig, dass..."
+
+      - marker: "etabliert"
+        delta_B: +0.18
+        beispiel: "Forschung hat etabliert, dass..."
+
+      - marker: "demonstriert"
+        delta_B: +0.15
+        beispiel: "Experiment 1 demonstriert den Effekt..."
+
+      - marker: "belegt"
+        delta_B: +0.12
+        beispiel: "Mehrere Studien belegen..."
+
+    senkend:
+      - marker: "deutet darauf hin"
+        delta_B: -0.12
+        beispiel: "Die Ergebnisse deuten darauf hin, dass..."
+
+      - marker: "legt nahe"
+        delta_B: -0.12
+        beispiel: "Die Evidenz legt nahe, dass..."
+
+      - marker: "konsistent mit"
+        delta_B: -0.15
+        beispiel: "Befunde sind konsistent mit der Hypothese..."
+
+      - marker: "möglicherweise"
+        delta_B: -0.18
+        beispiel: "Möglicherweise spielt X eine Rolle..."
+
+      - marker: "könnte"
+        delta_B: -0.18
+        beispiel: "Dies könnte erklären, warum..."
+
+      - marker: "unter bestimmten Bedingungen"
+        delta_B: -0.15
+        beispiel: "Unter bestimmten Bedingungen zeigt sich..."
+
+      - marker: "in diesem Kontext"
+        delta_B: -0.10
+        beispiel: "In diesem spezifischen Kontext..."
+
+      - marker: "vorläufig"
+        delta_B: -0.20
+        beispiel: "Vorläufige Ergebnisse zeigen..."
+
+      - marker: "explorativ"
+        delta_B: -0.22
+        beispiel: "Explorative Analysen deuten auf..."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  replikationskrise:
+    beschreibung: |
+      Nach OSC (2015) und ManyLabs: Klassische Effekte unter Revision.
+      Vorsicht bei Berufung auf ältere Studien ohne Replikation.
+
+    kritische_effekte:
+      - name: "Ego Depletion"
+        status: "nicht repliziert"
+        E_reduktion: -0.25
+        quelle: "Vohs et al. (2021) Multi-Lab"
+
+      - name: "Facial Feedback"
+        status: "teilweise repliziert"
+        E_reduktion: -0.10
+        quelle: "Wagenmakers et al. (2016)"
+
+      - name: "Social Priming"
+        status: "größtenteils nicht repliziert"
+        E_reduktion: -0.20
+        quelle: "ManyLabs 3"
+
+      - name: "Power Posing"
+        status: "nicht repliziert"
+        E_reduktion: -0.25
+        quelle: "Ranehill et al. (2015)"
+
+      - name: "Stereotype Threat"
+        status: "umstritten"
+        E_reduktion: -0.12
+        quelle: "Flore & Wicherts (2015) Meta-Analyse"
+
+    robuste_effekte:
+      - name: "Mere Exposure Effekt"
+        status: "gut repliziert"
+        E_stabil: true
+        quelle: "ManyLabs 1"
+
+      - name: "Anchoring"
+        status: "gut repliziert"
+        E_stabil: true
+        quelle: "ManyLabs 1 & 2"
+
+      - name: "Bystander-Effekt"
+        status: "meta-analytisch bestätigt"
+        E_stabil: true
+        quelle: "Fischer et al. (2011)"
+
+  kausalitaet:
+    beschreibung: |
+      Kausale Sprache nur bei experimenteller Manipulation.
+      Korrelationsstudien erlauben keine kausalen Schlüsse.
+
+    erlaubt_wenn:
+      - "Randomisiertes Experiment"
+      - "Manipulation einer unabhängigen Variable"
+      - "Kontrollierte Laborbedingungen"
+      - "Feldexperiment mit Randomisierung"
+
+    verboten_wenn:
+      - "Korrelationsstudie"
+      - "Querschnittsbefragung"
+      - "Naturalistic Observation"
+      - "Qualitative Studie"
+
+    empfehlung: |
+      Bei nicht-experimentellen Designs: "assoziiert mit", "korreliert mit",
+      "hängt zusammen mit", "geht einher mit"
+
+  generalisierbarkeit:
+    beschreibung: |
+      WEIRD-Bias (Western, Educated, Industrialized, Rich, Democratic)
+      beachten. Studentische Stichproben limitieren Generalisierung.
+
+    modifikatoren:
+      weird_stichprobe:
+        delta_B: -0.08
+        anmerkung: "Nur westliche Studierende"
+
+      diverse_stichprobe:
+        delta_E: +0.05
+        anmerkung: "Cross-cultural oder community sample"
+
+      online_stichprobe:
+        delta_E: -0.03
+        anmerkung: "MTurk/Prolific - höhere Power, weniger Kontrolle"
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "Präregistrierung vorhanden (OSF, AsPredicted)"
+    - "Power-Analyse berichtet (≥ 80%)"
+    - "Effektgrößen mit Konfidenzintervallen"
+    - "Open Materials & Open Data"
+    - "Direkte Replikation durchgeführt"
+    - "Mehrere Studien im Paper"
+    - "Manipulation Checks erfolgreich"
+    - "Explorative Analysen als solche gekennzeichnet"
+    - "Limitationen transparent diskutiert"
+
+  negativ:
+    - "P-Hacking vermutet (viele Ausschlüsse, flexible Analysen)"
+    - "HARKing (Hypothesizing After Results Known)"
+    - "Keine Power-Analyse"
+    - "Nur signifikante Ergebnisse berichtet"
+    - "Manipulation Check fehlgeschlagen"
+    - "Kleine Stichprobe ohne Begründung"
+    - "Demand Characteristics nicht kontrolliert"
+    - "Keine Replikation trotz überraschenden Ergebnissen"
+    - "Übermäßig starke Behauptungen"
+
+
+# =============================================================================
+# SPEZIFISCHE METHODENPROBLEME
+# =============================================================================
+
+methodenprobleme:
+
+  demand_characteristics:
+    beschreibung: "Teilnehmer erraten Hypothese und verhalten sich entsprechend"
+    E_reduktion: -0.08
+    gegenmassnahmen:
+      - "Cover Story verwenden"
+      - "Manipulation verdeckt"
+      - "Funnel Debriefing"
+
+  social_desirability:
+    beschreibung: "Sozial erwünschte Antworten in Selbstberichten"
+    E_reduktion: -0.05
+    gegenmassnahmen:
+      - "Implizite Maße verwenden"
+      - "Bogus Pipeline"
+      - "Verhaltensmaße statt Selbstbericht"
+
+  experimenter_effects:
+    beschreibung: "Versuchsleiter beeinflusst unbewusst Ergebnisse"
+    E_reduktion: -0.05
+    gegenmassnahmen:
+      - "Computergesteuerte Experimente"
+      - "Blinded Experimenters"
+      - "Standardisierte Instruktionen"
+
+  weird_bias:
+    beschreibung: "Western, Educated, Industrialized, Rich, Democratic Stichproben"
+    E_reduktion: -0.08
+    gegenmassnahmen:
+      - "Cross-cultural Replikation"
+      - "Community Samples"
+      - "Diverse Rekrutierung"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_sozialpsychologie.yaml"
+  glossar: "glossar_sozialpsychologie.yaml"
+  lexikon: "lexikon_sozialpsychologie.yaml"

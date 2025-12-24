@@ -1,0 +1,497 @@
+# =============================================================================
+# ESL DISZIPLIN-GLOSSAR: Sozialpsychologie
+# =============================================================================
+# Formalisiertes Glossar mit empirischen Base-Rates und Replikationsstatus
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "sozialpsychologie"
+  name: "Sozialpsychologie / Social Psychology"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  kontext_replikationskrise: |
+    Die Sozialpsychologie war besonders stark von der Replikationskrise betroffen.
+    Viele klassische Effekte haben sich als kleiner oder kontextabhängiger erwiesen
+    als ursprünglich berichtet. Dieses Glossar berücksichtigt den aktuellen
+    Replikationsstatus wichtiger Befunde.
+
+  quellen_base_rates:
+    - id: "OSC2015"
+      name: "Open Science Collaboration (2015)"
+      titel: "Estimating the reproducibility of psychological science"
+      replikationsrate: 0.39
+      anmerkung: "100 Psychologie-Studien repliziert, 39% erfolgreich"
+
+    - id: "ManyLabs1"
+      name: "Klein et al. (2014)"
+      titel: "Many Labs 1"
+      replikationsrate: 0.77
+      anmerkung: "13 klassische Effekte, 10 repliziert"
+
+    - id: "ManyLabs2"
+      name: "Klein et al. (2018)"
+      titel: "Many Labs 2"
+      replikationsrate: 0.54
+      anmerkung: "28 Effekte, 15 repliziert (54%)"
+
+    - id: "ManyLabs3"
+      name: "Ebersole et al. (2016)"
+      titel: "Many Labs 3"
+      replikationsrate: 0.30
+      anmerkung: "10 Effekte, 3 repliziert - Semester-Effekte"
+
+    - id: "Registered_Replication"
+      name: "Registered Replication Reports"
+      beschreibung: "Präregistrierte Multi-Lab Replikationen"
+
+
+# =============================================================================
+# EMPIRISCHE BASE-RATES
+# =============================================================================
+
+base_rates:
+
+  replikation:
+    beschreibung: |
+      P(Replikation | Studientyp) für sozialpsychologische Forschung.
+      Basierend auf großangelegten Replikationsprojekten.
+
+    raten:
+      meta_analyse:
+        P_replikation: 0.80
+        konfidenz: "mittel-hoch"
+        quelle: "Aggregation stabilisiert Befunde"
+
+      praeregistriert_high_powered:
+        P_replikation: 0.70
+        konfidenz: "mittel-hoch"
+        quelle: "Registered Reports, N > 500"
+
+      labor_klassisch:
+        P_replikation: 0.39
+        konfidenz: "mittel"
+        quelle: "OSC2015"
+        warnung: "Historische Rate - neue Standards höher"
+
+      labor_post_2015:
+        P_replikation: 0.55
+        konfidenz: "mittel"
+        quelle: "Geschätzt nach Methodenreform"
+
+      online_mturk:
+        P_replikation: 0.50
+        konfidenz: "niedrig-mittel"
+        quelle: "Qualitätsprobleme bei Online-Samples"
+
+      cross_cultural:
+        P_replikation: 0.45
+        konfidenz: "niedrig"
+        quelle: "WEIRD-Effekte oft nicht generalisierbar"
+
+
+  klassische_effekte:
+    beschreibung: |
+      Replikationsstatus wichtiger sozialpsychologischer Effekte.
+      Basierend auf Many Labs und anderen Replikationsprojekten.
+
+    repliziert_robust:
+      - name: "Mere Exposure Effect"
+        original: "Zajonc (1968)"
+        d_original: 0.50
+        d_repliziert: 0.40
+        status: "Robust repliziert"
+
+      - name: "Anchoring Effect"
+        original: "Tversky & Kahneman (1974)"
+        d_original: 1.20
+        d_repliziert: 0.95
+        status: "Robust repliziert, etwas kleiner"
+
+      - name: "Fundamental Attribution Error"
+        original: "Jones & Harris (1967)"
+        d_original: 0.80
+        d_repliziert: 0.60
+        status: "Repliziert, kulturabhängig"
+
+      - name: "Ingroup Favoritism"
+        original: "Tajfel (1971)"
+        d_repliziert: 0.45
+        status: "Robust repliziert"
+
+    teilweise_repliziert:
+      - name: "Bystander Effect"
+        original: "Darley & Latané (1968)"
+        status: "Repliziert, aber moderiert durch Gefährlichkeit"
+        anmerkung: "Bei echten Notfällen oft Hilfe trotz Bystandern"
+
+      - name: "Cognitive Dissonance (Induced Compliance)"
+        original: "Festinger & Carlsmith (1959)"
+        status: "Repliziert, aber Effekt kleiner und moderiert"
+
+      - name: "Conformity (Asch)"
+        original: "Asch (1951)"
+        konformitaet_original: 0.37
+        konformitaet_heute: 0.25
+        status: "Repliziert, aber säkularer Rückgang"
+
+    nicht_repliziert:
+      - name: "Ego Depletion"
+        original: "Baumeister et al. (1998)"
+        status: "Nicht repliziert in Multi-Lab"
+        quelle: "Hagger et al. (2016): d = 0.04"
+
+      - name: "Facial Feedback Hypothesis"
+        original: "Strack et al. (1988)"
+        status: "Nicht repliziert in RRR"
+        quelle: "Wagenmakers et al. (2016)"
+
+      - name: "Social Priming (viele)"
+        original: "Bargh et al. (1996)"
+        status: "Nicht repliziert"
+        quelle: "Doyen et al. (2012), Many Labs"
+
+      - name: "Power Posing (Hormonal)"
+        original: "Carney et al. (2010)"
+        status: "Nicht repliziert (Hormonspiegel)"
+        quelle: "Ranehill et al. (2015)"
+        anmerkung: "Subjektive Effekte möglicherweise vorhanden"
+
+
+  effektgroessen:
+    beschreibung: |
+      Typische Effektgrößen in der Sozialpsychologie.
+      Nach Open Science Collaboration kleiner als ursprünglich berichtet.
+
+    meta_verteilung:
+      median_d: 0.40
+      mean_d: 0.50
+      sd_d: 0.35
+      quelle: "Richard et al. (2003), OSC2015"
+
+    interpretation_cohen:
+      klein: "d = 0.20"
+      mittel: "d = 0.50"
+      gross: "d = 0.80"
+      warnung: |
+        Viele publizierte Effekte waren überschätzt (Publication Bias).
+        Realistische Erwartung: d = 0.20-0.40 für typische Effekte.
+
+
+# =============================================================================
+# KERNBEGRIFFE
+# =============================================================================
+
+begriffe:
+
+  # ---------------------------------------------------------------------------
+  # EINSTELLUNGEN
+  # ---------------------------------------------------------------------------
+
+  einstellung:
+    term: "Einstellung"
+    term_en: "Attitude"
+    symbol: "A"
+    kategorie: "Soziale Kognition"
+
+    definition: |
+      Psychologische Tendenz, ein Einstellungsobjekt mit einem
+      bestimmten Grad an Zu- oder Abneigung zu bewerten.
+
+    messung:
+      explizit:
+        methoden: ["Likert-Skala", "Semantic Differential", "Thermometer"]
+        E_value: 0.65
+      implizit:
+        methoden: ["IAT", "Priming", "AMP"]
+        E_value: 0.55
+        problem: "Validität diskutiert"
+
+    attitude_behavior_gap: |
+      Korrelation Einstellung-Verhalten: r ≈ 0.38 (Kraus, 1995)
+      Moderatoren: Spezifität, Zugänglichkeit, Direkte Erfahrung
+
+    E_value: 0.70
+    E_begruendung: "Gut etabliertes Konstrukt, Messung valide"
+
+  # ---------------------------------------------------------------------------
+  fundamentaler_attributionsfehler:
+    term: "Fundamentaler Attributionsfehler"
+    term_en: "Fundamental Attribution Error / Correspondence Bias"
+    kategorie: "Soziale Kognition"
+
+    definition: |
+      Tendenz, das Verhalten anderer auf deren Disposition (Persönlichkeit)
+      zurückzuführen und situative Faktoren zu unterschätzen.
+
+    original: "Ross (1977)"
+    replikationsstatus: "Repliziert, aber kulturabhängig"
+    kulturelle_variation: |
+      Effekt stärker in individualistischen Kulturen.
+      In kollektivistischen Kulturen schwächer (Miller, 1984).
+
+    E_value: 0.65
+    E_begruendung: "Repliziert, aber wichtige Moderatoren"
+
+  # ---------------------------------------------------------------------------
+  kognitive_dissonanz:
+    term: "Kognitive Dissonanz"
+    term_en: "Cognitive Dissonance"
+    kategorie: "Selbst"
+
+    definition: |
+      Aversiver Spannungszustand bei Widersprüchlichkeit zwischen
+      Kognitionen (Überzeugungen, Einstellungen, Verhalten).
+
+    original: "Festinger (1957)"
+    paradigmen:
+      induced_compliance:
+        beschreibung: "$1 vs. $20 Experiment"
+        replikationsstatus: "Repliziert, kleinerer Effekt"
+        d_original: 0.80
+        d_repliziert: 0.45
+      free_choice:
+        beschreibung: "Spreading of Alternatives nach Wahl"
+        replikationsstatus: "Teilweise repliziert"
+      effort_justification:
+        beschreibung: "Mehr Aufwand → höhere Bewertung"
+        replikationsstatus: "Repliziert"
+
+    E_value: 0.60
+    E_begruendung: "Kerntheorie repliziert, spezifische Befunde variieren"
+
+  # ---------------------------------------------------------------------------
+  # SOZIALER EINFLUSS
+  # ---------------------------------------------------------------------------
+
+  konformitaet:
+    term: "Konformität"
+    term_en: "Conformity"
+    kategorie: "Sozialer Einfluss"
+
+    definition: |
+      Anpassung von Urteilen, Meinungen oder Verhalten an die Mehrheit
+      oder wahrgenommene soziale Norm.
+
+    asch_paradigma:
+      original: "Asch (1951)"
+      konformitaet_original: 0.37
+      konformitaet_meta: 0.25
+      trend: "Säkularer Rückgang in westlichen Kulturen"
+      quelle: "Bond & Smith (1996)"
+
+    typen:
+      normativ: "Konformität aus Akzeptanzbedürfnis"
+      informational: "Konformität weil andere als Informationsquelle"
+
+    E_value: 0.70
+    E_begruendung: "Robust repliziert, gut verstanden"
+
+  # ---------------------------------------------------------------------------
+  gehorsam:
+    term: "Gehorsam"
+    term_en: "Obedience"
+    kategorie: "Sozialer Einfluss"
+
+    definition: |
+      Befolgung von Anweisungen einer als legitim wahrgenommenen Autorität.
+
+    milgram_paradigma:
+      original: "Milgram (1963)"
+      gehorsam_original: 0.65
+      gehorsam_replikation: 0.70
+      quelle: "Burger (2009) - modifiziertes Design bis 150V"
+
+    ethik: |
+      Originalstudien heute nicht durchführbar.
+      Moderne Replikationen mit ethischen Modifikationen.
+
+    E_value: 0.65
+    E_begruendung: "Repliziert, aber ethische Einschränkungen"
+
+  # ---------------------------------------------------------------------------
+  # GRUPPE
+  # ---------------------------------------------------------------------------
+
+  soziale_identitaet:
+    term: "Soziale Identität"
+    term_en: "Social Identity"
+    kategorie: "Gruppe"
+
+    definition: |
+      Teil des Selbstkonzepts, der aus der wahrgenommenen Zugehörigkeit
+      zu sozialen Gruppen und deren Bewertung stammt.
+
+    theorie: "Tajfel & Turner (1979): Social Identity Theory"
+
+    minimal_group:
+      befund: "Selbst willkürliche Gruppierung → Ingroup Favoritism"
+      replikationsstatus: "Robust repliziert"
+      d: 0.45
+
+    E_value: 0.75
+    E_begruendung: "Sehr gut repliziert, starke theoretische Basis"
+
+  # ---------------------------------------------------------------------------
+  bystander_effekt:
+    term: "Bystander-Effekt"
+    term_en: "Bystander Effect"
+    kategorie: "Prosoziales Verhalten"
+
+    definition: |
+      Reduzierte Hilfsbereitschaft bei Anwesenheit anderer potenzieller Helfer.
+
+    original: "Darley & Latané (1968)"
+
+    mechanismen:
+      - "Verantwortungsdiffusion"
+      - "Pluralistische Ignoranz"
+      - "Bewertungsangst"
+
+    replikationsstatus: |
+      Repliziert in Laborsituationen.
+      ABER: Bei echten Notfällen oft Hilfe trotz Bystandern.
+      Fischer et al. (2011) Meta: d = -0.35, moderiert durch Gefahr.
+
+    moderatoren:
+      - "Gefährlichkeit (bei Gefahr: mehr Hilfe mit Bystandern)"
+      - "Klarheit des Notfalls"
+      - "Kompetenz des Helfers"
+
+    E_value: 0.55
+    E_begruendung: "Repliziert, aber wichtige Moderatoren oft ignoriert"
+
+
+# =============================================================================
+# NICHT REPLIZIERTE EFFEKTE (WARNUNG)
+# =============================================================================
+
+nicht_repliziert:
+
+  beschreibung: |
+    Diese Effekte wurden in Large-Scale Replikationen NICHT bestätigt.
+    Bei Verwendung in neuen Arbeiten: Entsprechende Quellenangabe erforderlich.
+
+  effekte:
+
+    ego_depletion:
+      original: "Baumeister et al. (1998)"
+      claim: "Selbstkontrolle als limitierte Ressource, die erschöpft werden kann"
+      replikation: "Hagger et al. (2016) RRR: d = 0.04, n.s."
+      status: "Nicht repliziert"
+      E_value: 0.15
+
+    facial_feedback:
+      original: "Strack, Martin & Stepper (1988)"
+      claim: "Stift im Mund (Lächeln simulieren) → Mehr Freude"
+      replikation: "Wagenmakers et al. (2016) RRR: Nicht repliziert"
+      status: "Nicht repliziert"
+      E_value: 0.15
+      update: "Noah et al. (2018): Kleiner Effekt möglicherweise vorhanden"
+
+    professor_priming:
+      original: "Dijksterhuis & van Knippenberg (1998)"
+      claim: "An Professoren denken → Bessere Quiz-Leistung"
+      replikation: "Shanks et al. (2013), O'Donnell et al. (2018): Nicht repliziert"
+      status: "Nicht repliziert"
+      E_value: 0.10
+
+    elderly_priming:
+      original: "Bargh, Chen & Burrows (1996)"
+      claim: "Elderly-Wörter → Langsameres Gehen"
+      replikation: "Doyen et al. (2012): Nicht repliziert (Experimenter-Erwartung)"
+      status: "Nicht repliziert"
+      E_value: 0.10
+
+    power_posing_hormonal:
+      original: "Carney, Cuddy & Yap (2010)"
+      claim: "Power Poses → Erhöhtes Testosteron, Gesenkt Cortisol"
+      replikation: "Ranehill et al. (2015): Keine hormonellen Effekte"
+      status: "Hormonelle Effekte nicht repliziert"
+      E_value: 0.20
+      anmerkung: "Subjektive Effekte möglicherweise vorhanden (Cuddy, 2018)"
+
+
+# =============================================================================
+# METHODENSPEZIFISCHE E-WERTE
+# =============================================================================
+
+methoden_E_werte:
+
+  meta_analyse:
+    E: 0.82
+    bedingung: "Systematisch, präregistriert, Publication Bias korrigiert"
+
+  registered_replication_report:
+    E: 0.80
+    bedingung: "Multi-Lab, präregistriert, high-powered"
+
+  praeregistriert_single_lab:
+    E: 0.68
+    bedingung: "N > 200, Registered Report"
+
+  labor_klassisch_hoch_powered:
+    E: 0.55
+    bedingung: "N > 100 pro Zelle, post-2015"
+
+  labor_klassisch_niedrig_powered:
+    E: 0.40
+    bedingung: "N < 50 pro Zelle, pre-2015"
+
+  online_high_quality:
+    E: 0.50
+    bedingung: "Prolific/CloudResearch, Attention Checks"
+
+  online_mturk:
+    E: 0.42
+    bedingung: "Qualitätsprobleme bekannt"
+
+  korrelationsstudie:
+    E: 0.38
+    bedingung: "Keine kausale Inferenz"
+
+  qualitativ:
+    E: 0.30
+    bedingung: "Explorative Forschung"
+
+
+# =============================================================================
+# SPRACHLICHE MARKER
+# =============================================================================
+
+sprachliche_marker:
+
+  hohe_behauptungsstaerke:
+    beispiele:
+      - "zeigt"
+      - "demonstriert"
+      - "belegt"
+      - "beweist"
+      - "verursacht"
+    B_range: [0.80, 1.00]
+    warnung: "Nur bei experimenteller Evidenz + Replikation angemessen"
+
+  mittlere_behauptungsstaerke:
+    beispiele:
+      - "legt nahe"
+      - "deutet auf ... hin"
+      - "ist konsistent mit"
+      - "unterstützt die Hypothese"
+    B_range: [0.50, 0.75]
+
+  niedrige_behauptungsstaerke:
+    beispiele:
+      - "könnte"
+      - "möglicherweise"
+      - "weitere Forschung ist nötig"
+      - "die Daten sind mit ... vereinbar"
+    B_range: [0.20, 0.50]
+
+  replikations_disclaimer:
+    beispiele:
+      - "in dieser Stichprobe"
+      - "unter diesen Bedingungen"
+      - "Replikation erforderlich"
+      - "vorläufige Befunde"
+    B_reduktion: -0.15
