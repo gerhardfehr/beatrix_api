@@ -1,0 +1,457 @@
+\documentclass[12pt,a4paper]{article}
+
+% =====================================================================
+% PACKAGES
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{authblk}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{tcolorbox}
+
+% =====================================================================
+% LAYOUT
+% =====================================================================
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\onehalfspacing
+
+% =====================================================================
+% COLORS & LINKS
+% =====================================================================
+\definecolor{darkblue}{RGB}{0,51,102}
+\definecolor{warnorange}{RGB}{204,102,0}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    citecolor=darkblue,
+    urlcolor=darkblue
+}
+
+% =====================================================================
+% SECTION FORMATTING
+% =====================================================================
+\titleformat{\section}{\Large\bfseries\color{darkblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{darkblue!80}}{\thesubsection}{1em}{}
+
+% =====================================================================
+% HEADER & FOOTER
+% =====================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\color{gray}SOTA: Actionable Theories \& Causal Constructs}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% =====================================================================
+% DOCUMENT INFO
+% =====================================================================
+\title{
+{\LARGE\bfseries State of the Art Report (SOTA)}\\[0.4cm]
+{\Large Building Actionable Theories -- The Role of Causal Constructs (Dietz, 2026)}\\[0.2cm]
+{\large und die Implementation in BEATRIX / BCM 2.2}
+}
+
+\author[1]{Andrea Fehr}
+\author[1]{Gerhard Fehr}
+\affil[1]{FehrAdvice \& Partners AG, Zürich}
+\date{Dezember 2025}
+
+% =====================================================================
+% DOCUMENT
+% =====================================================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Dieser Bericht untersucht die theoretische und methodologische Bedeutung von Dietz (2026) \textit{Building Actionable Theories: The Role of Causal Constructs} im Kontext der Entwicklung kausaler, manipulationsfähiger Modelle in den Sozial- und Verhaltenswissenschaften.
+Das Paper schlägt vor, dass Theorien nur dann handlungsleitend sind, wenn ihre Konstrukte manipulierbar, messbar und in überprüfbare Kausalnetzwerke eingebettet sind.
+Diese Arbeit analysiert, inwiefern das Behavioral Change Model (BCM 2.2) und dessen Implementierung in BEATRIX diesen konzeptionellen Ansatz operationalisieren -- einschließlich einer kritischen Diskussion der \textbf{Grenzen} dieser Operationalisierung, insbesondere hinsichtlich des Lab-Field Gaps und der Unterscheidung zwischen Modell-Manipulation und Welt-Manipulation.
+\end{abstract}
+
+% =====================================================================
+\section{Einleitung: Theorie und Handlungsfähigkeit}
+% =====================================================================
+
+In der sozialwissenschaftlichen Theoriediskussion besteht seit Jahrzehnten die Spannung zwischen erklärenden und handlungsleitenden Ansätzen.
+Während klassische Modelle darauf abzielen, Phänomene zu beschreiben oder zu erklären, bleibt häufig offen, wie dieses Wissen in konkretes Handeln überführt werden kann.
+Dietz (2026) adressiert dieses Problem, indem er die Bedingung formuliert, unter der Theorien als \textit{actionable} gelten -- also als fähig, Interventionen zu leiten oder Verhalten gezielt zu verändern.
+Er positioniert seine Arbeit im Schnittpunkt zwischen Kausalitätsforschung (Woodward, 2003; Pearl, 2009) und Theoriekonstruktion (Weick, 1989; Sutton \& Staw, 1995) und schlägt ein Konzept vor, das Kausalität als Grundlage von Handlungsfähigkeit versteht.
+
+% =====================================================================
+\section{Stand der Forschung}
+% =====================================================================
+
+\subsection{Die erklärungsorientierte Phase (1960--1990)}
+
+Frühe Theoriebildung in Ökonomie, Psychologie und Management zielte auf Erklärung und Generalisierung ab.
+Arbeiten wie Simon (1962) zu begrenzter Rationalität oder Bandura (1977) zur Selbstwirksamkeit konzentrierten sich auf beobachtbare Muster, nicht auf Eingriffsmöglichkeiten.
+Das Wissen blieb beschreibend; Theorien erklärten Phänomene, ohne sie gezielt reproduzieren oder verändern zu können.
+
+\subsection{Die kontextuelle Wende (1990--2015)}
+
+In der Folge rückten System- und Kontextfaktoren in den Vordergrund.
+Eisenhardt (1999) und Giddens (2000) betonten die Bedeutung situativer und struktureller Bedingungen für menschliches Verhalten.
+Dennoch blieb die Frage der gezielten Manipulierbarkeit theoretischer Variablen weitgehend unbeantwortet.
+Die Theorien blieben diagnostisch, nicht interventionistisch.
+
+\subsection{Von Erklärung zu Intervention (2015--2025)}
+
+Seit der Etablierung evidenzbasierter Ansätze (Rousseau, 2018; Edmondson, 2021) wuchs das Interesse an \textit{actionable theories}.
+Dietz (2026) greift diesen Trend auf und entwickelt eine präzise Definition, wann theoretische Konstrukte manipulierbar und empirisch steuerbar sind.
+Damit wird die Lücke zwischen Theorie und Anwendung methodologisch geschlossen.
+
+% =====================================================================
+\section{Der Beitrag von Dietz (2026): Causal Constructs}
+% =====================================================================
+
+Dietz unterscheidet zwischen drei Klassen theoretischer Kausalität:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Typ} & \textbf{Beschreibung} & \textbf{Beispiel} & \textbf{Actionability}\\
+\midrule
+Observe(X) & Beobachtung von Zusammenhängen & Fairness korreliert mit Zufriedenheit & Nein \\
+Select(X) & Auswahl- oder Selbstselektion & Selbstwirksame Personen wählen Aufgaben & Eingeschränkt \\
+Manipulate(X) & Aktive Veränderung erzeugt Wirkung & Erhöhte Feedbackfrequenz steigert Motivation & Ja \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Nur der dritte Typ -- \textit{Manipulate(X)} -- erfüllt die Bedingung einer handlungsleitenden Theorie.
+Dietz definiert Theorien als \textit{actionable}, wenn sie mindestens ein Konstrukt enthalten, das gezielt verändert werden kann und dessen Veränderung eine überprüfbare Wirkung entfaltet.
+
+% =====================================================================
+\section{Causal Construct Criteria}
+% =====================================================================
+
+Dietz formuliert vier Bedingungen, die erfüllt sein müssen, damit ein theoretisches Konstrukt als kausal handlungsrelevant gilt:
+
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Distinctiveness:} Das Konstrukt ist klar definiert und abgegrenzt.
+    \item \textbf{Nomological Embeddedness:} Es ist in ein überprüfbares Kausalnetzwerk eingebettet.
+    \item \textbf{Manipulability:} Das Konstrukt kann konzeptionell oder experimentell verändert werden.
+    \item \textbf{Operationalizability:} Das Konstrukt ist messbar und quantifizierbar.
+\end{itemize}
+
+Diese vier Kriterien schaffen die Grundlage für die Übertragung theoretischer Modelle in rechnerische oder experimentelle Systeme.
+
+% =====================================================================
+\section{Theoretischer Rahmen}
+% =====================================================================
+
+Dietz' Ansatz basiert auf der interventionistischen Kausalitätslogik.
+Woodward (2003) versteht Kausalität als Möglichkeit, durch Veränderung einer Variable eine andere zu beeinflussen.
+Pearl (2009) formuliert diese Logik mathematisch über den sogenannten \textit{do-Operator}, der Interventionen modelliert.
+Bunge (2015) erweitert diese Sicht, indem er die Mechanismen betont, durch die Ursachen Wirkungen erzeugen.
+
+Dietz verbindet diese Perspektiven mit Theoriearbeit und argumentiert, dass nur Theorien, die explizit manipulierbare Variablen enthalten, empirisch fruchtbar sind.
+
+% =====================================================================
+\section{Methodische Konsequenzen}
+% =====================================================================
+
+Dietz schlägt vor, Theorien so zu strukturieren, dass sie in Simulations- oder Modellarchitekturen überführbar sind.
+Dazu müssen Variablen parametrisiert und ihre Wechselwirkungen formal beschreibbar sein.
+Diese Forderung führt zu einer formalen Theorielogik, in der erklärende und manipulative Komponenten systematisch getrennt sind.
+Somit wird Theoriebildung selbst zu einem Designprozess, der Eingriffsmöglichkeiten explizit abbildet.
+
+% =====================================================================
+\section{Integration in BEATRIX und BCM 2.2}
+% =====================================================================
+
+\subsection{Zwei-Ebenen-Architektur}
+
+Das BEATRIX-System nutzt eine zweistufige Struktur:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Schicht} & \textbf{Funktion} & \textbf{Charakteristik}\\
+\midrule
+LLM-Schicht & Semantisches Parsing von Sprache & probabilistisch\\
+BCM-Schicht & Berechnung der Modellstruktur & strukturiert (mit Unsicherheit)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=warnorange, title=Präzisierung: ``Deterministisch'' vs. ``Strukturiert'']
+Eine frühere Version dieses Dokuments bezeichnete die BCM-Schicht als ``deterministisch''. Dies ist eine Vereinfachung. BCM propagiert Unsicherheit durch Monte-Carlo-Simulation und liefert Konfidenzintervalle, nicht Punktschätzungen. Die korrekte Charakterisierung ist \textbf{strukturiert mit quantifizierter Unsicherheit}.
+\end{tcolorbox}
+
+Diese Trennung entspricht der inhaltlichen Logik von Dietz.
+Die sprachliche Interpretation (LLM) liefert Parameter, während das mathematische Modell (BCM) die kausale Struktur berechnet.
+
+\subsection{Bezug zur Theorie von Dietz}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Dietz (2026)} & \textbf{BEATRIX / BCM}\\
+\midrule
+Manipulable Construct & Exogene Parameter (z.B. $\alpha, \beta, \rho, \eta$)\\
+Nomological Network & Modellgleichungen im BCM\\
+Operationalizability & Rechenbare Nutzenfunktionen\\
+Producing Cause & Veränderung von Verhalten und Nutzen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Diese Zuordnung verdeutlicht, dass BEATRIX die von Dietz beschriebenen logischen Bedingungen technisch abbildet.
+\textbf{Jedoch ist eine kritische Differenzierung erforderlich}, die im folgenden Abschnitt ausgeführt wird.
+
+% =====================================================================
+\section{Kritische Differenzierung: Modell-Manipulation vs. Welt-Manipulation}
+% =====================================================================
+
+\subsection{Zwei Bedeutungen von ``Manipulierbarkeit''}
+
+Dietz' Kriterium der \textit{Manipulability} kann auf zwei Ebenen interpretiert werden:
+
+\begin{center}
+\begin{tabular}{p{5.5cm}p{6.5cm}}
+\toprule
+\textbf{Modell-Manipulation} & \textbf{Welt-Manipulation}\\
+\midrule
+Parameter können im Modell geändert werden & Interventionen ändern Parameter in der Realität\\
+$\lambda$ kann von 2.0 auf 2.5 gesetzt werden & Ein Nudge \textit{verursacht} höhere Loss Aversion\\
+\textit{What-if}-Analyse & \textit{Kausaler Effekt}\\
+Simulation & Intervention\\
+\textbf{BCM leistet dies: }\checkmark & \textbf{BCM ermöglicht dies, garantiert es aber nicht}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=darkblue, title=Zentrale Unterscheidung]
+BCM/BEATRIX ermöglicht \textbf{Modell-Manipulation}: Die Konsequenzen von Parameteränderungen können berechnet werden.
+
+Ob eine reale Intervention tatsächlich die gewünschte Parameteränderung bewirkt, ist eine \textbf{empirische Frage}, die das Modell nicht beantworten kann.
+\end{tcolorbox}
+
+\subsection{Implikation für Dietz' Kriterien}
+
+\begin{center}
+\begin{tabular}{llc}
+\toprule
+\textbf{Kriterium} & \textbf{BCM/BEATRIX Status} & \textbf{Erfüllung}\\
+\midrule
+Distinctiveness & 115 explizite Axiome, klare Parameterdefinitionen & \checkmark\\
+Nomological Embeddedness & Formale Modellgleichungen, 5-Ebenen-Hierarchie & \checkmark\\
+Manipulability (Modell) & Parameter als exogene Inputs änderbar & \checkmark\\
+Manipulability (Welt) & Abhängig von Interventionswirksamkeit & $\sim$\\
+Operationalizability & Quantifizierte Parameter mit Konfidenzintervallen & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+BCM erfüllt Dietz' Kriterien \textbf{auf Modellebene} vollständig. Die Übertragung auf \textbf{Welt-Manipulation} erfordert zusätzliche empirische Validierung.
+
+% =====================================================================
+\section{Der Lab-Field Gap: Empirische Grenzen der Manipulierbarkeit}
+% =====================================================================
+
+\subsection{Das Problem}
+
+Ein zentrales Ergebnis der Verhaltensökonomie der letzten Jahre ist der sogenannte \textit{Lab-Field Gap}: Effekte, die in kontrollierten Laborexperimenten gefunden werden, replizieren im Feld oft mit deutlich geringerer Stärke.
+
+\textbf{Zentrale Befunde:}
+\begin{itemize}
+    \item DellaVigna \& Linos (2022): Nudge-Effekte im Feld betragen \textbf{10--20\% der Laboreffekte}
+    \item Allcott (2015): Soziale Vergleichs-Nudges zeigen starke Heterogenität
+    \item Hummel \& Maedche (2019): Meta-Analyse zeigt systematische Überschätzung von Nudge-Wirksamkeit
+\end{itemize}
+
+\subsection{BCM-Axiom MA-EPI-38: Evidenzhierarchie}
+
+Das BCM adressiert dieses Problem explizit durch das Axiom MA-EPI-38, das eine Evidenzhierarchie für Parameter definiert:
+
+\begin{center}
+\begin{tabular}{clp{7cm}}
+\toprule
+\textbf{Stufe} & \textbf{Evidenzqualität} & \textbf{Beschreibung}\\
+\midrule
+$\star\star\star\star$ & Höchste & Konvergenz von Labor-RCT + Feld-RCT + Natürlichem Experiment\\
+$\star\star\star$ & Hohe & Replizierte Labor-RCTs mit theoretischer Fundierung\\
+$\star\star$ & Mittlere & Einzelne Labor-RCTs oder nicht-replizierte Feldstudien\\
+$\star$ & Niedrige & Beobachtungsstudien oder theoretische Ableitung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!75!black, title=Implikation für Actionability]
+Die meisten BCM-Parameter befinden sich auf Evidenzstufe $\star\star$ oder $\star\star\star$.
+
+\textbf{Das bedeutet}: Die \textit{Manipulierbarkeit} im Sinne von Dietz ist für viele Parameter empirisch nur unter Laborbedingungen nachgewiesen. Die Übertragung auf Feldkontexte erfordert Vorsicht und kontextspezifische Validierung.
+\end{tcolorbox}
+
+\subsection{Konsequenz für BEATRIX-Prognosen}
+
+BEATRIX-Prognosen sollten als \textbf{kalibrierte Schätzungen unter Unsicherheit} verstanden werden, nicht als präzise Vorhersagen:
+
+\begin{center}
+\begin{tabular}{p{5cm}p{7cm}}
+\toprule
+\textbf{BEATRIX sagt} & \textbf{Korrekte Interpretation}\\
+\midrule
+``4.2\% Churn [2.8\%, 5.9\%]'' & ``Basierend auf verfügbarer Evidenz und BCM-Struktur ist 4.2\% der wahrscheinlichste Wert, mit erheblicher Unsicherheit''\\
+\midrule
+``Nudge X reduziert Churn um 1.5pp'' & ``Unter Laborbedingungen reduziert Nudge X Churn um 1.5pp. Feldeffekt vermutlich geringer''\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================================
+\section{Was BCM/BEATRIX leistet -- und was nicht}
+% =====================================================================
+
+\subsection{Stärken (wo BCM Dietz' Vision erfüllt)}
+
+\begin{enumerate}
+    \item \textbf{Strukturierte Theoriebildung}: 115 explizite Axiome machen Annahmen transparent und kritisierbar
+    \item \textbf{Nomologisches Netzwerk}: Formale Gleichungen verbinden Parameter mit Outcomes
+    \item \textbf{Operationalisierung}: Alle Konstrukte sind quantifiziert und berechenbar
+    \item \textbf{Interventions-Taxonomie}: 8 Interventionstypen mit expliziten Mechanismen
+    \item \textbf{What-if-Analyse}: Konsequenzen von Parameteränderungen sind simulierbar
+    \item \textbf{Dokumentation}: Vollständige Reasoning-Chain für Nachvollziehbarkeit
+    \item \textbf{Lernfähigkeit}: Outcome-Feedback kann zur Kalibrierung genutzt werden
+\end{enumerate}
+
+\subsection{Grenzen (wo Vorsicht geboten ist)}
+
+\begin{enumerate}
+    \item \textbf{Modell $\neq$ Realität}: Parameteränderungen im Modell sind nicht automatisch in der Welt erreichbar
+    \item \textbf{Lab-Field Gap}: Interventionseffekte sind im Feld typischerweise 10--20\% der Laboreffekte
+    \item \textbf{Kein formaler do-Kalkül}: BCM implementiert nicht Pearls do-Operator; die kausale Struktur ist konzeptuell, nicht identifiziert
+    \item \textbf{Evidenzheterogenität}: Parameter haben unterschiedliche Evidenzqualität ($\star$ bis $\star\star\star\star$)
+    \item \textbf{Kontextabhängigkeit}: Effekte variieren stark nach Domäne, Population und Implementierung
+    \item \textbf{LLM-Schätzunsicherheit}: Die LLM-basierte Parameterschätzung fügt eine zusätzliche Unsicherheitsebene hinzu
+\end{enumerate}
+
+\subsection{Die korrekte Positionierung}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=BCM/BEATRIX als ``Actionable Theory''-Framework]
+BCM/BEATRIX ist kein Orakel, das präzise Verhaltensvorhersagen liefert.
+
+Es ist ein \textbf{Framework für strukturiertes Denken über Verhaltensänderung}, das:
+\begin{itemize}
+    \item Annahmen \textbf{explizit} macht (statt implizit)
+    \item Unsicherheit \textbf{quantifiziert} (statt ignoriert)
+    \item Mechanismen \textbf{spezifiziert} (statt vage beschreibt)
+    \item Interventionen \textbf{systematisiert} (statt ad-hoc wählt)
+    \item Lernen \textbf{ermöglicht} (statt Fehler zu wiederholen)
+\end{itemize}
+
+Im Sinne von Dietz (2026) ist BCM \textit{actionable} -- aber die \textit{action} erfordert empirische Validierung im spezifischen Kontext.
+\end{tcolorbox}
+
+% =====================================================================
+\section{Diskussion}
+% =====================================================================
+
+Dietz' Ansatz liefert eine präzise Definition, wann Theorien handlungsfähig sind.
+Er ermöglicht eine systematische Verbindung zwischen theoretischem Wissen und rechnerischer Umsetzung.
+BCM/BEATRIX illustriert die Umsetzbarkeit dieses Denkens, indem es kausale Strukturen explizit formalisiert.
+
+\textbf{Drei Differenzierungen sind jedoch wesentlich:}
+
+\begin{enumerate}
+    \item \textbf{Modell-Manipulation $\neq$ Welt-Manipulation}: BCM ermöglicht strukturierte What-if-Analysen. Ob Interventionen die gewünschten Parameteränderungen bewirken, ist empirisch zu prüfen.
+
+    \item \textbf{Lab-Field Gap}: Die verhaltensökonomische Forschung zeigt, dass Interventionseffekte im Feld systematisch geringer sind als im Labor. BCM adressiert dies durch die Evidenzhierarchie (MA-EPI-38), aber Anwender müssen diese Unsicherheit berücksichtigen.
+
+    \item \textbf{Strukturierte Unsicherheit statt Punktvorhersagen}: BCM liefert keine deterministischen Prognosen, sondern Schätzungen mit Konfidenzintervallen. Diese Unsicherheit ist ein Feature, kein Bug -- sie reflektiert die tatsächliche Erkenntnislage.
+\end{enumerate}
+
+Offen bleibt, wie weit diese Prinzipien empirisch verallgemeinerbar sind und welche Grenzen die formale Manipulierbarkeit in komplexen sozialen Systemen hat.
+
+% =====================================================================
+\section{Fazit}
+% =====================================================================
+
+Der Beitrag von Dietz (2026) stellt einen methodologischen Bezugspunkt für die Diskussion über \textit{actionable theories} dar.
+Er formuliert klare Bedingungen, unter denen Theorien manipulierbar und überprüfbar werden.
+BCM 2.2 und BEATRIX lassen sich als technische Umsetzungen dieser Bedingungen interpretieren -- \textbf{auf Modellebene}.
+
+Die Analyse zeigt:
+\begin{itemize}
+    \item BCM erfüllt Dietz' Kriterien (Distinctiveness, Nomological Embeddedness, Operationalizability) vollständig
+    \item Manipulability ist differenziert zu betrachten: Modell-Manipulation ist gegeben, Welt-Manipulation erfordert empirische Validierung
+    \item Der Lab-Field Gap ist eine systematische Herausforderung, die BCM durch die Evidenzhierarchie adressiert, aber nicht eliminiert
+    \item BEATRIX ist ein Framework für strukturiertes Denken, kein Prognose-Orakel
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=darkblue, title=Schlussfolgerung]
+BCM/BEATRIX macht Verhaltenstheorie \textit{actionable} im Sinne von Dietz -- nicht durch Garantie präziser Vorhersagen, sondern durch \textbf{Strukturierung}, \textbf{Quantifizierung} und \textbf{Transparenz} von Annahmen, Mechanismen und Unsicherheiten.
+
+Die praktische Handlungsfähigkeit entsteht nicht aus dem Modell allein, sondern aus der \textbf{Kombination} von strukturierter Theorie, empirischer Validierung und kontextspezifischer Anpassung.
+\end{tcolorbox}
+
+% =====================================================================
+\section*{Literatur}
+% =====================================================================
+
+\begin{thebibliography}{99}
+
+\bibitem[Allcott, 2015]{allcott2015}
+Allcott, H. (2015). Site Selection Bias in Program Evaluation. \textit{Quarterly Journal of Economics, 130}(3), 1117--1165.
+
+\bibitem[Argyris \& Schön, 1996]{argyris1996}
+Argyris, C., \& Schön, D. (1996). \textit{Theory in Practice: Increasing Professional Effectiveness.} Jossey-Bass.
+
+\bibitem[Bandura, 1977]{bandura1977}
+Bandura, A. (1977). Self-efficacy: Toward a unifying theory of behavioral change. \textit{Psychological Review, 84}(2), 191--215.
+
+\bibitem[Bunge, 2015]{bunge2015}
+Bunge, M. (2015). \textit{Causality and Mechanism in the Social Sciences.} Springer.
+
+\bibitem[DellaVigna \& Linos, 2022]{dellavigna2022}
+DellaVigna, S., \& Linos, E. (2022). RCTs to Scale: Comprehensive Evidence from Two Nudge Units. \textit{Econometrica, 90}(1), 81--116.
+
+\bibitem[Dietz, 2026]{dietz2026}
+Dietz, T. (2026). Building Actionable Theories: The Role of Causal Constructs. \textit{Behavioral Science Quarterly, 42}(3), 1--27.
+
+\bibitem[Eisenhardt, 1999]{eisenhardt1999}
+Eisenhardt, K. (1999). Strategy as Strategic Decision Making. \textit{Sloan Management Review.}
+
+\bibitem[Epstein, 2023]{epstein2023}
+Epstein, J. (2023). \textit{Generative Social Science 2.0.} MIT Press.
+
+\bibitem[Fehr \& Fehr, 2024]{fehr2024}
+Fehr, G., \& Fehr, A. (2024). \textit{Behavioral Change Modelling (BCM 2.2).} FehrAdvice Technical Report.
+
+\bibitem[Giddens, 2000]{giddens2000}
+Giddens, A. (2000). \textit{The Constitution of Society.} Polity Press.
+
+\bibitem[Hummel \& Maedche, 2019]{hummel2019}
+Hummel, D., \& Maedche, A. (2019). How effective is nudging? A quantitative review on the effect sizes and limits of empirical nudging studies. \textit{Journal of Behavioral and Experimental Economics, 80}, 47--58.
+
+\bibitem[Pearl, 2009]{pearl2009}
+Pearl, J. (2009). \textit{Causality: Models, Reasoning, and Inference.} Cambridge University Press.
+
+\bibitem[Rousseau, 2018]{rousseau2018}
+Rousseau, D. (2018). Evidence-Based Management Reconsidered. \textit{Academy of Management Perspectives.}
+
+\bibitem[Simon, 1962]{simon1962}
+Simon, H. (1962). The Architecture of Complexity. \textit{Proceedings of the American Philosophical Society, 106}(6), 467--482.
+
+\bibitem[Weick, 1989]{weick1989}
+Weick, K. (1989). Theory Construction as Disciplined Imagination. \textit{Academy of Management Review, 14}(4), 516--531.
+
+\bibitem[Woodward, 2003]{woodward2003}
+Woodward, J. (2003). \textit{Making Things Happen: A Theory of Causal Explanation.} Oxford University Press.
+
+\end{thebibliography}
+
+\end{document}
