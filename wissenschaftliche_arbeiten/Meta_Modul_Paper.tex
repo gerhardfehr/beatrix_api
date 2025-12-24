@@ -19,7 +19,35 @@
 \usepackage{epigraph}
 \usepackage{csquotes}
 \usepackage{tcolorbox}
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usepackage{xcolor}
+\usepackage{listings}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, backgrounds}
+
+% Code Listings Style für BEATRIX
+\definecolor{codegreen}{RGB}{0,128,0}
+\definecolor{codegray}{RGB}{128,128,128}
+\definecolor{codepurple}{RGB}{128,0,128}
+\definecolor{backcolour}{RGB}{245,245,245}
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=Python
+}
+\lstset{style=pythonstyle}
 
 \geometry{margin=2.5cm}
 
@@ -66,7 +94,7 @@
 \maketitle
 
 \begin{abstract}
-Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 114 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 38 kognitiven und methodologischen Axiomen (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND), der Evidenzhierarchie für BCM-Parameter (Labor-Feld-Triangulation) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
+Das \META-Modul bildet das axiomatische Fundament des Behavioral Change Model (\BCM) 2.2. Es definiert 115 Axiome in vier Kategorien: Ontologie (ONT), Epistemologie (EPI), Governance (GOV) und Dynamik (DYN). Diese Axiome konstituieren die philosophischen und methodologischen Grundlagen, auf denen alle operativen BCM-Module (INU, KNU, IDN, LAMBDA) aufbauen. Das vorliegende Paper dokumentiert systematisch die Struktur des \META-Moduls, erläutert die Funktion jeder Axiom-Kategorie und zeigt die Verknüpfung mit dem \BEATRIX-System zur LLM-basierten Verhaltensmodellierung. Besonderer Fokus liegt auf der Integration von 38 kognitiven und methodologischen Axiomen (EPI-Kategorie), der 5-Ebenen-Hierarchie (META-MAKRO-MESO-MIKRO-IND), der Evidenzhierarchie für BCM-Parameter (Labor-Feld-Triangulation) sowie den Governance-Prinzipien für ethische Interventionsgestaltung.
 \end{abstract}
 
 \tableofcontents
@@ -3657,6 +3685,214 @@ Die Transformation von Handwerk zu Engineering wird im folgenden Axiom formalisi
 
 \begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Die Transformation in einem Satz]
 BEATRIX transformiert BCM-Parameter-Schätzung von \textbf{fragmentiertem Handwerk} (personenabhängig, undokumentiert, nicht skalierbar) zu \textbf{integriertem Engineering} (systematisch, nachvollziehbar, skalierbar) -- ermöglicht durch LLMs als Brücke zwischen natürlicher Sprache und strukturierten Parametern.
+\end{tcolorbox}
+
+\subsection{Die Drei-Phasen-Architektur: Technologische Realisierung}
+
+Die in Abschnitt 9.5 beschriebene \textbf{6-Phasen-Pipeline} (Input $\rightarrow$ Extraction $\rightarrow$ Estimation $\rightarrow$ Modeling $\rightarrow$ Output $\rightarrow$ Feedback) beschreibt die \textit{funktionale} Perspektive -- was passiert in jedem Schritt.
+Komplementär dazu beschreibt die \textbf{Drei-Phasen-Architektur} die \textit{technologische} Perspektive -- welche Technologien werden wie orchestriert.
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Zwei komplementäre Perspektiven]
+\textbf{6 Phasen (funktional):} Was passiert? -- Input, Extraction, Estimation, Modeling, Output, Feedback
+
+\textbf{3 Phasen (technologisch):} Womit? -- LLM (Parsing) $\rightarrow$ Code Interpreter (Berechnung) $\rightarrow$ LLM (Interpretation)
+\end{tcolorbox}
+
+\subsubsection{Das Pre-LLM Problem revisited}
+
+Das BCM konnte immer \textbf{berechnet} werden -- gegeben die richtigen Parameter, liefert die Mathematik deterministische Ergebnisse.
+Das Problem lag an zwei Stellen:
+
+\begin{enumerate}
+    \item \textbf{Input-Problem}: Wie kommt man von einer Persona-Beschreibung (``Anna ist 45, Lehrerin, umweltbewusst...'') zu den Modellparametern ($\lambda = 2.2$, $\alpha = 0.88$, ...)?
+
+    \item \textbf{Output-Problem}: Wie erklärt man einem Nicht-Experten, was ``$U_{\text{eff}} = -0.34$ mit Sensitivität $\partial U / \partial \lambda = 0.6$'' bedeutet?
+\end{enumerate}
+
+Vor LLMs erforderten beide Schritte \textbf{menschliche Experten} -- Verhaltensökonomen, die Parameter schätzen und Ergebnisse interpretieren konnten.
+Dies machte BCM-Analysen langsam, teuer und nicht skalierbar.
+
+\subsubsection{Die BEATRIX-Lösung: Drei Phasen}
+
+BEATRIX löst dieses Problem durch eine orchestrierte Drei-Phasen-Architektur:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    phase/.style={rectangle, draw, rounded corners, minimum width=3.5cm, minimum height=2cm, align=center},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Phases
+\node[phase, fill=blue!15] (p1) at (0, 0) {\textbf{Phase 1}\\LLM\\[0.2em]\footnotesize Input-Parsing};
+\node[phase, fill=green!15] (p2) at (5, 0) {\textbf{Phase 2}\\Code Interpreter\\[0.2em]\footnotesize BCM-Berechnung};
+\node[phase, fill=orange!15] (p3) at (10, 0) {\textbf{Phase 3}\\LLM\\[0.2em]\footnotesize Interpretation};
+
+% Input/Output
+\node[above=0.8cm of p1, align=center] (input) {\footnotesize ``Anna ist 45,\\Lehrerin, ...''};
+\node[above=0.8cm of p2, align=center] (params) {\footnotesize $\lambda=2.2$, $\alpha=0.88$\\$w_F=0.35$, ...};
+\node[above=0.8cm of p3, align=center] (results) {\footnotesize Churn: 4.2\%\\CI: [2.8\%, 5.9\%]};
+\node[below=0.8cm of p3, align=center] (output) {\footnotesize ``Bei 5\% Preiserhöhung\\erwarten wir...''};
+
+% Arrows
+\draw[arrow] (input) -- (p1);
+\draw[arrow] (p1) -- node[above, font=\footnotesize] {JSON} (p2);
+\draw[arrow] (p2) -- node[above, font=\footnotesize] {Dict} (p3);
+\draw[arrow] (p3) -- (output);
+
+% Labels below
+\node[below=0.5cm of p1, font=\footnotesize\itshape, text=gray] {Probabilistisch};
+\node[below=0.5cm of p2, font=\footnotesize\itshape, text=gray] {Deterministisch};
+\node[below=0.5cm of p3, font=\footnotesize\itshape, text=gray] {Probabilistisch};
+
+\end{tikzpicture}
+\caption{Die Drei-Phasen-Architektur von BEATRIX. LLMs übernehmen die ``Übersetzung'' zwischen natürlicher Sprache und Modellparametern; die eigentliche Berechnung erfolgt deterministisch.}
+\label{fig:three-phases}
+\end{figure}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Kernprinzip]
+Das LLM ist \textbf{kein Taschenrechner} -- es führt keine BCM-Berechnungen durch.\\
+Das LLM ist ein \textbf{Übersetzer}:
+\begin{itemize}
+    \item Phase 1: Mensch $\rightarrow$ Modell (natürliche Sprache $\rightarrow$ Parameter)
+    \item Phase 3: Modell $\rightarrow$ Mensch (Ergebnisse $\rightarrow$ Narrative)
+\end{itemize}
+Die \textbf{Mathematik bleibt deterministisch} im Code Interpreter (Phase 2).
+\end{tcolorbox}
+
+\subsubsection{Historische Entwicklung: Seit wann ist das möglich?}
+
+Die Drei-Phasen-Architektur wurde erst durch eine Konvergenz mehrerer technologischer Entwicklungen möglich:
+
+\begin{table}[h]
+\centering
+\caption{Meilensteine der LLM-Entwicklung für BEATRIX}
+\small
+\begin{tabular}{@{}llp{7cm}@{}}
+\toprule
+\textbf{Datum} & \textbf{Entwicklung} & \textbf{Bedeutung für BEATRIX} \\
+\midrule
+Jun 2017 & Transformer (Vaswani et al.) & Grundarchitektur für alle modernen LLMs \\
+Jun 2020 & GPT-3 (175B Parameter) & In-Context Learning entdeckt \\
+\textbf{Mär 2022} & \textbf{InstructGPT / ChatGPT} & \textbf{Instruction Following wird zuverlässig} \\
+\textbf{Jun 2023} & \textbf{Function Calling (OpenAI)} & \textbf{Strukturierte JSON-Outputs werden zuverlässig} \\
+\textbf{Jul 2023} & \textbf{Code Interpreter (ChatGPT)} & \textbf{Python-Ausführung in Sandbox} \\
+\textbf{Aug 2024} & \textbf{Structured Outputs (OpenAI)} & \textbf{JSON Schema Enforcement -- garantierte Struktur} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black, title=Zeitliche Einordnung]
+\textbf{Frühester Zeitpunkt} (Proof of Concept): \textbf{Juni 2023}\\
+Mit Function Calling und Code Interpreter waren alle drei Phasen grundsätzlich umsetzbar.
+
+\textbf{Production-Ready Zeitpunkt}: \textbf{August 2024}\\
+Mit Structured Outputs werden Parameter-Extraktionen \textit{garantiert} strukturiert.
+
+\textbf{Die BEATRIX Drei-Phasen-Architektur ist erst seit $\approx$18 Monaten praktisch umsetzbar.}
+\end{tcolorbox}
+
+\subsubsection{Wissenschaftliche Grundlagen der drei Phasen}
+
+Die Drei-Phasen-Architektur stützt sich auf Erkenntnisse aus zehn Forschungsbereichen:
+
+\paragraph{Phase 1: Natural Language $\rightarrow$ Parameter}
+
+\begin{enumerate}
+    \item \textbf{Information Extraction (IE)}: Named Entity Recognition, Relation Extraction, Slot Filling -- BEATRIX nutzt LLMs für erweiterte Slot-Filling (BCM-Parameter als ``Slots'')
+
+    \item \textbf{Semantic Parsing}: Transformation natürlicher Sprache in formale Repräsentationen (``Anna ist preisbewusst'' $\rightarrow$ \texttt{w\_financial: 0.4})
+
+    \item \textbf{In-Context Learning}: Brown et al. (2020) zeigten, dass LLMs neue Aufgaben ohne Finetuning erlernen können durch Few-Shot-Beispiele im Prompt
+
+    \item \textbf{Instruction Tuning}: RLHF transformiert Base-Modelle in Instruction-Following-Assistenten (InstructGPT, Constitutional AI)
+\end{enumerate}
+
+\paragraph{Phase 2: Parameter $\rightarrow$ Berechnung}
+
+\begin{enumerate}
+    \item \textbf{Behavioral Economics Models}: Prospect Theory, Reference-Dependent Utility, Social Preferences, Identity Utility
+
+    \item \textbf{Uncertainty Quantification}: Monte Carlo Simulation, Sensitivity Analysis, Confidence Intervals
+
+    \item \textbf{Tool-Augmented LLMs}: Toolformer (Schick et al., 2023), PAL (Gao et al., 2023) -- LLMs erkennen, \textit{wann} Tools nötig sind
+\end{enumerate}
+
+\paragraph{Phase 3: Ergebnis $\rightarrow$ Narrative}
+
+\begin{enumerate}
+    \item \textbf{Natural Language Generation (NLG)}: Data-to-Text Generation transformiert strukturierte Daten in natürliche Sprache
+
+    \item \textbf{Explainable AI (XAI)}: Contrastive Explanations (``Warum 4\% und nicht 2\%?''), Counterfactual Explanations, Feature Attribution
+
+    \item \textbf{Grounded Generation}: Outputs müssen auf tatsächlichen BCM-Ergebnissen basieren, nicht halluziniert sein
+\end{enumerate}
+
+\subsubsection{Technische Implementierungsvarianten}
+
+BEATRIX unterstützt drei Implementierungsvarianten mit steigender Komplexität:
+
+\begin{table}[h]
+\centering
+\caption{Vergleich der drei Implementierungsvarianten}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Aspekt} & \textbf{A: Monolithisch} & \textbf{B: API-Orchestriert} & \textbf{C: Agentic} \\
+\midrule
+Architektur & Alles in einer Session & Explizite Phasentrennung & Autonomer Agent \\
+BCM-Code & Jedes Mal generiert & Statisch validiert & Statisch mit Iteration \\
+Kontrolle & Niedrig & Hoch & Mittel \\
+Reproduzierbarkeit & Niedrig & Hoch & Mittel \\
+Flexibilität & Hoch & Mittel & Sehr hoch \\
+Kosten/Anfrage & Niedrig & Mittel & Hoch \\
+\midrule
+\textbf{Eignung} & Demos, Exploration & \textbf{Production} & Komplexe Szenarien \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Variante B: API-Orchestriert (Production)}
+
+Die empfohlene Production-Variante trennt die drei Phasen explizit:
+
+\begin{lstlisting}[caption={BEATRIX Orchestrator: Integration der drei Phasen}]
+def beatrix_analyze(persona: str, scenario: Dict) -> Dict:
+    """Hauptfunktion: Orchestriert alle drei Phasen"""
+
+    # Phase 1: Extract (LLM)
+    params = extract_parameters(persona)  # -> BCMParameters
+
+    # Validierung zwischen Phasen
+    assert 1.0 <= params.lambda_loss_aversion <= 3.0
+
+    # Phase 2: Calculate (Deterministisch)
+    results = calculate_bcm(params, scenario)  # -> Dict
+
+    # Phase 3: Interpret (LLM)
+    interpretation = interpret_results(params, results, persona)
+
+    return {
+        "parameters": params.model_dump(),
+        "results": results,
+        "interpretation": interpretation,
+        "audit_trail": {
+            "phase1_model": "claude-sonnet-4-20250514",
+            "phase2_deterministic": True,
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+\end{lstlisting}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Schlussfolgerung]
+Die Drei-Phasen-Architektur von BEATRIX transformiert das BCM von einem Experten-Tool zu einem zugänglichen System:
+
+\textbf{Pre-BEATRIX}: Experte $\rightarrow$ Parameter $\rightarrow$ Excel $\rightarrow$ Experte $\rightarrow$ Bericht
+
+\textbf{Mit BEATRIX}: User $\rightarrow$ LLM $\rightarrow$ BCM $\rightarrow$ LLM $\rightarrow$ Verständlicher Output
+
+Der Schlüssel ist die \textbf{kluge Arbeitsteilung}: LLMs für Sprache, Code für Mathematik.
 \end{tcolorbox}
 
 %==============================================================================
