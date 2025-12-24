@@ -1669,6 +1669,41 @@ Berater sind \textbf{Dienstleister}, deren primäre Funktion nicht Wahrheitsfind
 Das Ziel ist nicht: ``Was ist wahr?''\\
 Das Ziel ist: ``Was macht den Kunden entscheidungsfähig?''
 
+\paragraph{Wie BCM/BEATRIX jede Funktion unterstützt.}
+
+\begin{table}[h]
+\centering
+\caption{Die fünf Funktionen von Beratung und BCM-Unterstützung}
+\small
+\begin{tabular}{@{}p{2.5cm}p{4.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Funktion} & \textbf{Klassisch} & \textbf{Mit BCM/BEATRIX} \\
+\midrule
+\textbf{Legitimation} &
+``Die Berater haben analysiert'' &
+``Die Analyse basiert auf 114 Axiomen, kalibriert an empirischen Base Rates'' -- \textit{stärkere} Legitimation \\[0.5em]
+
+\textbf{Story-Telling} &
+Narrative aus Erfahrung und Intuition &
+Narrative mit \textit{expliziter} Mechanismus-Kette: ``Loss Aversion $\rightarrow$ höhere Churn'' -- überzeugendere Story \\[0.5em]
+
+\textbf{Belief-Validierung} &
+``Unsere Analyse bestätigt...'' (vage) &
+``Ihre Intuition ergibt $\lambda = 1.8$, empirisch wäre 2.0 -- Sie liegen im plausiblen Bereich'' -- \textit{kalibrierte} Validierung \\[0.5em]
+
+\textbf{Konsensbildung} &
+Verhandlung bis Kompromiss &
+Verschiedene Beliefs werden \textit{explizit}: ``CFO: $\lambda = 2.5$, CMO: $\lambda = 1.5$ -- woher kommt die Differenz?'' \\[0.5em]
+
+\textbf{Politische Munition} &
+``Externe Analyse zeigt...'' &
+``Die Parameter-Sensitivität zeigt, dass $\lambda$ kritisch ist -- \textit{wer hat Daten dazu}?'' -- objektiviert Diskussion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Kernerkenntnis}: BCM/BEATRIX \textit{ersetzt} keine dieser Funktionen -- es macht sie alle \textbf{robuster} und \textbf{nachvollziehbarer}.
+
 \subsubsection{Wie Verhaltensannahmen wirklich entstehen}
 
 \paragraph{Die ``Methodik'' der klassischen Beratung.}
@@ -1691,6 +1726,62 @@ Was hier passiert:
 \end{enumerate}
 
 Das Ergebnis ist eine Zahl (4--5\%), die \textbf{niemandem gehört}, aber \textbf{alle akzeptieren} können. Das ist keine Schätzung -- das ist \textbf{Verhandlung}.
+
+\paragraph{Visualisierung: Der Prozess der verhandelten Realität.}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    box/.style={rectangle, draw, rounded corners, minimum width=2.8cm, minimum height=0.9cm, align=center, font=\small},
+    inputbox/.style={box, fill=blue!10},
+    processbox/.style={box, fill=orange!20},
+    outputbox/.style={box, fill=green!15},
+    arrow/.style={->, thick, >=stealth},
+    label/.style={font=\scriptsize\itshape, text=gray}
+]
+
+% Input boxes (left side)
+\node[inputbox] (mgmt) at (0, 1.5) {Management\\Beliefs};
+\node[inputbox] (berater) at (0, 0) {Berater-\\Intuition};
+\node[inputbox] (erfahrung) at (0, -1.5) {``Ähnliche\\Projekte''};
+
+% Process box (center)
+\node[processbox] (verhandlung) at (4.5, 0) {\textbf{Verhandlung}\\im Workshop};
+
+% Output boxes (right side)
+\node[outputbox] (zahl) at (9, 0.75) {``4--5\% Churn''};
+\node[outputbox] (story) at (9, -0.75) {PowerPoint-\\Story};
+
+% Arrows from inputs to process
+\draw[arrow] (mgmt.east) -- node[above, label] {CEO: 3\%} (verhandlung.west |- mgmt);
+\draw[arrow] (berater.east) -- node[above, label] {``passt''} (verhandlung.west);
+\draw[arrow] (erfahrung.east) -- node[above, label] {vage Referenz} (verhandlung.west |- erfahrung);
+
+% Arrows from process to outputs
+\draw[arrow] (verhandlung.east) -- (zahl.west);
+\draw[arrow] (verhandlung.east) -- (story.west);
+
+% Labels
+\node[below=0.3cm of erfahrung, font=\scriptsize, text=gray] {Inputs (subjektiv)};
+\node[below=0.3cm of verhandlung, font=\scriptsize, text=gray] {Konsensprozess};
+\node[below=0.3cm of story, font=\scriptsize, text=gray] {Outputs (``objektiv'')};
+
+% Annotation
+\node[draw=red!50, dashed, rounded corners, inner sep=3pt, font=\scriptsize, text=red!70!black] at (4.5, -2.5) {Keine dokumentierte Reasoning-Chain};
+
+\end{tikzpicture}
+\caption{Der Prozess der ``verhandelten Realität'' in der klassischen Beratung. Die finale Zahl trägt den Anschein von Objektivität, ist aber Produkt eines sozialen Prozesses.}
+\label{fig:verhandelte-realitaet}
+\end{figure}
+
+\textbf{Das Problem}: Diese ``verhandelte Realität'' ist nicht per se falsch -- oft funktioniert sie gut. Aber sie ist:
+\begin{itemize}
+    \item \textbf{Nicht nachvollziehbar}: Warum genau 4--5\%? Was waren die Annahmen?
+    \item \textbf{Nicht lernfähig}: Wenn es 7\% werden, wissen wir nicht, \textit{warum} wir falsch lagen
+    \item \textbf{Personenabhängig}: Ein anderer Berater hätte vielleicht 3--4\% geschätzt
+    \item \textbf{Anfällig für HiPPO}: Die Meinung des CEO (3\%) dominiert, CFO (5\%) wird marginalisiert
+\end{itemize}
 
 \paragraph{``Rationalität'' als Kommunikations-Konvention.}
 Die Annahme, dass ``Kunden rational auf Preissenkung reagieren werden'', ist keine wissenschaftliche Position, sondern ein \textbf{Plausibilitäts-Marker}. Sie signalisiert: ``Wir haben darüber nachgedacht und es ergibt Sinn.'' Sie bedeutet \textit{nicht}: ``Wir haben es wissenschaftlich überprüft.''
@@ -1731,6 +1822,117 @@ Warum funktioniert Beratung so -- und muss so funktionieren?
     \item Disruption (Vergangenheit kein Guide für Zukunft)
     \item \textbf{Verhaltensintensiven Interventionen} (Preisgestaltung, Nudging, Change)
 \end{itemize}
+
+\subsubsection{Das HiPPO-Problem: Wenn Status entscheidet}
+
+\paragraph{HiPPO = Highest Paid Person's Opinion.}
+In der klassischen Beratung hat das HiPPO-Phänomen erhebliche Auswirkungen auf die Qualität von Verhaltensannahmen:
+
+\begin{quote}
+\textit{Workshop-Situation}: CEO schätzt Churn auf 3\%, CFO auf 5\%, Marketing-Chef auf 6\%.\\
+\textit{Ergebnis}: ``Wir nehmen konservativ 3.5--4\% an.'' \\
+\textit{Realität}: Die CEO-Schätzung (3\%) wirkt als Anker, andere Meinungen werden marginalisiert.
+\end{quote}
+
+\paragraph{Warum HiPPO problematisch ist.}
+\begin{itemize}
+    \item \textbf{Keine Expertise-Korrelation}: Gehalt und hierarchische Position korrelieren nicht mit der Qualität von Verhaltensschätzungen
+    \item \textbf{Optimismus-Bias}: Führungskräfte sind oft systematisch optimistischer (``unsere Kunden sind loyal'', ``unsere Marke ist stark'')
+    \item \textbf{Confirmation Bias}: Berater bestätigen tendenziell die Meinung dessen, der die Rechnung bezahlt
+    \item \textbf{Groupthink}: Widerspruch zum CEO ist karriereschädlich -- also schweigt der CFO
+    \item \textbf{Fehlende Accountability}: Wenn es schiefgeht, war es ``unvorhersehbar''
+\end{itemize}
+
+\paragraph{Wie BCM/BEATRIX HiPPO demokratisiert.}
+
+\begin{table}[h]
+\centering
+\caption{HiPPO-Dynamik: Klassisch vs. BCM/BEATRIX}
+\begin{tabular}{@{}p{6cm}p{6.5cm}@{}}
+\toprule
+\textbf{Klassisches Setting} & \textbf{Mit BCM/BEATRIX} \\
+\midrule
+CEO: ``3\%'' $\rightarrow$ Anker & CEO: ``3\%'' $\rightarrow$ ``Das entspricht $\lambda = 1.5$'' \\[0.3em]
+CFO: ``5\%'' $\rightarrow$ ``zu pessimistisch'' & CFO: ``5\%'' $\rightarrow$ ``Das entspricht $\lambda = 2.5$'' \\[0.3em]
+Berater: ``4\% ist ein guter Kompromiss'' & Berater: ``Die Differenz kommt von unterschiedlichen $\lambda$-Annahmen. Welche Evidenz haben wir?'' \\[0.3em]
+Keine Begründung erforderlich & Begründung wird \textit{explizit} eingefordert \\[0.3em]
+Status entscheidet & \textbf{Evidenz und Logik} entscheiden \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Der Demokratisierungseffekt.}
+BCM/BEATRIX verschiebt die Diskussion von ``Wer hat Recht?'' zu ``Welche Annahmen sind plausibel?'':
+
+\begin{enumerate}
+    \item \textbf{Explizite Parameter}: Jede Meinung wird in BCM-Parameter übersetzt -- dadurch sichtbar und diskutierbar
+    \item \textbf{Base Rates als Referenz}: ``Der empirische Durchschnitt für Loss Aversion ist $\lambda = 2.0$. CEO liegt darunter, CFO darüber -- beide müssen begründen warum.''
+    \item \textbf{Sensitivitätsanalyse}: ``Mit CEO-Annahmen: 3.2\% Churn. Mit CFO-Annahmen: 5.8\%. Die Differenz ist materiell -- wir brauchen bessere Evidenz.''
+    \item \textbf{Dokumentation}: Alle Annahmen werden festgehalten -- späteres ``ich hatte immer Recht'' wird überprüfbar
+\end{enumerate}
+
+\textbf{Kernerkenntnis}: BCM/BEATRIX kann HiPPO nicht eliminieren (hierarchische Dynamiken bleiben), aber es kann die \textbf{Kosten} von HiPPO-Entscheidungen \textbf{sichtbar} machen und eine \textbf{faktenbasierte Alternative} bieten.
+
+\subsubsection{Entscheidungsmatrix: Wann welche Methodologie?}
+
+Die folgende Matrix hilft bei der Entscheidung, wann klassische Beratungsmethodik ausreicht und wann BCM/BEATRIX einen kritischen Mehrwert bietet:
+
+\begin{table}[h]
+\centering
+\caption{Entscheidungsmatrix: Klassische Methodik vs. BCM/BEATRIX}
+\small
+\begin{tabular}{@{}p{3.5cm}ccp{5cm}@{}}
+\toprule
+\textbf{Projektmerkmal} & \textbf{Klassisch} & \textbf{BCM} & \textbf{Rationale} \\
+\midrule
+\multicolumn{4}{l}{\textit{Entscheidungstyp}} \\
+\quad Inkrementell & \checkmark & $\circ$ & Fehler schnell korrigierbar \\
+\quad Irreversibel & $\circ$ & \checkmark & Hohe Kosten bei Fehleinschätzung \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Verhaltensrelevanz}} \\
+\quad Operational & \checkmark & $\circ$ & Verhalten ist nicht kritischer Faktor \\
+\quad Verhaltensintensiv & $\circ$ & \checkmark & Verhalten bestimmt Erfolg/Misserfolg \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Erfahrung des Managements}} \\
+\quad Bekanntes Terrain & \checkmark & $\circ$ & Intuition ist gut kalibriert \\
+\quad Neues Terrain & $\circ$ & \checkmark & Intuition nicht zuverlässig \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Feedback-Geschwindigkeit}} \\
+\quad Schnelles Feedback & \checkmark & $\circ$ & Lernen aus Fehlern möglich \\
+\quad Langsames Feedback & $\circ$ & \checkmark & Fehler erst nach Jahren sichtbar \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Stakeholder-Heterogenität}} \\
+\quad Homogenes Team & \checkmark & $\circ$ & Konsens leicht erreichbar \\
+\quad Heterogene Stakeholder & $\circ$ & \checkmark & BCM als gemeinsame Sprache \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Dokumentationsbedarf}} \\
+\quad Intern/informell & \checkmark & $\circ$ & Keine Audit-Anforderungen \\
+\quad Extern/reguliert & $\circ$ & \checkmark & Nachvollziehbarkeit erforderlich \\[0.5em]
+
+\multicolumn{4}{l}{\textit{Projektbudget}} \\
+\quad Klein ($<$100k) & \checkmark & $\circ$ & BCM-Setup lohnt nicht \\
+\quad Groß ($>$500k) & $\circ$ & \checkmark & Fehlerkosten rechtfertigen Investment \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\raggedright\footnotesize
+\checkmark = Bevorzugt \quad $\circ$ = Weniger geeignet
+\end{table}
+
+\paragraph{Die praktische Entscheidungsregel.}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black, title=Wann BCM/BEATRIX einsetzen?]
+\textbf{Grundregel}: Setze BCM/BEATRIX ein, wenn mindestens \textbf{zwei} der folgenden Bedingungen erfüllt sind:
+\begin{enumerate}
+    \item Die Entscheidung ist \textbf{materiell} ($>$500k CHF Auswirkung)
+    \item Der Erfolg hängt \textbf{kritisch} von Verhaltensannahmen ab
+    \item Das Management betritt \textbf{neues Terrain} (neue Märkte, Kundengruppen, Produkte)
+    \item Es gibt \textbf{kein schnelles Feedback} (Strategie, langfristige Investments)
+    \item \textbf{Regulatorische oder Governance-Anforderungen} verlangen Dokumentation
+    \item Es gibt \textbf{signifikante Meinungsverschiedenheiten} im Team (HiPPO-Risiko)
+\end{enumerate}
+\textbf{Korollar}: Für schnelle, kleine, inkrementelle Entscheidungen in bekanntem Terrain ist klassische Methodik oft ausreichend und effizienter.
+\end{tcolorbox}
 
 \subsubsection{Die korrigierte Perspektive auf BCM/BEATRIX}
 
