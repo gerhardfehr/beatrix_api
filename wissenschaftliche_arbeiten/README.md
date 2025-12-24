@@ -8,6 +8,7 @@ Dieser Ordner enthält die wissenschaftliche Dokumentation des Behavioral Change
 wissenschaftliche_arbeiten/
 ├── Meta_Modul_Paper.tex          # Hauptdokument (251 KB, 4300 Zeilen)
 ├── kapitel/                       # Kapitelentwicklung
+│   ├── 00_orientierung/          🆕 NEU - Executive Summary, Lesehinweise
 │   ├── 01_einfuehrung/           ✅ Ausführlich (2089 Zeilen)
 │   ├── 02_ontologie/             ⚠️ Dünn (190 Zeilen)
 │   ├── 03_epistemologie/         ✅ OK (449 Zeilen)
