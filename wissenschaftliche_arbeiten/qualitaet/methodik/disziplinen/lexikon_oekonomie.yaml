@@ -1,0 +1,539 @@
+# =============================================================================
+# ESL DISZIPLIN-LEXIKON: Ökonomie (Mainstream/Neoklassik)
+# =============================================================================
+# Erweitertes Lexikon mit Gebrauchskontext, Beispielsätzen und Kollokationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "oekonomie"
+  name: "Ökonomie / Economics (Mainstream)"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  zweck: |
+    Dieses Lexikon ergänzt das Glossar um:
+    - Beispielsätze aus der Fachliteratur
+    - Typische Kollokationen und Phrasen
+    - Kontext-spezifische Verwendung
+    - Abgrenzung ähnlicher Begriffe
+
+
+# =============================================================================
+# KERNKONZEPTE MIT ERWEITERTEM KONTEXT
+# =============================================================================
+
+eintraege:
+
+  # ---------------------------------------------------------------------------
+  # GLEICHGEWICHT
+  # ---------------------------------------------------------------------------
+
+  gleichgewicht:
+    lemma: "Gleichgewicht"
+    wortart: "Substantiv, n."
+    englisch: "equilibrium"
+    plural: "Gleichgewichte"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Zustand eines ökonomischen Systems, in dem keine Tendenz zur
+          Veränderung besteht, da alle Akteure ihre Pläne realisieren können.
+        fachgebiet: "Allgemeine Ökonomie"
+        beispielsaetze:
+          - "Im Gleichgewicht entspricht die nachgefragte Menge der angebotenen Menge."
+          - "Das Modell konvergiert gegen ein eindeutiges Gleichgewicht."
+          - "Außerhalb des Gleichgewichts entstehen Anpassungskräfte."
+
+      - nummer: 2
+        definition: |
+          Spieltheoretisch: Strategiekombination, bei der kein Spieler
+          durch einseitige Abweichung gewinnen kann.
+        fachgebiet: "Spieltheorie"
+        beispielsaetze:
+          - "Das Nash-Gleichgewicht ist nicht notwendigerweise Pareto-effizient."
+          - "In diesem Spiel existieren mehrere Gleichgewichte."
+
+    kollokationen:
+      haeufig:
+        - "walrasianisches Gleichgewicht"
+        - "Nash-Gleichgewicht"
+        - "partielles Gleichgewicht"
+        - "allgemeines Gleichgewicht"
+        - "Gleichgewichtspreis"
+        - "im Gleichgewicht"
+        - "zum Gleichgewicht konvergieren"
+      verben:
+        - "ein Gleichgewicht erreichen"
+        - "das Gleichgewicht stören"
+        - "im Gleichgewicht verharren"
+        - "ein Gleichgewicht berechnen"
+
+    typische_phrasen:
+      - "Im Gleichgewicht gilt..."
+      - "Wir charakterisieren das Gleichgewicht durch..."
+      - "Das eindeutige Gleichgewicht ist gegeben durch..."
+      - "Es existiert ein Gleichgewicht, in dem..."
+
+    abgrenzung:
+      stationaerer_zustand: |
+        "Stationärer Zustand" (Steady State) bezieht sich auf dynamische
+        Modelle, in denen sich Variablen nicht mehr ändern.
+        "Gleichgewicht" ist allgemeiner.
+
+
+  # ---------------------------------------------------------------------------
+  nutzen:
+    lemma: "Nutzen"
+    wortart: "Substantiv, m."
+    englisch: "utility"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Maß für die Befriedigung oder das Wohlbefinden, das ein Agent
+          aus dem Konsum von Gütern oder Zuständen zieht.
+        fachgebiet: "Mikroökonomie"
+        beispielsaetze:
+          - "Der Konsument maximiert seinen Nutzen unter der Budgetrestriktion."
+          - "Der marginale Nutzen ist abnehmend."
+          - "Die Nutzenfunktion ist strikt konkav."
+
+    kollokationen:
+      haeufig:
+        - "erwarteter Nutzen"
+        - "marginaler Nutzen"
+        - "Gesamtnutzen"
+        - "Nutzenfunktion"
+        - "Nutzenmaximierung"
+        - "kardinaler/ordinaler Nutzen"
+      verben:
+        - "Nutzen maximieren"
+        - "Nutzen stiften"
+        - "Nutzen vergleichen"
+
+    typische_phrasen:
+      - "Der Agent maximiert U(x) unter der Nebenbedingung..."
+      - "Sei U eine strikt quasikonkave Nutzenfunktion..."
+      - "Der erwartete Nutzen beträgt..."
+
+    abgrenzung:
+      profit: "Nutzen bezieht sich auf Konsumenten, Profit auf Firmen."
+      wohlfahrt: "Wohlfahrt ist aggregierter Nutzen über alle Agenten."
+
+
+  # ---------------------------------------------------------------------------
+  effizienz:
+    lemma: "Effizienz"
+    wortart: "Substantiv, f."
+    englisch: "efficiency"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Pareto-Effizienz: Zustand, in dem keine Besserstellung möglich ist,
+          ohne jemanden schlechter zu stellen.
+        fachgebiet: "Wohlfahrtsökonomie"
+        beispielsaetze:
+          - "Wettbewerbsmärkte führen zu effizienten Allokationen."
+          - "Die Effizienz des Ergebnisses hängt von der Informationsstruktur ab."
+
+      - nummer: 2
+        definition: |
+          Produktive Effizienz: Produktion an der Grenze der
+          Produktionsmöglichkeiten.
+        fachgebiet: "Produktionstheorie"
+
+    kollokationen:
+      haeufig:
+        - "Pareto-Effizienz"
+        - "Allokationseffizienz"
+        - "technische Effizienz"
+        - "Markteffizienz"
+        - "effizienter Markt"
+      verben:
+        - "Effizienz erreichen"
+        - "Effizienz messen"
+        - "die Effizienz steigern"
+
+    typische_phrasen:
+      - "Das Ergebnis ist Pareto-effizient."
+      - "Die Effizienz wird durch Marktversagen beeinträchtigt."
+      - "Unter vollständiger Information ist das First-Best erreichbar."
+
+
+  # ---------------------------------------------------------------------------
+  # MARKT
+  # ---------------------------------------------------------------------------
+
+  markt:
+    lemma: "Markt"
+    wortart: "Substantiv, m."
+    englisch: "market"
+    plural: "Märkte"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Institution oder Mechanismus, durch den Käufer und Verkäufer
+          zusammenkommen, um Güter und Dienstleistungen zu tauschen.
+        fachgebiet: "Mikroökonomie"
+        beispielsaetze:
+          - "Auf dem Markt bildet sich der Preis durch Angebot und Nachfrage."
+          - "Der Markt räumt bei p* = 10."
+          - "Ein perfekt kompetitiver Markt hat viele kleine Anbieter."
+
+    kollokationen:
+      haeufig:
+        - "Arbeitsmarkt"
+        - "Kapitalmarkt"
+        - "Gütermarkt"
+        - "vollkommener Markt"
+        - "Marktgleichgewicht"
+        - "Marktversagen"
+        - "Markträumung"
+      verben:
+        - "einen Markt räumen"
+        - "in den Markt eintreten"
+        - "den Markt regulieren"
+
+    typische_phrasen:
+      - "Der Markt räumt bei..."
+      - "Im Gleichgewicht des Marktes..."
+      - "Marktversagen tritt auf, wenn..."
+      - "Der Markt versagt bei öffentlichen Gütern."
+
+
+  # ---------------------------------------------------------------------------
+  preis:
+    lemma: "Preis"
+    wortart: "Substantiv, m."
+    englisch: "price"
+    plural: "Preise"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Tauschverhältnis zwischen Gütern, typischerweise ausgedrückt
+          in Einheiten eines Numéraire (Geld).
+        fachgebiet: "Preistheorie"
+        beispielsaetze:
+          - "Der Gleichgewichtspreis beträgt p* = 50."
+          - "Bei diesem Preis übersteigt die Nachfrage das Angebot."
+          - "Preise signalisieren Knappheit."
+
+    kollokationen:
+      haeufig:
+        - "Gleichgewichtspreis"
+        - "Marktpreis"
+        - "Schattenpreis"
+        - "relativer Preis"
+        - "Preisvektor"
+        - "Preiselastizität"
+      verben:
+        - "Preise setzen"
+        - "Preise anpassen"
+        - "den Preis bestimmen"
+
+    typische_phrasen:
+      - "Der Preis passt sich an, bis..."
+      - "Im Gleichgewicht ist der Preis..."
+      - "Der Schattenpreis der Restriktion beträgt..."
+
+
+  # ---------------------------------------------------------------------------
+  # KAUSALITÄT UND IDENTIFIKATION
+  # ---------------------------------------------------------------------------
+
+  kausalitaet:
+    lemma: "Kausalität"
+    wortart: "Substantiv, f."
+    englisch: "causality"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Ursache-Wirkungs-Beziehung: X verursacht Y, wenn eine
+          Intervention auf X den Wert von Y verändert.
+        fachgebiet: "Ökonometrie"
+        beispielsaetze:
+          - "Wir identifizieren den kausalen Effekt durch ein Experiment."
+          - "Korrelation impliziert keine Kausalität."
+          - "Das Instrument ermöglicht kausale Inferenz."
+
+    kollokationen:
+      haeufig:
+        - "kausaler Effekt"
+        - "kausale Identifikation"
+        - "kausale Inferenz"
+        - "Kausalität vs. Korrelation"
+      verben:
+        - "Kausalität nachweisen"
+        - "Kausalität identifizieren"
+        - "auf Kausalität schließen"
+
+    typische_phrasen:
+      - "Der kausale Effekt von X auf Y beträgt..."
+      - "Wir identifizieren den kausalen Zusammenhang durch..."
+      - "Unter der Annahme, dass Z exogen ist..."
+      - "Die Identifikationsstrategie beruht auf..."
+
+    vorsichtsmarker:
+      - "korreliert mit (NICHT: verursacht)"
+      - "ist assoziiert mit"
+      - "deutet auf einen Zusammenhang hin"
+
+
+  # ---------------------------------------------------------------------------
+  identifikation:
+    lemma: "Identifikation"
+    wortart: "Substantiv, f."
+    englisch: "identification"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Ökonometrische Strategie zur Isolierung kausaler Effekte
+          von Confounding-Faktoren.
+        fachgebiet: "Ökonometrie"
+        beispielsaetze:
+          - "Die Identifikation beruht auf exogener Variation."
+          - "Die Identifikationsannahme ist nicht testbar."
+          - "Wir nutzen die Grenzüberschreitung zur Identifikation."
+
+    kollokationen:
+      haeufig:
+        - "Identifikationsstrategie"
+        - "Identifikationsannahme"
+        - "kausale Identifikation"
+        - "partielle Identifikation"
+      verben:
+        - "den Effekt identifizieren"
+        - "die Identifikation sicherstellen"
+
+    typische_phrasen:
+      - "Unsere Identifikationsstrategie beruht auf..."
+      - "Die zentrale Identifikationsannahme ist..."
+      - "Unter dieser Annahme ist β identifiziert."
+
+
+  # ---------------------------------------------------------------------------
+  # MODELLIERUNG
+  # ---------------------------------------------------------------------------
+
+  modell:
+    lemma: "Modell"
+    wortart: "Substantiv, n."
+    englisch: "model"
+    plural: "Modelle"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Vereinfachte Darstellung ökonomischer Zusammenhänge,
+          typischerweise mathematisch formalisiert.
+        fachgebiet: "Wirtschaftstheorie"
+        beispielsaetze:
+          - "Das Modell sagt vorher, dass..."
+          - "Im Modell optimieren Agenten..."
+          - "Wir erweitern das Standardmodell um..."
+
+    kollokationen:
+      haeufig:
+        - "DSGE-Modell"
+        - "Gleichgewichtsmodell"
+        - "theoretisches Modell"
+        - "strukturelles Modell"
+        - "Benchmark-Modell"
+      verben:
+        - "ein Modell aufstellen"
+        - "das Modell lösen"
+        - "das Modell kalibrieren"
+        - "das Modell schätzen"
+
+    typische_phrasen:
+      - "Im Rahmen des Modells..."
+      - "Das Modell impliziert..."
+      - "Wir betrachten ein einfaches Modell, in dem..."
+      - "Die Modellannahme ist, dass..."
+
+    vorsichtsmarker:
+      - "im Modell (NICHT: in der Realität)"
+      - "unter den Annahmen des Modells"
+      - "ceteris paribus"
+
+
+  # ---------------------------------------------------------------------------
+  # WOHLFAHRT
+  # ---------------------------------------------------------------------------
+
+  wohlfahrt:
+    lemma: "Wohlfahrt"
+    wortart: "Substantiv, f."
+    englisch: "welfare"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Aggregiertes Maß für das Wohlbefinden einer Gesellschaft,
+          typischerweise Summe oder gewichtete Summe individueller Nutzen.
+        fachgebiet: "Wohlfahrtsökonomie"
+        beispielsaetze:
+          - "Die Politik maximiert die soziale Wohlfahrt."
+          - "Die Wohlfahrt steigt durch den Handel."
+          - "Wir berechnen den Wohlfahrtsverlust durch die Steuer."
+
+    kollokationen:
+      haeufig:
+        - "soziale Wohlfahrt"
+        - "Wohlfahrtsverlust"
+        - "Wohlfahrtsfunktion"
+        - "Wohlfahrtseffekt"
+        - "Wohlfahrtsanalyse"
+      verben:
+        - "Wohlfahrt maximieren"
+        - "Wohlfahrt messen"
+        - "Wohlfahrt vergleichen"
+
+    typische_phrasen:
+      - "Die Wohlfahrt wird maximiert, wenn..."
+      - "Der Wohlfahrtsverlust beträgt..."
+      - "Aus Wohlfahrtsperspektive..."
+
+
+  # ---------------------------------------------------------------------------
+  # ÖKONOMETRISCHE BEGRIFFE
+  # ---------------------------------------------------------------------------
+
+  endogenitaet:
+    lemma: "Endogenität"
+    wortart: "Substantiv, f."
+    englisch: "endogeneity"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Problem, wenn eine erklärende Variable mit dem Fehlerterm korreliert
+          ist, was zu verzerrten Schätzern führt.
+        fachgebiet: "Ökonometrie"
+        beispielsaetze:
+          - "Endogenität entsteht durch Omitted Variable Bias."
+          - "Wir adressieren die Endogenität durch Instrumentvariablen."
+          - "Das Ergebnis ist durch Endogenität verzerrt."
+
+    kollokationen:
+      haeufig:
+        - "Endogenitätsproblem"
+        - "Endogenität adressieren"
+        - "potentielle Endogenität"
+      verben:
+        - "Endogenität testen"
+        - "Endogenität korrigieren"
+        - "unter Endogenität leiden"
+
+    typische_phrasen:
+      - "Ein potentielles Endogenitätsproblem ist..."
+      - "Wir adressieren die Endogenität durch..."
+      - "Der Schätzer ist verzerrt aufgrund von Endogenität."
+
+
+  robustheit:
+    lemma: "Robustheit"
+    wortart: "Substantiv, f."
+    englisch: "robustness"
+
+    bedeutungen:
+      - nummer: 1
+        definition: |
+          Eigenschaft eines Ergebnisses, unter alternativen Spezifikationen
+          oder Annahmen stabil zu bleiben.
+        fachgebiet: "Ökonometrie"
+        beispielsaetze:
+          - "Das Ergebnis ist robust gegenüber alternativen Spezifikationen."
+          - "Wir führen Robustheitschecks durch."
+          - "Die Robustheit wird in Tabelle 3 gezeigt."
+
+    kollokationen:
+      haeufig:
+        - "Robustheitscheck"
+        - "Robustheitsanalyse"
+        - "robust gegenüber"
+      verben:
+        - "Robustheit prüfen"
+        - "Robustheit demonstrieren"
+
+    typische_phrasen:
+      - "Das Ergebnis ist robust gegenüber..."
+      - "In Robustheitschecks zeigen wir..."
+      - "Die Robustheit der Ergebnisse wird durch... bestätigt."
+
+
+# =============================================================================
+# FACHSPRACHLICHE WENDUNGEN
+# =============================================================================
+
+wendungen:
+
+  einleitung:
+    - "In diesem Paper untersuchen wir..."
+    - "Wir entwickeln ein Modell, in dem..."
+    - "Der Beitrag dieser Arbeit ist..."
+    - "Wir tragen zur Literatur bei, indem..."
+
+  methodik:
+    - "Wir identifizieren den kausalen Effekt durch..."
+    - "Die Identifikationsstrategie beruht auf..."
+    - "Unter der Annahme, dass..."
+    - "Wir schätzen folgende Spezifikation..."
+
+  ergebnisse:
+    - "Die Ergebnisse zeigen, dass..."
+    - "Wir finden einen statistisch signifikanten Effekt von..."
+    - "Spalte (1) zeigt die Basisspezifikation..."
+    - "Der Koeffizient ist signifikant auf dem 5%-Niveau."
+
+  diskussion:
+    - "Diese Ergebnisse sind konsistent mit..."
+    - "Eine mögliche Erklärung ist..."
+    - "Die Ergebnisse sollten mit Vorsicht interpretiert werden..."
+    - "Eine Einschränkung unserer Analyse ist..."
+
+  hedging:
+    - "Die Ergebnisse legen nahe, dass..."
+    - "Es deutet darauf hin, dass..."
+    - "Unter den getroffenen Annahmen..."
+    - "Die Evidenz ist konsistent mit der Hypothese, dass..."
+
+
+# =============================================================================
+# TYPISCHE SATZSTRUKTUREN
+# =============================================================================
+
+satzstrukturen:
+
+  kausal_stark:
+    muster: "X verursacht Y"
+    B_wert: 0.95
+    beispiel: "Die Mindestlohnerhöhung verursacht Beschäftigungsverluste."
+    warnung: "Nur bei experimenteller Evidenz angemessen"
+
+  kausal_moderat:
+    muster: "X führt zu Y"
+    B_wert: 0.80
+    beispiel: "Handelsliberalisierung führt zu Effizienzgewinnen."
+
+  korrelativ:
+    muster: "X ist assoziiert mit Y"
+    B_wert: 0.50
+    beispiel: "Bildung ist assoziiert mit höherem Einkommen."
+
+  theoretisch:
+    muster: "Im Modell impliziert X Y"
+    B_wert: 0.40
+    beispiel: "Im Modell impliziert Risikoaversion eine konkave Nutzenfunktion."
+
+  hypothetisch:
+    muster: "X könnte Y beeinflussen"
+    B_wert: 0.30
+    beispiel: "Geldpolitik könnte langfristig neutral sein."

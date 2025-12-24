@@ -1,0 +1,462 @@
+# =============================================================================
+# ESL DISZIPLIN-GLOSSAR: Ökonomie (Mainstream/Neoklassik)
+# =============================================================================
+# Mathematisch formalisiertes Glossar mit empirischen Base-Rates
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "oekonomie"
+  name: "Ökonomie / Economics (Mainstream)"
+  version: "1.0"
+  letzte_aktualisierung: "2024-12"
+
+  abgrenzung: |
+    Dieses Glossar behandelt Mainstream-Ökonomie (Neoklassik, Chicago School,
+    MIT-Style Makro). Für Verhaltensökonomie siehe glossar_verhaltensoekonomie.yaml.
+
+  quellen_base_rates:
+    - id: "Camerer2016"
+      name: "Camerer et al. (2016)"
+      titel: "Evaluating replicability of laboratory experiments in economics"
+      replikationsrate: 0.61
+      anmerkung: "Höher als Psychologie (0.39), da incentivierte Experimente"
+
+    - id: "Brodeur2020"
+      name: "Brodeur et al. (2020)"
+      titel: "Methods Matter: P-Hacking and Publication Bias in Causal Analysis"
+      p_hacking_rate: 0.25
+      anmerkung: "~25% der Studien zeigen Evidenz für P-Hacking"
+
+    - id: "Ioannidis2017"
+      name: "Ioannidis et al. (2017)"
+      titel: "The Power of Bias in Economics Research"
+      median_power: 0.18
+      anmerkung: "Mediane statistische Power nur 18%"
+
+    - id: "Christensen2018"
+      name: "Christensen & Miguel (2018)"
+      titel: "Transparency, Reproducibility, and the Credibility of Economics Research"
+      beschreibung: "Übersichtsartikel zur Replikationskrise in der Ökonomie"
+
+
+# =============================================================================
+# EMPIRISCHE BASE-RATES
+# =============================================================================
+
+base_rates:
+
+  replikation:
+    beschreibung: |
+      P(Replikation | Studientyp) - Wahrscheinlichkeit erfolgreicher Replikation
+      in ökonomischer Forschung
+
+    raten:
+      meta_analyse:
+        P_replikation: 0.82
+        konfidenz: "hoch"
+        quelle: "Aggregation multipler Studien reduziert Rauschen"
+
+      rct_praeregistriert:
+        P_replikation: 0.72
+        konfidenz: "mittel-hoch"
+        quelle: "Development Economics RCTs (Duflo, Banerjee)"
+        n_studien: ">100"
+
+      labor_incentivized:
+        P_replikation: 0.61
+        konfidenz: "mittel"
+        quelle: "Camerer2016"
+        n_studien: "18"
+
+      natural_experiment:
+        P_replikation: 0.55
+        konfidenz: "mittel"
+        quelle: "Geschätzt basierend auf IV-Studien"
+
+      oekonometrie_observational:
+        P_replikation: 0.45
+        konfidenz: "niedrig-mittel"
+        quelle: "Hohe Modellabhängigkeit"
+
+      theorie_kalibriert:
+        P_replikation: 0.70
+        konfidenz: "mittel"
+        quelle: "DSGE-Modelle - Kalibrierung reproduzierbar"
+
+      theorie_nicht_kalibriert:
+        P_replikation: 0.90
+        konfidenz: "hoch"
+        quelle: "Mathematische Ableitungen - deterministisch"
+
+
+  effektgroessen:
+    beschreibung: |
+      Typische Effektgrößen in ökonomischen Studien.
+      Wichtig für Power-Analysen und Plausibilitätschecks.
+
+    bereiche:
+      arbeitsmarkt:
+        mindestlohn_beschaeftigung:
+          effekt: "[-0.03, 0.01]"
+          interpretation: "Elastizität Beschäftigung bzgl. Mindestlohn"
+          quelle: "Card & Krueger (1994), Neumark & Wascher (2007)"
+
+        bildungsrendite:
+          effekt: "[0.06, 0.12]"
+          interpretation: "Lohnsteigerung pro Bildungsjahr"
+          quelle: "Mincer-Gleichung, Card (1999)"
+
+      makro:
+        fiskal_multiplikator:
+          effekt: "[0.5, 2.5]"
+          interpretation: "BIP-Änderung / Staatsausgaben-Änderung"
+          quelle: "Ramey (2019), Blanchard & Leigh (2013)"
+
+        geldpolitik_output:
+          effekt: "[-0.5, -0.1]"
+          interpretation: "Output-Reaktion auf 1% Zinserhöhung"
+          quelle: "VAR-Studien, Romer & Romer (2004)"
+
+      mikro:
+        preiselastizitaet_nachfrage:
+          effekt: "[-2, -0.5]"
+          interpretation: "Typische Nachfrageelastizitäten"
+          quelle: "Variiert stark nach Gut"
+
+
+# =============================================================================
+# KERNBEGRIFFE
+# =============================================================================
+
+begriffe:
+
+  # ---------------------------------------------------------------------------
+  # GLEICHGEWICHT
+  # ---------------------------------------------------------------------------
+
+  walrasianisches_gleichgewicht:
+    term: "Walrasianisches Gleichgewicht"
+    term_en: "Walrasian Equilibrium"
+    symbol: "E* = (p*, x*)"
+    kategorie: "Gleichgewicht"
+
+    definition: |
+      Allokation und Preisvektor, bei dem alle Märkte geräumt sind und
+      alle Agenten ihren Nutzen unter der Budgetrestriktion maximieren.
+
+    formale_bedingungen:
+      - "Nutzenmaximierung: xᵢ* ∈ argmax{Uᵢ(x): p*·x ≤ p*·ωᵢ}"
+      - "Markträumung: Σᵢ xᵢ* = Σᵢ ωᵢ"
+
+    existenz: |
+      Arrow & Debreu (1954): Existiert unter Konvexität, Stetigkeit, Nichtsättigung.
+
+    E_value: 0.85
+    E_begründung: "Fundamentales Theorem, mathematisch bewiesen"
+
+  pareto_optimalitaet:
+    term: "Pareto-Optimalität"
+    term_en: "Pareto Efficiency"
+    symbol: "PO"
+    kategorie: "Wohlfahrt"
+
+    definition: |
+      Zustand, in dem niemand bessergestellt werden kann,
+      ohne jemand anderen schlechter zu stellen.
+
+    formal: "¬∃y: [∀i: Uᵢ(y) ≥ Uᵢ(x)] ∧ [∃j: Uⱼ(y) > Uⱼ(x)]"
+
+    wohlfahrtssaetze:
+      erster: "Jedes Walras-GG ist Pareto-optimal"
+      zweiter: "Jedes Pareto-Optimum ist als GG erreichbar (nach Umverteilung)"
+
+    E_value: 0.90
+    E_begründung: "Mathematisches Theorem"
+
+  nash_gleichgewicht:
+    term: "Nash-Gleichgewicht"
+    term_en: "Nash Equilibrium"
+    symbol: "σ*"
+    kategorie: "Spieltheorie"
+
+    definition: |
+      Strategieprofil, bei dem kein Spieler durch einseitige
+      Abweichung seinen Payoff verbessern kann.
+
+    formal: "∀i, ∀σᵢ: uᵢ(σᵢ*, σ₋ᵢ*) ≥ uᵢ(σᵢ, σ₋ᵢ*)"
+
+    existenz: "Nash (1950): Existiert immer in gemischten Strategien"
+
+    E_value: 0.88
+    E_begründung: "Mathematisch bewiesen, experimentell oft bestätigt"
+
+
+  # ---------------------------------------------------------------------------
+  # MARKT
+  # ---------------------------------------------------------------------------
+
+  angebot_nachfrage:
+    term: "Angebot und Nachfrage"
+    term_en: "Supply and Demand"
+    symbol: "S(p), D(p)"
+    kategorie: "Markt"
+
+    definition: |
+      Fundamentales Modell der Preisbildung: Preis passt sich an,
+      bis Angebot gleich Nachfrage.
+
+    gleichgewicht: "p* mit S(p*) = D(p*)"
+
+    komparative_statik:
+      nachfrage_steigt: "p↑, q↑"
+      angebot_steigt: "p↓, q↑"
+
+    E_value: 0.75
+    E_begründung: "Empirisch gut belegt für einfache Märkte"
+
+  elastizitaet:
+    term: "Elastizität"
+    term_en: "Elasticity"
+    symbol: "ε"
+    kategorie: "Markt"
+
+    definition: |
+      Prozentuale Änderung einer Variable in Reaktion auf
+      1% Änderung einer anderen Variable.
+
+    formal: "ε = (∂Q/∂P) · (P/Q) = ∂ln(Q)/∂ln(P)"
+
+    typen:
+      preiselastizitaet: "Nachfrage-Reaktion auf Preisänderung"
+      einkommenselastizitaet: "Nachfrage-Reaktion auf Einkommensänderung"
+      kreuzpreiselastizitaet: "Nachfrage-Reaktion auf Preisänderung anderer Güter"
+
+    E_value: 0.70
+    E_begründung: "Empirisch gut messbar, aber kontextabhängig"
+
+
+  # ---------------------------------------------------------------------------
+  # RATIONALITÄT
+  # ---------------------------------------------------------------------------
+
+  homo_oeconomicus:
+    term: "Homo Oeconomicus"
+    term_en: "Economic Man / Rational Agent"
+    symbol: "σ"
+    kategorie: "Rationalität"
+
+    definition: |
+      Idealisierter rationaler Agent mit vollständigen Präferenzen,
+      unbegrenzter Informationsverarbeitung und Eigennutzmaximierung.
+
+    eigenschaften:
+      - "Vollständige & transitive Präferenzen"
+      - "Nutzenmaximierung"
+      - "Bayesianische Erwartungsbildung"
+      - "Zeitkonsistenz"
+
+    kritik: |
+      Simon (1955): Bounded Rationality
+      Kahneman & Tversky (1979): Systematische Abweichungen
+
+    E_value: 0.40
+    E_begründung: |
+      Als normatives Ideal nützlich, als deskriptives Modell
+      empirisch widerlegt (Verhaltensökonomie)
+
+  rationale_erwartungen:
+    term: "Rationale Erwartungen"
+    term_en: "Rational Expectations"
+    symbol: "𝔼[·|Iₜ]"
+    kategorie: "Makro"
+
+    definition: |
+      Agenten nutzen alle verfügbaren Informationen effizient
+      und machen im Durchschnitt keine systematischen Fehler.
+
+    formal: "𝔼[xₜ₊₁|Iₜ] = xₜ₊₁ + εₜ₊₁ mit 𝔼[εₜ₊₁|Iₜ] = 0"
+
+    anwendung: "DSGE-Modelle, Asset Pricing, Geldpolitik"
+
+    E_value: 0.50
+    E_begründung: |
+      Theoretisch elegant, empirisch umstritten.
+      Survey-Erwartungen weichen systematisch ab.
+
+
+  # ---------------------------------------------------------------------------
+  # WOHLFAHRT
+  # ---------------------------------------------------------------------------
+
+  konsumentenrente:
+    term: "Konsumentenrente"
+    term_en: "Consumer Surplus"
+    symbol: "CS"
+    kategorie: "Wohlfahrt"
+
+    definition: |
+      Differenz zwischen Zahlungsbereitschaft und tatsächlich gezahltem Preis.
+
+    formal: "CS = ∫₀^q* [D⁻¹(q) - p*] dq"
+
+    interpretation: "Maß für Wohlfahrtsgewinn der Konsumenten"
+
+    E_value: 0.75
+    E_begründung: "Konzept klar, Messung erfordert Nachfrageschätzung"
+
+  deadweight_loss:
+    term: "Wohlfahrtsverlust"
+    term_en: "Deadweight Loss"
+    symbol: "DWL"
+    kategorie: "Wohlfahrt"
+
+    definition: |
+      Verlust an Gesamtrente durch Marktverzerrungen
+      (Steuern, Monopol, Preiskontrollen).
+
+    harberger_dreieck: "DWL ≈ ½ · t² · ε · Q / P"
+
+    anwendungen:
+      - "Steuerinzidenz"
+      - "Monopolwohlfahrtsverlust"
+      - "Mindestlohn-Analyse"
+
+    E_value: 0.70
+    E_begründung: "Konzept theoretisch klar, Quantifizierung unsicher"
+
+
+  # ---------------------------------------------------------------------------
+  # ÖKONOMETRIE
+  # ---------------------------------------------------------------------------
+
+  kausalitaet:
+    term: "Kausalität"
+    term_en: "Causality"
+    symbol: "X → Y"
+    kategorie: "Ökonometrie"
+
+    definition: |
+      X verursacht Y, wenn Intervention auf X den Wert von Y verändert.
+
+    identifikation:
+      rct: "Randomisierung eliminiert Confounding"
+      iv: "Instrumentvariable als exogene Variation"
+      diff_in_diff: "Parallele Trends + Treatment"
+      rdd: "Diskontinuität an Schwellenwert"
+
+    rubin_framework: "Y(1) - Y(0) = kausaler Effekt (kontrafaktisch)"
+
+    E_value: 0.65
+    E_begründung: "Identifikation oft schwierig, Annahmen nicht testbar"
+
+  instrumentvariable:
+    term: "Instrumentvariable"
+    term_en: "Instrumental Variable"
+    symbol: "Z"
+    kategorie: "Ökonometrie"
+
+    definition: |
+      Variable Z, die X beeinflusst, aber Y nur über X.
+
+    bedingungen:
+      relevanz: "Cov(Z, X) ≠ 0"
+      exogenitaet: "Cov(Z, ε) = 0"
+
+    schaetzung: "2SLS: Erst X auf Z regressieren, dann Y auf X̂"
+
+    E_value: 0.55
+    E_begründung: |
+      Exogenitäts-Annahme nicht testbar.
+      "Weak Instruments" Problem häufig.
+
+
+# =============================================================================
+# SPRACHLICHE MARKER (für B-Messung)
+# =============================================================================
+
+sprachliche_marker:
+
+  hohe_behauptungsstaerke:
+    beispiele:
+      - "beweist"
+      - "zeigt klar"
+      - "etabliert"
+      - "bestätigt"
+      - "kausal"
+      - "identifiziert"
+    B_range: [0.85, 1.00]
+
+  mittlere_behauptungsstaerke:
+    beispiele:
+      - "legt nahe"
+      - "deutet auf"
+      - "konsistent mit"
+      - "unterstützt"
+      - "korreliert"
+    B_range: [0.50, 0.75]
+
+  niedrige_behauptungsstaerke:
+    beispiele:
+      - "könnte"
+      - "möglicherweise"
+      - "unter bestimmten Annahmen"
+      - "theoretisch"
+      - "hypothetisch"
+    B_range: [0.20, 0.50]
+
+  hedging_marker:
+    beispiele:
+      - "ceteris paribus"
+      - "unter den getroffenen Annahmen"
+      - "im Modell"
+      - "unter Vorbehalt"
+      - "vorläufig"
+    B_reduktion: -0.15
+
+
+# =============================================================================
+# METHODENSPEZIFISCHE E-WERTE
+# =============================================================================
+
+methoden_E_werte:
+
+  meta_analyse:
+    E: 0.88
+    bedingung: "Gut durchgeführt, präregistriert"
+
+  rct_praeregistriert:
+    E: 0.82
+    bedingung: "Pre-Analysis Plan, adequate power"
+
+  rct_nicht_praeregistriert:
+    E: 0.70
+    bedingung: "Potentielles P-Hacking"
+
+  natural_experiment:
+    E: 0.68
+    bedingung: "Plausible exogene Variation"
+
+  instrumentvariable:
+    E: 0.60
+    bedingung: "Starkes Instrument, plausible Exogenität"
+
+  diff_in_diff:
+    E: 0.62
+    bedingung: "Parallele Trends plausibel"
+
+  regression_discontinuity:
+    E: 0.72
+    bedingung: "Keine Manipulation am Cutoff"
+
+  ols_observational:
+    E: 0.45
+    bedingung: "Korrelation, nicht Kausalität"
+
+  theorie_kalibriert:
+    E: 0.55
+    bedingung: "Fit zu stilisierten Fakten"
+
+  theorie_analytisch:
+    E: 0.35
+    bedingung: "Mathematische Ableitung ohne Empirie"

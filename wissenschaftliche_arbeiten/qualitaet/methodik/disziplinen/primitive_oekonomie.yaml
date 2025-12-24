@@ -1,0 +1,708 @@
+# =============================================================================
+# PRIMITIVE DER ÖKONOMIE (Mainstream/Neoklassik)
+# =============================================================================
+#
+# Axiomatisches Fundament: 24 orthogonale Primitive in 6 Kategorien
+# Basis für klassische ökonomische Theorie (im Kontrast zu Verhaltensökonomie)
+#
+# Version: 1.0
+# Autor: FehrAdvice & Partners AG
+# Datum: 2024-12-24
+# =============================================================================
+
+meta:
+  titel: "Primitive Ontologie der Ökonomie"
+  untertitel: "Neoklassische und moderne Mainstream-Ökonomie"
+  version: "1.0"
+
+  abgrenzung: |
+    Diese Primitive beschreiben die KLASSISCHE Ökonomie (Walras, Arrow-Debreu,
+    Chicago School). Sie unterscheiden sich fundamental von der Verhaltensökonomie:
+    - Homo Oeconomicus statt Bounded Rationality
+    - Vollständige Information statt systematische Biases
+    - Gleichgewicht statt Prozess
+
+  prinzip: |
+    Ein PRIMITIV ist ein nicht weiter zerlegbarer Grundbegriff.
+    Alle ökonomischen Theoreme (Wohlfahrtssätze, Gleichgewichtsexistenz)
+    sind aus diesen Primitiven ableitbar.
+
+  kriterien:
+    - name: "Irreduzibilität"
+      beschreibung: "Kann nicht durch andere Primitive definiert werden"
+    - name: "Orthogonalität"
+      beschreibung: "Unabhängig von anderen Primitiven messbar"
+    - name: "Vollständigkeit"
+      beschreibung: "Alle Standard-Theoreme sind daraus ableitbar"
+    - name: "Axiomatische Tradition"
+      beschreibung: "Konsistent mit Arrow-Debreu, MWG"
+
+  notation_konventionen:
+    mengen: "Kalligraphisch: 𝒳, 𝒴, ℬ"
+    funktionen: "Lateinisch: U, f, g, π"
+    preise: "p, w, r"
+    mengen_variablen: "x, y, q"
+    parameter: "Griechisch: α, β, δ, ρ, σ"
+    gleichgewicht: "Stern: x*, p*, E*"
+
+  referenzen:
+    - "Mas-Colell, Whinston & Green (1995): Microeconomic Theory"
+    - "Arrow & Debreu (1954): Existence of Equilibrium"
+    - "Samuelson (1947): Foundations of Economic Analysis"
+    - "Debreu (1959): Theory of Value"
+
+
+# =============================================================================
+# KATEGORIE 1: PRÄFERENZ UND NUTZEN (4 Primitive)
+# =============================================================================
+# Frage: Was wollen rationale Agenten?
+# Theoretische Basis: Expected Utility, Revealed Preference
+# =============================================================================
+
+kategorien:
+
+  PRAEFERENZ:
+    frage: "Was wollen rationale Agenten?"
+    theorien: ["Expected Utility Theory", "Revealed Preference", "Consumer Theory"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      U:
+        name: "Nutzenfunktion"
+        symbol: "U"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            U: 𝒳 → ℝ
+
+            wobei:
+            - 𝒳: Konsummenge (Menge aller Güterbündel)
+            - ℝ: Reelle Zahlen (ordinale oder kardinale Nutzenwerte)
+
+            U(x) = "Nutzen des Güterbündels x"
+
+          axiome:
+            A1_Vollstaendigkeit: |
+              ∀ x, y ∈ 𝒳: x ≽ y ∨ y ≽ x
+              "Alle Alternativen sind vergleichbar"
+
+            A2_Transitivitaet: |
+              x ≽ y ∧ y ≽ z → x ≽ z
+              "Präferenzen sind konsistent"
+
+            A3_Kontinuitaet: |
+              {y: y ≽ x} und {y: x ≽ y} sind abgeschlossen
+              "Keine Sprünge in Präferenzen"
+
+            A4_Nichtsaettigung: |
+              x >> y → x ≻ y (strikt mehr ist strikt besser)
+              "Monotonie der Präferenzen"
+
+        unterschied_verhaltensoekonomie: |
+          In der Verhaltensökonomie ist U kontextabhängig (Reference-Dependent)
+          und kann Verluste übergewichten (Loss Aversion: λ ≈ 2).
+          Klassische Ökonomie: U ist stabil und kontextunabhängig.
+
+      # ─────────────────────────────────────────────────────────────────────
+      PREF:
+        name: "Präferenzrelation"
+        symbol: "≽"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            ≽ ⊆ 𝒳 × 𝒳 (binäre Relation auf Konsummenge)
+
+            x ≽ y: "x ist mindestens so gut wie y"
+            x ≻ y: x ≽ y ∧ ¬(y ≽ x) "x ist strikt besser"
+            x ~ y: x ≽ y ∧ y ≽ x "Indifferenz"
+
+          eigenschaften:
+            - "Reflexiv: x ≽ x"
+            - "Transitiv: x ≽ y ∧ y ≽ z → x ≽ z"
+            - "Vollständig: ∀x,y: x ≽ y ∨ y ≽ x"
+
+        theorem_existenz_nutzenfunktion: |
+          Wenn ≽ vollständig, transitiv und stetig ist,
+          dann existiert U: 𝒳 → ℝ mit:
+          x ≽ y ⟺ U(x) ≥ U(y)
+          (Debreu, 1954)
+
+      # ─────────────────────────────────────────────────────────────────────
+      EU:
+        name: "Erwartungsnutzen"
+        symbol: "𝔼[U]"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            𝔼[U] = Σᵢ pᵢ · U(xᵢ)
+
+            wobei:
+            - pᵢ: Wahrscheinlichkeit des Zustands i
+            - U(xᵢ): Nutzen im Zustand i
+
+            Für stetige Verteilungen:
+            𝔼[U] = ∫ U(x) dF(x)
+
+          axiome_vNM:
+            A1_Vollstaendigkeit: "Wie bei sicheren Präferenzen"
+            A2_Transitivitaet: "Wie bei sicheren Präferenzen"
+            A3_Unabhaengigkeit: |
+              L ≻ L' → αL + (1-α)M ≻ αL' + (1-α)M
+              "Irrelevanz unabhängiger Alternativen"
+            A4_Archimedisch: |
+              L ≻ M ≻ N → ∃α,β: αL + (1-α)N ≻ M ≻ βL + (1-β)N
+              "Kontinuität über Lotterien"
+
+        unterschied_verhaltensoekonomie: |
+          Prospect Theory ersetzt 𝔼[U] durch:
+          V = Σᵢ π(pᵢ) · v(xᵢ - r)
+          - π(p): Wahrscheinlichkeitsgewichtung (nicht-linear)
+          - v(x-r): Wertfunktion relativ zu Referenzpunkt r
+
+      # ─────────────────────────────────────────────────────────────────────
+      BUDGET:
+        name: "Budgetmenge"
+        symbol: "ℬ(p,w)"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            ℬ(p,w) = {x ∈ 𝒳: p·x ≤ w}
+
+            wobei:
+            - p = (p₁, ..., pₙ): Preisvektor
+            - w: Einkommen/Budget
+            - p·x = Σᵢ pᵢxᵢ: Ausgaben für Bündel x
+
+          eigenschaften:
+            - "Konvex (wenn 𝒳 konvex)"
+            - "Kompakt (abgeschlossen und beschränkt)"
+            - "Nicht-leer (wenn w > 0 und ∃i: pᵢ > 0)"
+
+
+  # =============================================================================
+  # KATEGORIE 2: MARKT UND PREIS (5 Primitive)
+  # =============================================================================
+  # Frage: Wie koordinieren sich Agenten?
+  # Theoretische Basis: Allgemeines Gleichgewicht, Preistheorie
+  # =============================================================================
+
+  MARKT:
+    frage: "Wie koordinieren sich Agenten über Märkte?"
+    theorien: ["General Equilibrium", "Price Theory", "Market Design"]
+    primitive_count: 5
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      P:
+        name: "Preis"
+        symbol: "p"
+        kategorie: "MARKT"
+
+        definition_formal:
+          notation: |
+            p: 𝒢 → ℝ₊
+
+            wobei:
+            - 𝒢: Menge aller Güter
+            - ℝ₊: Nicht-negative reelle Zahlen
+
+            p(g) = "Preis des Gutes g in Einheiten des Numéraire"
+
+          eigenschaften:
+            - "Nicht-negativ: p ≥ 0"
+            - "Numéraire-Normierung: p₀ = 1 (ein Gut als Referenz)"
+            - "Preisvektor: p ∈ ℝⁿ₊ (Simplex)"
+
+        funktion_im_gleichgewicht: |
+          Preise sind Signale, die Knappheit kommunizieren.
+          Im Gleichgewicht: p* räumt alle Märkte (Angebot = Nachfrage).
+
+      # ─────────────────────────────────────────────────────────────────────
+      D:
+        name: "Nachfrage"
+        symbol: "D(p)"
+        kategorie: "MARKT"
+
+        definition_formal:
+          notation: |
+            D: ℝⁿ₊ × ℝ₊ → ℝⁿ₊
+
+            D(p, w) = argmax{U(x): x ∈ ℬ(p,w)}
+
+            "Marshallsche Nachfrage: nutzenmaximierendes Bündel"
+
+          eigenschaften:
+            - "Homogen vom Grad 0: D(λp, λw) = D(p,w)"
+            - "Walras' Gesetz: p · D(p,w) = w (Budget wird ausgeschöpft)"
+            - "Slutsky-Symmetrie (bei rationalen Agenten)"
+
+          alternativ_hickssche_nachfrage: |
+            H(p, u) = argmin{p·x: U(x) ≥ u}
+            "Kompensierte Nachfrage: kostenminimierend bei gegebenem Nutzen"
+
+      # ─────────────────────────────────────────────────────────────────────
+      S:
+        name: "Angebot"
+        symbol: "S(p)"
+        kategorie: "MARKT"
+
+        definition_formal:
+          notation: |
+            S: ℝⁿ₊ → ℝⁿ₊
+
+            Für Firma j:
+            yⱼ(p) = argmax{p·y: y ∈ Yⱼ}
+
+            wobei Yⱼ: Produktionsmöglichkeitenmenge der Firma j
+
+            Aggregiertes Angebot: S(p) = Σⱼ yⱼ(p)
+
+          eigenschaften:
+            - "Homogen vom Grad 0 in p"
+            - "Konvex (wenn Yⱼ konvex)"
+            - "Profit: πⱼ(p) = p · yⱼ(p)"
+
+      # ─────────────────────────────────────────────────────────────────────
+      EXCESS:
+        name: "Überschussnachfrage"
+        symbol: "Z(p)"
+        kategorie: "MARKT"
+
+        definition_formal:
+          notation: |
+            Z(p) = D(p) - S(p) - ω
+
+            wobei:
+            - D(p): Aggregierte Nachfrage
+            - S(p): Aggregiertes Angebot
+            - ω: Anfangsausstattung
+
+            Gleichgewichtsbedingung: Z(p*) = 0
+
+          eigenschaften:
+            - "Walras' Gesetz: p · Z(p) = 0"
+            - "Homogen vom Grad 0"
+            - "Stetig (unter Standardannahmen)"
+
+      # ─────────────────────────────────────────────────────────────────────
+      CLEARING:
+        name: "Markträumung"
+        symbol: "D = S"
+        kategorie: "MARKT"
+
+        definition_formal:
+          notation: |
+            Für jeden Markt k:
+            Dₖ(p*) = Sₖ(p*) + ωₖ
+
+            "Im Gleichgewicht entspricht Nachfrage dem Angebot"
+
+          mechanismus: |
+            - Überschussnachfrage → Preis steigt
+            - Überschussangebot → Preis fällt
+            - Tâtonnement-Prozess (Walras)
+
+
+  # =============================================================================
+  # KATEGORIE 3: GLEICHGEWICHT (4 Primitive)
+  # =============================================================================
+  # Frage: Welche Zustände sind stabil?
+  # Theoretische Basis: Nash, Walras, Arrow-Debreu
+  # =============================================================================
+
+  GLEICHGEWICHT:
+    frage: "Welche Zustände sind stabil und selbst-erhaltend?"
+    theorien: ["General Equilibrium", "Game Theory", "Mechanism Design"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      WALRAS:
+        name: "Walrasianisches Gleichgewicht"
+        symbol: "E* = (p*, x*)"
+        kategorie: "GLEICHGEWICHT"
+
+        definition_formal:
+          notation: |
+            Ein Walrasianisches Gleichgewicht ist ein Paar (p*, x*) mit:
+
+            1. Nutzenmaximierung: ∀i: xᵢ* ∈ argmax{U(x): p*·x ≤ p*·ωᵢ}
+            2. Markträumung: Σᵢ xᵢ* = Σᵢ ωᵢ + Σⱼ yⱼ*
+            3. Profitmaximierung: ∀j: yⱼ* ∈ argmax{p*·y: y ∈ Yⱼ}
+
+          existenz_theorem: |
+            Arrow-Debreu (1954): Unter Standardannahmen
+            (Konvexität, Stetigkeit, Nichtsättigung) existiert E*.
+
+      # ─────────────────────────────────────────────────────────────────────
+      NASH:
+        name: "Nash-Gleichgewicht"
+        symbol: "σ*"
+        kategorie: "GLEICHGEWICHT"
+
+        definition_formal:
+          notation: |
+            Ein Strategieprofil σ* = (σ₁*, ..., σₙ*) ist Nash-GG wenn:
+
+            ∀i, ∀σᵢ: uᵢ(σᵢ*, σ₋ᵢ*) ≥ uᵢ(σᵢ, σ₋ᵢ*)
+
+            "Kein Spieler kann sich durch einseitige Abweichung verbessern"
+
+          existenz: |
+            Nash (1950): Jedes endliche Spiel hat mindestens ein
+            Nash-GG (möglicherweise in gemischten Strategien).
+
+      # ─────────────────────────────────────────────────────────────────────
+      PARETO:
+        name: "Pareto-Optimalität"
+        symbol: "x ∈ PO"
+        kategorie: "GLEICHGEWICHT"
+
+        definition_formal:
+          notation: |
+            x ist Pareto-optimal wenn:
+
+            ¬∃y: [∀i: Uᵢ(y) ≥ Uᵢ(x)] ∧ [∃j: Uⱼ(y) > Uⱼ(x)]
+
+            "Niemand kann bessergestellt werden, ohne jemanden schlechterzustellen"
+
+          wohlfahrtssaetze:
+            erster: |
+              Jedes Walrasianische Gleichgewicht ist Pareto-optimal.
+              (Effizienz des Marktes)
+            zweiter: |
+              Jede Pareto-optimale Allokation kann als Walrasianisches
+              Gleichgewicht (nach Umverteilung) erreicht werden.
+
+      # ─────────────────────────────────────────────────────────────────────
+      OPT:
+        name: "Optimierung"
+        symbol: "max/min"
+        kategorie: "GLEICHGEWICHT"
+
+        definition_formal:
+          notation: |
+            Standardproblem:
+            max f(x) s.t. g(x) ≤ 0, h(x) = 0
+
+            Lagrangean:
+            ℒ(x, λ, μ) = f(x) - λ·g(x) - μ·h(x)
+
+            KKT-Bedingungen (notwendig für Optimum):
+            - ∇ₓℒ = 0
+            - λ ≥ 0, g(x) ≤ 0, λ·g(x) = 0
+
+          oekonomische_interpretation: |
+            λ = Schattenpreis der Nebenbedingung
+            = Grenznutzen einer Lockerung der Restriktion
+
+
+  # =============================================================================
+  # KATEGORIE 4: INFORMATION (4 Primitive)
+  # =============================================================================
+  # Frage: Was wissen Agenten?
+  # Theoretische Basis: Information Economics, Contract Theory
+  # =============================================================================
+
+  INFORMATION:
+    frage: "Was wissen Agenten und wie beeinflusst das Entscheidungen?"
+    theorien: ["Information Economics", "Contract Theory", "Mechanism Design"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      INFO_PERFECT:
+        name: "Vollständige Information"
+        symbol: "Ω (common knowledge)"
+        kategorie: "INFORMATION"
+
+        definition_formal:
+          notation: |
+            Alle Agenten kennen:
+            - Präferenzen aller anderen: {Uᵢ}
+            - Technologien: {Yⱼ}
+            - Ausstattungen: {ωᵢ}
+            - Preise: p
+
+            Common Knowledge: Jeder weiß, dass jeder weiß, dass...
+
+          implikation: |
+            Unter vollständiger Information:
+            - Keine Adverse Selection
+            - Keine Moral Hazard
+            - First-Best erreichbar
+
+      # ─────────────────────────────────────────────────────────────────────
+      INFO_ASYM:
+        name: "Asymmetrische Information"
+        symbol: "Iᵢ ≠ Iⱼ"
+        kategorie: "INFORMATION"
+
+        definition_formal:
+          notation: |
+            Agent i hat private Information θᵢ
+            θᵢ ∈ Θᵢ (Typenraum)
+
+            Andere kennen nur: θᵢ ~ F(θ) (Prior-Verteilung)
+
+          konsequenzen:
+            adverse_selection: |
+              Vor Vertragsschluss: Verborgene Eigenschaften
+              Beispiel: Krankenversicherung (Akerlof, 1970)
+            moral_hazard: |
+              Nach Vertragsschluss: Verborgene Aktionen
+              Beispiel: Versicherung reduziert Vorsicht
+
+      # ─────────────────────────────────────────────────────────────────────
+      BELIEF:
+        name: "Erwartungen/Beliefs"
+        symbol: "μ(θ|s)"
+        kategorie: "INFORMATION"
+
+        definition_formal:
+          notation: |
+            μ: Wahrscheinlichkeitsverteilung über Zustände
+
+            Bayes-Update:
+            μ(θ|s) = P(s|θ)·μ(θ) / P(s)
+
+            "Posterior = (Likelihood × Prior) / Normierung"
+
+          rationalitaet: |
+            Rationale Erwartungen (Muth, Lucas):
+            μ = wahre Verteilung (im Durchschnitt korrekt)
+
+      # ─────────────────────────────────────────────────────────────────────
+      SIGNAL:
+        name: "Signal"
+        symbol: "s"
+        kategorie: "INFORMATION"
+
+        definition_formal:
+          notation: |
+            s: Θ → 𝒮 (möglicherweise stochastisch)
+
+            Signal s enthält Information über verborgenen Zustand θ
+            Informativer wenn P(θ|s) "spitzer" als P(θ)
+
+          anwendungen:
+            - "Arbeitsmarkt-Signaling (Spence, 1973)"
+            - "Screening durch Verträge"
+            - "Cheap Talk vs. Costly Signaling"
+
+
+  # =============================================================================
+  # KATEGORIE 5: ZEIT UND DYNAMIK (4 Primitive)
+  # =============================================================================
+  # Frage: Wie verhalten sich Agenten über Zeit?
+  # Theoretische Basis: Intertemporale Wahl, Wachstumstheorie
+  # =============================================================================
+
+  ZEIT:
+    frage: "Wie treffen Agenten Entscheidungen über Zeit?"
+    theorien: ["Intertemporal Choice", "Growth Theory", "Asset Pricing"]
+    primitive_count: 4
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      DISCOUNT:
+        name: "Diskontierung"
+        symbol: "δ, β"
+        kategorie: "ZEIT"
+
+        definition_formal:
+          notation: |
+            Diskontierter Nutzen:
+            U = Σₜ δᵗ · u(cₜ)
+
+            wobei:
+            - δ ∈ (0,1): Diskontfaktor
+            - ρ = (1-δ)/δ: Diskontrate (ρ = 1/δ - 1)
+
+            Exponentielles Diskontieren: δᵗ = e^{-ρt}
+
+          unterschied_verhaltensoekonomie: |
+            Klassisch: Exponentiell (δᵗ) - zeitkonsistent
+            Behavioral: Hyperbolisch (β·δᵗ) - gegenwartsorientiert
+            β < 1 führt zu Prokrastination und Selbstkontrollproblemen
+
+      # ─────────────────────────────────────────────────────────────────────
+      INTEREST:
+        name: "Zinssatz"
+        symbol: "r"
+        kategorie: "ZEIT"
+
+        definition_formal:
+          notation: |
+            r: Preis für intertemporalen Tausch
+
+            1 Einheit heute = (1+r) Einheiten morgen
+
+            Realzins: r_real = r_nominal - π (Inflation)
+
+          gleichgewicht: |
+            Im Gleichgewicht: r = ρ (Zeitpräferenz) + Wachstum
+            Fisher-Gleichung: (1+r) = (1+ρ)(1+g)
+
+      # ─────────────────────────────────────────────────────────────────────
+      CAPITAL:
+        name: "Kapital"
+        symbol: "K"
+        kategorie: "ZEIT"
+
+        definition_formal:
+          notation: |
+            Kapitalakkumulation:
+            Kₜ₊₁ = (1-δ)Kₜ + Iₜ
+
+            wobei:
+            - δ: Abschreibungsrate
+            - Iₜ: Investition in Periode t
+
+            Grenzprodukt: MPK = ∂F/∂K
+
+          optimale_akkumulation: |
+            Euler-Gleichung:
+            u'(cₜ) = β(1+r)u'(cₜ₊₁)
+            "Grenznutzen heute = diskontierter Grenznutzen morgen"
+
+      # ─────────────────────────────────────────────────────────────────────
+      GROWTH:
+        name: "Wachstum"
+        symbol: "g"
+        kategorie: "ZEIT"
+
+        definition_formal:
+          notation: |
+            g = (Yₜ₊₁ - Yₜ)/Yₜ = Wachstumsrate des Outputs
+
+            Solow-Modell:
+            Y = F(K, AL) = Kᵅ(AL)¹⁻ᵅ
+
+            Steady State: g* = technologischer Fortschritt
+
+          quellen:
+            - "Kapitalakkumulation"
+            - "Bevölkerungswachstum"
+            - "Technologischer Fortschritt (TFP)"
+
+
+  # =============================================================================
+  # KATEGORIE 6: AGENT UND RATIONALITÄT (3 Primitive)
+  # =============================================================================
+  # Frage: Wie entscheiden Agenten?
+  # Theoretische Basis: Rational Choice, Homo Oeconomicus
+  # =============================================================================
+
+  RATIONALITAET:
+    frage: "Welche Eigenschaften hat ein rationaler Agent?"
+    theorien: ["Rational Choice", "Decision Theory"]
+    primitive_count: 3
+
+    primitive:
+
+      # ─────────────────────────────────────────────────────────────────────
+      HOMO_OEC:
+        name: "Homo Oeconomicus"
+        symbol: "σ ∈ Σ"
+        kategorie: "RATIONALITAET"
+
+        definition_formal:
+          notation: |
+            Ein Homo Oeconomicus ist charakterisiert durch:
+
+            1. Vollständige & transitive Präferenzen
+            2. Unbegrenzte Informationsverarbeitung
+            3. Eigennutzmaximierung: max U(x)
+            4. Zeitkonsistenz (exponentielles Diskontieren)
+            5. Bayesianische Erwartungsbildung
+
+          kritik_verhaltensoeknonomie: |
+            Simon (1955): Bounded Rationality
+            Kahneman & Tversky (1979): Systematische Biases
+            Thaler (1980): Mental Accounting, Self-Control
+
+      # ─────────────────────────────────────────────────────────────────────
+      RATIONALITY:
+        name: "Rationalität"
+        symbol: "≽ rational"
+        kategorie: "RATIONALITAET"
+
+        definition_formal:
+          notation: |
+            Minimale Rationalität:
+            - Vollständigkeit: ∀x,y: x ≽ y ∨ y ≽ x
+            - Transitivität: x ≽ y ∧ y ≽ z → x ≽ z
+
+            Erweiterte Rationalität:
+            - Unabhängigkeit (für Lotterien)
+            - Bayes-Konsistenz (für Beliefs)
+            - Zeitkonsistenz
+
+          revealed_preference: |
+            WARP (Weak Axiom):
+            Wenn x gewählt bei {x,y} verfügbar, dann nie y gewählt wenn x verfügbar
+
+            SARP (Strong Axiom):
+            Keine zyklischen Revealed Preferences
+
+      # ─────────────────────────────────────────────────────────────────────
+      SELFINTEREST:
+        name: "Eigeninteresse"
+        symbol: "max Uᵢ"
+        kategorie: "RATIONALITAET"
+
+        definition_formal:
+          notation: |
+            Agent i maximiert eigenen Nutzen Uᵢ
+
+            Uᵢ = f(xᵢ)
+            NICHT: Uᵢ = f(xᵢ, xⱼ, ...) (keine sozialen Präferenzen)
+
+          unterschied_verhaltensoekonomie: |
+            Verhaltensökonomie erlaubt:
+            - Fairness-Präferenzen (Fehr & Schmidt)
+            - Altruismus
+            - Reziprozität
+            - Inequity Aversion
+
+
+# =============================================================================
+# ZUSAMMENFASSUNG
+# =============================================================================
+
+zusammenfassung:
+  total_primitive: 24
+  kategorien: 6
+
+  liste:
+    PRAEFERENZ: ["U (Nutzen)", "PREF (≽)", "EU (Erwartungsnutzen)", "BUDGET (ℬ)"]
+    MARKT: ["P (Preis)", "D (Nachfrage)", "S (Angebot)", "EXCESS (Z)", "CLEARING"]
+    GLEICHGEWICHT: ["WALRAS (E*)", "NASH (σ*)", "PARETO", "OPT (max)"]
+    INFORMATION: ["INFO_PERFECT (Ω)", "INFO_ASYM", "BELIEF (μ)", "SIGNAL (s)"]
+    ZEIT: ["DISCOUNT (δ)", "INTEREST (r)", "CAPITAL (K)", "GROWTH (g)"]
+    RATIONALITAET: ["HOMO_OEC", "RATIONALITY (≽)", "SELFINTEREST"]
+
+  kontrast_verhaltensoekonomie:
+    klassisch: "Homo Oeconomicus, Vollständige Rationalität, Gleichgewicht"
+    behavioral: "Bounded Rationality, Biases, Prozess"
+
+    mapping:
+      - klassisch: "U stabil"
+        behavioral: "U = f(Referenzpunkt)"
+      - klassisch: "δᵗ exponentiell"
+        behavioral: "β·δᵗ hyperbolisch"
+      - klassisch: "Bayes-Updates"
+        behavioral: "Base Rate Neglect, Confirmation Bias"
+      - klassisch: "Eigennutz"
+        behavioral: "Fairness, Reziprozität"

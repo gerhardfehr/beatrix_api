@@ -1,0 +1,431 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Ökonomie (Mainstream/Neoklassik)
+# =============================================================================
+# Für: Wirtschaftswissenschaftliche Publikationen, Ökonometrie, Makro/Mikro
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "oekonomie"
+  name: "Ökonomie / Economics (Mainstream)"
+  name_en: "Economics"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Mainstream-Ökonomie.
+    Unterscheidet sich von Verhaltensökonomie durch:
+    - Höhere Gewichtung formaler Theorie
+    - Fokus auf Gleichgewichtsanalyse
+    - Identifikationsbasierte Kausalinferenz
+    - Strengere ökonometrische Standards
+
+  anwendungsbereich:
+    - "Mikroökonomische Theorie"
+    - "Makroökonomische Modelle"
+    - "Ökonometrische Studien"
+    - "Applied Economics"
+    - "Labor Economics, Development Economics"
+    - "International Trade, Public Finance"
+
+  wissenschaftstyp: "Sozialwissenschaft (formal-mathematisch + empirisch)"
+  toleranzfenster: 0.12  # Enger als Verhaltensökonomie (0.15)
+
+  verwandte_profile:
+    - id: "verhaltensoekonomie"
+      beziehung: "Teilmenge/Erweiterung"
+      unterschied: "Verhaltensökonomie relaxiert Rationalitätsannahmen"
+
+
+# =============================================================================
+# E-SKALA: Ökonomie-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Evidenzhierarchie für ökonomische Forschung.
+    Betont kausale Identifikation und ökonometrische Rigorosität.
+    Unterscheidet zwischen Theorie und Empirie klarer als andere Disziplinen.
+
+  stufen:
+
+    stufe_1:
+      name: "Meta-Analyse / Systematischer Review"
+      E_range: [0.85, 1.00]
+      beschreibung: |
+        Systematische Synthese mehrerer Studien mit formaler Aggregation.
+        Gold-Standard für Effektgrößen-Schätzung.
+      beispiele:
+        - "Meta-Analyse zu Mindestlohneffekten (Doucouliagos & Stanley)"
+        - "Cochrane-Style Review ökonomischer Interventionen"
+        - "Registered Report mit präregistrierter Replikation"
+      marker:
+        - "meta-analyse"
+        - "systematic review"
+        - "gepoolte effektgröße"
+        - "publication bias corrected"
+      modifikatoren:
+        praeregistriert: +0.03
+        heterogenitaet_hoch: -0.08
+        publication_bias_korrigiert: +0.05
+
+    stufe_2:
+      name: "Präregistrierte RCTs / Feldexperimente"
+      E_range: [0.78, 0.88]
+      beschreibung: |
+        Randomisierte Experimente mit Pre-Analysis Plan.
+        Standard in Development Economics (J-PAL, IPA).
+      beispiele:
+        - "Präregistriertes Feldexperiment (Duflo, Banerjee)"
+        - "RCT mit vorab spezifizierter Analyse"
+        - "Multi-Site Replikation"
+      marker:
+        - "präregistriert"
+        - "pre-analysis plan"
+        - "randomized controlled trial"
+        - "field experiment"
+        - "AEA registry"
+      modifikatoren:
+        multi_site: +0.05
+        grosses_n: +0.03
+        attrition_hoch: -0.08
+
+    stufe_3:
+      name: "Quasi-Experimentelle Designs (starke Identifikation)"
+      E_range: [0.68, 0.78]
+      beschreibung: |
+        Natural Experiments, RDD, starke Instrumentvariablen.
+        Kausale Identifikation durch exogene Variation.
+      beispiele:
+        - "Regression Discontinuity Design"
+        - "Natural Experiment (z.B. Lotterie)"
+        - "Starkes Instrument mit First-Stage F > 100"
+      marker:
+        - "natural experiment"
+        - "regression discontinuity"
+        - "exogene variation"
+        - "quasi-experiment"
+        - "rdd"
+      modifikatoren:
+        first_stage_stark: +0.05
+        manipulation_test_bestanden: +0.03
+        bandwidth_sensitiv: -0.05
+
+    stufe_4:
+      name: "Difference-in-Differences / Instrumentvariablen"
+      E_range: [0.55, 0.68]
+      beschreibung: |
+        Standard-Identifikationsstrategien mit testbaren Annahmen.
+        Parallel Trends oder Exogenitätsannahmen erforderlich.
+      beispiele:
+        - "Difference-in-Differences mit Placebo-Tests"
+        - "IV-Schätzung mit plausiblem Instrument"
+        - "Event Study Design"
+      marker:
+        - "difference-in-differences"
+        - "did"
+        - "instrumental variable"
+        - "iv"
+        - "2sls"
+        - "event study"
+      modifikatoren:
+        parallel_trends_gezeigt: +0.05
+        weak_instrument: -0.10
+        pre_trends_vorhanden: -0.08
+
+    stufe_5:
+      name: "Strukturelle Schätzung / Kalibrierte Modelle"
+      E_range: [0.45, 0.58]
+      beschreibung: |
+        Modellbasierte Schätzung mit expliziten Annahmen.
+        DSGE, Structural IO, Dynamic Discrete Choice.
+      beispiele:
+        - "DSGE-Modell kalibriert auf stilisierte Fakten"
+        - "Strukturelle Schätzung eines Entry-Modells"
+        - "Dynamic Discrete Choice Modell"
+      marker:
+        - "structural estimation"
+        - "dsge"
+        - "kalibriert"
+        - "calibrated"
+        - "moment matching"
+      modifikatoren:
+        out_of_sample_fit: +0.08
+        overidentification_test: +0.05
+        stark_modellabhaengig: -0.10
+
+    stufe_6:
+      name: "Ökonometrische Korrelationsstudien"
+      E_range: [0.35, 0.48]
+      beschreibung: |
+        OLS-Regressionen ohne klare Identifikation.
+        Beschreibende Zusammenhänge, keine Kausalität.
+      beispiele:
+        - "Cross-Sectional Regression"
+        - "Panel Fixed Effects (ohne exogene Variation)"
+        - "Korrelationsanalyse mit Kontrollen"
+      marker:
+        - "ols"
+        - "regression"
+        - "korrelation"
+        - "assoziiert mit"
+        - "fixed effects"
+      modifikatoren:
+        viele_kontrollen: +0.03
+        r_squared_hoch: +0.02
+        endogenitaet_wahrscheinlich: -0.10
+
+    stufe_7:
+      name: "Theoretische Modelle (ohne Empirie)"
+      E_range: [0.25, 0.40]
+      beschreibung: |
+        Formale mathematische Theorie.
+        Ableitungen aus Axiomen, keine empirische Validierung.
+      beispiele:
+        - "Gleichgewichtsexistenz-Beweis"
+        - "Mechanism Design Theorem"
+        - "Spieltheoretische Analyse"
+        - "Wohlfahrtssätze"
+      marker:
+        - "theorem"
+        - "beweis"
+        - "im modell"
+        - "wir zeigen, dass"
+        - "es folgt"
+        - "ceteris paribus"
+      modifikatoren:
+        axiome_standard: +0.05
+        empirisch_kalibrierbar: +0.08
+        rein_abstrakt: -0.05
+
+    stufe_8:
+      name: "Informelle Argumentation / Meinung"
+      E_range: [0.10, 0.25]
+      beschreibung: |
+        Plausibilitätsargumente ohne formales Modell oder Empirie.
+        Policy-Diskussion, Kommentare.
+      beispiele:
+        - "Policy Brief ohne Daten"
+        - "Kommentar zu aktuellen Entwicklungen"
+        - "Spekulative Argumentation"
+      marker:
+        - "es scheint"
+        - "wahrscheinlich"
+        - "dürfte"
+        - "man könnte argumentieren"
+
+    stufe_9:
+      name: "Unbelegte Behauptung"
+      E_range: [0.00, 0.10]
+      beschreibung: |
+        Aussagen ohne erkennbare Grundlage.
+      beispiele:
+        - "Es ist bekannt, dass..."
+        - "Offensichtlich..."
+      marker:
+        - "bekannt"
+        - "offensichtlich"
+        - "selbstverständlich"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Ökonomie
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Ökonomie liegt zwischen Naturwissenschaften (streng) und
+    anderen Sozialwissenschaften (locker). Formal-mathematische
+    Tradition erfordert Präzision, aber empirische Unsicherheit
+    ist höher als in Physik.
+
+  kategorien:
+    stabil:
+      range: [0.78, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch Evidenz gut gedeckt"
+      aktion: "Publikationsreif"
+      beispiel: "Meta-Analyse bestätigt robusten Effekt"
+
+    teilstabil:
+      range: [0.58, 0.78]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz für Wirtschaftsforschung"
+      aktion: "Hedging hinzufügen, Limitationen diskutieren"
+      beispiel: "IV-Schätzung mit plausiblem Instrument"
+
+    interpretativ:
+      range: [0.38, 0.58]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Stärkeres Hedging, 'konsistent mit' statt 'zeigt'"
+      beispiel: "OLS-Regression ohne klare Identifikation"
+
+    spekulativ:
+      range: [0.00, 0.38]
+      label: "Spekulativ"
+      bedeutung: "Behauptung deutlich über Evidenzlevel"
+      aktion: "Überarbeitung erforderlich oder als Hypothese kennzeichnen"
+      beispiel: "Kausale Behauptung ohne Identifikation"
+
+  vergleich:
+    naturwissenschaft:
+      stabil_threshold: 0.85
+      kommentar: "Strenger wegen höherer Reproduzierbarkeit"
+    verhaltensoekonomie:
+      stabil_threshold: 0.75
+      kommentar: "Lockerer wegen inhärenter Verhaltensvariation"
+    oekonomie:
+      stabil_threshold: 0.78
+      kommentar: "Dazwischen - formal streng, empirisch unsicher"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Ökonomische Fachsprache ist präzise aber oft formal.
+    "Im Modell" reduziert B-Wert erheblich (Disclaimer).
+    "Kausal" erhöht B-Wert stark (starke Behauptung).
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "beweist"
+        delta_B: +0.25
+        beispiel: "Wir beweisen, dass ein Gleichgewicht existiert."
+
+      - marker: "kausal"
+        delta_B: +0.20
+        beispiel: "Der kausale Effekt beträgt..."
+
+      - marker: "identifiziert"
+        delta_B: +0.18
+        beispiel: "Wir identifizieren den Effekt durch..."
+
+      - marker: "zeigt"
+        delta_B: +0.15
+        beispiel: "Die Evidenz zeigt, dass..."
+
+      - marker: "bestätigt"
+        delta_B: +0.12
+        beispiel: "Die Daten bestätigen die Hypothese."
+
+    senkend:
+      - marker: "im Modell"
+        delta_B: -0.20
+        beispiel: "Im Modell führt dies zu..."
+
+      - marker: "ceteris paribus"
+        delta_B: -0.15
+        beispiel: "Ceteris paribus steigt der Output."
+
+      - marker: "unter der Annahme"
+        delta_B: -0.18
+        beispiel: "Unter der Annahme rationaler Erwartungen..."
+
+      - marker: "legt nahe"
+        delta_B: -0.12
+        beispiel: "Die Evidenz legt nahe, dass..."
+
+      - marker: "konsistent mit"
+        delta_B: -0.15
+        beispiel: "Das Ergebnis ist konsistent mit der Theorie."
+
+      - marker: "könnte"
+        delta_B: -0.20
+        beispiel: "Dies könnte auf Marktversagen hindeuten."
+
+      - marker: "möglicherweise"
+        delta_B: -0.22
+        beispiel: "Möglicherweise erklärt dies den Befund."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  kausalitaet:
+    beschreibung: |
+      In der Ökonomie ist "kausal" ein stark geladenes Wort.
+      Nur bei klarer Identifikationsstrategie verwenden.
+
+    erlaubt_wenn:
+      - "RCT oder Feldexperiment"
+      - "RDD mit Manipulation-Test"
+      - "IV mit starkem First-Stage und plausibler Exogenität"
+      - "Natural Experiment mit überzeugendem Narrativ"
+
+    verboten_wenn:
+      - "OLS ohne Identifikation"
+      - "Korrelationsanalyse"
+      - "Panel Fixed Effects allein"
+
+    empfehlung: |
+      Bei unklarer Identifikation: "assoziiert mit", "korreliert mit",
+      "deutet auf einen Zusammenhang hin"
+
+  theorie_vs_empirie:
+    beschreibung: |
+      Ökonomie unterscheidet klar zwischen theoretischen und
+      empirischen Aussagen. "Im Modell" kennzeichnet Theorie.
+
+    theorie_marker:
+      - "im Modell"
+      - "das Modell impliziert"
+      - "aus den Axiomen folgt"
+      - "ceteris paribus"
+      - "unter der Annahme"
+
+    empirie_marker:
+      - "die Daten zeigen"
+      - "wir schätzen"
+      - "die Regression ergibt"
+      - "statistisch signifikant"
+
+  signifikanz:
+    beschreibung: |
+      Statistische Signifikanz ≠ ökonomische Signifikanz.
+      Effektgrößen diskutieren, nicht nur p-Werte.
+
+    warnung: |
+      "Statistisch signifikant" allein ist keine starke Evidenz.
+      Immer Effektgröße und ökonomische Bedeutung diskutieren.
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "Präregistrierung vorhanden"
+    - "Replikationsdaten verfügbar"
+    - "Multiple Spezifikationen getestet"
+    - "Robustheitschecks durchgeführt"
+    - "Placebo-Tests bestanden"
+    - "Effektgröße interpretiert"
+    - "Limitationen transparent diskutiert"
+
+  negativ:
+    - "P-Hacking vermutet (Verteilung um 0.05)"
+    - "Selektive Berichterstattung"
+    - "Keine Robustheitschecks"
+    - "Effektgröße nicht interpretiert"
+    - "Nur positive Ergebnisse berichtet"
+    - "Identifikationsannahmen nicht diskutiert"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_oekonomie.yaml"
+  glossar: "glossar_oekonomie.yaml"
+  lexikon: "lexikon_oekonomie.yaml"
