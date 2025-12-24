@@ -1,0 +1,401 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Verhaltensökonomie
+# =============================================================================
+# Für: BCM 2.2, BEATRIX, Behavioral Economics Publikationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "verhaltensoekonomie"
+  name: "Verhaltensökonomie / Behavioral Economics"
+  name_en: "Behavioral Economics"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für verhaltensökonomische Forschung.
+    Berücksichtigt die Besonderheiten empirischer Verhaltensforschung:
+    - Experimentelle Paradigmen (Labor, Feld)
+    - Replikationsdebatte in der Psychologie
+    - Axiomatische Fundierung (wie bei BCM)
+    - Mixture aus quantitativen und qualitativen Methoden
+
+  anwendungsbereich:
+    - "BCM 2.2 Dokumentation"
+    - "BEATRIX Technical Reports"
+    - "Behavioral Economics Paper"
+    - "Nudging-Studien"
+    - "Entscheidungsforschung"
+
+  wissenschaftstyp: "Sozialwissenschaft (empirisch-quantitativ)"
+  toleranzfenster: 0.15  # τ für Sozialwissenschaften
+
+# =============================================================================
+# E-SKALA: Verhaltensökonomie-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Angepasste Evidenzhierarchie für Verhaltensökonomie.
+    Berücksichtigt experimentelle Paradigmen und Replikationsstatus.
+
+  stufen:
+
+    stufe_1:
+      name: "Meta-Analyse verhaltensökonomischer Studien"
+      E_range: [0.88, 1.00]
+      beschreibung: |
+        Systematische Zusammenfassung mehrerer Studien zum gleichen Effekt.
+        Höchste Evidenzstufe, wenn gut durchgeführt.
+      beispiele:
+        - "Meta-Analyse zu Loss Aversion (Gal & Rucker, 2018)"
+        - "Cochrane-Style Review zu Nudging"
+        - "Gepoolte Effektgrößen aus 50+ Studien"
+      marker:
+        - "meta-analyse"
+        - "systematic review"
+        - "gepoolte effektgröße"
+        - "n = "  # mit großem N
+      modifikatoren:
+        repliziert: +0.05
+        praeregistriert: +0.03
+        heterogenitaet_hoch: -0.10
+
+    stufe_2:
+      name: "Präregistrierte Feldexperimente"
+      E_range: [0.78, 0.88]
+      beschreibung: |
+        Experimente mit realen Entscheidungen, präregistriert.
+        Gold-Standard für kausale Aussagen in Verhaltensökonomie.
+      beispiele:
+        - "RCT mit echten finanziellen Konsequenzen"
+        - "Präregistriertes Feldexperiment (N > 1000)"
+        - "A/B-Test mit Verhaltensdaten"
+      marker:
+        - "präregistriert"
+        - "feldexperiment"
+        - "rct"
+        - "field experiment"
+        - "randomized"
+        - "reale entscheidung"
+      modifikatoren:
+        grosses_n: +0.05
+        multi_site: +0.05
+        kleines_n: -0.08
+
+    stufe_3:
+      name: "Labor-Experimente (incentivized)"
+      E_range: [0.65, 0.78]
+      beschreibung: |
+        Kontrollierte Experimente mit monetären Anreizen.
+        Standard in experimenteller Ökonomie.
+      beispiele:
+        - "Incentivized Choice Task"
+        - "Dictator Game / Ultimatum Game"
+        - "Lottery Choice Experiment"
+        - "Kahneman & Tversky Paradigmen"
+      marker:
+        - "labor"
+        - "laborexperiment"
+        - "incentivized"
+        - "anreizkompatibel"
+        - "experiment zeigt"
+      modifikatoren:
+        repliziert: +0.08
+        nicht_repliziert: -0.15
+        hypothetisch: -0.10  # Keine echten Anreize
+
+    stufe_4:
+      name: "Beobachtungsstudien / Survey-Experimente"
+      E_range: [0.50, 0.65]
+      beschreibung: |
+        Korrelative Daten oder hypothetische Szenarien.
+        Erlaubt Assoziationen, keine Kausalität.
+      beispiele:
+        - "Survey mit Stated Preferences"
+        - "Kohortenstudie zu Finanzverhalten"
+        - "Vignetten-Experimente"
+        - "Paneldaten-Analyse"
+      marker:
+        - "survey"
+        - "befragung"
+        - "korrelation"
+        - "beobachtung"
+        - "stated preference"
+        - "hypothetisch"
+      modifikatoren:
+        grosses_n: +0.05
+        repraesentativ: +0.05
+
+    stufe_5:
+      name: "Fallstudien / Qualitative Forschung"
+      E_range: [0.35, 0.50]
+      beschreibung: |
+        Explorative Untersuchungen, Einzelfälle.
+        Hypothesengenerierend, nicht -testend.
+      beispiele:
+        - "Ethnographische Studie zu Sparverhalten"
+        - "Qualitative Interviews mit Entscheidern"
+        - "Case Study einer Intervention"
+      marker:
+        - "fallstudie"
+        - "qualitativ"
+        - "interview"
+        - "explorativ"
+        - "case study"
+
+    stufe_6:
+      name: "Axiomatische Ableitung / Theoretische Modelle"
+      E_range: [0.30, 0.45]
+      beschreibung: |
+        Logische Ableitung aus etablierten Axiomen.
+        Für BCM: Ableitungen aus den 115 Axiomen.
+        WICHTIG: Höher als "Experteneinschätzung", weil formal ableitbar.
+      beispiele:
+        - "Folgt aus Prospect Theory Axiomen"
+        - "Abgeleitet aus BCM Axiom MA-ONT-05"
+        - "Mathematisch beweisbar aus Grundannahmen"
+      marker:
+        - "axiom"
+        - "abgeleitet"
+        - "folgt aus"
+        - "theorem"
+        - "formal"
+        - "mathematisch"
+        - "bcm"
+      modifikatoren:
+        axiom_empirisch_validiert: +0.15  # Wenn Basis-Axiom selbst validiert
+        axiom_hypothetisch: -0.10
+
+    stufe_7:
+      name: "Experteneinschätzung / Konsens"
+      E_range: [0.20, 0.35]
+      beschreibung: |
+        Einschätzungen ohne formale Ableitung oder empirische Prüfung.
+      beispiele:
+        - "Experten gehen davon aus..."
+        - "Nach Einschätzung der Autoren..."
+        - "Konsens in der Literatur..."
+      marker:
+        - "experten"
+        - "einschätzung"
+        - "konsens"
+        - "nach meinung"
+        - "annahme"
+
+    stufe_8:
+      name: "Unbegründet / Behauptung"
+      E_range: [0.00, 0.20]
+      beschreibung: |
+        Aussagen ohne erkennbare Evidenzbasis.
+      beispiele:
+        - "Es ist bekannt, dass..."
+        - "Offensichtlich..."
+        - "Man weiß..."
+      marker:
+        - "bekannt"
+        - "offensichtlich"
+        - "selbstverständlich"
+        - "klar"
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Sozialwissenschaften
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Leicht niedrigere Schwellenwerte als Naturwissenschaften,
+    da Verhaltensforschung inhärent mehr Variabilität hat.
+
+  kategorien:
+    stabil:
+      range: [0.75, 1.00]
+      label: "🟢 Stabil"
+      bedeutung: "Aussage gut durch Evidenz gedeckt"
+      aktion: "Publikationsreif"
+
+    teilstabil:
+      range: [0.55, 0.75]
+      label: "🟡 Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz für Sozialwissenschaft"
+      aktion: "Akzeptabel mit Hinweis auf Unsicherheit"
+
+    interpretativ:
+      range: [0.35, 0.55]
+      label: "🟠 Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Hedging hinzufügen oder als Hypothese kennzeichnen"
+
+    spekulativ:
+      range: [0.00, 0.35]
+      label: "🔴 Spekulativ"
+      bedeutung: "Behauptung deutlich über Evidenz"
+      aktion: "Überarbeitung erforderlich"
+
+  vergleich_naturwissenschaft:
+    info: |
+      Naturwissenschaften verwenden engere Schwellen:
+      - Stabil: K ≥ 0.85 (vs. 0.75 hier)
+      - Spekulativ: K < 0.45 (vs. 0.35 hier)
+
+      Der Unterschied reflektiert höhere Messgenauigkeit in Physik/Chemie.
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Kleine Anpassungen für verhaltensökonomische Fachsprache.
+    Grundstruktur bleibt gleich (Modalverben, Quantoren, Hedging).
+
+  zusaetzliche_marker:
+
+    quantoren:
+      # Verhaltensökonomie-spezifisch
+      "signifikant": 0.80  # Statistisch signifikant impliziert Stärke
+      "robust": 0.85
+      "konsistent": 0.75
+      "teilweise": 0.50
+      "under certain conditions": 0.55
+
+    hedging:
+      # Akademisches Hedging in Behavioral Econ
+      "weitere forschung nötig": -0.20
+      "vorläufige evidenz": -0.15
+      "suggestive evidence": -0.15
+      "consistent with": -0.10
+      "in line with": -0.10
+
+    verstaerker:
+      "robust evidence": +0.10
+      "strong support": +0.12
+      "well-established": +0.15
+      "replicated finding": +0.15
+
+# =============================================================================
+# BCM-SPEZIFISCHE REGELN
+# =============================================================================
+
+bcm_regeln:
+
+  beschreibung: |
+    Spezielle Regeln für BCM 2.2 Dokumentation.
+
+  axiom_referenz:
+    regel: |
+      Wenn eine Aussage auf ein BCM-Axiom verweist (MA-XXX-##),
+      erbt sie teilweise die Evidenz des Axioms.
+
+    formel: |
+      E_aussage = 0.3 + 0.5 * E_axiom
+
+      Beispiel: Axiom hat E=0.7 → Ableitung hat E=0.3 + 0.35 = 0.65
+
+  parameter_aussagen:
+    regel: |
+      Aussagen über BCM-Parameter (λ, α, ρ, etc.) werden nach
+      ihrer empirischen Fundierung bewertet.
+
+    beispiele:
+      - aussage: "λ liegt typischerweise bei 2.0-2.5"
+        evidenz: "Meta-Analyse zu Loss Aversion"
+        E_erwartung: 0.85
+
+      - aussage: "Der Parameter γ muss kalibriert werden"
+        evidenz: "Theoretische Notwendigkeit"
+        E_erwartung: 0.40
+
+  beatrix_aussagen:
+    regel: |
+      Aussagen über BEATRIX-Funktionalität ohne empirische Validierung
+      erhalten niedrige E-Werte, auch wenn technisch korrekt.
+
+    beispiel:
+      - aussage: "BEATRIX berechnet optimale Interventionen"
+        technisch_korrekt: true
+        empirisch_validiert: false
+        E_erwartung: 0.25  # Weil nicht validiert
+
+# =============================================================================
+# BEISPIEL-BEWERTUNGEN
+# =============================================================================
+
+beispiele:
+
+  - aussage: "Loss Aversion ist ein robustes Phänomen mit λ ≈ 2.0"
+    B_analyse:
+      modalverb: null
+      quantor: "robust"
+      hedging: null
+      B: 0.85
+    E_analyse:
+      stufe: "Meta-Analyse"
+      marker: ["meta-analyse", "repliziert"]
+      modifikatoren: [repliziert: +0.05]
+      E: 0.95
+    K: 0.90
+    kategorie: "🟢 Stabil"
+    kommentar: "Gut kalibriert - starke Behauptung mit starker Evidenz"
+
+  - aussage: "Alle Menschen zeigen Hyperbolic Discounting"
+    B_analyse:
+      quantor: "alle"
+      B: 0.95
+    E_analyse:
+      stufe: "Labor-Experimente"
+      kommentar: "Nicht universell, kulturelle Unterschiede"
+      E: 0.60
+    K: 0.65
+    kategorie: "🟡 Teilstabil"
+    kommentar: "Überbehauptung - 'alle' ist zu stark für verfügbare Evidenz"
+
+  - aussage: "BCM muss alle Verhaltensänderungen vorhersagen können"
+    B_analyse:
+      modalverb: "muss"
+      quantor: "alle"
+      B: 0.95
+    E_analyse:
+      stufe: "Unbegründet"
+      kommentar: "Normative Behauptung ohne empirische Basis"
+      E: 0.10
+    K: 0.15
+    kategorie: "🔴 Spekulativ"
+    kommentar: "Starke Überbehauptung - kein System kann 'alles' vorhersagen"
+
+  - aussage: "Nudging könnte bei einigen Entscheidungen wirksam sein"
+    B_analyse:
+      modalverb: "könnte"
+      quantor: "einige"
+      hedging: null
+      B: 0.45
+    E_analyse:
+      stufe: "Meta-Analyse"
+      E: 0.90
+    K: 0.55
+    kategorie: "🟡 Teilstabil"
+    kommentar: "Unterbehauptung - Evidenz ist stärker als Formulierung"
+
+# =============================================================================
+# META-INFORMATION
+# =============================================================================
+
+validierung:
+  status: "INITIAL - v1.0"
+
+  bekannte_limitationen:
+    - "E-Stufen basieren auf Experteneinschätzung, nicht empirisch validiert"
+    - "K-Schwellenwerte sind normative Setzungen"
+    - "BCM-spezifische Regeln noch nicht getestet"
+
+  naechste_schritte:
+    - "Anwendung auf BCM-Kapitel zur Validierung"
+    - "Inter-Rater-Test für E-Zuordnung"
+    - "Vergleich mit anderen Verhaltensökonomen"
+
+  selbstanwendung:
+    diese_datei:
+      B: 0.70  # "Dies ist die richtige E-Skala für Verhaltensökonomie"
+      E: 0.30  # Experteneinschätzung
+      K: 0.60
+      bewertung: "🟡 Teilstabil - Profil ist plausibel, aber nicht validiert"

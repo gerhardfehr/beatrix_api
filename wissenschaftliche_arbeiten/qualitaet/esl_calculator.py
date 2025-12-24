@@ -8,10 +8,13 @@ basierend auf Behauptungsstärke (B) und Evidenzstärke (E).
 
 Kernformel: K = 1 - |B - E|
 
+Unterstützt disziplinspezifische Profile (z.B. Verhaltensökonomie, BCM).
+
 Nutzung:
     python esl_calculator.py --aussage "Alle Menschen müssen essen"
+    python esl_calculator.py --aussage "Loss Aversion ist robust" --disziplin verhaltensoekonomie
     python esl_calculator.py --interaktiv
-    python esl_calculator.py --datei aussagen.yaml
+    python esl_calculator.py --datei aussagen.yaml --disziplin bcm
 """
 
 import re
@@ -19,8 +22,22 @@ import argparse
 import yaml
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Tuple
+from typing import Optional, List, Dict, Tuple, Union
 from enum import Enum
+
+# Disziplin-Profile importieren
+try:
+    from esl_disziplinen import (
+        lade_disziplin,
+        liste_disziplinen,
+        DisziplinProfil,
+        DEFAULT_PROFIL,
+        VERHALTENSOEKONOMIE_PROFIL,
+    )
+    DISZIPLIN_SUPPORT = True
+except ImportError:
+    DISZIPLIN_SUPPORT = False
+    DisziplinProfil = None
 
 
 # =============================================================================
@@ -233,7 +250,7 @@ E_MODIFIKATOREN = {
 # =============================================================================
 
 class KKategorie(Enum):
-    """K-Wert Kategorien"""
+    """K-Wert Kategorien (Default-Schwellenwerte)"""
     STABIL = ("🟢 Stabil", 0.80, 1.00, "Behauptung durch Evidenz gedeckt")
     TEILSTABIL = ("🟡 Teilstabil", 0.60, 0.80, "Leichte Diskrepanz")
     INTERPRETATIV = ("🟠 Interpretativ", 0.40, 0.60, "Signifikante Lücke")
@@ -246,7 +263,27 @@ class KKategorie(Enum):
         self.beschreibung = beschreibung
 
     @classmethod
-    def from_k(cls, k: float) -> "KKategorie":
+    def from_k(cls, k: float, profil: "DisziplinProfil" = None) -> "KKategorie":
+        """
+        Bestimmt K-Kategorie, optional mit disziplinspezifischen Schwellenwerten.
+
+        Args:
+            k: Der K-Wert
+            profil: Optional ein DisziplinProfil mit angepassten Schwellenwerten
+        """
+        if profil is not None and DISZIPLIN_SUPPORT:
+            # Nutze disziplinspezifische Schwellenwerte
+            kat = profil.get_k_kategorie(k)
+            # Mappe auf Enum für Kompatibilität
+            mapping = {
+                "stabil": cls.STABIL,
+                "teilstabil": cls.TEILSTABIL,
+                "interpretativ": cls.INTERPRETATIV,
+                "spekulativ": cls.SPEKULATIV,
+            }
+            return mapping.get(kat.name, cls.SPEKULATIV)
+
+        # Default-Schwellenwerte
         for kategorie in cls:
             if kategorie.min_k <= k <= kategorie.max_k:
                 return kategorie
@@ -308,17 +345,19 @@ class KAnalyse:
     K: float
     kategorie: KKategorie
     diskrepanz_typ: str  # "kalibriert", "überbehauptung", "unterbehauptung"
+    disziplin: Optional[str] = None  # Name des verwendeten Disziplin-Profils
 
     def __str__(self) -> str:
+        disziplin_info = f" [{self.disziplin}]" if self.disziplin else ""
         return (
-            f"K = {self.K:.2f} {self.kategorie.label}\n"
+            f"K = {self.K:.2f} {self.kategorie.label}{disziplin_info}\n"
             f"  B: {self.B_analyse}\n"
             f"  E: {self.E_analyse}\n"
             f"  Typ: {self.diskrepanz_typ}"
         )
 
     def to_dict(self) -> dict:
-        return {
+        result = {
             "aussage": self.aussage,
             "K": round(self.K, 3),
             "kategorie": self.kategorie.label,
@@ -331,23 +370,37 @@ class KAnalyse:
                 "evidenz_stufe": self.E_analyse.stufe.label,
             }
         }
+        if self.disziplin:
+            result["disziplin"] = self.disziplin
+        return result
 
 
 # =============================================================================
 # B-EXTRAKTION
 # =============================================================================
 
-def extrahiere_B(text: str) -> BAnalyse:
+def extrahiere_B(text: str, profil: "DisziplinProfil" = None) -> BAnalyse:
     """
     Extrahiert die Behauptungsstärke (B) aus einem Text.
 
     Args:
         text: Der zu analysierende Text
+        profil: Optional ein DisziplinProfil mit zusätzlichen Markern
 
     Returns:
         BAnalyse mit B-Wert und Details
     """
     text_lower = text.lower()
+
+    # Disziplin-spezifische Marker vorbereiten
+    zusatz_quantoren = {}
+    zusatz_hedging = {}
+    zusatz_verstaerker = {}
+
+    if profil is not None and DISZIPLIN_SUPPORT:
+        zusatz_quantoren = profil.zusatz_quantoren
+        zusatz_hedging = profil.zusatz_hedging
+        zusatz_verstaerker = profil.zusatz_verstaerker
 
     # Modalverb finden
     modalverb = None
@@ -358,25 +411,28 @@ def extrahiere_B(text: str) -> BAnalyse:
             modalverb_B = b_wert
             break
 
-    # Quantor finden
+    # Quantor finden (inkl. disziplinspezifische)
     quantor = None
     quantor_B = None
-    for q, b_wert in sorted(QUANTOREN.items(), key=lambda x: len(x[0]), reverse=True):
+    alle_quantoren = {**QUANTOREN, **zusatz_quantoren}
+    for q, b_wert in sorted(alle_quantoren.items(), key=lambda x: len(x[0]), reverse=True):
         if q in text_lower:
             quantor = q
             quantor_B = b_wert
             break
 
-    # Hedging finden
+    # Hedging finden (inkl. disziplinspezifische)
     hedging = []
     hedging_adjustment = 0.0
 
-    for marker, adjustment in HEDGING_REDUKTOREN.items():
+    alle_reduktoren = {**HEDGING_REDUKTOREN, **zusatz_hedging}
+    for marker, adjustment in alle_reduktoren.items():
         if marker in text_lower:
             hedging.append((marker, adjustment))
             hedging_adjustment += adjustment
 
-    for marker, adjustment in HEDGING_VERSTAERKER.items():
+    alle_verstaerker = {**HEDGING_VERSTAERKER, **zusatz_verstaerker}
+    for marker, adjustment in alle_verstaerker.items():
         if marker in text_lower:
             hedging.append((marker, adjustment))
             hedging_adjustment += adjustment
@@ -455,6 +511,7 @@ def berechne_E(
     evidenz_beschreibung: Optional[str] = None,
     stufe: Optional[EvidenzStufe] = None,
     modifikatoren: Optional[List[Tuple[str, float]]] = None,
+    profil: "DisziplinProfil" = None,
 ) -> EAnalyse:
     """
     Berechnet die Evidenzstärke (E).
@@ -463,26 +520,56 @@ def berechne_E(
         evidenz_beschreibung: Freitext-Beschreibung der Evidenz
         stufe: Direkt angegebene Evidenzstufe (überschreibt Beschreibung)
         modifikatoren: Direkt angegebene Modifikatoren
+        profil: Optional ein DisziplinProfil mit angepassten E-Stufen
 
     Returns:
         EAnalyse mit E-Wert und Details
     """
     marker_gefunden = []
+    base_E = 0.0
+
+    # Disziplin-spezifische E-Modifikatoren
+    zusatz_modifikatoren = {}
+    if profil is not None and DISZIPLIN_SUPPORT:
+        zusatz_modifikatoren = profil.e_modifikatoren
 
     if stufe is None:
         if evidenz_beschreibung:
-            stufe, marker_gefunden = klassifiziere_evidenz(evidenz_beschreibung)
+            # Prüfe erst disziplinspezifische Evidenzstufen
+            if profil is not None and DISZIPLIN_SUPPORT:
+                disziplin_stufe, disziplin_marker = profil.get_evidenz_stufe(evidenz_beschreibung)
+                if disziplin_marker:
+                    marker_gefunden = disziplin_marker
+                    base_E = disziplin_stufe.E_default
+                    # Erstelle EvidenzStufe-ähnliches Objekt für Kompatibilität
+                    stufe = EvidenzStufe.KEINE  # Placeholder
+                    stufe_label = disziplin_stufe.name
+                else:
+                    # Fallback auf Standard-Klassifikation
+                    stufe, marker_gefunden = klassifiziere_evidenz(evidenz_beschreibung)
+                    base_E = stufe.default_e
+                    stufe_label = stufe.label
+            else:
+                stufe, marker_gefunden = klassifiziere_evidenz(evidenz_beschreibung)
+                base_E = stufe.default_e
         else:
             stufe = EvidenzStufe.KEINE
+            base_E = stufe.default_e
+    else:
+        base_E = stufe.default_e
 
     if modifikatoren is None:
         if evidenz_beschreibung:
+            # Standard + disziplinspezifische Modifikatoren
             modifikatoren = extrahiere_modifikatoren(evidenz_beschreibung)
+
+            # Zusätzliche disziplinspezifische Modifikatoren
+            text_lower = evidenz_beschreibung.lower()
+            for marker, adjustment in zusatz_modifikatoren.items():
+                if marker in text_lower:
+                    modifikatoren.append((marker, adjustment))
         else:
             modifikatoren = []
-
-    # Basis-E aus Stufe
-    base_E = stufe.default_e
 
     # Modifikatoren anwenden
     adjustment = sum(adj for _, adj in modifikatoren)
@@ -506,6 +593,8 @@ def berechne_K(
     evidenz_beschreibung: Optional[str] = None,
     evidenz_stufe: Optional[EvidenzStufe] = None,
     E_wert: Optional[float] = None,
+    disziplin: Optional[str] = None,
+    profil: "DisziplinProfil" = None,
 ) -> KAnalyse:
     """
     Berechnet den K-Wert (Kalibrierung) für eine Aussage.
@@ -515,12 +604,22 @@ def berechne_K(
         evidenz_beschreibung: Freitext-Beschreibung der Evidenz
         evidenz_stufe: Direkt angegebene Evidenzstufe
         E_wert: Direkt angegebener E-Wert (überschreibt alles andere)
+        disziplin: Name des Disziplin-Profils (z.B. "verhaltensoekonomie", "bcm")
+        profil: Direkt übergebenes DisziplinProfil (überschreibt disziplin)
 
     Returns:
         Vollständige KAnalyse
     """
-    # B extrahieren
-    B_analyse = extrahiere_B(aussage)
+    # Disziplin-Profil laden
+    disziplin_name = None
+    if profil is None and disziplin is not None and DISZIPLIN_SUPPORT:
+        profil = lade_disziplin(disziplin)
+        disziplin_name = profil.name
+    elif profil is not None:
+        disziplin_name = profil.name
+
+    # B extrahieren (mit Disziplin-Profil)
+    B_analyse = extrahiere_B(aussage, profil=profil)
 
     # E berechnen
     if E_wert is not None:
@@ -533,17 +632,22 @@ def berechne_K(
         E_analyse = berechne_E(
             evidenz_beschreibung=evidenz_beschreibung,
             stufe=evidenz_stufe,
+            profil=profil,
         )
 
     # K berechnen
     K = 1.0 - abs(B_analyse.B - E_analyse.E)
 
-    # Kategorie bestimmen
-    kategorie = KKategorie.from_k(K)
+    # Kategorie bestimmen (mit Disziplin-Profil für angepasste Schwellenwerte)
+    kategorie = KKategorie.from_k(K, profil=profil)
 
-    # Diskrepanz-Typ bestimmen
+    # Diskrepanz-Typ bestimmen (mit Toleranzfenster aus Profil)
+    toleranz = 0.1
+    if profil is not None and DISZIPLIN_SUPPORT:
+        toleranz = profil.toleranzfenster
+
     diff = B_analyse.B - E_analyse.E
-    if abs(diff) < 0.1:
+    if abs(diff) < toleranz:
         diskrepanz_typ = "kalibriert"
     elif diff > 0:
         diskrepanz_typ = "überbehauptung"
@@ -557,6 +661,7 @@ def berechne_K(
         K=K,
         kategorie=kategorie,
         diskrepanz_typ=diskrepanz_typ,
+        disziplin=disziplin_name,
     )
 
 
@@ -564,12 +669,18 @@ def berechne_K(
 # BATCH-VERARBEITUNG
 # =============================================================================
 
-def analysiere_aussagen(aussagen: List[dict]) -> List[KAnalyse]:
+def analysiere_aussagen(
+    aussagen: List[dict],
+    disziplin: Optional[str] = None,
+    profil: "DisziplinProfil" = None,
+) -> List[KAnalyse]:
     """
     Analysiert eine Liste von Aussagen.
 
     Args:
         aussagen: Liste von Dicts mit 'aussage' und optional 'evidenz'
+        disziplin: Name des Disziplin-Profils für alle Aussagen
+        profil: Direkt übergebenes DisziplinProfil
 
     Returns:
         Liste von KAnalysen
@@ -581,10 +692,15 @@ def analysiere_aussagen(aussagen: List[dict]) -> List[KAnalyse]:
         evidenz = item.get("evidenz", item.get("evidence", None))
         E_wert = item.get("E", item.get("e_wert", None))
 
+        # Item-spezifische Disziplin überschreibt globale
+        item_disziplin = item.get("disziplin", disziplin)
+
         analyse = berechne_K(
             aussage=aussage,
             evidenz_beschreibung=evidenz,
             E_wert=E_wert,
+            disziplin=item_disziplin,
+            profil=profil if item_disziplin == disziplin else None,
         )
         ergebnisse.append(analyse)
 
@@ -635,6 +751,8 @@ def drucke_analyse(analyse: KAnalyse, verbose: bool = True):
     """Gibt eine Analyse formatiert aus."""
     print("\n" + "=" * 70)
     print(f"  AUSSAGE: {analyse.aussage[:60]}...")
+    if analyse.disziplin:
+        print(f"  DISZIPLIN: {analyse.disziplin}")
     print("=" * 70)
 
     # K-Wert prominent
@@ -695,10 +813,12 @@ def drucke_aggregation(agg: dict):
 # INTERAKTIVER MODUS
 # =============================================================================
 
-def interaktiver_modus():
+def interaktiver_modus(disziplin: Optional[str] = None):
     """Startet den interaktiven Modus."""
     print("\n" + "=" * 70)
     print("  ESL CALCULATOR - Interaktiver Modus")
+    if disziplin:
+        print(f"  Disziplin: {disziplin}")
     print("=" * 70)
     print("\n  Gib eine Aussage ein und optional Evidenz.")
     print("  Leere Eingabe beendet das Programm.\n")
@@ -712,7 +832,7 @@ def interaktiver_modus():
         if not evidenz:
             evidenz = None
 
-        analyse = berechne_K(aussage, evidenz_beschreibung=evidenz)
+        analyse = berechne_K(aussage, evidenz_beschreibung=evidenz, disziplin=disziplin)
         drucke_analyse(analyse)
         print()
 
@@ -723,7 +843,8 @@ def interaktiver_modus():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="ESL Calculator - Berechnet K-Werte für wissenschaftliche Aussagen"
+        description="ESL Calculator - Berechnet K-Werte für wissenschaftliche Aussagen",
+        epilog="Beispiel: python esl_calculator.py -a 'Loss Aversion ist robust' -d bcm"
     )
 
     parser.add_argument(
@@ -738,6 +859,10 @@ def main():
         "--e-wert",
         type=float,
         help="Direkter E-Wert (0.0-1.0)"
+    )
+    parser.add_argument(
+        "--disziplin", "-d",
+        help="Disziplin-Profil (z.B. 'verhaltensoekonomie', 'bcm', 'beatrix')"
     )
     parser.add_argument(
         "--datei", "-f",
@@ -763,17 +888,36 @@ def main():
         action="store_true",
         help="Demo mit Beispielaussagen"
     )
+    parser.add_argument(
+        "--liste-disziplinen",
+        action="store_true",
+        help="Liste verfügbarer Disziplin-Profile"
+    )
 
     args = parser.parse_args()
 
+    # Disziplin-Liste anzeigen
+    if args.liste_disziplinen:
+        if DISZIPLIN_SUPPORT:
+            print("\nVerfügbare Disziplin-Profile:")
+            print("-" * 40)
+            for name in liste_disziplinen():
+                profil = lade_disziplin(name)
+                print(f"  {name:20} → {profil.name}")
+            print()
+        else:
+            print("Fehler: Disziplin-Support nicht verfügbar (esl_disziplinen.py fehlt)")
+        return
+
     if args.interaktiv:
-        interaktiver_modus()
+        interaktiver_modus(disziplin=args.disziplin)
 
     elif args.aussage:
         analyse = berechne_K(
             aussage=args.aussage,
             evidenz_beschreibung=args.evidenz,
             E_wert=args.e_wert,
+            disziplin=args.disziplin,
         )
         if args.json:
             import json
@@ -785,17 +929,23 @@ def main():
         with open(args.datei, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)
 
+        # Disziplin aus Datei oder CLI
+        disziplin = args.disziplin or data.get("disziplin", None)
+
         aussagen = data.get("aussagen", data.get("statements", []))
-        analysen = analysiere_aussagen(aussagen)
+        analysen = analysiere_aussagen(aussagen, disziplin=disziplin)
 
         if args.json:
             import json
             result = {
+                "disziplin": disziplin,
                 "analysen": [a.to_dict() for a in analysen],
                 "aggregation": aggregiere_K(analysen),
             }
             print(json.dumps(result, indent=2, ensure_ascii=False))
         else:
+            if disziplin:
+                print(f"\n  Disziplin-Profil: {disziplin}")
             for analyse in analysen:
                 drucke_analyse(analyse, verbose=not args.kurz)
 
@@ -803,18 +953,11 @@ def main():
             drucke_aggregation(agg)
 
     elif args.demo:
-        demo_aussagen = [
+        # Demo mit Default-Profil
+        demo_aussagen_default = [
             {
                 "aussage": "Alle Menschen müssen essen, um zu überleben.",
                 "evidenz": "Meta-Analyse von biologischen Studien, repliziert",
-            },
-            {
-                "aussage": "Loss Aversion könnte möglicherweise bei einigen Entscheidungen eine Rolle spielen.",
-                "evidenz": "Qualitative Fallstudie mit kleinem N",
-            },
-            {
-                "aussage": "BEATRIX verbessert Entscheidungen definitiv und nachweislich.",
-                "evidenz": None,  # Keine Evidenz
             },
             {
                 "aussage": "Die meisten Nutzer profitieren in der Regel von personalisierten Empfehlungen.",
@@ -822,9 +965,51 @@ def main():
             },
         ]
 
-        analysen = analysiere_aussagen(demo_aussagen)
-        for analyse in analysen:
-            drucke_analyse(analyse, verbose=not args.kurz)
+        # Demo mit BCM/Verhaltensökonomie-Profil
+        demo_aussagen_bcm = [
+            {
+                "aussage": "Loss Aversion ist ein robustes Phänomen mit λ ≈ 2.0",
+                "evidenz": "Meta-Analyse, repliziert, präregistriert",
+            },
+            {
+                "aussage": "Hyperbolic Discounting könnte bei einigen Entscheidungen auftreten.",
+                "evidenz": "Laborexperiment mit kleinem N",
+            },
+            {
+                "aussage": "BCM muss alle Verhaltensänderungen vorhersagen können.",
+                "evidenz": None,  # Keine Evidenz
+            },
+            {
+                "aussage": "Nudging zeigt konsistente Effekte in Feldexperimenten.",
+                "evidenz": "Feldexperiment, präregistriert, großes N",
+            },
+        ]
+
+        disziplin = args.disziplin
+
+        if disziplin:
+            print(f"\n  DEMO mit Disziplin-Profil: {disziplin}")
+            analysen = analysiere_aussagen(demo_aussagen_bcm, disziplin=disziplin)
+        else:
+            # Zeige beide Profile im Vergleich
+            print("\n  DEMO: Vergleich Default vs. Verhaltensökonomie")
+            print("\n  --- DEFAULT PROFIL ---")
+            analysen_default = analysiere_aussagen(demo_aussagen_default)
+            for analyse in analysen_default:
+                drucke_analyse(analyse, verbose=not args.kurz)
+
+            if DISZIPLIN_SUPPORT:
+                print("\n  --- VERHALTENSÖKONOMIE PROFIL ---")
+                analysen_bcm = analysiere_aussagen(demo_aussagen_bcm, disziplin="bcm")
+                for analyse in analysen_bcm:
+                    drucke_analyse(analyse, verbose=not args.kurz)
+                analysen = analysen_default + analysen_bcm
+            else:
+                analysen = analysen_default
+
+        if disziplin:
+            for analyse in analysen:
+                drucke_analyse(analyse, verbose=not args.kurz)
 
         agg = aggregiere_K(analysen)
         drucke_aggregation(agg)
