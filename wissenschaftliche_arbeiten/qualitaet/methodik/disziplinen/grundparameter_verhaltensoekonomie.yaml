@@ -1,0 +1,1166 @@
+# =============================================================================
+# BCM GRUNDPARAMETER FÜR DIE VERHALTENSÖKONOMIE
+# =============================================================================
+#
+# Verhaltensökonomische Primitive: 20 orthogonale Grundparameter in 6 Kategorien
+# Alle ~300 BCM-Axiome sind aus diesen Grundparametern ableitbar.
+#
+# Terminologie:
+#   - "BCM Grundparameter" = formale Bezeichnung im BCM-System
+#   - "Verhaltensökonomische Primitive" = disziplinspezifischer Fachbegriff
+#
+# Version: 1.1
+# Autor: FehrAdvice & Partners AG
+# Datum: 2025-12-24
+# =============================================================================
+
+meta:
+  titel: "BCM Grundparameter für die Verhaltensökonomie"
+  alternativbezeichnung: "Verhaltensökonomische Primitive"
+  version: "1.1"
+
+  prinzip: |
+    Ein GRUNDPARAMETER (Primitiv) ist ein nicht weiter zerlegbarer Grundbegriff.
+    Alle abgeleiteten Konzepte (z.B. "Loss Aversion", "Nudging")
+    sind Kompositionen aus Grundparametern.
+
+  kriterien:
+    - name: "Irreduzibilität"
+      beschreibung: "Kann nicht durch andere Grundparameter definiert werden"
+    - name: "Orthogonalität"
+      beschreibung: "Unabhängig von anderen Grundparametern messbar"
+    - name: "Vollständigkeit"
+      beschreibung: "Alle BCM-Axiome sind daraus ableitbar"
+    - name: "Sparsamkeit"
+      beschreibung: "Minimale Anzahl (20 statt 300+)"
+
+  notation_konventionen:
+    mengen: "Kalligraphisch: 𝒱, 𝒮, ℐ"
+    funktionen: "Lateinisch: U, P, f"
+    parameter: "Griechisch: λ, δ, β, π, ω"
+    operatoren: "Spezial: Ψ, ⊕, ⊗"
+
+
+# =============================================================================
+# KATEGORIE 1: PRÄFERENZ (5 Grundparameter)
+# =============================================================================
+# Frage: Was wollen Agenten?
+# BCM-Module: INU, WAX
+# =============================================================================
+
+kategorien:
+
+  PRAEFERENZ:
+    frage: "Was wollen Agenten?"
+    bcm_module: ["INU", "WAX"]
+    grundparameter_count: 5
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      U:
+        name: "Nutzen"
+        symbol: "U"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            U: 𝒱 × Σ × ρ → ℝ
+
+            wobei:
+            - 𝒱: Menge aller möglichen Verhaltensweisen/Outcomes
+            - Σ: Menge aller Subjekte (Agenten)
+            - ρ: Kontextraum
+            - ℝ: Reelle Zahlen (Nutzenwerte)
+
+            U(v, σ, ρ) = "Nutzen von Verhalten v für Subjekt σ in Kontext ρ"
+
+          axiome:
+            A1_Vollstaendigkeit: |
+              ∀ v₁, v₂ ∈ 𝒱: U(v₁) ≥ U(v₂) ∨ U(v₂) ≥ U(v₁)
+              "Alle Optionen sind vergleichbar"
+
+            A2_Transitivitaet: |
+              U(v₁) ≥ U(v₂) ∧ U(v₂) ≥ U(v₃) → U(v₁) ≥ U(v₃)
+              "Präferenzen sind konsistent geordnet"
+
+            A3_Kontinuitaet: |
+              Für konvergente Folgen: lim_{n→∞} U(vₙ) = U(lim vₙ)
+              "Kleine Änderungen → kleine Nutzenänderungen"
+
+          dekomposition: |
+            U_total = Ψ(U_INU, U_KNU, U_IDN)
+
+            wobei:
+            - U_INU = Σ_{d∈FEPSDE} ω_d · u_d  (Individueller Nutzen)
+            - U_KNU = λ · U_kollektiv          (Kollektiver Nutzen)
+            - U_IDN = Σ_j π_j · A_j · U_j      (Identitätsnutzen)
+
+        messvorschrift: |
+          Revealed Preferences: U erschlossen aus beobachteten Wahlen
+          U(v₁) > U(v₂) ⟺ P(Wahl v₁ | {v₁, v₂}) > 0.5
+
+          Stated Preferences: Direkte Nutzenbewertung auf Skala
+
+        einheit: "Utile (kardinal) oder Rang (ordinal)"
+        wertebereich: "ℝ (unbeschränkt)"
+
+        bcm_axiom_referenz:
+          - "MA-ONT-03: Existenz von Nutzen"
+          - "MA-ONT-07: Drei Nutzenfamilien"
+          - "MA-ONT-08: FEPSDE-Dimensionen"
+
+      # ─────────────────────────────────────────────────────────────────────
+      r:
+        name: "Referenzpunkt"
+        symbol: "r"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            r: Σ × ρ × τ → ℝⁿ
+
+            wobei:
+            - r(σ, ρ, τ) ∈ ℝⁿ: Referenzpunkt des Subjekts im Kontext zur Zeit
+            - n: Dimensionalität des Outcome-Raums
+
+            Nutzen ist referenzpunkt-abhängig:
+            U(x) = U(x | r) = v(x - r)
+
+          axiome:
+            A1_Existenz: |
+              ∀ σ, ρ, τ: ∃! r(σ, ρ, τ)
+              "Jeder Agent hat genau einen Referenzpunkt pro Kontext/Zeit"
+
+            A2_Status_Quo: |
+              Default: r = Status Quo (aktueller Besitz/Zustand)
+              r_default(σ) = x_aktuell(σ)
+
+            A3_Erwartungsbasiert: |
+              Alternativ: r = Erwartung
+              r_expectation(σ) = E[x | Information(σ)]
+
+            A4_Adaptation: |
+              lim_{τ→∞} r(τ) = x_neu nach permanenter Änderung
+              "Referenzpunkte adaptieren an neue Realität"
+
+          formalismus: |
+            Prospect Theory Wertfunktion:
+
+            v(x - r) = {
+              (x - r)^α           wenn x ≥ r  (Gewinn)
+              -λ|x - r|^β         wenn x < r  (Verlust)
+            }
+
+            wobei α, β ∈ (0,1) und λ > 1
+
+        messvorschrift: |
+          Experimentell: Variation des Referenzpunkts und Messung der Wahlveränderung
+          Endowment-Paradigma: WTA vs. WTP
+
+        einheit: "Gleiche Einheit wie Outcome-Variable"
+        wertebereich: "ℝⁿ"
+
+        bcm_axiom_referenz:
+          - "MA-EPI-15: Loss Aversion"
+          - "MA-EPI-17: Status Quo Bias"
+
+      # ─────────────────────────────────────────────────────────────────────
+      delta_beta:
+        name: "Diskontierung"
+        symbol: "δ, β"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            Exponentielles Diskontieren:
+            D_exp(t) = δ^t, δ ∈ (0, 1)
+
+            Quasi-hyperbolisches Diskontieren (β-δ Modell):
+            D_hyp(t) = {
+              1       wenn t = 0
+              β·δ^t   wenn t > 0
+            }
+
+            wobei:
+            - δ ∈ (0,1): Langfristiger Diskontfaktor (Geduld)
+            - β ∈ (0,1): Present-Bias-Parameter (Gegenwartspräferenz)
+
+            Diskontierter Nutzen:
+            U₀ = u₀ + β · Σ_{t=1}^∞ δ^t · u_t
+
+          axiome:
+            A1_Monotonie: |
+              D(t₁) > D(t₂) für t₁ < t₂
+              "Nähere Zeitpunkte werden höher gewichtet"
+
+            A2_Normierung: |
+              D(0) = 1
+              "Gegenwart wird nicht diskontiert"
+
+            A3_Present_Bias: |
+              β < 1 ⟺ ∂²D/∂t² > 0 nahe t = 0
+              "Überproportionale Gewichtung der Gegenwart"
+
+            A4_Zeitinkonsistenz: |
+              Wenn β < 1: Optimaler Plan bei t₀ ≠ Optimaler Plan bei t₁ > t₀
+              "Präferenzen ändern sich, wenn Zukunft zur Gegenwart wird"
+
+        messvorschrift: |
+          Intertemporal Choice Tasks:
+          "Präferierst du X jetzt oder Y in t Tagen?"
+
+          Schätzung:
+          δ = (X/Y)^(1/t) für indifferente Paare
+          β = D(1) / D(0⁺) für quasi-hyperbolisch
+
+        einheit: "Dimensionslos [0, 1]"
+        typische_werte:
+          delta: 0.99  # pro Tag
+          beta: 0.70   # Present Bias
+
+        bcm_axiom_referenz:
+          - "MA-DYN-13: Discounting"
+          - "MA-DYN-14: Hyperbolisches Diskontieren"
+          - "MA-EPI-16: Present Bias"
+
+      # ─────────────────────────────────────────────────────────────────────
+      omega:
+        name: "Dimensionsgewichtung"
+        symbol: "ω"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            ω: Σ × ρ → Δ^(n-1)
+
+            wobei:
+            - Δ^(n-1): (n-1)-Simplex = {ω ∈ ℝⁿ | ω_i ≥ 0, Σω_i = 1}
+            - n = 6 für FEPSDE
+
+            FEPSDE-Gewichtungsvektor:
+            ω = (ω_F, ω_E, ω_P, ω_S, ω_D, ω_Ec)
+
+            Individueller Nutzen:
+            U_INU = Σ_{d∈FEPSDE} ω_d · u_d
+
+          axiome:
+            A1_Normierung: |
+              Σ_d ω_d = 1
+              "Gewichte summieren sich zu 1"
+
+            A2_Nicht_Negativitaet: |
+              ∀ d: ω_d ≥ 0
+              "Keine negativen Gewichte"
+
+            A3_Personenabhaengigkeit: |
+              ω(σ₁) ≠ ω(σ₂) im Allgemeinen
+              "Verschiedene Menschen haben verschiedene Prioritäten"
+
+            A4_Kontextabhaengigkeit: |
+              ω(σ, ρ₁) ≠ ω(σ, ρ₂) möglich
+              "Gleiche Person, verschiedene Kontexte → verschiedene Gewichte"
+
+        messvorschrift: |
+          Conjoint-Analyse: Trade-offs zwischen Dimensionen
+          Direkte Allokation: "Verteile 100 Punkte auf 6 Dimensionen"
+          Revealed Preferences: Inferenz aus Verhalten
+
+        einheit: "Dimensionslos, summiert zu 1"
+        wertebereich: "[0, 1] pro Dimension, Simplex insgesamt"
+
+        bcm_axiom_referenz:
+          - "MA-ONT-08: FEPSDE-Dimensionen"
+          - "MA-ONT-16: Gewichtungsfunktion"
+
+      # ─────────────────────────────────────────────────────────────────────
+      lambda:
+        name: "Kooperations-Regulator"
+        symbol: "λ"
+        kategorie: "PRAEFERENZ"
+
+        definition_formal:
+          notation: |
+            λ: Σ × ρ × τ → [0, 1]
+
+            Effektiver Nutzen mit λ:
+            U_eff = (1 - λ) · U_lokal + λ · κ(U_lokal, U_komplementaer)
+
+            wobei:
+            - λ = 0: Pure Eigennutz-Maximierung
+            - λ = 1: Pure Kollektivorientierung
+            - κ: Komplementaritätsfunktion (Synergien)
+
+          axiome:
+            A1_Beschraenktheit: |
+              λ ∈ [0, 1]
+              "Immer zwischen Extrem-Egoismus und Extrem-Altruismus"
+
+            A2_Kontextabhaengigkeit: |
+              λ = f(ρ, σ, τ)
+              λ ist NICHT fix, sondern situationsabhängig
+
+            A3_Trait_State_Dekomposition: |
+              λ(σ, ρ, τ) = λ_trait(σ) + Δλ_state(ρ, τ)
+              "Basis-Kooperativität + situative Anpassung"
+
+            A4_Beobachtungseffekt: |
+              λ(beobachtet) > λ(anonym)
+              "Beobachtung erhöht Kooperationsbereitschaft"
+
+          verhaltenstypen:
+            self_interested: "λ < 0.3"
+            conditional_cooperator: "λ ∈ [0.3, 0.7]"
+            altruist: "λ > 0.7"
+
+        messvorschrift: |
+          Public Goods Game: Beitrag / Endowment
+          Dictator Game: Anteil an Empfänger
+          Conditional Cooperation: Beitrag als Funktion anderer Beiträge
+
+        einheit: "Dimensionslos [0, 1]"
+        typische_werte:
+          population_mittel: 0.45
+          conditional_cooperators: 0.50
+
+        bcm_axiom_referenz:
+          - "MA-ONT-14: Kooperations-Regulator λ"
+          - "MA-ONT-15: Hybrid-Kontinuum"
+          - "MA-DYN-23: λ-Dynamik"
+
+
+  # =============================================================================
+  # KATEGORIE 2: BELIEF (3 Grundparameter)
+  # =============================================================================
+  # Frage: Was glauben Agenten?
+  # BCM-Module: AWX, META
+  # =============================================================================
+
+  BELIEF:
+    frage: "Was glauben Agenten?"
+    bcm_module: ["AWX", "META"]
+    grundparameter_count: 3
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      P_s:
+        name: "Subjektive Wahrscheinlichkeit"
+        symbol: "P(s)"
+        kategorie: "BELIEF"
+
+        definition_formal:
+          notation: |
+            P: Σ × 𝒮 → [0, 1]
+
+            wobei:
+            - Σ: Menge der Subjekte
+            - 𝒮: Zustandsraum (mögliche Weltzustände)
+
+            P(s | σ) = "Subjektive Wahrscheinlichkeit, die σ dem Zustand s zuweist"
+
+            Konsistenzbedingung:
+            Σ_{s∈𝒮} P(s | σ) = 1
+
+          axiome:
+            A1_Nicht_Negativitaet: |
+              ∀ s: P(s) ≥ 0
+
+            A2_Normierung: |
+              Σ_s P(s) = 1
+
+            A3_Additivitaet: |
+              P(A ∪ B) = P(A) + P(B) für disjunkte A, B
+
+            A4_Subjektivitaet: |
+              P(s | σ₁) ≠ P(s | σ₂) im Allgemeinen
+              "Verschiedene Menschen haben verschiedene Beliefs"
+
+        messvorschrift: |
+          Direkte Elicitation: "Mit welcher Wahrscheinlichkeit glaubst du...?"
+          Betting Odds: Aus Wettquoten inferieren
+          Calibration Tasks: Konfidenzintervalle
+
+        einheit: "Dimensionslos [0, 1]"
+
+        bcm_axiom_referenz:
+          - "MA-EPI-01: Unvollständiges Wissen"
+          - "MA-EPI-24: Bayes'sches Updating"
+
+      # ─────────────────────────────────────────────────────────────────────
+      c:
+        name: "Konfidenz / Präzision"
+        symbol: "c"
+        kategorie: "BELIEF"
+
+        definition_formal:
+          notation: |
+            c: Σ × 𝒮 → ℝ⁺
+
+            Alternative Formulierungen:
+
+            1. Inverse Varianz:
+               c = 1/σ² (Präzision)
+
+            2. Konfidenzintervall-Breite:
+               c = 1/|CI_95|
+
+            3. Meta-Belief:
+               c = P("Mein Belief P(s) ist korrekt")
+
+          axiome:
+            A1_Nicht_Negativitaet: |
+              c ≥ 0
+
+            A2_Overconfidence: |
+              E[c_subjektiv] > c_kalibriert
+              "Menschen sind typischerweise überkonfident"
+
+            A3_Hard_Easy_Effect: |
+              Overconfidence steigt mit Schwierigkeit
+
+        messvorschrift: |
+          Calibration: Anteil korrekter Antworten bei Konfidenz X
+          Confidence Intervals: Breite der 90%-Intervalle
+
+        einheit: "Dimensionslos oder 1/Varianz-Einheit"
+
+        bcm_axiom_referenz:
+          - "MA-EPI-18: Overconfidence"
+          - "MA-EPI-03: Irreduzible Unsicherheit"
+
+      # ─────────────────────────────────────────────────────────────────────
+      B_operator:
+        name: "Bayes-Updating-Operator"
+        symbol: "B(·)"
+        kategorie: "BELIEF"
+
+        definition_formal:
+          notation: |
+            B: P × E → P'
+
+            Standard Bayes:
+            P'(s | e) = P(e | s) · P(s) / P(e)
+
+            wobei:
+            - P(s): Prior (Vorab-Wahrscheinlichkeit)
+            - P(e | s): Likelihood (Wahrscheinlichkeit der Evidenz gegeben s)
+            - P(e): Marginale Wahrscheinlichkeit der Evidenz
+            - P'(s | e): Posterior (aktualisierte Wahrscheinlichkeit)
+
+          axiome:
+            A1_Konsistenz: |
+              Wiederholtes Updating mit gleicher Evidenz ändert nichts:
+              B(B(P, e), e) = B(P, e)
+
+            A2_Ordnungsunabhaengigkeit: |
+              B(B(P, e₁), e₂) = B(B(P, e₂), e₁)
+              "Reihenfolge der Evidenz ist irrelevant"
+
+            A3_Konvergenz: |
+              Mit genug Evidenz konvergiert Posterior zur Wahrheit
+
+          abweichungen_empirisch:
+            conservatism: "Zu wenig Updating"
+            base_rate_neglect: "Prior wird ignoriert"
+            confirmation_bias: "Asymmetrisches Updating"
+
+        messvorschrift: |
+          Belief-Revision-Tasks: Prior → Evidenz → Posterior messen
+          Vergleich mit Bayes-optimalem Posterior
+
+        bcm_axiom_referenz:
+          - "MA-EPI-24: Bayes'sches Updating"
+          - "MA-EPI-25: Confirmation Bias"
+          - "MA-EPI-26: Base Rate Neglect"
+
+
+  # =============================================================================
+  # KATEGORIE 3: MOTIVATION (4 Grundparameter)
+  # =============================================================================
+  # Frage: Warum wollen Agenten, was sie wollen?
+  # BCM-Module: IDN, WAX
+  # Besonderheit: Verbindet PRÄFERENZ und BELIEF (Motivated Beliefs)
+  # =============================================================================
+
+  MOTIVATION:
+    frage: "Warum wollen Agenten, was sie wollen?"
+    bcm_module: ["IDN", "WAX"]
+    grundparameter_count: 4
+    besonderheit: "Brücke zwischen PRÄFERENZ und BELIEF (Motivated Reasoning)"
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      E_ego:
+        name: "Ego-Nutzen"
+        symbol: "E"
+        kategorie: "MOTIVATION"
+
+        definition_formal:
+          notation: |
+            E: Σ × Belief-Space → ℝ
+
+            E(σ, b) = "Nutzen für σ aus dem Halten des Beliefs b"
+
+            Komponenten:
+            E = E_self-esteem + E_identity + E_anticipatory
+
+            wobei:
+            - E_self-esteem: Nutzen aus positivem Selbstbild
+            - E_identity: Nutzen aus Identitätskonsistenz
+            - E_anticipatory: Nutzen aus positiven Erwartungen
+
+          axiome:
+            A1_Self_Serving: |
+              E(σ, "Ich bin kompetent") > E(σ, "Ich bin inkompetent")
+              "Positive Selbst-Beliefs werden bevorzugt"
+
+            A2_Motivated_Inference: |
+              P*(s | e, E) ≠ P(s | e) wenn E(s) ≠ 0
+              "Belief-Updating wird durch Ego-Nutzen verzerrt"
+
+        messvorschrift: |
+          Self-Enhancement-Maße
+          Attribution Bias: Internal für Erfolg, External für Misserfolg
+
+        bcm_axiom_referenz:
+          - "MA-EPI-31: Self-Serving Bias"
+          - "MA-EPI-30: Optimism Bias"
+
+      # ─────────────────────────────────────────────────────────────────────
+      I_identity:
+        name: "Identitäts-Portfolio"
+        symbol: "ℐ"
+        kategorie: "MOTIVATION"
+
+        definition_formal:
+          notation: |
+            ℐ: Σ → 𝒫(Identity-Space)
+
+            Für Subjekt σ:
+            ℐ(σ) = {I₁, I₂, ..., Iₙ}
+
+            wobei jede Identität Iⱼ definiert ist durch:
+            - Präskriptionen: P_j ⊂ 𝒱 (was sollte ich tun?)
+            - Proskriptionen: Q_j ⊂ 𝒱 (was sollte ich nicht tun?)
+            - Attribute: A_j (was bin ich?)
+
+            Identitätsnutzen:
+            U_IDN = Σ_j π_j · A_j(v) · U_j
+
+            wobei:
+            - π_j: Aktivierungswahrscheinlichkeit der Identität j
+            - A_j(v): Alignment von Verhalten v mit Identität j
+            - U_j: Stärke der Identität j
+
+          axiome:
+            A1_Multiplizitaet: |
+              |ℐ(σ)| ≥ 1
+              "Jeder hat mindestens eine Identität"
+
+            A2_Kontextaktivierung: |
+              π_j = f(ρ)
+              "Kontext aktiviert spezifische Identitäten"
+
+            A3_Konsistenzdruck: |
+              A(v, I) < 0 → Dissonanz-Kosten
+              "Identitätsinkongruentes Verhalten ist kostspielig"
+
+        messvorschrift: |
+          Identity Salience: "Wer bist du?" offene Frage
+          Twenty Statements Test
+          Implicit Association Tests
+
+        bcm_axiom_referenz:
+          - "MA-ONT-09: Multiple Identitäten"
+          - "MA-ONT-17: Identitäts-Aktivierung π"
+          - "MA-ONT-18: Alignment-Funktion A"
+
+      # ─────────────────────────────────────────────────────────────────────
+      pi_activation:
+        name: "Identitäts-Aktivierung"
+        symbol: "π"
+        kategorie: "MOTIVATION"
+
+        definition_formal:
+          notation: |
+            π: ℐ × ρ → Δ^(n-1)
+
+            π(I_j | ρ) = "Wahrscheinlichkeit, dass Identität j im Kontext ρ aktiv ist"
+
+            Konsistenzbedingung:
+            Σ_j π_j = 1 (genau eine Identität dominant)
+
+            oder relaxiert:
+            Σ_j π_j ≤ k (mehrere Identitäten teilaktiv)
+
+          axiome:
+            A1_Normierung: |
+              Σ_j π(I_j | ρ) = 1
+
+            A2_Kontextabhaengigkeit: |
+              π(I_j | ρ₁) ≠ π(I_j | ρ₂) im Allgemeinen
+
+            A3_Priming: |
+              π(I_j | ρ + Prime_j) > π(I_j | ρ)
+              "Identitäten können geprimt werden"
+
+            A4_Chronische_Salienz: |
+              ∃ j: π(I_j | ρ) > π_base unabhängig von ρ
+              "Manche Identitäten sind chronisch aktiv"
+
+        messvorschrift: |
+          Priming-Experimente
+          Kontextmanipulation + Verhaltensmessung
+
+        einheit: "Dimensionslos [0, 1], summiert zu 1"
+
+        bcm_axiom_referenz:
+          - "MA-ONT-17: Identitäts-Aktivierung"
+
+      # ─────────────────────────────────────────────────────────────────────
+      D_dissonance:
+        name: "Dissonanz-Kosten"
+        symbol: "D"
+        kategorie: "MOTIVATION"
+
+        definition_formal:
+          notation: |
+            D: Belief-Space × Belief-Space → ℝ⁺
+
+            D(b₁, b₂) = "Kosten der Inkonsistenz zwischen b₁ und b₂"
+
+            Kognitive Dissonanz:
+            D_cogn = f(|b_verhalten - b_einstellung|)
+
+            Identitätsdissonanz:
+            D_idn = f(|v - Präskription(I)|)
+
+          axiome:
+            A1_Nicht_Negativitaet: |
+              D ≥ 0
+
+            A2_Symmetrie: |
+              D(b₁, b₂) = D(b₂, b₁)
+
+            A3_Identitaet: |
+              D(b, b) = 0
+              "Konsistenz hat keine Kosten"
+
+            A4_Reduktionsmotiv: |
+              Agenten minimieren D durch:
+              - Belief-Änderung
+              - Verhaltens-Änderung
+              - Rationalisierung
+
+        messvorschrift: |
+          Free-Choice-Paradigma: Bewertung vor/nach Wahl
+          Induced Compliance: Einstellungsänderung nach inkongruentem Verhalten
+
+        einheit: "Nutzen-äquivalent (negativ)"
+
+        bcm_axiom_referenz:
+          - "MA-EPI-34: Moral Licensing"
+          - "MA-IDN: Kohärenz-Axiome"
+
+
+  # =============================================================================
+  # KATEGORIE 4: CONSTRAINT (3 Grundparameter)
+  # =============================================================================
+  # Frage: Was schränkt Agenten ein?
+  # BCM-Module: GOV, AWX
+  # =============================================================================
+
+  CONSTRAINT:
+    frage: "Was schränkt Agenten ein?"
+    bcm_module: ["GOV", "AWX"]
+    grundparameter_count: 3
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      K_capacity:
+        name: "Kognitive Kapazität"
+        symbol: "K"
+        kategorie: "CONSTRAINT"
+
+        definition_formal:
+          notation: |
+            K: Σ × τ → ℝ⁺
+
+            K(σ, τ) = "Verfügbare kognitive Ressourcen von σ zur Zeit τ"
+
+            Bounded Rationality:
+            Optimierung unter K-Constraint:
+            max U(v) s.t. Complexity(v) ≤ K
+
+          axiome:
+            A1_Beschraenktheit: |
+              K < ∞
+              "Kognitive Kapazität ist endlich"
+
+            A2_Depletierbarkeit: |
+              K(τ + Δτ) < K(τ) nach kognitiver Anstrengung
+              "Kapazität erschöpft sich durch Nutzung"
+
+            A3_Regeneration: |
+              K(τ + Ruhe) > K(τ) nach Erschöpfung
+              "Kapazität regeneriert durch Erholung"
+
+            A4_Zwei_Systeme: |
+              K_System1 ≈ ∞ (automatisch, unbegrenzt)
+              K_System2 < ∞ (deliberativ, begrenzt)
+
+        messvorschrift: |
+          Working Memory Tests (Digit Span)
+          Ego Depletion Paradigmen
+          Dual-Task-Experimente
+
+        einheit: "Dimensionslos oder Bits"
+
+        bcm_axiom_referenz:
+          - "MA-EPI-02: Bounded Rationality"
+          - "MA-EPI-05: Zwei-Systeme-Kognition"
+          - "MA-DYN-17: Ego Depletion"
+
+      # ─────────────────────────────────────────────────────────────────────
+      theta:
+        name: "Schwellenwerte"
+        symbol: "θ"
+        kategorie: "CONSTRAINT"
+
+        definition_formal:
+          notation: |
+            θ: Transitionstyp → ℝ
+
+            Verhaltensänderung tritt ein wenn:
+            ΔU > θ
+
+            Verschiedene Schwellen:
+            - θ_action: Schwelle für Handlungsinitiierung
+            - θ_change: Schwelle für Verhaltensänderung
+            - θ_tipping: Schwelle für Systemwechsel
+
+          axiome:
+            A1_Nicht_Negativitaet: |
+              θ ≥ 0
+              "Schwellen sind nicht-negativ"
+
+            A2_Hysterese: |
+              θ_aufwaerts ≠ θ_abwaerts möglich
+              "Asymmetrische Schwellen für Aufbau vs. Abbau"
+
+            A3_Kontextabhaengigkeit: |
+              θ = f(ρ, σ)
+              "Schwellen variieren mit Person und Situation"
+
+        messvorschrift: |
+          Titration: Schrittweise Änderung bis Verhaltensswitch
+          Just-Noticeable-Difference (JND)
+
+        einheit: "Gleiche Einheit wie die überschrittene Variable"
+
+        bcm_axiom_referenz:
+          - "MA-DYN-06: Tipping Points"
+          - "MA-DYN-05: Hysterese"
+
+      # ─────────────────────────────────────────────────────────────────────
+      Gamma:
+        name: "Feasibility-Menge"
+        symbol: "Γ"
+        kategorie: "CONSTRAINT"
+
+        definition_formal:
+          notation: |
+            Γ: Σ × ρ → 𝒫(𝒱)
+
+            Γ(σ, ρ) ⊆ 𝒱 = "Menge aller für σ in ρ möglichen Verhaltensweisen"
+
+            Constraint-Funktion:
+            γ: 𝒱 → {0, 1}
+            γ(v) = 1 ⟺ v ∈ Γ
+
+            Constraint-Typen:
+            - Γ_physisch: Körperliche Grenzen
+            - Γ_zeitlich: Zeitbudget
+            - Γ_finanziell: Budgetbeschränkung
+            - Γ_legal: Rechtliche Grenzen
+            - Γ_sozial: Soziale Normen (weich)
+
+          axiome:
+            A1_Nicht_Leer: |
+              Γ ≠ ∅
+              "Mindestens eine Option ist immer möglich"
+
+            A2_Kontextabhaengigkeit: |
+              Γ(σ, ρ₁) ≠ Γ(σ, ρ₂) im Allgemeinen
+
+            A3_Governance_Manipulation: |
+              Interventionen können Γ erweitern oder einschränken
+
+        messvorschrift: |
+          Choice Set Elicitation
+          Constraint Identification
+
+        bcm_axiom_referenz:
+          - "MA-ONT-06: Existenz von Constraints"
+          - "MA-GOV-01: Constraints existieren"
+          - "MA-GOV-02: Kontextabhängigkeit"
+
+
+  # =============================================================================
+  # KATEGORIE 5: KONTEXT (4 Grundparameter)
+  # =============================================================================
+  # Frage: Was formt die Entscheidungssituation?
+  # BCM-Module: META, alle
+  # =============================================================================
+
+  KONTEXT:
+    frage: "Was formt die Entscheidungssituation?"
+    bcm_module: ["META", "alle"]
+    grundparameter_count: 4
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      rho:
+        name: "Kontext"
+        symbol: "ρ"
+        kategorie: "KONTEXT"
+
+        definition_formal:
+          notation: |
+            ρ ∈ 𝒫 (Kontextraum)
+
+            Kontext-Dekomposition:
+            ρ = (ρ_phys, ρ_soz, ρ_inst, ρ_temp)
+
+            wobei:
+            - ρ_phys: Physische Umgebung (Ort, Objekte)
+            - ρ_soz: Soziales Setting (Anwesende, Beziehungen)
+            - ρ_inst: Institutioneller Rahmen (Regeln, Organisation)
+            - ρ_temp: Temporaler Kontext (Zeitpunkt, Zeitdruck)
+
+          axiome:
+            A1_Existenz: |
+              Jedes Verhalten findet in genau einem Kontext statt
+
+            A2_Einfluss: |
+              V = f(U, ρ)
+              "Verhalten hängt von Kontext ab"
+
+            A3_5_Ebenen: |
+              ρ ∈ {META, MACRO, MESO, MICRO, IND}
+              Hierarchische Schachtelung von Kontexten
+
+        messvorschrift: |
+          Situationsbeschreibung
+          Kontextcodierung (standardisiert)
+
+        bcm_axiom_referenz:
+          - "MA-ONT-04: Existenz von Kontext"
+          - "MA-ONT-26: 5-Ebenen-Modell"
+
+      # ─────────────────────────────────────────────────────────────────────
+      sigma:
+        name: "Subjekt-Index"
+        symbol: "σ"
+        kategorie: "KONTEXT"
+
+        definition_formal:
+          notation: |
+            σ ∈ Σ (Menge aller Subjekte/Agenten)
+
+            Subjekt-Charakterisierung:
+            σ = (traits(σ), states(σ), history(σ))
+
+            wobei:
+            - traits: Stabile Eigenschaften (Persönlichkeit, λ_base)
+            - states: Aktuelle Zustände (Stimmung, Energie)
+            - history: Vergangenes Verhalten und Erfahrungen
+
+          axiome:
+            A1_Existenz: |
+              |Σ| ≥ 1
+              "Mindestens ein Subjekt existiert"
+
+            A2_Heterogenitaet: |
+              σ₁ ≠ σ₂ → Unterschiede in mindestens einem Parameter
+
+            A3_Kontinuitaet: |
+              σ(τ) und σ(τ + Δτ) sind verbunden
+              "Identität persistiert über Zeit"
+
+        messvorschrift: |
+          Persona-Beschreibung
+          Trait-Messung (Big Five, etc.)
+          Verhaltenshistorie
+
+        bcm_axiom_referenz:
+          - "MA-ONT-01: Existenz von Subjekten"
+
+      # ─────────────────────────────────────────────────────────────────────
+      N_norms:
+        name: "Soziale Normen"
+        symbol: "N"
+        kategorie: "KONTEXT"
+
+        definition_formal:
+          notation: |
+            N: G × 𝒱 → [0, 1]
+
+            N(g, v) = "Normstärke für Verhalten v in Gruppe g"
+
+            Norm-Typen:
+            - N_deskriptiv(v) = P(v | Gruppe) "Was tun andere?"
+            - N_injunktiv(v) = Approval(v | Gruppe) "Was wird erwartet?"
+
+          axiome:
+            A1_Gruppenabhaengigkeit: |
+              N = f(G)
+              "Normen sind gruppenspezifisch"
+
+            A2_Dual: |
+              N_deskriptiv ≠ N_injunktiv möglich
+              "Was ist vs. was sein sollte"
+
+            A3_Sanktionen: |
+              Abweichung von N → Soziale Kosten
+
+            A4_Evolution: |
+              N(τ + Δτ) ≠ N(τ) möglich
+              "Normen können sich ändern"
+
+        messvorschrift: |
+          Norm Survey: "Was denken andere...?"
+          Vignette-Experimente
+          Sanctioning Behavior
+
+        bcm_axiom_referenz:
+          - "MA-ONT-11: Existenz von Normen"
+          - "MA-ONT-24: Normen evolvieren"
+          - "MA-DYN-12: Norm-Kaskaden"
+
+      # ─────────────────────────────────────────────────────────────────────
+      G_groups:
+        name: "Gruppenzugehörigkeit"
+        symbol: "G"
+        kategorie: "KONTEXT"
+
+        definition_formal:
+          notation: |
+            G: Σ → 𝒫(𝒫(Σ))
+
+            G(σ) = "Menge aller Gruppen, denen σ angehört"
+
+            Gruppen-Eigenschaften:
+            - Nested: G_familie ⊂ G_stadt ⊂ G_nation
+            - Overlapping: G_arbeit ∩ G_verein ≠ ∅ möglich
+            - Exclusive: G_teamA ∩ G_teamB = ∅ möglich
+
+            Soziale Distanz:
+            d: Σ × Σ → ℝ⁺
+            d(σ₁, σ₂) = f(|Shared Groups|)
+
+          axiome:
+            A1_Nicht_Leer: |
+              G(σ) ≠ ∅
+              "Jeder gehört mindestens einer Gruppe an"
+
+            A2_Ingroup_Outgroup: |
+              λ(σ, g_in) > λ(σ, g_out)
+              "Höhere Kooperation mit Eigengruppe"
+
+            A3_Salienz: |
+              Aktivierte Gruppe beeinflusst N, λ, I
+
+        messvorschrift: |
+          Gruppenzugehörigkeits-Fragen
+          Social Network Analysis
+          Minimal Group Paradigm
+
+        bcm_axiom_referenz:
+          - "MA-ONT-10: Existenz von Gruppen"
+
+
+  # =============================================================================
+  # KATEGORIE 6: ZEIT (1 Grundparameter)
+  # =============================================================================
+  # Frage: Wann geschieht es?
+  # BCM-Module: DYN, WTX
+  # =============================================================================
+
+  ZEIT:
+    frage: "Wann geschieht es?"
+    bcm_module: ["DYN", "WTX"]
+    grundparameter_count: 1
+
+    grundparameter:
+
+      # ─────────────────────────────────────────────────────────────────────
+      tau:
+        name: "Zeit"
+        symbol: "τ"
+        kategorie: "ZEIT"
+
+        definition_formal:
+          notation: |
+            τ ∈ T ⊆ ℝ⁺ (Zeitachse)
+
+            Zeit-Operatoren:
+            - d/dτ: Veränderungsrate
+            - ∫dτ: Akkumulation
+            - Δτ: Zeitintervall
+
+            Zeitliche Struktur:
+            - τ_decision: Entscheidungszeitpunkt
+            - τ_outcome: Outcome-Zeitpunkt
+            - τ_lag = τ_outcome - τ_decision: Verzögerung
+
+          axiome:
+            A1_Kontinuitaet: |
+              T ist kontinuierlich (ℝ⁺)
+
+            A2_Unidirektionalitaet: |
+              τ₂ > τ₁ → τ₁ ↛ τ₂ (keine Zeitreisen)
+              "Zeit fließt nur vorwärts"
+
+            A3_Kausalitaet: |
+              Ursache(τ₁) → Wirkung(τ₂) erfordert τ₁ < τ₂
+
+            A4_Diskrete_Events: |
+              Entscheidungen sind punktuell: Decision ∈ {τ₁, τ₂, ...}
+              "Entscheidungen sind diskrete Ereignisse in kontinuierlicher Zeit"
+
+        einheit: "Sekunden, Tage, Jahre (kontextabhängig)"
+        wertebereich: "ℝ⁺₀ (nicht-negative reelle Zahlen)"
+
+        bcm_axiom_referenz:
+          - "MA-ONT-05: Existenz von Zeit"
+          - "MA-DYN-01: Zeit ist kontinuierlich"
+          - "MA-DYN-02: Diskrete Events"
+
+
+# =============================================================================
+# OPERATOREN (nicht Primitive, aber wichtig)
+# =============================================================================
+
+operatoren:
+
+  Psi:
+    name: "Kohärenz-Operator"
+    symbol: "Ψ"
+    typ: "Meta-Operator (nicht Grundparameter)"
+
+    definition: |
+      Ψ: ℝ × ℝ × ℝ → ℝ
+
+      Ψ(U_INU, U_KNU, U_IDN) = Kombinierter Nutzen
+
+      NICHT einfache Addition:
+      Ψ ≠ Σ (wegen Arrow's Theorem)
+
+      Mögliche Formen:
+      - Multiplikativ: Ψ = U_INU · f(U_KNU) · g(U_IDN)
+      - Minimum: Ψ = min(U_INU, U_KNU, U_IDN)
+      - Veto-Logik: Ψ = 0 wenn eine Komponente < Schwelle
+
+    bcm_axiom_referenz:
+      - "MA-ONT-13: Kohärenz-Operator"
+
+  kappa:
+    name: "Komplementaritäts-Operator"
+    symbol: "κ"
+    typ: "Meta-Operator (nicht Grundparameter)"
+
+    definition: |
+      κ: ℝ × ℝ → ℝ
+
+      κ(U_lokal, U_komplementär) = Synergienutzen
+
+      κ > U_lokal + U_komplementär: Superadditive Synergie
+      κ = U_lokal + U_komplementär: Keine Synergie
+      κ < U_lokal + U_komplementär: Subadditive Interaktion
+
+    bcm_axiom_referenz:
+      - "MA-ONT-12: Komplementarität"
+
+
+# =============================================================================
+# ABGELEITETE KONZEPTE (Beispiele)
+# =============================================================================
+
+abgeleitete_konzepte:
+
+  loss_aversion:
+    name: "Verlustaversion"
+    grundparameter_basis:
+      - "U (Nutzen)"
+      - "r (Referenzpunkt)"
+    ableitung: |
+      λ_loss = |∂U/∂x|_{x<r} / |∂U/∂x|_{x>r} > 1
+
+  present_bias:
+    name: "Gegenwartspräferenz"
+    grundparameter_basis:
+      - "δ (Diskontierung)"
+      - "β (Present-Bias-Parameter)"
+      - "τ (Zeit)"
+    ableitung: |
+      β < 1 ⟺ D(1) / D(0⁺) < 1
+
+  nudging:
+    name: "Verhaltensanstöße"
+    grundparameter_basis:
+      - "ρ (Kontext)"
+      - "Γ (Feasibility)"
+      - "θ (Schwellen)"
+      - "K (Kapazität)"
+    ableitung: |
+      Nudge = Δρ s.t. Γ unverändert, aber P(v_ziel) ↑
+
+  conditional_cooperation:
+    name: "Bedingte Kooperation"
+    grundparameter_basis:
+      - "λ (Kooperations-Regulator)"
+      - "P(s) (Beliefs über andere)"
+      - "N (Normen)"
+    ableitung: |
+      λ(σ) = f(E[λ(andere)])
+      "Eigene Kooperation abhängig von erwarteter Kooperation anderer"
+
+
+# =============================================================================
+# VOLLSTÄNDIGKEITSBEWEIS-SKIZZE
+# =============================================================================
+
+vollstaendigkeitsbeweis:
+  these: |
+    Alle 113 META-Axiome des BCM sind aus den 20 Grundparametern ableitbar.
+
+  methode: |
+    Für jedes Axiom MA-X-Y zeige:
+    ∃ Formel F aus Grundparametern: MA-X-Y ⟺ F
+
+  beispiele:
+    - axiom: "MA-ONT-03: Nutzen existiert"
+      grundparameter: "U"
+      ableitung: "Direkte Definition von U"
+
+    - axiom: "MA-EPI-15: Loss Aversion"
+      grundparameter: ["U", "r"]
+      ableitung: "v(x-r) mit asymmetrischer Krümmung"
+
+    - axiom: "MA-DYN-07: Gewohnheitsformation"
+      grundparameter: ["τ", "θ", "K"]
+      ableitung: "Wiederholung(τ) → θ_action ↓ und K_needed ↓"
+
+    - axiom: "MA-ONT-14: λ-Regulator"
+      grundparameter: "λ"
+      ableitung: "Direkte Definition von λ"
+
+  offene_fragen:
+    - "Ist die Menge von 20 Grundparametern minimal?"
+    - "Gibt es alternative Grundparameter-Sets gleicher Mächtigkeit?"
+    - "Wie verhält sich die Grundparameter-Ontologie zu anderen Frameworks?"
