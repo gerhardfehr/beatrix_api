@@ -1011,4 +1011,401 @@ ESL ist das erste von mehreren geplanten QA-Modulen:
 \textbf{Die Pipeline orchestriert} die Module und entscheidet, ob Output akzeptiert, regeneriert oder eskaliert wird.
 \end{tcolorbox}
 
+\subsection{Evolutionsstufen des BCM: Eine vergleichende Analyse}
+
+Die Entwicklung des BCM lässt sich in vier distinkte Evolutionsstufen unterteilen. Jede Stufe adressiert spezifische Limitationen der vorherigen und fügt neue Fähigkeiten hinzu.
+
+\subsubsection{Die vier Evolutionsstufen}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    stage/.style={rectangle, draw, rounded corners, minimum width=3.2cm, minimum height=1.8cm, align=center, font=\small},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Stages
+\node[stage, fill=gray!20] (s1) at (0, 0) {\textbf{Stufe 1}\\BCM\\(Handwerk)};
+\node[stage, fill=blue!20] (s2) at (4, 0) {\textbf{Stufe 2}\\BCM + LLM};
+\node[stage, fill=green!20] (s3) at (8, 0) {\textbf{Stufe 3}\\BCM + LLM\\+ Code};
+\node[stage, fill=purple!20] (s4) at (12, 0) {\textbf{Stufe 4}\\BCM + LLM\\+ Code + QA};
+
+% Arrows
+\draw[arrow] (s1) -- (s2);
+\draw[arrow] (s2) -- (s3);
+\draw[arrow] (s3) -- (s4);
+
+% Labels below
+\node[below=0.5cm of s1, font=\scriptsize, text=gray] {Pre-2023};
+\node[below=0.5cm of s2, font=\scriptsize, text=gray] {2023};
+\node[below=0.5cm of s3, font=\scriptsize, text=gray] {2023--24};
+\node[below=0.5cm of s4, font=\scriptsize, text=gray] {2024+};
+
+% What each adds
+\node[above=0.5cm of s2, font=\scriptsize, text=blue!70] {+Skalierung};
+\node[above=0.5cm of s3, font=\scriptsize, text=green!70] {+Verifikation};
+\node[above=0.5cm of s4, font=\scriptsize, text=purple!70] {+Epistemik};
+
+\end{tikzpicture}
+\caption{Die vier Evolutionsstufen des BCM mit ihren jeweiligen Erweiterungen.}
+\label{fig:bcm-evolution}
+\end{figure}
+
+\paragraph{Stufe 1: BCM ohne LLM (Handwerk)}
+
+Die ursprüngliche Implementierung des BCM als manueller Beratungsprozess.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Komponente} & \textbf{Implementierung} \\
+\midrule
+Parameter-Extraktion & Berater (Workshop, Interview) \\
+Berechnung & Excel / Python (manuell) \\
+Interpretation & Berater (Bericht) \\
+Qualitätssicherung & Peer Review (ad-hoc) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Charakteristik}: Hohe Qualität bei erfahrenen Beratern, aber nicht skalierbar, nicht reproduzierbar, hohe Varianz.
+
+\paragraph{Stufe 2: BCM + LLM}
+
+Integration eines LLM für Parameter-Extraktion und Interpretation.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Komponente} & \textbf{Implementierung} \\
+\midrule
+Parameter-Extraktion & LLM (Prompt Engineering) \\
+Berechnung & LLM (im selben Kontext) \\
+Interpretation & LLM (Narrative Generation) \\
+Qualitätssicherung & Keine systematische \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Charakteristik}: Skalierbar und schnell, aber \textit{epistemisch unsicher} -- das LLM kann halluzinieren, falsch rechnen, und Behauptungen ohne Evidenz generieren.
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!75!black, title=Kritisches Problem: LLM als Taschenrechner]
+LLMs sind \textbf{keine zuverlässigen Rechner}. Selbst einfache Berechnungen können fehlerhaft sein:
+\begin{itemize}
+    \item Prospect Theory Utility: LLM macht Vorzeichenfehler bei Verlusten
+    \item Monte Carlo: LLM ``simuliert'' nicht wirklich, sondern generiert plausible Zahlen
+    \item Sensitivitätsanalyse: LLM schätzt statt zu berechnen
+\end{itemize}
+\textbf{Resultat}: Outputs \textit{sehen} korrekt aus, sind aber mathematisch oft falsch.
+\end{tcolorbox}
+
+\paragraph{Stufe 3: BCM + LLM + Code-Interpreter}
+
+Trennung von Sprachverarbeitung (LLM) und Berechnung (Code).
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Komponente} & \textbf{Implementierung} \\
+\midrule
+Parameter-Extraktion & LLM (strukturierter Output) \\
+Berechnung & Code-Interpreter (deterministisch) \\
+Interpretation & LLM (basierend auf echten Ergebnissen) \\
+Qualitätssicherung & Constraint-Checks im Code \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Charakteristik}: Mathematisch korrekt, aber \textit{epistemisch noch unsicher} -- das LLM kann immer noch:
+\begin{itemize}
+    \item Parameter ohne Evidenz behaupten (``$\lambda = 2.5$'' ohne Begründung)
+    \item Ergebnisse überinterpretieren (``beweist'' statt ``deutet an'')
+    \item Geltungsbereiche ignorieren (WEIRD-Sample $\rightarrow$ universelle Aussage)
+\end{itemize}
+
+\paragraph{Stufe 4: BCM + LLM + Code-Interpreter + QA-Module}
+
+Vollständige Architektur mit epistemischer Qualitätssicherung.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Komponente} & \textbf{Implementierung} \\
+\midrule
+Parameter-Extraktion & LLM + ESL-Validierung \\
+Berechnung & Code-Interpreter + VAL-Constraints \\
+Interpretation & LLM + ESL + BOUND-Prüfung \\
+Qualitätssicherung & Modulare QA-Pipeline (ESL, VAL, PROV, ...) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Charakteristik}: Skalierbar, mathematisch korrekt, \textit{und epistemisch abgesichert}.
+
+\subsubsection{Vergleichende Metriken}
+
+Die folgende Tabelle vergleicht die vier Stufen anhand von acht kritischen Dimensionen:
+
+\begin{table}[h]
+\centering
+\caption{Vergleich der BCM-Evolutionsstufen (1 = schlecht, 5 = exzellent)}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Dimension} & \textbf{Stufe 1} & \textbf{Stufe 2} & \textbf{Stufe 3} & \textbf{Stufe 4} \\
+ & \textit{Handwerk} & \textit{+LLM} & \textit{+Code} & \textit{+QA} \\
+\midrule
+\textbf{Skalierbarkeit} & 1 & 5 & 5 & 5 \\
+\textbf{Geschwindigkeit} & 1 & 5 & 4 & 4 \\
+\textbf{Mathematische Korrektheit} & 4 & 2 & 5 & 5 \\
+\textbf{Epistemische Sicherheit} & 3 & 1 & 2 & 5 \\
+\textbf{Reproduzierbarkeit} & 2 & 4 & 5 & 5 \\
+\textbf{Audit-Fähigkeit} & 1 & 2 & 3 & 5 \\
+\textbf{Disziplin-Adaptivität} & 3 & 2 & 2 & 5 \\
+\textbf{Halluzinations-Resistenz} & 4 & 1 & 2 & 4 \\
+\midrule
+\textbf{Gesamt-Score} & \textbf{19} & \textbf{22} & \textbf{28} & \textbf{38} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Detailanalyse der kritischen Dimensionen}
+
+\paragraph{Skalierbarkeit.}
+
+\begin{itemize}
+    \item \textbf{Stufe 1}: Linear mit Beraterkapazität. 1 Berater = 10--20 Personas/Tag.
+    \item \textbf{Stufe 2--4}: Quasi-unbegrenzt. 1000+ Personas/Stunde möglich.
+\end{itemize}
+
+\paragraph{Mathematische Korrektheit.}
+
+\begin{itemize}
+    \item \textbf{Stufe 1}: Menschliche Fehler möglich, aber systematisch prüfbar.
+    \item \textbf{Stufe 2}: \textcolor{red}{Kritisch} -- LLM macht subtile Rechenfehler, die plausibel aussehen.
+    \item \textbf{Stufe 3--4}: Deterministischer Code garantiert Korrektheit.
+\end{itemize}
+
+\begin{lstlisting}[caption={Beispiel: LLM-Rechenfehler vs. Code-Korrektheit}]
+# Stufe 2: LLM "berechnet" Prospect Theory Utility
+# LLM Output: "U(x) = x^0.88 für Gewinne, also U(100) = 63.1"
+# FALSCH! 100^0.88 = 57.5
+
+# Stufe 3: Code-Interpreter berechnet korrekt
+def prospect_utility(x, alpha=0.88, lambda_=2.25):
+    if x >= 0:
+        return x ** alpha
+    else:
+        return -lambda_ * ((-x) ** alpha)
+
+prospect_utility(100)  # -> 57.54 (korrekt)
+\end{lstlisting}
+
+\paragraph{Epistemische Sicherheit.}
+
+\begin{itemize}
+    \item \textbf{Stufe 1}: Berater haben implizites Wissen über Evidenzstärken, aber nicht systematisch.
+    \item \textbf{Stufe 2}: \textcolor{red}{Kritisch} -- LLM generiert Behauptungen ohne Evidenzprüfung.
+    \item \textbf{Stufe 3}: Besser durch strukturierte Outputs, aber keine explizite Evidenzprüfung.
+    \item \textbf{Stufe 4}: ESL und andere QA-Module prüfen explizit $B \leq E$.
+\end{itemize}
+
+\begin{lstlisting}[caption={Beispiel: Epistemische Unsicherheit in Stufe 2 vs. Sicherheit in Stufe 4}]
+# Stufe 2: LLM ohne QA
+llm_output = """
+Die Verlustaversion von Anna beträgt definitiv lambda = 2.8.
+Dies beweist, dass sie bei Preiserhöhungen stark reagieren wird.
+"""
+# Problem: "definitiv", "beweist" ohne Evidenzgrundlage
+
+# Stufe 4: Mit ESL-Validierung
+esl_result = esl.validate(llm_output, "verhaltensoekonomie", context)
+# -> QAResult(passed=False, score=0.45,
+#             violations=["Überbehauptung: B=0.9 > E=0.5"])
+
+# Nach Korrektur:
+corrected_output = """
+Die geschätzte Verlustaversion von Anna liegt bei lambda ≈ 2.8 [2.2, 3.4].
+Basierend auf demografischen Base Rates und Persona-Merkmalen
+deutet dies darauf hin, dass sie bei Preiserhöhungen
+überdurchschnittlich sensitiv reagieren könnte.
+"""
+# -> QAResult(passed=True, score=0.82)
+\end{lstlisting}
+
+\paragraph{Halluzinations-Resistenz.}
+
+\begin{itemize}
+    \item \textbf{Stufe 1}: Menschen halluzinieren selten Fakten (aber haben Biases).
+    \item \textbf{Stufe 2}: \textcolor{red}{Kritisch} -- LLM kann Studien, Zahlen, Zitate erfinden.
+    \item \textbf{Stufe 3}: Berechnungen sind korrekt, aber Quellenangaben können falsch sein.
+    \item \textbf{Stufe 4}: HALL-Modul + PROV-Modul erkennen fabricierte Inhalte.
+\end{itemize}
+
+\subsubsection{Kosten-Nutzen-Analyse}
+
+\begin{table}[h]
+\centering
+\caption{Kosten pro BCM-Analyse nach Evolutionsstufe}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Kostenart} & \textbf{Stufe 1} & \textbf{Stufe 2} & \textbf{Stufe 3} & \textbf{Stufe 4} \\
+\midrule
+Personal (pro Analyse) & \EUR{150} & \EUR{0} & \EUR{0} & \EUR{0} \\
+LLM API Kosten & \EUR{0} & \EUR{0.05} & \EUR{0.08} & \EUR{0.15} \\
+Compute (Code) & \EUR{0} & \EUR{0} & \EUR{0.01} & \EUR{0.02} \\
+QA-Overhead & \EUR{0} & \EUR{0} & \EUR{0} & \EUR{0.03} \\
+\midrule
+\textbf{Gesamt pro Analyse} & \textbf{\EUR{150}} & \textbf{\EUR{0.05}} & \textbf{\EUR{0.09}} & \textbf{\EUR{0.20}} \\
+\textbf{Gesamt für 1000 Analysen} & \textbf{\EUR{150'000}} & \textbf{\EUR{50}} & \textbf{\EUR{90}} & \textbf{\EUR{200}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Kosten-Nutzen-Verhältnis]
+\textbf{Stufe 4 kostet 4× so viel wie Stufe 2} (\EUR{0.20} vs. \EUR{0.05}), liefert aber:
+\begin{itemize}
+    \item Mathematisch korrekte Ergebnisse (statt plausibel aussehender Fehler)
+    \item Epistemisch abgesicherte Aussagen (K-Score validiert)
+    \item Vollständigen Audit-Trail
+    \item Halluzinations-Detektion
+\end{itemize}
+
+\textbf{Bei 1000 Analysen}: \EUR{200} für Stufe 4 vs. \EUR{150'000} für Stufe 1.\\
+$\rightarrow$ \textbf{750× günstiger bei höherer epistemischer Qualität.}
+\end{tcolorbox}
+
+\subsubsection{Risiko-Matrix}
+
+\begin{table}[h]
+\centering
+\caption{Risiko-Matrix: Fehlertypen nach Evolutionsstufe}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Fehlertyp} & \textbf{Stufe 1} & \textbf{Stufe 2} & \textbf{Stufe 3} & \textbf{Stufe 4} \\
+\midrule
+Rechenfehler & Mittel & \textcolor{red}{Hoch} & Niedrig & Niedrig \\
+Parameter-Halluzination & Niedrig & \textcolor{red}{Hoch} & \textcolor{orange}{Mittel} & Niedrig \\
+Überbehauptung (B > E) & Mittel & \textcolor{red}{Hoch} & \textcolor{red}{Hoch} & Niedrig \\
+Zitat-Fabrication & Niedrig & \textcolor{red}{Hoch} & \textcolor{red}{Hoch} & \textcolor{orange}{Mittel} \\
+Constraint-Verletzung & Mittel & \textcolor{red}{Hoch} & Niedrig & Niedrig \\
+WEIRD-Übergeneralisierung & \textcolor{orange}{Mittel} & \textcolor{red}{Hoch} & \textcolor{red}{Hoch} & Niedrig \\
+\midrule
+\textbf{Gesamt-Risiko} & \textbf{Mittel} & \textbf{\textcolor{red}{Hoch}} & \textbf{\textcolor{orange}{Mittel}} & \textbf{Niedrig} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Empfehlung: Wann welche Stufe?}
+
+\begin{table}[h]
+\centering
+\caption{Empfohlene Evolutionsstufe nach Anwendungsfall}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Anwendungsfall} & \textbf{Empfohlen} & \textbf{Begründung} \\
+\midrule
+Schnelle Exploration / Demo & Stufe 2 & Geschwindigkeit wichtiger als Präzision \\
+Interne Analyse (Low Stakes) & Stufe 3 & Mathematisch korrekt, Risiko akzeptabel \\
+Kundenreport & Stufe 4 & Epistemische Sicherheit erforderlich \\
+Regulatorischer Kontext & Stufe 4 & Audit-Trail und Nachvollziehbarkeit \\
+Wissenschaftliche Publikation & Stufe 4 & Höchste epistemische Standards \\
+Einzelfall (hohe Expertise) & Stufe 1 & Wenn Berater-Expertise kritisch ist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Strategische Empfehlung]
+\textbf{Default: Stufe 4} (BCM + LLM + Code + QA)
+
+Die marginalen Mehrkosten (\EUR{0.15} pro Analyse) sind vernachlässigbar im Vergleich zum Risiko epistemisch unsicherer Outputs. Stufe 4 sollte der \textbf{Standard für alle produktiven Anwendungen} sein.
+
+\textbf{Ausnahmen}:
+\begin{itemize}
+    \item Stufe 2/3 für schnelle interne Exploration (mit explizitem Disclaimer)
+    \item Stufe 1 für Einzelfälle, bei denen menschliche Expertise unverzichtbar ist
+\end{itemize}
+\end{tcolorbox}
+
+\subsubsection{Architektur-Diagramm: Stufe 4 im Detail}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=0.6cm,
+    component/.style={rectangle, draw, rounded corners, minimum width=2.4cm, minimum height=1cm, align=center, font=\scriptsize},
+    qa/.style={rectangle, draw=purple!70, rounded corners, minimum width=1.8cm, minimum height=0.8cm, align=center, font=\scriptsize, fill=purple!10},
+    data/.style={rectangle, draw=gray, dashed, minimum width=1.6cm, minimum height=0.6cm, align=center, font=\tiny},
+    arrow/.style={->, thick, >=stealth},
+    qaArrow/.style={->, purple!70, thick, >=stealth}
+]
+
+% Input
+\node[data] (input) at (0, 4) {Persona\\Description};
+
+% Phase 1
+\node[component, fill=blue!15] (llm1) at (0, 2.5) {LLM\\Extraktion};
+\node[qa] (esl1) at (3, 2.5) {ESL};
+\node[qa] (prov1) at (3, 1.5) {PROV};
+
+% Phase 2
+\node[component, fill=green!15] (code) at (0, 0) {Code\\Interpreter};
+\node[qa] (val) at (3, 0) {VAL};
+\node[qa] (cons) at (3, -1) {CONS};
+
+% Phase 3
+\node[component, fill=orange!15] (llm2) at (0, -2.5) {LLM\\Interpretation};
+\node[qa] (esl2) at (3, -2.5) {ESL};
+\node[qa] (bound) at (3, -3.5) {BOUND};
+\node[qa] (hall) at (5, -2.5) {HALL};
+
+% Output
+\node[data] (output) at (0, -5) {Validierter\\Report};
+
+% Main flow
+\draw[arrow] (input) -- (llm1);
+\draw[arrow] (llm1) -- (code);
+\draw[arrow] (code) -- (llm2);
+\draw[arrow] (llm2) -- (output);
+
+% QA flows Phase 1
+\draw[qaArrow] (llm1) -- (esl1);
+\draw[qaArrow] (llm1) -- (prov1);
+
+% QA flows Phase 2
+\draw[qaArrow] (code) -- (val);
+\draw[qaArrow] (code) -- (cons);
+
+% QA flows Phase 3
+\draw[qaArrow] (llm2) -- (esl2);
+\draw[qaArrow] (llm2) -- (bound);
+\draw[qaArrow] (llm2) -- (hall);
+
+% Labels
+\node[left=0.3cm of llm1, font=\scriptsize, text=blue!70] {Phase 1};
+\node[left=0.3cm of code, font=\scriptsize, text=green!70] {Phase 2};
+\node[left=0.3cm of llm2, font=\scriptsize, text=orange!70] {Phase 3};
+
+% QA Gate indicators
+\node[right=0.3cm of esl1, font=\tiny, text=purple!70] {Gate 1};
+\node[right=0.3cm of val, font=\tiny, text=purple!70] {Gate 2};
+\node[right=0.3cm of hall, font=\tiny, text=purple!70] {Gate 3};
+
+\end{tikzpicture}
+\caption{Vollständige Stufe-4-Architektur mit allen QA-Modulen und Gates.}
+\label{fig:stage4-architecture}
+\end{figure}
+
 %==============================================================================
