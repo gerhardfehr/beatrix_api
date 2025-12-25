@@ -167,6 +167,60 @@ ESL provides a systematic methodology for calibrating claim strength to underlyi
 \newpage
 
 % =============================================================================
+% EXECUTIVE SUMMARY
+% =============================================================================
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\textbf{What is ESL?} \\
+A universal Quality Assurance (QA) framework for LLM-assisted knowledge systems that ensures claim strength aligns with evidence quality.
+
+\vspace{0.5em}
+\textbf{The Core Problem} \\
+LLMs can generate authoritative-sounding text regardless of evidential grounding. At scale (1000+ outputs/hour), even small overclaiming rates (15\%) produce massive epistemic risk.
+
+\vspace{0.5em}
+\textbf{The Solution: The K-Metric} \\
+\[
+K = 1 - \frac{|B - E|}{B_{\max}}
+\]
+where $B$ = claim strength (linguistic markers), $E$ = evidence quality. \\
+$K \geq K_{\text{stable}}$ indicates calibrated claims; $K < K_{\text{stable}}$ flags overclaiming.
+
+\vspace{0.5em}
+\textbf{Key Properties}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Universal}: Domain-agnostic core; discipline-specific calibration
+    \item \textbf{LLM-Agnostic}: Works with GPT, Claude, Llama, or any model
+    \item \textbf{Modular}: Integrates as QA layer into existing pipelines
+    \item \textbf{Self-Validating}: Applies its own methodology recursively
+    \item \textbf{Empirically Validated}: N=115 claims, 100\% accuracy
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Validation Status (ESL 2.2)}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Physics: $K_{\text{stable}} = 0.79$ [0.75, 0.82], N=25
+    \item Economics: $K_{\text{stable}} = 0.76$ [0.72, 0.80], N=28
+    \item Behavioral Economics: $K_{\text{stable}} = 0.60$ [0.53, 0.67], N=27
+    \item Cross-domain accuracy: 115/115 = 100\%
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Applications Demonstrated}
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{BCM}: Behavioral parameter registry with ESL validation
+    \item \textbf{BEATRIX}: AI-assisted analysis (overclaiming: 35\% $\to$ 4\%)
+    \item \textbf{Literature ESL}: Author classification (N=35, $r=0.98$)
+\end{enumerate}
+}}
+\end{center}
+
+\newpage
+
+% =============================================================================
 % 1. INTRODUCTION
 % =============================================================================
 \section{Introduction}
@@ -285,6 +339,30 @@ This paper presents ESL as an \textbf{empirically validated framework}. The foll
 \end{eslbox}
 
 % =============================================================================
+% PART I: CORE FRAMEWORK
+% =============================================================================
+
+\part*{Part I: Core Framework}
+\addcontentsline{toc}{part}{Part I: Core Framework}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{The K-Metric and Evidence Hierarchies} \\[0.5em]
+Part I establishes ESL's theoretical foundation:
+\begin{itemize}[noitemsep]
+    \item The K-metric for claim-evidence alignment
+    \item Lexical primitives and ontological foundations
+    \item Discipline-specific evidence hierarchies
+    \item Linguistic markers for claim strength
+\end{itemize}
+These components are \textbf{universal}---applicable to any domain with appropriate calibration.
+}}
+\end{center}
+
+\vspace{1em}
+
+% =============================================================================
 % 2. THEORETICAL FOUNDATIONS
 % =============================================================================
 \section{Theoretical Foundations}
@@ -399,206 +477,206 @@ These categories are empirically calibrated. Behavioral economics uses $K_{\text
 \end{eslbox}
 
 % =============================================================================
-% 3. LEXIKALISCHE PRIMITIVE: DIE ONTOLOGISCHE BASIS
+% 3. LEXICAL PRIMITIVES: THE ONTOLOGICAL FOUNDATION
 % =============================================================================
-\section{Lexikalische Primitive: Die ontologische Basis}
+\section{Lexical Primitives: The Ontological Foundation}
 \label{sec:primitive}
 
 % ESL Self-Assessment: B = 0.75, E = 0.78 → K = 0.96
 
-Eine zentrale Innovation des ESL-Frameworks ist die Unterscheidung zwischen \textbf{lexikalischen Primitiven} (Grundbegriffen) und \textbf{Tokens}. Diese Unterscheidung ist fundamental für das Verständnis, warum LLM-basierte Systeme ohne semantische Verankerung epistemisch instabil sind.
+A central innovation of the ESL framework is the distinction between \textbf{lexical primitives} (fundamental concepts) and \textbf{tokens}. This distinction is fundamental for understanding why LLM-based systems without semantic grounding are epistemically unstable.
 
-\subsection{Grundbegriff vs. Token: Eine fundamentale Unterscheidung}
+\subsection{Fundamental Concept vs. Token: A Critical Distinction}
 
-\begin{definition}[Lexikalisches Primitiv / Grundbegriff]
+\begin{definition}[Lexical Primitive]
 \label{def:primitiv}
-Ein \textbf{lexikalisches Primitiv} (Grundbegriff) ist ein semantisch fundamentales Konzept einer Disziplin, das folgende Eigenschaften erfüllt:
+A \textbf{lexical primitive} is a semantically fundamental concept of a discipline with the following properties:
 \begin{enumerate}
-    \item \textbf{Irreduzibilität}: Kann nicht durch andere Primitive der Disziplin definiert werden
-    \item \textbf{Orthogonalität}: Unabhängig von anderen Primitiven messbar
-    \item \textbf{Generativität}: Alle komplexeren Konzepte der Disziplin sind aus Primitiven ableitbar
-    \item \textbf{Semantische Verankerung}: Hat eine definierte Bedeutung, Referenz und theoretische Rolle
+    \item \textbf{Irreducibility}: Cannot be defined by other primitives of the discipline
+    \item \textbf{Orthogonality}: Measurable independently of other primitives
+    \item \textbf{Generativity}: All complex concepts of the discipline are derivable from primitives
+    \item \textbf{Semantic Grounding}: Has defined meaning, reference, and theoretical role
 \end{enumerate}
 \end{definition}
 
 \begin{definition}[Token]
 \label{def:token}
-Ein \textbf{Token} ist eine Zeichenkette, die von einem NLP-System zur Verarbeitung segmentiert wird. Tokens sind rein \textbf{syntaktische} Einheiten:
+A \textbf{token} is a character string segmented by an NLP system for processing. Tokens are purely \textbf{syntactic} units:
 \begin{itemize}
-    \item Keine inhärente Bedeutung (nur statistische Kookkurrenz-Muster)
-    \item Keine Referenz auf Realwelt-Entitäten
-    \item Keine theoretische Rolle
-    \item Kontextabhängige Interpretation durch das Modell
+    \item No inherent meaning (only statistical co-occurrence patterns)
+    \item No reference to real-world entities
+    \item No theoretical role
+    \item Context-dependent interpretation by the model
 \end{itemize}
 \end{definition}
 
 \begin{table}[h]
 \centering
-\caption{Grundbegriff vs. Token: Systematischer Vergleich}
+\caption{Fundamental Concept vs. Token: Systematic Comparison}
 \label{tab:primitiv-token}
 \begin{tabular}{p{3cm}p{5.2cm}p{5.2cm}}
 \toprule
-\textbf{Dimension} & \textbf{Grundbegriff (Primitiv)} & \textbf{Token} \\
+\textbf{Dimension} & \textbf{Primitive (Fundamental)} & \textbf{Token} \\
 \midrule
-\textbf{Ebene} & Semantisch (Bedeutung) & Syntaktisch (Zeichenkette) \\
-\textbf{Definition} & Explizit, formal & Implizit, statistisch \\
-\textbf{Referenz} & Definierte Realwelt-Entität & Keine (nur Embedding-Vektor) \\
-\textbf{Messbarkeit} & Operationalisiert & Nicht messbar \\
-\textbf{Theor. Rolle} & Axiomatisch fundiert & Keine \\
-\textbf{Wahrheitsfähig} & Ja (Aussagen sind wahr/falsch) & Nein \\
+\textbf{Level} & Semantic (meaning) & Syntactic (string) \\
+\textbf{Definition} & Explicit, formal & Implicit, statistical \\
+\textbf{Reference} & Defined real-world entity & None (only embedding vector) \\
+\textbf{Measurability} & Operationalized & Not measurable \\
+\textbf{Theoretical Role} & Axiomatically grounded & None \\
+\textbf{Truth-Capable} & Yes (statements are true/false) & No \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{practicalbox}[title={Beispiel: ``Nutzen'' als Grundbegriff vs. Token}]
-\textbf{Als Grundbegriff} (Ökonomie):
+\begin{practicalbox}[title={Example: ``Utility'' as Primitive vs. Token}]
+\textbf{As Primitive} (Economics):
 \begin{itemize}
     \item Symbol: $U$
-    \item Definition: Numerische Repräsentation von Präferenzen
-    \item Axiome: Vollständigkeit, Transitivität, Kontinuität
-    \item Messung: Revealed Preference, Choice Experiments
-    \item Evidenz-Level: MA-EPI-01 (axiomatisch + empirisch)
+    \item Definition: Numerical representation of preferences
+    \item Axioms: Completeness, transitivity, continuity
+    \item Measurement: Revealed preference, choice experiments
+    \item Evidence Level: MA-EPI-01 (axiomatic + empirical)
 \end{itemize}
 
-\textbf{Als Token} (LLM):
+\textbf{As Token} (LLM):
 \begin{itemize}
-    \item Repräsentation: Embedding-Vektor $\vec{v} \in \mathbb{R}^{4096}$
-    \item ``Bedeutung'': Statistische Nähe zu ``Vorteil'', ``Gewinn'', ``utility''
-    \item Keine axiomatische Fundierung
-    \item Keine Unterscheidung kardinal/ordinal
+    \item Representation: Embedding vector $\vec{v} \in \mathbb{R}^{4096}$
+    \item ``Meaning'': Statistical proximity to ``benefit'', ``profit'', ``advantage''
+    \item No axiomatic foundation
+    \item No distinction cardinal/ordinal
 \end{itemize}
 
-\textbf{Problem}: Ein LLM kann ``Der Nutzen steigt um 15\%'' generieren, ohne zu wissen, ob kardinaler Nutzen überhaupt messbar ist (umstritten!).
+\textbf{Problem}: An LLM can generate ``Utility increases by 15\%'' without knowing whether cardinal utility is even measurable (contested!).
 \end{practicalbox}
 
-\subsection{Warum diese Unterscheidung für ESL kritisch ist}
+\subsection{Why This Distinction is Critical for ESL}
 
-Die Token-Grundbegriff-Unterscheidung erklärt, warum LLMs ohne QA-Module epistemisch problematisch sind:
+The token-primitive distinction explains why LLMs without QA modules are epistemically problematic:
 
 \begin{enumerate}
-    \item \textbf{LLMs operieren auf Tokens}: Sie haben keinen Zugang zu den axiomatischen Strukturen, die Grundbegriffe definieren.
+    \item \textbf{LLMs operate on tokens}: They have no access to the axiomatic structures that define primitives.
 
-    \item \textbf{Grundbegriffe tragen Evidenzgewichte}: Ein Satz über einen gut fundierten Grundbegriff (z.B. $\lambda$) hat einen höheren $E$-Wert als ein Satz über ein schlecht fundiertes Konzept.
+    \item \textbf{Primitives carry evidence weights}: A sentence about a well-founded primitive (e.g., $\lambda$) has a higher $E$-value than one about a poorly founded concept.
 
-    \item \textbf{Tokens täuschen Verständnis vor}: ``Loss aversion demonstrates...'' sieht für ein LLM genauso ``natürlich'' aus wie ``Loss aversion proves...'', obwohl $B$ fundamental verschieden ist.
+    \item \textbf{Tokens simulate understanding}: ``Loss aversion demonstrates...'' looks as ``natural'' to an LLM as ``Loss aversion proves...'', despite fundamentally different $B$-values.
 
-    \item \textbf{ESL übersetzt Token $\to$ Semantik}: Das ESL-Modul erkennt den B-Wert-Unterschied unabhängig von der Token-Repräsentation.
+    \item \textbf{ESL translates Token $\to$ Semantics}: The ESL module recognizes the B-value difference independent of token representation.
 \end{enumerate}
 
-\begin{warningbox}[title={Das Token-Illusion-Problem}]
-LLMs erzeugen \textbf{Token-Sequenzen}, die statistisch plausibel sind, aber keine \textbf{semantische Verankerung} haben.
+\begin{warningbox}[title={The Token Illusion Problem}]
+LLMs generate \textbf{token sequences} that are statistically plausible but lack \textbf{semantic grounding}.
 
-\textbf{Beispiel einer LLM-Halluzination}:
+\textbf{Example of LLM Hallucination}:
 \begin{quote}
-``Die Verlustaversion ($\lambda$) beträgt exakt 2.73, wie Schmidt et al. (2019) definitiv bewiesen hat.''
+``Loss aversion ($\lambda$) is exactly 2.73, as Schmidt et al. (2019) definitively proved.''
 \end{quote}
 
-\textbf{Token-Ebene}: Grammatisch korrekt, statistisch plausibel \\
-\textbf{Grundbegriff-Ebene}:
+\textbf{Token Level}: Grammatically correct, statistically plausible \\
+\textbf{Primitive Level}:
 \begin{itemize}
-    \item $\lambda = 2.73$ ist falsche Präzision (korrekt: $\approx 2.0$--$2.5$)
-    \item ``Schmidt et al. (2019)'' existiert möglicherweise nicht
-    \item ``definitiv bewiesen'' ist Overclaiming ($B = 0.95$)
+    \item $\lambda = 2.73$ is false precision (correct: $\approx 2.0$--$2.5$)
+    \item ``Schmidt et al. (2019)'' may not exist
+    \item ``definitively proved'' is overclaiming ($B = 0.95$)
 \end{itemize}
 \end{warningbox}
 
-\subsection{Disziplinspezifische Primitive-Ontologien}
+\subsection{Discipline-Specific Primitive Ontologies}
 
-Jede Disziplin besitzt eine \textbf{Primitive-Ontologie}---eine minimale Menge von Grundbegriffen, aus denen alle Fachkonzepte ableitbar sind.
+Each discipline possesses a \textbf{primitive ontology}---a minimal set of fundamental concepts from which all domain concepts are derivable.
 
-\subsubsection{Verhaltensökonomie: 20 Primitive in 6 Kategorien}
+\subsubsection{Behavioral Economics: 20 Primitives in 6 Categories}
 
 \begin{table}[h]
 \centering
-\caption{Primitive-Ontologie der Verhaltensökonomie}
+\caption{Primitive Ontology of Behavioral Economics}
 \label{tab:primitive-be}
 \begin{tabular}{clcl}
 \toprule
-\textbf{Kat.} & \textbf{Name} & \textbf{$n$} & \textbf{Primitive (Symbole)} \\
+\textbf{Cat.} & \textbf{Name} & \textbf{$n$} & \textbf{Primitives (Symbols)} \\
 \midrule
-1 & Präferenz & 5 & $U$, $r$, $\lambda$, $\beta$, $\alpha$ \\
+1 & Preference & 5 & $U$, $r$, $\lambda$, $\beta$, $\alpha$ \\
 2 & Belief & 3 & $\pi$, $\mu$, $\sigma_b$ \\
 3 & Motivation & 4 & $\theta$, $\varepsilon$, $\gamma$, $I$ \\
 4 & Constraint & 3 & $C$, $K$, $t_c$ \\
-5 & Kontext & 4 & $\omega$, $S$, $F$, $N$ \\
-6 & Zeit & 1 & $\tau$ \\
+5 & Context & 4 & $\omega$, $S$, $F$, $N$ \\
+6 & Time & 1 & $\tau$ \\
 \midrule
 & \textbf{Total} & \textbf{20} & \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{proposition}[Ableitbarkeitsthese]
+\begin{proposition}[Derivability Thesis]
 \label{prop:derivability}
-Alle $\sim$113 META-Axiome des BCM sind aus den 20 Primitiven formal ableitbar:
+All $\sim$113 META-axioms of BCM are formally derivable from the 20 primitives:
 \begin{equation}
-\forall \text{MA-X-Y} \in \text{BCM}: \exists \text{ Formel } F: \text{MA-X-Y} \Leftrightarrow F(\text{Primitive})
+\forall \text{MA-X-Y} \in \text{BCM}: \exists \text{ formula } F: \text{MA-X-Y} \Leftrightarrow F(\text{Primitives})
 \end{equation}
 \end{proposition}
 
-\textbf{Beispiele}:
+\textbf{Examples}:
 \begin{itemize}
-    \item \textbf{MA-PRE-01} (Prospect Theory): Ableitbar aus $\{U, \lambda, \alpha\}$
-    \item \textbf{MA-TIM-01} (Hyperbolisches Diskontieren): Ableitbar aus $\{U, \beta, \tau\}$
-    \item \textbf{MA-SOC-01} (Soziale Präferenzen): Ableitbar aus $\{U, S, I\}$
+    \item \textbf{MA-PRE-01} (Prospect Theory): Derivable from $\{U, \lambda, \alpha\}$
+    \item \textbf{MA-TIM-01} (Hyperbolic Discounting): Derivable from $\{U, \beta, \tau\}$
+    \item \textbf{MA-SOC-01} (Social Preferences): Derivable from $\{U, S, I\}$
 \end{itemize}
 
-\subsubsection{Ökonomie (Mainstream): 24 Primitive in 6 Kategorien}
+\subsubsection{Economics (Mainstream): 24 Primitives in 6 Categories}
 
 \begin{table}[h]
 \centering
-\caption{Primitive der Ökonomie (Auswahl)}
+\caption{Primitives of Economics (Selection)}
 \label{tab:primitive-econ}
 \begin{tabular}{cll}
 \toprule
-\textbf{Kat.} & \textbf{Kategorie} & \textbf{Zentrale Primitive} \\
+\textbf{Cat.} & \textbf{Category} & \textbf{Core Primitives} \\
 \midrule
-1 & Präferenz/Nutzen & $U$, $\succeq$ (Präferenzrelation) \\
-2 & Markt/Preis & $p$, $D$ (Nachfrage), $S$ (Angebot) \\
-3 & Gleichgewicht & $E^*$, $\eta$ (Elastizität) \\
-4 & Information & $I$, $\sigma$ (Signal) \\
-5 & Zeit/Dynamik & $\delta$, $g$ (Wachstum) \\
-6 & Rationalität & $\max$, $\mathbb{E}$ \\
+1 & Preference/Utility & $U$, $\succeq$ (preference relation) \\
+2 & Market/Price & $p$, $D$ (demand), $S$ (supply) \\
+3 & Equilibrium & $E^*$, $\eta$ (elasticity) \\
+4 & Information & $I$, $\sigma$ (signal) \\
+5 & Time/Dynamics & $\delta$, $g$ (growth) \\
+6 & Rationality & $\max$, $\mathbb{E}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsubsection{Vererbung: Verhaltensökonomie als Derivat der Ökonomie}
+\subsubsection{Inheritance: Behavioral Economics as Economics Derivative}
 
-Verhaltensökonomie \textbf{erbt} Primitive und \textbf{modifiziert} sie:
+Behavioral economics \textbf{inherits} primitives and \textbf{modifies} them:
 \begin{itemize}
-    \item $U_{\text{BE}} = U_{\text{Econ}}$ mit Referenzpunkt-Abhängigkeit
-    \item $\delta_{\text{BE}} = \beta \cdot \delta_{\text{Econ}}$ (hyperbolisch)
-    \item $\pi_{\text{BE}} = w(\pi_{\text{Econ}})$ (gewichtet)
+    \item $U_{\text{BE}} = U_{\text{Econ}}$ with reference point dependence
+    \item $\delta_{\text{BE}} = \beta \cdot \delta_{\text{Econ}}$ (hyperbolic)
+    \item $\pi_{\text{BE}} = w(\pi_{\text{Econ}})$ (weighted)
 \end{itemize}
 
-\subsection{Primitive und Evidenz-Qualität}
+\subsection{Primitives and Evidence Quality}
 
-Die Fundierung eines Grundbegriffs beeinflusst den $E$-Wert:
+The foundation of a primitive influences its $E$-value:
 
 \begin{table}[h]
 \centering
-\caption{Primitive-Fundierung und $E$-Werte}
+\caption{Primitive Foundation and $E$-Values}
 \label{tab:primitive-E}
 \begin{tabular}{lccp{4.5cm}}
 \toprule
-\textbf{Primitiv} & \textbf{Fundierung} & \textbf{$E$-Basis} & \textbf{Begründung} \\
+\textbf{Primitive} & \textbf{Foundation} & \textbf{$E$-Basis} & \textbf{Justification} \\
 \midrule
-$\lambda$ & Stark & 0.88--0.92 & Trianguliert \\
-$\beta$ & Mittel & 0.75--0.82 & Lab + Field, Heterogenität \\
-$U$ & Axiomatisch & 0.70--0.78 & Theoretisch, Messung umstritten \\
-$I$ (Identität) & Schwach & 0.55--0.65 & Schwer operationalisierbar \\
+$\lambda$ & Strong & 0.88--0.92 & Triangulated \\
+$\beta$ & Medium & 0.75--0.82 & Lab + Field, heterogeneity \\
+$U$ & Axiomatic & 0.70--0.78 & Theoretical, measurement contested \\
+$I$ (Identity) & Weak & 0.55--0.65 & Difficult to operationalize \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{insightbox}
-\textbf{ESL-Prinzip: Primitive-Awareness} \\
-Der $E$-Wert hängt nicht nur von der Studienqualität ab, sondern auch von der \textbf{Fundierung der verwendeten Grundbegriffe}. Eine methodisch perfekte Studie über ein schlecht definiertes Primitiv erreicht keinen hohen $E$-Wert.
+\textbf{ESL Principle: Primitive Awareness} \\
+The $E$-value depends not only on study quality but also on the \textbf{foundation of the primitives used}. A methodologically perfect study about a poorly defined primitive cannot achieve a high $E$-value.
 \end{insightbox}
 
 \begin{eslbox}
-\textbf{Section Assessment:} Lexikalische Primitive werden als fundamentale Unterscheidung eingeführt (B $\approx$ 0.75), basierend auf Ontologie-Forschung und Sprachphilosophie (E $\approx$ 0.78). \\[0.3em]
+\textbf{Section Assessment:} Lexical primitives are introduced as fundamental distinction (B $\approx$ 0.75), based on ontology research and philosophy of language (E $\approx$ 0.78). \\[0.3em]
 \textbf{Calculation:} $K = 1 - |0.75 - 0.78| / 0.78 = 0.96$ \\
 \textbf{Status:} Highly Stable
 \end{eslbox}
@@ -918,6 +996,30 @@ Qualitative Research & 0.65 & --- & --- & 0.25 & Proposed \\
 \textbf{Calculation:} $K = 1 - |0.79 - 0.85| / 0.79 = 1 - 0.08 = 0.92$ (validated disciplines) \\
 \textbf{Status:} \textcolor{green!60!black}{Stable}---three disciplines empirically validated, four remain proposed
 \end{eslbox}
+
+% =============================================================================
+% PART II: LLM INTEGRATION
+% =============================================================================
+
+\part*{Part II: LLM Integration}
+\addcontentsline{toc}{part}{Part II: LLM Integration}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{ESL as Quality Assurance Module} \\[0.5em]
+Part II develops ESL's integration into LLM-based systems:
+\begin{itemize}[noitemsep]
+    \item Why ESL is \textbf{necessary} (not merely beneficial) for LLMs
+    \item The four-stage evolution from manual to autonomous systems
+    \item Cost-benefit analysis of ESL integration
+    \item Pipeline architecture and integration points
+\end{itemize}
+ESL operates as a \textbf{modular QA layer}---compatible with any LLM backend.
+}}
+\end{center}
+
+\vspace{1em}
 
 % =============================================================================
 % 6. ESL IN LLM-BASED SYSTEMS
@@ -1889,9 +1991,32 @@ Priority directions include:
 \end{eslbox}
 
 % =============================================================================
+% PART III: VALIDATION & SAFEGUARDS
+% =============================================================================
+
+\part*{Part III: Validation and Safeguards}
+\addcontentsline{toc}{part}{Part III: Validation and Safeguards}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{From Theory to Empirical Validation} \\[0.5em]
+Part III presents ESL's self-critical evolution:
+\begin{itemize}[noitemsep]
+    \item \textbf{ESL 2.0}: Structural safeguards against self-overclaiming
+    \item \textbf{ESL 2.1}: Monte-Carlo consistency validation
+    \item \textbf{ESL 2.2}: Empirical validation (N=115, 100\% accuracy)
+\end{itemize}
+This evolution demonstrates ESL's core principle: \textit{confidence must be earned through measurement.}
+}}
+\end{center}
+
+\vspace{1em}
+
+% =============================================================================
 % 12. ESL 2.0: STRUCTURAL SAFEGUARDS
 % =============================================================================
-\section{ESL 2.0: Strukturelle Safeguards gegen Selbstüberschätzung}
+\section{ESL 2.0: Structural Safeguards Against Self-Overclaiming}
 \label{sec:esl2}
 
 % ESL Self-Assessment: This section cannot be self-assessed (RAS applies)
@@ -3359,7 +3484,7 @@ This appendix provides a practical checklist for applying ESL to scientific writ
 % APPENDIX B: FORMAL MATHEMATICAL FOUNDATIONS
 % =============================================================================
 
-\section{Formal Mathematical Foundations: Komplementarität von Safeguards und Monte Carlo}
+\section{Formal Mathematical Foundations: Complementarity of Safeguards and Monte Carlo}
 \label{app:math-foundations}
 
 This appendix provides rigorous mathematical proofs for the claims made in ESL 2.1 (Section \ref{sec:esl21}). We demonstrate that Safeguards and Monte-Carlo validation are \textbf{mathematically complementary}: Safeguards control \textit{Type-I errors} (overclaiming), while Monte Carlo reduces \textit{Type-II errors} (underclaiming).
