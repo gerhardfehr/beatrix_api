@@ -1,0 +1,373 @@
+# =============================================================================
+# ESL PROFIL: Epistemische Fehlmuster
+# =============================================================================
+# Anti-Pattern für Verschwörungsdenken und Pseudowissenschaft
+# KEIN Disziplin-Profil, sondern Erkennungswerkzeug
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "epistemische_fehlmuster"
+  name: "Epistemische Fehlmuster"
+  name_en: "Epistemic Error Patterns"
+  typ: "Anti-Pattern / Negativprofil"
+
+  beschreibung: |
+    Dieses Profil beschreibt KEINE wissenschaftliche Disziplin,
+    sondern dient der Erkennung und Abgrenzung epistemisch
+    problematischer Argumentationsmuster.
+
+    Anwendung:
+    - Qualitätssicherung wissenschaftlicher Kommunikation
+    - Faktencheck und Desinformationserkennung
+    - Unterscheidung legitimer Skepsis von Verschwörungsdenken
+    - Pädagogische Illustration guter vs. schlechter Epistemik
+
+  wichtiger_hinweis: |
+    NICHT jede Kritik an Institutionen ist Verschwörungsdenken!
+    Legitime wissenschaftliche Skepsis unterscheidet sich durch:
+    - Falsifizierbarkeit
+    - Proportionale Evidenzforderung
+    - Offenheit für neue Daten
+    - Peer Review und Transparenz
+
+  wissenschaftliche_grundlage:
+    - "Psychologie des Verschwörungsdenkens (Douglas, Sutton)"
+    - "Wissenschaftsphilosophie (Popper, Lakatos)"
+    - "Forschung zu Pseudowissenschaft (Shermer, Pigliucci)"
+    - "Desinformationsforschung (van der Linden)"
+
+
+# =============================================================================
+# INVERTIERTE E-SKALA: Epistemische Qualität
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Diese Skala misst die EPISTEMISCHE QUALITÄT von Behauptungen.
+    INVERTIERT zu Disziplin-Profilen: Mehr Fehlmuster = NIEDRIGERER E-Wert.
+    Ziel: Je mehr Muster erkannt werden, desto weniger vertrauenswürdig.
+
+  stufen:
+
+    stufe_1:
+      name: "Wissenschaftlich etabliert"
+      E_range: [0.90, 1.00]
+      beschreibung: |
+        Behauptung entspricht wissenschaftlichem Konsens.
+        Keine Fehlmuster erkennbar. Quellenbasiert, falsifizierbar.
+      marker:
+        - "Peer-reviewed Quellen zitiert"
+        - "Unsicherheiten benannt"
+        - "Falsifizierbar formuliert"
+        - "Konsens-konform"
+      fehlmuster_score: 0
+
+    stufe_2:
+      name: "Wissenschaftlich plausibel"
+      E_range: [0.75, 0.90]
+      beschreibung: |
+        Legitime wissenschaftliche Hypothese oder Minderheitsmeinung
+        ohne epistemische Fehlmuster.
+      marker:
+        - "Quellenangaben vorhanden"
+        - "Offenheit für Widerlegung"
+        - "Keine emotionale Manipulation"
+      fehlmuster_score: "1-2"
+
+    stufe_3:
+      name: "Grenzbereich / Kritisch prüfen"
+      E_range: [0.55, 0.75]
+      beschreibung: |
+        Einige Warnsignale, aber auch legitime Elemente.
+        Sorgfältige Prüfung erforderlich.
+      marker:
+        - "Vereinzelte Fehlmuster"
+        - "Aber auch: Quellenangaben oder Offenheit"
+      fehlmuster_score: "3-5"
+
+    stufe_4:
+      name: "Erhöhte Skepsis angebracht"
+      E_range: [0.35, 0.55]
+      beschreibung: |
+        Mehrere Fehlmuster erkennbar.
+        Wahrscheinlich epistemisch problematisch.
+      marker:
+        - "Mehrere Kategorien betroffen"
+        - "Quellenqualität niedrig"
+        - "Emotionale Appelle"
+      fehlmuster_score: "6-9"
+
+    stufe_5:
+      name: "Wahrscheinlich Desinformation"
+      E_range: [0.15, 0.35]
+      beschreibung: |
+        Viele Fehlmuster, klassische Verschwörungsrhetorik.
+        Hohe Wahrscheinlichkeit für epistemisches Versagen.
+      marker:
+        - "Geheimes Wissen"
+        - "Unfalsifizierbarkeit"
+        - "Märtyrernarrativ"
+        - "Ablehnung aller Gegenargumente"
+      fehlmuster_score: "10-15"
+
+    stufe_6:
+      name: "Eindeutige Desinformation / Verschwörungstheorie"
+      E_range: [0.00, 0.15]
+      beschreibung: |
+        Massive Häufung von Fehlmustern.
+        Widerspricht etabliertem Wissen ohne valide Evidenz.
+      marker:
+        - "Alle Kategorien betroffen"
+        - "Widerlegte Behauptungen"
+        - "Klassische VT-Strukturen"
+      fehlmuster_score: ">15"
+
+
+# =============================================================================
+# FEHLMUSTER-KATEGORIEN UND GEWICHTUNG
+# =============================================================================
+
+fehlmuster_kategorien:
+
+  beschreibung: |
+    Fehlmuster werden nach Kategorien und Schweregrad gewichtet.
+    Kumulative Scores bestimmen Einordnung auf E-Skala.
+
+  kategorien:
+
+    narrativ_struktur:
+      gewicht: 3
+      muster:
+        - name: "Geheimes Wissen"
+          beispiele: ["was sie verschweigen", "verborgene Wahrheit"]
+        - name: "Vertuschung"
+          beispiele: ["cover-up", "zensiert", "unterdrückt"]
+        - name: "Erwachungsnarrativ"
+          beispiele: ["aufgewacht", "red pill", "Schlafschafe"]
+        - name: "Kontroll-Narrativ"
+          beispiele: ["die da oben", "die Elite", "Strippenzieher"]
+
+    epistemische_fehler:
+      gewicht: 4
+      muster:
+        - name: "Unfalsifizierbarkeit"
+          beispiele: ["Gegenbeweise beweisen die Verschwörung"]
+        - name: "Anomalie-Jagd"
+          beispiele: ["wie erklären Sie DAS?"]
+        - name: "Proportionalitätsbias"
+          beispiele: ["so groß kann kein Einzelner bewirken"]
+        - name: "Agency-Überattribution"
+          beispiele: ["nichts ist Zufall", "alles geplant"]
+
+    argumentations_fehler:
+      gewicht: 2
+      muster:
+        - name: "Cui Bono Fehlschluss"
+          beispiele: ["wem nützt es? Also ist er schuld"]
+        - name: "Just Asking Questions"
+          beispiele: ["ich frage ja nur", "merkwürdig, oder?"]
+        - name: "Gish Gallop"
+          beispiele: ["aber was ist mit X, Y, Z, A, B...?"]
+        - name: "False Balance"
+          beispiele: ["es gibt zwei Seiten"]
+
+    autoritaets_muster:
+      gewicht: 3
+      muster:
+        - name: "Mainstream-Ablehnung"
+          beispiele: ["Lügenpresse", "Systemmedien"]
+        - name: "Alternativ-Autorität"
+          beispiele: ["dieser eine Arzt sagt"]
+        - name: "Experten-Abwertung"
+          beispiele: ["sogenannte Experten", "Elfenbeinturm"]
+
+    pseudowissenschaft:
+      gewicht: 3
+      muster:
+        - name: "Wissenschafts-Mimikry"
+          beispiele: ["Studien zeigen" ohne Quelle]
+        - name: "Naturalistischer Fehlschluss"
+          beispiele: ["natürlich ist besser", "Chemie ist Gift"]
+        - name: "Quantenquatsch"
+          beispiele: ["Quantenheilung", "Schwingungen"]
+
+    emotionale_manipulation:
+      gewicht: 2
+      muster:
+        - name: "Angst-Appell"
+          beispiele: ["sie wollen dich kontrollieren", "Gefahr"]
+        - name: "Wut-Appell"
+          beispiele: ["sie belügen dich", "Skandal"]
+        - name: "Märtyrer-Narrativ"
+          beispiele: ["sie greifen mich an, weil ich richtig liege"]
+
+
+# =============================================================================
+# K-METRIK FÜR EPISTEMISCHE FEHLMUSTER
+# =============================================================================
+
+k_metrik:
+
+  beschreibung: |
+    Die K-Metrik wird hier ANDERS angewendet:
+    K misst die Diskrepanz zwischen BEHAUPTUNGSSTÄRKE und
+    EPISTEMISCHER QUALITÄT der Argumentation.
+
+  formel: "K = 1 - |B - Q| / B_max"
+  wobei:
+    B: "Stärke der Behauptung (wie stark/sicher formuliert)"
+    Q: "Epistemische Qualität (E-Wert aus Fehlmuster-Analyse)"
+
+  interpretation:
+    K_hoch:
+      range: [0.80, 1.00]
+      bedeutung: "Behauptung entspricht epistemischer Qualität"
+      beispiel: "Vorsichtige Formulierung bei unsicherer Evidenz"
+
+    K_mittel:
+      range: [0.50, 0.80]
+      bedeutung: "Gewisse Diskrepanz"
+      beispiel: "Etwas zu starke Behauptung für Evidenzbasis"
+
+    K_niedrig:
+      range: [0.00, 0.50]
+      bedeutung: "Massive Diskrepanz - epistemisches Versagen"
+      beispiel: "Absolute Gewissheit bei widerlegten Behauptungen"
+
+  typische_muster:
+    verschwoerungstheorie:
+      B: 0.95  # "Sicher", "bewiesen", "die Wahrheit"
+      Q: 0.10  # Viele Fehlmuster, keine valide Evidenz
+      K: 0.15  # Massive Diskrepanz
+
+    legitime_wissenschaft:
+      B: 0.75  # "Evidenz zeigt", "wahrscheinlich"
+      Q: 0.85  # Peer-reviewed, falsifizierbar
+      K: 0.90  # Gute Übereinstimmung
+
+
+# =============================================================================
+# ABGRENZUNG: VT vs. LEGITIME KRITIK
+# =============================================================================
+
+abgrenzung:
+
+  beschreibung: |
+    WICHTIG: Nicht jede Kritik an Institutionen ist Verschwörungsdenken.
+    Legitime Skepsis und Whistleblowing existieren.
+
+  unterscheidungskriterien:
+
+    falsifizierbarkeit:
+      verschwoerung: "Unfalsifizierbar - jeder Gegenbeweis ist Teil der Verschwörung"
+      legitim: "Klare Kriterien, unter denen man falsch liegt"
+
+    evidenz_typ:
+      verschwoerung: "Anekdoten, anonyme Quellen, 'verborgenes' Wissen"
+      legitim: "Dokumente, überprüfbare Fakten, benannte Quellen"
+
+    reaktion_auf_widerlegung:
+      verschwoerung: "Moving Goalposts, Immunisierung, Angriff"
+      legitim: "Anerkennung, Revision, Update"
+
+    umfang:
+      verschwoerung: "Gigantische Koordination erforderlich"
+      legitim: "Plausible Akteurszahl und -fähigkeiten"
+
+    motivation:
+      verschwoerung: "Böswillige Superverschwörer"
+      legitim: "Normale menschliche Motive (Gier, Inkompetenz, Eigeninteresse)"
+
+  echte_verschwoerungen:
+    beschreibung: |
+      Es gibt reale Verschwörungen - aber sie werden aufgedeckt
+      durch Journalismus, Whistleblower, Justiz.
+    beispiele:
+      - "Watergate (aufgedeckt durch Journalisten)"
+      - "NSA-Überwachung (Snowden-Leaks)"
+      - "Tabak-Industrie-Lügen (interne Dokumente)"
+      - "Dieselgate (Whistleblower + Tests)"
+    unterschied: |
+      Diese wurden durch EVIDENZ aufgedeckt, nicht durch
+      YouTube-Videos und anonyme Posts.
+
+
+# =============================================================================
+# INTERVENTIONS-EMPFEHLUNGEN
+# =============================================================================
+
+intervention:
+
+  praevention:
+    inoculation:
+      beschreibung: |
+        "Vorimpfung" gegen Manipulation: Techniken erklären,
+        BEVOR man ihnen begegnet.
+      methode: "Schwache Version des Arguments + Widerlegung"
+      evidenz: "Van der Linden et al., multiple RCTs"
+      effekt: "Reduziert Anfälligkeit um 20-30%"
+
+    critical_thinking:
+      beschreibung: |
+        Förderung von Quellenkritik, Verständnis kognitiver
+        Verzerrungen, wissenschaftlicher Methode.
+      methoden:
+        - "SIFT-Methode (Stop, Investigate, Find, Trace)"
+        - "Lateral Reading"
+        - "Kognitionsverzerrungen kennenlernen"
+
+  bei_bestehendem_glauben:
+    effektiv:
+      - empathie: "Bedürfnisse hinter dem Glauben verstehen"
+      - vertrauen: "Beziehung aufbauen, nicht konfrontieren"
+      - fragen: "Sokratische Methode statt Belehrung"
+      - langfristig: "Kein schneller Fix, Samen pflanzen"
+      - alternativen: "Bedürfnisse anders adressieren"
+
+    ineffektiv:
+      - fakten_allein: "Kann Backfire-Effekt auslösen"
+      - beschaemung: "Verstärkt Identifikation mit Gruppe"
+      - autoritaet: "Wird abgelehnt"
+      - ultimaten: "Polarisiert"
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  warnsignale_hoch:
+    - "Unfalsifizierbare Kernbehauptung"
+    - "Gegenbeweise werden uminterpretiert"
+    - "Keine peer-reviewed Quellen"
+    - "Anonyme oder nicht-überprüfbare Quellen"
+    - "Emotionale Manipulation dominant"
+    - "Alle Experten liegen falsch, außer Auserwählte"
+    - "Gigantische Verschwörung nötig"
+
+  warnsignale_mittel:
+    - "Selektive Quellenauswahl"
+    - "Übertreibungen"
+    - "Cui-Bono ohne weitere Evidenz"
+    - "Einzelne Anomalien überbetont"
+
+  positive_indikatoren:
+    - "Quellenangaben überprüfbar"
+    - "Unsicherheiten benannt"
+    - "Offenheit für Widerlegung"
+    - "Proportionale Behauptungsstärke"
+    - "Peer Review akzeptiert"
+    - "Konsistent mit etabliertem Wissen oder erklärt warum nicht"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_epistemische_fehlmuster.yaml"
+  glossar: "glossar_epistemische_fehlmuster.yaml"
+  lexikon: "lexikon_epistemische_fehlmuster.yaml"

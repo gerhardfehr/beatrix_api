@@ -1,0 +1,360 @@
+# =============================================================================
+# ESL PRIMITIVE: Epistemische Fehlmuster
+# =============================================================================
+# Rhetorische und kognitive Muster in Verschwörungsdenken & Pseudowissenschaft
+# Anti-Pattern zur Erkennung epistemisch problematischer Aussagen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  typ: "Anti-Pattern / Negativprofil"
+  anzahl_muster: 24
+  kategorien: 6
+  beschreibung: |
+    Dieses Profil beschreibt KEINE wissenschaftliche Disziplin,
+    sondern epistemisch problematische Denk- und Argumentationsmuster.
+    Ziel: Erkennung und Abgrenzung von legitimer Wissenschaft.
+
+    Basiert auf: Psychologie des Verschwörungsdenkens, Wissenschaftsphilosophie,
+    Forschung zu Pseudowissenschaft und Desinformation.
+
+  wichtiger_hinweis: |
+    Nicht jede Kritik am Mainstream ist Verschwörungsdenken!
+    Legitime wissenschaftliche Skepsis unterscheidet sich durch:
+    - Bereitschaft zur Falsifikation
+    - Proportionale Evidenzforderung
+    - Offenheit für neue Daten
+    - Peer Review und Transparenz
+
+
+# =============================================================================
+# KATEGORIE 1: NARRATIV-STRUKTUREN
+# =============================================================================
+
+NARRATIV:
+
+  GEHEIMNIS:
+    definition: "Behauptung verborgenen Wissens, das 'sie' unterdrücken"
+    marker:
+      - "was sie dir nicht sagen"
+      - "was die Medien verschweigen"
+      - "geheimes Wissen"
+      - "verbotene Wahrheit"
+    funktion: "Erzeugt Insideridentität, wertet 'Wissende' auf"
+    problematik: |
+      Wissenschaft ist transparent und peer-reviewed.
+      Echte Entdeckungen werden publiziert, nicht versteckt.
+
+  VERTUSCHUNG:
+    definition: "Annahme aktiver Unterdrückung von Informationen"
+    marker:
+      - "Vertuschung"
+      - "cover-up"
+      - "wird unterdrückt"
+      - "zensiert"
+      - "mundtot gemacht"
+    funktion: "Immunisiert gegen Gegenargumente (Fehlen von Beweisen = Beweis)"
+    problematik: |
+      Erfordert unplausible Koordination tausender Menschen.
+      Wissenschaftliche Kontroversen werden öffentlich ausgetragen.
+
+  KONTROLLE:
+    definition: "Annahme einer machtvollen Gruppe mit umfassender Kontrolle"
+    marker:
+      - "die da oben"
+      - "die Elite"
+      - "die Globalisten"
+      - "das Establishment"
+      - "die Strippenzieher"
+    funktion: "Vereinfacht komplexe Systeme zu intentionalen Akteuren"
+    problematik: |
+      Überschätzt Koordinationsfähigkeit, unterschätzt Komplexität.
+      Reale Machtstrukturen sind diffuser und konflikthafter.
+
+  ERWACHEN:
+    definition: "Narrativ des 'Aufwachens' aus Täuschung"
+    marker:
+      - "aufgewacht"
+      - "die Augen geöffnet"
+      - "red pill"
+      - "Schlafschafe"
+      - "die Wahrheit erkennen"
+    funktion: "Identitätsstiftend, trennt 'Erleuchtete' von 'Schlafenden'"
+    problematik: |
+      Gnostisches Muster: Wissen durch Offenbarung, nicht Evidenz.
+      Wissenschaft erfordert Methode, nicht Erweckungserlebnis.
+
+
+# =============================================================================
+# KATEGORIE 2: EPISTEMISCHE FEHLER
+# =============================================================================
+
+EPISTEMIK:
+
+  UNFALSIFIZIERBARKEIT:
+    definition: "Behauptungen, die nicht widerlegbar konstruiert sind"
+    mechanismen:
+      - "Jeder Gegenbeweis ist Teil der Verschwörung"
+      - "Abwesenheit von Beweisen = Beweis für Vertuschung"
+      - "Moving Goalposts (Kriterien ändern sich)"
+    problematik: |
+      Wissenschaftliche Hypothesen MÜSSEN falsifizierbar sein (Popper).
+      Unfalsifizierbare Behauptungen haben keinen Informationsgehalt.
+    beispiel: "Wenn es keine Beweise gibt, beweist das nur, wie gut sie es verstecken"
+
+  ANOMALIE_JAGD:
+    definition: "Fokus auf unerklärte Details statt Gesamtbild"
+    mechanismen:
+      - "Cherry-picking von Ungereimtheiten"
+      - "Ignorieren der erklärenden Theorie"
+      - "God of the Gaps Argumentation"
+    problematik: |
+      Wissenschaft erklärt Muster, nicht jedes Detail perfekt.
+      Einzelne Anomalien widerlegen nicht etablierte Theorien.
+    beispiel: "Wie erklären Sie DIESES Detail?" (bei 99% erklärten)
+
+  PROPORTIONALITAETSBIAS:
+    definition: "Große Ereignisse brauchen große Ursachen"
+    mechanismen:
+      - "Ein Einzeltäter kann nicht so viel bewirken"
+      - "Das muss größer sein als es aussieht"
+    problematik: |
+      Realität ist nicht symmetrisch.
+      Kleine Ursachen können große Wirkungen haben (Chaos, Zufall).
+    beispiel: "JFK kann nicht von einem Einzelnen erschossen worden sein"
+
+  AGENCY_UEBERATTRIBUTION:
+    definition: "Alle Ereignisse sind intentional geplant"
+    mechanismen:
+      - "Nichts passiert zufällig"
+      - "Es gibt keine Zufälle"
+      - "Alles ist verbunden"
+    problematik: |
+      Unterschätzt Zufall, Inkompetenz, unbeabsichtigte Folgen.
+      Komplexe Systeme zeigen emergente Muster ohne Plan.
+    beispiel: "Das kann kein Zufall sein" (bei erwartbaren Koinzidenzen)
+
+
+# =============================================================================
+# KATEGORIE 3: ARGUMENTATIVE MUSTER
+# =============================================================================
+
+ARGUMENTATION:
+
+  CUI_BONO:
+    definition: "Wem nutzt es? → Der Nutznießer ist der Täter"
+    problem: |
+      Logischer Fehlschluss: Nutzen ≠ Urheberschaft.
+      Viele profitieren von Ereignissen, ohne sie zu verursachen.
+    beispiel: "Wem nützt es? Der Pharma! Also hat die Pharma es geplant."
+
+  JUST_ASKING_QUESTIONS:
+    definition: "Insinuation durch 'unschuldige' Fragen (JAQing off)"
+    marker:
+      - "Ich frage ja nur"
+      - "Darf man nicht mehr fragen?"
+      - "Merkwürdig, oder?"
+      - "Warum wird das nicht untersucht?"
+    funktion: "Suggeriert Verschwörung ohne Beweislast zu übernehmen"
+    problematik: |
+      Fragen implizieren Antworten.
+      Rhetorische Fragen sind versteckte Behauptungen.
+
+  GISH_GALLOP:
+    definition: "Überflutung mit vielen schwachen Argumenten"
+    mechanismus: |
+      So viele Behauptungen aufstellen, dass Widerlegung
+      unmöglich ist (Asymmetrie des Bullshits).
+    problematik: |
+      Qualität schlägt Quantität in der Wissenschaft.
+      Eine widerlegte Behauptung bleibt widerlegt.
+    beispiel: "Aber was ist mit X, Y, Z, A, B, C...?"
+
+  FALSE_BALANCE:
+    definition: "Künstliche Gleichgewichtung ungleicher Positionen"
+    marker:
+      - "Es gibt zwei Seiten"
+      - "Die andere Seite sagt"
+      - "Man muss beide Seiten hören"
+    problematik: |
+      97% Konsens ≠ 50:50 Debatte.
+      Nicht alle Positionen sind gleich evidenzbasiert.
+
+
+# =============================================================================
+# KATEGORIE 4: KOGNITIVE VERZERRUNGEN
+# =============================================================================
+
+KOGNITION:
+
+  CONFIRMATION_BIAS:
+    definition: "Selektive Wahrnehmung bestätigender Information"
+    manifestation:
+      - "Suche nach bestätigenden Quellen"
+      - "Abwertung widersprechender Evidenz"
+      - "Erinnerung an Treffer, Vergessen von Fehlschlägen"
+    problematik: |
+      Wissenschaft sucht aktiv nach Falsifikation.
+      Confirmation Bias ist anti-wissenschaftlich.
+
+  MUSTER_ERKENNUNG:
+    definition: "Übermäßige Mustererkennung (Apophänie)"
+    beispiele:
+      - "Verbindungen zwischen unverbundenen Ereignissen"
+      - "Gesichter in Zufallsmustern"
+      - "Bedeutung in Koinzidenzen"
+    problematik: |
+      Evolution hat uns auf Mustererkennung optimiert.
+      Fehlalarme (falsch positiv) waren weniger kostspielig.
+      Aber: Korrelation ≠ Kausalität.
+
+  DUNNING_KRUGER:
+    definition: "Überschätzung eigener Kompetenz bei Inkompetenz"
+    manifestation:
+      - "Ich habe selbst recherchiert"
+      - "Experten liegen falsch"
+      - "Gesunder Menschenverstand"
+    problematik: |
+      Expertise erfordert Jahre der Ausbildung.
+      YouTube-Recherche ersetzt kein Studium.
+
+  BACKFIRE_EFFEKT:
+    definition: "Gegenargumente verstärken ursprüngliche Überzeugung"
+    mechanismus: "Korrekturen bedrohen Identität → Abwehr"
+    problematik: |
+      Macht Aufklärung schwierig.
+      Faktenbasierte Korrektur reicht oft nicht.
+
+
+# =============================================================================
+# KATEGORIE 5: SOZIALE DYNAMIKEN
+# =============================================================================
+
+SOZIAL:
+
+  INGROUP_OUTGROUP:
+    definition: "Scharfe Trennung zwischen 'uns' und 'denen'"
+    manifestation:
+      - "Wir Aufgewachten vs. Schlafschafe"
+      - "Wahrheitssucher vs. Systemlinge"
+      - "Freidenker vs. Mainstream"
+    funktion: "Identitätsstiftung durch Abgrenzung"
+    problematik: |
+      Wissenschaft ist international und offen.
+      Wahrheit ist nicht gruppenabhängig.
+
+  ECHO_KAMMER:
+    definition: "Selbstverstärkende Informationsblase"
+    mechanismen:
+      - "Algorithmen zeigen Ähnliches"
+      - "Gleichgesinnte bestätigen sich"
+      - "Abweichende werden ausgeschlossen"
+    problematik: |
+      Fehlende Außenkorrektur.
+      Radikalisierung durch Isolation.
+
+  MAERTYRER_NARRATIV:
+    definition: "Widerstand gegen Kritik als Beweis für Wahrheit"
+    marker:
+      - "Wenn sie mich angreifen, bin ich über dem Ziel"
+      - "Verfolgt für die Wahrheit"
+      - "Mundtot gemacht"
+    problematik: |
+      Kritik ist normal in der Wissenschaft.
+      Widerspruch ist kein Beweis für Richtigkeit.
+
+  AUTHORITY_PARADOX:
+    definition: "Ablehnung von Experten, aber Berufung auf 'alternative' Autoritäten"
+    manifestation:
+      - "Mainstream-Experten lügen"
+      - "Aber dieser eine Arzt sagt..."
+      - "Nobelpreisträger X meint..."
+    problematik: |
+      Selektive Autoritätsakzeptanz.
+      Einzelmeinungen überstimmen nicht Konsens.
+
+
+# =============================================================================
+# KATEGORIE 6: PSEUDOWISSENSCHAFTLICHE MARKER
+# =============================================================================
+
+PSEUDOWISSENSCHAFT:
+
+  WISSENSCHAFTS_MIMIKRY:
+    definition: "Oberflächliche Nachahmung wissenschaftlicher Form"
+    marker:
+      - "Studien zeigen" (ohne Quellenangabe)
+      - "Wissenschaftlich bewiesen"
+      - "Forschung hat gezeigt"
+      - Pseudotechnischer Jargon
+    problematik: |
+      Form ohne Substanz.
+      Echte Wissenschaft ist überprüfbar und zitiert Quellen.
+
+  SUPPRESSED_SCIENCE:
+    definition: "Behauptung unterdrückter wissenschaftlicher Erkenntnisse"
+    marker:
+      - "Die Wissenschaft, die sie verstecken"
+      - "Verbotene Forschung"
+      - "Was Big Pharma nicht will, dass du weißt"
+    problematik: |
+      Wissenschaftler sind kompetitiv, nicht konspirativ.
+      Nobelpreise winken für echte Durchbrüche.
+
+  NATURALISTISCHER_FEHLSCHLUSS:
+    definition: "Natürlich = gut, künstlich = schlecht"
+    marker:
+      - "Natürliche Heilmittel"
+      - "Chemie ist Gift"
+      - "Natur weiß es besser"
+    problematik: |
+      Arsen ist natürlich, Insulin synthetisch.
+      Natürlichkeit hat keinen moralischen/gesundheitlichen Wert per se.
+
+  ANEKDOTISCHE_EVIDENZ:
+    definition: "Einzelfälle als Beweis"
+    marker:
+      - "Ich kenne jemanden, der..."
+      - "Bei mir hat es gewirkt"
+      - "Meine Erfahrung zeigt"
+    problematik: |
+      Einzelfälle sind keine statistisch valide Evidenz.
+      Placebo, Regression zur Mitte, Confirmation Bias.
+
+
+# =============================================================================
+# ERKENNUNG UND ABGRENZUNG
+# =============================================================================
+
+erkennung:
+  warnsignale:
+    sprache:
+      - "Sie wollen nicht, dass du weißt"
+      - "Offizielle Narrative"
+      - "Selbst recherchieren"
+      - "Aufwachen"
+      - "Mainstream-Medien lügen"
+
+    struktur:
+      - "Unfalsifizierbare Kernbehauptung"
+      - "Anomalie-Fokus statt Gesamtbild"
+      - "Cui bono ohne Evidenz"
+      - "Autoritätsablehnung + Alternativ-Autorität"
+
+    sozial:
+      - "Stark geteilte Ingroup/Outgroup"
+      - "Märtyrernarrativ bei Kritik"
+      - "Echo-Kammer-Dynamik"
+
+  abgrenzung_legitime_kritik:
+    beschreibung: |
+      Nicht jede Kritik an Institutionen ist Verschwörungsdenken!
+      Legitime wissenschaftliche Skepsis unterscheidet sich durch:
+
+    kriterien:
+      - falsifizierbar: "Klare Bedingungen, unter denen man falsch liegt"
+      - proportional: "Evidenzforderung entspricht Behauptungsstärke"
+      - offen: "Bereitschaft, Meinung bei neuen Daten zu ändern"
+      - transparent: "Quellen und Methoden offengelegt"
+      - peer_reviewed: "Prüfung durch Fachkollegen akzeptiert"
+      - sparsam: "Einfachere Erklärungen bevorzugt (Ockhams Rasiermesser)"

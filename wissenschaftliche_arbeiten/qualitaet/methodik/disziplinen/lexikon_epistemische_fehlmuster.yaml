@@ -1,0 +1,433 @@
+# =============================================================================
+# ESL LEXIKON: Epistemische Fehlmuster
+# =============================================================================
+# Sprachmarker zur Erkennung von Verschwörungsdenken und Pseudowissenschaft
+# Version: 1.0
+# =============================================================================
+
+meta:
+  typ: "Anti-Pattern / Detektionswerkzeug"
+  anzahl_marker: 120+
+  beschreibung: |
+    Katalog sprachlicher Marker, die auf epistemisch problematische
+    Argumentation hinweisen können. WICHTIG: Einzelne Marker sind
+    nicht hinreichend - Kontext und Häufung entscheiden.
+
+
+# =============================================================================
+# KATEGORIE 1: WISSENS-MARKER
+# =============================================================================
+
+wissens_marker:
+
+  geheimes_wissen:
+    marker:
+      - "was sie nicht wollen, dass du weißt"
+      - "was die Medien verschweigen"
+      - "die verborgene Wahrheit"
+      - "geheimes Wissen"
+      - "die wahre Geschichte"
+      - "was wirklich passiert ist"
+      - "hinter den Kulissen"
+      - "die eigentliche Agenda"
+    warnstufe: "hoch"
+    erklaerung: |
+      Suggeriert exklusives Wissen einer Minderheit.
+      Wissenschaft ist transparent und peer-reviewed.
+    kontrast_wissenschaft:
+      - "nach aktuellem Forschungsstand"
+      - "die Evidenz zeigt"
+      - "peer-reviewed Studien belegen"
+
+  erwachungs_rhetorik:
+    marker:
+      - "aufgewacht"
+      - "die Augen geöffnet"
+      - "red pill"
+      - "aufwachen"
+      - "Schlafschafe"
+      - "die Wahrheit erkennen"
+      - "endlich verstanden"
+      - "aus der Matrix"
+    warnstufe: "hoch"
+    erklaerung: |
+      Gnostisches Narrativ: Wissen durch Erleuchtung, nicht Methode.
+      Teilt Welt in "Erwachte" und "Schlafende".
+
+  selbst_recherche:
+    marker:
+      - "recherchier selbst"
+      - "mach deine eigene Recherche"
+      - "sieh es dir selbst an"
+      - "informier dich"
+      - "tu deine eigene Arbeit"
+      - "Google es"
+      - "YouTube zeigt"
+    warnstufe: "mittel"
+    erklaerung: |
+      Verlagert Beweislast. YouTube ≠ Fachstudium.
+      Echte Expertise erfordert Jahre methodischer Ausbildung.
+
+
+# =============================================================================
+# KATEGORIE 2: AUTORITÄTS-MARKER
+# =============================================================================
+
+autoritaets_marker:
+
+  mainstream_ablehnung:
+    marker:
+      - "Mainstream-Medien"
+      - "Lügenpresse"
+      - "Systemmedien"
+      - "gekaufte Presse"
+      - "Propaganda"
+      - "die offizielle Version"
+      - "das Narrativ"
+      - "Mainstream-Wissenschaft"
+    warnstufe: "hoch"
+    erklaerung: |
+      Pauschale Ablehnung aller etablierten Quellen.
+      Ignoriert interne Pluralität und Kritik im "Mainstream".
+
+  alternativ_autoritaet:
+    marker:
+      - "ein mutiger Arzt"
+      - "ein Insider"
+      - "Whistleblower"
+      - "ein echter Experte"
+      - "unabhängiger Forscher"
+      - "dieser Professor sagt"
+      - "Nobelpreisträger X meint"
+    warnstufe: "mittel"
+    erklaerung: |
+      Selektive Berufung auf Einzelpersonen gegen Konsens.
+      Einzelmeinung überstimmt nicht Fachkonsens.
+    kontrast:
+      legitim: "Meta-Analyse zeigt..."
+      problematisch: "Dieser eine Arzt sagt..."
+
+  experten_abwertung:
+    marker:
+      - "sogenannte Experten"
+      - "selbsternannte Experten"
+      - "die Experten lagen schon oft falsch"
+      - "Elfenbeinturm"
+      - "Akademiker verstehen die Realität nicht"
+      - "gesunder Menschenverstand"
+    warnstufe: "hoch"
+    erklaerung: |
+      Dunning-Kruger: Expertise wird abgewertet.
+      "Gesunder Menschenverstand" ist kein Ersatz für Fachkenntnis.
+
+
+# =============================================================================
+# KATEGORIE 3: VERSCHWÖRUNGS-MARKER
+# =============================================================================
+
+verschwoerung_marker:
+
+  akteure:
+    marker:
+      - "die da oben"
+      - "die Elite"
+      - "die Globalisten"
+      - "die Strippenzieher"
+      - "die Hintermänner"
+      - "das Establishment"
+      - "die Kabale"
+      - "die Schattenregierung"
+      - "Deep State"
+      - "Big Pharma"
+      - "die Rothschilds"
+      - "George Soros"
+    warnstufe: "hoch"
+    erklaerung: |
+      Personifizierung komplexer Systeme.
+      Reale Machtstrukturen sind diffuser und konflikthafter.
+    warnung_antisemitismus: |
+      Manche Marker haben antisemitische Geschichte.
+      "Globalisten", "internationale Finanzelite", "Rothschilds"
+      sind oft Chiffren.
+
+  mechanismen:
+    marker:
+      - "Vertuschung"
+      - "cover-up"
+      - "unter den Teppich kehren"
+      - "zensiert"
+      - "gelöscht"
+      - "unterdrückt"
+      - "mundtot gemacht"
+      - "gesperrt"
+      - "deplatformed"
+    warnstufe: "mittel"
+    erklaerung: |
+      Nicht jede Moderation ist Zensur.
+      Wissenschaftliche Kontroversen werden öffentlich ausgetragen.
+
+  intentionalitaet:
+    marker:
+      - "kein Zufall"
+      - "alles geplant"
+      - "Agenda"
+      - "orchestriert"
+      - "inszeniert"
+      - "false flag"
+      - "crisis actors"
+      - "gesteuert"
+    warnstufe: "hoch"
+    erklaerung: |
+      Überschätzt Planung, unterschätzt Zufall und Inkompetenz.
+      Komplexe Systeme zeigen emergente Muster ohne Plan.
+
+
+# =============================================================================
+# KATEGORIE 4: ARGUMENTATIONS-MARKER
+# =============================================================================
+
+argument_marker:
+
+  cui_bono:
+    marker:
+      - "wem nutzt es?"
+      - "follow the money"
+      - "cui bono"
+      - "der profitiert davon"
+      - "Geld dahinter"
+      - "finanzielles Interesse"
+    warnstufe: "mittel"
+    erklaerung: |
+      Nutzen ≠ Urheberschaft.
+      Viele profitieren von Ereignissen, ohne sie zu verursachen.
+    nuance: |
+      Interessenkonflikte sind legitime Frage.
+      Aber: Allein kein Beweis für Verschwörung.
+
+  just_asking_questions:
+    marker:
+      - "ich frage ja nur"
+      - "darf man nicht mehr fragen?"
+      - "merkwürdig, oder?"
+      - "komisch, dass..."
+      - "warum wird das nicht untersucht?"
+      - "wie erklären Sie das?"
+      - "denk mal drüber nach"
+    warnstufe: "mittel"
+    erklaerung: |
+      Rhetorische Fragen sind versteckte Behauptungen.
+      Beweislast wird umgekehrt.
+
+  false_balance:
+    marker:
+      - "es gibt zwei Seiten"
+      - "die andere Seite"
+      - "auch diese Meinung"
+      - "alternative Sichtweise"
+      - "beide Seiten haben Punkte"
+      - "man muss auch hören"
+    warnstufe: "niedrig"
+    erklaerung: |
+      Nicht alle Positionen sind gleich evidenzbasiert.
+      97% Konsens ≠ 50:50 Debatte.
+    nuance: |
+      Pluralismus ist wichtig.
+      Aber: Falsche Äquivalenz ist Täuschung.
+
+
+# =============================================================================
+# KATEGORIE 5: PSEUDO-WISSENSCHAFTS-MARKER
+# =============================================================================
+
+pseudowissenschaft_marker:
+
+  wissenschafts_mimikry:
+    marker:
+      - "Studien zeigen" (ohne Zitat)
+      - "wissenschaftlich bewiesen"
+      - "Forschung hat gezeigt"
+      - "Experten sagen"
+      - "es ist bekannt, dass"
+      - "Wissenschaftler haben festgestellt"
+    warnstufe: "mittel"
+    erklaerung: |
+      Ohne Quellenangabe: Leere Autoritätsberufung.
+      Echte Wissenschaft ist zitierbar und überprüfbar.
+    nachfrage: "Welche Studie? Wo publiziert? Peer-reviewed?"
+
+  naturalistisch:
+    marker:
+      - "natürlich"
+      - "chemie-frei"
+      - "ohne Zusatzstoffe"
+      - "die Natur weiß es besser"
+      - "künstlich ist schlecht"
+      - "Gift"
+      - "Toxine"
+    warnstufe: "niedrig"
+    erklaerung: |
+      Natürlichkeitsfehlschluss: Natürlich ≠ gut.
+      Arsen ist natürlich, Insulin synthetisch.
+
+  quantenquatsch:
+    marker:
+      - "Quantenheilung"
+      - "Schwingungen"
+      - "Frequenzen"
+      - "Energie" (esoterisch)
+      - "Felder"
+      - "auf zellulärer Ebene"
+      - "DNA aktivieren"
+    warnstufe: "hoch"
+    erklaerung: |
+      Missbrauch wissenschaftlicher Terminologie.
+      Quanteneffekte sind auf makroskopischer Ebene irrelevant.
+
+
+# =============================================================================
+# KATEGORIE 6: EMOTIONALE MARKER
+# =============================================================================
+
+emotion_marker:
+
+  angst_appell:
+    marker:
+      - "sie wollen dich kontrollieren"
+      - "Gefahr"
+      - "Bedrohung"
+      - "du bist in Gefahr"
+      - "deine Kinder sind in Gefahr"
+      - "bevor es zu spät ist"
+      - "Wake up!"
+    warnstufe: "mittel"
+    erklaerung: |
+      Angst reduziert kritisches Denken.
+      Emotionale Manipulation statt Argumentation.
+
+  wut_appell:
+    marker:
+      - "sie belügen dich"
+      - "Betrug"
+      - "Verrat"
+      - "Skandal"
+      - "unglaublich"
+      - "unfassbar"
+      - "sie lachen über uns"
+    warnstufe: "mittel"
+    erklaerung: |
+      Wut fördert Gruppendenken und Polarisierung.
+      Wissenschaft ist nüchtern, nicht empört.
+
+  maertyrer:
+    marker:
+      - "ich werde dafür angegriffen"
+      - "sie wollen mich zum Schweigen bringen"
+      - "über dem Ziel"
+      - "deshalb werden wir bekämpft"
+      - "Zeichen, dass wir richtig liegen"
+    warnstufe: "hoch"
+    erklaerung: |
+      Kritik wird als Bestätigung umgedeutet.
+      Unfalsifizierbares Immunisierungsmuster.
+
+
+# =============================================================================
+# DETEKTIONS-ALGORITHMUS
+# =============================================================================
+
+detektion:
+
+  scoring:
+    beschreibung: |
+      Einzelne Marker sind nicht hinreichend.
+      Bewertung basiert auf Häufung und Kontext.
+
+    gewichtung:
+      hoch: 3
+      mittel: 2
+      niedrig: 1
+
+    schwellenwerte:
+      niedrig: "Score 3-6: Vorsicht, genauer prüfen"
+      mittel: "Score 7-12: Erhöhte Wahrscheinlichkeit"
+      hoch: "Score >12: Sehr wahrscheinlich problematisch"
+
+  kontext_faktoren:
+    verstaerkend:
+      - "Multiple Marker aus verschiedenen Kategorien"
+      - "Ablehnung jeglicher Gegenargumente"
+      - "Berufung auf anonyme Quellen"
+      - "Häufung emotionaler Appelle"
+    abschwachend:
+      - "Quellenangaben vorhanden"
+      - "Einräumung von Unsicherheit"
+      - "Peer-reviewed Publikationen zitiert"
+      - "Offenheit für Widerlegung"
+
+
+# =============================================================================
+# GEGENÜBERSTELLUNG: VT vs. WISSENSCHAFT
+# =============================================================================
+
+vergleich:
+
+  merkmal_tabelle:
+    evidenz:
+      verschwörung: "Selektiv, anekdotisch, 'verborgene' Quellen"
+      wissenschaft: "Systematisch, replizierbar, peer-reviewed"
+
+    falsifizierbarkeit:
+      verschwörung: "Unfalsifizierbar (Gegenbeweise = Teil der Verschwörung)"
+      wissenschaft: "Falsifizierbar (klare Widerlegungskriterien)"
+
+    komplexitaet:
+      verschwörung: "Vereinfacht (intentionale Akteure)"
+      wissenschaft: "Akzeptiert Komplexität und Zufall"
+
+    autoritaet:
+      verschwörung: "Selektiv (Einzelne gegen Konsens)"
+      wissenschaft: "Peer Review, Community Consensus"
+
+    unsicherheit:
+      verschwörung: "Überzeugt, keine Zweifel"
+      wissenschaft: "Kalibriert, Unsicherheiten quantifiziert"
+
+    reaktion_auf_kritik:
+      verschwörung: "Abwehr, Märtyrernarrativ"
+      wissenschaft: "Prüfung, Replikation, ggf. Revision"
+
+    vorhersagen:
+      verschwörung: "Vage oder Moving Goalposts"
+      wissenschaft: "Spezifisch und überprüfbar"
+
+
+# =============================================================================
+# KOMMUNIKATIONS-EMPFEHLUNGEN
+# =============================================================================
+
+kommunikation:
+
+  im_umgang:
+    effektiv:
+      - "Empathie zeigen, nicht beschämen"
+      - "Nach Quellen fragen"
+      - "Gemeinsame Werte betonen"
+      - "Langfristig denken"
+      - "Auf Methodik fokussieren, nicht Person"
+    ineffektiv:
+      - "Fakten allein (kann Backfire auslösen)"
+      - "Lächerlich machen"
+      - "Autoritätsappelle"
+      - "Moralische Überlegenheit zeigen"
+
+  praevention:
+    inoculation:
+      beschreibung: |
+        "Vorimpfung" gegen Manipulation durch Erklärung
+        der Techniken, bevor man ihnen begegnet.
+      evidenz: "Van der Linden et al., mehrere RCTs"
+
+    critical_thinking:
+      beschreibung: |
+        Förderung von Quellenkritik, Verständnis von
+        Kognitionsverzerrungen, wissenschaftlicher Methode.

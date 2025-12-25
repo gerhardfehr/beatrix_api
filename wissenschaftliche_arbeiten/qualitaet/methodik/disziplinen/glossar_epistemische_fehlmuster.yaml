@@ -1,0 +1,353 @@
+# =============================================================================
+# ESL GLOSSAR: Epistemische Fehlmuster
+# =============================================================================
+# Typische Behauptungen und ihre wissenschaftlichen Widerlegungen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  typ: "Anti-Pattern / Negativprofil"
+  anzahl_eintraege: 40
+  beschreibung: |
+    Katalog verbreiteter Verschwörungstheorien und pseudowissenschaftlicher
+    Behauptungen mit wissenschaftlichen Korrekturen. Dient der Erkennung
+    und des Faktenchecks, nicht der Verbreitung.
+
+  ethischer_hinweis: |
+    Ziel ist Aufklärung, nicht Diffamierung von Personen.
+    Viele Menschen glauben an diese Theorien aus verständlichen
+    psychologischen Gründen (Kontrollbedürfnis, Sinnsuche, Misstrauen).
+
+
+# =============================================================================
+# MEDIZIN & GESUNDHEIT
+# =============================================================================
+
+medizin_gesundheit:
+
+  impfungen_autismus:
+    behauptung: "Impfungen verursachen Autismus"
+    ursprung: "Wakefield-Studie 1998 (zurückgezogen)"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Wakefield-Studie war Betrug (Lancet zurückgezogen 2010)"
+        - "Dutzende Studien mit Millionen Kindern: kein Zusammenhang"
+        - "Taylor et al. 2014 Meta-Analyse: RR = 0.99"
+        - "Autismus-Diagnose korreliert mit Alter, nicht Impfung"
+      konsens: "Weltweiter wissenschaftlicher Konsens"
+    verwendete_muster:
+      - "Anekdotische Evidenz"
+      - "Post hoc ergo propter hoc"
+      - "Cui bono (Big Pharma)"
+    konfidenz_widerlegung: 0.99
+
+  5g_corona:
+    behauptung: "5G verursacht/verbreitet COVID-19"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Viren benötigen biologischen Wirt, keine Funkwellen"
+        - "COVID-19 verbreitete sich in Ländern ohne 5G"
+        - "5G-Frequenzen sind nicht-ionisierend"
+        - "Kein biologisch plausibler Mechanismus"
+      konsens: "Wissenschaftlich unsinnig"
+    verwendete_muster:
+      - "Korrelation = Kausalität"
+      - "Technophobie"
+      - "Zeitliche Koinzidenz"
+    konfidenz_widerlegung: 0.99
+
+  chemtrails:
+    behauptung: "Kondensstreifen sind chemische Sprühungen zur Bevölkerungskontrolle"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Kondensstreifen sind Wasserdampf-Kristallisation"
+        - "Persistenz hängt von Luftfeuchtigkeit ab"
+        - "Keine anomalen Substanzen in Luftproben"
+        - "Logistisch unmöglich (Menge, Geheimhaltung)"
+        - "Piloten und Bodenpersonal wären betroffen"
+      konsens: "Atmosphärenphysik erklärt Phänomen vollständig"
+    verwendete_muster:
+      - "Muster in Normalem sehen"
+      - "Vertuschungs-Narrativ"
+      - "Unfalsifizierbarkeit"
+    konfidenz_widerlegung: 0.99
+
+  alternativmedizin_krebs:
+    behauptung: "Krebsheilung wird unterdrückt zugunsten von Chemotherapie"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Wissenschaftler und Ärzte sterben auch an Krebs"
+        - "Nobelpreise für Krebsdurchbrüche (Immuntherapie)"
+        - "Kein wirtschaftliches Interesse an kranken Toten"
+        - "Alternative Heilmittel versagen in RCTs"
+      konsens: "Krebs ist komplex, Heilung wäre nicht geheim zu halten"
+    verwendete_muster:
+      - "Cui bono"
+      - "Suppressed Science"
+      - "Naturalistischer Fehlschluss"
+    konfidenz_widerlegung: 0.98
+
+
+# =============================================================================
+# KLIMA & UMWELT
+# =============================================================================
+
+klima_umwelt:
+
+  klimawandel_hoax:
+    behauptung: "Klimawandel ist ein Schwindel für Profit/Kontrolle"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "97-99% wissenschaftlicher Konsens"
+        - "Physik des Treibhauseffekts seit 1850er verstanden"
+        - "Multiple independent lines of evidence"
+        - "IPCC-Assessment durch tausende Wissenschaftler"
+        - "Fossile Industrie wusste seit 1970er Bescheid"
+      konsens: "Stärkster Konsens in moderner Wissenschaft"
+    verwendete_muster:
+      - "Cui bono (Wissenschaftler-Förderung)"
+      - "Expertenmisstrauen"
+      - "Cherry-picking (Kältewellen)"
+    konfidenz_widerlegung: 0.99
+
+  mondlandung_fake:
+    behauptung: "Die Apollo-Mondlandungen waren gefälscht"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Reflektoren auf dem Mond (Laser-Ranging)"
+        - "Mondgestein unterscheidet sich von irdischem"
+        - "Unabhängige Bestätigung (auch durch UdSSR)"
+        - "Fotos von Landestellen durch LRO"
+        - "400.000 Beteiligte hätten schweigen müssen"
+      konsens: "Bestdokumentiertes Ereignis der Geschichte"
+    verwendete_muster:
+      - "Anomalie-Jagd (Schatten, Flagge)"
+      - "Technische Inkompetenz des Kritikers"
+      - "Proportionalitätsbias"
+    konfidenz_widerlegung: 0.99
+
+  flache_erde:
+    behauptung: "Die Erde ist flach, NASA und Regierungen lügen"
+    wissenschaftliche_lage:
+      status: "Widerlegt (seit Antike)"
+      evidenz:
+        - "Eratosthenes berechnete Erdumfang 240 v.Chr."
+        - "Schiffe verschwinden am Horizont unten zuerst"
+        - "Unterschiedliche Sternenhimmel je Breitengrad"
+        - "Flüge, Zeitzonen, GPS funktionieren"
+        - "Selbst Flat Earther-Experimente bestätigen Krümmung"
+      konsens: "Unstreitig seit >2000 Jahren"
+    verwendete_muster:
+      - "Fundamentales Misstrauen"
+      - "Sinneswahrnehmung über Wissenschaft"
+      - "Mega-Verschwörung"
+    konfidenz_widerlegung: 1.00
+
+
+# =============================================================================
+# POLITIK & GESELLSCHAFT
+# =============================================================================
+
+politik_gesellschaft:
+
+  neue_weltordnung:
+    behauptung: "Geheime Elite plant Weltregierung"
+    varianten:
+      - "Illuminaten"
+      - "Bilderberger"
+      - "WEF/Great Reset"
+      - "Deep State"
+    wissenschaftliche_bewertung:
+      status: "Unbelegte Spekulation"
+      probleme:
+        - "Keine falsifizierbaren Vorhersagen"
+        - "Unplausible Koordination über Generationen"
+        - "Reale Eliten haben öffentliche Konflikte"
+        - "Anpassung an alle Ereignisse (unfalsifizierbar)"
+      konsens: "Keine Evidenz für zentrale Koordination"
+    verwendete_muster:
+      - "Agency-Überattribution"
+      - "Unfalsifizierbarkeit"
+      - "Proportionalitätsbias"
+    konfidenz_gegen: 0.95
+
+  qanon:
+    behauptung: "Satanistische Elite betreibt Kindesmissbrauch, Trump kämpft dagegen"
+    wissenschaftliche_bewertung:
+      status: "Widerlegt / Unbelegte Behauptung"
+      probleme:
+        - "Keine der 'Vorhersagen' trat ein"
+        - "Basiert auf anonymen Internetposts"
+        - "Recycelt antisemitische Blutlügen-Tropen"
+        - "Führte zu realer Gewalt"
+      konsens: "Psychologisch gut verstandenes Phänomen"
+    verwendete_muster:
+      - "Kryptische Prophezeiungen"
+      - "Moving Goalposts"
+      - "Ingroup/Outgroup"
+    konfidenz_gegen: 0.99
+
+  great_replacement:
+    behauptung: "Geplanter Bevölkerungsaustausch durch Eliten"
+    wissenschaftliche_bewertung:
+      status: "Demographisch widerlegt"
+      probleme:
+        - "Migration folgt ökonomischen/politischen Faktoren"
+        - "Keine zentrale Planung nachweisbar"
+        - "Geburtenraten sind individuelle Entscheidungen"
+        - "Führte zu terroristischer Gewalt"
+      konsens: "Demographische Veränderungen ≠ 'Plan'"
+    verwendete_muster:
+      - "Intentionalisierung von Prozessen"
+      - "In-/Outgroup"
+      - "Cui bono"
+    konfidenz_gegen: 0.98
+
+
+# =============================================================================
+# HISTORISCHE VERSCHWÖRUNGSTHEORIEN
+# =============================================================================
+
+historisch:
+
+  jfk_verschwoerung:
+    behauptung: "JFK wurde nicht von Oswald allein getötet"
+    wissenschaftliche_lage:
+      status: "Umstritten, aber Einzeltäter wahrscheinlich"
+      evidenz:
+        - "Warren Commission: Einzeltäter"
+        - "HSCA 1979: Wahrscheinlich Verschwörung (umstrittene Akustik)"
+        - "Ballistische Analysen unterstützen Einzeltäter"
+        - "Keine harten Beweise für Zweitschützen"
+      konsens: "Mainstream-Historiker: Einzeltäter wahrscheinlicher"
+    verwendete_muster:
+      - "Proportionalitätsbias"
+      - "Anomalie-Jagd"
+      - "Cui bono"
+    konfidenz_widerlegung: 0.70
+    anmerkung: "Komplexerer Fall als andere VT"
+
+  9_11_inside_job:
+    behauptung: "9/11 war ein Inside Job"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Ingenieurskonsens: Kollaps durch Feuer/Aufprall erklärbar"
+        - "NIST-Untersuchung über Jahre"
+        - "Thermit-Behauptungen widerlegt"
+        - "Tausende müssten schweigen"
+        - "Al-Qaida bekannte sich"
+      konsens: "Wissenschaftlich-technisch erklärt"
+    verwendete_muster:
+      - "Anomalie-Jagd (WTC7)"
+      - "JAQing (Just Asking Questions)"
+      - "Proportionalitätsbias"
+    konfidenz_widerlegung: 0.98
+
+
+# =============================================================================
+# PSEUDOWISSENSCHAFT
+# =============================================================================
+
+pseudowissenschaft:
+
+  homoeopathie:
+    behauptung: "Hochverdünnte Substanzen haben Heilwirkung"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Keine Wirkung über Placebo in Meta-Analysen"
+        - "Physikalisch unmöglich (keine Moleküle ab C12)"
+        - "Wassergedächtnis widerlegt"
+        - "Cochrane Reviews: keine Evidenz"
+      konsens: "Wissenschaftlich nicht plausibel, nicht wirksam"
+    verwendete_muster:
+      - "Anekdotische Evidenz"
+      - "Naturalistischer Fehlschluss"
+      - "Wissenschafts-Mimikry"
+    konfidenz_widerlegung: 0.98
+
+  astrologie:
+    behauptung: "Sternzeichen beeinflussen Persönlichkeit und Schicksal"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Keine Korrelation in kontrollierten Studien"
+        - "Shawn Carlson Doppelblindstudie (Nature 1985)"
+        - "Kein physikalischer Mechanismus"
+        - "Präzession verschiebt Sternzeichen"
+        - "Barnum-Effekt erklärt subjektive Validierung"
+      konsens: "Keine wissenschaftliche Basis"
+    verwendete_muster:
+      - "Subjektive Validierung"
+      - "Barnum-Effekt"
+      - "Confirmation Bias"
+    konfidenz_widerlegung: 0.99
+
+  kreationismus:
+    behauptung: "Evolution ist falsch, Arten wurden erschaffen"
+    varianten:
+      - "Junge Erde (6000 Jahre)"
+      - "Intelligent Design"
+    wissenschaftliche_lage:
+      status: "Widerlegt"
+      evidenz:
+        - "Fossile Übergangsformen"
+        - "DNA-Vergleiche bestätigen Abstammung"
+        - "Beobachtete Evolution (Bakterien, Finken)"
+        - "Radiometrische Datierung (4.5 Mrd. Jahre)"
+        - "Biogeographie"
+      konsens: "Evolution ist Faktum, kein umstrittene Theorie"
+    verwendete_muster:
+      - "God of the Gaps"
+      - "Falsche Kontroverse"
+      - "Anomalie-Jagd"
+    konfidenz_widerlegung: 0.99
+
+
+# =============================================================================
+# WARUM MENSCHEN GLAUBEN
+# =============================================================================
+
+psychologie:
+
+  beduerfnisse:
+    beschreibung: "Psychologische Funktionen von Verschwörungsglauben"
+    kategorien:
+      epistemisch:
+        - "Komplexität reduzieren"
+        - "Unerklärtes erklären"
+        - "Muster finden"
+      existentiell:
+        - "Kontrolle in chaotischer Welt"
+        - "Sinn finden"
+        - "Bedrohungen verstehen"
+      sozial:
+        - "Gruppenidentität"
+        - "Einzigartigkeit ('Ich weiß mehr')"
+        - "Misstrauen gegenüber Autoritäten"
+
+  risikofaktoren:
+    - "Kontrollverlust-Erleben"
+    - "Niedriges institutionelles Vertrauen"
+    - "Pattern-seeking Persönlichkeit"
+    - "Bedrohungswahrnehmung"
+    - "Soziale Isolation"
+    - "Bildungsferne (aber nicht Bildungsmangel!)"
+
+  intervention:
+    evidenzbasiert:
+      - "Inoculation (Vorimpfung gegen Manipulation)"
+      - "Kritisches Denken fördern"
+      - "Vertrauen in Institutionen stärken"
+      - "Empathie, nicht Beschämung"
+    wenig_effektiv:
+      - "Fakten allein (Backfire-Risiko)"
+      - "Beschämung"
+      - "Autoritätsappelle"
