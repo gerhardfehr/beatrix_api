@@ -32,6 +32,35 @@ meta:
       titel: "Many Labs 2"
       replikationsrate: 0.54
 
+  methodologische_grundlagen:
+    - id: "FalkHeckman2009"
+      name: "Falk & Heckman (2009)"
+      titel: "Lab Experiments Are a Major Source of Knowledge in the Social Sciences"
+      journal: "Science, 326(5952)"
+      kernaussagen:
+        - "Labor- und Feldexperimente sind komplementär"
+        - "Interne vs. externe Validität als Trade-off"
+        - "Triangulation über Methoden erhöht Konfidenz"
+
+    - id: "LevittList2007"
+      name: "Levitt & List (2007)"
+      titel: "What Do Laboratory Experiments Measuring Social Preferences Reveal About the Real World?"
+      journal: "Journal of Economic Perspectives"
+      kernaussagen:
+        - "Labor-Effekte können in echten Kontexten anders sein"
+        - "Scrutiny, Stakes, Kontext beeinflussen Verhalten"
+        - "Externe Validität muss geprüft werden"
+
+    - id: "Henrich2010"
+      name: "Henrich et al. (2010)"
+      titel: "The weirdest people in the world?"
+      journal: "Behavioral and Brain Sciences"
+      kernaussagen:
+        - "WEIRD = Western, Educated, Industrialized, Rich, Democratic"
+        - "~96% der Psychologie-Studien mit ~12% der Weltbevölkerung"
+        - "Verhaltensmuster sind kulturabhängig"
+        - "Universalitätsannahmen riskant"
+
 # =============================================================================
 # EMPIRISCHE BASE-RATES
 # =============================================================================
@@ -122,6 +151,134 @@ base_rates:
       praeregistriert:
         bias_faktor: 0.05
         note: "Präregistrierung reduziert Bias erheblich"
+
+  # Triangulation (Falk & Heckman 2009)
+  triangulation:
+    beschreibung: |
+      Evidenz-Bonus bei Konvergenz über verschiedene Methoden.
+      Basiert auf Falk & Heckman (2009): Labor und Feld sind komplementär.
+
+    methoden_kombination:
+      labor_allein:
+        triangulation_bonus: 0.00
+        validitaet:
+          intern: "sehr hoch"
+          extern: "niedrig-mittel"
+        note: "Hohe Kontrolle, aber Generalisierbarkeit unsicher"
+
+      feld_allein:
+        triangulation_bonus: 0.00
+        validitaet:
+          intern: "mittel"
+          extern: "hoch"
+        note: "Hohe Realitätsnähe, aber schwächere Kontrolle"
+
+      labor_plus_feld:
+        triangulation_bonus: 0.10
+        validitaet:
+          intern: "hoch"
+          extern: "hoch"
+        note: "Konvergenz erhöht Vertrauen in beide Dimensionen"
+
+      labor_plus_feld_plus_natural:
+        triangulation_bonus: 0.20
+        validitaet:
+          intern: "hoch"
+          extern: "sehr hoch"
+        note: "Gold-Standard für Parametervalidierung"
+
+    formel: |
+      E_trianguliert = E_base + triangulation_bonus
+
+      Beispiel: Labor-Experiment (E=0.72) + Feld-Replikation →
+      E_trianguliert = 0.72 + 0.10 = 0.82
+
+  # WEIRD Population Korrekturen
+  weird_korrektur:
+    beschreibung: |
+      Korrekturfaktoren für Population-Bias (Henrich et al. 2010).
+      WEIRD = Western, Educated, Industrialized, Rich, Democratic.
+
+    hintergrund: |
+      ~96% der Psychologie-Studien basieren auf ~12% der Weltbevölkerung.
+      Viele Effekte variieren kulturell:
+      - Müller-Lyer Illusion: WEIRD-spezifisch
+      - Dictator Game: Kulturell variabel
+      - Loss Aversion: Robust über Kulturen
+
+    korrektur_faktoren:
+      nur_weird:
+        korrektur: -0.08
+        E_multiplikator: 0.92
+        note: "Nur westliche Industrieländer, keine Replikation anderswo"
+
+      weird_plus_entwicklungsland:
+        korrektur: -0.04
+        E_multiplikator: 0.96
+        note: "Mindestens eine Studie außerhalb WEIRD"
+
+      cross_kulturell_validiert:
+        korrektur: 0.00
+        E_multiplikator: 1.00
+        note: "Systematische Cross-kulturelle Replikation"
+
+      universell_repliziert:
+        korrektur: +0.05
+        E_multiplikator: 1.05
+        note: "Repliziert über 5+ Kulturkreise"
+
+    anwendung_formel: |
+      E_korrigiert = E_base × weird_multiplikator
+
+      Beispiel: Labor-Experiment, nur WEIRD-Stichprobe
+      E_korrigiert = 0.72 × 0.92 = 0.66
+
+    effekte_mit_variation:
+      hohe_kulturelle_variation:
+        - "Fairness-Präferenzen (Ultimatum Game)"
+        - "Diskontierung (Zeitpräferenz)"
+        - "Risikoeinstellungen"
+        - "Kooperationsbereitschaft"
+      niedrige_kulturelle_variation:
+        - "Loss Aversion (λ)"
+        - "Probability Weighting (grundlegend)"
+        - "Certainty Effect"
+
+  # Natürliche Experimente
+  natural_experiments:
+    beschreibung: |
+      Base-Rates für natürliche Experimente und Quasi-Designs.
+      Zentral für Kausalinferenz außerhalb des Labors.
+
+    typen:
+      regression_discontinuity:
+        P_kausale_validitaet: 0.80
+        konfidenz: "hoch (bei guter Implementierung)"
+        note: "Lokaler Average Treatment Effect"
+
+      instrumental_variable:
+        P_kausale_validitaet: 0.70
+        konfidenz: "mittel-hoch (Instrument-abhängig)"
+        warnung: "Schwache Instrumente führen zu Bias"
+
+      difference_in_differences:
+        P_kausale_validitaet: 0.65
+        konfidenz: "mittel"
+        note: "Parallel Trends Annahme kritisch"
+
+      random_lottery:
+        P_kausale_validitaet: 0.85
+        konfidenz: "hoch"
+        beispiele:
+          - "Oregon Medicaid Lottery"
+          - "Vietnam Draft Lottery"
+        note: "Echte Randomisierung in natürlichem Setting"
+
+    kombination_mit_labor:
+      beschreibung: |
+        Konvergenz zwischen Labor-RCT und Natural Experiment
+        erhöht Vertrauen erheblich.
+      bonus: +0.15
 
 # =============================================================================
 # GLOSSAR: EVIDENZ-TERME

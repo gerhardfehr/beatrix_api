@@ -12,10 +12,11 @@ meta:
   beschreibung: |
     Disziplin-spezifisches ESL-Profil für verhaltensökonomische Forschung.
     Berücksichtigt die Besonderheiten empirischer Verhaltensforschung:
-    - Experimentelle Paradigmen (Labor, Feld)
+    - Experimentelle Paradigmen (Labor, Feld, Natürliche Experimente)
     - Replikationsdebatte in der Psychologie
     - Axiomatische Fundierung (wie bei BCM)
     - Mixture aus quantitativen und qualitativen Methoden
+    - Triangulationsprinzip nach Falk & Heckman (2009)
 
   anwendungsbereich:
     - "BCM 2.2 Dokumentation"
@@ -26,6 +27,40 @@ meta:
 
   wissenschaftstyp: "Sozialwissenschaft (empirisch-quantitativ)"
   toleranzfenster: 0.15  # τ für Sozialwissenschaften
+
+  methodologische_grundlagen:
+    falk_heckman_2009:
+      beschreibung: |
+        Die Debatte Falk & Heckman (2009) vs. Levitt & List (2007)
+        etablierte zentrale methodologische Prinzipien:
+      kernpunkte:
+        - "Labor- und Feldexperimente sind KOMPLEMENTÄR, nicht konkurrierend"
+        - "Interne Validität (Labor) vs. Externe Validität (Feld)"
+        - "Triangulation über Methoden erhöht Konfidenz"
+        - "Kontextsensitivität muss explizit kommuniziert werden"
+      referenz: "Falk, A. & Heckman, J. (2009). Lab Experiments Are a Major Source of Knowledge in the Social Sciences. Science, 326(5952)"
+
+    triangulation_prinzip:
+      beschreibung: |
+        Höchste Konfidenz bei Konvergenz über:
+        1. Labor-RCT (hohe interne Validität)
+        2. Feld-RCT (hohe externe Validität)
+        3. Natürliches Experiment (keine Selektionseffekte)
+      konfidenz_boost:
+        labor_allein: 0.00
+        labor_plus_feld: +0.10
+        triangulation_komplett: +0.20
+
+    weird_population_caveat:
+      beschreibung: |
+        WEIRD = Western, Educated, Industrialized, Rich, Democratic
+        Henrich et al. (2010): Die meisten Verhaltensforschung basiert
+        auf ~5% der Weltbevölkerung.
+      implikationen:
+        - "Effektgrößen können kulturabhängig variieren"
+        - "Universalitätsannahmen sind riskant"
+        - "Cross-kulturelle Replikation erforderlich für starke Claims"
+      korrektur_ohne_cross_kulturell: -0.08  # E-Malus
 
 # =============================================================================
 # E-SKALA: Verhaltensökonomie-spezifische Evidenzhierarchie
@@ -60,15 +95,43 @@ e_skala:
         heterogenitaet_hoch: -0.10
 
     stufe_2:
-      name: "Präregistrierte Feldexperimente"
-      E_range: [0.78, 0.88]
+      name: "Triangulierte Evidenz (Labor + Feld + Natural)"
+      E_range: [0.82, 0.95]
+      beschreibung: |
+        Konvergenz der Ergebnisse über mindestens zwei der drei
+        Hauptmethoden: Labor-RCT, Feld-RCT, Natürliches Experiment.
+        GOLD-STANDARD nach Falk & Heckman (2009).
+      beispiele:
+        - "Loss Aversion: Lab + Field + Oregon Medicaid (3/3)"
+        - "Present Bias: Lab + Field Commitment Devices (2/3)"
+        - "Social Preferences: Dictator Game + Charitable Giving (2/3)"
+      validitaet:
+        intern: "hoch (via Labor-Komponente)"
+        extern: "hoch (via Feld-Komponente)"
+        selektionsfrei: "hoch (via Natural Experiment)"
+      marker:
+        - "trianguliert"
+        - "konvergent über methoden"
+        - "labor und feld"
+        - "natürliches experiment bestätigt"
+      modifikatoren:
+        drei_methoden: +0.10
+        zwei_methoden: +0.05
+        cross_kulturell: +0.05
+
+    stufe_3:
+      name: "Präregistrierte Feldexperimente (Feld-RCT)"
+      E_range: [0.72, 0.82]
       beschreibung: |
         Experimente mit realen Entscheidungen, präregistriert.
-        Gold-Standard für kausale Aussagen in Verhaltensökonomie.
+        Hohe EXTERNE Validität, moderate interne Validität.
       beispiele:
         - "RCT mit echten finanziellen Konsequenzen"
         - "Präregistriertes Feldexperiment (N > 1000)"
         - "A/B-Test mit Verhaltensdaten"
+      validitaet:
+        intern: "mittel (reale Störvariablen)"
+        extern: "sehr hoch (echte Kontexte)"
       marker:
         - "präregistriert"
         - "feldexperiment"
@@ -80,18 +143,27 @@ e_skala:
         grosses_n: +0.05
         multi_site: +0.05
         kleines_n: -0.08
+        weird_only: -0.08
 
-    stufe_3:
-      name: "Labor-Experimente (incentivized)"
-      E_range: [0.65, 0.78]
+    stufe_4:
+      name: "Labor-Experimente (incentivized, Labor-RCT)"
+      E_range: [0.65, 0.75]
       beschreibung: |
         Kontrollierte Experimente mit monetären Anreizen.
+        Hohe INTERNE Validität, aber Generalisierbarkeit unsicher.
         Standard in experimenteller Ökonomie.
       beispiele:
         - "Incentivized Choice Task"
         - "Dictator Game / Ultimatum Game"
         - "Lottery Choice Experiment"
         - "Kahneman & Tversky Paradigmen"
+      validitaet:
+        intern: "sehr hoch (kontrolliert)"
+        extern: "niedrig-mittel (Labor ≠ echte Welt)"
+      falk_heckman_note: |
+        Falk & Heckman (2009) argumentieren: Laborbefunde sind VALIDE,
+        aber externe Validität muss durch Feldstudien bestätigt werden.
+        Labor liefert kausale Mechanismen, Feld liefert Generalisierbarkeit.
       marker:
         - "labor"
         - "laborexperiment"
@@ -102,10 +174,39 @@ e_skala:
         repliziert: +0.08
         nicht_repliziert: -0.15
         hypothetisch: -0.10  # Keine echten Anreize
+        weird_only: -0.05
 
-    stufe_4:
+    stufe_5:
+      name: "Natürliche Experimente"
+      E_range: [0.60, 0.72]
+      beschreibung: |
+        Quasi-experimentelle Designs, die natürlich vorkommende
+        Variation nutzen (Regression Discontinuity, IV, Diff-in-Diff).
+        Hohe REALITÄTSNÄHE, aber potenzielle Selektionsprobleme.
+      beispiele:
+        - "Oregon Medicaid Lottery (Finkelstein et al.)"
+        - "Vietnam Draft Lottery (Angrist)"
+        - "Regression Discontinuity bei Mindestlohn"
+        - "Instrumental Variables mit exogenen Schocks"
+      validitaet:
+        intern: "mittel (abhängig von Instrument-Qualität)"
+        extern: "hoch (echte Kontexte)"
+        selektionsfrei: "variabel (Instrument-abhängig)"
+      marker:
+        - "natürliches experiment"
+        - "natural experiment"
+        - "quasi-experiment"
+        - "instrumental variable"
+        - "regression discontinuity"
+        - "difference-in-differences"
+      modifikatoren:
+        starkes_instrument: +0.08
+        schwaches_instrument: -0.10
+        repliziert: +0.05
+
+    stufe_6:
       name: "Beobachtungsstudien / Survey-Experimente"
-      E_range: [0.50, 0.65]
+      E_range: [0.45, 0.60]
       beschreibung: |
         Korrelative Daten oder hypothetische Szenarien.
         Erlaubt Assoziationen, keine Kausalität.
@@ -125,9 +226,9 @@ e_skala:
         grosses_n: +0.05
         repraesentativ: +0.05
 
-    stufe_5:
+    stufe_7:
       name: "Fallstudien / Qualitative Forschung"
-      E_range: [0.35, 0.50]
+      E_range: [0.30, 0.45]
       beschreibung: |
         Explorative Untersuchungen, Einzelfälle.
         Hypothesengenerierend, nicht -testend.
@@ -142,9 +243,9 @@ e_skala:
         - "explorativ"
         - "case study"
 
-    stufe_6:
+    stufe_8:
       name: "Axiomatische Ableitung / Theoretische Modelle"
-      E_range: [0.30, 0.45]
+      E_range: [0.25, 0.40]
       beschreibung: |
         Logische Ableitung aus etablierten Axiomen.
         Für BCM: Ableitungen aus den 115 Axiomen.
@@ -165,9 +266,9 @@ e_skala:
         axiom_empirisch_validiert: +0.15  # Wenn Basis-Axiom selbst validiert
         axiom_hypothetisch: -0.10
 
-    stufe_7:
+    stufe_9:
       name: "Experteneinschätzung / Konsens"
-      E_range: [0.20, 0.35]
+      E_range: [0.15, 0.30]
       beschreibung: |
         Einschätzungen ohne formale Ableitung oder empirische Prüfung.
       beispiele:
@@ -181,9 +282,9 @@ e_skala:
         - "nach meinung"
         - "annahme"
 
-    stufe_8:
+    stufe_10:
       name: "Unbegründet / Behauptung"
-      E_range: [0.00, 0.20]
+      E_range: [0.00, 0.15]
       beschreibung: |
         Aussagen ohne erkennbare Evidenzbasis.
       beispiele:
@@ -316,6 +417,279 @@ bcm_regeln:
         technisch_korrekt: true
         empirisch_validiert: false
         E_erwartung: 0.25  # Weil nicht validiert
+
+
+# =============================================================================
+# MA-EPI-XX: EVIDENZHIERARCHIE FÜR BCM-PARAMETER
+# =============================================================================
+
+ma_epi_parameter_hierarchie:
+
+  beschreibung: |
+    Evidenzhierarchie für BCM-Modellparameter basierend auf
+    Falk & Heckman (2009) und moderner Kausalinferenz.
+
+    BEATRIX sollte die Evidenzstufe bei Parameterschätzungen kommunizieren.
+    Die meisten BCM-Base-Rates basieren primär auf Stufe (2).
+
+  stufen:
+
+    stufe_1:
+      name: "Triangulierte Konvergenz"
+      code: "MA-EPI-01"
+      E_range: [0.85, 1.00]
+      beschreibung: |
+        Parameter-Schätzung konvergiert über Labor-RCT, Feld-RCT
+        UND Natürliche Experimente. Höchste Konfidenz.
+      kriterien:
+        - "Mindestens 2 von 3 Methoden zeigen konsistente Schätzung"
+        - "Abweichung < 15% zwischen Methoden"
+        - "Multi-kulturelle Replikation vorhanden"
+      beispiele:
+        - parameter: "λ (Loss Aversion)"
+          schaetzung: "2.0-2.5"
+          labor: "Kahneman & Tversky (1992): λ ≈ 2.25"
+          feld: "Pope & Schweitzer (2011, Golf): λ ≈ 2.0"
+          natural: "Camerer et al. (1997, Taxi): λ ≈ 2.3"
+          status: "Trianguliert ✓"
+          E: 0.92
+          kommunikation: |
+            "Der Loss-Aversion-Parameter λ ist einer der best-belegten
+            Parameter in der Verhaltensökonomie mit konvergierender
+            Evidenz aus Labor, Feld und natürlichen Experimenten."
+
+    stufe_2:
+      name: "Labor + Feld Konvergenz"
+      code: "MA-EPI-02"
+      E_range: [0.70, 0.85]
+      beschreibung: |
+        Parameter-Schätzung basiert auf Labor-RCT UND Feld-RCT
+        mit konsistenten Ergebnissen. Kein Natürliches Experiment.
+      kriterien:
+        - "Labor und Feld stimmen überein"
+        - "Abweichung < 20% zwischen Methoden"
+        - "Mindestens 5 unabhängige Studien"
+      beispiele:
+        - parameter: "β (Present Bias)"
+          schaetzung: "0.70-0.85"
+          labor: "Frederick et al. (2002): β ≈ 0.75"
+          feld: "Ashraf et al. (2006, Commitment): β ≈ 0.78"
+          natural: "Begrenzt verfügbar"
+          status: "Lab + Feld ✓"
+          E: 0.78
+          kommunikation: |
+            "Der Present-Bias-Parameter β ist gut belegt durch
+            Labor- und Feldexperimente, allerdings fehlen starke
+            natürliche Experimente zur vollständigen Triangulation."
+
+        - parameter: "α (Probability Weighting)"
+          schaetzung: "0.65-0.75"
+          labor: "Tversky & Kahneman (1992): α ≈ 0.65"
+          feld: "Syndor (2010, Versicherung): α ≈ 0.70"
+          natural: "Begrenzt"
+          status: "Lab + Feld ✓"
+          E: 0.75
+      beatrix_note: |
+        Die meisten BCM-Base-Rates befinden sich auf dieser Stufe.
+        BEATRIX sollte dies bei Schätzungen kommunizieren.
+
+    stufe_3:
+      name: "Nur Labor-RCT (keine Feldvalidierung)"
+      code: "MA-EPI-03"
+      E_range: [0.55, 0.70]
+      beschreibung: |
+        Parameter-Schätzung basiert primär auf Labor-Experimenten.
+        Externe Validität unsicher (Falk-Heckman Caveat).
+      kriterien:
+        - "Mehrere replizierte Labor-Studien"
+        - "Keine oder inkonsistente Feldstudien"
+        - "WEIRD-Population dominant"
+      beispiele:
+        - parameter: "δ (Exponential Discount)"
+          schaetzung: "0.90-0.99"
+          labor: "Ja, viele Studien"
+          feld: "Variabel, kontextabhängig"
+          natural: "Kaum"
+          status: "Nur Labor"
+          E: 0.62
+          kommunikation: |
+            "Die Schätzung für δ basiert primär auf Laborexperimenten
+            mit WEIRD-Populationen. Externe Validität erfordert Vorsicht."
+          weird_warnung: true
+      warnung: |
+        BEATRIX sollte bei Parametern dieser Stufe explizit warnen:
+        "Schätzung basiert auf Labor-Daten. Externe Validität prüfen."
+
+    stufe_4:
+      name: "Explorative/Theoretische Schätzung"
+      code: "MA-EPI-04"
+      E_range: [0.30, 0.55]
+      beschreibung: |
+        Parameter basiert auf einzelnen Studien, theoretischer
+        Ableitung oder Expertenschätzung. Hohe Unsicherheit.
+      kriterien:
+        - "Weniger als 5 Studien"
+        - "Keine Replikation"
+        - "Oder: rein theoretisch abgeleitet"
+      beispiele:
+        - parameter: "Interaktionseffekte (λ × β)"
+          schaetzung: "Variabel"
+          labor: "Einzelstudien"
+          feld: "Keine"
+          natural: "Keine"
+          status: "Explorativ"
+          E: 0.40
+          kommunikation: |
+            "Die Interaktion zwischen Loss Aversion und Present Bias
+            ist empirisch wenig untersucht. Schätzungen sind explorativ."
+      warnung: |
+        BEATRIX sollte bei Parametern dieser Stufe nicht schätzen,
+        sondern auf Datenlücke hinweisen.
+
+  kombinationsregeln:
+    formel: |
+      E_parameter = E_base × weird_korrektur × triangulation_bonus
+
+      Wobei:
+      - weird_korrektur = 0.92 wenn nur WEIRD, 1.00 wenn cross-kulturell
+      - triangulation_bonus = 1.00 (Stufe 3/4), 1.10 (Stufe 2), 1.20 (Stufe 1)
+
+  beatrix_kommunikation:
+    anforderung: |
+      BEATRIX MUSS bei jeder Parameterschätzung kommunizieren:
+      1. Evidenzstufe (MA-EPI-01 bis MA-EPI-04)
+      2. Quellentyp (Labor/Feld/Natural)
+      3. WEIRD-Status (ja/nein/gemischt)
+      4. Unsicherheitsintervall
+
+    format:
+      beispiel: |
+        "Geschätzter Loss-Aversion-Parameter: λ = 2.2 ± 0.3
+         Evidenz: MA-EPI-01 (Trianguliert)
+         Quellen: Labor + Feld + Natural Experiments
+         Population: Cross-kulturell validiert
+         Konfidenz: Hoch (K = 0.88)"
+
+
+# =============================================================================
+# BCM-PARAMETER EVIDENCE REGISTRY
+# =============================================================================
+
+bcm_parameter_evidenz:
+
+  beschreibung: |
+    Registry der empirischen Evidenzbasis für BCM-Kernparameter.
+    Basis für transparente BEATRIX-Kommunikation.
+
+  parameter:
+
+    loss_aversion_lambda:
+      symbol: "λ"
+      name: "Loss Aversion Coefficient"
+      schaetzung: "2.0-2.5 (Median: 2.25)"
+      evidenzstufe: "MA-EPI-01"
+      E: 0.92
+      quellen:
+        labor:
+          - "Kahneman & Tversky (1992): 2.25"
+          - "Abdellaoui et al. (2008): 2.1"
+          - "Repliziert in Many Labs"
+        feld:
+          - "Pope & Schweitzer (2011): 2.0 (Golf)"
+          - "Crawford & Meng (2011): 2.3 (Taxi)"
+          - "Mas & Moretti (2009): ~2.0 (Arbeit)"
+        natural:
+          - "Camerer et al. (1997): 2.3 (Taxi)"
+          - "Fehr & Götte (2007): 2.0-2.5"
+      weird_status: "Cross-kulturell validiert"
+      replikation: "Hoch (>20 Studien)"
+      heterogenitaet: "Moderat (I² ≈ 40%)"
+      empfehlung: "Robust verwendbar"
+
+    present_bias_beta:
+      symbol: "β"
+      name: "Present Bias (Quasi-Hyperbolic)"
+      schaetzung: "0.70-0.85 (Median: 0.78)"
+      evidenzstufe: "MA-EPI-02"
+      E: 0.78
+      quellen:
+        labor:
+          - "Frederick et al. (2002): 0.75"
+          - "Andreoni & Sprenger (2012): 0.80"
+        feld:
+          - "Ashraf et al. (2006): 0.78"
+          - "Kaur et al. (2015): 0.70"
+        natural:
+          - "Begrenzt: Einige Konsumstudien"
+      weird_status: "Primär WEIRD, einige Dev-Studien"
+      replikation: "Mittel (10-15 Studien)"
+      heterogenitaet: "Hoch (I² ≈ 60%)"
+      empfehlung: "Verwendbar mit Vorsicht bzgl. Kontext"
+
+    probability_weighting_alpha:
+      symbol: "α"
+      name: "Probability Weighting (Prelec)"
+      schaetzung: "0.65-0.75 (Median: 0.70)"
+      evidenzstufe: "MA-EPI-02"
+      E: 0.75
+      quellen:
+        labor:
+          - "Tversky & Kahneman (1992): 0.65"
+          - "Prelec (1998): 0.74"
+          - "Gonzalez & Wu (1999): 0.71"
+        feld:
+          - "Syndor (2010): ~0.70 (Versicherung)"
+          - "Barseghyan et al. (2013): ~0.65"
+        natural:
+          - "Begrenzt verfügbar"
+      weird_status: "Primär WEIRD"
+      replikation: "Mittel"
+      heterogenitaet: "Moderat"
+      empfehlung: "Verwendbar, aber WEIRD-Caveat"
+
+    exponential_discount_delta:
+      symbol: "δ"
+      name: "Exponential Discount Factor"
+      schaetzung: "0.90-0.99 (stark kontextabhängig)"
+      evidenzstufe: "MA-EPI-03"
+      E: 0.62
+      quellen:
+        labor:
+          - "Frederick et al. (2002): Hohe Variabilität"
+          - "Andreoni & Sprenger (2012): 0.95-0.99"
+        feld:
+          - "Sehr variabel je nach Kontext"
+        natural:
+          - "Kaum verfügbar"
+      weird_status: "Primär WEIRD"
+      replikation: "Niedrig für spezifische Werte"
+      heterogenitaet: "Sehr hoch (I² > 80%)"
+      empfehlung: |
+        VORSICHT: Stark kontextabhängig.
+        Nicht als universellen Parameter behandeln.
+
+    social_preference_alpha:
+      symbol: "α_s"
+      name: "Social Preference (Inequity Aversion)"
+      schaetzung: "0.2-0.6 (hohe Heterogenität)"
+      evidenzstufe: "MA-EPI-03"
+      E: 0.58
+      quellen:
+        labor:
+          - "Fehr & Schmidt (1999): 0.4-0.6"
+          - "Bolton & Ockenfels (2000)"
+          - "Dictator Game Meta-Analysen"
+        feld:
+          - "Charitable Giving Studien"
+          - "Engel (2011) Meta-Analyse"
+        natural:
+          - "Begrenzt"
+      weird_status: "Cross-kulturell, aber variabel"
+      replikation: "Mittel"
+      heterogenitaet: "Sehr hoch"
+      empfehlung: |
+        Individuelle Unterschiede dominieren.
+        Nicht als Population-Parameter verwenden.
 
 # =============================================================================
 # BEISPIEL-BEWERTUNGEN
