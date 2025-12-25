@@ -124,9 +124,10 @@
 }
 
 \date{%
-    Version 3.0 --- December 2024 \\[0.3em]
+    Version 3.1 --- December 2024 \\[0.3em]
     \small Comprehensive Edition with LLM Integration \\
-    \small Self-Assessed K-Score: 0.92 (Stable)
+    \small Honest Self-Assessed K-Score: 0.73 (Partially Stable) \\
+    \small \textit{Theoretical Framework---Parameters Require Validation}
 }
 
 \begin{document}
@@ -145,7 +146,9 @@ This paper presents ESL as both a theoretical framework and a practical Quality 
 
 The framework addresses a fundamental challenge: \textbf{scaling amplifies epistemic errors}. When LLMs process thousands of analyses per hour, even small overclaiming rates produce substantial epistemic risk. ESL provides automated validation at critical pipeline phases, enabling epistemically safe AI-assisted analysis.
 
-We demonstrate ESL's practical application through: (1) the Behavioral Change Model (BCM) parameter registry, (2) integration into the BEATRIX three-phase architecture, and (3) comprehensive self-application to this paper itself. The paper achieves a self-assessed K-score of 0.92, demonstrating that rigorous calibration is achievable without sacrificing substantive claims.
+We demonstrate ESL's practical application through: (1) the Behavioral Change Model (BCM) parameter registry, (2) integration into the BEATRIX three-phase architecture, and (3) comprehensive self-application to this paper itself.
+
+\textbf{Methodological Note}: This paper presents ESL as a \textit{theoretical framework} with \textit{proposed} numerical parameters. Honest self-assessment reveals a K-score of 0.73 (Partially Stable): sections grounded in published research achieve high scores, while proposed $B$-values and $K$-thresholds require empirical validation. This transparency itself demonstrates ESL's core principle.
 
 \vspace{0.5em}
 \noindent\textbf{Keywords:} Epistemic calibration, scientific communication, evidence hierarchies, replication crisis, LLM quality assurance, AI safety, metascience, behavioral economics
@@ -209,7 +212,46 @@ The framework draws on several established research traditions:
 
 \subsection{Paper Structure}
 
-This paper proceeds as follows. Section~\ref{sec:theory} presents the theoretical foundations and formalizes the K-metric. Section~\ref{sec:evidence} develops discipline-specific evidence hierarchies. Section~\ref{sec:linguistic} details linguistic markers for claim strength. Section~\ref{sec:disciplines} addresses cross-disciplinary adaptation. Section~\ref{sec:llm} presents ESL as a QA module for LLM systems, including the four-stage evolution analysis. Section~\ref{sec:practical} provides extensive practical examples. Section~\ref{sec:application} demonstrates BCM integration. Section~\ref{sec:discussion} discusses implications and limitations. The Appendices provide a complete self-application analysis of this paper.
+This paper proceeds as follows. Section~\ref{sec:theory} presents the theoretical foundations and formalizes the K-metric. Section~\ref{sec:primitive} introduces lexical primitives. Section~\ref{sec:evidence} develops discipline-specific evidence hierarchies. Section~\ref{sec:linguistic} details linguistic markers for claim strength. Section~\ref{sec:disciplines} addresses cross-disciplinary adaptation. Section~\ref{sec:llm} presents ESL as a QA module for LLM systems, including the four-stage evolution analysis. Section~\ref{sec:practical} provides extensive practical examples. Section~\ref{sec:application} demonstrates BCM integration. Section~\ref{sec:discussion} discusses implications and limitations. The Appendices provide a complete self-application analysis of this paper.
+
+\subsection{Methodological Caveat: Status of Numerical Parameters}
+\label{sec:caveat}
+
+\begin{warningbox}[title={Important: Parameter Validation Status}]
+This paper presents ESL as a \textbf{theoretical framework} with \textbf{proposed numerical parameters}. The following distinction is critical:
+
+\textbf{Empirically grounded} (with citations):
+\begin{itemize}
+    \item Replication rates: $\sim$60\% in psychology \citep{OpenScienceCollaboration2015}, $\sim$61\% in economics \citep{Camerer2016}
+    \item Loss aversion estimates: $\lambda \approx 2.0$--$2.5$ \citep{KahnemanTversky1992, PopeSchweitzer2011}
+    \item WEIRD population statistics: 12\% of population, 96\% of samples \citep{Henrich2010}
+\end{itemize}
+
+\textbf{Proposed values requiring empirical validation}:
+\begin{itemize}
+    \item $B$-values for linguistic markers (Table~\ref{tab:modals}, \ref{tab:quantifiers})
+    \item $K$-thresholds for disciplines (Table~\ref{tab:cross-discipline})
+    \item Triangulation bonuses ($\Delta_{\text{tri}}$)
+    \item WEIRD correction factors ($\omega$)
+    \item Evidence hierarchy $E$-ranges
+\end{itemize}
+
+\textbf{Illustrative examples} (not empirical claims):
+\begin{itemize}
+    \item Cost estimates for LLM analyses
+    \item Overclaiming rate reductions
+    \item Worked calculation examples
+\end{itemize}
+
+The proposed values represent \textbf{expert estimates} designed to be \textbf{conceptually coherent} and serve as \textbf{starting points for calibration}. Their validation requires:
+\begin{enumerate}
+    \item Corpus linguistic studies for $B$-value calibration
+    \item Inter-rater reliability studies for $B$ and $E$ assignment
+    \item Predictive validity studies correlating $K$-scores with replication outcomes
+\end{enumerate}
+
+This caveat itself demonstrates ESL's self-referential consistency: we explicitly acknowledge where our evidence is weak, rather than presenting proposed values as established facts.
+\end{warningbox}
 
 \begin{eslbox}
 \textbf{Section Assessment:} This introduction makes moderate claims (B $\approx$ 0.75) about established problems (replication crisis, LLM risks) with strong evidential grounding (E $\approx$ 0.85). \\[0.3em]
@@ -671,9 +713,19 @@ Universal replication (5+ diverse contexts) & $\times 1.05$ \\
 \section{Linguistic Markers of Claim Strength}
 \label{sec:linguistic}
 
-% ESL Self-Assessment: B = 0.70, E = 0.72 → K = 0.97
+% ESL Self-Assessment: B = 0.70, E = 0.42 → K = 0.67 (HONEST)
 
 The $B$-component of ESL requires systematic identification of linguistic markers signaling claim strength.
+
+\begin{warningbox}[title={Validation Status: Proposed Values}]
+The $B$-values in this section are \textbf{proposed starting points}, not empirically validated parameters. They are derived from:
+\begin{itemize}
+    \item Ordinal ranking based on linguistic intuition (strong $>$ weak modals)
+    \item Approximate calibration to the $[0, 1]$ interval
+    \item Internal consistency checks (e.g., ``proves'' $>$ ``shows'' $>$ ``suggests'')
+\end{itemize}
+\textbf{Required validation}: Corpus linguistic studies measuring actual claim-outcome correlations; inter-rater reliability studies ($\kappa > 0.70$ target).
+\end{warningbox}
 
 \subsection{Modal Verbs}
 
@@ -681,7 +733,7 @@ Modal verbs are primary markers of epistemic commitment:
 
 \begin{table}[h]
 \centering
-\caption{Modal Verb $B$-Values}
+\caption{Modal Verb $B$-Values \textbf{(Proposed---Requires Validation)}}
 \label{tab:modals}
 \begin{tabular}{lc|lc}
 \toprule
@@ -703,7 +755,7 @@ Quantifiers modulate claim scope and thus affect $B$:
 
 \begin{table}[h]
 \centering
-\caption{Quantifier $B$-Values}
+\caption{Quantifier $B$-Values \textbf{(Proposed---Requires Validation)}}
 \label{tab:quantifiers}
 \begin{tabular}{lc|lc}
 \toprule
@@ -724,7 +776,7 @@ Hedging expressions reduce effective claim strength through additive modifiers:
 
 \begin{table}[h]
 \centering
-\caption{Hedging Expression Modifiers}
+\caption{Hedging Expression Modifiers \textbf{(Proposed---Requires Validation)}}
 \label{tab:hedging}
 \begin{tabular}{lc}
 \toprule
@@ -765,9 +817,9 @@ B_{\text{composite}} &= 0.58 - 0.10 - 0.06 - 0.18 = 0.24
 \end{practicalbox}
 
 \begin{eslbox}
-\textbf{Section Assessment:} Linguistic markers are presented with specific values (B $\approx$ 0.70) based on corpus linguistics and calibration research (E $\approx$ 0.72). Values are proposals requiring empirical validation. \\[0.3em]
-\textbf{Calculation:} $K = 1 - |0.70 - 0.72| / 0.72 = 1 - 0.028 = 0.97$ \\
-\textbf{Status:} Highly Stable
+\textbf{Section Assessment (Honest):} Linguistic markers are presented with specific numerical values (B $\approx$ 0.70), but evidence is limited to ordinal intuitions and internal consistency (E $\approx$ 0.40). \textbf{No corpus validation exists for these values.} \\[0.3em]
+\textbf{Calculation:} $K = 1 - |0.70 - 0.40| / 0.70 = 1 - 0.43 = 0.57$ \\
+\textbf{Status:} \textcolor{orange}{Partially Stable}---requires empirical validation before operational use
 \end{eslbox}
 
 % =============================================================================
@@ -814,7 +866,7 @@ Lab experiment position & Level 5--6 & Level 4--5 \\
 
 \begin{table}[h]
 \centering
-\caption{$K$-Thresholds Across Disciplines}
+\caption{$K$-Thresholds Across Disciplines \textbf{(Normative Proposals---Not Empirically Derived)}}
 \label{tab:cross-discipline}
 \begin{tabular}{lccc}
 \toprule
@@ -831,10 +883,12 @@ Qualitative Research & 0.65 & 0.25 & Different validity criteria \\
 \end{tabular}
 \end{table}
 
+\textbf{Note}: These thresholds are \textit{normative proposals} based on qualitative reasoning about discipline characteristics. They are \textbf{not} derived from empirical studies correlating $K$-scores with replication outcomes. Validation would require retrospective analysis of published claims against subsequent replication attempts.
+
 \begin{eslbox}
-\textbf{Section Assessment:} Discipline adaptations are proposed (B $\approx$ 0.68) based on field-specific characteristics (E $\approx$ 0.72). Cross-disciplinary thresholds are informed estimates. \\[0.3em]
-\textbf{Calculation:} $K = 1 - |0.68 - 0.72| / 0.72 = 1 - 0.056 = 0.94$ \\
-\textbf{Status:} Stable
+\textbf{Section Assessment (Honest):} Discipline thresholds are presented as specific values (B $\approx$ 0.72), but evidence is limited to qualitative reasoning about field differences (E $\approx$ 0.35). \textbf{No empirical calibration exists.} \\[0.3em]
+\textbf{Calculation:} $K = 1 - |0.72 - 0.35| / 0.72 = 1 - 0.51 = 0.49$ \\
+\textbf{Status:} \textcolor{red}{Interpretive}---normative proposal, not empirical claim
 \end{eslbox}
 
 % =============================================================================
@@ -1706,16 +1760,32 @@ Key contributions include:
     \item Practical integration architecture
 \end{itemize}
 
-This paper demonstrates that high $K$-scores are achievable through calibrated language, transparent evidence documentation, and explicit acknowledgment of limitations. We achieve an overall $K$-score of 0.92, within the ``Highly Stable'' category.
+This paper demonstrates that calibrated language and explicit acknowledgment of limitations are achievable and valuable. However, honest self-assessment reveals that this paper itself has mixed epistemic foundations.
 
-ESL does not claim to solve the replication crisis. However, it offers a framework for \textbf{calibrated communication}---ensuring that the strength of our claims aligns with the strength of our evidence. This calibration is, we suggest, a necessary condition for cumulative scientific progress in the age of artificial intelligence.
+ESL does not claim to solve the replication crisis. It offers a \textbf{conceptual framework} for calibrated communication---but many of the specific numerical parameters require empirical validation before operational deployment.
 
 \begin{eslbox}
-\textbf{Paper-Level Assessment:} \\
-Overall $B$: 0.74 (moderate claims throughout) \\
-Overall $E$: 0.79 (grounded in established literature) \\
-\textbf{Final $K$-Score: 0.92} (Highly Stable) \\[0.3em]
-\textbf{Self-Assessment}: This paper achieves its target of $K \geq 0.85$.
+\textbf{Paper-Level Assessment (Honest Revision):} \\[0.5em]
+\textbf{Sections with strong evidence} ($E \geq 0.75$):
+\begin{itemize}
+    \item Replication crisis motivation (published meta-analyses)
+    \item LLM limitation analysis (documented capabilities)
+    \item Triangulation principle (Falk-Heckman, established)
+    \item Loss aversion estimates (triangulated evidence)
+\end{itemize}
+
+\textbf{Sections with weak evidence} ($E \leq 0.45$):
+\begin{itemize}
+    \item $B$-value tables (expert intuition only)
+    \item $K$-thresholds by discipline (normative proposals)
+    \item WEIRD correction factors (estimated)
+    \item Cost estimates (illustrative)
+\end{itemize}
+
+\textbf{Revised Assessment:} \\
+Weighted $B$: 0.72 \quad Weighted $E$: 0.58 \\
+\textbf{Honest $K$-Score: 0.73} (\textcolor{orange}{Partially Stable}) \\[0.3em]
+\textbf{Interpretation}: This paper is a \textbf{theoretical framework proposal} with some empirically grounded components and many parameters requiring validation. It should be read as a \textit{starting point for calibration research}, not as a validated measurement instrument.
 \end{eslbox}
 
 % =============================================================================
@@ -2255,22 +2325,37 @@ This appendix provides a practical checklist for applying ESL to scientific writ
 \end{center}
 \vspace{1em}
 
-\noindent\textbf{Final Self-Assessment Summary}
+\noindent\textbf{Final Self-Assessment Summary (Revised)}
 
-This paper (``Empirical Stability of Language: A Comprehensive Framework for Calibrating Scientific Claims in the Age of Large Language Models'') achieves:
+This paper presents ESL as a \textbf{theoretical framework} with \textbf{mixed epistemic foundations}:
 
 \begin{itemize}
-    \item \textbf{Overall $K$-Score}: 0.92 (Highly Stable)
-    \item \textbf{Lowest Section $K$}: 0.80 (Related Work---still Stable)
-    \item \textbf{Highest Section $K$}: 0.98 (Four Stages Analysis)
-    \item \textbf{Claims Passing ESL}: 100\% (all claims achieve $K \geq 0.75$)
+    \item \textbf{Honest $K$-Score}: 0.73 (Partially Stable)
+    \item \textbf{Strongest Sections}: Problem motivation, LLM analysis ($K \geq 0.85$)
+    \item \textbf{Weakest Sections}: $B$-value tables, $K$-thresholds ($K \approx 0.49$--$0.57$)
+    \item \textbf{Status}: Theoretical framework proposal requiring empirical validation
 \end{itemize}
 
-The paper demonstrates that rigorous epistemic calibration is both achievable and compatible with substantive scientific claims. ESL does not require weak claims---it requires \textit{well-calibrated} claims.
+\textbf{What this paper provides}:
+\begin{itemize}
+    \item A coherent conceptual framework for claim-evidence calibration
+    \item Formally defined metrics with interpretable components
+    \item Ordinal rankings of linguistic markers (validated: strong $>$ weak)
+    \item Integration architecture for LLM systems
+\end{itemize}
+
+\textbf{What this paper does NOT provide}:
+\begin{itemize}
+    \item Empirically validated numerical $B$-values
+    \item Empirically calibrated $K$-thresholds
+    \item Predictive validity evidence ($K$-scores $\to$ replication outcomes)
+\end{itemize}
+
+The paper demonstrates that \textbf{honest self-assessment is achievable}---and that acknowledging weak evidence where it exists is itself an application of ESL principles.
 
 \vspace{1em}
 \begin{center}
-\textit{``Calibration, not minimization.''}
+\textit{``Calibration, not minimization---and honesty about what we don't know.''}
 \end{center}
 
 \end{document}
