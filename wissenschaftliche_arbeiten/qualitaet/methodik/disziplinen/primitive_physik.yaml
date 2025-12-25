@@ -1,0 +1,335 @@
+# =============================================================================
+# ESL PRIMITIVE: Physik
+# =============================================================================
+# Orthogonale Grundbegriffe der Physik
+# Nicht weiter zerlegbar, bilden semantische Basis
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Physik"
+  anzahl_primitive: 24
+  kategorien: 6
+  beschreibung: |
+    Fundamentale Konzepte der Physik. Diese Primitive sind
+    mathematisch präzise definiert und durch Gleichungen verbunden.
+    Hohe Konsistenz über Subdisziplinen hinweg.
+
+
+# =============================================================================
+# KATEGORIE 1: RAUM-ZEIT
+# =============================================================================
+
+RAUM_ZEIT:
+
+  RAUM:
+    definition: "Dreidimensionale Ausdehnung, in der Objekte existieren"
+    symbol: "x, r, V"
+    einheit: "m, m³"
+    mathematisch: "ℝ³ oder Riemannsche Mannigfaltigkeit"
+    relationen:
+      - ZEIT: "Raumzeit-Kontinuum (Minkowski, Lorentz)"
+      - FELD: "Felder existieren im Raum"
+      - SYMMETRIE: "Translationsinvarianz → Impulserhaltung"
+
+  ZEIT:
+    definition: "Geordnete Abfolge von Ereignissen"
+    symbol: "t"
+    einheit: "s"
+    mathematisch: "ℝ oder Komponente der Raumzeit"
+    relationen:
+      - RAUM: "Vereinigt in Raumzeit"
+      - ERHALTUNG: "Zeitsymmetrie → Energieerhaltung"
+      - KAUSALITAET: "Zeitordnung bestimmt Kausalstruktur"
+
+  BEWEGUNG:
+    definition: "Änderung der Position über Zeit"
+    symbol: "v = dx/dt, a = dv/dt"
+    einheit: "m/s, m/s²"
+    mathematisch: "Zeitableitung des Ortsvektors"
+    relationen:
+      - RAUM: "Ortsänderung"
+      - ZEIT: "Zeitliche Entwicklung"
+      - KRAFT: "F = ma (Newton)"
+
+  KAUSALITAET:
+    definition: "Ursache-Wirkungs-Beziehung zwischen Ereignissen"
+    symbol: "—"
+    einheit: "—"
+    mathematisch: "Lichtkegel, zeitartige Weltlinien"
+    relationen:
+      - ZEIT: "Ursache vor Wirkung"
+      - RAUM: "Begrenzt durch Lichtgeschwindigkeit"
+
+
+# =============================================================================
+# KATEGORIE 2: MECHANIK
+# =============================================================================
+
+MECHANIK:
+
+  MASSE:
+    definition: "Maß für Trägheit und Gravitationsquelle"
+    symbol: "m"
+    einheit: "kg"
+    mathematisch: "Skalar (träge), Quelle von Gμν (schwer)"
+    relationen:
+      - KRAFT: "F = ma"
+      - ENERGIE: "E = mc²"
+      - IMPULS: "p = mv"
+
+  KRAFT:
+    definition: "Ursache von Beschleunigung"
+    symbol: "F"
+    einheit: "N = kg·m/s²"
+    mathematisch: "Vektor, F = dp/dt"
+    relationen:
+      - MASSE: "Trägheit gegen Kraft"
+      - BEWEGUNG: "Erzeugt Beschleunigung"
+      - FELD: "Kraftfelder (Gravitation, EM)"
+
+  IMPULS:
+    definition: "Bewegungsgröße, Produkt aus Masse und Geschwindigkeit"
+    symbol: "p"
+    einheit: "kg·m/s"
+    mathematisch: "Vektor, p = mv, kanonisch: p = ∂L/∂q̇"
+    relationen:
+      - MASSE: "p = mv"
+      - ERHALTUNG: "Translationsinvarianz"
+      - QUANT: "p = ℏk (de Broglie)"
+
+  DREHIMPULS:
+    definition: "Rotations-Bewegungsgröße"
+    symbol: "L"
+    einheit: "kg·m²/s"
+    mathematisch: "L = r × p, quantisiert in ℏ"
+    relationen:
+      - IMPULS: "Rotationsanalogon"
+      - SYMMETRIE: "Rotationsinvarianz"
+      - QUANT: "L = √(l(l+1))ℏ"
+
+
+# =============================================================================
+# KATEGORIE 3: ENERGIE UND ERHALTUNG
+# =============================================================================
+
+ENERGIE_ERHALTUNG:
+
+  ENERGIE:
+    definition: "Fähigkeit, Arbeit zu verrichten"
+    symbol: "E"
+    einheit: "J = kg·m²/s²"
+    mathematisch: "Skalar, E = H (Hamilton)"
+    formen:
+      - "Kinetisch: T = ½mv²"
+      - "Potentiell: U(r)"
+      - "Ruheenergie: E₀ = mc²"
+      - "Thermisch: U = NkT"
+    relationen:
+      - MASSE: "Äquivalenz E = mc²"
+      - ERHALTUNG: "Zeitinvarianz"
+      - ARBEIT: "W = ∫F·dr"
+
+  ERHALTUNG:
+    definition: "Invarianz einer Größe unter Zeitentwicklung"
+    symbol: "dQ/dt = 0"
+    mathematisch: "Noether-Theorem: Symmetrie ↔ Erhaltungsgröße"
+    beispiele:
+      - "Energie (Zeittranslation)"
+      - "Impuls (Raumtranslation)"
+      - "Drehimpuls (Rotation)"
+      - "Ladung (U(1)-Symmetrie)"
+    relationen:
+      - SYMMETRIE: "Noether-Theorem"
+      - ENERGIE: "Erhaltene Größe"
+
+  ENTROPIE:
+    definition: "Maß für Unordnung / Anzahl Mikrozustände"
+    symbol: "S"
+    einheit: "J/K"
+    mathematisch: "S = kB ln Ω (Boltzmann)"
+    relationen:
+      - ENERGIE: "dU = TdS - pdV"
+      - WAHRSCHEINLICHKEIT: "Statistische Mechanik"
+      - ZEIT: "2. Hauptsatz: dS ≥ 0"
+
+  TEMPERATUR:
+    definition: "Maß für mittlere kinetische Energie"
+    symbol: "T"
+    einheit: "K"
+    mathematisch: "1/T = ∂S/∂U"
+    relationen:
+      - ENERGIE: "⟨E⟩ = (3/2)kBT (ideales Gas)"
+      - ENTROPIE: "Konjugierte Variable"
+
+
+# =============================================================================
+# KATEGORIE 4: FELDER UND WECHSELWIRKUNGEN
+# =============================================================================
+
+FELDER:
+
+  FELD:
+    definition: "Physikalische Größe an jedem Punkt des Raums"
+    symbol: "φ(x,t), Aμ(x,t)"
+    mathematisch: "Abbildung: Raumzeit → Wertebereich"
+    typen:
+      - "Skalarfeld: φ(x)"
+      - "Vektorfeld: A(x)"
+      - "Tensorfeld: gμν(x)"
+      - "Spinorfeld: ψ(x)"
+    relationen:
+      - RAUM: "Definiert über Raumzeit"
+      - KRAFT: "Vermittelt Wechselwirkung"
+      - QUANT: "Quantisiert zu Teilchen"
+
+  LADUNG:
+    definition: "Quelle eines Feldes, erhaltene Quantenzahl"
+    symbol: "q, Q"
+    einheit: "C (elektrisch)"
+    typen:
+      - "Elektrisch: e"
+      - "Farbe: QCD"
+      - "Schwache Ladung"
+    relationen:
+      - FELD: "Quelle von Feldern"
+      - ERHALTUNG: "Ladungserhaltung"
+      - SYMMETRIE: "Eichinvarianz"
+
+  POTENTIAL:
+    definition: "Skalare/vektorielle Größe, aus der Kraft abgeleitet wird"
+    symbol: "V, φ, Aμ"
+    einheit: "J, V, V·s/m"
+    mathematisch: "F = -∇V, E = -∇φ - ∂A/∂t"
+    relationen:
+      - KRAFT: "Gradient des Potentials"
+      - FELD: "Feldstärke aus Potential"
+      - ENERGIE: "Potentielle Energie"
+
+  WECHSELWIRKUNG:
+    definition: "Kopplung zwischen Feldern oder Teilchen"
+    symbol: "g, α, λ"
+    typen:
+      - "Gravitation: G"
+      - "Elektromagnetisch: α ≈ 1/137"
+      - "Stark: αs ≈ 1"
+      - "Schwach: GF"
+    relationen:
+      - KRAFT: "Fundamentale Kräfte"
+      - FELD: "Vermittelt durch Austauschteilchen"
+
+
+# =============================================================================
+# KATEGORIE 5: QUANTENMECHANIK
+# =============================================================================
+
+QUANTENMECHANIK:
+
+  QUANT:
+    definition: "Diskrete Einheit einer physikalischen Größe"
+    symbol: "ℏ, n"
+    mathematisch: "Eigenwerte von Operatoren"
+    beispiele:
+      - "Photon: E = hν"
+      - "Drehimpuls: L = nℏ"
+      - "Ladung: e"
+    relationen:
+      - ENERGIE: "Quantisierung"
+      - FELD: "Feldquanten = Teilchen"
+
+  WELLE:
+    definition: "Räumlich-zeitliche Oszillation"
+    symbol: "ψ, A"
+    mathematisch: "Lösung der Wellengleichung"
+    parameter:
+      - "Wellenlänge: λ"
+      - "Frequenz: ν"
+      - "Amplitude: A"
+    relationen:
+      - TEILCHEN: "Welle-Teilchen-Dualismus"
+      - QUANT: "λ = h/p"
+
+  TEILCHEN:
+    definition: "Lokalisiertes Objekt mit definierten Eigenschaften"
+    symbol: "—"
+    eigenschaften:
+      - "Masse: m"
+      - "Spin: s"
+      - "Ladung: q"
+    relationen:
+      - WELLE: "Welle-Teilchen-Dualismus"
+      - FELD: "Anregung von Quantenfeldern"
+      - MASSE: "Ruhemasse"
+
+  ZUSTAND:
+    definition: "Vollständige Beschreibung eines Quantensystems"
+    symbol: "|ψ⟩"
+    mathematisch: "Vektor im Hilbertraum"
+    relationen:
+      - WAHRSCHEINLICHKEIT: "|⟨φ|ψ⟩|²"
+      - MESSUNG: "Kollaps auf Eigenzustand"
+
+  WAHRSCHEINLICHKEIT:
+    definition: "Relative Häufigkeit eines Messergebnisses"
+    symbol: "P"
+    mathematisch: "P = |⟨φ|ψ⟩|² (Born-Regel)"
+    relationen:
+      - ZUSTAND: "Aus Wellenfunktion"
+      - MESSUNG: "Vorhersage von Ergebnissen"
+
+
+# =============================================================================
+# KATEGORIE 6: SYMMETRIE
+# =============================================================================
+
+SYMMETRIE:
+
+  SYMMETRIE:
+    definition: "Invarianz unter Transformation"
+    symbol: "G (Gruppe)"
+    typen:
+      - "Kontinuierlich: Translation, Rotation"
+      - "Diskret: Parität, Zeitumkehr"
+      - "Eich: U(1), SU(2), SU(3)"
+    relationen:
+      - ERHALTUNG: "Noether-Theorem"
+      - FELD: "Eichsymmetrien"
+
+  INVARIANZ:
+    definition: "Unveränderlichkeit unter Transformation"
+    symbol: "T[L] = L"
+    mathematisch: "Symmetriegruppe wirkt auf Lagrange"
+    relationen:
+      - SYMMETRIE: "Manifestation"
+      - ERHALTUNG: "Konsequenz"
+
+  DIMENSION:
+    definition: "Unabhängige Freiheitsgrade"
+    symbol: "d, D"
+    typen:
+      - "Räumlich: 3"
+      - "Raumzeit: 4"
+      - "Stringtheorie: 10/11"
+    relationen:
+      - RAUM: "Räumliche Dimensionen"
+      - ZEIT: "Zeitdimension"
+
+
+# =============================================================================
+# RELATIONSGRAPH
+# =============================================================================
+
+relationsgraph:
+  zentrale_knoten:
+    - ENERGIE: "Verbindet Mechanik, Thermodynamik, Quantenmechanik"
+    - SYMMETRIE: "Noether-Theorem verbindet mit Erhaltungsgrößen"
+    - FELD: "Vereinheitlicht Kräfte und Teilchen"
+    - QUANT: "Brücke klassisch ↔ quantenmechanisch"
+
+  fundamentale_gleichungen:
+    - "F = ma (Newton)"
+    - "E = mc² (Einstein)"
+    - "iℏ∂ψ/∂t = Hψ (Schrödinger)"
+    - "∂μFμν = jν (Maxwell)"
+    - "Gμν = 8πGTμν (Einstein)"
+    - "S = kB ln Ω (Boltzmann)"

@@ -1,0 +1,496 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Physik
+# =============================================================================
+# Für: Physikalische Forschung (Experimentell und Theoretisch)
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "physik"
+  name: "Physik"
+  name_en: "Physics"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Physik.
+    Charakteristika:
+    - Höchste Reproduzierbarkeit aller Wissenschaften (>99%)
+    - Mathematisch exakte Formulierung
+    - Klare Unterscheidung Theorie/Experiment
+    - Präzisionsmessungen mit definierten Unsicherheiten
+    - 5σ-Standard für Entdeckungen
+    - Strenge Peer-Review-Kultur
+
+  anwendungsbereich:
+    - "Klassische Mechanik"
+    - "Elektrodynamik"
+    - "Quantenmechanik"
+    - "Statistische Mechanik / Thermodynamik"
+    - "Relativitätstheorie"
+    - "Teilchenphysik / Hochenergiephysik"
+    - "Kondensierte Materie"
+    - "Astrophysik / Kosmologie"
+    - "Atom- und Molekülphysik"
+    - "Kernphysik"
+
+  wissenschaftstyp: "Exakte Naturwissenschaft (mathematisch + experimentell)"
+  toleranzfenster: 0.08  # Sehr eng wegen hoher Reproduzierbarkeit
+
+  verwandte_profile:
+    - id: "chemie"
+      beziehung: "Überlappend"
+      unterschied: "Chemie fokussiert auf molekulare Ebene"
+    - id: "ingenieurwissenschaften"
+      beziehung: "Angewandt"
+      unterschied: "Anwendung physikalischer Prinzipien"
+
+
+# =============================================================================
+# E-SKALA: Physik-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Evidenzhierarchie für physikalische Forschung.
+    Besonderheit: Theoretische Vorhersagen haben hohen Stellenwert,
+    wenn sie präzise und falsifizierbar sind. Experimentelle Bestätigung
+    mit >5σ ist Gold-Standard für Entdeckungen.
+
+  stufen:
+
+    stufe_1:
+      name: "Fundamentales Prinzip / Erhaltungssatz"
+      E_range: [0.95, 1.00]
+      beschreibung: |
+        Grundlegende physikalische Prinzipien, die nie verletzt
+        wurden und theoretisch fundamental begründet sind.
+      beispiele:
+        - "Energieerhaltung"
+        - "Impulserhaltung"
+        - "Ladungserhaltung"
+        - "CPT-Theorem"
+      marker:
+        - "fundamentales prinzip"
+        - "erhaltungssatz"
+        - "nie verletzt beobachtet"
+        - "aus symmetrie folgt"
+      modifikatoren:
+        noether_theorem: +0.02
+        experimentell_geprueft: +0.01
+
+    stufe_2:
+      name: "Etablierte Theorie mit Präzisionstests"
+      E_range: [0.88, 0.96]
+      beschreibung: |
+        Theorien mit vielfacher experimenteller Bestätigung
+        auf hohem Präzisionsniveau.
+      beispiele:
+        - "Quantenelektrodynamik (QED)"
+        - "Standardmodell-Vorhersagen"
+        - "Allgemeine Relativitätstheorie (im getesteten Bereich)"
+        - "Spezielle Relativitätstheorie"
+      marker:
+        - "präzision von"
+        - "übereinstimmung auf niveau von"
+        - "vielfach bestätigt"
+        - "experimentell etabliert"
+      modifikatoren:
+        praezision_besser_1ppm: +0.03
+        mehrere_unabhaengige_tests: +0.02
+
+    stufe_3:
+      name: "5σ-Entdeckung / Hochsignifikante Messung"
+      E_range: [0.82, 0.90]
+      beschreibung: |
+        Experimentelle Ergebnisse mit statistischer Signifikanz
+        ≥5σ. Standard für Teilchenphysik-Entdeckungen.
+      beispiele:
+        - "Higgs-Boson Entdeckung (ATLAS/CMS)"
+        - "Gravitationswellen-Nachweis (LIGO)"
+        - "W/Z-Boson Entdeckung"
+        - "Top-Quark Entdeckung"
+      marker:
+        - "5σ"
+        - "signifikanz >5"
+        - "entdeckung"
+        - "direkter nachweis"
+      modifikatoren:
+        mehrere_experimente: +0.05
+        systematiken_kontrolliert: +0.03
+        blinded_analysis: +0.02
+
+    stufe_4:
+      name: "3-5σ Evidence / Starker Hinweis"
+      E_range: [0.70, 0.82]
+      beschreibung: |
+        Experimentelle Hinweise mit 3-5σ Signifikanz.
+        Noch keine Entdeckung, aber starke Evidenz.
+      beispiele:
+        - "Excess bei 3.5σ"
+        - "Hinweis auf neue Physik"
+        - "Bestätigung in einem Kanal"
+      marker:
+        - "3σ"
+        - "4σ"
+        - "evidence"
+        - "hinweis"
+        - "excess"
+      modifikatoren:
+        zwei_experimente: +0.05
+        nur_ein_kanal: -0.05
+        look_elsewhere_effekt: -0.08
+
+    stufe_5:
+      name: "Präzisionsmessung (einzelnes Experiment)"
+      E_range: [0.60, 0.72]
+      beschreibung: |
+        Hochpräzise Messung eines Parameters durch ein
+        einzelnes Experiment. Noch ohne unabhängige Bestätigung.
+      beispiele:
+        - "Erste Messung einer neuen Größe"
+        - "Präzisions-Bestimmung einer Konstante"
+        - "Neuer Präzisions-Weltrekord"
+      marker:
+        - "messung"
+        - "bestimmung"
+        - "erste präzise messung"
+        - "unsicherheit von"
+      modifikatoren:
+        systematiken_dominant: -0.05
+        statistik_limitiert: -0.03
+        neue_methode: -0.05
+
+    stufe_6:
+      name: "Theoretische Vorhersage (etabliertes Framework)"
+      E_range: [0.50, 0.65]
+      beschreibung: |
+        Vorhersage aus etablierter Theorie, die noch nicht
+        experimentell getestet wurde. Hohe Glaubwürdigkeit
+        wegen Konsistenz mit Framework.
+      beispiele:
+        - "Standardmodell-Vorhersage für ungemessenen Prozess"
+        - "QCD-Vorhersage für neue Observable"
+        - "Kosmologische Vorhersage aus ΛCDM"
+      marker:
+        - "vorhersage"
+        - "theorie sagt vorher"
+        - "aus dem modell folgt"
+        - "erwartet"
+      modifikatoren:
+        praezise_vorhersage: +0.05
+        parameter_aus_fit: -0.05
+        mehrere_freie_parameter: -0.08
+
+    stufe_7:
+      name: "Theoretisches Modell / Hypothese"
+      E_range: [0.35, 0.52]
+      beschreibung: |
+        Neue theoretische Modelle oder Erweiterungen,
+        die noch nicht bestätigt sind (BSM, Stringtheorie, etc.)
+      beispiele:
+        - "Supersymmetrie-Vorhersage"
+        - "Stringtheorie-Phänomenologie"
+        - "BSM-Modell"
+        - "Alternative Gravitationstheorie"
+      marker:
+        - "modell"
+        - "hypothese"
+        - "erweiterung"
+        - "bsm"
+        - "jenseits des standardmodells"
+      modifikatoren:
+        minimale_erweiterung: +0.05
+        viele_freie_parameter: -0.10
+        keine_eindeutige_vorhersage: -0.12
+
+    stufe_8:
+      name: "Spekulative Theorie"
+      E_range: [0.15, 0.35]
+      beschreibung: |
+        Hochspekulative theoretische Ideen ohne klare
+        experimentelle Vorhersagen oder Testbarkeit.
+      beispiele:
+        - "Multiversum-Hypothesen"
+        - "Prä-Big-Bang Szenarien"
+        - "Nicht-testbare String-Vakua"
+      marker:
+        - "spekulativ"
+        - "hypothetisch"
+        - "möglicherweise"
+        - "könnte erklären"
+      modifikatoren:
+        prinzipiell_testbar: +0.08
+        nicht_falsifizierbar: -0.15
+
+    stufe_9:
+      name: "Unbelegte Behauptung / Pseudowissenschaft"
+      E_range: [0.00, 0.15]
+      beschreibung: |
+        Behauptungen ohne wissenschaftliche Grundlage.
+      beispiele:
+        - "Perpetuum Mobile"
+        - "Kalte Fusion (nicht repliziert)"
+        - "Überlichtgeschwindigkeit"
+      marker:
+        - "widerlegt"
+        - "nicht replizierbar"
+        - "verletzt erhaltungssätze"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Physik
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Physik hat die strengsten K-Schwellenwerte aller Disziplinen.
+    Hohe Reproduzierbarkeit und mathematische Präzision erlauben
+    und erfordern genaue Übereinstimmung von Behauptung und Evidenz.
+
+  kategorien:
+    stabil:
+      range: [0.85, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch solide Evidenz vollständig gedeckt"
+      aktion: "Publikationsreif für Top-Journals"
+      beispiel: "Etablierte Theorie mit Präzisionstests"
+
+    teilstabil:
+      range: [0.65, 0.85]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz, Einschränkungen angeben"
+      aktion: "Gültigkeitsbereich und Unsicherheiten explizit machen"
+      beispiel: "Neue Messung, noch ohne unabhängige Bestätigung"
+
+    interpretativ:
+      range: [0.45, 0.65]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Als 'Hinweis' oder 'Modell' kennzeichnen, nicht als etabliert"
+      beispiel: "BSM-Vorhersage ohne experimentelle Bestätigung"
+
+    spekulativ:
+      range: [0.00, 0.45]
+      label: "Spekulativ"
+      bedeutung: "Behauptung nicht durch Evidenz gedeckt"
+      aktion: "Als 'hypothetisch' oder 'spekulativ' kennzeichnen"
+      beispiel: "Nicht-testbare theoretische Spekulationen"
+
+  vergleich:
+    physik:
+      stabil_threshold: 0.85
+      kommentar: "Strengste Standards wegen hoher Reproduzierbarkeit"
+    oekonomie:
+      stabil_threshold: 0.78
+      kommentar: "Weniger streng wegen empirischer Unsicherheit"
+    sozialpsychologie:
+      stabil_threshold: 0.72
+      kommentar: "Lockerer wegen inhärenter Variabilität"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Physikalische Sprache ist präzise. Starke Behauptungen
+    (kausal, beweist) erfordern starke Evidenz.
+    Einschränkungen (im Modell, näherungsweise) reduzieren B.
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "beweist"
+        delta_B: +0.30
+        beispiel: "Das Experiment beweist..."
+        warnung: "In Physik sehr starke Behauptung"
+
+      - marker: "widerlegt"
+        delta_B: +0.28
+        beispiel: "Das Ergebnis widerlegt die Theorie"
+
+      - marker: "zeigt eindeutig"
+        delta_B: +0.25
+        beispiel: "Die Daten zeigen eindeutig..."
+
+      - marker: "ist exakt"
+        delta_B: +0.22
+        beispiel: "Die Lösung ist exakt"
+
+      - marker: "fundamental"
+        delta_B: +0.20
+        beispiel: "Dies ist ein fundamentales Prinzip"
+
+      - marker: "universal"
+        delta_B: +0.18
+        beispiel: "Das Gesetz ist universell gültig"
+
+      - marker: "bestätigt"
+        delta_B: +0.15
+        beispiel: "Das Experiment bestätigt die Vorhersage"
+
+    senkend:
+      - marker: "näherungsweise"
+        delta_B: -0.15
+        beispiel: "Näherungsweise gilt..."
+
+      - marker: "im Rahmen des Modells"
+        delta_B: -0.18
+        beispiel: "Im Rahmen des Standardmodells..."
+
+      - marker: "im klassischen Grenzfall"
+        delta_B: -0.12
+        beispiel: "Im klassischen Grenzfall gilt..."
+
+      - marker: "unter der Annahme"
+        delta_B: -0.18
+        beispiel: "Unter der Annahme idealer Bedingungen..."
+
+      - marker: "bis zur Ordnung"
+        delta_B: -0.12
+        beispiel: "Bis zur Ordnung O(α²)..."
+
+      - marker: "konsistent mit"
+        delta_B: -0.15
+        beispiel: "Das Ergebnis ist konsistent mit der Theorie"
+
+      - marker: "deutet auf"
+        delta_B: -0.18
+        beispiel: "Der Excess deutet auf neue Physik hin"
+
+      - marker: "könnte"
+        delta_B: -0.22
+        beispiel: "Dies könnte auf BSM-Physik hindeuten"
+
+      - marker: "hypothetisch"
+        delta_B: -0.25
+        beispiel: "Hypothetische dunkle Materie..."
+
+      - marker: "spekulativ"
+        delta_B: -0.28
+        beispiel: "Spekulative Erweiterungen des Standardmodells..."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  entdeckungsstandard:
+    beschreibung: |
+      In der Teilchenphysik gilt 5σ als Entdeckungsschwelle.
+      Dies entspricht p < 3×10⁻⁷ (nach look-elsewhere Korrektur).
+
+    signifikanzstufen:
+      - stufe: "3σ"
+        bedeutung: "Evidence / Hinweis"
+        p_wert: "~0.003"
+        aktion: "Kann berichtet werden, aber keine Entdeckung"
+
+      - stufe: "5σ"
+        bedeutung: "Entdeckung"
+        p_wert: "~3×10⁻⁷"
+        aktion: "Entdeckung kann behauptet werden"
+
+    warnung: |
+      Look-elsewhere Effekt beachten: Lokale Signifikanz ist
+      höher als globale Signifikanz bei multiplen Tests.
+
+  theorie_vs_experiment:
+    beschreibung: |
+      Klare Unterscheidung zwischen theoretischen Vorhersagen
+      und experimentellen Ergebnissen.
+
+    theorie_marker:
+      - "das Modell sagt vorher"
+      - "theoretisch erwartet"
+      - "aus der Theorie folgt"
+      - "die Rechnung ergibt"
+
+    experiment_marker:
+      - "gemessen"
+      - "beobachtet"
+      - "das Experiment zeigt"
+      - "der Nachweis gelang"
+
+  unsicherheitsangaben:
+    beschreibung: |
+      Physikalische Ergebnisse erfordern Angabe von Unsicherheiten.
+      Format: Wert ± stat. ± syst. oder Wert (Unsicherheit).
+
+    pflicht:
+      - "Statistische Unsicherheit"
+      - "Systematische Unsicherheit (getrennt)"
+      - "Konfidenzintervall wenn relevant"
+
+    beispiel: "m_H = 125.10 ± 0.14 GeV"
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "Blinded Analysis durchgeführt"
+    - "Unabhängige Bestätigung durch zweites Experiment"
+    - "Systematiken sorgfältig studiert"
+    - "Theorie-Vorhersage existierte vor Messung"
+    - "Präzision besser als frühere Messungen"
+    - "Konsistenz mit etablierten Prinzipien"
+    - "Detaillierte Fehlerbudgets"
+    - "Rohdaten verfügbar"
+
+  negativ:
+    - "Nur ein Experiment"
+    - "Systematiken dominieren"
+    - "Nicht repliziert"
+    - "Widerspruch zu etablierten Messungen"
+    - "Post-hoc Theorie-Anpassung"
+    - "Verletzt Erhaltungssätze"
+    - "Nicht falsifizierbare Vorhersage"
+
+
+# =============================================================================
+# SPEZIELLE BEREICHE
+# =============================================================================
+
+teilbereiche:
+
+  teilchenphysik:
+    standards:
+      entdeckung: "5σ"
+      evidence: "3σ"
+    besonderheiten:
+      - "Look-elsewhere Korrektur"
+      - "Kombinierte Analysen (ATLAS+CMS)"
+      - "Präregistrierung selten, aber Blinding üblich"
+
+  astrophysik:
+    standards:
+      - "Oft nur ein Beobachtungsobjekt"
+      - "Systematics oft dominant"
+    besonderheiten:
+      - "Reproduzierbarkeit eingeschränkt"
+      - "Modellabhängigkeit hoch"
+
+  kondensierte_materie:
+    standards:
+      - "Reproduzierbarkeit in verschiedenen Labs"
+    besonderheiten:
+      - "Materialabhängigkeit"
+      - "Sample-to-sample Variation"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_physik.yaml"
+  glossar: "glossar_physik.yaml"
+  lexikon: "lexikon_physik.yaml"

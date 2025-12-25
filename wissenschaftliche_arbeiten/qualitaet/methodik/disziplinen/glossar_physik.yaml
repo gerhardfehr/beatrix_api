@@ -1,0 +1,451 @@
+# =============================================================================
+# ESL GLOSSAR: Physik
+# =============================================================================
+# Definitionen mit Präzisionsangaben und experimenteller Bestätigung
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Physik"
+  anzahl_eintraege: 48
+  beschreibung: |
+    Glossar physikalischer Begriffe mit Angaben zur experimentellen
+    Präzision und theoretischen Fundierung. Physik zeichnet sich durch
+    außergewöhnlich hohe Reproduzierbarkeit aus (>99% für etablierte Effekte).
+
+
+# =============================================================================
+# FUNDAMENTALE KONSTANTEN
+# =============================================================================
+
+fundamentale_konstanten:
+
+  lichtgeschwindigkeit:
+    begriff: "Lichtgeschwindigkeit"
+    symbol: "c"
+    definition: "Maximale Signalgeschwindigkeit im Vakuum"
+    wert: "299792458 m/s (exakt)"
+    praezision: "per Definition (SI seit 2019)"
+    experimentell_bestaetigt: true
+    konfidenz: 1.00
+    quelle: "CODATA 2018, SI-Definition"
+
+  planck_konstante:
+    begriff: "Plancksche Konstante"
+    symbol: "h, ℏ"
+    definition: "Fundamentales Wirkungsquantum"
+    wert: "6.62607015 × 10⁻³⁴ J·s (exakt)"
+    praezision: "per Definition (SI seit 2019)"
+    experimentell_bestaetigt: true
+    konfidenz: 1.00
+    quelle: "CODATA 2018, SI-Definition"
+
+  gravitationskonstante:
+    begriff: "Gravitationskonstante"
+    symbol: "G"
+    definition: "Kopplungsstärke der Gravitation"
+    wert: "6.67430(15) × 10⁻¹¹ m³/(kg·s²)"
+    praezision: "2.2 × 10⁻⁵ (relative Unsicherheit)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.98
+    quelle: "CODATA 2018"
+    anmerkung: "Am ungenauesten bekannte Fundamentalkonstante"
+
+  elementarladung:
+    begriff: "Elementarladung"
+    symbol: "e"
+    definition: "Elektrische Ladung eines Protons"
+    wert: "1.602176634 × 10⁻¹⁹ C (exakt)"
+    praezision: "per Definition (SI seit 2019)"
+    experimentell_bestaetigt: true
+    konfidenz: 1.00
+    quelle: "CODATA 2018, SI-Definition"
+
+  feinstrukturkonstante:
+    begriff: "Feinstrukturkonstante"
+    symbol: "α"
+    definition: "Dimensionslose elektromagnetische Kopplungskonstante"
+    wert: "7.2973525693(11) × 10⁻³ ≈ 1/137"
+    praezision: "1.5 × 10⁻¹⁰"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "ae-Messung (Penning-Falle)"
+
+  boltzmann_konstante:
+    begriff: "Boltzmann-Konstante"
+    symbol: "kB"
+    definition: "Verbindung zwischen Temperatur und Energie"
+    wert: "1.380649 × 10⁻²³ J/K (exakt)"
+    praezision: "per Definition (SI seit 2019)"
+    experimentell_bestaetigt: true
+    konfidenz: 1.00
+    quelle: "CODATA 2018, SI-Definition"
+
+
+# =============================================================================
+# KLASSISCHE MECHANIK
+# =============================================================================
+
+klassische_mechanik:
+
+  newton_axiome:
+    begriff: "Newtonsche Axiome"
+    definition: "Drei Grundgesetze der klassischen Mechanik"
+    komponenten:
+      erstes_axiom: "Trägheitsprinzip: Körper verharrt in Ruhe oder gleichförmiger Bewegung"
+      zweites_axiom: "Bewegungsgleichung: F = ma = dp/dt"
+      drittes_axiom: "Actio = Reactio"
+    gueltigkeit: "Klassischer Grenzfall (v << c, S >> ℏ)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    einschraenkung: "Nicht gültig bei relativistischen Geschwindigkeiten oder Quanteneffekten"
+
+  energie_erhaltungssatz:
+    begriff: "Energieerhaltungssatz"
+    definition: "Gesamtenergie eines abgeschlossenen Systems bleibt konstant"
+    mathematisch: "dE/dt = 0"
+    grundlage: "Noether-Theorem (Zeittranslationsinvarianz)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Fundamentalprinzip, nie verletzt beobachtet"
+    anmerkung: "Auf Quantenebene: ΔE·Δt ≥ ℏ/2"
+
+  impulserhaltung:
+    begriff: "Impulserhaltungssatz"
+    definition: "Gesamtimpuls eines abgeschlossenen Systems bleibt konstant"
+    mathematisch: "dp/dt = 0"
+    grundlage: "Noether-Theorem (Translationsinvarianz)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Teilchenphysik-Experimente"
+
+  drehimpulserhaltung:
+    begriff: "Drehimpulserhaltungssatz"
+    definition: "Gesamtdrehimpuls eines abgeschlossenen Systems bleibt konstant"
+    mathematisch: "dL/dt = 0"
+    grundlage: "Noether-Theorem (Rotationsinvarianz)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Atomspektren, Teilchenphysik"
+
+
+# =============================================================================
+# RELATIVITÄTSTHEORIE
+# =============================================================================
+
+relativitaetstheorie:
+
+  spezielle_relativitaet:
+    begriff: "Spezielle Relativitätstheorie"
+    definition: "Theorie der Raumzeit für Inertialsysteme"
+    postulate:
+      - "Relativitätsprinzip: Physikalische Gesetze in allen Inertialsystemen gleich"
+      - "Konstanz der Lichtgeschwindigkeit"
+    konsequenzen:
+      - "Zeitdilatation: t' = γt"
+      - "Längenkontraktion: L' = L/γ"
+      - "E = mc²"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    tests:
+      - "Myonen-Lebensdauer"
+      - "GPS-Korrekturen"
+      - "Teilchenbeschleuniger"
+
+  allgemeine_relativitaet:
+    begriff: "Allgemeine Relativitätstheorie"
+    definition: "Geometrische Theorie der Gravitation"
+    kernaussage: "Gravitation = Krümmung der Raumzeit"
+    gleichung: "Gμν + Λgμν = (8πG/c⁴)Tμν"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    tests:
+      - "Periheldrehung des Merkur"
+      - "Lichtablenkung"
+      - "Gravitationswellen (LIGO 2015)"
+      - "Schwarzes-Loch-Foto (EHT 2019)"
+    offene_fragen: "Quantengravitation nicht formuliert"
+
+  masse_energie_aequivalenz:
+    begriff: "Masse-Energie-Äquivalenz"
+    symbol: "E = mc²"
+    definition: "Masse ist eine Form von Energie"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    tests:
+      - "Kernspaltung/Fusion"
+      - "Teilchen-Antiteilchen-Annihilation"
+      - "Bindungsenergie-Defekte"
+
+
+# =============================================================================
+# QUANTENMECHANIK
+# =============================================================================
+
+quantenmechanik:
+
+  welle_teilchen_dualismus:
+    begriff: "Welle-Teilchen-Dualismus"
+    definition: "Quantenobjekte zeigen sowohl Wellen- als auch Teilcheneigenschaften"
+    mathematisch: "λ = h/p (de Broglie)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    tests:
+      - "Doppelspaltexperiment (Elektronen)"
+      - "Beugung von Molekülen (C60)"
+      - "Photoelektrischer Effekt"
+
+  unschaerferelation:
+    begriff: "Heisenbergsche Unschärferelation"
+    definition: "Fundamentale Grenze der gleichzeitigen Messbarkeit"
+    mathematisch: "Δx·Δp ≥ ℏ/2, ΔE·Δt ≥ ℏ/2"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Quantenoptik, Atomphysik"
+    anmerkung: "Keine Messunsicherheit, sondern ontologisches Prinzip"
+
+  schroedinger_gleichung:
+    begriff: "Schrödinger-Gleichung"
+    definition: "Bewegungsgleichung der Quantenmechanik"
+    mathematisch: "iℏ∂ψ/∂t = Ĥψ"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    gueltigkeit: "Nicht-relativistisch"
+    relativistische_erweiterung: "Dirac-Gleichung, Klein-Gordon"
+
+  born_regel:
+    begriff: "Born-Regel"
+    definition: "Wahrscheinlichkeitsinterpretation der Wellenfunktion"
+    mathematisch: "P = |ψ|²"
+    status: "Postulat, nicht abgeleitet"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    offene_frage: "Messproblem, Interpretation"
+
+  verschraenkung:
+    begriff: "Quantenverschränkung"
+    definition: "Nicht-separabler Zustand mehrerer Teilchen"
+    mathematisch: "|ψ⟩ ≠ |ψ₁⟩⊗|ψ₂⟩"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    tests:
+      - "Bell-Test (Aspect 1982)"
+      - "Loophole-freie Tests (2015)"
+      - "Nobelpreis 2022 (Aspect, Clauser, Zeilinger)"
+
+  spin:
+    begriff: "Spin"
+    definition: "Intrinsischer Drehimpuls von Teilchen"
+    werte: "s = 0, 1/2, 1, 3/2, 2, ..."
+    klassifikation:
+      bosonen: "Ganzzahliger Spin (0, 1, 2)"
+      fermionen: "Halbzahliger Spin (1/2, 3/2)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Stern-Gerlach, Spektroskopie"
+
+
+# =============================================================================
+# STANDARDMODELL
+# =============================================================================
+
+standardmodell:
+
+  quarks:
+    begriff: "Quarks"
+    definition: "Fundamentale Fermionen mit Farbladung"
+    typen:
+      up: "m ≈ 2.2 MeV, Q = +2/3"
+      down: "m ≈ 4.7 MeV, Q = -1/3"
+      strange: "m ≈ 96 MeV, Q = -1/3"
+      charm: "m ≈ 1.28 GeV, Q = +2/3"
+      bottom: "m ≈ 4.18 GeV, Q = -1/3"
+      top: "m ≈ 173 GeV, Q = +2/3"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Deep Inelastic Scattering, Beschleuniger"
+
+  leptonen:
+    begriff: "Leptonen"
+    definition: "Fundamentale Fermionen ohne Farbladung"
+    typen:
+      elektron: "m = 0.511 MeV"
+      myon: "m = 105.7 MeV"
+      tau: "m = 1777 MeV"
+      neutrinos: "Elektron-, Myon-, Tau-Neutrino"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Teilchenphysik-Experimente"
+
+  eichbosonen:
+    begriff: "Eichbosonen"
+    definition: "Vermittler der fundamentalen Wechselwirkungen"
+    typen:
+      photon: "Elektromagnetisch, m = 0"
+      w_boson: "Schwach, m = 80.4 GeV"
+      z_boson: "Schwach, m = 91.2 GeV"
+      gluon: "Stark, m = 0"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "LEP, LHC, Tevatron"
+
+  higgs_boson:
+    begriff: "Higgs-Boson"
+    definition: "Skalarboson, gibt Massen durch Higgs-Mechanismus"
+    masse: "125.1 ± 0.2 GeV"
+    spin: 0
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "ATLAS/CMS 2012, Nobelpreis 2013"
+
+  cp_verletzung:
+    begriff: "CP-Verletzung"
+    definition: "Asymmetrie unter Ladungs-Paritäts-Transformation"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Kaon-Zerfall (1964), B-Mesonen"
+    bedeutung: "Erklärt Materie-Antimaterie-Asymmetrie (teilweise)"
+
+
+# =============================================================================
+# THERMODYNAMIK
+# =============================================================================
+
+thermodynamik:
+
+  erster_hauptsatz:
+    begriff: "Erster Hauptsatz der Thermodynamik"
+    definition: "Energieerhaltung für thermodynamische Systeme"
+    mathematisch: "dU = δQ - δW"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    status: "Nie verletzt beobachtet"
+
+  zweiter_hauptsatz:
+    begriff: "Zweiter Hauptsatz der Thermodynamik"
+    definition: "Entropie eines isolierten Systems nimmt nie ab"
+    mathematisch: "dS ≥ 0"
+    formulierungen:
+      - "Clausius: Wärme fließt nicht spontan von kalt nach warm"
+      - "Kelvin: Kein Perpetuum mobile 2. Art"
+      - "Boltzmann: S = kB ln Ω"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    anmerkung: "Statistisches Gesetz, Fluktuationen möglich"
+
+  dritter_hauptsatz:
+    begriff: "Dritter Hauptsatz der Thermodynamik"
+    definition: "Absoluter Nullpunkt ist nicht erreichbar"
+    mathematisch: "S → 0 für T → 0 (idealer Kristall)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Tieftemperaturphysik"
+
+
+# =============================================================================
+# ELEKTROMAGNETISMUS
+# =============================================================================
+
+elektromagnetismus:
+
+  maxwell_gleichungen:
+    begriff: "Maxwell-Gleichungen"
+    definition: "Vollständige Theorie des Elektromagnetismus"
+    gleichungen:
+      gauss_e: "∇·E = ρ/ε₀"
+      gauss_b: "∇·B = 0"
+      faraday: "∇×E = -∂B/∂t"
+      ampere_maxwell: "∇×B = μ₀j + μ₀ε₀∂E/∂t"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+    quelle: "Gesamte Elektrotechnik, QED"
+
+  elektromagnetische_wellen:
+    begriff: "Elektromagnetische Wellen"
+    definition: "Selbstpropagierende E- und B-Feld-Oszillationen"
+    spektrum:
+      - "Radiowellen"
+      - "Mikrowellen"
+      - "Infrarot"
+      - "Sichtbares Licht"
+      - "UV"
+      - "Röntgen"
+      - "Gammastrahlen"
+    experimentell_bestaetigt: true
+    konfidenz: 0.9999
+
+
+# =============================================================================
+# KOSMOLOGIE
+# =============================================================================
+
+kosmologie:
+
+  urknall:
+    begriff: "Urknall / Big Bang"
+    definition: "Anfangszustand des beobachtbaren Universums"
+    alter_universum: "13.8 ± 0.02 Mrd. Jahre"
+    evidenz:
+      - "Kosmische Hintergrundstrahlung (CMB)"
+      - "Hubble-Expansion"
+      - "Primordiale Nukleosynthese"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    quelle: "Planck 2018, WMAP"
+
+  dunkle_materie:
+    begriff: "Dunkle Materie"
+    definition: "Nicht-baryonische Materie, gravitativ nachweisbar"
+    anteil: "~27% der Energiedichte"
+    evidenz:
+      - "Rotationskurven von Galaxien"
+      - "Gravitationslinsen"
+      - "CMB-Anisotropien"
+    experimentell_bestaetigt: true
+    konfidenz: 0.95
+    kandidaten: "WIMPs, Axionen, sterile Neutrinos"
+    status: "Noch nicht direkt detektiert"
+
+  dunkle_energie:
+    begriff: "Dunkle Energie"
+    definition: "Ursache der beschleunigten Expansion"
+    anteil: "~68% der Energiedichte"
+    gleichung: "w = P/ρ ≈ -1 (kosmologische Konstante)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.95
+    quelle: "Supernovae Typ Ia, CMB, BAO"
+    status: "Natur unbekannt"
+
+
+# =============================================================================
+# OFFENE FRAGEN
+# =============================================================================
+
+offene_fragen:
+
+  quantengravitation:
+    begriff: "Quantengravitation"
+    status: "Ungelöst"
+    ansaetze:
+      - "Stringtheorie"
+      - "Loop-Quantengravitation"
+      - "Asymptotisch sichere Gravitation"
+    konfidenz: 0.00
+    anmerkung: "Keine experimentelle Evidenz für Ansätze"
+
+  messproblem:
+    begriff: "Quantenmechanisches Messproblem"
+    status: "Interpretationsfrage"
+    positionen:
+      - "Kopenhagen: Kollaps bei Messung"
+      - "Viele-Welten: Keine Kollaps"
+      - "Dekohärenz: Emergent"
+    konfidenz: "N/A (Interpretation, nicht Empirie)"
+
+  vereinheitlichung:
+    begriff: "Große Vereinheitlichte Theorie (GUT)"
+    status: "Hypothetisch"
+    vorhersagen:
+      - "Protonzerfall (noch nicht beobachtet)"
+    konfidenz: 0.40
+    anmerkung: "Energieskala ~10¹⁶ GeV nicht erreichbar"

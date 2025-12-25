@@ -1,0 +1,578 @@
+# =============================================================================
+# ESL LEXIKON: Physik
+# =============================================================================
+# Erweiterte Definitionen mit Verwendungskontext, Beispielsätzen
+# und disziplinspezifischen Kollokationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Physik"
+  anzahl_eintraege: 36
+  beschreibung: |
+    Erweitertes Lexikon mit Verwendungshinweisen für präzise
+    physikalische Kommunikation. Physikalische Sprache ist
+    mathematisch exakt - Hedging ist selten nötig, aber
+    Gültigkeitsgrenzen müssen angegeben werden.
+
+
+# =============================================================================
+# FUNDAMENTALE BEGRIFFE
+# =============================================================================
+
+energie:
+  grundform: "Energie"
+  plural: "Energien"
+  symbol: "E"
+
+  definition:
+    kurz: "Erhaltungsgröße, Fähigkeit Arbeit zu verrichten"
+    erweitert: |
+      Zentrale physikalische Größe, die in verschiedenen Formen
+      auftritt (kinetisch, potentiell, thermisch, Ruheenergie).
+      Durch Noether-Theorem mit Zeittranslationsinvarianz verknüpft.
+
+  verwendung:
+    korrekt:
+      - "Die kinetische Energie beträgt T = ½mv²"
+      - "Die Gesamtenergie des Systems bleibt erhalten"
+      - "Die Energie wird in Wärme umgewandelt"
+    inkorrekt:
+      - "Die Energie wird verbraucht" # Energie wird umgewandelt, nicht verbraucht
+      - "Energie fließt" # Energie ist keine Substanz
+
+  beispielsaetze:
+    - satz: "Die Bindungsenergie des Deuterons beträgt 2.22 MeV."
+      kontext: "Kernphysik, präzise Angabe"
+    - satz: "Im klassischen Grenzfall gilt E = p²/2m."
+      kontext: "Einschränkung des Gültigkeitsbereichs"
+    - satz: "Die Energie-Impuls-Relation lautet E² = (pc)² + (mc²)²."
+      kontext: "Relativistische Mechanik"
+
+  kollokationen:
+    - "kinetische/potentielle Energie"
+    - "Energie ist erhalten"
+    - "Energieerhaltung gilt"
+    - "Energie wird übertragen/umgewandelt"
+    - "Bindungsenergie"
+    - "Anregungsenergie"
+    - "Ruheenergie"
+
+  verwandte_begriffe:
+    - "Arbeit"
+    - "Leistung"
+    - "Impuls"
+    - "Masse"
+
+
+kraft:
+  grundform: "Kraft"
+  plural: "Kräfte"
+  symbol: "F"
+
+  definition:
+    kurz: "Ursache von Beschleunigung"
+    erweitert: |
+      Vektorielle Größe, die Änderung des Impulses bewirkt.
+      Fundamentale Kräfte: Gravitation, Elektromagnetismus,
+      starke und schwache Wechselwirkung.
+
+  verwendung:
+    korrekt:
+      - "Die resultierende Kraft beträgt F = 10 N"
+      - "Die Gravitationskraft wirkt anziehend"
+      - "Die Kraft ist proportional zur Beschleunigung"
+    inkorrekt:
+      - "Die Zentrifugalkraft wirkt..." # Scheinkraft im Inertialsystem
+      - "Die Kraft verursacht Bewegung" # Kraft verursacht Beschleunigung
+
+  beispielsaetze:
+    - satz: "Die Lorentzkraft auf eine bewegte Ladung beträgt F = q(E + v×B)."
+      kontext: "Elektrodynamik"
+    - satz: "Im Gleichgewicht ist die Summe aller Kräfte null."
+      kontext: "Statik"
+    - satz: "Die starke Kernkraft bindet Quarks zu Hadronen."
+      kontext: "Teilchenphysik"
+
+  kollokationen:
+    - "Kraft wirkt/greift an"
+    - "resultierende Kraft"
+    - "fundamentale Kraft/Wechselwirkung"
+    - "Kraft ausüben"
+    - "Kraftfeld"
+
+
+masse:
+  grundform: "Masse"
+  plural: "Massen"
+  symbol: "m"
+
+  definition:
+    kurz: "Maß für Trägheit und Gravitationsquelle"
+    erweitert: |
+      Träge Masse: Widerstand gegen Beschleunigung (F = ma).
+      Schwere Masse: Quelle und Empfänger von Gravitation.
+      Äquivalenzprinzip: Träge = schwere Masse.
+
+  verwendung:
+    korrekt:
+      - "Die Masse des Elektrons beträgt 0.511 MeV/c²"
+      - "Die invariante Masse ist eine Lorentz-skalare Größe"
+      - "Die Ruhemasse des Photons ist null"
+    inkorrekt:
+      - "Die relativistische Masse nimmt zu" # Veraltetes Konzept
+      - "Masse und Gewicht sind gleich" # Gewicht ist Kraft
+
+  beispielsaetze:
+    - satz: "Die Masse des Higgs-Bosons wurde zu 125 GeV bestimmt."
+      kontext: "Teilchenphysik"
+    - satz: "Im Standardmodell erhalten Fermionen ihre Masse durch den Higgs-Mechanismus."
+      kontext: "Theoretische Physik"
+
+  kollokationen:
+    - "Ruhemasse"
+    - "invariante Masse"
+    - "Masse ist erhalten" # Klassisch
+    - "Massendefekt"
+    - "schwere/träge Masse"
+
+
+# =============================================================================
+# QUANTENMECHANISCHE BEGRIFFE
+# =============================================================================
+
+wellenfunktion:
+  grundform: "Wellenfunktion"
+  plural: "Wellenfunktionen"
+  symbol: "ψ, Ψ"
+
+  definition:
+    kurz: "Vollständige Beschreibung eines Quantenzustands"
+    erweitert: |
+      Komplexwertige Funktion, deren Betragsquadrat die
+      Aufenthaltswahrscheinlichkeitsdichte ergibt (Born-Regel).
+      Zeitentwicklung durch Schrödinger-Gleichung.
+
+  verwendung:
+    korrekt:
+      - "Die Wellenfunktion ist normiert"
+      - "Die Wellenfunktion kollabiert bei der Messung"
+      - "|ψ|² gibt die Wahrscheinlichkeitsdichte an"
+    inkorrekt:
+      - "Die Wellenfunktion ist das Teilchen" # Beschreibung, nicht Ontologie
+
+  beispielsaetze:
+    - satz: "Die Wellenfunktion des Wasserstoff-Grundzustands ist ψ₁₀₀ = (1/√π)(1/a₀)^(3/2)e^(-r/a₀)."
+      kontext: "Atomphysik"
+    - satz: "In der Kopenhagener Interpretation kollabiert die Wellenfunktion bei der Messung."
+      kontext: "Quantenmechanik-Interpretation"
+
+  kollokationen:
+    - "Wellenfunktion kollabiert"
+    - "normierte Wellenfunktion"
+    - "Wellenfunktion breitet sich aus"
+    - "Wellenfunktion ist antisymmetrisch" # Fermionen
+
+
+superposition:
+  grundform: "Superposition"
+  plural: "Superpositionen"
+
+  definition:
+    kurz: "Überlagerung von Quantenzuständen"
+    erweitert: |
+      Quantensysteme können sich in Linearkombinationen von
+      Basiszuständen befinden. Fundamentales Prinzip der
+      Quantenmechanik, ermöglicht Interferenz.
+
+  verwendung:
+    korrekt:
+      - "Das System befindet sich in einer Superposition von |0⟩ und |1⟩"
+      - "Die Superposition wird durch Dekohärenz zerstört"
+    inkorrekt:
+      - "Das Teilchen ist gleichzeitig an beiden Orten" # Missverständnis
+
+  beispielsaetze:
+    - satz: "Ein Qubit im Zustand |ψ⟩ = α|0⟩ + β|1⟩ befindet sich in einer Superposition."
+      kontext: "Quanteninformation"
+    - satz: "Schrödingers Katze illustriert die Superposition makroskopischer Zustände."
+      kontext: "Gedankenexperiment"
+
+  kollokationen:
+    - "kohärente Superposition"
+    - "Superposition von Zuständen"
+    - "Superposition kollabiert"
+
+
+messung:
+  grundform: "Messung"
+  plural: "Messungen"
+
+  definition:
+    kurz: "Wechselwirkung, die Information über Observable extrahiert"
+    erweitert: |
+      In der Quantenmechanik: Projektion auf Eigenzustand des
+      Messoperators. Ergebnis ist Eigenwert, nicht deterministisch.
+      Das Messproblem ist philosophisch nicht abschließend geklärt.
+
+  verwendung:
+    korrekt:
+      - "Die Messung des Spins ergab +ℏ/2"
+      - "Bei der Messung kollabiert die Wellenfunktion auf einen Eigenzustand"
+      - "Die Messung wurde mit einer Unsicherheit von 0.1% durchgeführt"
+
+  beispielsaetze:
+    - satz: "Die Messung der Lichtgeschwindigkeit durch Michelson ergab keinen Ätherwind."
+      kontext: "Experimentelle Physik, historisch"
+    - satz: "Wiederholte Messungen an identisch präparierten Systemen ergeben eine Wahrscheinlichkeitsverteilung."
+      kontext: "Quantenmechanik"
+
+  kollokationen:
+    - "Messung durchführen"
+    - "Messunsicherheit"
+    - "Messergebnis"
+    - "Messprozess"
+    - "Messung kollabiert die Wellenfunktion"
+
+
+verschraenkung:
+  grundform: "Verschränkung"
+  alternativ: "Quantenverschränkung"
+  englisch: "Entanglement"
+
+  definition:
+    kurz: "Nicht-separabler Zustand mehrerer Teilchen"
+    erweitert: |
+      Zwei oder mehr Teilchen sind verschränkt, wenn ihr
+      gemeinsamer Zustand nicht als Produkt von Einzelzuständen
+      geschrieben werden kann. Führt zu Korrelationen, die
+      klassisch nicht erklärbar sind (Bell-Ungleichung).
+
+  verwendung:
+    korrekt:
+      - "Die beiden Photonen sind polarisationsverschränkt"
+      - "Der Bell-Zustand ist maximal verschränkt"
+      - "Verschränkung ist eine Ressource für Quantenkommunikation"
+    inkorrekt:
+      - "Verschränkung ermöglicht überlichtschnelle Kommunikation" # Nein
+
+  beispielsaetze:
+    - satz: "Die Bell-Tests von Aspect, Clauser und Zeilinger bestätigten die Verletzung der Bell-Ungleichung."
+      kontext: "Experimentelle Quantenmechanik"
+    - satz: "Im Bell-Zustand |Φ⁺⟩ = (|00⟩ + |11⟩)/√2 sind die Qubits maximal verschränkt."
+      kontext: "Quanteninformation"
+
+  kollokationen:
+    - "maximal verschränkt"
+    - "Verschränkung erzeugen/zerstören"
+    - "verschränktes Paar"
+    - "Verschränkung ist nicht-lokal"
+
+
+# =============================================================================
+# RELATIVISTISCHE BEGRIFFE
+# =============================================================================
+
+raumzeit:
+  grundform: "Raumzeit"
+  englisch: "Spacetime"
+
+  definition:
+    kurz: "Vereinigung von Raum und Zeit zu vierdimensionalem Kontinuum"
+    erweitert: |
+      In der speziellen Relativitätstheorie: Minkowski-Raumzeit
+      mit Metrik ds² = c²dt² - dx² - dy² - dz². In der allgemeinen
+      Relativitätstheorie: Gekrümmte pseudo-Riemannsche Mannigfaltigkeit.
+
+  verwendung:
+    korrekt:
+      - "Ereignisse sind Punkte in der Raumzeit"
+      - "Die Raumzeit ist durch die Metrik charakterisiert"
+      - "Masse krümmt die Raumzeit"
+
+  beispielsaetze:
+    - satz: "In der Nähe eines schwarzen Lochs ist die Raumzeit stark gekrümmt."
+      kontext: "Allgemeine Relativitätstheorie"
+    - satz: "Der Abstand zweier Ereignisse in der Raumzeit ist invariant unter Lorentz-Transformationen."
+      kontext: "Spezielle Relativitätstheorie"
+
+  kollokationen:
+    - "gekrümmte Raumzeit"
+    - "flache Raumzeit" # Minkowski
+    - "Raumzeit-Intervall"
+    - "Raumzeit-Diagramm"
+
+
+lorentz_transformation:
+  grundform: "Lorentz-Transformation"
+  plural: "Lorentz-Transformationen"
+
+  definition:
+    kurz: "Koordinatentransformation zwischen Inertialsystemen"
+    erweitert: |
+      Lineare Transformation, die das Raumzeit-Intervall invariant
+      lässt. Führt zu Zeitdilatation und Längenkontraktion.
+      Bildet die Lorentz-Gruppe.
+
+  verwendung:
+    korrekt:
+      - "Die Maxwell-Gleichungen sind invariant unter Lorentz-Transformationen"
+      - "Der Lorentz-Faktor ist γ = 1/√(1-v²/c²)"
+
+  beispielsaetze:
+    - satz: "Die Zeitdilatation Δt' = γΔt folgt direkt aus der Lorentz-Transformation."
+      kontext: "Spezielle Relativitätstheorie"
+
+  kollokationen:
+    - "Lorentz-invariant"
+    - "Lorentz-Boost"
+    - "Lorentz-Kontraktion"
+    - "Lorentz-Faktor γ"
+
+
+schwarzes_loch:
+  grundform: "Schwarzes Loch"
+  plural: "Schwarze Löcher"
+  englisch: "Black Hole"
+
+  definition:
+    kurz: "Raumzeitregion, aus der nichts entkommen kann"
+    erweitert: |
+      Lösung der Einstein-Gleichungen mit Ereignishorizont.
+      Charakterisiert durch Masse, Drehimpuls und Ladung
+      (No-Hair-Theorem). Hawking-Strahlung führt zur Verdampfung.
+
+  verwendung:
+    korrekt:
+      - "Das schwarze Loch im Zentrum der Milchstraße hat etwa 4 Millionen Sonnenmassen"
+      - "Der Schwarzschild-Radius ist rs = 2GM/c²"
+      - "Am Ereignishorizont erreicht die Fluchtgeschwindigkeit die Lichtgeschwindigkeit"
+
+  beispielsaetze:
+    - satz: "Das Event Horizon Telescope fotografierte 2019 erstmals den Schatten eines schwarzen Lochs."
+      kontext: "Beobachtende Astrophysik"
+    - satz: "Die Hawking-Strahlung führt zur langsamen Verdampfung schwarzer Löcher."
+      kontext: "Theoretische Physik"
+
+  kollokationen:
+    - "Ereignishorizont"
+    - "Singularität"
+    - "Schwarzschild-Radius"
+    - "supermassereiches schwarzes Loch"
+
+
+# =============================================================================
+# TEILCHENPHYSIK
+# =============================================================================
+
+standardmodell:
+  grundform: "Standardmodell"
+  alternativ: "Standardmodell der Teilchenphysik"
+
+  definition:
+    kurz: "Vereinheitlichte Theorie der fundamentalen Teilchen und Kräfte"
+    erweitert: |
+      Quantenfeldtheorie basierend auf der Eichgruppe
+      SU(3)×SU(2)×U(1). Beschreibt Quarks, Leptonen und ihre
+      Wechselwirkungen (stark, schwach, elektromagnetisch).
+      Gravitation nicht enthalten.
+
+  verwendung:
+    korrekt:
+      - "Das Standardmodell sagt die Existenz des Higgs-Bosons vorher"
+      - "Das Standardmodell erklärt nicht die Dunkle Materie"
+      - "Alle Vorhersagen des Standardmodells wurden experimentell bestätigt"
+
+  beispielsaetze:
+    - satz: "Die Entdeckung des Higgs-Bosons 2012 bestätigte den letzten fehlenden Baustein des Standardmodells."
+      kontext: "Teilchenphysik"
+    - satz: "Jenseits des Standardmodells werden Supersymmetrie und GUTs diskutiert."
+      kontext: "Theoretische Physik"
+
+  kollokationen:
+    - "Standardmodell der Teilchenphysik"
+    - "Vorhersagen des Standardmodells"
+    - "Physik jenseits des Standardmodells"
+    - "Erweiterungen des Standardmodells"
+
+
+wirkungsquerschnitt:
+  grundform: "Wirkungsquerschnitt"
+  plural: "Wirkungsquerschnitte"
+  symbol: "σ"
+  englisch: "Cross Section"
+
+  definition:
+    kurz: "Effektive Fläche für Streuprozesse"
+    erweitert: |
+      Maß für die Wahrscheinlichkeit einer Wechselwirkung.
+      Einheit: barn (1 b = 10⁻²⁸ m²). In Teilchenphysik oft
+      Femtobarn (fb) oder Pikobarn (pb).
+
+  verwendung:
+    korrekt:
+      - "Der Wirkungsquerschnitt für Higgs-Produktion beträgt etwa 50 pb"
+      - "Der differentielle Wirkungsquerschnitt dσ/dΩ beschreibt die Winkelverteilung"
+
+  beispielsaetze:
+    - satz: "Der totale Wirkungsquerschnitt für pp-Streuung bei LHC-Energien beträgt etwa 100 mb."
+      kontext: "Hadronenphysik"
+
+  kollokationen:
+    - "totaler/differentieller Wirkungsquerschnitt"
+    - "Wirkungsquerschnitt messen"
+    - "Wirkungsquerschnitt berechnen"
+
+
+# =============================================================================
+# EXPERIMENTELLE PHYSIK
+# =============================================================================
+
+signifikanz:
+  grundform: "Signifikanz"
+  symbol: "σ"
+
+  definition:
+    kurz: "Statistische Sicherheit einer Beobachtung"
+    erweitert: |
+      In der Teilchenphysik: Anzahl der Standardabweichungen
+      über dem Untergrund. 5σ entspricht p < 3×10⁻⁷ und gilt
+      als Entdeckungsschwelle.
+
+  verwendung:
+    korrekt:
+      - "Die Beobachtung hat eine Signifikanz von 5.1σ"
+      - "Der Excess erreicht noch nicht die Entdeckungsschwelle von 5σ"
+    inkorrekt:
+      - "Der Effekt ist signifikant" # Ohne Angabe der σ-Zahl unvollständig
+
+  beispielsaetze:
+    - satz: "Das Higgs-Signal wurde 2012 mit einer kombinierten Signifikanz von über 5σ beobachtet."
+      kontext: "Teilchenphysik"
+    - satz: "Ein 3σ-Excess entspricht einer Wahrscheinlichkeit von etwa 0.3% für eine Fluktuation."
+      kontext: "Statistische Analyse"
+
+  kollokationen:
+    - "5σ-Entdeckung"
+    - "statistische Signifikanz"
+    - "Signifikanz erreichen"
+    - "lokale/globale Signifikanz"
+
+
+systematischer_fehler:
+  grundform: "Systematischer Fehler"
+  alternativ: "Systematische Unsicherheit"
+  plural: "Systematische Fehler"
+
+  definition:
+    kurz: "Reproduzierbarer Fehler, der nicht durch Mittelung verschwindet"
+    erweitert: |
+      Im Gegensatz zum statistischen Fehler verschwindet der
+      systematische Fehler nicht bei größerer Stichprobe.
+      Quellen: Kalibrierung, Modellierung, Akzeptanz.
+
+  verwendung:
+    korrekt:
+      - "Der systematische Fehler dominiert bei großen Statistiken"
+      - "Die Unsicherheit ist (stat.) ± 0.5 (syst.) ± 1.2"
+
+  beispielsaetze:
+    - satz: "Die Messung der Higgs-Masse hat einen statistischen Fehler von 0.1 GeV und einen systematischen Fehler von 0.3 GeV."
+      kontext: "Teilchenphysik"
+
+  kollokationen:
+    - "systematische Unsicherheit"
+    - "systematischer/statistischer Fehler"
+    - "Fehlerquellen"
+
+
+# =============================================================================
+# METHODISCHE BEGRIFFE
+# =============================================================================
+
+approximation:
+  grundform: "Approximation"
+  alternativ: "Näherung"
+  plural: "Approximationen"
+
+  definition:
+    kurz: "Vereinfachung eines Problems durch Vernachlässigung kleiner Terme"
+    erweitert: |
+      In der Physik oft notwendig für analytische Lösungen.
+      Wichtig: Gültigkeitsbereich und Fehler der Approximation
+      angeben. Beispiele: Taylor-Entwicklung, Born-Approximation.
+
+  verwendung:
+    korrekt:
+      - "In der Näherung kleiner Winkel gilt sin θ ≈ θ"
+      - "Die Born-Approximation ist gültig für schwache Potentiale"
+      - "Die Störungstheorie liefert Korrekturen zur führenden Ordnung"
+
+  beispielsaetze:
+    - satz: "Im nicht-relativistischen Grenzfall v << c vereinfacht sich die Dirac-Gleichung zur Schrödinger-Gleichung."
+      kontext: "Relativistische Quantenmechanik"
+
+  kollokationen:
+    - "in der Näherung"
+    - "bis zur Ordnung"
+    - "führende Ordnung"
+    - "Korrekturen höherer Ordnung"
+
+
+grenzfall:
+  grundform: "Grenzfall"
+  plural: "Grenzfälle"
+  englisch: "Limit"
+
+  definition:
+    kurz: "Spezialfall einer Theorie für extreme Parameterwerte"
+    erweitert: |
+      Physikalische Theorien müssen in ihren Grenzfällen
+      konsistent mit etablierten Theorien sein (Korrespondenzprinzip).
+
+  verwendung:
+    korrekt:
+      - "Im klassischen Grenzfall ℏ → 0 geht die Quantenmechanik in die klassische Mechanik über"
+      - "Im nicht-relativistischen Grenzfall v << c"
+
+  beispielsaetze:
+    - satz: "Im Grenzfall hoher Temperaturen verhält sich jedes Gas ideal."
+      kontext: "Statistische Mechanik"
+    - satz: "Die allgemeine Relativitätstheorie geht im Grenzfall schwacher Felder in die Newtonsche Gravitation über."
+      kontext: "Gravitationsphysik"
+
+  kollokationen:
+    - "klassischer Grenzfall"
+    - "nicht-relativistischer Grenzfall"
+    - "im Grenzfall"
+    - "Grenzfall schwacher/starker Kopplung"
+
+
+# =============================================================================
+# HEDGING IN DER PHYSIK
+# =============================================================================
+
+hedging_physik:
+  beschreibung: |
+    In der Physik ist Hedging weniger nötig als in Sozialwissenschaften,
+    da Reproduzierbarkeit hoch ist. Wichtiger ist die Angabe von
+    Gültigkeitsbereichen und Unsicherheiten.
+
+  gueltigkeitsangaben:
+    - "im klassischen Grenzfall"
+    - "im Rahmen des Standardmodells"
+    - "bis zur Ordnung O(α²)"
+    - "für nicht-relativistische Geschwindigkeiten"
+    - "unter der Annahme, dass..."
+
+  unsicherheitsangaben:
+    - "mit einer Unsicherheit von ±X"
+    - "innerhalb der experimentellen Fehler"
+    - "statistisch signifikant auf dem Niveau von Xσ"
+    - "konsistent mit null innerhalb der Fehler"
+
+  vorsicht_bei:
+    - "jenseits des Standardmodells"
+    - "in Modellen der Quantengravitation"
+    - "spekulative Erweiterungen"
+    - "nicht experimentell bestätigt"
