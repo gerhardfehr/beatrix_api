@@ -1341,6 +1341,165 @@ Qualitative Research & 0.65 & --- & --- & 0.25 & Proposed \\
 \end{eslbox}
 
 % =============================================================================
+% 8. METHODOLOGICAL TRANSPARENCY
+% =============================================================================
+\section{Methodological Transparency: Validated vs. Proposed Parameters}
+\label{sec:transparency}
+
+% ESL Self-Assessment: B = 0.75, E = 0.82 → K = 0.91
+
+A core principle of ESL is self-application. This section explicitly distinguishes between \textbf{empirically validated} components and \textbf{proposed parameters} requiring future validation.
+
+\subsection{The Triangulation Bonus: Principle vs. Values}
+
+\subsubsection{The Principle (Well-Founded)}
+
+The triangulation principle derives from two established sources:
+
+\begin{itemize}
+    \item \textbf{Falk \& Heckman (2009)}: Laboratory and field experiments are \textit{complementary}, not competing. Each method has distinct error sources; convergence across methods reduces systematic artifact probability.
+    \item \textbf{Campbell \& Fiske (1959); Denzin (1978)}: Methodological triangulation---when different methods with different error structures yield the same result, confidence in the finding increases.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{Triangulation Bonus: Principle vs. Values}
+\label{tab:tri-validation}
+\begin{tabular}{lcccl}
+\toprule
+\textbf{Component} & \textbf{B} & \textbf{E} & \textbf{K} & \textbf{Status} \\
+\midrule
+Concept (convergence $\uparrow$ E) & 0.82 & 0.85 & 0.96 & \textcolor{green!60!black}{Stable} \\
+Specific values ($+0.10$, $+0.20$) & 0.72 & 0.25 & 0.35 & \textcolor{red}{Speculative} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{The Values (Requiring Validation)}
+
+The specific bonus values ($\Delta_{\text{tri}} = +0.10$ for Lab+Field, $+0.20$ for Lab+Field+Natural) are \textbf{T5 estimates} (Author Intuition) based on:
+\begin{enumerate}
+    \item Ordinal intuition: More convergence = stronger evidence
+    \item Conservative constraint: Bonus remains below $+0.25$
+    \item Practical simplicity: Easy-to-apply gradation
+\end{enumerate}
+
+\begin{warningbox}[title={Required Validation for Triangulation Values}]
+\textbf{What would validate these values:}
+\begin{itemize}
+    \item Meta-analysis correlating triangulation status with replication rates
+    \item Hypothesis: $R_{\text{triangulated}} > R_{\text{single-method}}$
+    \item Calibration: $\Delta_{\text{tri}} = f(R_{\text{tri}} - R_{\text{single}})$
+\end{itemize}
+\textbf{Current status:} Not yet performed.
+\end{warningbox}
+
+\subsection{Nobel Prize Validation: Strengths and Limitations}
+
+\subsubsection{Rationale for Using Nobel Prizes}
+
+Nobel Prizes serve as a \textbf{calibration check}, not a proof of predictive validity:
+
+\begin{itemize}
+    \item \textbf{Selection process}: Nobel committees implicitly apply stringent criteria---decades of replication, broad acceptance, independent confirmation
+    \item \textbf{Falsification criterion}: If ESL is valid, Nobel-winning discoveries \textit{must} score $K \geq 0.85$. If they don't, the framework is falsified.
+    \item \textbf{Survivorship logic}: Nobel = ``definitively confirmed''---a necessary positive control
+\end{itemize}
+
+\subsubsection{Critical Limitations}
+
+\begin{table}[h]
+\centering
+\caption{Nobel Validation: Strengths and Limitations}
+\label{tab:nobel-limits}
+\begin{tabular}{p{4cm}p{5cm}p{4.5cm}}
+\toprule
+\textbf{Limitation} & \textbf{Problem} & \textbf{Mitigation} \\
+\midrule
+Retrospective bias & We know the outcome; E-ratings may be unconsciously influenced & Blind rating protocol needed \\
+Selection bias & Nobels are ``peak'' claims, not typical & Extended validation to replication failures \\
+No prospective test & All Nobels are confirmed by definition & Pre-registered K-predictions for current research needed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{What Nobel Validation Actually Demonstrates}
+
+\begin{resultbox}
+\textbf{Demonstrated:}
+\begin{itemize}
+    \item ESL produces no false negatives for validated discoveries (42/42 Nobels: $K \geq 0.88$)
+    \item ESL discriminates confirmed from falsified: Nobel mean $K = 0.94$, Falsified mean $K = 0.38$, gap $[0.40, 0.88]$---no overlap
+\end{itemize}
+
+\textbf{Not yet demonstrated:}
+\begin{itemize}
+    \item Prospective predictive validity (can ESL predict future replication outcomes?)
+    \item Generalizability beyond physics and economics
+\end{itemize}
+\end{resultbox}
+
+\subsection{Linguistic Markers: Honest Status}
+
+The $B$-values for linguistic markers (Section~\ref{sec:linguistic}) are the \textbf{least validated} component of ESL:
+
+\begin{table}[h]
+\centering
+\caption{Linguistic Marker Validation Status}
+\label{tab:ling-validation}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Component} & \textbf{Claim-Type} & \textbf{K} & \textbf{Required Validation} \\
+\midrule
+Ordinal ranking (proves $>$ shows $>$ suggests) & T4 & 0.78 & Inter-rater reliability \\
+Specific $B$-values (e.g., ``proves'' = 0.95) & T5 & 0.35 & Corpus linguistic study \\
+Composite calculation formula & T4 & 0.65 & Empirical calibration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Summary: ESL Parameter Validation Status}
+
+\begin{table}[h]
+\centering
+\caption{Complete Parameter Validation Status}
+\label{tab:param-validation}
+\begin{tabular}{p{4.5cm}ccp{4cm}}
+\toprule
+\textbf{Parameter} & \textbf{Claim-Type} & \textbf{Status} & \textbf{Evidence Source} \\
+\midrule
+\multicolumn{4}{l}{\textit{Empirically Validated (T2)}} \\
+$K_{\text{stable}}$ Physics & T2 & \textcolor{green!60!black}{Validated} & N=25, retrospective \\
+$K_{\text{stable}}$ Economics & T2 & \textcolor{green!60!black}{Validated} & N=28, retrospective \\
+$K_{\text{stable}}$ Behavioral Econ & T2 & \textcolor{green!60!black}{Validated} & N=27, retrospective \\
+Nobel/Falsified discrimination & T2 & \textcolor{green!60!black}{Validated} & N=56, 100\% accuracy \\
+\midrule
+\multicolumn{4}{l}{\textit{Conceptually Grounded (T3--T4)}} \\
+Triangulation principle & T2 & \textcolor{green!60!black}{Stable} & Falk \& Heckman (2009) \\
+Evidence hierarchy structure & T3 & \textcolor{blue}{Grounded} & GRADE, Oxford CEBM \\
+WEIRD correction concept & T2 & \textcolor{green!60!black}{Stable} & Henrich et al. (2010) \\
+\midrule
+\multicolumn{4}{l}{\textit{Proposed---Requires Validation (T4--T5)}} \\
+Triangulation bonus values & T5 & \textcolor{orange}{Proposed} & Author intuition \\
+$B$-values for linguistic markers & T5 & \textcolor{red}{Unvalidated} & Ordinal intuition \\
+$K_{\text{stable}}$ Medicine, Psychology & T4 & \textcolor{orange}{Proposed} & Expert estimate \\
+Composite $B$ calculation & T4 & \textcolor{orange}{Proposed} & Theoretical derivation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insightbox}
+\textbf{ESL Transparency Principle} \\
+A framework claiming to measure epistemic calibration must be transparent about its own epistemic status. This section documents that ESL contains both validated and proposed components. Users should weight ESL outputs accordingly: validated thresholds (Physics, Economics, Behavioral Economics) provide reliable classification; proposed parameters ($B$-values, triangulation bonuses) should be treated as starting points for local calibration.
+\end{insightbox}
+
+\begin{eslbox}
+\textbf{Section Assessment:} This transparency section makes moderate claims (B $\approx$ 0.75) about parameter validation status, grounded in explicit documentation of evidence sources (E $\approx$ 0.82). \\[0.3em]
+\textbf{Calculation:} $K = 1 - |0.75 - 0.82| / 0.82 = 0.91$ \\
+\textbf{Status:} \textcolor{green!60!black}{Stable}---honest self-assessment strengthens framework credibility
+\end{eslbox}
+
+% =============================================================================
 % PART II: LLM INTEGRATION
 % =============================================================================
 
