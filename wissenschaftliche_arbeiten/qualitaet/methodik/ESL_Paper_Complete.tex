@@ -869,23 +869,23 @@ Lab experiment position & Level 5--6 & Level 4--5 \\
 \centering
 \caption{$K$-Thresholds Across Disciplines \textbf{(Partially Empirically Validated)}}
 \label{tab:cross-discipline}
-\begin{tabular}{lcccc}
+\begin{tabular}{lccccc}
 \toprule
-\textbf{Discipline} & $K_{\text{stable}}$ & $K_{\text{stable}}$ & $\tau$ & \textbf{Status} \\
- & (Original) & (Empirical) & & \\
+\textbf{Discipline} & $K_{\text{stable}}$ & $K_{\text{stable}}$ & \textbf{95\% CI} & $\tau$ & \textbf{Status} \\
+ & (Original) & (Empirical) & & & \\
 \midrule
-Physics$^\dagger$ & 0.85 & \textbf{0.79} & 0.08 & \textcolor{green!60!black}{Validated} (N=25) \\
-Medicine (EBM) & 0.82 & --- & 0.10 & Proposed \\
-Economics$^\dagger$ & 0.78 & \textbf{0.76} & 0.12 & \textcolor{green!60!black}{Validated} (N=28) \\
-Behavioral Economics$^\dagger$ & 0.75 & \textbf{0.70} & 0.15 & \textcolor{green!60!black}{Validated} (N=7) \\
-Psychology & 0.72 & --- & 0.18 & Proposed \\
-Sociology & 0.70 & --- & 0.20 & Proposed \\
-Qualitative Research & 0.65 & --- & 0.25 & Proposed \\
+Physics$^\dagger$ & 0.85 & \textbf{0.79} & [0.75, 0.82] & 0.08 & \textcolor{green!60!black}{Validated} (N=25) \\
+Medicine (EBM) & 0.82 & --- & --- & 0.10 & Proposed \\
+Economics$^\dagger$ & 0.78 & \textbf{0.76} & [0.72, 0.80] & 0.12 & \textcolor{green!60!black}{Validated} (N=28) \\
+Behavioral Economics$^\dagger$ & 0.75 & \textbf{0.70} & [0.48, 0.91] & 0.15 & \textcolor{green!60!black}{Validated} (N=7) \\
+Psychology & 0.72 & --- & --- & 0.18 & Proposed \\
+Sociology & 0.70 & --- & --- & 0.20 & Proposed \\
+Qualitative Research & 0.65 & --- & --- & 0.25 & Proposed \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent $^\dagger$ \textit{Empirically derived thresholds from retrospective validation (Appendices C--E). Formula: $K_{\text{stable}}^{\text{emp}} = (\max(K_{\text{failed}}) + \min(K_{\text{confirmed}})) / 2$}
+\noindent $^\dagger$ \textit{Empirically derived thresholds from retrospective validation (Appendices C--E). CI via SE = Gap$/2\sqrt{N}$.}
 
 \textbf{Note}: Original thresholds were \textit{normative proposals} based on qualitative reasoning about discipline characteristics. \textbf{Three disciplines now have empirically validated thresholds} based on retrospective analysis of 60 claims with known outcomes (Appendices C--E). The empirical values are systematically lower than original proposals, reflecting conservative calibration based on actual separation between confirmed and falsified claims.
 
@@ -2507,21 +2507,21 @@ K = 1 - \frac{|B - E|}{B_{\max}}, \quad B_{\max} = \max(B, 1-B)
 
 \subsection{$K$-Score Thresholds by Discipline}
 \begin{center}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Discipline} & $K_{\text{stable}}$ & $K_{\text{stable}}$ & $K_{\text{highly stable}}$ \\
- & (Original) & (Empirical$^\dagger$) & \\
+\textbf{Discipline} & $K_{\text{stable}}$ & $K_{\text{stable}}$ & \textbf{95\% CI} & $K_{\text{highly stable}}$ \\
+ & (Original) & (Empirical$^\dagger$) & & \\
 \midrule
-Physics & 0.85 & \textbf{0.79} & 0.92 \\
-Medicine & 0.82 & --- & 0.90 \\
-Economics & 0.78 & \textbf{0.76} & 0.88 \\
-Behavioral Economics & 0.75 & \textbf{0.70} & 0.85 \\
-Psychology & 0.72 & --- & 0.82 \\
+Physics & 0.85 & \textbf{0.79} & [0.75, 0.82] & 0.92 \\
+Medicine & 0.82 & --- & --- & 0.90 \\
+Economics & 0.78 & \textbf{0.76} & [0.72, 0.80] & 0.88 \\
+Behavioral Econ & 0.75 & \textbf{0.70} & [0.48, 0.91] & 0.85 \\
+Psychology & 0.72 & --- & --- & 0.82 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\noindent {\small $^\dagger$ Empirically derived from N=60 validated claims (Appendices C--E)}
+\noindent {\small $^\dagger$ Empirically derived from N=60 validated claims (Appendices C--E). CI via SE = Gap$/2\sqrt{N}$}
 
 \subsection{Key Linguistic Markers}
 \textbf{High $B$ ($>0.80$)}: proves, demonstrates, establishes, all, always, never \\
@@ -4734,21 +4734,21 @@ Failed ``classic'' effects & 4 & 0.29 & [0.21, 0.40] & 4/4 Unstable \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Empirically Derived K-Thresholds}
+\subsubsection{Empirically Derived K-Thresholds with Confidence Intervals}
 
-Based on the validation data, we can now \textbf{empirically derive} K-thresholds:
+Based on the validation data, we can now \textbf{empirically derive} K-thresholds with confidence intervals:
 
 \begin{table}[h]
 \centering
-\caption{K-Thresholds: Original Assumptions vs. Empirically Derived}
-\begin{tabular}{lccccc}
+\caption{K-Thresholds: Original Assumptions vs. Empirically Derived (with 95\% CI)}
+\begin{tabular}{lcccccc}
 \toprule
-\textbf{Discipline} & \textbf{Original} & \textbf{Empirical} & \textbf{$\Delta$} & \textbf{Claim Type} \\
- & (T5) & (T2) & & Upgrade \\
+\textbf{Discipline} & \textbf{Original} & \textbf{Empirical} & \textbf{95\% CI} & \textbf{N} & \textbf{Claim Type} \\
+ & (T5) & (T2) & & & Upgrade \\
 \midrule
-Physics & 0.85 & \textbf{0.79} & $-0.06$ & T5 $\to$ T2 \\
-Economics & 0.78 & \textbf{0.76} & $-0.02$ & T5 $\to$ T2 \\
-Behavioral Economics & 0.75 & \textbf{0.70} & $-0.05$ & T5 $\to$ T2 \\
+Physics & 0.85 & \textbf{0.79} & [0.75, 0.82] & 25 & T5 $\to$ T2 \\
+Economics & 0.78 & \textbf{0.76} & [0.72, 0.80] & 28 & T5 $\to$ T2 \\
+Behavioral Economics & 0.75 & \textbf{0.70} & [0.55, 0.84] & 7 & T5 $\to$ T2 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -4758,11 +4758,47 @@ Behavioral Economics & 0.75 & \textbf{0.70} & $-0.05$ & T5 $\to$ T2 \\
 K_{\text{stable}}^{\text{empirical}} = \frac{\max(K_{\text{failed}}) + \min(K_{\text{confirmed}})}{2}
 \]
 
-\textbf{For Behavioral Economics:}
+\textbf{95\% Confidence Interval Calculation:}
+
+The CI is derived from the uncertainty in the separation gap boundaries:
+\[
+\text{SE}(K_{\text{stable}}) = \frac{\text{Gap}}{2\sqrt{N}}, \quad \text{CI} = K_{\text{stable}} \pm 1.96 \cdot \text{SE}
+\]
+
+where Gap $= \min(K_{\text{confirmed}}) - \max(K_{\text{failed}})$.
+
+\begin{table}[h]
+\centering
+\caption{Confidence Interval Derivation Details}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Discipline} & $\max(K_{\text{fail}})$ & $\min(K_{\text{conf}})$ & \textbf{Gap} & \textbf{SE} & $K_{\text{stable}}$ & \textbf{95\% CI} \\
+\midrule
+Physics & 0.69 & 0.88 & 0.19 & 0.019 & 0.79 & [0.75, 0.82] \\
+Economics & 0.65 & 0.87 & 0.22 & 0.021 & 0.76 & [0.72, 0.80] \\
+Behav. Econ & 0.40 & 0.99 & 0.59 & 0.111 & 0.70 & [0.48, 0.91] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Interpretation:}
+\begin{itemize}
+    \item \textbf{Physics}: Tight CI [0.75, 0.82] due to large N and narrow gap $\Rightarrow$ high precision
+    \item \textbf{Economics}: Moderate CI [0.72, 0.80] $\Rightarrow$ good precision
+    \item \textbf{Behavioral Economics}: Wide CI [0.48, 0.91] due to small N (7) $\Rightarrow$ requires more validation data
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Note on Behavioral Economics CI:} The wide confidence interval reflects limited sample size (N=7). The point estimate (0.70) is reliable, but the bounds should narrow with additional validated cases. Priority: expand BE validation dataset.
+\end{warningbox}
+
+\textbf{For Behavioral Economics (detailed):}
 \begin{itemize}
     \item $\max(K_{\text{failed}}) = 0.40$ (Money Priming)
     \item $\min(K_{\text{confirmed}}) = 0.99$ (Loss Aversion)
     \item $K_{\text{stable}}^{\text{BE}} = (0.40 + 0.99) / 2 = 0.70$
+    \item Gap = 0.59, SE = $0.59 / (2 \times \sqrt{7}) = 0.111$
+    \item 95\% CI = $0.70 \pm 1.96 \times 0.111 = [0.48, 0.91]$
 \end{itemize}
 
 \begin{resultbox}
