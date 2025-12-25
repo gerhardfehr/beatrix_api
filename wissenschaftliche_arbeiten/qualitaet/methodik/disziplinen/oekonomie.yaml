@@ -28,10 +28,28 @@ meta:
   wissenschaftstyp: "Sozialwissenschaft (formal-mathematisch + empirisch)"
   toleranzfenster: 0.12  # Enger als Verhaltensökonomie (0.15)
 
-  verwandte_profile:
+  typ: "Eltern-Disziplin"
+
+  kind_disziplinen:
     - id: "verhaltensoekonomie"
-      beziehung: "Teilmenge/Erweiterung"
-      unterschied: "Verhaltensökonomie relaxiert Rationalitätsannahmen"
+      name: "Verhaltensökonomie / Behavioral Economics"
+      beziehung: "Derivat mit relaxierten Rationalitätsannahmen"
+      datei: "verhaltensoekonomie.yaml"
+      vererbung:
+        geerbt:
+          - "Meta-Analyse als höchste Evidenz"
+          - "Kausalidentifikation"
+          - "Ökonometrische Rigorosität"
+          - "Axiomatische Fundierung"
+        modifiziert:
+          k_schwelle_stabil: "0.78 → 0.75 (-0.03)"
+          toleranzfenster: "0.12 → 0.15 (+0.03)"
+          labor_experimente: "Aufgewertet (Kernmethode)"
+        erweitert:
+          - "Triangulationsprinzip (Falk-Heckman)"
+          - "WEIRD-Korrekturen (Henrich)"
+          - "BCM/BEATRIX-Integration"
+          - "Psychologie-Integration (Biases, Heuristiken)"
 
 
 # =============================================================================

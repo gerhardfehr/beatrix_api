@@ -2,15 +2,18 @@
 # ESL DISZIPLIN-PROFIL: Verhaltensökonomie
 # =============================================================================
 # Für: BCM 2.2, BEATRIX, Behavioral Economics Publikationen
-# Version: 1.0
+# Version: 2.0 - FORMALES DERIVAT von Ökonomie
 # =============================================================================
 
 meta:
   id: "verhaltensoekonomie"
   name: "Verhaltensökonomie / Behavioral Economics"
   name_en: "Behavioral Economics"
+  typ: "Derivat-Disziplin"
   beschreibung: |
     Disziplin-spezifisches ESL-Profil für verhaltensökonomische Forschung.
+    DERIVAT der Mainstream-Ökonomie mit spezifischen Modifikationen.
+
     Berücksichtigt die Besonderheiten empirischer Verhaltensforschung:
     - Experimentelle Paradigmen (Labor, Feld, Natürliche Experimente)
     - Replikationsdebatte in der Psychologie
@@ -26,9 +29,247 @@ meta:
     - "Entscheidungsforschung"
 
   wissenschaftstyp: "Sozialwissenschaft (empirisch-quantitativ)"
-  toleranzfenster: 0.15  # τ für Sozialwissenschaften
+  toleranzfenster: 0.15  # τ für Sozialwissenschaften (vs. 0.12 in Ökonomie)
 
-  methodologische_grundlagen:
+
+# =============================================================================
+# DERIVAT-STRUKTUR: Formale Beziehung zur Eltern-Disziplin
+# =============================================================================
+
+derivat_struktur:
+
+  eltern_disziplin:
+    id: "oekonomie"
+    name: "Ökonomie / Economics (Mainstream)"
+    datei: "oekonomie.yaml"
+    beziehung: "Kind-Disziplin mit relaxierten Rationalitätsannahmen"
+
+  genealogie: |
+    Ökonomie (Mainstream)
+    └── Verhaltensökonomie
+        ├── Erbt: Formale Methodik, Kausalidentifikation
+        ├── Modifiziert: Rationalitätsannahmen, K-Schwellen
+        └── Erweitert: Psychologie-Integration, BCM, Triangulation
+
+  historischer_kontext: |
+    Verhaltensökonomie entwickelte sich aus der Kritik an den
+    unrealistischen Rationalitätsannahmen der Neoklassik:
+    - 1950er: Simon (Bounded Rationality)
+    - 1970er: Kahneman & Tversky (Prospect Theory)
+    - 1980er: Thaler (Mental Accounting, Nudging)
+    - 2000er: Institutionalisierung (J-PAL, NBER Behavioral)
+    - 2017: Thaler Nobelpreis
+
+  # ---------------------------------------------------------------------------
+  # GEERBT: Elemente ohne Modifikation übernommen
+  # ---------------------------------------------------------------------------
+
+  geerbt_von_oekonomie:
+    beschreibung: |
+      Folgende Elemente werden von der Eltern-Disziplin Ökonomie
+      OHNE MODIFIKATION übernommen (Vererbungsprinzip):
+
+    elemente:
+      e_skala_prinzipien:
+        - "Meta-Analyse als höchste Evidenzstufe"
+        - "Präregistrierte RCTs als Gold-Standard"
+        - "Quasi-experimentelle Designs (RDD, IV, DiD)"
+        - "Strukturelle Schätzung als valide Methode"
+        - "Unterscheidung Theorie vs. Empirie"
+
+      methodologie:
+        - "Kausalidentifikation als zentrales Konzept"
+        - "Ökonometrische Rigorosität"
+        - "Robustheitschecks und Sensitivitätsanalysen"
+        - "Pre-Analysis Plans"
+        - "Placebo-Tests"
+
+      formale_grundlagen:
+        - "Mathematische Modellierung"
+        - "Axiomatische Fundierung"
+        - "Spieltheoretische Elemente"
+        - "Utility-Maximierung (modifiziert)"
+
+      qualitaetsindikatoren:
+        - "Präregistrierung als Qualitätsmerkmal"
+        - "Replikationsdaten-Verfügbarkeit"
+        - "Multiple Spezifikationen"
+        - "Effektgrößen-Interpretation"
+
+  # ---------------------------------------------------------------------------
+  # MODIFIZIERT: Systematisch angepasste Elemente
+  # ---------------------------------------------------------------------------
+
+  modifiziert_gegenueber_oekonomie:
+    beschreibung: |
+      Folgende Elemente werden gegenüber der Eltern-Disziplin
+      SYSTEMATISCH ANGEPASST (Modifikationsprinzip):
+
+    rationalitaetsannahmen:
+      oekonomie: "Vollständige Rationalität (homo oeconomicus)"
+      verhaltensoekonomie: "Bounded Rationality, systematische Abweichungen"
+      delta: "Relaxierung"
+      begründung: |
+        Empirische Evidenz zeigt konsistente Abweichungen von
+        vollständiger Rationalität (Kahneman & Tversky, 1979).
+        Prospect Theory, Hyperbolic Discounting, Social Preferences.
+
+    k_schwellenwerte:
+      vergleich:
+        oekonomie:
+          stabil: "[0.78, 1.00]"
+          teilstabil: "[0.58, 0.78]"
+          interpretativ: "[0.38, 0.58]"
+          spekulativ: "[0.00, 0.38]"
+        verhaltensoekonomie:
+          stabil: "[0.75, 1.00]"
+          teilstabil: "[0.55, 0.75]"
+          interpretativ: "[0.35, 0.55]"
+          spekulativ: "[0.00, 0.35]"
+      delta_stabil: -0.03
+      begründung: |
+        Verhaltensforschung hat inhärent höhere Variabilität durch:
+        - Individuelle Unterschiede in kognitiven Stilen
+        - Kontexteffekte und Framing
+        - WEIRD-Population Bias
+        - Niedrigere Replikationsraten (~40% vs ~60%)
+
+    toleranzfenster:
+      oekonomie: 0.12
+      verhaltensoekonomie: 0.15
+      delta: +0.03
+      begründung: |
+        Breitere Toleranz reflektiert stochastische Natur von Verhalten.
+        Messrauschen in Verhaltensdaten ist höher als in Preisdaten.
+
+    labor_experimente_position:
+      oekonomie: "Ergänzend zu Ökonometrie (Stufe 5-6)"
+      verhaltensoekonomie: "Kernmethode (Stufe 4: E 0.65-0.75)"
+      delta: "Aufwertung um ~1-2 Stufen"
+      begründung: |
+        Labor-Experimente sind zentrale Methode der Verhaltensökonomie.
+        Falk & Heckman (2009): Laborbefunde sind valide für Mechanismen.
+        Incentivized Choice ist Standard seit Kahneman & Tversky.
+
+    theorie_position:
+      oekonomie: "Stufe 7 (E: 0.25-0.40)"
+      verhaltensoekonomie: "Stufe 8 (E: 0.25-0.40)"
+      delta: "Eine Stufe tiefer"
+      begründung: |
+        Verhaltensökonomie ist empirisch orientierter.
+        Theoretische Modelle ohne Empirie sind weniger zentral.
+
+  # ---------------------------------------------------------------------------
+  # ERWEITERT: Neue Elemente ohne Äquivalent in Eltern-Disziplin
+  # ---------------------------------------------------------------------------
+
+  erweitert_gegenueber_oekonomie:
+    beschreibung: |
+      Folgende Elemente werden als ERWEITERUNGEN hinzugefügt,
+      die in der Eltern-Disziplin nicht vorhanden sind:
+
+    psychologie_integration:
+      beschreibung: "Integration kognitiver Psychologie (Kahneman-Erbe)"
+      elemente:
+        - "Kognitive Verzerrungen (Biases): 100+ katalogisiert"
+        - "Heuristiken (Availability, Representativeness, Anchoring)"
+        - "Dual-Process-Theory (System 1 / System 2)"
+        - "Emotionale Einflüsse auf Entscheidungen"
+        - "Soziale Präferenzen (Fairness, Reziprozität, Altruismus)"
+        - "Mental Accounting (Thaler)"
+      quelle: "Psychologie (kognitive Neurowissenschaft)"
+
+    triangulation_framework:
+      beschreibung: "Falk-Heckman (2009) Triangulationsprinzip"
+      neu_in_verhaltensoekonomie: true
+      elemente:
+        - "Stufe 2: Triangulierte Evidenz (Labor + Feld + Natural)"
+        - "Triangulations-Bonus (+0.10 bis +0.20)"
+        - "Validitäts-Mapping (intern vs. extern vs. selektionsfrei)"
+        - "Methoden-Komplementarität statt Konkurrenz"
+
+    weird_korrekturen:
+      beschreibung: "Henrich et al. (2010) Population-Bias Korrekturen"
+      neu_in_verhaltensoekonomie: true
+      elemente:
+        - "WEIRD-Multiplikatoren (0.92 bis 1.05)"
+        - "Cross-kulturelle Validierungsanforderungen"
+        - "Effekt-spezifische Kulturvariabilität"
+        - "Generalisierbarkeits-Warnungen"
+
+    bcm_spezifika:
+      beschreibung: "BCM 2.2 und BEATRIX-spezifische Erweiterungen"
+      neu_in_verhaltensoekonomie: true
+      elemente:
+        - "MA-EPI-XX Evidenzhierarchie für Parameter"
+        - "BCM-Parameter Evidence Registry"
+        - "Axiom-Referenzierung (MA-XXX-##)"
+        - "BEATRIX-Kommunikationsanforderungen"
+        - "115 Meta-Axiome als Referenzrahmen"
+
+  # ---------------------------------------------------------------------------
+  # VERERBUNGS-FORMELN: Mathematische Ableitungen
+  # ---------------------------------------------------------------------------
+
+  vererbungs_formeln:
+    beschreibung: |
+      Formale Berechnung der Verhaltensökonomie-Parameter
+      aus Ökonomie-Basis mit systematischen Modifikationen.
+
+    k_schwelle_stabil:
+      formel: "K_ve = K_oek - δ_verhaltens"
+      werte:
+        K_oek: 0.78
+        δ_verhaltens: 0.03
+        K_ve: 0.75
+      interpretation: |
+        3 Prozentpunkte niedrigere Schwelle reflektiert
+        höhere inhärente Variabilität von Verhaltensdaten.
+
+    toleranzfenster:
+      formel: "τ_ve = τ_oek + δ_variabilität"
+      werte:
+        τ_oek: 0.12
+        δ_variabilität: 0.03
+        τ_ve: 0.15
+      interpretation: |
+        25% breiteres Toleranzfenster für Verhaltensforschung.
+
+    e_skala_transformation:
+      beschreibung: |
+        Verhaltensökonomie fügt neue Stufen ein und
+        reorganisiert die Hierarchie:
+      oekonomie_stufen: 9
+      verhaltensoekonomie_stufen: 10
+      transformationen:
+        - typ: "Einfügung"
+          position: "Stufe 2"
+          name: "Triangulierte Evidenz"
+          begründung: "Falk-Heckman Framework"
+
+        - typ: "Aufwertung"
+          von: "Stufe 5-6 (Ökonomie)"
+          zu: "Stufe 4 (Verhaltensökonomie)"
+          name: "Labor-Experimente"
+          begründung: "Kernmethode der Disziplin"
+
+        - typ: "Explizierung"
+          position: "Stufe 5"
+          name: "Natürliche Experimente"
+          begründung: "Trennung von anderen Quasi-Designs"
+
+    replikations_korrektur:
+      formel: "E_ve = E_oek × (Rep_ve / Rep_oek)"
+      werte:
+        Rep_oek: 0.61  # Camerer 2016
+        Rep_ve: 0.50   # Geschätzt (Psychologie-Anteil)
+        Faktor: 0.82
+      interpretation: |
+        Verhaltensökonomie-Studien haben im Schnitt ~18% niedrigere
+        Replikationsraten aufgrund des Psychologie-Anteils.
+
+
+methodologische_grundlagen:
     falk_heckman_2009:
       beschreibung: |
         Die Debatte Falk & Heckman (2009) vs. Levitt & List (2007)
