@@ -1,0 +1,390 @@
+# =============================================================================
+# ESL PRIMITIVE: Biologie
+# =============================================================================
+# Orthogonale Grundbegriffe der Biologie
+# Nicht weiter zerlegbar, bilden semantische Basis
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Biologie"
+  anzahl_primitive: 24
+  kategorien: 6
+  beschreibung: |
+    Fundamentale Konzepte der Biologie. Diese Primitive spannen
+    den konzeptuellen Raum von molekularer bis ökologischer Ebene.
+    Integration von Struktur, Funktion und Evolution.
+
+
+# =============================================================================
+# KATEGORIE 1: LEBEN UND ORGANISATION
+# =============================================================================
+
+LEBEN_ORGANISATION:
+
+  LEBEN:
+    definition: "Selbsterhaltende, sich reproduzierende Systeme mit Stoffwechsel"
+    merkmale:
+      - "Stoffwechsel (Metabolismus)"
+      - "Wachstum und Entwicklung"
+      - "Reproduktion"
+      - "Reaktion auf Umwelt"
+      - "Homöostase"
+      - "Evolution"
+    relationen:
+      - ZELLE: "Grundeinheit des Lebens"
+      - STOFFWECHSEL: "Energieumwandlung"
+      - EVOLUTION: "Veränderung über Zeit"
+
+  ZELLE:
+    definition: "Kleinste selbstständig lebensfähige Einheit"
+    typen:
+      - "Prokaryot: ohne Zellkern"
+      - "Eukaryot: mit Zellkern"
+    komponenten:
+      - "Membran"
+      - "Cytoplasma"
+      - "Genom"
+      - "Ribosomen"
+    relationen:
+      - LEBEN: "Träger des Lebens"
+      - GEN: "Enthält genetische Information"
+      - PROTEIN: "Produziert Proteine"
+
+  ORGANISMUS:
+    definition: "Individuelles Lebewesen"
+    organisation:
+      - "Zellen → Gewebe → Organe → Organsysteme → Organismus"
+    relationen:
+      - ZELLE: "Aufgebaut aus Zellen"
+      - POPULATION: "Teil einer Population"
+      - UMWELT: "Interagiert mit Umwelt"
+
+  HOMOESTASE:
+    definition: "Aufrechterhaltung eines stabilen inneren Milieus"
+    mechanismen:
+      - "Negative Rückkopplung"
+      - "Positive Rückkopplung (selten)"
+    beispiele:
+      - "Temperaturregulation"
+      - "pH-Regulation"
+      - "Blutzuckerregulation"
+    relationen:
+      - STOFFWECHSEL: "Reguliert Stoffwechsel"
+      - UMWELT: "Puffer gegen Umweltschwankungen"
+
+
+# =============================================================================
+# KATEGORIE 2: GENETIK UND MOLEKULARBIOLOGIE
+# =============================================================================
+
+GENETIK:
+
+  GEN:
+    definition: "Funktionelle Einheit der Vererbung, kodiert für RNA/Protein"
+    struktur:
+      - "DNA-Sequenz"
+      - "Promotor, Exons, Introns"
+    relationen:
+      - DNA: "Besteht aus DNA"
+      - PROTEIN: "Kodiert für Protein"
+      - VERERBUNG: "Wird vererbt"
+      - MUTATION: "Kann mutieren"
+
+  DNA:
+    definition: "Desoxyribonukleinsäure, Träger der Erbinformation"
+    struktur: "Doppelhelix aus Nukleotiden (A, T, G, C)"
+    funktionen:
+      - "Speicherung genetischer Information"
+      - "Replikation"
+      - "Transkription"
+    relationen:
+      - GEN: "Enthält Gene"
+      - PROTEIN: "Information für Proteinsynthese"
+
+  PROTEIN:
+    definition: "Makromolekül aus Aminosäuren, führt Zellfunktionen aus"
+    funktionen:
+      - "Enzyme (Katalyse)"
+      - "Struktur"
+      - "Transport"
+      - "Signaltransduktion"
+      - "Immunfunktion"
+    relationen:
+      - GEN: "Von Gen kodiert"
+      - STOFFWECHSEL: "Katalysiert Reaktionen"
+      - PHAENOTYP: "Bestimmt Phänotyp"
+
+  GENOTYP:
+    definition: "Genetische Ausstattung eines Organismus"
+    notation: "AA, Aa, aa (diploid)"
+    relationen:
+      - GEN: "Summe aller Gene"
+      - PHAENOTYP: "Bestimmt Phänotyp (mit Umwelt)"
+      - VERERBUNG: "Wird vererbt"
+
+  PHAENOTYP:
+    definition: "Beobachtbare Merkmale eines Organismus"
+    bestimmung: "Genotyp × Umwelt → Phänotyp"
+    ebenen:
+      - "Molekular"
+      - "Zellulär"
+      - "Morphologisch"
+      - "Verhaltens-"
+    relationen:
+      - GENOTYP: "Genetische Basis"
+      - UMWELT: "Umwelteinfluss"
+      - SELEKTION: "Ziel der Selektion"
+
+
+# =============================================================================
+# KATEGORIE 3: EVOLUTION
+# =============================================================================
+
+EVOLUTION:
+
+  EVOLUTION:
+    definition: "Veränderung der Allelfrequenzen in Populationen über Zeit"
+    mechanismen:
+      - "Natürliche Selektion"
+      - "Genetische Drift"
+      - "Genfluss"
+      - "Mutation"
+    relationen:
+      - SELEKTION: "Hauptmechanismus"
+      - MUTATION: "Quelle der Variation"
+      - ART: "Führt zu Artbildung"
+
+  SELEKTION:
+    definition: "Differentieller Reproduktionserfolg aufgrund von Merkmalen"
+    typen:
+      - "Natürliche Selektion"
+      - "Sexuelle Selektion"
+      - "Künstliche Selektion"
+    formen:
+      - "Direktionale Selektion"
+      - "Stabilisierende Selektion"
+      - "Disruptive Selektion"
+    relationen:
+      - FITNESS: "Misst Selektionserfolg"
+      - ADAPTATION: "Führt zu Anpassung"
+      - PHAENOTYP: "Wirkt auf Phänotyp"
+
+  MUTATION:
+    definition: "Dauerhafte Veränderung der DNA-Sequenz"
+    typen:
+      - "Punktmutation"
+      - "Insertion/Deletion"
+      - "Chromosomenmutation"
+    relationen:
+      - GEN: "Verändert Gene"
+      - EVOLUTION: "Rohstoff der Evolution"
+      - VARIATION: "Erzeugt Variation"
+
+  ADAPTATION:
+    definition: "Anpassung an Umweltbedingungen durch Selektion"
+    ebenen:
+      - "Morphologisch"
+      - "Physiologisch"
+      - "Verhaltens-"
+    relationen:
+      - SELEKTION: "Entsteht durch Selektion"
+      - UMWELT: "Anpassung an Umwelt"
+      - FITNESS: "Erhöht Fitness"
+
+  FITNESS:
+    definition: "Relativer Reproduktionserfolg eines Genotyps"
+    masse:
+      - "Absolute Fitness: w"
+      - "Relative Fitness: w/w_max"
+    relationen:
+      - SELEKTION: "Selektionsmaß"
+      - PHAENOTYP: "Vermittelt durch Phänotyp"
+
+
+# =============================================================================
+# KATEGORIE 4: ÖKOLOGIE
+# =============================================================================
+
+OEKOLOGIE:
+
+  POPULATION:
+    definition: "Gruppe von Individuen einer Art in einem Gebiet"
+    parameter:
+      - "Größe (N)"
+      - "Dichte"
+      - "Wachstumsrate (r)"
+      - "Altersstruktur"
+    relationen:
+      - ORGANISMUS: "Besteht aus Organismen"
+      - ART: "Gehört zu einer Art"
+      - OEKOSYSTEM: "Teil eines Ökosystems"
+
+  ART:
+    definition: "Gruppe von Organismen mit potentiellem Genfluss"
+    konzepte:
+      - "Biologisches Artkonzept (Mayr)"
+      - "Phylogenetisches Artkonzept"
+      - "Morphologisches Artkonzept"
+    relationen:
+      - POPULATION: "Besteht aus Populationen"
+      - EVOLUTION: "Entsteht durch Artbildung"
+
+  OEKOSYSTEM:
+    definition: "Biotische und abiotische Komponenten in Wechselwirkung"
+    komponenten:
+      - "Produzenten"
+      - "Konsumenten"
+      - "Destruenten"
+      - "Abiotische Faktoren"
+    prozesse:
+      - "Energiefluss"
+      - "Stoffkreisläufe"
+    relationen:
+      - POPULATION: "Enthält Populationen"
+      - UMWELT: "Umfasst Umwelt"
+
+  UMWELT:
+    definition: "Gesamtheit der auf einen Organismus wirkenden Faktoren"
+    faktoren:
+      biotisch:
+        - "Konkurrenz"
+        - "Prädation"
+        - "Symbiose"
+      abiotisch:
+        - "Temperatur"
+        - "Licht"
+        - "Wasser"
+        - "Nährstoffe"
+    relationen:
+      - ORGANISMUS: "Wirkt auf Organismus"
+      - SELEKTION: "Selektionsdruck"
+      - ADAPTATION: "Ziel der Anpassung"
+
+
+# =============================================================================
+# KATEGORIE 5: PHYSIOLOGIE UND STOFFWECHSEL
+# =============================================================================
+
+PHYSIOLOGIE:
+
+  STOFFWECHSEL:
+    definition: "Gesamtheit der biochemischen Reaktionen im Organismus"
+    typen:
+      - "Anabolismus (aufbauend)"
+      - "Katabolismus (abbauend)"
+    zentrale_wege:
+      - "Glykolyse"
+      - "Citratzyklus"
+      - "Atmungskette"
+      - "Photosynthese"
+    relationen:
+      - ENERGIE: "Energieumwandlung"
+      - PROTEIN: "Katalysiert durch Enzyme"
+      - HOMOESTASE: "Reguliert"
+
+  ENERGIE:
+    definition: "Fähigkeit, Arbeit zu verrichten (biologischer Kontext)"
+    waehrung: "ATP (Adenosintriphosphat)"
+    quellen:
+      - "Licht (Phototrophe)"
+      - "Chemische Verbindungen (Chemotrophe)"
+    relationen:
+      - STOFFWECHSEL: "Im Stoffwechsel umgewandelt"
+      - ZELLE: "Zellulärer Energiebedarf"
+
+  REGULATION:
+    definition: "Steuerung biologischer Prozesse"
+    ebenen:
+      - "Genregulation"
+      - "Enzymregulation"
+      - "Hormonelle Regulation"
+      - "Neuronale Regulation"
+    mechanismen:
+      - "Feedback-Schleifen"
+      - "Signaltransduktion"
+    relationen:
+      - HOMOESTASE: "Dient Homöostase"
+      - GEN: "Genexpression reguliert"
+
+  VERERBUNG:
+    definition: "Weitergabe genetischer Information an Nachkommen"
+    mechanismen:
+      - "Mendelsche Vererbung"
+      - "Polygene Vererbung"
+      - "Epigenetik"
+    relationen:
+      - GEN: "Gene werden vererbt"
+      - GENOTYP: "Genotyp weitergegeben"
+      - EVOLUTION: "Grundlage der Evolution"
+
+
+# =============================================================================
+# KATEGORIE 6: VARIATION UND DIVERSITÄT
+# =============================================================================
+
+VARIATION:
+
+  VARIATION:
+    definition: "Unterschiede zwischen Individuen einer Population"
+    quellen:
+      - "Mutation"
+      - "Rekombination"
+      - "Genfluss"
+    typen:
+      - "Genetische Variation"
+      - "Phänotypische Variation"
+    relationen:
+      - MUTATION: "Erzeugt durch Mutation"
+      - SELEKTION: "Substrat für Selektion"
+      - EVOLUTION: "Voraussetzung für Evolution"
+
+  BIODIVERSITAET:
+    definition: "Vielfalt des Lebens auf allen Ebenen"
+    ebenen:
+      - "Genetische Diversität"
+      - "Artendiversität"
+      - "Ökosystem-Diversität"
+    masse:
+      - "Artenreichtum"
+      - "Shannon-Index"
+      - "Simpson-Index"
+    relationen:
+      - ART: "Anzahl der Arten"
+      - OEKOSYSTEM: "Ökosystemfunktion"
+
+  PHYLOGENIE:
+    definition: "Evolutionäre Verwandtschaftsbeziehungen"
+    methoden:
+      - "Morphologische Analyse"
+      - "Molekulare Phylogenetik"
+      - "Genomvergleiche"
+    darstellung: "Phylogenetische Bäume / Kladogramme"
+    relationen:
+      - EVOLUTION: "Zeigt Evolution"
+      - ART: "Ordnet Arten"
+
+
+# =============================================================================
+# RELATIONSGRAPH
+# =============================================================================
+
+relationsgraph:
+  zentrale_knoten:
+    - EVOLUTION: "Verbindet Genetik, Ökologie, Diversität"
+    - ZELLE: "Grundeinheit, verbindet molekulare und organismische Ebene"
+    - GEN: "Brücke zwischen Genotyp und Phänotyp"
+    - SELEKTION: "Verbindet Variation mit Adaptation"
+
+  hierarchien:
+    organisation:
+      - "Molekül → Organelle → Zelle → Gewebe → Organ → Organismus"
+    oekologisch:
+      - "Individuum → Population → Gemeinschaft → Ökosystem → Biosphäre"
+    taxonomisch:
+      - "Art → Gattung → Familie → Ordnung → Klasse → Stamm → Reich → Domäne"
+
+  zentrale_dogmen:
+    - "DNA → RNA → Protein (Molekularbiologie)"
+    - "Variation + Selektion → Adaptation (Evolution)"
+    - "Energie fließt, Materie zykliert (Ökologie)"

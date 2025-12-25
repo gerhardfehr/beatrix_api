@@ -1,0 +1,504 @@
+# =============================================================================
+# ESL LEXIKON: Biologie
+# =============================================================================
+# Erweiterte Definitionen mit Verwendungskontext, Beispielsätzen
+# und disziplinspezifischen Kollokationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Biologie"
+  anzahl_eintraege: 32
+  beschreibung: |
+    Erweitertes Lexikon mit Verwendungshinweisen für präzise
+    biologische Kommunikation. Besonderer Fokus auf:
+    - Unterscheidung Korrelation/Kausalität
+    - Angemessenes Hedging bei komplexen Systemen
+    - Korrekte Verwendung evolutionärer Terminologie
+
+
+# =============================================================================
+# EVOLUTIONÄRE BEGRIFFE
+# =============================================================================
+
+evolution:
+  grundform: "Evolution"
+  plural: "—"
+
+  definition:
+    kurz: "Veränderung der Allelfrequenzen über Generationen"
+    erweitert: |
+      Biologische Evolution bezeichnet die genetische Veränderung
+      von Populationen über Zeit. Nicht zu verwechseln mit
+      Entwicklung (Ontogenese) oder Fortschritt.
+
+  verwendung:
+    korrekt:
+      - "Die Evolution von Antibiotikaresistenz erfolgt durch Selektion"
+      - "Evolutionäre Anpassung an neue Umweltbedingungen"
+      - "Die molekulare Evolution zeigt neutrale Veränderungen"
+    inkorrekt:
+      - "Das Individuum evolviert" # Populationen evolvieren
+      - "Evolution ist Fortschritt" # Keine Richtung
+      - "Evolution hat ein Ziel" # Nicht teleologisch
+
+  beispielsaetze:
+    - satz: "Die Evolution der Laktosetoleranz erfolgte unabhängig in verschiedenen Populationen."
+      kontext: "Humangenetik"
+    - satz: "Antibiotikaresistenz evolviert innerhalb weniger Generationen."
+      kontext: "Mikrobiologie"
+    - satz: "Die konvergente Evolution von Augen zeigt ähnliche Lösungen für ähnliche Probleme."
+      kontext: "Vergleichende Biologie"
+
+  kollokationen:
+    - "Evolution durch natürliche Selektion"
+    - "konvergente/divergente Evolution"
+    - "molekulare Evolution"
+    - "Evolution findet statt / erfolgt"
+    - "evolutionäre Anpassung"
+
+  verwandte_begriffe:
+    - "Selektion"
+    - "Adaptation"
+    - "Drift"
+
+
+selektion:
+  grundform: "Selektion"
+  alternativ: "Natürliche Selektion"
+
+  definition:
+    kurz: "Differentieller Reproduktionserfolg aufgrund von Merkmalen"
+    erweitert: |
+      Selektion ist der Mechanismus, durch den bestimmte
+      Varianten in einer Population häufiger werden, weil sie
+      einen Überlebens- oder Reproduktionsvorteil bieten.
+
+  verwendung:
+    korrekt:
+      - "Selektion wirkt auf den Phänotyp"
+      - "Positive Selektion für vorteilhafte Allele"
+      - "Selektion führt zu Adaptation"
+    inkorrekt:
+      - "Selektion wählt absichtlich" # Kein Akteur
+      - "Selektion kreiert Variation" # Selektion wirkt auf vorhandene Variation
+
+  beispielsaetze:
+    - satz: "Die Selektion für größere Körpergröße resultierte in einer Verschiebung der Verteilung."
+      kontext: "Quantitative Genetik"
+    - satz: "Sexuelle Selektion erklärt extravagante Ornamente bei Männchen."
+      kontext: "Verhaltensökologie"
+
+  kollokationen:
+    - "natürliche/sexuelle/künstliche Selektion"
+    - "positive/negative/stabilisierende Selektion"
+    - "Selektion wirkt auf"
+    - "Selektion favorisiert"
+    - "unter Selektionsdruck"
+
+
+adaptation:
+  grundform: "Adaptation"
+  alternativ: "Anpassung"
+  plural: "Adaptationen"
+
+  definition:
+    kurz: "Merkmal, das durch Selektion entstanden ist und Fitness erhöht"
+    erweitert: |
+      Eine Adaptation ist ein Merkmal, das durch natürliche Selektion
+      geformt wurde und zur Fitness beiträgt. Nicht jedes nützliche
+      Merkmal ist eine Adaptation (kann auch Nebenprodukt sein).
+
+  verwendung:
+    korrekt:
+      - "Die Tarnung ist eine Adaptation gegen Prädation"
+      - "Adaptationen entstehen durch Selektion"
+      - "Die Flügel der Vögel sind eine Adaptation für den Flug"
+    inkorrekt:
+      - "Der Organismus adaptiert sich bewusst" # Kein bewusster Prozess
+      - "Jedes nützliche Merkmal ist eine Adaptation" # Kann auch Spandrel sein
+
+  beispielsaetze:
+    - satz: "Die Echolokation bei Fledermäusen ist eine Adaptation für die nächtliche Jagd."
+      kontext: "Verhaltensbiologie"
+    - satz: "Wir können nicht jedes Merkmal als Adaptation interpretieren (adaptationism)."
+      kontext: "Methodenkritik, Gould & Lewontin"
+
+  kollokationen:
+    - "evolutionäre Adaptation"
+    - "lokale Adaptation"
+    - "Adaptation an"
+    - "adaptive Radiation"
+
+
+fitness:
+  grundform: "Fitness"
+  alternativ: "Biologische Fitness"
+
+  definition:
+    kurz: "Relativer Reproduktionserfolg eines Genotyps"
+    erweitert: |
+      Fitness misst den Beitrag eines Genotyps zur nächsten
+      Generation relativ zu anderen Genotypen. Nicht zu verwechseln
+      mit körperlicher Fitness oder Überlebensfähigkeit allein.
+
+  verwendung:
+    korrekt:
+      - "Die Fitness des Heterozygoten beträgt w = 1.05"
+      - "Selektion maximiert Fitness (unter Constraints)"
+      - "Inklusive Fitness berücksichtigt Verwandte"
+    inkorrekt:
+      - "Der stärkste Organismus hat die höchste Fitness" # Reproduktion zählt
+      - "Fitness bedeutet körperliche Stärke" # Evolutionärer Begriff
+
+  beispielsaetze:
+    - satz: "Die Fitness des Sichelzellenallels ist im Heterozygoten erhöht (Heterosiseffekt)."
+      kontext: "Populationsgenetik"
+    - satz: "Hamiltons Regel beschreibt, wann Altruismus die inklusive Fitness erhöht."
+      kontext: "Soziobiologie"
+
+  kollokationen:
+    - "absolute/relative Fitness"
+    - "inklusive Fitness"
+    - "Fitness-Landschaft"
+    - "Fitness erhöhen/reduzieren"
+
+
+# =============================================================================
+# GENETISCHE BEGRIFFE
+# =============================================================================
+
+gen:
+  grundform: "Gen"
+  plural: "Gene"
+
+  definition:
+    kurz: "Funktionelle Einheit der Vererbung"
+    erweitert: |
+      Ein Gen ist eine DNA-Sequenz, die für ein funktionelles
+      Produkt (RNA oder Protein) kodiert. Die Definition hat
+      sich mit dem Verständnis von Genomik erweitert.
+
+  verwendung:
+    korrekt:
+      - "Das Gen kodiert für ein Enzym"
+      - "Gene werden exprimiert"
+      - "Das Gen liegt auf Chromosom 7"
+    inkorrekt:
+      - "Das Gen für Intelligenz" # Polygenes Merkmal
+      - "Gene determinieren das Verhalten" # Zu deterministisch
+
+  beispielsaetze:
+    - satz: "Das BRCA1-Gen ist mit erhöhtem Brustkrebsrisiko assoziiert."
+      kontext: "Medizinische Genetik"
+    - satz: "Hox-Gene regulieren die Körperachsenentwicklung."
+      kontext: "Entwicklungsbiologie"
+
+  kollokationen:
+    - "Gen exprimieren"
+    - "Gen kodiert für"
+    - "Gen ist assoziiert mit"
+    - "Gen reguliert"
+    - "Kandidatengen"
+
+
+genotyp:
+  grundform: "Genotyp"
+  plural: "Genotypen"
+
+  definition:
+    kurz: "Genetische Ausstattung eines Individuums"
+    erweitert: |
+      Der Genotyp bezeichnet die Allele, die ein Individuum trägt.
+      Im engeren Sinne für einen Locus (z.B. Aa), im weiteren
+      Sinne für das gesamte Genom.
+
+  verwendung:
+    korrekt:
+      - "Der Genotyp Aa führt zum intermediären Phänotyp"
+      - "Die Genotypfrequenzen entsprechen Hardy-Weinberg"
+      - "Aus dem Phänotyp kann nicht direkt auf den Genotyp geschlossen werden"
+
+  beispielsaetze:
+    - satz: "Der Genotyp AaBb segregiert in der F2-Generation."
+      kontext: "Mendelsche Genetik"
+    - satz: "Die Beziehung zwischen Genotyp und Phänotyp ist nicht eins-zu-eins."
+      kontext: "Quantitative Genetik"
+
+  kollokationen:
+    - "Genotyp-Phänotyp-Beziehung"
+    - "Genotypfrequenz"
+    - "Genotyp bestimmen/ermitteln"
+
+
+phaenotyp:
+  grundform: "Phänotyp"
+  plural: "Phänotypen"
+
+  definition:
+    kurz: "Beobachtbare Merkmale eines Organismus"
+    erweitert: |
+      Der Phänotyp umfasst alle beobachtbaren Eigenschaften eines
+      Organismus, von molekularen bis zu Verhaltensmerkmalen.
+      Er ist das Ergebnis von Genotyp, Umwelt und deren Interaktion.
+
+  verwendung:
+    korrekt:
+      - "Der Phänotyp resultiert aus Genotyp und Umwelt"
+      - "Phänotypische Plastizität ermöglicht Anpassung"
+      - "Selektion wirkt auf den Phänotyp, nicht direkt auf Gene"
+
+  beispielsaetze:
+    - satz: "Der wildtypische Phänotyp zeigt rote Augen."
+      kontext: "Drosophila-Genetik"
+    - satz: "Phänotypische Varianz wird in genetische und Umweltkomponenten aufgeteilt."
+      kontext: "Quantitative Genetik"
+
+  kollokationen:
+    - "phänotypische Varianz/Plastizität"
+    - "Phänotyp ausprägen"
+    - "Phänotyp beobachten"
+
+
+mutation:
+  grundform: "Mutation"
+  plural: "Mutationen"
+
+  definition:
+    kurz: "Dauerhafte Veränderung der DNA-Sequenz"
+    erweitert: |
+      Mutationen sind der Rohstoff der Evolution. Sie können
+      neutral, schädlich oder vorteilhaft sein. Die meisten
+      Mutationen sind neutral oder leicht schädlich.
+
+  verwendung:
+    korrekt:
+      - "Die Mutation verändert ein Codon"
+      - "Mutationen entstehen zufällig bezüglich ihrer Fitness-Effekte"
+      - "Die Mutationsrate beträgt ~10⁻⁹ pro Basenpaar pro Generation"
+    inkorrekt:
+      - "Die Mutation entstand, weil sie gebraucht wurde" # Nicht gerichtet
+      - "Mutanten sind abnormal" # Variation ist normal
+
+  beispielsaetze:
+    - satz: "Eine Punktmutation im β-Globin-Gen verursacht Sichelzellanämie."
+      kontext: "Medizinische Genetik"
+    - satz: "Loss-of-function Mutationen im Tumorsuppressor führen zu Krebs."
+      kontext: "Onkologie"
+
+  kollokationen:
+    - "Punktmutation"
+    - "Mutation verursacht/führt zu"
+    - "Mutationsrate"
+    - "spontane/induzierte Mutation"
+
+
+# =============================================================================
+# ÖKOLOGISCHE BEGRIFFE
+# =============================================================================
+
+population:
+  grundform: "Population"
+  plural: "Populationen"
+
+  definition:
+    kurz: "Gruppe von Individuen einer Art in einem Gebiet"
+    erweitert: |
+      Eine Population ist die Einheit, auf die Evolution wirkt.
+      Sie ist durch Genfluss verbunden und kann sich von anderen
+      Populationen derselben Art unterscheiden.
+
+  verwendung:
+    korrekt:
+      - "Die Population wächst exponentiell"
+      - "Populationen evolvieren, nicht Individuen"
+      - "Die effektive Populationsgröße bestimmt die Drift"
+
+  beispielsaetze:
+    - satz: "Die Population der Galapagos-Finken zeigte nach der Dürre veränderte Schnabelgrößen."
+      kontext: "Evolutionsbiologie, Grant-Studien"
+    - satz: "Kleine Populationen sind anfälliger für genetische Drift."
+      kontext: "Populationsgenetik"
+
+  kollokationen:
+    - "Populationsgröße"
+    - "Population wächst/schrumpft"
+    - "lokale Population"
+    - "effektive Populationsgröße (Ne)"
+
+
+art:
+  grundform: "Art"
+  alternativ: "Spezies"
+  plural: "Arten"
+
+  definition:
+    kurz: "Gruppe von Organismen mit potentiellem Genfluss"
+    erweitert: |
+      Das biologische Artkonzept (Mayr) definiert Arten als
+      reproduktiv isolierte Gruppen. Alternative Konzepte
+      (phylogenetisch, morphologisch) existieren für
+      asexuelle Organismen und Fossilien.
+
+  verwendung:
+    korrekt:
+      - "Die Art ist reproduktiv isoliert"
+      - "Die Abgrenzung von Arten kann schwierig sein"
+      - "Neue Arten entstehen durch Speziation"
+    inkorrekt:
+      - "Die Art evolviert in eine andere Art" # Populationen divergieren
+
+  beispielsaetze:
+    - satz: "Die Abgrenzung zwischen Homo erectus und Homo sapiens ist umstritten."
+      kontext: "Paläoanthropologie"
+    - satz: "Ring-Arten zeigen graduellen Übergang von Genfluss zu Isolation."
+      kontext: "Evolutionsbiologie"
+
+  kollokationen:
+    - "Artkonzept"
+    - "Artbildung (Speziation)"
+    - "Art bestimmen"
+    - "invasive Art"
+
+
+oekosystem:
+  grundform: "Ökosystem"
+  plural: "Ökosysteme"
+
+  definition:
+    kurz: "Lebensgemeinschaft und ihre abiotische Umwelt"
+    erweitert: |
+      Ein Ökosystem umfasst alle Organismen in einem Gebiet
+      (Biozönose) und die unbelebten Faktoren (Biotop).
+      Ökosysteme zeigen Energie- und Stoffflüsse.
+
+  verwendung:
+    korrekt:
+      - "Das Ökosystem zeigt Energiefluss und Stoffkreisläufe"
+      - "Ökosystemdienstleistungen umfassen Bestäubung und Wasserreinigung"
+      - "Schlüsselarten haben überproportionalen Einfluss auf das Ökosystem"
+
+  beispielsaetze:
+    - satz: "Das Korallenriff-Ökosystem ist durch Erwärmung bedroht."
+      kontext: "Meeresbiologie"
+    - satz: "Die Entfernung des Wolfes führte zu Kaskadeneffekten im Yellowstone-Ökosystem."
+      kontext: "Trophische Kaskaden"
+
+  kollokationen:
+    - "Ökosystemdienstleistungen"
+    - "Ökosystemfunktion"
+    - "stabiles/fragiles Ökosystem"
+
+
+# =============================================================================
+# MOLEKULARBIOLOGISCHE BEGRIFFE
+# =============================================================================
+
+expression:
+  grundform: "Expression"
+  alternativ: "Genexpression"
+
+  definition:
+    kurz: "Ablesen und Umsetzen genetischer Information"
+    erweitert: |
+      Genexpression umfasst Transkription (DNA → RNA) und
+      Translation (mRNA → Protein). Die Expression wird auf
+      vielen Ebenen reguliert.
+
+  verwendung:
+    korrekt:
+      - "Das Gen wird in der Leber stark exprimiert"
+      - "Die Expression ist induzierbar"
+      - "Differenzielle Expression zwischen Geweben"
+    inkorrekt:
+      - "Das Gen exprimiert das Protein" # Das Gen wird exprimiert
+
+  beispielsaetze:
+    - satz: "Die Expression von Hsp70 wird durch Hitzestress induziert."
+      kontext: "Stressantwort"
+    - satz: "RNA-Seq ermöglicht die genomweite Analyse der Genexpression."
+      kontext: "Transkriptomik"
+
+  kollokationen:
+    - "Gen wird exprimiert"
+    - "Expression regulieren/induzieren"
+    - "Expressionsmuster"
+    - "differenzielle Expression"
+
+
+signifikant:
+  grundform: "signifikant"
+
+  definition:
+    kurz: "Statistisch von Zufall unterscheidbar (biologisch: bedeutsam)"
+    erweitert: |
+      In der Biologie werden statistische und biologische
+      Signifikanz unterschieden. Ein statistisch signifikantes
+      Ergebnis muss nicht biologisch bedeutsam sein.
+
+  verwendung:
+    korrekt:
+      - "Der Unterschied war statistisch signifikant (p < 0.05)"
+      - "Trotz statistischer Signifikanz war die Effektgröße gering"
+      - "Der biologisch signifikante Schwellenwert liegt bei..."
+    inkorrekt:
+      - "Signifikant" ohne Angabe von p-Wert oder Effektgröße
+
+  beispielsaetze:
+    - satz: "Die Überlebensrate unterschied sich signifikant zwischen den Gruppen (χ² = 12.4, p < 0.001)."
+      kontext: "Statistische Analyse"
+    - satz: "Obwohl statistisch signifikant, war der Unterschied von 2% biologisch nicht relevant."
+      kontext: "Ergebnisinterpretation"
+
+  kollokationen:
+    - "statistisch signifikant"
+    - "biologisch signifikant"
+    - "signifikanter Unterschied"
+    - "Signifikanzniveau"
+
+
+# =============================================================================
+# HEDGING IN DER BIOLOGIE
+# =============================================================================
+
+hedging_biologie:
+  beschreibung: |
+    In der Biologie ist angemessenes Hedging wichtig wegen:
+    - Biologischer Variabilität
+    - Komplexer Gen-Umwelt-Interaktionen
+    - Unterscheidung Korrelation/Kausalität
+    - Beschränkter Generalisierbarkeit
+
+  korrelation_vs_kausalitaet:
+    korrekt:
+      - "X ist assoziiert mit Y"
+      - "X korreliert positiv mit Y"
+      - "Es besteht ein Zusammenhang zwischen X und Y"
+    nur_bei_experiment:
+      - "X verursacht Y"
+      - "X führt zu Y"
+      - "Der kausale Effekt von X auf Y"
+
+  generalisierung:
+    vorsichtig:
+      - "In diesem Modellorganismus..."
+      - "Unter Laborbedingungen..."
+      - "In der untersuchten Population..."
+    zu_vermeiden:
+      - "Generell gilt..."
+      - "Alle Organismen zeigen..."
+
+  staerke_der_aussage:
+    stark_zu_schwach:
+      - "zeigt" → "legt nahe" → "ist konsistent mit" → "könnte"
+      - "beweist" → "unterstützt" → "deutet an"
+
+  beispiele:
+    - original: "Das Gen verursacht die Krankheit"
+      besser: "Das Gen ist mit erhöhtem Krankheitsrisiko assoziiert"
+
+    - original: "Evolution optimiert Fitness"
+      besser: "Selektion führt tendenziell zu höherer Fitness"
+
+    - original: "Das Ökosystem ist stabil"
+      besser: "Das Ökosystem zeigt Resilienz gegenüber moderaten Störungen"

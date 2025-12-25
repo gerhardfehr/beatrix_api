@@ -1,0 +1,535 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Biologie
+# =============================================================================
+# Für: Biologische Forschung (Molekular-, Evolutions-, Ökobiologie)
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "biologie"
+  name: "Biologie"
+  name_en: "Biology"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Biologie.
+    Charakteristika:
+    - Hohe natürliche Variabilität biologischer Systeme
+    - Unterschiedliche Standards je nach Subdisziplin
+    - Molekularbiologie: hohe Reproduzierbarkeit (~85%)
+    - Ökologie/Verhaltensbiologie: moderate Reproduzierbarkeit (~55%)
+    - Starke experimentelle Tradition, aber auch Beobachtungsstudien
+    - Replikationsprobleme in präklinischer Forschung
+
+  anwendungsbereich:
+    - "Molekularbiologie / Biochemie"
+    - "Genetik / Genomik"
+    - "Zellbiologie"
+    - "Evolutionsbiologie"
+    - "Ökologie"
+    - "Verhaltensbiologie / Ethologie"
+    - "Physiologie"
+    - "Mikrobiologie"
+    - "Entwicklungsbiologie"
+    - "Systembiologie"
+
+  wissenschaftstyp: "Empirische Naturwissenschaft (experimentell + beobachtend)"
+  toleranzfenster: 0.12  # Breiter als Physik wegen biologischer Variabilität
+
+  verwandte_profile:
+    - id: "medizin"
+      beziehung: "Angewandt"
+      unterschied: "Medizin fokussiert auf menschliche Gesundheit"
+    - id: "physik"
+      beziehung: "Grundlagenfach"
+      unterschied: "Physik hat engere Toleranzfenster"
+
+
+# =============================================================================
+# E-SKALA: Biologie-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Evidenzhierarchie für biologische Forschung.
+    Berücksichtigt experimentelle und beobachtende Studien,
+    sowie die unterschiedlichen Standards der Subdisziplinen.
+    Replikation und Effektgrößen werden zunehmend wichtiger.
+
+  stufen:
+
+    stufe_1:
+      name: "Meta-Analyse / Systematischer Review"
+      E_range: [0.85, 1.00]
+      beschreibung: |
+        Systematische Synthese mehrerer Studien mit formaler
+        Aggregation. Gold-Standard für Effektgrößen-Schätzung.
+      beispiele:
+        - "Cochrane-Style Meta-Analyse"
+        - "Phylogenetic Meta-Analysis"
+        - "Quantitative Review mit Effektgrößen"
+      marker:
+        - "meta-analyse"
+        - "systematic review"
+        - "gepoolte effektgröße"
+        - "across studies"
+      modifikatoren:
+        heterogenitaet_gering: +0.05
+        publication_bias_korrigiert: +0.05
+        nur_publizierte_studien: -0.08
+
+    stufe_2:
+      name: "Präregistrierte Multi-Lab Studie"
+      E_range: [0.78, 0.88]
+      beschreibung: |
+        Replikation über mehrere unabhängige Labore mit
+        Präregistrierung und standardisiertem Protokoll.
+      beispiele:
+        - "eLife Replication Study"
+        - "Multi-Lab Replikation"
+        - "Registered Report akzeptiert"
+      marker:
+        - "multi-lab"
+        - "präregistriert"
+        - "repliziert in"
+        - "unabhängige bestätigung"
+      modifikatoren:
+        drei_plus_labore: +0.05
+        verschiedene_modellorganismen: +0.03
+        protokollabweichungen: -0.08
+
+    stufe_3:
+      name: "Kontrolliertes Experiment (gut repliziert)"
+      E_range: [0.68, 0.80]
+      beschreibung: |
+        Klassisches Experiment mit Kontrolle und Randomisierung,
+        mindestens einmal unabhängig repliziert.
+      beispiele:
+        - "RCT in Modellorganismen"
+        - "Repliziertes Laborexperiment"
+        - "Feldexperiment mit Kontrolle"
+      marker:
+        - "randomisiert"
+        - "kontrolliert"
+        - "repliziert"
+        - "experiment"
+        - "n ="
+      modifikatoren:
+        grosse_stichprobe: +0.05
+        blinded: +0.03
+        power_analyse: +0.02
+        pseudo_replikation: -0.12
+
+    stufe_4:
+      name: "Einzelnes Experiment (nicht repliziert)"
+      E_range: [0.52, 0.68]
+      beschreibung: |
+        Gut durchgeführtes Experiment ohne unabhängige Replikation.
+        Standard für viele Erstpublikationen.
+      beispiele:
+        - "Erstes Experiment zu neuem Effekt"
+        - "Proof-of-Concept Studie"
+        - "Pilotstudie mit gutem Design"
+      marker:
+        - "erste studie"
+        - "wir zeigen"
+        - "experiment demonstriert"
+      modifikatoren:
+        mechanismus_erklaert: +0.05
+        multiple_experimente_im_paper: +0.05
+        keine_effektgroesse: -0.08
+        p_hacking_verdacht: -0.15
+
+    stufe_5:
+      name: "Beobachtungsstudie (korrelativ)"
+      E_range: [0.40, 0.55]
+      beschreibung: |
+        Systematische Beobachtung ohne experimentelle Manipulation.
+        Keine kausalen Schlüsse möglich.
+      beispiele:
+        - "Korrelationsstudie"
+        - "Longitudinale Beobachtung"
+        - "Vergleichende Studie"
+        - "Feldstudie ohne Manipulation"
+      marker:
+        - "korrelation"
+        - "zusammenhang"
+        - "assoziiert mit"
+        - "beobachtung"
+        - "vergleich"
+      modifikatoren:
+        longitudinal: +0.08
+        grosser_datensatz: +0.05
+        confounding_kontrolliert: +0.05
+        nur_querschnitt: -0.05
+
+    stufe_6:
+      name: "Deskriptive Studie / Fallbericht"
+      E_range: [0.28, 0.42]
+      beschreibung: |
+        Beschreibende Studien ohne statistische Inferenz.
+        Hypothesengenerierend, nicht -testend.
+      beispiele:
+        - "Artbeschreibung"
+        - "Fallstudie"
+        - "Deskriptive Ökologie"
+        - "Naturgeschichte"
+      marker:
+        - "beschreibung"
+        - "bericht"
+        - "erstbeschreibung"
+        - "dokumentation"
+      modifikatoren:
+        systematisch: +0.05
+        einzelfall: -0.08
+        anekdotisch: -0.10
+
+    stufe_7:
+      name: "Modellvorhersage / Simulation"
+      E_range: [0.22, 0.35]
+      beschreibung: |
+        Theoretische Vorhersagen aus mathematischen oder
+        Computermodellen ohne direkte empirische Validierung.
+      beispiele:
+        - "Populationsmodell"
+        - "Phylogenetische Rekonstruktion"
+        - "Ökologische Simulation"
+        - "Strukturvorhersage"
+      marker:
+        - "modell"
+        - "simulation"
+        - "vorhersage"
+        - "rekonstruktion"
+      modifikatoren:
+        empirisch_kalibriert: +0.08
+        out_of_sample_validierung: +0.10
+        stark_modellabhaengig: -0.10
+
+    stufe_8:
+      name: "Expertenmeinung / Review"
+      E_range: [0.12, 0.25]
+      beschreibung: |
+        Nicht-systematische Reviews und Meinungen von Experten.
+        Nützlich für Hypothesengenerierung und Überblick.
+      beispiele:
+        - "Narrativer Review"
+        - "Perspektive / Kommentar"
+        - "Lehrbuchdarstellung"
+      marker:
+        - "review"
+        - "übersicht"
+        - "perspektive"
+        - "wird angenommen"
+
+    stufe_9:
+      name: "Unbelegte Behauptung / Spekulation"
+      E_range: [0.00, 0.12]
+      beschreibung: |
+        Aussagen ohne erkennbare empirische oder theoretische Grundlage.
+      beispiele:
+        - "Alltagsweisheit"
+        - "Unbelegte Generalisierung"
+        - "Pseudowissenschaft"
+      marker:
+        - "bekannt dass"
+        - "offensichtlich"
+        - "jeder weiß"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Biologie
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Biologie liegt zwischen Physik (streng) und Sozialwissenschaften
+    (locker). Biologische Variabilität erfordert breitere Toleranz,
+    aber experimentelle Tradition erlaubt solide Standards.
+
+  kategorien:
+    stabil:
+      range: [0.78, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch solide Evidenz gut gedeckt"
+      aktion: "Publikationsreif für Top-Journals"
+      beispiel: "Repliziertes Experiment mit klarem Mechanismus"
+
+    teilstabil:
+      range: [0.58, 0.78]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz, Einschränkungen beachten"
+      aktion: "Hedging hinzufügen, Limitationen diskutieren"
+      beispiel: "Gut durchgeführtes Einzelexperiment"
+
+    interpretativ:
+      range: [0.38, 0.58]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Als vorläufig kennzeichnen, weitere Forschung nötig"
+      beispiel: "Korrelative Studie ohne Mechanismus"
+
+    spekulativ:
+      range: [0.00, 0.38]
+      label: "Spekulativ"
+      bedeutung: "Behauptung nicht durch Evidenz gedeckt"
+      aktion: "Als Hypothese formulieren oder überarbeiten"
+      beispiel: "Modellvorhersage ohne Validierung"
+
+  subdisziplin_anpassung:
+    molekularbiologie:
+      stabil_threshold: 0.82
+      kommentar: "Höhere Reproduzierbarkeit"
+    oekologie:
+      stabil_threshold: 0.72
+      kommentar: "Komplexe Systeme, natürliche Variabilität"
+    verhaltensbiologie:
+      stabil_threshold: 0.70
+      kommentar: "Hohe Variabilität, Kontextabhängigkeit"
+
+  vergleich:
+    physik:
+      stabil_threshold: 0.85
+      kommentar: "Strengste Standards"
+    biologie:
+      stabil_threshold: 0.78
+      kommentar: "Mittel - experimentell, aber variabel"
+    sozialpsychologie:
+      stabil_threshold: 0.72
+      kommentar: "Lockerer wegen inhärenter Variabilität"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Biologische Sprache muss Variabilität und Unsicherheit
+    widerspiegeln. Kausale Behauptungen nur bei Experimenten.
+    Vorsicht bei Generalisierungen über Organismen.
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "beweist"
+        delta_B: +0.28
+        beispiel: "Das Experiment beweist..."
+        warnung: "In Biologie sehr selten angemessen"
+
+      - marker: "verursacht"
+        delta_B: +0.22
+        beispiel: "X verursacht Y"
+        bedingung: "Nur bei experimenteller Manipulation"
+
+      - marker: "zeigt eindeutig"
+        delta_B: +0.20
+        beispiel: "Die Daten zeigen eindeutig..."
+
+      - marker: "universell"
+        delta_B: +0.22
+        beispiel: "Universell bei allen Organismen..."
+        warnung: "Fast nie zutreffend"
+
+      - marker: "determiniert"
+        delta_B: +0.25
+        beispiel: "Das Gen determiniert..."
+        warnung: "Zu stark, Gene beeinflussen"
+
+      - marker: "belegt"
+        delta_B: +0.12
+        beispiel: "Die Studie belegt..."
+
+    senkend:
+      - marker: "ist assoziiert mit"
+        delta_B: -0.15
+        beispiel: "X ist assoziiert mit Y"
+
+      - marker: "legt nahe"
+        delta_B: -0.12
+        beispiel: "Die Ergebnisse legen nahe..."
+
+      - marker: "konsistent mit"
+        delta_B: -0.15
+        beispiel: "Konsistent mit der Hypothese"
+
+      - marker: "deutet darauf hin"
+        delta_B: -0.12
+        beispiel: "Deutet auf einen Zusammenhang hin"
+
+      - marker: "könnte"
+        delta_B: -0.18
+        beispiel: "X könnte Y beeinflussen"
+
+      - marker: "möglicherweise"
+        delta_B: -0.20
+        beispiel: "Möglicherweise spielt X eine Rolle"
+
+      - marker: "in diesem Modellorganismus"
+        delta_B: -0.10
+        beispiel: "In Drosophila..."
+
+      - marker: "unter Laborbedingungen"
+        delta_B: -0.12
+        beispiel: "Unter kontrollierten Bedingungen..."
+
+      - marker: "vorläufig"
+        delta_B: -0.18
+        beispiel: "Vorläufige Ergebnisse zeigen..."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  kausalitaet:
+    beschreibung: |
+      Kausale Aussagen erfordern experimentelle Manipulation.
+      Beobachtungsstudien erlauben nur Korrelationsaussagen.
+
+    erlaubt_wenn:
+      - "Randomisiertes Experiment"
+      - "Knockout/Knockdown"
+      - "Manipulation der unabhängigen Variable"
+      - "Zeitliche Priorität etabliert"
+
+    verboten_wenn:
+      - "Korrelationsstudie"
+      - "Querschnittsdesign"
+      - "Retrospektive Analyse"
+      - "Keine experimentelle Kontrolle"
+
+    empfehlung: |
+      Bei nicht-experimentellen Designs: "assoziiert mit", "korreliert mit",
+      "geht einher mit", "steht in Zusammenhang mit"
+
+  generalisierung:
+    beschreibung: |
+      Biologische Ergebnisse sind oft art- und kontextspezifisch.
+      Vorsicht bei Übertragung auf andere Organismen.
+
+    einschraenkungen:
+      - modellorganismus: "In E. coli / Drosophila / Maus..."
+      - labor_vs_feld: "Unter Laborbedingungen..."
+      - population: "In der untersuchten Population..."
+      - zeitraum: "Während des Studienzeitraums..."
+
+    warnung: |
+      Ergebnisse aus Modellorganismen nicht ohne Weiteres auf
+      Menschen oder andere Arten übertragbar.
+
+  evolutionaere_sprache:
+    beschreibung: |
+      Evolutionäre Aussagen dürfen nicht teleologisch sein.
+      Evolution hat keine Absicht oder Ziel.
+
+    korrekt:
+      - "Selektion favorisierte..."
+      - "Adaptation entstand durch..."
+      - "Fitness wurde erhöht durch..."
+
+    inkorrekt:
+      - "Evolution wollte..."
+      - "Die Art entwickelte X, um..."
+      - "Zum Zweck der Anpassung..."
+
+  statistische_standards:
+    beschreibung: |
+      Moderne biologische Forschung erfordert:
+      - Effektgrößen mit Konfidenzintervallen
+      - Angabe der Power oder Stichprobengröße
+      - Korrektur für multiples Testen
+
+    empfehlungen:
+      - "p-Wert UND Effektgröße berichten"
+      - "n pro Gruppe angeben"
+      - "Variabilität zeigen (SD, SE, CI)"
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "Präregistrierung vorhanden"
+    - "Unabhängige Replikation"
+    - "Adequate Power (≥80%)"
+    - "Effektgrößen berichtet"
+    - "Open Data / Open Materials"
+    - "Mechanismus erklärt"
+    - "Multiple Experimente im Paper"
+    - "Blinding durchgeführt"
+    - "ARRIVE Guidelines befolgt (Tierversuche)"
+    - "Positiv- und Negativkontrollen"
+
+  negativ:
+    - "Keine Replikation"
+    - "P-Hacking vermutet"
+    - "HARKing (Hypothesizing After Results Known)"
+    - "Pseudo-Replikation"
+    - "Keine Power-Analyse"
+    - "Nur positive Ergebnisse"
+    - "Keine Effektgrößen"
+    - "Selektive Berichterstattung"
+    - "Übermäßige Generalisierung"
+
+
+# =============================================================================
+# SUBDISZIPLIN-SPEZIFISCHE ANPASSUNGEN
+# =============================================================================
+
+subdisziplinen:
+
+  molekularbiologie:
+    beschreibung: "Studien auf molekularer Ebene"
+    besonderheiten:
+      - "Western Blot als Standardmethode (Replikationsprobleme)"
+      - "Antibody Validation wichtig"
+      - "Quantitative Methoden bevorzugt"
+    anpassung:
+      stabil_threshold: 0.82
+      toleranz: 0.10
+
+  evolutionsbiologie:
+    beschreibung: "Studien zur Evolution"
+    besonderheiten:
+      - "Historische Rekonstruktion"
+      - "Phylogenetische Unsicherheit"
+      - "Adaptationism-Kritik beachten"
+    anpassung:
+      stabil_threshold: 0.75
+      toleranz: 0.14
+
+  oekologie:
+    beschreibung: "Studien zu Ökosystemen"
+    besonderheiten:
+      - "Komplexe Systeme"
+      - "Natürliche Variabilität"
+      - "Skalenabhängigkeit"
+    anpassung:
+      stabil_threshold: 0.72
+      toleranz: 0.15
+
+  verhaltensbiologie:
+    beschreibung: "Studien zum Verhalten"
+    besonderheiten:
+      - "Kontextabhängigkeit"
+      - "Observer Effects"
+      - "Ähnliche Probleme wie Psychologie"
+    anpassung:
+      stabil_threshold: 0.70
+      toleranz: 0.16
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_biologie.yaml"
+  glossar: "glossar_biologie.yaml"
+  lexikon: "lexikon_biologie.yaml"

@@ -1,0 +1,477 @@
+# =============================================================================
+# ESL GLOSSAR: Biologie
+# =============================================================================
+# Definitionen mit Evidenzstärke und Replikationsstatus
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Biologie"
+  anzahl_eintraege: 52
+  beschreibung: |
+    Glossar biologischer Begriffe mit Angaben zur Evidenzqualität.
+    Biologie zeigt hohe Variabilität je nach Subdisziplin:
+    - Molekularbiologie: Hohe Reproduzierbarkeit (~85%)
+    - Ökologie: Mittlere Reproduzierbarkeit (~60%)
+    - Verhaltensbiologie: Variable Reproduzierbarkeit (40-70%)
+
+
+# =============================================================================
+# MOLEKULARBIOLOGIE
+# =============================================================================
+
+molekularbiologie:
+
+  zentrales_dogma:
+    begriff: "Zentrales Dogma der Molekularbiologie"
+    definition: "Informationsfluss: DNA → RNA → Protein"
+    formuliert_von: "Francis Crick, 1958"
+    erweiterungen:
+      - "Reverse Transkription (RNA → DNA)"
+      - "RNA-Replikation (RNA-Viren)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    quelle: "Fundamentalprinzip seit 1958"
+
+  dna_struktur:
+    begriff: "DNA-Doppelhelix"
+    definition: "Struktur der DNA als rechtsgängige Doppelhelix"
+    entdeckung: "Watson & Crick, 1953"
+    parameter:
+      - "Ganghöhe: 3.4 nm"
+      - "Durchmesser: 2 nm"
+      - "10.5 bp pro Windung"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Röntgenstrukturanalyse, Kristallographie"
+
+  genetischer_code:
+    begriff: "Genetischer Code"
+    definition: "Zuordnung von Codons (Triplets) zu Aminosäuren"
+    eigenschaften:
+      - "Degeneriert (64 Codons, 20 AS)"
+      - "Fast universell"
+      - "Nicht-überlappend"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Nirenberg, Khorana, 1960er"
+
+  pcr:
+    begriff: "Polymerase-Kettenreaktion (PCR)"
+    definition: "Methode zur exponentiellen Amplifikation von DNA"
+    erfinder: "Kary Mullis, 1983"
+    anwendungen:
+      - "Diagnostik"
+      - "Forensik"
+      - "Klonierung"
+      - "Sequenzierung"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Standard-Labormethode"
+
+  crispr:
+    begriff: "CRISPR-Cas9"
+    definition: "RNA-geführtes System zur gezielten Genomeditierung"
+    entdeckung: "Doudna & Charpentier, 2012"
+    anwendungen:
+      - "Gentherapie"
+      - "Grundlagenforschung"
+      - "Pflanzenzucht"
+    experimentell_bestaetigt: true
+    konfidenz: 0.98
+    limitationen: "Off-target Effekte, Mosaik-Editierung"
+    quelle: "Nobelpreis 2020"
+
+
+# =============================================================================
+# GENETIK
+# =============================================================================
+
+genetik:
+
+  mendelsche_regeln:
+    begriff: "Mendelsche Regeln"
+    definition: "Grundgesetze der Vererbung"
+    regeln:
+      uniformitaet: "F1-Generation uniform bei reinerbigen Eltern"
+      spaltung: "F2-Generation spaltet im Verhältnis 3:1 (dominant:rezessiv)"
+      unabhaengigkeit: "Unabhängige Vererbung verschiedener Merkmale"
+    gueltigkeit: "Gilt für monogene Merkmale, unabhängige Loci"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    einschraenkung: "Gekoppelte Gene, polygene Merkmale abweichend"
+
+  hardy_weinberg:
+    begriff: "Hardy-Weinberg-Gleichgewicht"
+    definition: "Allelfrequenzen bleiben ohne Evolution konstant"
+    gleichung: "p² + 2pq + q² = 1"
+    annahmen:
+      - "Keine Selektion"
+      - "Keine Mutation"
+      - "Keine Migration"
+      - "Zufällige Paarung"
+      - "Unendliche Populationsgröße"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    anwendung: "Nullmodell für Populationsgenetik"
+
+  heritabilitaet:
+    begriff: "Heritabilität"
+    symbol: "h²"
+    definition: "Anteil der phänotypischen Varianz, der genetisch bedingt ist"
+    formel: "h² = V_G / V_P"
+    interpretation:
+      - "h² = 0: Keine genetische Komponente"
+      - "h² = 1: Vollständig genetisch"
+    experimentell_bestaetigt: true
+    konfidenz: 0.90
+    warnung: "Populations- und umweltspezifisch, nicht deterministisch"
+
+  epigenetik:
+    begriff: "Epigenetik"
+    definition: "Vererbbare Genregulation ohne DNA-Sequenzänderung"
+    mechanismen:
+      - "DNA-Methylierung"
+      - "Histonmodifikation"
+      - "ncRNA"
+    experimentell_bestaetigt: true
+    konfidenz: 0.92
+    kontroverse: "Transgenerationelle Vererbung beim Menschen umstritten"
+
+
+# =============================================================================
+# EVOLUTION
+# =============================================================================
+
+evolution:
+
+  natuerliche_selektion:
+    begriff: "Natürliche Selektion"
+    definition: "Differentieller Reproduktionserfolg aufgrund vererbbarer Variation"
+    voraussetzungen:
+      - "Variation"
+      - "Vererbung"
+      - "Differentielle Reproduktion"
+    formuliert_von: "Darwin & Wallace, 1858"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Fundamentalprinzip, vielfach bestätigt"
+    beispiele:
+      - "Industriemelanismus"
+      - "Antibiotikaresistenz"
+      - "Darwin-Finken"
+
+  genetische_drift:
+    begriff: "Genetische Drift"
+    definition: "Zufällige Änderung der Allelfrequenzen"
+    staerke: "Umgekehrt proportional zu Populationsgröße"
+    effekte:
+      - "Fixierung/Verlust von Allelen"
+      - "Gründereffekt"
+      - "Flaschenhalseffekt"
+    experimentell_bestaetigt: true
+    konfidenz: 0.98
+    quelle: "Populationsgenetik, empirische Studien"
+
+  artbildung:
+    begriff: "Artbildung (Speziation)"
+    definition: "Entstehung neuer Arten durch reproduktive Isolation"
+    typen:
+      allopatrisch: "Geographische Trennung"
+      sympatrisch: "Ohne geographische Trennung"
+      parapatrisch: "Angrenzende Gebiete"
+    experimentell_bestaetigt: true
+    konfidenz: 0.95
+    quelle: "Fossilbefunde, Laborexperimente, Genomvergleiche"
+
+  phylogenetik:
+    begriff: "Phylogenetik"
+    definition: "Rekonstruktion evolutionärer Verwandtschaftsbeziehungen"
+    methoden:
+      - "Maximum Parsimony"
+      - "Maximum Likelihood"
+      - "Bayesische Inferenz"
+    datentypen:
+      - "Morphologie"
+      - "DNA-Sequenzen"
+      - "Genome"
+    experimentell_bestaetigt: true
+    konfidenz: 0.90
+    unsicherheit: "Tiefe Verzweigungen oft unsicher"
+
+  molekulare_uhr:
+    begriff: "Molekulare Uhr"
+    definition: "Konstante Mutationsrate für Datierung von Divergenzen"
+    annahme: "Neutral evolution führt zu konstanter Rate"
+    kalibrierung: "Fossilbefunde, biogeographische Ereignisse"
+    experimentell_bestaetigt: true
+    konfidenz: 0.80
+    einschraenkung: "Rate variiert zwischen Genen, Linien, Generationszeit"
+
+
+# =============================================================================
+# ÖKOLOGIE
+# =============================================================================
+
+oekologie:
+
+  oekologische_nische:
+    begriff: "Ökologische Nische"
+    definition: "Gesamtheit der Umweltfaktoren, die eine Art zum Überleben braucht"
+    konzepte:
+      fundamentalnische: "Theoretisch möglicher Bereich"
+      realisierte_nische: "Tatsächlich besetzter Bereich (mit Konkurrenz)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.88
+    quelle: "Hutchinson, 1957"
+
+  konkurrenzausschluss:
+    begriff: "Konkurrenzausschlussprinzip"
+    definition: "Zwei Arten können nicht dieselbe Nische besetzen"
+    formuliert_von: "Gause, 1934"
+    experimentell_bestaetigt: true
+    konfidenz: 0.85
+    einschraenkung: "In Natur durch Nischendifferenzierung oft umgangen"
+
+  trophische_ebenen:
+    begriff: "Trophische Ebenen"
+    definition: "Ernährungsstufen in Nahrungsnetzen"
+    ebenen:
+      - "Produzenten (Autotrophe)"
+      - "Primärkonsumenten (Herbivoren)"
+      - "Sekundärkonsumenten (Karnivoren)"
+      - "Tertiärkonsumenten (Top-Prädatoren)"
+      - "Destruenten"
+    energietransfer: "~10% pro Stufe (Lindeman, 1942)"
+    experimentell_bestaetigt: true
+    konfidenz: 0.92
+
+  biodiversitaets_hotspots:
+    begriff: "Biodiversitäts-Hotspots"
+    definition: "Gebiete mit hoher Artenvielfalt und Bedrohung"
+    kriterien:
+      - ">1500 endemische Pflanzenarten"
+      - ">70% Habitatverlust"
+    anzahl: "36 Hotspots weltweit"
+    konfidenz: 0.90
+    quelle: "Myers et al., 2000; Conservation International"
+
+  metapopulation:
+    begriff: "Metapopulation"
+    definition: "Netzwerk von Teilpopulationen mit Austausch"
+    dynamik:
+      - "Lokales Aussterben"
+      - "Rekolonisation"
+    konzept: "Levins, 1969"
+    experimentell_bestaetigt: true
+    konfidenz: 0.88
+
+
+# =============================================================================
+# ZELLBIOLOGIE
+# =============================================================================
+
+zellbiologie:
+
+  zellteilung_mitose:
+    begriff: "Mitose"
+    definition: "Kernteilung mit identischer Chromosomenverteilung"
+    phasen:
+      - "Prophase"
+      - "Metaphase"
+      - "Anaphase"
+      - "Telophase"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Standardwissen seit >100 Jahren"
+
+  zellteilung_meiose:
+    begriff: "Meiose"
+    definition: "Reduktionsteilung zur Bildung haploider Gameten"
+    besonderheiten:
+      - "Crossing-over"
+      - "Unabhängige Segregation"
+      - "Reduktion von 2n auf n"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+
+  apoptose:
+    begriff: "Apoptose"
+    definition: "Programmierter Zelltod"
+    mechanismen:
+      - "Intrinsischer Weg (Mitochondrien)"
+      - "Extrinsischer Weg (Todesrezeptoren)"
+    funktion: "Entwicklung, Homöostase, Immunsystem"
+    experimentell_bestaetigt: true
+    konfidenz: 0.98
+    quelle: "Nobelpreis 2002 (Brenner, Horvitz, Sulston)"
+
+  signaltransduktion:
+    begriff: "Signaltransduktion"
+    definition: "Übertragung extrazellulärer Signale in intrazelluläre Antworten"
+    komponenten:
+      - "Ligand"
+      - "Rezeptor"
+      - "Second Messenger"
+      - "Effektor"
+    beispiele:
+      - "GPCR-Signalweg"
+      - "Tyrosinkinase-Signalweg"
+      - "Notch-Signalweg"
+    experimentell_bestaetigt: true
+    konfidenz: 0.98
+
+
+# =============================================================================
+# PHYSIOLOGIE
+# =============================================================================
+
+physiologie:
+
+  atmungskette:
+    begriff: "Atmungskette / Oxidative Phosphorylierung"
+    definition: "Elektronentransport und ATP-Synthese in Mitochondrien"
+    komponenten:
+      - "Komplex I-IV"
+      - "ATP-Synthase"
+      - "Protonengradient"
+    ausbeute: "~30-32 ATP pro Glucose"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    quelle: "Mitchell (Chemiosmotische Theorie), Nobelpreis 1978"
+
+  photosynthese:
+    begriff: "Photosynthese"
+    definition: "Umwandlung von Lichtenergie in chemische Energie"
+    gleichung: "6CO₂ + 6H₂O + Licht → C₆H₁₂O₆ + 6O₂"
+    phasen:
+      lichtreaktion: "Thylakoid, ATP + NADPH"
+      calvin_zyklus: "Stroma, CO₂-Fixierung"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+
+  aktionspotential:
+    begriff: "Aktionspotential"
+    definition: "Elektrisches Signal in erregbaren Zellen"
+    phasen:
+      - "Depolarisation (Na⁺-Einstrom)"
+      - "Repolarisation (K⁺-Ausstrom)"
+      - "Hyperpolarisation"
+    parameter:
+      - "Amplitude: ~100 mV"
+      - "Dauer: 1-2 ms"
+      - "Geschwindigkeit: 1-100 m/s"
+    experimentell_bestaetigt: true
+    konfidenz: 0.999
+    quelle: "Hodgkin & Huxley, Nobelpreis 1963"
+
+
+# =============================================================================
+# MIKROBIOLOGIE
+# =============================================================================
+
+mikrobiologie:
+
+  mikrobiom:
+    begriff: "Mikrobiom"
+    definition: "Gesamtheit der Mikroorganismen in/auf einem Organismus"
+    mensch:
+      - "~38 Billionen Bakterien"
+      - "~10.000 Arten"
+      - "Hauptsächlich Darm"
+    funktionen:
+      - "Verdauung"
+      - "Immunsystem"
+      - "Vitaminproduktion"
+    experimentell_bestaetigt: true
+    konfidenz: 0.92
+    warnung: "Kausale Zusammenhänge oft nur korrelativ belegt"
+
+  antibiotikaresistenz:
+    begriff: "Antibiotikaresistenz"
+    definition: "Bakterielle Resistenz gegen Antibiotika"
+    mechanismen:
+      - "Enzymatische Inaktivierung"
+      - "Zielmodifikation"
+      - "Efflux-Pumpen"
+      - "Permeabilitätsänderung"
+    evolution: "Starker Selektionsdruck durch Antibiotikaverbrauch"
+    experimentell_bestaetigt: true
+    konfidenz: 0.99
+    quelle: "WHO Priority Pathogens List"
+
+
+# =============================================================================
+# KONTROVERSE THEMEN
+# =============================================================================
+
+kontroverse:
+
+  grupenselektion:
+    begriff: "Gruppenselektion"
+    status: "Umstritten"
+    definition: "Selektion auf Gruppenebene"
+    positionen:
+      dafuer: "Multilevel Selection Theory (Wilson)"
+      dagegen: "Kin Selection erklärt Altruismus besser"
+    konfidenz: 0.50
+    anmerkung: "Keine allgemein akzeptierte Position"
+
+  evo_devo:
+    begriff: "Evo-Devo (Evolutionäre Entwicklungsbiologie)"
+    status: "Etabliert aber expandierend"
+    definition: "Integration von Evolution und Entwicklung"
+    konzepte:
+      - "Hox-Gene"
+      - "Modulare Evolution"
+      - "Developmental Constraints"
+    konfidenz: 0.88
+    trend: "Zunehmend wichtig"
+
+  extended_synthesis:
+    begriff: "Erweiterte Synthese"
+    status: "In Diskussion"
+    definition: "Erweiterung der Modernen Synthese"
+    neue_elemente:
+      - "Epigenetik"
+      - "Nischenkonstruktion"
+      - "Developmental Plasticity"
+    konfidenz: 0.70
+    anmerkung: "Debatte über Notwendigkeit der Erweiterung"
+
+
+# =============================================================================
+# REPLIKATIONSKRISE IN DER BIOLOGIE
+# =============================================================================
+
+replikation:
+
+  status:
+    beschreibung: |
+      Biologie ist weniger von der Replikationskrise betroffen als
+      Psychologie, aber Probleme existieren besonders in:
+      - Präklinischer Forschung (~50% Replikation)
+      - Ökologie (komplexe Systeme)
+      - Verhaltensbiologie
+
+  raten_nach_subdisziplin:
+    molekularbiologie:
+      replikationsrate: 0.85
+      anmerkung: "Relativ hoch, standardisierte Methoden"
+    praeklinische_forschung:
+      replikationsrate: 0.50
+      anmerkung: "Begley & Ellis 2012: 11% in Onkologie"
+      quelle: "Nature 2012"
+    oekologie:
+      replikationsrate: 0.60
+      anmerkung: "Variabilität durch komplexe Systeme"
+    verhaltensbiologie:
+      replikationsrate: 0.55
+      anmerkung: "Ähnliche Probleme wie Psychologie"
+
+  gegenmassnahmen:
+    - "Präregistrierung (weniger verbreitet als Psychologie)"
+    - "Registered Reports"
+    - "Open Data / Open Materials"
+    - "Multi-Lab Studies"
+    - "ARRIVE Guidelines (Tierversuche)"
