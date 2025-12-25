@@ -2,9 +2,10 @@
 % ESL: Empirical Stability of Language
 % Ein Framework zur Kalibrierung wissenschaftlicher Behauptungen
 % =============================================================================
-% Comprehensive Version 3.0 - ~10,000 Words
-% Self-Application: This paper applies ESL principles throughout
-% Target K-Score: ≥ 0.90 (Stable)
+% Comprehensive Version 4.1 - ~15,000 Words
+% Self-Application: This paper applies ESL 2.0 principles throughout
+% Actual K-Score: 0.30 (Speculative) - Honest Assessment with ESL 2.0
+% Includes: ESL 2.0 Safeguards + ESL 2.1 Monte-Carlo Validation
 % =============================================================================
 
 \documentclass[11pt,a4paper]{article}
@@ -61,7 +62,7 @@
 % --- Header/Footer ---
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{ESL Framework v3.0}
+\rhead{ESL Framework v4.1}
 \lhead{Gerhard Fehr}
 \rfoot{\thepage}
 
@@ -2030,7 +2031,303 @@ The five safeguards (CTC, PP, WLA, EVA, RAS) create structural barriers against 
 \end{eslbox}
 
 % =============================================================================
-% 13. CONCLUSION
+% 13. ESL 2.1: MONTE-CARLO LLM VALIDATION
+% =============================================================================
+\section{ESL 2.1: Monte-Carlo LLM Validation}
+\label{sec:esl21}
+
+% ESL Self-Assessment: Cannot fully self-assess (novel methodology)
+
+ESL 2.0 classifies LLM-based estimates as ``Author Intuition'' (T5) with $E_{\max} = 0.20$. This conservative assessment is appropriate for \textit{single} LLM calls. However, \textbf{Monte-Carlo sampling} (N $\geq$ 1000 calls) creates a qualitatively different epistemic situation: instead of a point estimate, we obtain a distribution with measurable variance.
+
+\begin{principle}[From Point Estimates to Distributions]
+\label{princ:mc}
+A single LLM estimate is ``Author Intuition.'' A distribution of 1000+ LLM estimates with measured consistency is \textbf{empirical evidence about LLM behavior}---a fundamentally different epistemic category.
+\end{principle}
+
+\subsection{The Epistemic Problem with Single Estimates}
+
+ESL 2.0 treats all LLM estimates identically:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Estimation Method} & \textbf{Type} & \textbf{$E_{\max}$} \\
+\midrule
+Human estimates once & T5 & 0.20 \\
+LLM estimates once & T5 & 0.20 \\
+LLM estimates 1000× & T5 (?) & 0.20 (?) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+But with 1000 estimates, we can measure:
+\begin{itemize}
+    \item \textbf{Central tendency}: Where does the mean lie?
+    \item \textbf{Variance}: How uncertain is the LLM itself?
+    \item \textbf{Distribution shape}: Normal? Bimodal? Fat tails?
+    \item \textbf{Consistency}: Does the LLM contradict itself?
+\end{itemize}
+
+\subsection{Synthetic Inter-Rater Reliability}
+
+In classical research, inter-rater reliability (IRR) is measured through multiple independent raters using Cohen's $\kappa$:
+
+\[
+\kappa = \frac{P_o - P_e}{1 - P_e}
+\]
+
+where $P_o$ = observed agreement, $P_e$ = chance agreement. We adapt this concept for LLM sampling.
+
+\begin{definition}[Monte-Carlo B-Estimation]
+\label{def:mc-b}
+For a linguistic marker $m$, the Monte-Carlo B-estimate is:
+\begin{equation}
+\hat{B}_m = \frac{1}{N} \sum_{i=1}^{N} B_m^{(i)}
+\end{equation}
+where $B_m^{(i)}$ is the $i$-th LLM estimate under sampling conditions $\theta_i$ (varying temperature, prompts).
+\end{definition}
+
+\begin{definition}[MC-Variance as Uncertainty Measure]
+\label{def:mc-var}
+The sample variance:
+\begin{equation}
+\sigma^2_m = \frac{1}{N-1} \sum_{i=1}^{N} (B_m^{(i)} - \hat{B}_m)^2
+\end{equation}
+measures the \textbf{intrinsic uncertainty} of the LLM regarding marker $m$.
+\end{definition}
+
+\begin{definition}[Consistency Coefficient $\kappa_{MC}$]
+\label{def:kappa-mc}
+\begin{equation}
+\kappa_{\text{MC}} = 1 - \frac{\sigma_m}{\sigma_{\max}}
+\end{equation}
+where $\sigma_{\max} = 0.29$ (standard deviation of uniform distribution on $[0,1]$).
+
+\textbf{Interpretation}:
+\begin{itemize}
+    \item $\kappa_{\text{MC}} \geq 0.90$: Very high consistency
+    \item $\kappa_{\text{MC}} \in [0.75, 0.90)$: Good consistency
+    \item $\kappa_{\text{MC}} \in [0.50, 0.75)$: Moderate consistency
+    \item $\kappa_{\text{MC}} < 0.50$: Low consistency
+\end{itemize}
+\end{definition}
+
+\subsection{Claim-Type Upgrade Through MC Evidence}
+
+\begin{table}[h]
+\centering
+\caption{ESL 2.1: MC-Based Claim-Type Upgrade}
+\label{tab:mc-upgrade}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{MC Evidence} & \textbf{N} & \textbf{$\kappa_{MC}$} & \textbf{New Type} & \textbf{$E_{\max}$} \\
+\midrule
+None (single call) & 1 & -- & T5 & 0.20 \\
+Weak & $<100$ & $<0.75$ & T5 & 0.20 \\
+Moderate & $\geq 100$ & $\geq 0.75$ & T4+ & 0.35 \\
+Strong & $\geq 500$ & $\geq 0.85$ & T4 & 0.45 \\
+\rowcolor{green!10}
+Very strong & $\geq 1000$ & $\geq 0.90$ & T3- & 0.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{warningbox}[title={Why Not Higher Than T3-?}]
+Even with perfect consistency ($\kappa = 1.0$), MC-LLM evidence remains below T2/T1 because:
+\begin{enumerate}
+    \item LLMs can be \textbf{systematically wrong} (consistently wrong $\neq$ correct)
+    \item No external validation against ground truth
+    \item Training data bias is not eliminated
+\end{enumerate}
+MC-consistency measures \textbf{precision}, not \textbf{accuracy}.
+\end{warningbox}
+
+\subsection{Confidence Intervals Instead of Point Estimates}
+
+\begin{definition}[MC Confidence Interval]
+\label{def:mc-ci}
+The 95\% confidence interval for $B_m$:
+\begin{equation}
+CI_{95} = \left[ \hat{B}_m - 1.96 \cdot \frac{\sigma_m}{\sqrt{N}}, \hat{B}_m + 1.96 \cdot \frac{\sigma_m}{\sqrt{N}} \right]
+\end{equation}
+\end{definition}
+
+\begin{practicalbox}[title={Example: MC-Validated B-Value}]
+\textbf{Marker}: ``suggests'' \\
+\textbf{Sampling}: N = 1000 (5 temperatures × 5 prompts × 40 repetitions) \\[0.3em]
+\textbf{Results}:
+\begin{itemize}
+    \item $\hat{B} = 0.58$
+    \item $\sigma = 0.04$
+    \item $\kappa_{MC} = 1 - (0.04/0.29) = 0.86$
+    \item $CI_{95} = [0.577, 0.583]$
+\end{itemize}
+
+\textbf{Type Upgrade}: T5 → T4 (N $\geq$ 500, $\kappa \geq 0.85$) \\
+\textbf{New $E_{\max}$}: 0.45 (was 0.20) \\[0.3em]
+\textbf{K-Score Impact}: With $B = 0.72$ claiming this value:
+\begin{itemize}
+    \item ESL 2.0: $E = 0.06$, $K = 0.08$ (Speculative)
+    \item ESL 2.1: $E = 0.45 \times 0.85 = 0.38$, $K = 0.53$ (Partially Stable)
+\end{itemize}
+\end{practicalbox}
+
+\subsection{Sampling Strategy}
+
+To measure true variance (not just API noise), we use:
+
+\begin{enumerate}
+    \item \textbf{Temperature variation}: $T \in \{0.3, 0.5, 0.7, 0.9, 1.0\}$
+    \item \textbf{Prompt variation}: 5 semantically equivalent prompts
+    \item \textbf{Repetitions}: 40 per temperature-prompt combination
+    \item \textbf{Total}: $5 \times 5 \times 40 = 1000$ samples
+\end{enumerate}
+
+\subsection{Handling Bimodal Distributions}
+
+Sometimes the MC distribution shows two peaks:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=9cm, height=4cm,
+    xlabel={B-Value},
+    ylabel={Frequency},
+    title={Bimodal Distribution for ``indicates''},
+    ymin=0,
+    xmin=0.4, xmax=0.9
+]
+\addplot[ybar, fill=blue!30, bar width=0.04] coordinates {
+    (0.48, 80) (0.52, 120) (0.56, 90) (0.60, 50)
+    (0.64, 30) (0.68, 60) (0.72, 100) (0.76, 130) (0.80, 70)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretation}: The LLM ``sees'' two possible interpretations:
+\begin{itemize}
+    \item Peak 1 ($B \approx 0.52$): ``indicates'' as cautious hint
+    \item Peak 2 ($B \approx 0.76$): ``indicates'' as evidence claim
+\end{itemize}
+
+\textbf{Consequence}: Bimodal markers should \textbf{not} receive a single point value. Instead: context-dependent rules or exclusion from the base schema.
+
+\subsection{Provenance Codes for MC Evidence}
+
+\begin{table}[h]
+\centering
+\caption{Provenance Modifiers for MC Evidence}
+\label{tab:mc-provenance}
+\begin{tabular}{clc}
+\toprule
+\textbf{Code} & \textbf{Description} & \textbf{Modifier} \\
+\midrule
+P-MC1 & MC with $\kappa \geq 0.90$, documented & $\times 0.85$ \\
+P-MC2 & MC with $\kappa \geq 0.75$, documented & $\times 0.70$ \\
+P-MC3 & MC with $\kappa < 0.75$ or undocumented & $\times 0.40$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Implementation Sketch}
+
+\begin{lstlisting}[language=Python, caption={MC-ESL Core Implementation}]
+@dataclass
+class MCResult:
+    marker: str
+    mean: float      # B-hat
+    std: float       # sigma
+    ci_lower: float  # 95% CI lower
+    ci_upper: float  # 95% CI upper
+    kappa_mc: float  # Consistency coefficient
+    n_samples: int
+
+class MCESL:
+    SIGMA_MAX = 0.29  # Std of uniform [0,1]
+
+    def analyze(self, samples: List[float]) -> MCResult:
+        arr = np.array(samples)
+        mean = np.mean(arr)
+        std = np.std(arr, ddof=1)
+        se = std / np.sqrt(len(arr))
+
+        return MCResult(
+            mean=mean,
+            std=std,
+            ci_lower=mean - 1.96 * se,
+            ci_upper=mean + 1.96 * se,
+            kappa_mc=1 - (std / self.SIGMA_MAX),
+            n_samples=len(arr)
+        )
+
+    def determine_type(self, r: MCResult) -> str:
+        if r.n_samples >= 1000 and r.kappa_mc >= 0.90:
+            return "T3- (E_max=0.55)"
+        elif r.n_samples >= 500 and r.kappa_mc >= 0.85:
+            return "T4 (E_max=0.45)"
+        elif r.n_samples >= 100 and r.kappa_mc >= 0.75:
+            return "T4+ (E_max=0.35)"
+        return "T5 (E_max=0.20)"
+\end{lstlisting}
+
+\subsection{Impact on This Paper's Assessment}
+
+If MC validation were performed for the B-values:
+
+\begin{table}[h]
+\centering
+\caption{Hypothetical Impact of MC Validation}
+\label{tab:mc-impact}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Scenario} & \textbf{Cluster 2 K} & \textbf{Document K} & \textbf{Category} \\
+\midrule
+ESL 2.0 (no MC) & 0.08 & 0.30 & Speculative \\
+ESL 2.1 (MC, $\kappa=0.75$) & 0.35 & 0.49 & Interpretive \\
+ESL 2.1 (MC, $\kappa=0.85$) & 0.45 & 0.56 & Partially Stable \\
+ESL 2.1 (MC, $\kappa=0.90$) & 0.53 & 0.61 & Partially Stable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Note}: These are hypothetical values. Actual MC validation is required to determine real $\kappa_{MC}$ values for the B-value estimates.
+
+\subsection{Limitations of MC-ESL}
+
+\begin{enumerate}
+    \item \textbf{Systematic bias}: If the LLM is consistently wrong, MC does not help
+    \item \textbf{Training data leakage}: LLM may have seen similar tasks during training
+    \item \textbf{No ground truth}: We measure consistency, not correctness
+    \item \textbf{Prompt engineering dependence}: Results depend on prompt design
+    \item \textbf{Cost}: $\sim$\$25 for full validation of 50 markers
+\end{enumerate}
+
+\subsection{Validation Path}
+
+To validate MC-ESL itself:
+\begin{enumerate}
+    \item \textbf{Human-LLM comparison}: MC estimates vs. expert panel
+    \item \textbf{Predictive validity}: Do MC-B-values correlate with replication rates?
+    \item \textbf{Cross-model consistency}: Do Claude, GPT-4, Gemini agree?
+\end{enumerate}
+
+\begin{insightbox}
+\textbf{ESL 2.1 Core Principle:} \\[0.3em]
+\textit{``From point estimates to distributions---from intuition to evidence---from assertion to measurement.''}
+
+Monte-Carlo sampling transforms ``I think $B = 0.58$'' into ``The distribution shows $B = 0.58 \pm 0.04$ with 95\% confidence.''
+\end{insightbox}
+
+\begin{eslbox}
+\textbf{Section Assessment:} This section presents a novel methodology (B $\approx$ 0.72) for upgrading claim types through MC evidence. The methodology is theoretically grounded but \textbf{not yet empirically validated} (E $\approx$ 0.45 for the methodology itself). \\[0.3em]
+\textbf{Calculation:} $K = 1 - |0.72 - 0.45| / 0.72 = 0.63$ \\
+\textbf{Status:} \textcolor{orange}{Partially Stable}---methodology proposal requiring validation
+\end{eslbox}
+
+% =============================================================================
+% 14. CONCLUSION
 % =============================================================================
 \section{Conclusion}
 \label{sec:conclusion}
@@ -2044,7 +2341,7 @@ The Empirical Stability of Language (ESL) framework provides a systematic approa
 Scaling amplifies epistemic errors. ESL transforms this risk into an opportunity: automated validation at scale, with discipline-specific calibration and complete audit trails.
 \end{insightbox}
 
-This paper makes two distinct contributions:
+This paper makes three distinct contributions:
 
 \textbf{ESL 1.0} (Sections 2--11): The conceptual framework
 \begin{itemize}
@@ -2064,7 +2361,18 @@ This paper makes two distinct contributions:
     \item \textbf{RAS}: Reflexive Application Lock
 \end{itemize}
 
+\textbf{ESL 2.1} (Section 13): Monte-Carlo LLM Validation
+\begin{itemize}
+    \item Consistency coefficient $\kappa_{\text{MC}}$ for measuring response stability
+    \item Evidence-based claim-type upgrades (T5 $\to$ T3-) through sampling
+    \item Confidence intervals replacing point estimates
+    \item Bimodal distribution detection for prompt ambiguity
+    \item Practical validation path: $N \geq 1000$, $\kappa \geq 0.90$ $\Rightarrow$ $E_{\max} = 0.55$
+\end{itemize}
+
 ESL 2.0 emerged from honest self-criticism: ESL 1.0 allowed this paper to claim $K = 0.92$ while the actual evidence basis for core components (B-values, K-thresholds) was $E \approx 0.06$--$0.20$. The five safeguards create \textbf{structural barriers} against such inflation.
+
+ESL 2.1 provides the \textbf{validation path}: through Monte-Carlo sampling, T5 claims (author judgment) can earn empirical support and upgrade to T3- status---not through rhetoric, but through demonstrated consistency across 1,000+ independent assessments.
 
 \begin{eslbox}
 \textbf{Paper-Level Assessment (ESL 2.0):} \\[0.5em]
@@ -2623,6 +2931,21 @@ This appendix provides a practical checklist for applying ESL to scientific writ
     \item[EVA] External Validation Requirement (ESL 2.0). Certain claim types (T4, T5) cannot achieve $K > 0.40$ without external empirical validation.
 
     \item[RAS] Reflexive Application Lock (ESL 2.0). A framework cannot evaluate its own definitional claims. Prevents circular self-validation.
+
+    % ESL 2.1 Monte-Carlo Terms
+    \item[$\kappa_{\text{MC}}$] Consistency Coefficient (ESL 2.1). Measures LLM output stability: $\kappa_{\text{MC}} = 1 - \sigma_m / \sigma_{\max}$. Values $\geq 0.90$ indicate high consistency.
+
+    \item[$\bar{B}_{\text{MC}}$] Monte-Carlo B-Estimate (ESL 2.1). Mean of $N$ independent B-assessments: $\bar{B}_{\text{MC}} = \frac{1}{N}\sum_{i=1}^{N} B_i$.
+
+    \item[P-MC1] Weak MC Evidence. $N < 100$ or $\kappa < 0.75$. Remains at T5 ($E_{\max} = 0.20$).
+
+    \item[P-MC2] Moderate MC Evidence. $N \geq 100$ and $\kappa \geq 0.75$. Upgrades to T4+ ($E_{\max} = 0.35$).
+
+    \item[P-MC3] Strong MC Evidence. $N \geq 1000$ and $\kappa \geq 0.90$. Upgrades to T3- ($E_{\max} = 0.55$).
+
+    \item[Bimodal Distribution] When MC sampling reveals two distinct response clusters (e.g., $B \approx 0.3$ and $B \approx 0.8$), indicating prompt ambiguity or genuine uncertainty. Requires separate analysis per mode.
+
+    \item[Temperature Sweep] Sampling strategy across multiple temperature settings ($T \in \{0.0, 0.3, 0.5, 0.7, 1.0\}$) to assess response stability.
 \end{description}
 
 % =============================================================================
@@ -2635,7 +2958,7 @@ This appendix provides a practical checklist for applying ESL to scientific writ
 \end{center}
 \vspace{1em}
 
-\noindent\textbf{Final Self-Assessment Summary (ESL 2.0)}
+\noindent\textbf{Final Self-Assessment Summary (ESL 2.0 + 2.1)}
 
 \begin{table}[h]
 \centering
@@ -2646,15 +2969,18 @@ This appendix provides a practical checklist for applying ESL to scientific writ
 ESL 1.0 (original, inflated) & 0.92 & Highly Stable \\
 ESL 1.0 (honest revision) & 0.73 & Partially Stable \\
 \textbf{ESL 2.0 (with safeguards)} & \textbf{0.30} & \textbf{Speculative} \\
+ESL 2.1 (after MC validation)* & 0.45--0.55 & Marginally Stable \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\noindent *\textit{Projected score after successful Monte-Carlo validation ($N \geq 1000$, $\kappa \geq 0.90$) upgrades Cluster 2 from T5 to T3-.}
+
 \textbf{ESL 2.0 Cluster Analysis}:
 \begin{itemize}
     \item \textbf{Cluster 1} (Empirical: replication rates, $\lambda$): $K = 0.81$
-    \item \textbf{Cluster 2} (Framework: B-values, thresholds): $K = 0.08$
-    \item \textbf{Document}: $K = 0.30 \times 0.81 + 0.70 \times 0.08 = 0.30$
+    \item \textbf{Cluster 2} (Framework: B-values, thresholds): $K = 0.08$ (current) $\to$ $K \approx 0.45$ (after MC validation)
+    \item \textbf{Document}: $K = 0.30$ (current) $\to$ $K \approx 0.50$ (projected with ESL 2.1)
 \end{itemize}
 
 \textbf{What this paper provides}:
@@ -2663,23 +2989,27 @@ ESL 1.0 (honest revision) & 0.73 & Partially Stable \\
     \item Strong empirical motivation (replication crisis, LLM risks)
     \item Structural safeguards against self-overestimation (ESL 2.0)
     \item Lexikalische Primitive (Grundbegriff vs. Token distinction)
+    \item Monte-Carlo validation methodology (ESL 2.1)
 \end{itemize}
 
 \textbf{What this paper does NOT provide}:
 \begin{itemize}
-    \item Validated B-values (requires corpus studies)
+    \item Validated B-values (requires corpus studies or MC validation)
     \item Calibrated K-thresholds (requires outcome prediction studies)
     \item Predictive validity evidence
 \end{itemize}
 
-\textbf{The key insight}: ESL 1.0 failed at self-assessment because it lacked structural safeguards. ESL 2.0's five mechanisms (CTC, PP, WLA, EVA, RAS) create mathematical barriers against inflation---barriers that this paper itself cannot circumvent.
+\textbf{The key insight}: ESL 1.0 failed at self-assessment because it lacked structural safeguards. ESL 2.0's five mechanisms (CTC, PP, WLA, EVA, RAS) create mathematical barriers against inflation. ESL 2.1 provides the \textbf{empirical path forward}: through Monte-Carlo sampling, even T5 claims can earn measurable evidence and upgrade their status.
 
 \vspace{1em}
 \begin{center}
 \fbox{\parbox{0.85\textwidth}{
 \centering
-\textbf{Core Principle:} \\[0.3em]
+\textbf{Core Principle (ESL 2.0):} \\[0.3em]
 \textit{``An honest framework must \textbf{enforce} honesty, not merely recommend it.''}
+\\[0.5em]
+\textbf{Validation Principle (ESL 2.1):} \\[0.3em]
+\textit{``An empirical framework must \textbf{earn} its confidence through measurement, not assumption.''}
 }}
 \end{center}
 
