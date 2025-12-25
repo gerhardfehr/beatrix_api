@@ -332,7 +332,212 @@ These categories are calibrated for behavioral economics ($K_{\text{stable}} \ge
 \end{eslbox}
 
 % =============================================================================
-% 3. EVIDENCE HIERARCHIES
+% 3. LEXIKALISCHE PRIMITIVE: DIE ONTOLOGISCHE BASIS
+% =============================================================================
+\section{Lexikalische Primitive: Die ontologische Basis}
+\label{sec:primitive}
+
+% ESL Self-Assessment: B = 0.75, E = 0.78 → K = 0.96
+
+Eine zentrale Innovation des ESL-Frameworks ist die Unterscheidung zwischen \textbf{lexikalischen Primitiven} (Grundbegriffen) und \textbf{Tokens}. Diese Unterscheidung ist fundamental für das Verständnis, warum LLM-basierte Systeme ohne semantische Verankerung epistemisch instabil sind.
+
+\subsection{Grundbegriff vs. Token: Eine fundamentale Unterscheidung}
+
+\begin{definition}[Lexikalisches Primitiv / Grundbegriff]
+\label{def:primitiv}
+Ein \textbf{lexikalisches Primitiv} (Grundbegriff) ist ein semantisch fundamentales Konzept einer Disziplin, das folgende Eigenschaften erfüllt:
+\begin{enumerate}
+    \item \textbf{Irreduzibilität}: Kann nicht durch andere Primitive der Disziplin definiert werden
+    \item \textbf{Orthogonalität}: Unabhängig von anderen Primitiven messbar
+    \item \textbf{Generativität}: Alle komplexeren Konzepte der Disziplin sind aus Primitiven ableitbar
+    \item \textbf{Semantische Verankerung}: Hat eine definierte Bedeutung, Referenz und theoretische Rolle
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Token]
+\label{def:token}
+Ein \textbf{Token} ist eine Zeichenkette, die von einem NLP-System zur Verarbeitung segmentiert wird. Tokens sind rein \textbf{syntaktische} Einheiten:
+\begin{itemize}
+    \item Keine inhärente Bedeutung (nur statistische Kookkurrenz-Muster)
+    \item Keine Referenz auf Realwelt-Entitäten
+    \item Keine theoretische Rolle
+    \item Kontextabhängige Interpretation durch das Modell
+\end{itemize}
+\end{definition}
+
+\begin{table}[h]
+\centering
+\caption{Grundbegriff vs. Token: Systematischer Vergleich}
+\label{tab:primitiv-token}
+\begin{tabular}{p{3cm}p{5.2cm}p{5.2cm}}
+\toprule
+\textbf{Dimension} & \textbf{Grundbegriff (Primitiv)} & \textbf{Token} \\
+\midrule
+\textbf{Ebene} & Semantisch (Bedeutung) & Syntaktisch (Zeichenkette) \\
+\textbf{Definition} & Explizit, formal & Implizit, statistisch \\
+\textbf{Referenz} & Definierte Realwelt-Entität & Keine (nur Embedding-Vektor) \\
+\textbf{Messbarkeit} & Operationalisiert & Nicht messbar \\
+\textbf{Theor. Rolle} & Axiomatisch fundiert & Keine \\
+\textbf{Wahrheitsfähig} & Ja (Aussagen sind wahr/falsch) & Nein \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{practicalbox}[title={Beispiel: ``Nutzen'' als Grundbegriff vs. Token}]
+\textbf{Als Grundbegriff} (Ökonomie):
+\begin{itemize}
+    \item Symbol: $U$
+    \item Definition: Numerische Repräsentation von Präferenzen
+    \item Axiome: Vollständigkeit, Transitivität, Kontinuität
+    \item Messung: Revealed Preference, Choice Experiments
+    \item Evidenz-Level: MA-EPI-01 (axiomatisch + empirisch)
+\end{itemize}
+
+\textbf{Als Token} (LLM):
+\begin{itemize}
+    \item Repräsentation: Embedding-Vektor $\vec{v} \in \mathbb{R}^{4096}$
+    \item ``Bedeutung'': Statistische Nähe zu ``Vorteil'', ``Gewinn'', ``utility''
+    \item Keine axiomatische Fundierung
+    \item Keine Unterscheidung kardinal/ordinal
+\end{itemize}
+
+\textbf{Problem}: Ein LLM kann ``Der Nutzen steigt um 15\%'' generieren, ohne zu wissen, ob kardinaler Nutzen überhaupt messbar ist (umstritten!).
+\end{practicalbox}
+
+\subsection{Warum diese Unterscheidung für ESL kritisch ist}
+
+Die Token-Grundbegriff-Unterscheidung erklärt, warum LLMs ohne QA-Module epistemisch problematisch sind:
+
+\begin{enumerate}
+    \item \textbf{LLMs operieren auf Tokens}: Sie haben keinen Zugang zu den axiomatischen Strukturen, die Grundbegriffe definieren.
+
+    \item \textbf{Grundbegriffe tragen Evidenzgewichte}: Ein Satz über einen gut fundierten Grundbegriff (z.B. $\lambda$) hat einen höheren $E$-Wert als ein Satz über ein schlecht fundiertes Konzept.
+
+    \item \textbf{Tokens täuschen Verständnis vor}: ``Loss aversion demonstrates...'' sieht für ein LLM genauso ``natürlich'' aus wie ``Loss aversion proves...'', obwohl $B$ fundamental verschieden ist.
+
+    \item \textbf{ESL übersetzt Token $\to$ Semantik}: Das ESL-Modul erkennt den B-Wert-Unterschied unabhängig von der Token-Repräsentation.
+\end{enumerate}
+
+\begin{warningbox}[title={Das Token-Illusion-Problem}]
+LLMs erzeugen \textbf{Token-Sequenzen}, die statistisch plausibel sind, aber keine \textbf{semantische Verankerung} haben.
+
+\textbf{Beispiel einer LLM-Halluzination}:
+\begin{quote}
+``Die Verlustaversion ($\lambda$) beträgt exakt 2.73, wie Schmidt et al. (2019) definitiv bewiesen hat.''
+\end{quote}
+
+\textbf{Token-Ebene}: Grammatisch korrekt, statistisch plausibel \\
+\textbf{Grundbegriff-Ebene}:
+\begin{itemize}
+    \item $\lambda = 2.73$ ist falsche Präzision (korrekt: $\approx 2.0$--$2.5$)
+    \item ``Schmidt et al. (2019)'' existiert möglicherweise nicht
+    \item ``definitiv bewiesen'' ist Overclaiming ($B = 0.95$)
+\end{itemize}
+\end{warningbox}
+
+\subsection{Disziplinspezifische Primitive-Ontologien}
+
+Jede Disziplin besitzt eine \textbf{Primitive-Ontologie}---eine minimale Menge von Grundbegriffen, aus denen alle Fachkonzepte ableitbar sind.
+
+\subsubsection{Verhaltensökonomie: 20 Primitive in 6 Kategorien}
+
+\begin{table}[h]
+\centering
+\caption{Primitive-Ontologie der Verhaltensökonomie}
+\label{tab:primitive-be}
+\begin{tabular}{clcl}
+\toprule
+\textbf{Kat.} & \textbf{Name} & \textbf{$n$} & \textbf{Primitive (Symbole)} \\
+\midrule
+1 & Präferenz & 5 & $U$, $r$, $\lambda$, $\beta$, $\alpha$ \\
+2 & Belief & 3 & $\pi$, $\mu$, $\sigma_b$ \\
+3 & Motivation & 4 & $\theta$, $\varepsilon$, $\gamma$, $I$ \\
+4 & Constraint & 3 & $C$, $K$, $t_c$ \\
+5 & Kontext & 4 & $\omega$, $S$, $F$, $N$ \\
+6 & Zeit & 1 & $\tau$ \\
+\midrule
+& \textbf{Total} & \textbf{20} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}[Ableitbarkeitsthese]
+\label{prop:derivability}
+Alle $\sim$113 META-Axiome des BCM sind aus den 20 Primitiven formal ableitbar:
+\begin{equation}
+\forall \text{MA-X-Y} \in \text{BCM}: \exists \text{ Formel } F: \text{MA-X-Y} \Leftrightarrow F(\text{Primitive})
+\end{equation}
+\end{proposition}
+
+\textbf{Beispiele}:
+\begin{itemize}
+    \item \textbf{MA-PRE-01} (Prospect Theory): Ableitbar aus $\{U, \lambda, \alpha\}$
+    \item \textbf{MA-TIM-01} (Hyperbolisches Diskontieren): Ableitbar aus $\{U, \beta, \tau\}$
+    \item \textbf{MA-SOC-01} (Soziale Präferenzen): Ableitbar aus $\{U, S, I\}$
+\end{itemize}
+
+\subsubsection{Ökonomie (Mainstream): 24 Primitive in 6 Kategorien}
+
+\begin{table}[h]
+\centering
+\caption{Primitive der Ökonomie (Auswahl)}
+\label{tab:primitive-econ}
+\begin{tabular}{cll}
+\toprule
+\textbf{Kat.} & \textbf{Kategorie} & \textbf{Zentrale Primitive} \\
+\midrule
+1 & Präferenz/Nutzen & $U$, $\succeq$ (Präferenzrelation) \\
+2 & Markt/Preis & $p$, $D$ (Nachfrage), $S$ (Angebot) \\
+3 & Gleichgewicht & $E^*$, $\eta$ (Elastizität) \\
+4 & Information & $I$, $\sigma$ (Signal) \\
+5 & Zeit/Dynamik & $\delta$, $g$ (Wachstum) \\
+6 & Rationalität & $\max$, $\mathbb{E}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Vererbung: Verhaltensökonomie als Derivat der Ökonomie}
+
+Verhaltensökonomie \textbf{erbt} Primitive und \textbf{modifiziert} sie:
+\begin{itemize}
+    \item $U_{\text{BE}} = U_{\text{Econ}}$ mit Referenzpunkt-Abhängigkeit
+    \item $\delta_{\text{BE}} = \beta \cdot \delta_{\text{Econ}}$ (hyperbolisch)
+    \item $\pi_{\text{BE}} = w(\pi_{\text{Econ}})$ (gewichtet)
+\end{itemize}
+
+\subsection{Primitive und Evidenz-Qualität}
+
+Die Fundierung eines Grundbegriffs beeinflusst den $E$-Wert:
+
+\begin{table}[h]
+\centering
+\caption{Primitive-Fundierung und $E$-Werte}
+\label{tab:primitive-E}
+\begin{tabular}{lccp{4.5cm}}
+\toprule
+\textbf{Primitiv} & \textbf{Fundierung} & \textbf{$E$-Basis} & \textbf{Begründung} \\
+\midrule
+$\lambda$ & Stark & 0.88--0.92 & Trianguliert \\
+$\beta$ & Mittel & 0.75--0.82 & Lab + Field, Heterogenität \\
+$U$ & Axiomatisch & 0.70--0.78 & Theoretisch, Messung umstritten \\
+$I$ (Identität) & Schwach & 0.55--0.65 & Schwer operationalisierbar \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insightbox}
+\textbf{ESL-Prinzip: Primitive-Awareness} \\
+Der $E$-Wert hängt nicht nur von der Studienqualität ab, sondern auch von der \textbf{Fundierung der verwendeten Grundbegriffe}. Eine methodisch perfekte Studie über ein schlecht definiertes Primitiv erreicht keinen hohen $E$-Wert.
+\end{insightbox}
+
+\begin{eslbox}
+\textbf{Section Assessment:} Lexikalische Primitive werden als fundamentale Unterscheidung eingeführt (B $\approx$ 0.75), basierend auf Ontologie-Forschung und Sprachphilosophie (E $\approx$ 0.78). \\[0.3em]
+\textbf{Calculation:} $K = 1 - |0.75 - 0.78| / 0.78 = 0.96$ \\
+\textbf{Status:} Highly Stable
+\end{eslbox}
+
+% =============================================================================
+% 4. EVIDENCE HIERARCHIES
 % =============================================================================
 \section{Evidence Hierarchies}
 \label{sec:evidence}
