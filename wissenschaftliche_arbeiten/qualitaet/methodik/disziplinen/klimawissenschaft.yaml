@@ -1,0 +1,475 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Klimawissenschaft
+# =============================================================================
+# Für: Klimaforschung, IPCC-Berichte, Attributionswissenschaft
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "klimawissenschaft"
+  name: "Klimawissenschaft"
+  name_en: "Climate Science"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Klimawissenschaft.
+    Charakteristika:
+    - Hochgradig interdisziplinär (Physik, Chemie, Biologie, Ozeanographie)
+    - IPCC als Konsens-Organisation mit standardisierter Terminologie
+    - Kalibrierte Unsicherheitssprache (virtually certain, very likely, etc.)
+    - Attributionswissenschaft für Ursachenzuordnung
+    - Modellbasierte Projektionen mit Szenarioabhängigkeit
+    - Wissenschaftlicher Konsens bei 97-99% für anthropogene Ursache
+    - Politisch aufgeladen, aber methodisch rigoros
+
+  anwendungsbereich:
+    - "Klimaphysik und -dynamik"
+    - "Paläoklimatologie"
+    - "Klimamodellierung"
+    - "Attribution von Klimaänderungen"
+    - "Auswirkungsforschung"
+    - "Projektionen und Szenarien"
+    - "Extremereignis-Attribution"
+
+  wissenschaftstyp: "Interdisziplinäre Naturwissenschaft (physik-basiert)"
+  toleranzfenster: 0.10  # Eng wegen physikalischer Grundlagen
+
+  verwandte_profile:
+    - id: "physik"
+      beziehung: "Grundlage"
+      unterschied: "Klimawissenschaft ist angewandte Physik komplexer Systeme"
+    - id: "biologie"
+      beziehung: "Überlappend (Ökosysteme, Kohlenstoffkreislauf)"
+      unterschied: "Klimawissenschaft fokussiert auf Erdsystem"
+
+
+# =============================================================================
+# E-SKALA: Klimawissenschaft-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Evidenzhierarchie für klimawissenschaftliche Aussagen.
+    Orientiert an IPCC-Bewertungsmethodik mit Konfidenz
+    und Wahrscheinlichkeitsangaben. Unterscheidet zwischen
+    Beobachtungen, Prozessverständnis und Projektionen.
+
+  stufen:
+
+    stufe_1:
+      name: "Fundamentale Physik / Beobachteter Konsens"
+      E_range: [0.95, 1.00]
+      beschreibung: |
+        Aussagen basierend auf fundamentaler Physik und/oder
+        überwältigendem Beobachtungskonsens. "Unequivocal" im IPCC-Sinne.
+      beispiele:
+        - "Treibhauseffekt existiert (Physik seit 19. Jh.)"
+        - "Globale Erwärmung findet statt (Messdaten)"
+        - "CO₂-Anstieg ist menschgemacht (Isotopensignatur)"
+        - "Menschliche Aktivität ist Hauptursache (Attribution)"
+      IPCC_konfidenz: "unequivocal / virtually certain"
+      marker:
+        - "ist eindeutig"
+        - "unequivocal"
+        - "praktisch sicher"
+        - "äußerst wahrscheinlich (>95%)"
+      modifikatoren:
+        multi_evidence_lines: +0.02
+        physikalisch_konsistent: +0.02
+
+    stufe_2:
+      name: "IPCC-Konsens (very likely)"
+      E_range: [0.88, 0.96]
+      beschreibung: |
+        Aussagen mit sehr hoher Übereinstimmung in der Literatur
+        und starker physikalischer Grundlage. 90-100% Wahrscheinlichkeit.
+      beispiele:
+        - "Menschlicher Einfluss hat Erwärmung verursacht"
+        - "Arktisches Meereis nimmt ab"
+        - "Ozean hat sich erwärmt"
+        - "Meeresspiegel steigt an"
+      IPCC_konfidenz: "very likely (90-100%)"
+      marker:
+        - "sehr wahrscheinlich"
+        - "very likely"
+        - "mit hoher Konfidenz"
+      modifikatoren:
+        ipcc_assessment: +0.03
+        multiple_unabhaengige_studien: +0.02
+
+    stufe_3:
+      name: "Etablierte Prozesse (likely)"
+      E_range: [0.75, 0.90]
+      beschreibung: |
+        Gut verstandene Prozesse mit solider empirischer Basis.
+        66-100% Wahrscheinlichkeit.
+      beispiele:
+        - "Feedback-Stärken"
+        - "Regionale Klimaänderungen"
+        - "Extremereignis-Trends"
+        - "Klimasensitivität (ECS 2.5-4.0°C)"
+      IPCC_konfidenz: "likely (66-100%)"
+      marker:
+        - "wahrscheinlich"
+        - "likely"
+        - "mit mittlerer bis hoher Konfidenz"
+      modifikatoren:
+        observational_evidence: +0.05
+        process_understanding: +0.03
+        modell_bestaetigt: +0.02
+
+    stufe_4:
+      name: "Modellbasierte Projektionen (robuste Muster)"
+      E_range: [0.62, 0.78]
+      beschreibung: |
+        Projektionen mit robusten Mustern über viele Modelle hinweg.
+        Unsicherheit hauptsächlich aus Szenarien.
+      beispiele:
+        - "Globale Temperaturprojektionen 2100"
+        - "Großskalige Niederschlagsänderungen"
+        - "Meeresspiegel (wahrscheinlicher Bereich)"
+      IPCC_konfidenz: "medium to high confidence"
+      marker:
+        - "projektionen zeigen"
+        - "modelle stimmen überein"
+        - "robustes Muster"
+      modifikatoren:
+        multi_model_agreement: +0.05
+        observational_constraint: +0.05
+        hohe_modell_unsicherheit: -0.08
+
+    stufe_5:
+      name: "Modellbasierte Projektionen (unsicher)"
+      E_range: [0.48, 0.65]
+      beschreibung: |
+        Projektionen mit substantieller Modell- oder Prozess-Unsicherheit.
+      beispiele:
+        - "Regionale Klimaprojektionen"
+        - "Veränderungen in Extremereignissen (Detail)"
+        - "Monsun-Änderungen"
+      IPCC_konfidenz: "medium confidence"
+      marker:
+        - "mit mittlerer Konfidenz"
+        - "modellabhängig"
+        - "unsicherheit besteht"
+      modifikatoren:
+        prozess_unsicherheit: -0.08
+        regionale_details: -0.05
+
+    stufe_6:
+      name: "Kipppunkte und Extremszenarien"
+      E_range: [0.35, 0.52]
+      beschreibung: |
+        Aussagen über Kipppunkte und Tail Risks. Wichtig,
+        aber mit niedriger Konfidenz in Timing und Schwellen.
+      beispiele:
+        - "Kipppunkt-Schwellen"
+        - "AMOC-Kollaps-Risiko"
+        - "Permafrost-Kohlenstoff-Feedback-Stärke"
+        - "Meeresspiegelanstieg >1m bis 2100"
+      IPCC_konfidenz: "low to medium confidence"
+      marker:
+        - "mit niedriger Konfidenz"
+        - "kann nicht ausgeschlossen werden"
+        - "unter bestimmten Bedingungen"
+      modifikatoren:
+        tail_risk: -0.05
+        prozess_schlecht_verstanden: -0.10
+
+    stufe_7:
+      name: "Emergente Forschung / Hypothesen"
+      E_range: [0.22, 0.38]
+      beschreibung: |
+        Neue Forschungsergebnisse, die noch nicht in
+        Assessment Reports integriert sind.
+      beispiele:
+        - "Neue Feedback-Mechanismen"
+        - "Nicht-bestätigte Kipppunkt-Hypothesen"
+        - "Kontroverse Paläoklima-Interpretationen"
+      IPCC_konfidenz: "low confidence"
+      marker:
+        - "neue studie deutet an"
+        - "hypothese"
+        - "noch nicht bestätigt"
+
+    stufe_8:
+      name: "Spekulation / Single Study"
+      E_range: [0.10, 0.25]
+      beschreibung: |
+        Einzelstudien ohne Replikation oder spekulative
+        Extrapolationen weit über Daten hinaus.
+      beispiele:
+        - "Einzelne nicht-replizierte Studie"
+        - "Extreme Szenarion-Extrapolationen"
+      marker:
+        - "eine studie"
+        - "spekulativ"
+        - "könnte möglicherweise"
+
+    stufe_9:
+      name: "Klimaskeptische Behauptungen (widerlegt)"
+      E_range: [0.00, 0.10]
+      beschreibung: |
+        Wissenschaftlich widerlegte Behauptungen, die
+        dem etablierten Konsens widersprechen.
+      beispiele:
+        - "Sonne verursacht Erwärmung"
+        - "Erwärmung gestoppt"
+        - "CO₂ ist nicht Ursache"
+      marker:
+        - "widerlegt"
+        - "widerspricht Konsens"
+        - "keine wissenschaftliche Basis"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Klimawissenschaft
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Klimawissenschaft hat hohe Standards aufgrund der
+    physikalischen Grundlagen. Aber Unsicherheiten in
+    komplexen Systemen erfordern differenzierte Kommunikation.
+
+  kategorien:
+    stabil:
+      range: [0.82, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch solide Evidenz gut gedeckt"
+      aktion: "Kann als etabliert kommuniziert werden"
+      IPCC_entsprechung: "high confidence / very likely"
+      beispiel: "Menschlicher Einfluss auf Erwärmung"
+
+    teilstabil:
+      range: [0.62, 0.82]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz, Unsicherheiten angeben"
+      aktion: "IPCC-Unsicherheitssprache verwenden"
+      IPCC_entsprechung: "medium confidence / likely"
+      beispiel: "Klimasensitivität (ECS)"
+
+    interpretativ:
+      range: [0.42, 0.62]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Unsicherheit"
+      aktion: "Explizit als unsicher kennzeichnen"
+      IPCC_entsprechung: "low to medium confidence"
+      beispiel: "Kipppunkt-Schwellenwerte"
+
+    spekulativ:
+      range: [0.00, 0.42]
+      label: "Spekulativ"
+      bedeutung: "Hohe Unsicherheit oder widerlegt"
+      aktion: "Als Hypothese oder widerlegt kennzeichnen"
+      IPCC_entsprechung: "low confidence / speculative"
+      beispiel: "Neue unbestätigte Mechanismen"
+
+  vergleich:
+    physik:
+      stabil_threshold: 0.85
+      kommentar: "Strenger (kontrollierte Experimente möglich)"
+    klimawissenschaft:
+      stabil_threshold: 0.82
+      kommentar: "Ähnlich streng, aber Erdsystem ist komplex"
+    biologie:
+      stabil_threshold: 0.78
+      kommentar: "Etwas lockerer wegen Variabilität"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Klimawissenschaftliche Sprache ist durch IPCC standardisiert.
+    Wahrscheinlichkeits- und Konfidenzangaben sind kalibriert.
+    Projektionen vs. Vorhersagen unterscheiden.
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "ist eindeutig"
+        delta_B: +0.30
+        beispiel: "Die Erwärmung ist eindeutig"
+        anwendung: "Nur für unequivocal im IPCC-Sinne"
+
+      - marker: "ist praktisch sicher"
+        delta_B: +0.28
+        beispiel: "Es ist praktisch sicher (>99%), dass..."
+
+      - marker: "ist äußerst wahrscheinlich"
+        delta_B: +0.25
+        beispiel: "Es ist äußerst wahrscheinlich (>95%), dass..."
+
+      - marker: "verursacht"
+        delta_B: +0.22
+        beispiel: "Menschliche Aktivität verursacht Erwärmung"
+
+      - marker: "ist sehr wahrscheinlich"
+        delta_B: +0.20
+        beispiel: "Es ist sehr wahrscheinlich (>90%), dass..."
+
+      - marker: "zeigt"
+        delta_B: +0.12
+        beispiel: "Die Attribution zeigt menschlichen Einfluss"
+
+    senkend:
+      - marker: "ist wahrscheinlich"
+        delta_B: -0.05
+        beispiel: "Es ist wahrscheinlich (>66%), dass..."
+        anmerkung: "IPCC-kalibriert, nicht umgangssprachlich"
+
+      - marker: "mit mittlerer Konfidenz"
+        delta_B: -0.12
+        beispiel: "Mit mittlerer Konfidenz hat sich..."
+
+      - marker: "etwa gleich wahrscheinlich"
+        delta_B: -0.18
+        beispiel: "Es ist etwa gleich wahrscheinlich wie nicht"
+
+      - marker: "projektionen zeigen"
+        delta_B: -0.10
+        beispiel: "Projektionen zeigen eine Erwärmung von..."
+        anmerkung: "Szenarioabhängig"
+
+      - marker: "mit niedriger Konfidenz"
+        delta_B: -0.20
+        beispiel: "Mit niedriger Konfidenz könnte..."
+
+      - marker: "könnte"
+        delta_B: -0.18
+        beispiel: "Der Effekt könnte zu X führen"
+
+      - marker: "kann nicht ausgeschlossen werden"
+        delta_B: -0.22
+        beispiel: "Ein Anstieg >1m kann nicht ausgeschlossen werden"
+
+      - marker: "ist unwahrscheinlich"
+        delta_B: -0.25
+        beispiel: "Es ist unwahrscheinlich (<33%), dass..."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  ipcc_terminologie:
+    beschreibung: |
+      IPCC-Berichte verwenden standardisierte Terminologie.
+      Diese sollte in wissenschaftlicher Kommunikation
+      verwendet werden.
+
+    wahrscheinlichkeiten:
+      virtually_certain: "99-100%"
+      extremely_likely: "95-100%"
+      very_likely: "90-100%"
+      likely: "66-100%"
+      about_as_likely_as_not: "33-66%"
+      unlikely: "0-33%"
+      very_unlikely: "0-10%"
+      extremely_unlikely: "0-5%"
+
+    konfidenz:
+      faktoren:
+        - "Menge der Evidenz (limited, medium, robust)"
+        - "Übereinstimmung (low, medium, high)"
+      kombination: "Beide Faktoren bestimmen Konfidenz"
+
+  projektion_vs_vorhersage:
+    beschreibung: |
+      Klimaprojektionen sind KEINE Vorhersagen.
+      Sie sind bedingt auf Emissionsszenarien.
+
+    korrekt:
+      - "Projektionen unter SSP2-4.5 zeigen..."
+      - "Bei Fortschreibung aktueller Emissionen..."
+      - "Im Szenario X wird erwartet..."
+
+    inkorrekt:
+      - "Die Temperatur wird um X°C steigen"
+      - "Das Modell sagt vorher..."
+      - "Prognose für 2100"
+
+  wetter_vs_klima:
+    beschreibung: |
+      Wetter (kurzfristig) ≠ Klima (30-Jahre-Statistik).
+      Einzelne Wetterereignisse widerlegen oder bestätigen
+      nicht den Klimawandel.
+
+    korrekt:
+      - "Der Klimawandel macht Hitzewellen wahrscheinlicher"
+      - "Im Trend der letzten 50 Jahre..."
+      - "Klimatologisch gesehen..."
+
+    inkorrekt:
+      - "Der heiße Sommer beweist den Klimawandel"
+      - "Der kalte Winter widerlegt die Erwärmung"
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "IPCC-Assessment berücksichtigt"
+    - "Multiple lines of evidence"
+    - "Physikalisch konsistent"
+    - "Paläoklima-Constraints erfüllt"
+    - "Multi-Model-Agreement"
+    - "Observational Constraints angewendet"
+    - "Unsicherheiten quantifiziert (IPCC-Sprache)"
+    - "Peer-reviewed in etablierten Journals"
+
+  negativ:
+    - "Widerspricht etabliertem Konsens ohne neue Evidenz"
+    - "Einzelstudie ohne Replikation"
+    - "Keine Unsicherheitsangaben"
+    - "Cherry-Picking von Zeiträumen"
+    - "Verwechslung Wetter/Klima"
+    - "Nicht-peer-reviewed"
+    - "Finanzierung durch fossile Industrie (ohne Transparenz)"
+
+
+# =============================================================================
+# KONSENS UND KONTROVERSE
+# =============================================================================
+
+konsens:
+
+  wissenschaftlicher_konsens:
+    aussage: "Menschliche Aktivität ist Hauptursache der Erwärmung"
+    konsens_niveau: "97-99% der Klimawissenschaftler"
+    quellen:
+      - "Cook et al. 2013, 2016"
+      - "Doran & Zimmerman 2009"
+      - "Anderegg et al. 2010"
+    anmerkung: "Einer der stärksten Konsense in der Wissenschaft"
+
+  legitime_unsicherheiten:
+    - "Klimasensitivität (Bereich)"
+    - "Regionale Klimaänderungen"
+    - "Kipppunkt-Schwellen und Timing"
+    - "Wolken-Feedbacks"
+    - "Eisschild-Dynamik"
+
+  illegitime_kontroversen:
+    - "Ob Erwärmung stattfindet (sie findet statt)"
+    - "Ob CO₂ ein Treibhausgas ist (es ist)"
+    - "Ob Menschen die Hauptursache sind (sie sind)"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_klimawissenschaft.yaml"
+  glossar: "glossar_klimawissenschaft.yaml"
+  lexikon: "lexikon_klimawissenschaft.yaml"

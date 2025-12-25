@@ -1,0 +1,429 @@
+# =============================================================================
+# ESL LEXIKON: Klimawissenschaft
+# =============================================================================
+# Erweiterte Definitionen mit Verwendungskontext, Beispielsätzen
+# und IPCC-konformer Terminologie
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Klimawissenschaft"
+  anzahl_eintraege: 28
+  beschreibung: |
+    Erweitertes Lexikon mit Verwendungshinweisen für präzise
+    klimawissenschaftliche Kommunikation. IPCC-Terminologie
+    für Unsicherheiten. Unterscheidung Wetter/Klima.
+    Vermeidung von Fehlinterpretationen.
+
+
+# =============================================================================
+# KERNBEGRIFFE
+# =============================================================================
+
+klimawandel:
+  grundform: "Klimawandel"
+  alternativ: "Klimaänderung, Erderwärmung, Klimakrise"
+  englisch: "Climate Change, Global Warming"
+
+  definition:
+    kurz: "Langfristige Änderung der Klimastatistik"
+    erweitert: |
+      Klimawandel bezeichnet langfristige Änderungen der
+      statistischen Eigenschaften des Klimas (Mittelwerte,
+      Variabilität, Extreme) über Zeiträume von Jahrzehnten
+      bis Jahrhunderten. Heute meist bezogen auf den
+      anthropogenen Klimawandel seit der Industrialisierung.
+
+  verwendung:
+    korrekt:
+      - "Der anthropogene Klimawandel hat die globale Temperatur um 1.1°C erhöht"
+      - "Der Klimawandel beeinflusst die Häufigkeit von Extremereignissen"
+      - "Maßnahmen zur Begrenzung des Klimawandels auf 1.5°C"
+    inkorrekt:
+      - "Das kalte Wetter widerlegt den Klimawandel" # Wetter ≠ Klima
+      - "Der Klimawandel verursachte dieses Gewitter" # Zu direkt
+
+  beispielsaetze:
+    - satz: "Der anthropogene Klimawandel ist eindeutig nachgewiesen (IPCC AR6)."
+      kontext: "Wissenschaftliche Aussage"
+    - satz: "Die Auswirkungen des Klimawandels verstärken sich mit jedem Zehntelgrad."
+      kontext: "Auswirkungsforschung"
+
+  kollokationen:
+    - "anthropogener Klimawandel"
+    - "Begrenzung des Klimawandels"
+    - "Folgen/Auswirkungen des Klimawandels"
+    - "Anpassung an den Klimawandel"
+
+  abgrenzung:
+    globale_erwaermung: "Nur Temperaturaspekt"
+    klimakrise: "Politisch-wertend"
+    klimawandel: "Wissenschaftlich neutral"
+
+
+erwaermung:
+  grundform: "Erwärmung"
+  alternativ: "Temperaturanstieg"
+
+  definition:
+    kurz: "Anstieg der globalen Mitteltemperatur"
+    erweitert: |
+      Die globale Erwärmung bezeichnet den Anstieg der
+      global gemittelten Oberflächentemperatur (GMST).
+      Bezugszeitraum typischerweise 1850-1900 (vorindustriell).
+
+  verwendung:
+    korrekt:
+      - "Die Erwärmung beträgt 1.1°C gegenüber 1850-1900"
+      - "Eine Erwärmung von 1.5°C könnte bereits in den 2030ern erreicht werden"
+      - "Die Erwärmung über Land ist stärker als über Ozean"
+    inkorrekt:
+      - "Die Erde hat sich um 1.1 Grad erwärmt" # Ohne Bezugszeitraum
+
+  beispielsaetze:
+    - satz: "Die Erwärmung der letzten 50 Jahre ist beispiellos in den letzten 2000 Jahren."
+      kontext: "Paläoklimavergleich"
+    - satz: "Jedes weitere Zehntelgrad Erwärmung verstärkt die Risiken."
+      kontext: "Risikoabschätzung"
+
+  kollokationen:
+    - "globale Erwärmung"
+    - "Erwärmung begrenzen auf"
+    - "Erwärmung seit vorindustriell"
+    - "committed/unvermeidbare Erwärmung"
+
+
+treibhausgas:
+  grundform: "Treibhausgas"
+  plural: "Treibhausgase"
+  abkuerzung: "THG"
+  englisch: "Greenhouse Gas (GHG)"
+
+  definition:
+    kurz: "Gas, das langwellige Strahlung absorbiert"
+    erweitert: |
+      Treibhausgase absorbieren und emittieren langwellige
+      (Infrarot-)Strahlung und verstärken so den natürlichen
+      Treibhauseffekt. Hauptverursacher des anthropogenen
+      Klimawandels.
+
+  verwendung:
+    korrekt:
+      - "Die Treibhausgaskonzentration ist auf 420 ppm CO₂-Äquivalent gestiegen"
+      - "Treibhausgasemissionen müssen bis 2050 auf Netto-Null sinken"
+      - "Methan ist ein kurzlebiges, aber starkes Treibhausgas"
+
+  beispielsaetze:
+    - satz: "Die Treibhausgasemissionen stiegen 2023 auf einen neuen Rekordwert."
+      kontext: "Emissionsbericht"
+    - satz: "CO₂ ist das wichtigste anthropogene Treibhausgas aufgrund seiner langen Verweildauer."
+      kontext: "Wissenschaftliche Erklärung"
+
+  kollokationen:
+    - "Treibhausgasemissionen"
+    - "Treibhausgaskonzentration"
+    - "kurzlebige/langlebige Treibhausgase"
+    - "Treibhausgas-Fußabdruck"
+
+  gase_und_gwp:
+    CO2:
+      GWP_100: 1
+      verweildauer: "300-1000 Jahre"
+    CH4:
+      GWP_100: 28
+      GWP_20: 80
+      verweildauer: "~12 Jahre"
+    N2O:
+      GWP_100: 265
+      verweildauer: "~120 Jahre"
+
+
+emissionen:
+  grundform: "Emissionen"
+  singular: "Emission"
+
+  definition:
+    kurz: "Freisetzung von Stoffen in die Atmosphäre"
+    erweitert: |
+      Im Klimakontext: Freisetzung von Treibhausgasen.
+      Unterscheidung zwischen fossilen Emissionen und
+      Landnutzungsänderungen. Angabe meist in GtCO₂/Jahr
+      oder CO₂-Äquivalent.
+
+  verwendung:
+    korrekt:
+      - "Die globalen CO₂-Emissionen betragen ~40 GtCO₂/Jahr"
+      - "Netto-Null-Emissionen bedeutet: Emissionen = Senken"
+      - "Die Emissionen müssen bis 2030 um 45% sinken (für 1.5°C)"
+    inkorrekt:
+      - "Emissionen stoppen" # Netto-Null ist realistischer Begriff
+
+  beispielsaetze:
+    - satz: "Die globalen Emissionen erreichten 2023 mit 40.9 GtCO₂ einen neuen Höchststand."
+      kontext: "Global Carbon Budget"
+    - satz: "Historische kumulative Emissionen bestimmen die bisherige Erwärmung."
+      kontext: "Kohlenstoffbudget"
+
+  kollokationen:
+    - "Emissionen reduzieren/senken"
+    - "Netto-Null-Emissionen"
+    - "historische/kumulative Emissionen"
+    - "Emissionen pro Kopf"
+
+
+# =============================================================================
+# UNSICHERHEITS-TERMINOLOGIE
+# =============================================================================
+
+wahrscheinlich:
+  grundform: "wahrscheinlich"
+  englisch: "likely"
+
+  definition:
+    kurz: "IPCC-Term: 66-100% Wahrscheinlichkeit"
+    erweitert: |
+      In IPCC-Berichten ist "wahrscheinlich" (likely) ein
+      kalibrierter Begriff für Wahrscheinlichkeiten von 66-100%.
+      Nicht umgangssprachlich zu verwenden.
+
+  verwendung:
+    korrekt:
+      - "Es ist wahrscheinlich (>66%), dass menschliche Aktivitäten..."
+      - "Der Bereich 2.5-4.0°C ist wahrscheinlich (likely range)"
+    inkorrekt:
+      - "Es ist wahrscheinlich wärmer geworden" # Zu vage
+
+  ipcc_skala:
+    virtually_certain: "99-100%"
+    extremely_likely: "95-100%"
+    very_likely: "90-100%"
+    likely: "66-100%"
+    about_as_likely_as_not: "33-66%"
+    unlikely: "0-33%"
+    very_unlikely: "0-10%"
+    extremely_unlikely: "0-5%"
+
+  beispielsaetze:
+    - satz: "Es ist sehr wahrscheinlich (very likely, >90%), dass menschlicher Einfluss der Haupttreiber ist."
+      kontext: "IPCC-Aussage"
+
+  kollokationen:
+    - "wahrscheinlich (66-100%)"
+    - "sehr wahrscheinlich (>90%)"
+    - "likely range"
+
+
+konfidenz:
+  grundform: "Konfidenz"
+  englisch: "Confidence"
+
+  definition:
+    kurz: "Qualitatives Maß für Vertrauen in eine Aussage"
+    erweitert: |
+      IPCC-Konfidenz basiert auf Evidenzmenge und
+      Übereinstimmung der Evidenz. Skala: sehr niedrig,
+      niedrig, mittel, hoch, sehr hoch.
+
+  verwendung:
+    korrekt:
+      - "Mit hoher Konfidenz: Extremereignisse haben zugenommen"
+      - "Mit mittlerer Konfidenz: AMOC hat sich abgeschwächt"
+    inkorrekt:
+      - "Die Wissenschaft ist unsicher" # Zu pauschal
+
+  beispielsaetze:
+    - satz: "Mit hoher Konfidenz hat sich die Häufigkeit von Hitzewellen seit 1950 erhöht."
+      kontext: "IPCC-Aussage"
+    - satz: "Die Projektion für den Eisschild hat nur mittlere Konfidenz wegen Unsicherheit in der Eisdynamik."
+      kontext: "Unsicherheitskommunikation"
+
+  kollokationen:
+    - "mit hoher/niedriger Konfidenz"
+    - "Konfidenz basiert auf"
+    - "limited evidence, medium agreement"
+
+
+# =============================================================================
+# PROJEKTIONEN UND SZENARIEN
+# =============================================================================
+
+projektion:
+  grundform: "Projektion"
+  plural: "Projektionen"
+
+  definition:
+    kurz: "Modellbasierte Abschätzung zukünftiger Klimaentwicklung"
+    erweitert: |
+      Klimaprojektionen sind bedingte Vorhersagen basierend
+      auf Emissionsszenarien. Sie sind keine Prognosen im
+      Sinne von Wettervorhersagen.
+
+  verwendung:
+    korrekt:
+      - "Projektionen zeigen eine Erwärmung von 2.1-3.5°C unter SSP2-4.5"
+      - "Die Projektion ist bedingt auf das angenommene Szenario"
+    inkorrekt:
+      - "Die Prognose sagt X vorher" # Projektion ≠ Prognose
+      - "Das Modell prophezeit" # Nicht deterministisch
+
+  beispielsaetze:
+    - satz: "Klimaprojektionen für 2100 unter SSP2-4.5 zeigen eine Erwärmung von 2.1-3.5°C."
+      kontext: "IPCC-Projektion"
+    - satz: "Die Projektionen umfassen einen Unsicherheitsbereich aus verschiedenen Modellen und Szenarien."
+      kontext: "Unsicherheitskommunikation"
+
+  kollokationen:
+    - "Projektion unter Szenario X"
+    - "Projektionen zeigen/deuten auf"
+    - "Unsicherheitsbereich der Projektionen"
+
+  abgrenzung:
+    projektion: "Bedingt auf Szenario"
+    prognose: "Unbedingte Vorhersage"
+    szenario: "Angenommener Entwicklungspfad"
+
+
+szenario:
+  grundform: "Szenario"
+  plural: "Szenarien"
+
+  definition:
+    kurz: "Plausible Entwicklungspfade für Emissionen"
+    erweitert: |
+      Emissionsszenarien beschreiben mögliche Entwicklungen
+      basierend auf sozioökonomischen Annahmen. Sie sind
+      keine Vorhersagen, sondern "Was-wäre-wenn"-Analysen.
+
+  verwendung:
+    korrekt:
+      - "Unter dem Szenario SSP2-4.5..."
+      - "Im Hochemissionsszenario SSP5-8.5..."
+      - "Das 1.5°C-kompatible Szenario SSP1-1.9 erfordert..."
+    inkorrekt:
+      - "Das wahrscheinlichste Szenario" # Szenarien sind nicht Vorhersagen
+
+  aktuelle_szenarien:
+    SSP1_1.9: "Nachhaltig, 1.5°C-kompatibel"
+    SSP1_2.6: "Nachhaltig, 2°C-kompatibel"
+    SSP2_4.5: "Mittlerer Pfad"
+    SSP3_7.0: "Regionale Rivalität"
+    SSP5_8.5: "Fossil-intensiv (zunehmend unplausibel)"
+
+  beispielsaetze:
+    - satz: "Das Szenario SSP2-4.5 beschreibt einen mittleren Entwicklungspfad ohne verstärkte Klimapolitik."
+      kontext: "Szenariobeschreibung"
+
+  kollokationen:
+    - "unter dem Szenario"
+    - "Emissionsszenario"
+    - "Hochemissions-/Niedrigemissionsszenario"
+
+
+# =============================================================================
+# ATTRIBUTION
+# =============================================================================
+
+attribution:
+  grundform: "Attribution"
+  alternativ: "Zuordnung"
+
+  definition:
+    kurz: "Wissenschaftliche Zuordnung von Ursachen"
+    erweitert: |
+      Attributionswissenschaft ordnet beobachtete Klimaänderungen
+      oder Extremereignisse bestimmten Ursachen zu (anthropogen
+      vs. natürlich). Methoden: Fingerprint-Analysen, Modellvergleiche.
+
+  verwendung:
+    korrekt:
+      - "Die Attributionsanalyse zeigt, dass die Hitzewelle durch den Klimawandel 2× wahrscheinlicher wurde"
+      - "Der anthropogene Anteil an der beobachteten Erwärmung beträgt ~100%"
+    inkorrekt:
+      - "Der Klimawandel verursachte dieses Ereignis" # Probabilistisch formulieren
+
+  beispielsaetze:
+    - satz: "Attributionsstudien zeigen, dass die Hitzewelle 2021 in Westkanada ohne Klimawandel praktisch unmöglich gewesen wäre."
+      kontext: "Event Attribution"
+    - satz: "Die Attribution der beobachteten Erwärmung zu menschlichen Aktivitäten ist mit sehr hoher Konfidenz etabliert."
+      kontext: "Detection & Attribution"
+
+  kollokationen:
+    - "Attribution von Extremereignissen"
+    - "Attributionsstudie/analyse"
+    - "anthropogener Anteil"
+
+
+# =============================================================================
+# HÄUFIGE MISSVERSTÄNDNISSE
+# =============================================================================
+
+missverstaendnisse:
+
+  wetter_vs_klima:
+    fehler: "Ein kalter Winter widerlegt die globale Erwärmung"
+    richtig: |
+      Wetter (kurzfristig) ≠ Klima (30-Jahre-Statistik).
+      Lokale Kälte kann bei globaler Erwärmung auftreten.
+    erklaerung: "Variabilität überlagert Trend auf kurzen Zeitskalen"
+
+  natuerliche_variabilitaet:
+    fehler: "Das Klima hat sich schon immer geändert"
+    richtig: |
+      Korrekt, aber irreführend. Die aktuelle Änderungsrate
+      ist beispiellos. Natürliche Faktoren erklären die
+      beobachtete Erwärmung nicht.
+    erklaerung: "Rate und Ursache sind entscheidend, nicht nur Existenz von Änderung"
+
+  modell_unsicherheit:
+    fehler: "Modelle sind unzuverlässig"
+    richtig: |
+      Modelle reproduzieren beobachtete Trends erfolgreich.
+      Unsicherheit in Projektionen stammt hauptsächlich aus
+      Szenario-Unsicherheit, nicht Modellversagen.
+    erklaerung: "Modelle haben bekannte Stärken und Grenzen"
+
+  zwei_grad_ziel:
+    fehler: "Unter 2°C ist alles in Ordnung"
+    richtig: |
+      Es gibt keine sichere Schwelle. Risiken steigen
+      kontinuierlich mit jedem Zehntelgrad.
+    erklaerung: "Politische Ziele ≠ wissenschaftliche Sicherheitsgrenzen"
+
+
+# =============================================================================
+# HEDGING IN DER KLIMAWISSENSCHAFT
+# =============================================================================
+
+hedging_klimawissenschaft:
+  beschreibung: |
+    Klimawissenschaftliche Aussagen erfordern präzise
+    Unsicherheitskommunikation nach IPCC-Standard.
+
+  nach_evidenzstaerke:
+    sehr_sicher:
+      - "ist eindeutig" (unequivocal)
+      - "ist praktisch sicher (>99%)"
+      - "ist äußerst wahrscheinlich (>95%)"
+
+    sicher:
+      - "ist sehr wahrscheinlich (>90%)"
+      - "mit hoher Konfidenz"
+
+    wahrscheinlich:
+      - "ist wahrscheinlich (>66%)"
+      - "mit mittlerer Konfidenz"
+
+    unsicher:
+      - "ist etwa gleich wahrscheinlich wie nicht (33-66%)"
+      - "mit niedriger Konfidenz"
+      - "könnte"
+
+  beispiele:
+    - original: "Der Klimawandel verursacht mehr Stürme"
+      besser: "Mit hoher Konfidenz hat sich die Intensität tropischer Wirbelstürme seit 1980 erhöht."
+
+    - original: "Die Temperatur wird um 3°C steigen"
+      besser: "Projektionen unter SSP2-4.5 zeigen eine Erwärmung von 2.1-3.5°C (likely range) bis 2100."
+
+    - original: "Der Meeresspiegel wird um 1 Meter steigen"
+      besser: "Der Meeresspiegelanstieg bis 2100 liegt wahrscheinlich zwischen 0.4-0.8m (SSP2-4.5), höhere Werte können bei Eis-Instabilitäten nicht ausgeschlossen werden."

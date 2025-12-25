@@ -1,0 +1,405 @@
+# =============================================================================
+# ESL PRIMITIVE: Klimawissenschaft
+# =============================================================================
+# Orthogonale Grundbegriffe der Klimawissenschaft
+# Nicht weiter zerlegbar, bilden semantische Basis
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Klimawissenschaft"
+  anzahl_primitive: 24
+  kategorien: 6
+  beschreibung: |
+    Fundamentale Konzepte der Klimawissenschaft. Interdisziplinär:
+    Physik, Chemie, Biologie, Geowissenschaften, Ozeanographie.
+    IPCC-Terminologie als Standard. Unsicherheitskommunikation
+    ist integraler Bestandteil.
+
+
+# =============================================================================
+# KATEGORIE 1: KLIMASYSTEM
+# =============================================================================
+
+KLIMASYSTEM:
+
+  KLIMA:
+    definition: "Statistik des Wetters über längere Zeiträume (typisch 30 Jahre)"
+    unterschied_wetter: "Wetter = kurzfristig, Klima = langfristige Statistik"
+    komponenten:
+      - "Mittelwerte"
+      - "Variabilität"
+      - "Extremereignisse"
+    relationen:
+      - WETTER: "Aggregiert aus Wetter"
+      - KLIMASYSTEM: "Resultat des Klimasystems"
+      - VARIABILITAET: "Beinhaltet natürliche Schwankungen"
+
+  WETTER:
+    definition: "Momentaner Zustand der Atmosphäre"
+    zeitskala: "Sekunden bis Wochen"
+    parameter:
+      - "Temperatur"
+      - "Niederschlag"
+      - "Wind"
+      - "Luftfeuchtigkeit"
+      - "Bewölkung"
+    relationen:
+      - KLIMA: "Aggregiert zu Klima"
+      - ATMOSPHAERE: "Findet in Atmosphäre statt"
+
+  ATMOSPHAERE:
+    definition: "Gashülle der Erde"
+    zusammensetzung:
+      - "N₂: 78%"
+      - "O₂: 21%"
+      - "Ar: 0.9%"
+      - "CO₂: ~420 ppm (2024)"
+      - "Wasserdampf: variabel"
+    schichten:
+      - "Troposphäre (0-12 km)"
+      - "Stratosphäre (12-50 km)"
+      - "Mesosphäre (50-85 km)"
+      - "Thermosphäre (>85 km)"
+    relationen:
+      - STRAHLUNG: "Interagiert mit Strahlung"
+      - TREIBHAUSEFFEKT: "Ermöglicht Treibhauseffekt"
+
+  OZEAN:
+    definition: "Globaler Wasserkörper, bedeckt 71% der Erdoberfläche"
+    funktionen:
+      - "Wärmespeicher (90% der Überschusswärme)"
+      - "CO₂-Senke (~25% anthropogener Emissionen)"
+      - "Zirkulationssystem"
+    relationen:
+      - WAERME: "Speichert Wärme"
+      - KOHLENSTOFFKREISLAUF: "CO₂-Senke"
+      - MEERESSPIEGEL: "Thermische Ausdehnung"
+
+  KRYOSPHAERE:
+    definition: "Gefrorene Komponenten des Erdsystems"
+    komponenten:
+      - "Eisschilde (Grönland, Antarktis)"
+      - "Gletscher"
+      - "Meereis"
+      - "Permafrost"
+      - "Schneedecke"
+    relationen:
+      - ALBEDO: "Hohe Reflektivität"
+      - MEERESSPIEGEL: "Beeinflusst Meeresspiegel"
+      - FEEDBACK: "Eis-Albedo-Feedback"
+
+
+# =============================================================================
+# KATEGORIE 2: ENERGIE UND STRAHLUNG
+# =============================================================================
+
+ENERGIE_STRAHLUNG:
+
+  STRAHLUNG:
+    definition: "Elektromagnetische Energie, die durch den Raum transportiert wird"
+    typen:
+      kurzwellig: "Solare Strahlung (UV, sichtbar, nahes IR)"
+      langwellig: "Terrestrische Wärmestrahlung (thermisches IR)"
+    bilanz:
+      eingehend: "~340 W/m² (solar, global gemittelt)"
+      ausgehend: "~340 W/m² (reflektiert + emittiert)"
+    relationen:
+      - TREIBHAUSEFFEKT: "Absorption langwelliger Strahlung"
+      - ALBEDO: "Reflexion kurzwelliger Strahlung"
+      - FORCING: "Änderung der Strahlungsbilanz"
+
+  TREIBHAUSEFFEKT:
+    definition: "Erwärmung durch atmosphärische Absorption langwelliger Strahlung"
+    natuerlich: "+33°C (ohne: -18°C, mit: +15°C)"
+    anthropogen: "+1.1°C seit 1850-1900 (Stand 2023)"
+    gase:
+      - "H₂O: stärkster, aber nicht Treiber"
+      - "CO₂: wichtigster anthropogener Treiber"
+      - "CH₄: 80× stärker als CO₂ (20 Jahre)"
+      - "N₂O: 300× stärker als CO₂"
+    relationen:
+      - STRAHLUNG: "Basiert auf Strahlungsphysik"
+      - FORCING: "Verstärkt durch anthropogenes Forcing"
+      - TEMPERATUR: "Erhöht globale Temperatur"
+
+  ALBEDO:
+    definition: "Reflexionsvermögen einer Oberfläche (0-1)"
+    werte:
+      frischer_schnee: "0.8-0.9"
+      eis: "0.5-0.7"
+      ozean: "0.06"
+      wald: "0.1-0.2"
+      wueste: "0.3-0.4"
+    relationen:
+      - STRAHLUNG: "Reflektierte Solarstrahlung"
+      - FEEDBACK: "Eis-Albedo-Feedback"
+
+  FORCING:
+    definition: "Strahlungsantrieb - externe Änderung der Energiebilanz"
+    einheit: "W/m²"
+    beispiele:
+      CO2_verdopplung: "+3.7 W/m²"
+      seit_1750: "+2.7 W/m² (netto, 2019)"
+      aerosole: "-0.5 bis -1.5 W/m² (kühlend)"
+    typen:
+      - "Treibhausgase (positiv)"
+      - "Aerosole (meist negativ)"
+      - "Solare Variabilität (klein)"
+      - "Vulkane (temporär negativ)"
+    relationen:
+      - TREIBHAUSEFFEKT: "Verstärkt Treibhauseffekt"
+      - SENSITIVITAET: "Temperaturantwort auf Forcing"
+
+
+# =============================================================================
+# KATEGORIE 3: RÜCKKOPPLUNGEN UND SENSITIVITÄT
+# =============================================================================
+
+FEEDBACK_SENSITIVITAET:
+
+  FEEDBACK:
+    definition: "Rückkopplung - Verstärkung oder Dämpfung einer Störung"
+    typen:
+      positiv:
+        - "Wasserdampf-Feedback (stärkste)"
+        - "Eis-Albedo-Feedback"
+        - "Permafrost-Kohlenstoff-Feedback"
+      negativ:
+        - "Planck-Feedback (Schwarzkörperstrahlung)"
+        - "Lapse-Rate-Feedback"
+    netto: "Positive Feedbacks dominieren → Verstärkung"
+    relationen:
+      - SENSITIVITAET: "Bestimmt Klimasensitivität"
+      - FORCING: "Verstärkt Forcing-Effekt"
+
+  SENSITIVITAET:
+    definition: "Temperaturänderung bei CO₂-Verdopplung"
+    symbol: "ECS (Equilibrium Climate Sensitivity)"
+    wert: "2.5-4.0°C (IPCC AR6, wahrscheinlich)"
+    best_estimate: "3°C"
+    verwandte_masse:
+      TCR: "Transient Climate Response: 1.4-2.2°C"
+      ECS: "Equilibrium Climate Sensitivity: 2.5-4.0°C"
+    relationen:
+      - FORCING: "Antwort auf Forcing"
+      - FEEDBACK: "Bestimmt durch Feedbacks"
+      - PROJEKTION: "Grundlage für Projektionen"
+
+  KIPPPUNKT:
+    definition: "Schwellenwert, ab dem irreversible Veränderungen eintreten"
+    englisch: "Tipping Point"
+    beispiele:
+      - "Grönländischer Eisschild: 1.5-3.0°C"
+      - "Westantarktischer Eisschild: 1.5-2.0°C"
+      - "Amazonas-Dieback: 2.0-6.0°C"
+      - "Permafrost-Kollaps: 3.0-6.0°C"
+      - "AMOC-Abschwächung: 1.5-2.0°C"
+    relationen:
+      - FEEDBACK: "Kann Kaskaden auslösen"
+      - IRREVERSIBILITAET: "Schwer umkehrbar"
+
+  TRAEGHEIT:
+    definition: "Verzögerung der Klimareaktion durch Speicher"
+    komponenten:
+      - "Ozean: Jahrzehnte bis Jahrhunderte"
+      - "Eisschilde: Jahrhunderte bis Jahrtausende"
+      - "Kohlenstoffkreislauf: Jahrhunderte"
+    implikation: "Committed Warming auch bei Stopp der Emissionen"
+    relationen:
+      - OZEAN: "Hauptspeicher"
+      - MEERESSPIEGEL: "Verzögerte Reaktion"
+
+
+# =============================================================================
+# KATEGORIE 4: KOHLENSTOFFKREISLAUF
+# =============================================================================
+
+KOHLENSTOFF:
+
+  KOHLENSTOFFKREISLAUF:
+    definition: "Austausch von Kohlenstoff zwischen Reservoiren"
+    reservoire:
+      atmosphaere: "~870 GtC (2020)"
+      ozean: "~38.000 GtC"
+      land_biosphaere: "~2.000 GtC"
+      fossile_brennstoffe: "~4.000 GtC (verbleibend)"
+    fluesse:
+      anthropogen: "~10 GtC/Jahr (fossil + Landnutzung)"
+      ozean_aufnahme: "~2.5 GtC/Jahr"
+      land_aufnahme: "~3 GtC/Jahr"
+      verbleibend_atmosphaere: "~5 GtC/Jahr"
+    relationen:
+      - EMISSION: "Anthropogener Input"
+      - KONZENTRATION: "Atmosphärische Akkumulation"
+      - SENKE: "Ozean und Land"
+
+  EMISSION:
+    definition: "Freisetzung von Treibhausgasen in die Atmosphäre"
+    quellen:
+      fossil: "~35 GtCO₂/Jahr"
+      landnutzung: "~5 GtCO₂/Jahr"
+      methan: "~600 TgCH₄/Jahr"
+    sektoren:
+      - "Energie: 73%"
+      - "Landwirtschaft: 12%"
+      - "Industrie: 6%"
+      - "Abfall: 3%"
+    relationen:
+      - KONZENTRATION: "Erhöht Konzentration"
+      - KOHLENSTOFFKREISLAUF: "Input in Kreislauf"
+
+  KONZENTRATION:
+    definition: "Gehalt eines Gases in der Atmosphäre"
+    einheit: "ppm (parts per million), ppb (parts per billion)"
+    werte_2024:
+      CO2: "~420 ppm (vorindustriell: 280 ppm)"
+      CH4: "~1900 ppb (vorindustriell: 720 ppb)"
+      N2O: "~335 ppb (vorindustriell: 270 ppb)"
+    relationen:
+      - EMISSION: "Erhöht durch Emissionen"
+      - FORCING: "Bestimmt Forcing"
+      - TREIBHAUSEFFEKT: "Verstärkt Treibhauseffekt"
+
+  SENKE:
+    definition: "Prozess oder Reservoir, das Kohlenstoff aufnimmt"
+    typen:
+      natuerlich:
+        - "Ozean: physikalisch + biologisch"
+        - "Terrestrisch: Photosynthese"
+      anthropogen:
+        - "CCS (Carbon Capture and Storage)"
+        - "Aufforstung"
+    relationen:
+      - KOHLENSTOFFKREISLAUF: "Teil des Kreislaufs"
+      - EMISSION: "Kompensiert teilweise"
+
+
+# =============================================================================
+# KATEGORIE 5: AUSWIRKUNGEN
+# =============================================================================
+
+AUSWIRKUNGEN:
+
+  TEMPERATUR:
+    definition: "Thermisches Maß, global gemittelt an der Oberfläche"
+    referenz: "GMST (Global Mean Surface Temperature)"
+    aenderung:
+      seit_1850_1900: "+1.1°C (2011-2020)"
+      seit_1970: "+0.2°C/Dekade"
+    relationen:
+      - FORCING: "Antwort auf Forcing"
+      - TREIBHAUSEFFEKT: "Erhöht durch Treibhauseffekt"
+
+  MEERESSPIEGEL:
+    definition: "Mittlere Höhe der Meeresoberfläche"
+    anstieg:
+      seit_1900: "~20 cm"
+      rate_aktuell: "3.7 mm/Jahr (2006-2018)"
+    ursachen:
+      - "Thermische Ausdehnung: ~40%"
+      - "Gletscher: ~20%"
+      - "Grönland: ~20%"
+      - "Antarktis: ~10%"
+    relationen:
+      - OZEAN: "Thermische Ausdehnung"
+      - KRYOSPHAERE: "Eismasserverlust"
+
+  EXTREMEREIGNIS:
+    definition: "Seltenes Wetter- oder Klimaereignis mit großer Auswirkung"
+    typen:
+      - "Hitzewellen"
+      - "Starkniederschlag"
+      - "Dürren"
+      - "Tropische Wirbelstürme"
+    attribution: "Wissenschaftliche Zuordnung zu Klimawandel"
+    relationen:
+      - KLIMA: "Teil der Klimastatistik"
+      - VARIABILITAET: "Überlagert Variabilität"
+
+  VARIABILITAET:
+    definition: "Natürliche Schwankungen des Klimasystems"
+    zeitskalen:
+      - "ENSO: 2-7 Jahre"
+      - "PDO: 20-30 Jahre"
+      - "AMO: 60-80 Jahre"
+    unterschied: "Natürliche Variabilität ≠ anthropogener Trend"
+    relationen:
+      - KLIMA: "Teil des Klimas"
+      - TREND: "Überlagert Trend"
+
+
+# =============================================================================
+# KATEGORIE 6: SZENARIEN UND PROJEKTIONEN
+# =============================================================================
+
+SZENARIEN:
+
+  SZENARIO:
+    definition: "Plausible Entwicklungspfade für Emissionen und Klima"
+    typen:
+      RCP: "Representative Concentration Pathways (AR5)"
+      SSP: "Shared Socioeconomic Pathways (AR6)"
+    beispiele:
+      SSP1_1.9: "Starke Minderung, 1.5°C-Pfad"
+      SSP2_4.5: "Mittlerer Pfad"
+      SSP5_8.5: "Hohe Emissionen (unwahrscheinlich)"
+    relationen:
+      - EMISSION: "Emissionspfade"
+      - PROJEKTION: "Grundlage für Projektionen"
+
+  PROJEKTION:
+    definition: "Modellbasierte Vorhersage des zukünftigen Klimas"
+    unterschied_vorhersage: "Projektion = bedingt auf Szenario"
+    zeitrahmen:
+      - "Nahe Zukunft: 2021-2040"
+      - "Mittelfristig: 2041-2060"
+      - "Langfristig: 2081-2100"
+    relationen:
+      - SZENARIO: "Basiert auf Szenarien"
+      - MODELL: "Erzeugt durch Modelle"
+
+  MODELL:
+    definition: "Numerische Simulation des Klimasystems"
+    typen:
+      - "GCM: Global Climate Model"
+      - "ESM: Earth System Model"
+      - "RCM: Regional Climate Model"
+    cmip: "Coupled Model Intercomparison Project"
+    relationen:
+      - PROJEKTION: "Erzeugt Projektionen"
+      - UNSICHERHEIT: "Quelle von Unsicherheit"
+
+  BUDGET:
+    definition: "Verbleibendes CO₂-Emissionsbudget für Temperaturziel"
+    werte_ab_2020:
+      1_5_grad_50: "~500 GtCO₂"
+      1_5_grad_67: "~400 GtCO₂"
+      2_grad_67: "~1150 GtCO₂"
+    implikation: "Bei ~40 GtCO₂/Jahr: ~10-12 Jahre für 1.5°C"
+    relationen:
+      - EMISSION: "Begrenzung der Emissionen"
+      - TEMPERATUR: "Begrenzung der Erwärmung"
+
+
+# =============================================================================
+# RELATIONSGRAPH
+# =============================================================================
+
+relationsgraph:
+  zentrale_knoten:
+    - TREIBHAUSEFFEKT: "Zentraler Mechanismus"
+    - FORCING: "Verbindet Ursache und Wirkung"
+    - FEEDBACK: "Bestimmt Systemantwort"
+    - KOHLENSTOFFKREISLAUF: "Verbindet Emission und Konzentration"
+
+  kausalkette:
+    - "Emission → Konzentration → Forcing → Temperatur → Auswirkungen"
+    - "Feedbacks verstärken Temperaturantwort"
+    - "Kipppunkte als nicht-lineare Schwellen"
+
+  ipcc_kernaussagen:
+    - "Erwärmung des Klimasystems ist eindeutig"
+    - "Menschlicher Einfluss ist die Hauptursache"
+    - "Weitere Erwärmung ist unvermeidbar"
+    - "Begrenzung erfordert Netto-Null-Emissionen"
