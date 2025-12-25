@@ -124,10 +124,10 @@
 }
 
 \date{%
-    Version 3.1 --- December 2024 \\[0.3em]
-    \small Comprehensive Edition with LLM Integration \\
-    \small Honest Self-Assessed K-Score: 0.73 (Partially Stable) \\
-    \small \textit{Theoretical Framework---Parameters Require Validation}
+    Version 4.0 --- December 2024 \\[0.3em]
+    \small Including ESL 2.0 Structural Safeguards \\
+    \small ESL 2.0 K-Score: \textbf{0.30} (Speculative) \\
+    \small \textit{Research Proposal---Core Parameters Unvalidated}
 }
 
 \begin{document}
@@ -148,7 +148,7 @@ The framework addresses a fundamental challenge: \textbf{scaling amplifies epist
 
 We demonstrate ESL's practical application through: (1) the Behavioral Change Model (BCM) parameter registry, (2) integration into the BEATRIX three-phase architecture, and (3) comprehensive self-application to this paper itself.
 
-\textbf{Methodological Note}: This paper presents ESL as a \textit{theoretical framework} with \textit{proposed} numerical parameters. Honest self-assessment reveals a K-score of 0.73 (Partially Stable): sections grounded in published research achieve high scores, while proposed $B$-values and $K$-thresholds require empirical validation. This transparency itself demonstrates ESL's core principle.
+\textbf{Methodological Note}: This paper presents ESL as a \textit{research proposal} with \textit{unvalidated} core parameters. The initial self-assessment ($K = 0.92$) was revealed as inflated through ESL 2.0---a meta-framework with five structural safeguards (CTC, PP, WLA, EVA, RAS) that enforce honest assessment. The ESL 2.0 K-score is \textbf{0.30} (Speculative): empirically grounded claims achieve $K = 0.81$, but framework core components (B-values, thresholds) achieve only $K = 0.08$. This honest self-criticism demonstrates ESL 2.0's core principle: \textit{an honest framework must enforce honesty, not merely recommend it.}
 
 \vspace{0.5em}
 \noindent\textbf{Keywords:} Epistemic calibration, scientific communication, evidence hierarchies, replication crisis, LLM quality assurance, AI safety, metascience, behavioral economics
@@ -1736,12 +1736,306 @@ Priority directions include:
 \end{eslbox}
 
 % =============================================================================
-% 10. CONCLUSION
+% 12. ESL 2.0: STRUCTURAL SAFEGUARDS
+% =============================================================================
+\section{ESL 2.0: Strukturelle Safeguards gegen Selbstüberschätzung}
+\label{sec:esl2}
+
+% ESL Self-Assessment: This section cannot be self-assessed (RAS applies)
+
+The honest self-assessment in Sections~\ref{sec:linguistic} and \ref{sec:disciplines} revealed a fundamental problem: ESL 1.0 allowed inflated K-scores because it lacked structural mechanisms to enforce honesty. This section presents \textbf{ESL 2.0}---a meta-framework revision with built-in safeguards against epistemic self-overestimation.
+
+\begin{principle}[Anti-Circularity]
+\label{principle:anti-circ}
+A calibration framework must not be used to evaluate its own foundational components without external validation.
+\end{principle}
+
+\subsection{Diagnosis: Why ESL 1.0 Failed at Self-Assessment}
+
+ESL 1.0 exhibited four structural weaknesses:
+
+\begin{enumerate}
+    \item \textbf{No Claim-Type Distinction}: ``Replication rate is 62\%'' (measured) and ``$B_{\text{suggests}} = 0.58$'' (author intuition) were treated identically.
+
+    \item \textbf{Circular Self-Evaluation}: The paper defined E-scales, B-values, and K-thresholds, then evaluated itself using those same criteria.
+
+    \item \textbf{No Provenance Requirement}: ESL 1.0 asked ``What is E?'' but not ``Where does this number come from?''
+
+    \item \textbf{Aggregation Illusion}: Averaging K-scores across sections hid the fact that core components (B-values) had $E \approx 0.15$.
+\end{enumerate}
+
+\subsection{The Five Safeguards of ESL 2.0}
+
+% --- SAFEGUARD 1: CTC ---
+\subsubsection{Safeguard 1: Claim-Type Classification (CTC)}
+
+\begin{definition}[Claim-Type Classification]
+\label{def:ctc}
+Every claim must be classified into one of five types \textbf{before} E-assessment. The type determines a maximum allowable E-value ($E_{\max}$).
+
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Type} & \textbf{Description} & \textbf{$E_{\max}$} & \textbf{Example} \\
+\midrule
+T1 & Empirically measured (peer-reviewed) & 1.00 & ``Rep. rate = 62\%'' \\
+T2 & Meta-analytically aggregated & 0.95 & ``$\lambda \in [2.0, 2.5]$'' \\
+T3 & Theoretically/mathematically derived & 0.60 & ``K-metric properties'' \\
+T4 & Expert proposal (documented) & 0.40 & ``$K_{\text{stable}} = 0.75$'' \\
+T5 & Author intuition & 0.20 & ``$B_{\text{suggests}} = 0.58$'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\textbf{Mechanism}: CTC enforces a ceiling. A T5 claim can \textbf{never} receive $E > 0.20$, regardless of how convincingly it is formulated:
+\begin{equation}
+E_{\text{capped}} = \min(E_{\text{assessed}}, E_{\max}(\text{Type}))
+\end{equation}
+
+% --- SAFEGUARD 2: PP ---
+\subsubsection{Safeguard 2: Provenance Requirement (PP)}
+
+\begin{definition}[Provenance Categories]
+\label{def:provenance}
+Every quantitative claim must include explicit provenance. Without provenance, $E_{\max} = 0.10$.
+
+\begin{center}
+\begin{tabular}{clc}
+\toprule
+\textbf{Code} & \textbf{Provenance Type} & \textbf{Modifier} \\
+\midrule
+P1 & Peer-reviewed publication with DOI & $\times 1.00$ \\
+P2 & Preprint / Working paper & $\times 0.85$ \\
+P3 & Established textbook & $\times 0.90$ \\
+P4 & Documented methodology & $\times 0.70$ \\
+P5 & Expert consensus (documented) & $\times 0.50$ \\
+P6 & Author judgment (explicit) & $\times 0.30$ \\
+P0 & No provenance stated & $\times 0.10$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\textbf{Combined Formula}:
+\begin{equation}
+E_{\text{final}} = \min(E_{\text{assessed}}, E_{\max}(\text{Type})) \times P_{\text{modifier}}
+\label{eq:E-final}
+\end{equation}
+
+\begin{practicalbox}[title={Example: B-Value with CTC + PP}]
+\textbf{Claim}: ``$B_{\text{suggests}} = 0.58$'' \\[0.3em]
+\textbf{CTC}: Type T5 (Author intuition) → $E_{\max} = 0.20$ \\
+\textbf{PP}: P6 (Author judgment) → Modifier $\times 0.30$ \\
+\textbf{$E_{\text{final}}$}: $\min(0.72, 0.20) \times 0.30 = 0.20 \times 0.30 = 0.06$ \\[0.3em]
+\textbf{K-Score}: With $B = 0.72$: $K = 1 - |0.72 - 0.06| / 0.72 = 0.08$ \\[0.3em]
+\textbf{Interpretation}: This claim is \textcolor{red}{Speculative}---it cannot support confident assertions until empirically validated.
+\end{practicalbox}
+
+% --- SAFEGUARD 3: WLA ---
+\subsubsection{Safeguard 3: Weakest-Link Aggregation (WLA)}
+
+\begin{definition}[Dependency Analysis]
+\label{def:dependency}
+Two claims $C_1$ and $C_2$ are \textbf{dependent} if the validity of $C_2$ presupposes the validity of $C_1$.
+\end{definition}
+
+\begin{definition}[Weakest-Link Aggregation]
+\label{def:wla}
+For a set of dependent claims forming a cluster:
+\begin{equation}
+K_{\text{cluster}} = \min_{i \in \text{cluster}} K_i
+\end{equation}
+For independent clusters, weighted averaging may be used:
+\begin{equation}
+K_{\text{document}} = \sum_{j} w_j \cdot K_{\text{cluster}_j}, \quad \sum_j w_j = 1
+\end{equation}
+\end{definition}
+
+\textbf{ESL Dependency Structure}:
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1cm,
+    box/.style={rectangle, draw, rounded corners, minimum width=2cm, minimum height=0.6cm, align=center, font=\footnotesize}
+]
+\node[box] (k) at (0,0) {K-Score};
+\node[box] (b) at (-2,-1.2) {B-Value};
+\node[box] (e) at (2,-1.2) {E-Value};
+\node[box] (ling) at (-2,-2.4) {Linguistic\\Markers};
+\node[box] (hier) at (2,-2.4) {Evidence\\Hierarchy};
+
+\draw[->, thick] (b) -- (k);
+\draw[->, thick] (e) -- (k);
+\draw[->, thick] (ling) -- (b);
+\draw[->, thick] (hier) -- (e);
+\end{tikzpicture}
+\end{center}
+
+If $K_{\text{Linguistic Markers}} = 0.08$ (because B-values are unvalidated), then:
+\[
+K_{\text{B-System}} \leq 0.08 \quad \Rightarrow \quad K_{\text{ESL-Framework}} \leq 0.08
+\]
+
+% --- SAFEGUARD 4: EVA ---
+\subsubsection{Safeguard 4: External Validation Requirement (EVA)}
+
+\begin{definition}[Validation Requirements]
+\label{def:eva}
+Certain claim types require external validation before high K-scores are permissible:
+
+\begin{center}
+\begin{tabular}{lcp{5.5cm}}
+\toprule
+\textbf{Claim Type} & \textbf{$K > 0.75$?} & \textbf{Requirement} \\
+\midrule
+T1: Empirical & Yes & Peer-reviewed publication \\
+T2: Meta-analysis & Yes & Preregistration + publication \\
+T3: Theoretical & Conditional & Formal proof or simulation \\
+T4: Expert proposal & No & Only after empirical validation \\
+T5: Author intuition & No & Only after corpus study \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\textbf{Consequence}: The B-values in this paper (T5) can \textbf{never} achieve $K > 0.40$ until a corpus linguistic study is conducted, inter-rater reliability is measured, and results are peer-reviewed.
+
+% --- SAFEGUARD 5: RAS ---
+\subsubsection{Safeguard 5: Reflexive Application Lock (RAS)}
+
+\begin{definition}[Definitional vs. Application Claims]
+\label{def:ras}
+\begin{itemize}
+    \item \textbf{Definitional claims}: Claims that constitute the framework itself (e.g., ``$K = 1 - |B-E|/B_{\max}$'')
+    \item \textbf{Application claims}: Claims evaluated using the framework (e.g., ``Loss aversion $\lambda \approx 2.2$'')
+\end{itemize}
+\end{definition}
+
+\begin{rule}[Reflexive Application Lock]
+Definitional claims of a framework \textbf{cannot} be evaluated using that framework. Their validation requires:
+\begin{enumerate}
+    \item Meta-level analysis (external framework)
+    \item Empirical validation (predictive validity)
+    \item Comparison with alternatives (comparative analysis)
+\end{enumerate}
+\end{rule}
+
+\textbf{Consequence}: ESL 1.0's self-assessment of $K = 0.92$ is \textbf{invalid} because it evaluated definitional claims (K-formula, E-hierarchy, B-values) using those same definitions.
+
+\subsection{ESL 2.0: Complete Specification}
+
+\begin{definition}[ESL 2.0 K-Score]
+\label{def:esl2-k}
+The ESL 2.0 K-Score for a document $D$ with claim clusters $\{C_1, \ldots, C_m\}$:
+
+\begin{equation}
+K_{\text{ESL2.0}}(D) = \sum_{j=1}^{m} w_j \cdot \min_{i \in C_j} K_i
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $C_j$ = Cluster of dependent claims
+    \item $w_j$ = Cluster weight (by importance), $\sum w_j = 1$
+    \item $K_i = 1 - |B_i - E_i| / B_{\max,i}$
+    \item $E_i = \min(E_{\text{assessed},i}, E_{\max}(\text{Type}_i)) \times P_i$
+\end{itemize}
+\end{definition}
+
+\subsection{Application: This Paper Re-Evaluated with ESL 2.0}
+
+\begin{table}[h]
+\centering
+\caption{ESL Paper: Re-Assessment with ESL 2.0 Safeguards}
+\label{tab:esl2-reassessment}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Claim} & \textbf{Type} & \textbf{$E_{\max}$} & \textbf{Prov.} & \textbf{$E_{\text{final}}$} & \textbf{B} & \textbf{K} \\
+\midrule
+Rep. rate 62\% & T1 & 1.00 & P1 & 0.95 & 0.80 & 0.81 \\
+$\lambda \approx 2.2$ & T2 & 0.95 & P1 & 0.88 & 0.75 & 0.83 \\
+K-formula properties & T3 & 0.60 & P4 & 0.42 & 0.70 & 0.60 \\
+$B_{\text{suggests}} = 0.58$ & T5 & 0.20 & P6 & 0.06 & 0.72 & 0.08 \\
+$K_{\text{stable}} = 0.75$ & T4 & 0.40 & P6 & 0.12 & 0.75 & 0.16 \\
+Triangulation $\Delta$ & T4 & 0.40 & P5 & 0.20 & 0.72 & 0.28 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Cluster Analysis}:
+
+\textbf{Cluster 1: Empirical Foundation} (independent, weight $w_1 = 0.30$):
+\begin{itemize}
+    \item Replication rates, $\lambda$-estimates, WEIRD statistics
+    \item $K_{\text{C1}} = \min(0.81, 0.83) = 0.81$
+\end{itemize}
+
+\textbf{Cluster 2: ESL Framework Core} (dependent, weight $w_2 = 0.70$):
+\begin{itemize}
+    \item K-formula → B-values → Linguistic markers
+    \item K-formula → E-values → Evidence hierarchy
+    \item $K_{\text{C2}} = \min(0.60, 0.08, 0.16, 0.28) = 0.08$
+\end{itemize}
+
+\textbf{ESL 2.0 Document Score}:
+\begin{equation}
+K_{\text{ESL2.0}} = 0.30 \times 0.81 + 0.70 \times 0.08 = 0.243 + 0.056 = \mathbf{0.30}
+\end{equation}
+
+\begin{table}[h]
+\centering
+\caption{ESL 1.0 vs ESL 2.0 Assessment Comparison}
+\label{tab:comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{ESL 1.0} & \textbf{ESL 2.0} \\
+\midrule
+Document K-Score & 0.92 & 0.30 \\
+Category & Highly Stable & \textcolor{red}{Speculative} \\
+Discrepancy & --- & 0.62 points \\
+Honesty Level & Low & High \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Interpretation and Implications}
+
+The ESL 2.0 assessment reveals that this paper, while presenting valuable conceptual contributions, has a \textbf{speculative} epistemic status regarding its core numerical parameters.
+
+\textbf{What this means}:
+\begin{itemize}
+    \item The \textbf{conceptual framework} (claim-evidence alignment, K-metric structure) is theoretically sound ($K \approx 0.60$)
+    \item The \textbf{empirical grounding} (replication crisis, loss aversion) is strong ($K \approx 0.81$)
+    \item The \textbf{specific numerical parameters} (B-values, K-thresholds) are speculative ($K \approx 0.08$--$0.28$)
+\end{itemize}
+
+\textbf{Path to validation}:
+\begin{enumerate}
+    \item Conduct corpus linguistic studies to validate B-values
+    \item Perform inter-rater reliability studies
+    \item Test predictive validity: Do K-scores predict replication outcomes?
+    \item Peer-review and publish validation results
+    \item Upgrade claim types from T5/T4 to T1/T2
+\end{enumerate}
+
+\begin{insightbox}
+\textbf{Core Principle of ESL 2.0:} \\[0.3em]
+\textit{An honest framework must \textbf{enforce} honesty, not merely recommend it.}
+
+The five safeguards (CTC, PP, WLA, EVA, RAS) create structural barriers against epistemic inflation---barriers that operate through mathematical constraints, not good intentions.
+\end{insightbox}
+
+\begin{eslbox}
+\textbf{Section Assessment:} This section \textbf{cannot be self-assessed} using ESL (RAS applies). Its validation requires external review and empirical testing of whether ESL 2.0 safeguards actually prevent self-overestimation better than ESL 1.0.
+\end{eslbox}
+
+% =============================================================================
+% 13. CONCLUSION
 % =============================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-% ESL Self-Assessment: B = 0.75, E = 0.78 → K = 0.96
+% ESL 2.0 Self-Assessment: Cannot be performed (RAS applies)
 
 The Empirical Stability of Language (ESL) framework provides a systematic approach for calibrating scientific claims to their evidence base. In an era of LLM-assisted knowledge production, ESL offers a critical safeguard against epistemic inflation.
 
@@ -1750,42 +2044,48 @@ The Empirical Stability of Language (ESL) framework provides a systematic approa
 Scaling amplifies epistemic errors. ESL transforms this risk into an opportunity: automated validation at scale, with discipline-specific calibration and complete audit trails.
 \end{insightbox}
 
-Key contributions include:
+This paper makes two distinct contributions:
 
+\textbf{ESL 1.0} (Sections 2--11): The conceptual framework
 \begin{itemize}
     \item Formal $K$-metric with interpretable thresholds
     \item Discipline-specific evidence hierarchies
     \item Triangulation and WEIRD correction frameworks
     \item Four-stage evolution analysis for LLM systems
-    \item Practical integration architecture
+    \item Lexikalische Primitive (Grundbegriff vs. Token)
 \end{itemize}
 
-This paper demonstrates that calibrated language and explicit acknowledgment of limitations are achievable and valuable. However, honest self-assessment reveals that this paper itself has mixed epistemic foundations.
+\textbf{ESL 2.0} (Section 12): Structural safeguards against self-overestimation
+\begin{itemize}
+    \item \textbf{CTC}: Claim-Type Classification with $E_{\max}$ caps
+    \item \textbf{PP}: Provenance Requirement with modifiers
+    \item \textbf{WLA}: Weakest-Link Aggregation for dependent claims
+    \item \textbf{EVA}: External Validation Requirement
+    \item \textbf{RAS}: Reflexive Application Lock
+\end{itemize}
 
-ESL does not claim to solve the replication crisis. It offers a \textbf{conceptual framework} for calibrated communication---but many of the specific numerical parameters require empirical validation before operational deployment.
+ESL 2.0 emerged from honest self-criticism: ESL 1.0 allowed this paper to claim $K = 0.92$ while the actual evidence basis for core components (B-values, K-thresholds) was $E \approx 0.06$--$0.20$. The five safeguards create \textbf{structural barriers} against such inflation.
 
 \begin{eslbox}
-\textbf{Paper-Level Assessment (Honest Revision):} \\[0.5em]
-\textbf{Sections with strong evidence} ($E \geq 0.75$):
+\textbf{Paper-Level Assessment (ESL 2.0):} \\[0.5em]
+\textbf{Cluster 1: Empirical Foundation} (T1/T2 claims, $w = 0.30$):
 \begin{itemize}
-    \item Replication crisis motivation (published meta-analyses)
-    \item LLM limitation analysis (documented capabilities)
-    \item Triangulation principle (Falk-Heckman, established)
-    \item Loss aversion estimates (triangulated evidence)
+    \item Replication rates, loss aversion, WEIRD statistics
+    \item $K_{\text{C1}} = 0.81$ (Stable)
 \end{itemize}
 
-\textbf{Sections with weak evidence} ($E \leq 0.45$):
+\textbf{Cluster 2: Framework Core} (T3--T5 claims, $w = 0.70$):
 \begin{itemize}
-    \item $B$-value tables (expert intuition only)
-    \item $K$-thresholds by discipline (normative proposals)
-    \item WEIRD correction factors (estimated)
-    \item Cost estimates (illustrative)
+    \item K-formula, B-values, E-hierarchies, thresholds
+    \item $K_{\text{C2}} = \min(0.60, 0.08, 0.16, 0.28) = 0.08$ (Speculative)
 \end{itemize}
 
-\textbf{Revised Assessment:} \\
-Weighted $B$: 0.72 \quad Weighted $E$: 0.58 \\
-\textbf{Honest $K$-Score: 0.73} (\textcolor{orange}{Partially Stable}) \\[0.3em]
-\textbf{Interpretation}: This paper is a \textbf{theoretical framework proposal} with some empirically grounded components and many parameters requiring validation. It should be read as a \textit{starting point for calibration research}, not as a validated measurement instrument.
+\textbf{ESL 2.0 Document Score:} \\
+$K = 0.30 \times 0.81 + 0.70 \times 0.08 = \mathbf{0.30}$ \\[0.3em]
+\textbf{Category}: \textcolor{red}{Speculative} \\[0.3em]
+\textbf{Interpretation}: This paper presents a \textbf{theoretically coherent framework} with \textbf{strong empirical motivation} but \textbf{unvalidated core parameters}. It is a \textit{research proposal}, not a validated instrument.
+
+\textbf{Path forward}: Corpus studies → Inter-rater reliability → Predictive validity → Peer review → Upgrade T5→T1
 \end{eslbox}
 
 % =============================================================================
@@ -2313,6 +2613,16 @@ This appendix provides a practical checklist for applying ESL to scientific writ
     \item[Evidence Decay] Reduction in $E$-values over time due to failed replications, methodological critiques, or new contradictory findings.
 
     \item[QA Module] Quality Assurance module in an LLM pipeline. ESL functions as a QA module validating epistemic claims.
+
+    \item[CTC] Claim-Type Classification (ESL 2.0). Every claim must be classified T1--T5 before assessment, determining $E_{\max}$.
+
+    \item[PP] Provenance Requirement (ESL 2.0). Every quantitative claim requires explicit source documentation, with modifiers P1--P0.
+
+    \item[WLA] Weakest-Link Aggregation (ESL 2.0). For dependent claims: $K_{\text{cluster}} = \min_i K_i$. Prevents averaging from hiding weak components.
+
+    \item[EVA] External Validation Requirement (ESL 2.0). Certain claim types (T4, T5) cannot achieve $K > 0.40$ without external empirical validation.
+
+    \item[RAS] Reflexive Application Lock (ESL 2.0). A framework cannot evaluate its own definitional claims. Prevents circular self-validation.
 \end{description}
 
 % =============================================================================
@@ -2325,37 +2635,52 @@ This appendix provides a practical checklist for applying ESL to scientific writ
 \end{center}
 \vspace{1em}
 
-\noindent\textbf{Final Self-Assessment Summary (Revised)}
+\noindent\textbf{Final Self-Assessment Summary (ESL 2.0)}
 
-This paper presents ESL as a \textbf{theoretical framework} with \textbf{mixed epistemic foundations}:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Assessment Method} & \textbf{K-Score} & \textbf{Category} \\
+\midrule
+ESL 1.0 (original, inflated) & 0.92 & Highly Stable \\
+ESL 1.0 (honest revision) & 0.73 & Partially Stable \\
+\textbf{ESL 2.0 (with safeguards)} & \textbf{0.30} & \textbf{Speculative} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
+\textbf{ESL 2.0 Cluster Analysis}:
 \begin{itemize}
-    \item \textbf{Honest $K$-Score}: 0.73 (Partially Stable)
-    \item \textbf{Strongest Sections}: Problem motivation, LLM analysis ($K \geq 0.85$)
-    \item \textbf{Weakest Sections}: $B$-value tables, $K$-thresholds ($K \approx 0.49$--$0.57$)
-    \item \textbf{Status}: Theoretical framework proposal requiring empirical validation
+    \item \textbf{Cluster 1} (Empirical: replication rates, $\lambda$): $K = 0.81$
+    \item \textbf{Cluster 2} (Framework: B-values, thresholds): $K = 0.08$
+    \item \textbf{Document}: $K = 0.30 \times 0.81 + 0.70 \times 0.08 = 0.30$
 \end{itemize}
 
 \textbf{What this paper provides}:
 \begin{itemize}
-    \item A coherent conceptual framework for claim-evidence calibration
-    \item Formally defined metrics with interpretable components
-    \item Ordinal rankings of linguistic markers (validated: strong $>$ weak)
-    \item Integration architecture for LLM systems
+    \item A theoretically coherent framework (K-metric, evidence hierarchies)
+    \item Strong empirical motivation (replication crisis, LLM risks)
+    \item Structural safeguards against self-overestimation (ESL 2.0)
+    \item Lexikalische Primitive (Grundbegriff vs. Token distinction)
 \end{itemize}
 
 \textbf{What this paper does NOT provide}:
 \begin{itemize}
-    \item Empirically validated numerical $B$-values
-    \item Empirically calibrated $K$-thresholds
-    \item Predictive validity evidence ($K$-scores $\to$ replication outcomes)
+    \item Validated B-values (requires corpus studies)
+    \item Calibrated K-thresholds (requires outcome prediction studies)
+    \item Predictive validity evidence
 \end{itemize}
 
-The paper demonstrates that \textbf{honest self-assessment is achievable}---and that acknowledging weak evidence where it exists is itself an application of ESL principles.
+\textbf{The key insight}: ESL 1.0 failed at self-assessment because it lacked structural safeguards. ESL 2.0's five mechanisms (CTC, PP, WLA, EVA, RAS) create mathematical barriers against inflation---barriers that this paper itself cannot circumvent.
 
 \vspace{1em}
 \begin{center}
-\textit{``Calibration, not minimization---and honesty about what we don't know.''}
+\fbox{\parbox{0.85\textwidth}{
+\centering
+\textbf{Core Principle:} \\[0.3em]
+\textit{``An honest framework must \textbf{enforce} honesty, not merely recommend it.''}
+}}
 \end{center}
 
 \end{document}
