@@ -1,0 +1,407 @@
+# =============================================================================
+# ESL GLOSSAR: Medizin
+# =============================================================================
+# Definitionen mit Evidenzstärke und klinischer Relevanz
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Medizin"
+  anzahl_eintraege: 56
+  beschreibung: |
+    Glossar medizinischer Begriffe mit Fokus auf Evidence-Based
+    Medicine. Klinische vs. statistische Signifikanz wird
+    unterschieden. GRADE-System für Evidenzbewertung.
+
+
+# =============================================================================
+# STUDIENDESIGNS
+# =============================================================================
+
+studiendesigns:
+
+  randomisierte_kontrollierte_studie:
+    begriff: "Randomisierte kontrollierte Studie (RCT)"
+    englisch: "Randomized Controlled Trial"
+    definition: "Experiment mit zufälliger Zuteilung zu Behandlungsgruppen"
+    merkmale:
+      - "Randomisierung"
+      - "Kontrollgruppe"
+      - "Prospektiv"
+      - "Idealerweise Verblindung"
+    evidenzstufe: "1b (Oxford CEBM)"
+    GRADE: "Hoch"
+    staerken:
+      - "Höchste interne Validität"
+      - "Kontrolliert bekannte und unbekannte Confounder"
+    schwaechen:
+      - "Teuer und zeitaufwendig"
+      - "Nicht immer ethisch möglich"
+      - "Möglicherweise geringe externe Validität"
+    konfidenz: 0.95
+    quelle: "Gold-Standard seit Bradford Hill"
+
+  kohortenstudie:
+    begriff: "Kohortenstudie"
+    definition: "Längsschnittstudie mit Verfolgung exponierter/nicht-exponierter Gruppen"
+    typen:
+      prospektiv: "Exposition → Follow-up → Outcome"
+      retrospektiv: "Historische Daten"
+    evidenzstufe: "2b"
+    GRADE: "Niedrig bis moderat"
+    staerken:
+      - "Zeitliche Sequenz"
+      - "Berechnung von Inzidenz möglich"
+    schwaechen:
+      - "Confounding möglich"
+      - "Teuer bei seltenen Erkrankungen"
+    konfidenz: 0.75
+
+  fall_kontroll_studie:
+    begriff: "Fall-Kontroll-Studie"
+    definition: "Rückblickende Studie: Fälle vs. Kontrollen, Exposition vergleichen"
+    richtung: "Outcome → Exposition (retrospektiv)"
+    masse: "Odds Ratio (OR)"
+    evidenzstufe: "3"
+    GRADE: "Niedrig"
+    staerken:
+      - "Effizient bei seltenen Erkrankungen"
+      - "Schnell und günstig"
+    schwaechen:
+      - "Recall Bias"
+      - "Selektionsbias bei Kontrollen"
+      - "Keine Inzidenz berechenbar"
+    konfidenz: 0.65
+
+  querschnittsstudie:
+    begriff: "Querschnittsstudie"
+    definition: "Erhebung zu einem Zeitpunkt"
+    masse: "Prävalenz, Prävalenz-Odds-Ratio"
+    evidenzstufe: "4"
+    GRADE: "Sehr niedrig"
+    limitationen:
+      - "Keine Kausalität"
+      - "Keine zeitliche Sequenz"
+    konfidenz: 0.50
+
+  systematischer_review:
+    begriff: "Systematischer Review"
+    definition: "Strukturierte Zusammenfassung aller verfügbaren Evidenz"
+    merkmale:
+      - "Protokoll a priori"
+      - "Systematische Literatursuche"
+      - "Qualitätsbewertung"
+      - "Optional: Meta-Analyse"
+    evidenzstufe: "1a (wenn RCTs)"
+    GRADE: "Hoch"
+    standards:
+      - "PRISMA-Guidelines"
+      - "Cochrane Methodology"
+    konfidenz: 0.98
+
+  meta_analyse:
+    begriff: "Meta-Analyse"
+    definition: "Statistische Kombination von Ergebnissen mehrerer Studien"
+    vorteile:
+      - "Erhöhte Power"
+      - "Präzisere Effektschätzung"
+      - "Exploration von Heterogenität"
+    kennzahlen:
+      - "Gepoolter Effekt"
+      - "I² (Heterogenität)"
+      - "Funnel Plot (Publication Bias)"
+    evidenzstufe: "1a"
+    GRADE: "Hoch (bei geringer Heterogenität)"
+    konfidenz: 0.95
+    warnung: "GIGO: Garbage In, Garbage Out"
+
+
+# =============================================================================
+# EFFEKTMASSE
+# =============================================================================
+
+effektmasse:
+
+  relatives_risiko:
+    begriff: "Relatives Risiko (RR)"
+    alternativ: "Risk Ratio"
+    definition: "Verhältnis der Risiken in Behandlungs- vs. Kontrollgruppe"
+    formel: "RR = (a/(a+b)) / (c/(c+d))"
+    interpretation:
+      - "RR = 1: Kein Effekt"
+      - "RR < 1: Protektiv"
+      - "RR > 1: Risikoerhöhend"
+    anwendung: "Kohortenstudien, RCTs"
+    konfidenz: 0.90
+
+  odds_ratio:
+    begriff: "Odds Ratio (OR)"
+    definition: "Verhältnis der Odds in zwei Gruppen"
+    formel: "OR = (a×d) / (b×c)"
+    interpretation:
+      - "OR ≈ RR bei seltenen Erkrankungen"
+      - "Überschätzt RR bei häufigen Erkrankungen"
+    anwendung: "Fall-Kontroll-Studien, logistische Regression"
+    konfidenz: 0.85
+
+  hazard_ratio:
+    begriff: "Hazard Ratio (HR)"
+    definition: "Verhältnis der Hazardraten (Ereignisraten pro Zeiteinheit)"
+    interpretation: "Ähnlich RR, berücksichtigt Zeit bis Ereignis"
+    anwendung: "Überlebenszeitanalysen (Cox-Regression)"
+    konfidenz: 0.90
+
+  absolute_risikoreduktion:
+    begriff: "Absolute Risikoreduktion (ARR)"
+    definition: "Differenz der Risiken: Kontrolle - Behandlung"
+    formel: "ARR = CER - EER"
+    klinische_relevanz: "Direktes Maß für Patientennutzen"
+    konfidenz: 0.95
+
+  number_needed_to_treat:
+    begriff: "Number Needed to Treat (NNT)"
+    definition: "Anzahl zu Behandelnder für ein verhindertes Ereignis"
+    formel: "NNT = 1 / ARR"
+    interpretation:
+      - "NNT = 10: 10 behandeln für 1 verhinderten Fall"
+      - "Kleiner = besser"
+    beispiele:
+      statine_praevention: "NNT ~40-100 (Primärprävention)"
+      aspirin_herzinfarkt: "NNT ~42 (Sekundärprävention)"
+    klinische_relevanz: "Wichtigstes Maß für Praxisentscheidungen"
+    konfidenz: 0.95
+
+  number_needed_to_harm:
+    begriff: "Number Needed to Harm (NNH)"
+    definition: "Anzahl zu Behandelnder für einen Schadensfall"
+    formel: "NNH = 1 / ARI (Absolute Risk Increase)"
+    anwendung: "Nebenwirkungsbewertung"
+    konfidenz: 0.90
+
+
+# =============================================================================
+# DIAGNOSTISCHE KENNZAHLEN
+# =============================================================================
+
+diagnostik:
+
+  sensitivitaet:
+    begriff: "Sensitivität"
+    definition: "Anteil korrekt erkannter Kranker"
+    formel: "Sens = RP / (RP + FN)"
+    klinische_bedeutung: "Hohe Sensitivität → Ausschlussdiagnostik (SnNout)"
+    beispiele:
+      troponin_acs: "Sensitivität 95-99%"
+      d_dimer_lungenembolie: "Sensitivität >95%"
+    konfidenz: 0.95
+
+  spezifitaet:
+    begriff: "Spezifität"
+    definition: "Anteil korrekt erkannter Gesunder"
+    formel: "Spez = RN / (RN + FP)"
+    klinische_bedeutung: "Hohe Spezifität → Bestätigungsdiagnostik (SpPin)"
+    konfidenz: 0.95
+
+  positiver_praediktiver_wert:
+    begriff: "Positiver Prädiktiver Wert (PPV)"
+    definition: "Wahrscheinlichkeit krank zu sein bei positivem Test"
+    formel: "PPV = RP / (RP + FP)"
+    abhaengigkeit: "Stark prävalenzabhängig!"
+    konfidenz: 0.90
+
+  negativer_praediktiver_wert:
+    begriff: "Negativer Prädiktiver Wert (NPV)"
+    definition: "Wahrscheinlichkeit gesund zu sein bei negativem Test"
+    formel: "NPV = RN / (RN + FN)"
+    abhaengigkeit: "Stark prävalenzabhängig!"
+    konfidenz: 0.90
+
+  likelihood_ratio:
+    begriff: "Likelihood Ratio (LR)"
+    definition: "Verhältnis der Testwahrscheinlichkeiten bei Kranken vs. Gesunden"
+    formeln:
+      LR_positiv: "Sensitivität / (1 - Spezifität)"
+      LR_negativ: "(1 - Sensitivität) / Spezifität"
+    interpretation:
+      - "LR+ > 10: Starke Evidenz für Erkrankung"
+      - "LR- < 0.1: Starke Evidenz gegen Erkrankung"
+    vorteil: "Prävalenzunabhängig"
+    konfidenz: 0.92
+
+  roc_auc:
+    begriff: "Area Under the ROC Curve (AUC)"
+    definition: "Diskriminationsfähigkeit eines Tests"
+    interpretation:
+      - "AUC = 0.5: Zufall"
+      - "AUC 0.7-0.8: Akzeptabel"
+      - "AUC 0.8-0.9: Gut"
+      - "AUC > 0.9: Exzellent"
+    konfidenz: 0.92
+
+
+# =============================================================================
+# EVIDENCE-BASED MEDICINE
+# =============================================================================
+
+ebm:
+
+  grade_system:
+    begriff: "GRADE (Grading of Recommendations, Assessment, Development and Evaluation)"
+    definition: "System zur Bewertung von Evidenzqualität und Empfehlungsstärke"
+    evidenzqualitaet:
+      hoch: "Weitere Forschung ändert Vertrauen sehr unwahrscheinlich"
+      moderat: "Weitere Forschung könnte Vertrauen ändern"
+      niedrig: "Weitere Forschung wird Vertrauen wahrscheinlich ändern"
+      sehr_niedrig: "Effektschätzung sehr unsicher"
+    downgrading:
+      - "Risk of Bias"
+      - "Inconsistency"
+      - "Indirectness"
+      - "Imprecision"
+      - "Publication Bias"
+    upgrading:
+      - "Large Effect"
+      - "Dose-Response"
+      - "Plausible Confounding"
+    konfidenz: 0.95
+    quelle: "Standard seit 2000er, Cochrane, WHO"
+
+  sackett_ebm:
+    begriff: "Evidence-Based Medicine (EBM)"
+    definition: "Integration bester Evidenz mit klinischer Expertise und Patientenwerten"
+    saeulen:
+      - "Beste verfügbare externe Evidenz"
+      - "Individuelle klinische Expertise"
+      - "Patientenpräferenzen und -werte"
+    quelle: "Sackett et al., 1996"
+    konfidenz: 0.98
+    anmerkung: "Paradigma der modernen Medizin"
+
+  cochrane:
+    begriff: "Cochrane Collaboration"
+    definition: "Internationale Organisation für systematische Reviews"
+    produkte:
+      - "Cochrane Database of Systematic Reviews"
+      - "Cochrane Handbook"
+      - "RevMan Software"
+    qualitaet: "Gold-Standard für systematische Reviews"
+    konfidenz: 0.98
+
+
+# =============================================================================
+# BIAS UND CONFOUNDING
+# =============================================================================
+
+bias:
+
+  selektionsbias:
+    begriff: "Selektionsbias"
+    definition: "Systematischer Fehler durch nicht-repräsentative Auswahl"
+    beispiele:
+      - "Healthy Worker Effect"
+      - "Berksons Bias"
+      - "Loss to Follow-up"
+    kontrolle: "Randomisierung, klare Ein-/Ausschlusskriterien"
+    konfidenz: 0.90
+
+  information_bias:
+    begriff: "Informationsbias"
+    typen:
+      recall_bias: "Unterschiedliche Erinnerung bei Fällen vs. Kontrollen"
+      interviewer_bias: "Unterschiedliche Befragung"
+      detection_bias: "Unterschiedlich intensive Diagnostik"
+    kontrolle: "Verblindung, standardisierte Erhebung"
+    konfidenz: 0.88
+
+  confounding:
+    begriff: "Confounding"
+    definition: "Störvariable, die mit Exposition und Outcome assoziiert ist"
+    kontrolle:
+      design: "Randomisierung, Matching, Restriktion"
+      analyse: "Stratifikation, Adjustierung, Propensity Score"
+    konfidenz: 0.88
+
+  publication_bias:
+    begriff: "Publication Bias"
+    definition: "Bevorzugte Publikation positiver Ergebnisse"
+    nachweis:
+      - "Funnel Plot Asymmetrie"
+      - "Egger's Test"
+      - "Trim-and-Fill"
+    ausmass: "Schätzung: 50% negativer Studien unpubliziert"
+    gegenmassnahmen:
+      - "Präregistrierung (ClinicalTrials.gov)"
+      - "Registered Reports"
+      - "Suche nach grauer Literatur"
+    konfidenz: 0.85
+
+
+# =============================================================================
+# KLINISCHE RELEVANZ
+# =============================================================================
+
+klinische_relevanz:
+
+  statistische_vs_klinische_signifikanz:
+    begriff: "Statistische vs. klinische Signifikanz"
+    definition: |
+      Statistisch signifikant ≠ klinisch relevant.
+      Bei großen Studien können triviale Unterschiede signifikant werden.
+    beispiel: |
+      Blutdrucksenkung um 2 mmHg kann bei N=10.000 signifikant sein,
+      aber klinisch irrelevant.
+    empfehlung: "Immer Effektgröße und Konfidenzintervall betrachten"
+    konfidenz: 0.95
+
+  minimal_clinically_important_difference:
+    begriff: "Minimal Clinically Important Difference (MCID)"
+    definition: "Kleinste klinisch bedeutsame Änderung"
+    beispiele:
+      schmerzskala_vas: "~13 mm auf 100mm VAS"
+      6_minuten_gehtest: "~30 Meter"
+      sf36_physical: "~3-5 Punkte"
+    bedeutung: "Schwelle für klinische Relevanz"
+    konfidenz: 0.88
+
+  surrogatendpunkte:
+    begriff: "Surrogatendpunkte"
+    definition: "Laborwert oder Marker als Ersatz für klinisches Outcome"
+    beispiele:
+      validiert:
+        - "HbA1c für Diabeteskomplikationen"
+        - "Blutdruck für kardiovaskuläre Ereignisse"
+      problematisch:
+        - "Tumorschrumpfung ≠ Überleben"
+        - "Knochendichte ≠ Frakturen (teilweise)"
+    warnung: "Surrogat muss kausal mit Outcome verknüpft sein"
+    konfidenz: 0.75
+
+
+# =============================================================================
+# REPLIKATIONSKRISE IN DER MEDIZIN
+# =============================================================================
+
+replikation:
+
+  praeklinische_forschung:
+    replikationsrate: 0.25
+    quelle: "Begley & Ellis, Nature 2012 (11% in Onkologie)"
+    ursachen:
+      - "Publication Bias"
+      - "Underpowered Studies"
+      - "P-Hacking"
+      - "Mangelnde Methodendetails"
+
+  klinische_studien:
+    replikationsrate: 0.50
+    quelle: "Ioannidis, JAMA 2005"
+    variation:
+      - "RCTs: ~70%"
+      - "Beobachtungsstudien: ~30%"
+
+  gegenmassnahmen:
+    - "Präregistrierung (ClinicalTrials.gov seit 2007 Pflicht)"
+    - "Registered Reports"
+    - "CONSORT, STROBE, PRISMA Guidelines"
+    - "Open Data / Open Materials"
+    - "Replication Studies"

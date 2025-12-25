@@ -1,0 +1,479 @@
+# =============================================================================
+# ESL LEXIKON: Medizin
+# =============================================================================
+# Erweiterte Definitionen mit Verwendungskontext, Beispielsätzen
+# und klinisch-wissenschaftlichen Kollokationen
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Medizin"
+  anzahl_eintraege: 28
+  beschreibung: |
+    Erweitertes Lexikon mit Verwendungshinweisen für präzise
+    medizinische Kommunikation. Unterscheidung zwischen
+    klinischer und statistischer Signifikanz. EBM-konforme
+    Formulierungen.
+
+
+# =============================================================================
+# WIRKSAMKEIT UND EVIDENZ
+# =============================================================================
+
+wirksamkeit:
+  grundform: "Wirksamkeit"
+  englisch: "Efficacy / Effectiveness"
+
+  definition:
+    kurz: "Ausmaß des therapeutischen Effekts"
+    erweitert: |
+      Unterscheidung zwischen Efficacy (Wirksamkeit unter
+      Idealbedingungen, z.B. RCT) und Effectiveness (Wirksamkeit
+      unter Alltagsbedingungen). Beide können divergieren.
+
+  verwendung:
+    korrekt:
+      - "Die Wirksamkeit wurde in einem RCT nachgewiesen (Efficacy)"
+      - "Die Effektivität unter Praxisbedingungen ist noch unklar"
+      - "Die Therapie zeigte Wirksamkeit mit NNT = 15"
+    inkorrekt:
+      - "Das Medikament wirkt" # Ohne Evidenzangabe
+      - "Die Behandlung ist effektiv" # Ohne Quantifizierung
+
+  beispielsaetze:
+    - satz: "Die Wirksamkeit von Statinen in der Sekundärprävention ist gut belegt (RRR 25%, NNT 28)."
+      kontext: "Kardiologie"
+    - satz: "Trotz nachgewiesener Efficacy im RCT konnte keine Effectiveness im klinischen Alltag gezeigt werden."
+      kontext: "Therapieevaluation"
+
+  kollokationen:
+    - "Wirksamkeit nachweisen/belegen"
+    - "Wirksamkeit im RCT zeigen"
+    - "klinische Wirksamkeit"
+    - "Wirksamkeit vs. Verträglichkeit"
+
+
+evidenz:
+  grundform: "Evidenz"
+  englisch: "Evidence"
+
+  definition:
+    kurz: "Wissenschaftliche Grundlage für medizinische Aussagen"
+    erweitert: |
+      In der EBM: Summe der verfügbaren wissenschaftlichen Daten,
+      hierarchisch nach Studiendesign und -qualität geordnet.
+      GRADE-System für Evidenzqualität (hoch, moderat, niedrig, sehr niedrig).
+
+  verwendung:
+    korrekt:
+      - "Die Evidenz aus RCTs zeigt..."
+      - "Evidenz hoher Qualität (GRADE) belegt..."
+      - "Die Evidenz ist limitiert durch..."
+    inkorrekt:
+      - "Es gibt Evidenz" # Ohne Qualifizierung
+      - "Bewiesen durch Evidenz" # Übertrieben
+
+  beispielsaetze:
+    - satz: "Die Evidenz für ASS in der Primärprävention wurde durch aktuelle RCTs relativiert."
+      kontext: "Kardiologie"
+    - satz: "Evidenz moderater Qualität unterstützt den Einsatz von... (GRADE)"
+      kontext: "Leitlinienempfehlung"
+
+  kollokationen:
+    - "Evidenz hoher/moderater/niedriger Qualität"
+    - "Evidenz aus RCTs/Kohortenstudien"
+    - "verfügbare Evidenz"
+    - "Evidenz zusammenfassen/bewerten"
+
+
+signifikant:
+  grundform: "signifikant"
+
+  definition:
+    kurz: "Statistisch oder klinisch bedeutsam"
+    erweitert: |
+      In der Medizin müssen statistische und klinische Signifikanz
+      unterschieden werden. Ein statistisch signifikantes Ergebnis
+      (p < 0.05) muss nicht klinisch relevant sein.
+
+  verwendung:
+    korrekt:
+      - "Der Unterschied war statistisch signifikant (p = 0.01)"
+      - "Die Differenz erreichte nicht die klinische Relevanzschwelle"
+      - "Statistisch signifikant, aber klinisch nicht relevant (Δ = 2 mmHg)"
+    inkorrekt:
+      - "Signifikant besser" # Ohne Angabe welche Art
+      - "Hochsignifikant" # p-Wert angeben
+
+  beispielsaetze:
+    - satz: "Die Blutdrucksenkung war statistisch signifikant (p < 0.001), aber mit 3 mmHg unter der MCID."
+      kontext: "Hypertonie-Studie"
+    - satz: "Der primäre Endpunkt erreichte sowohl statistische (p = 0.02) als auch klinische Signifikanz (MCID überschritten)."
+      kontext: "RCT-Ergebnis"
+
+  kollokationen:
+    - "statistisch signifikant"
+    - "klinisch signifikant/relevant"
+    - "signifikanter Unterschied"
+    - "Signifikanzniveau von α = 0.05"
+
+
+# =============================================================================
+# RISIKO UND NUTZEN
+# =============================================================================
+
+risiko:
+  grundform: "Risiko"
+  plural: "Risiken"
+
+  definition:
+    kurz: "Wahrscheinlichkeit eines unerwünschten Ereignisses"
+    erweitert: |
+      Verschiedene Risikomaße in der Medizin: Absolutes Risiko,
+      relatives Risiko, Odds Ratio. Relatives Risiko kann bei
+      niedrigen Basisraten irreführend sein.
+
+  verwendung:
+    korrekt:
+      - "Das absolute Risiko beträgt 5%"
+      - "Das relative Risiko ist um 50% erhöht (RR 1.5)"
+      - "Die absolute Risikoreduktion beträgt 2%"
+    inkorrekt:
+      - "Das Risiko verdoppelt sich" # Ohne Basisrate
+      - "Erhöhtes Risiko" # Ohne Quantifizierung
+
+  beispielsaetze:
+    - satz: "Das 10-Jahres-Risiko für kardiovaskuläre Ereignisse beträgt 15% (SCORE)."
+      kontext: "Risikostratifizierung"
+    - satz: "Rauchen erhöht das relative Lungenkrebsrisiko um das 20-fache (RR = 20)."
+      kontext: "Epidemiologie"
+
+  kollokationen:
+    - "absolutes/relatives Risiko"
+    - "Risiko erhöhen/senken"
+    - "Risiko-Nutzen-Abwägung"
+    - "Risikofaktor"
+
+
+nutzen:
+  grundform: "Nutzen"
+  englisch: "Benefit"
+
+  definition:
+    kurz: "Positiver therapeutischer Effekt"
+    erweitert: |
+      Quantifiziert durch ARR, NNT, oder qualitätsjustierte
+      Lebensjahre (QALYs). Muss gegen Risiken abgewogen werden.
+
+  verwendung:
+    korrekt:
+      - "Der Nutzen überwiegt das Risiko bei..."
+      - "NNT = 25 bedeutet: 25 behandeln für 1 verhinderten Fall"
+      - "Der absolute Nutzen beträgt 3% Risikoreduktion"
+    inkorrekt:
+      - "Die Therapie nützt" # Ohne Quantifizierung
+
+  beispielsaetze:
+    - satz: "Der Nettonutzen (Nutzen minus Schaden) war positiv bei Patienten mit hohem Risiko."
+      kontext: "Therapieentscheidung"
+    - satz: "Bei einem NNT von 100 und NNH von 50 überwiegen die Risiken."
+      kontext: "Risiko-Nutzen-Analyse"
+
+  kollokationen:
+    - "Nutzen-Risiko-Verhältnis"
+    - "klinischer Nutzen"
+    - "Nettonutzen"
+    - "Nutzen überwiegt"
+
+
+# =============================================================================
+# DIAGNOSE
+# =============================================================================
+
+diagnose:
+  grundform: "Diagnose"
+  plural: "Diagnosen"
+
+  definition:
+    kurz: "Zuordnung von Befunden zu einem Krankheitsbild"
+    erweitert: |
+      Diagnostischer Prozess: Anamnese → körperliche Untersuchung →
+      apparative Diagnostik → Diagnosestellung. Unterscheidung
+      zwischen Verdachts-, Arbeits- und gesicherter Diagnose.
+
+  verwendung:
+    korrekt:
+      - "Die Verdachtsdiagnose lautet..."
+      - "Die Diagnose wurde histologisch gesichert"
+      - "Die Differentialdiagnosen umfassen..."
+    inkorrekt:
+      - "Die Diagnose ist klar" # Welche Art der Sicherung?
+
+  beispielsaetze:
+    - satz: "Die Diagnose eines akuten Koronarsyndroms wurde mittels Troponin und EKG gestellt."
+      kontext: "Notfallmedizin"
+    - satz: "Bei unklarer Diagnose erfolgte eine Ausschlussdiagnostik."
+      kontext: "Klinischer Alltag"
+
+  kollokationen:
+    - "Diagnose stellen/sichern"
+    - "Verdachts-/Arbeitsdiagnose"
+    - "Differentialdiagnose"
+    - "diagnostische Kriterien"
+
+
+test:
+  grundform: "Test"
+  plural: "Tests"
+
+  definition:
+    kurz: "Diagnostisches Verfahren zur Erkennung von Erkrankungen"
+    erweitert: |
+      Charakterisiert durch Sensitivität, Spezifität, prädiktive
+      Werte und Likelihood Ratios. Testauswahl abhängig von
+      Vortestwahrscheinlichkeit.
+
+  verwendung:
+    korrekt:
+      - "Der Test hat eine Sensitivität von 95%"
+      - "Ein negativer Test schließt die Erkrankung aus (hohe Sensitivität)"
+      - "Der positive prädiktive Wert hängt von der Prävalenz ab"
+    inkorrekt:
+      - "Der Test ist positiv/negativ" # Ohne Kontextinformation
+
+  beispielsaetze:
+    - satz: "Bei hoher Vortestwahrscheinlichkeit ist ein negativer D-Dimer-Test nicht ausreichend."
+      kontext: "Lungenembolie-Diagnostik"
+    - satz: "Die Spezifität des Tests ist zu gering für ein Screening."
+      kontext: "Screening-Evaluation"
+
+  kollokationen:
+    - "Test durchführen"
+    - "Testgütekriterien"
+    - "positiver/negativer Test"
+    - "Screening-Test"
+
+
+# =============================================================================
+# THERAPIE
+# =============================================================================
+
+therapie:
+  grundform: "Therapie"
+  alternativ: "Behandlung"
+  plural: "Therapien"
+
+  definition:
+    kurz: "Medizinische Maßnahme zur Heilung oder Linderung"
+    erweitert: |
+      Unterscheidung: kurativ (heilend), symptomatisch (lindernd),
+      palliativ (lebensqualitätsorientiert). Therapieentscheidung
+      basiert auf Evidenz, klinischer Erfahrung und Patientenwunsch.
+
+  verwendung:
+    korrekt:
+      - "Die leitliniengerechte Therapie umfasst..."
+      - "Die Therapie der Wahl ist..."
+      - "Bei Kontraindikation gegen X ist Y eine Alternative"
+    inkorrekt:
+      - "Die beste Therapie" # Evidenz- und Patientenbezogen
+
+  beispielsaetze:
+    - satz: "Die Therapie erfolgte leitliniengerecht mit dualer Plättchenhemmung."
+      kontext: "Kardiologie"
+    - satz: "Nach Therapieversagen wurde auf Second-line umgestellt."
+      kontext: "Onkologie"
+
+  kollokationen:
+    - "Therapie einleiten/anpassen"
+    - "Therapie der Wahl"
+    - "leitliniengerechte Therapie"
+    - "Therapieansprechen"
+
+
+nebenwirkung:
+  grundform: "Nebenwirkung"
+  alternativ: "Unerwünschte Arzneimittelwirkung (UAW)"
+  plural: "Nebenwirkungen"
+
+  definition:
+    kurz: "Unbeabsichtigte schädliche Wirkung einer Behandlung"
+    erweitert: |
+      Klassifiziert nach Häufigkeit (sehr häufig >10%, häufig 1-10%,
+      gelegentlich 0.1-1%, selten 0.01-0.1%, sehr selten <0.01%),
+      Schweregrad und Kausalität.
+
+  verwendung:
+    korrekt:
+      - "Häufige Nebenwirkungen umfassen..."
+      - "Die Nebenwirkungsrate betrug 15%"
+      - "Schwerwiegende unerwünschte Ereignisse traten bei 2% auf"
+
+  beispielsaetze:
+    - satz: "Die gastrointestinalen Nebenwirkungen führten bei 10% zum Therapieabbruch."
+      kontext: "UAW-Profil"
+    - satz: "Schwerwiegende Nebenwirkungen (SAE) wurden gemäß ICH-Kriterien dokumentiert."
+      kontext: "Klinische Studie"
+
+  kollokationen:
+    - "Nebenwirkung berichten/dokumentieren"
+    - "Nebenwirkungsprofil"
+    - "schwerwiegende Nebenwirkung"
+    - "Nutzen-Nebenwirkungs-Verhältnis"
+
+
+# =============================================================================
+# STUDIENDESIGN
+# =============================================================================
+
+randomisiert:
+  grundform: "randomisiert"
+
+  definition:
+    kurz: "Durch Zufallsverfahren zugeteilt"
+    erweitert: |
+      Randomisierung ist das Kernmerkmal von RCTs. Sie eliminiert
+      Selektionsbias und balanciert bekannte und unbekannte
+      Confounder zwischen den Gruppen.
+
+  verwendung:
+    korrekt:
+      - "Die Patienten wurden 1:1 randomisiert"
+      - "Nach stratifizierter Randomisierung..."
+      - "Die randomisierte Zuteilung erfolgte computergestützt"
+
+  beispielsaetze:
+    - satz: "500 Patienten wurden randomisiert der Verum- oder Placebogruppe zugeteilt."
+      kontext: "RCT-Methodik"
+    - satz: "Die Randomisierung war durch Alter und Geschlecht stratifiziert."
+      kontext: "Studiendesign"
+
+  kollokationen:
+    - "randomisiert kontrolliert"
+    - "randomisierte Zuteilung"
+    - "1:1 randomisiert"
+    - "stratifiziert randomisiert"
+
+
+verblindet:
+  grundform: "verblindet"
+  alternativ: "maskiert"
+
+  definition:
+    kurz: "Gruppenzugehörigkeit unbekannt"
+    erweitert: |
+      Einfach verblindet: Patient blind.
+      Doppelt verblindet: Patient und Behandler blind.
+      Dreifach verblindet: zusätzlich Auswerter blind.
+      Verhindert Performance und Detection Bias.
+
+  verwendung:
+    korrekt:
+      - "Die Studie war doppelt verblindet"
+      - "Die Verblindung wurde bis zur Endauswertung aufrechterhalten"
+      - "Open-label nach der Interimsanalyse"
+
+  beispielsaetze:
+    - satz: "In der doppelblinden Phase wussten weder Patienten noch Untersucher die Gruppenzugehörigkeit."
+      kontext: "RCT-Methodik"
+    - satz: "Die Verblindung war durch unterschiedliche Applikationsform nicht möglich."
+      kontext: "Methodische Limitation"
+
+  kollokationen:
+    - "doppelt verblindet"
+    - "Verblindung aufheben"
+    - "open-label Extension"
+    - "verblindet ausgewertet"
+
+
+# =============================================================================
+# KAUSALITÄT IN DER MEDIZIN
+# =============================================================================
+
+kausalitaet:
+  beschreibung: |
+    Kausalaussagen in der Medizin erfordern starke Evidenz.
+    Die Bradford-Hill-Kriterien helfen bei der Beurteilung.
+
+  bradford_hill_kriterien:
+    - name: "Stärke der Assoziation"
+      beschreibung: "Starke Assoziationen eher kausal"
+    - name: "Konsistenz"
+      beschreibung: "Replizierbarkeit in verschiedenen Settings"
+    - name: "Spezifität"
+      beschreibung: "Spezifische Exposition → spezifisches Outcome"
+    - name: "Zeitliche Sequenz"
+      beschreibung: "Exposition muss Outcome vorausgehen"
+    - name: "Dosis-Wirkungs-Beziehung"
+      beschreibung: "Mehr Exposition → mehr Effekt"
+    - name: "Plausibilität"
+      beschreibung: "Biologisch plausibel"
+    - name: "Kohärenz"
+      beschreibung: "Konsistent mit anderem Wissen"
+    - name: "Experiment"
+      beschreibung: "Experimentelle Evidenz"
+    - name: "Analogie"
+      beschreibung: "Ähnliche Zusammenhänge bekannt"
+
+  formulierungen:
+    kausal_stark:
+      - "verursacht"
+      - "führt zu"
+      - "bewirkt"
+      bedingung: "Nur bei RCT oder starker Evidenz"
+
+    kausal_moderat:
+      - "ist Risikofaktor für"
+      - "erhöht das Risiko für"
+      - "prädisponiert für"
+      bedingung: "Bei guten Kohortenstudien"
+
+    assoziativ:
+      - "ist assoziiert mit"
+      - "korreliert mit"
+      - "geht einher mit"
+      bedingung: "Bei Beobachtungsstudien"
+
+
+# =============================================================================
+# HEDGING IN DER MEDIZIN
+# =============================================================================
+
+hedging_medizin:
+  beschreibung: |
+    Medizinische Aussagen erfordern präzises Hedging entsprechend
+    der Evidenzstärke. GRADE-System gibt Orientierung.
+
+  nach_evidenzstaerke:
+    hoch_GRADE:
+      - "zeigt"
+      - "belegt"
+      - "wird empfohlen (starke Empfehlung)"
+    moderat_GRADE:
+      - "legt nahe"
+      - "unterstützt"
+      - "sollte erwogen werden"
+    niedrig_GRADE:
+      - "deutet darauf hin"
+      - "könnte"
+      - "kann erwogen werden (schwache Empfehlung)"
+    sehr_niedrig_GRADE:
+      - "möglicherweise"
+      - "unklar ob"
+      - "weitere Forschung nötig"
+
+  beispiele:
+    - original: "Statine senken die Mortalität"
+      besser: "Evidenz hoher Qualität zeigt, dass Statine die kardiovaskuläre Mortalität in der Sekundärprävention um 25% senken (RRR, NNT 28)."
+
+    - original: "Vitamin D schützt vor Krebs"
+      besser: "Die Evidenz für einen protektiven Effekt von Vitamin D auf die Krebsinzidenz ist inkonsistent (GRADE: niedrig)."
+
+    - original: "Das Medikament wirkt"
+      besser: "In einem RCT zeigte das Medikament Wirksamkeit gegenüber Placebo (ARR 5%, NNT 20, p < 0.01)."
+
+  leitlinien_sprache:
+    starke_empfehlung: "soll / soll nicht"
+    schwache_empfehlung: "sollte / sollte nicht"
+    offen: "kann erwogen werden"
+    negativ: "wird nicht empfohlen"

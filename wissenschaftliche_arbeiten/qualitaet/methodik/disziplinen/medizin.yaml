@@ -1,0 +1,532 @@
+# =============================================================================
+# ESL DISZIPLIN-PROFIL: Medizin
+# =============================================================================
+# Für: Klinische Forschung, Evidence-Based Medicine, Therapiestudien
+# Version: 1.0
+# =============================================================================
+
+meta:
+  id: "medizin"
+  name: "Medizin"
+  name_en: "Medicine"
+  beschreibung: |
+    Disziplin-spezifisches ESL-Profil für Medizin.
+    Charakteristika:
+    - Evidence-Based Medicine als methodischer Rahmen
+    - Etablierte Evidenzhierarchie (Oxford CEBM, GRADE)
+    - RCTs als Gold-Standard für Therapieentscheidungen
+    - Klinische vs. statistische Signifikanz wichtig
+    - Strenge regulatorische Anforderungen (FDA, EMA)
+    - Präregistrierung für klinische Studien verpflichtend
+    - Translationaler Gap: Präklinik ≠ Klinik
+
+  anwendungsbereich:
+    - "Klinische Studien (Phase I-IV)"
+    - "Systematische Reviews / Meta-Analysen"
+    - "Diagnostische Studien"
+    - "Prognostische Studien"
+    - "Epidemiologie"
+    - "Leitlinienentwicklung"
+    - "Health Technology Assessment"
+
+  wissenschaftstyp: "Angewandte Naturwissenschaft (klinisch-empirisch)"
+  toleranzfenster: 0.10  # Relativ eng wegen Patientensicherheit
+
+  verwandte_profile:
+    - id: "biologie"
+      beziehung: "Grundlagenfach"
+      unterschied: "Medizin fokussiert auf klinische Anwendung"
+    - id: "psychologie"
+      beziehung: "Überlappend (Psychiatrie, Psychosomatik)"
+      unterschied: "Ähnliche Methodik, anderer Fokus"
+
+
+# =============================================================================
+# E-SKALA: Medizin-spezifische Evidenzhierarchie
+# =============================================================================
+
+e_skala:
+
+  beschreibung: |
+    Die medizinische Evidenzhierarchie ist gut etabliert und
+    international standardisiert. Basiert auf Oxford CEBM und
+    wird durch GRADE-System für Empfehlungsstärke ergänzt.
+
+  stufen:
+
+    stufe_1:
+      name: "Systematischer Review / Meta-Analyse von RCTs"
+      E_range: [0.90, 1.00]
+      beschreibung: |
+        Höchste Evidenzstufe. Systematische Synthese aller
+        verfügbaren RCTs mit quantitativer Zusammenfassung.
+      beispiele:
+        - "Cochrane Systematic Review"
+        - "Meta-Analyse mit geringer Heterogenität"
+        - "Living Systematic Review"
+      marker:
+        - "meta-analyse"
+        - "systematic review"
+        - "cochrane"
+        - "gepoolte analyse"
+      GRADE: "Hoch"
+      modifikatoren:
+        cochrane: +0.03
+        heterogenitaet_gering: +0.03
+        publication_bias_korrigiert: +0.02
+        heterogenitaet_hoch: -0.10
+        wenige_studien: -0.05
+
+    stufe_2:
+      name: "Randomisierte kontrollierte Studie (RCT)"
+      E_range: [0.80, 0.92]
+      beschreibung: |
+        Gold-Standard für Therapiestudien. Randomisierung
+        kontrolliert bekannte und unbekannte Confounder.
+      beispiele:
+        - "Phase-III-Studie"
+        - "Pragmatisches RCT"
+        - "Cluster-randomisierte Studie"
+      marker:
+        - "randomisiert"
+        - "rct"
+        - "randomized"
+        - "placebo-kontrolliert"
+        - "doppelblind"
+      GRADE: "Hoch"
+      modifikatoren:
+        praeregistriert: +0.03
+        doppelblind: +0.03
+        multicenter: +0.02
+        intention_to_treat: +0.02
+        hohes_bias_risiko: -0.12
+        offenes_design: -0.05
+        hoher_dropout: -0.08
+
+    stufe_3:
+      name: "Prospektive Kohortenstudie"
+      E_range: [0.62, 0.78]
+      beschreibung: |
+        Beobachtungsstudie mit zeitlicher Sequenz.
+        Confounding kann nicht ausgeschlossen werden.
+      beispiele:
+        - "Framingham Heart Study"
+        - "EPIC-Studie"
+        - "Prospektive Register"
+      marker:
+        - "kohortenstudie"
+        - "prospektiv"
+        - "follow-up"
+        - "längsschnitt"
+      GRADE: "Niedrig bis moderat"
+      modifikatoren:
+        grosses_n: +0.05
+        langes_followup: +0.03
+        confounding_adjustiert: +0.05
+        healthy_user_bias: -0.08
+
+    stufe_4:
+      name: "Fall-Kontroll-Studie / Retrospektive Kohorte"
+      E_range: [0.45, 0.62]
+      beschreibung: |
+        Retrospektive Designs mit höherem Bias-Risiko.
+        Gut für seltene Erkrankungen.
+      beispiele:
+        - "Nested Case-Control Study"
+        - "Retrospektive Kohortenstudie"
+        - "Matched Case-Control"
+      marker:
+        - "fall-kontroll"
+        - "retrospektiv"
+        - "case-control"
+      GRADE: "Niedrig"
+      modifikatoren:
+        matching: +0.05
+        recall_bias_kontrolliert: +0.03
+        selection_bias: -0.10
+
+    stufe_5:
+      name: "Querschnittsstudie / Ökologische Studie"
+      E_range: [0.32, 0.48]
+      beschreibung: |
+        Keine zeitliche Sequenz, keine Kausalität ableitbar.
+        Für Prävalenz und Assoziationen.
+      beispiele:
+        - "Querschnittliche Survey"
+        - "Prävalenzstudie"
+        - "Ökologische Korrelation"
+      marker:
+        - "querschnitt"
+        - "cross-sectional"
+        - "prävalenz"
+      GRADE: "Sehr niedrig"
+      modifikatoren:
+        repraesentativ: +0.05
+        grosses_n: +0.03
+
+    stufe_6:
+      name: "Fallserie / Fallbericht"
+      E_range: [0.18, 0.35]
+      beschreibung: |
+        Deskriptive Berichte ohne Kontrollgruppe.
+        Für seltene Erkrankungen und Hypothesengenerierung.
+      beispiele:
+        - "Fallserie von N Patienten"
+        - "Case Report"
+        - "Erste Beschreibung eines Syndroms"
+      marker:
+        - "fallserie"
+        - "case series"
+        - "fallbericht"
+        - "wir berichten"
+      GRADE: "Sehr niedrig"
+      modifikatoren:
+        standardisierte_dokumentation: +0.03
+        einzelfall: -0.08
+
+    stufe_7:
+      name: "Expertenmeinung / Narrativer Review"
+      E_range: [0.08, 0.22]
+      beschreibung: |
+        Nicht-systematische Übersichten und Meinungen.
+        Für Hypothesengenerierung und Orientierung.
+      beispiele:
+        - "Editorial"
+        - "Narrativer Review"
+        - "Lehrbuchmeinung"
+        - "Konsensus ohne systematische Methodik"
+      marker:
+        - "expertenmeinung"
+        - "narrative review"
+        - "nach unserer erfahrung"
+      GRADE: "Sehr niedrig"
+
+    stufe_8:
+      name: "Mechanistische Begründung / In-vitro"
+      E_range: [0.05, 0.15]
+      beschreibung: |
+        Präklinische Evidenz, nicht direkt auf Patienten übertragbar.
+        Translationaler Gap beachten.
+      beispiele:
+        - "In-vitro-Studie"
+        - "Tierexperiment"
+        - "Pathophysiologische Begründung"
+      marker:
+        - "in vitro"
+        - "tiermodell"
+        - "mechanistisch"
+      warnung: "Translationaler Gap: ~90% scheitern in klinischen Studien"
+
+    stufe_9:
+      name: "Unbelegte Behauptung"
+      E_range: [0.00, 0.08]
+      beschreibung: |
+        Aussagen ohne erkennbare wissenschaftliche Grundlage.
+      beispiele:
+        - "Alternativmedizinische Behauptung ohne Evidenz"
+        - "Werbung"
+        - "Anekdotische Aussage"
+
+
+# =============================================================================
+# K-SCHWELLENWERTE: Angepasst für Medizin
+# =============================================================================
+
+k_schwellenwerte:
+
+  beschreibung: |
+    Medizinische K-Schwellenwerte sind relativ streng wegen
+    der Konsequenzen für Patienten. GRADE-Empfehlungsstärke
+    korrespondiert mit K-Werten.
+
+  kategorien:
+    stabil:
+      range: [0.80, 1.00]
+      label: "Stabil"
+      bedeutung: "Aussage durch solide Evidenz gut gedeckt"
+      aktion: "Starke Empfehlung möglich (soll/soll nicht)"
+      GRADE_entsprechung: "Hoch + starke Empfehlung"
+      beispiel: "Meta-Analyse zeigt klaren Nutzen"
+
+    teilstabil:
+      range: [0.60, 0.80]
+      label: "Teilstabil"
+      bedeutung: "Akzeptable Diskrepanz, Einschränkungen beachten"
+      aktion: "Schwache Empfehlung (sollte/sollte nicht)"
+      GRADE_entsprechung: "Moderat"
+      beispiel: "RCT mit methodischen Limitationen"
+
+    interpretativ:
+      range: [0.40, 0.60]
+      label: "Interpretativ"
+      bedeutung: "Signifikante Lücke zwischen Behauptung und Evidenz"
+      aktion: "Kann erwogen werden, weitere Forschung nötig"
+      GRADE_entsprechung: "Niedrig"
+      beispiel: "Kohortenstudie ohne Adjustierung"
+
+    spekulativ:
+      range: [0.00, 0.40]
+      label: "Spekulativ"
+      bedeutung: "Behauptung nicht durch Evidenz gedeckt"
+      aktion: "Keine Empfehlung, Forschung erforderlich"
+      GRADE_entsprechung: "Sehr niedrig"
+      beispiel: "In-vitro-Daten auf Patienten extrapoliert"
+
+  vergleich:
+    physik:
+      stabil_threshold: 0.85
+      kommentar: "Strenger (höhere Reproduzierbarkeit)"
+    medizin:
+      stabil_threshold: 0.80
+      kommentar: "Streng wegen Patientensicherheit"
+    biologie:
+      stabil_threshold: 0.78
+      kommentar: "Ähnlich, aber breitere Toleranz"
+
+
+# =============================================================================
+# B-SKALA ANPASSUNGEN
+# =============================================================================
+
+b_skala_anpassungen:
+
+  beschreibung: |
+    Medizinische Sprache ist stark standardisiert.
+    GRADE-Empfehlungssprache und EBM-Terminologie verwenden.
+    Kausale Aussagen nur bei RCT-Evidenz.
+
+  modifikatoren:
+
+    erhoehend:
+      - marker: "beweist"
+        delta_B: +0.30
+        beispiel: "Die Studie beweist..."
+        warnung: "In Medizin fast nie angemessen"
+
+      - marker: "heilt"
+        delta_B: +0.28
+        beispiel: "Das Medikament heilt..."
+        bedingung: "Nur bei vollständiger Remission"
+
+      - marker: "verhindert"
+        delta_B: +0.22
+        beispiel: "Die Therapie verhindert..."
+        bedingung: "Bei RR = 0 oder sehr niedrigem NNT"
+
+      - marker: "wirksam"
+        delta_B: +0.18
+        beispiel: "Das Medikament ist wirksam"
+        bedingung: "Nur bei nachgewiesener Efficacy"
+
+      - marker: "soll"
+        delta_B: +0.20
+        beispiel: "Patienten sollen behandelt werden"
+        bedeutung: "Starke Leitlinienempfehlung"
+
+      - marker: "zeigt"
+        delta_B: +0.12
+        beispiel: "Die Studie zeigt einen Effekt"
+
+    senkend:
+      - marker: "ist assoziiert mit"
+        delta_B: -0.15
+        beispiel: "Risikofaktor X ist assoziiert mit Erkrankung Y"
+
+      - marker: "legt nahe"
+        delta_B: -0.12
+        beispiel: "Die Daten legen nahe, dass..."
+
+      - marker: "könnte"
+        delta_B: -0.18
+        beispiel: "Die Therapie könnte wirksam sein"
+
+      - marker: "kann erwogen werden"
+        delta_B: -0.15
+        beispiel: "Die Behandlung kann erwogen werden"
+        bedeutung: "Schwache Empfehlung"
+
+      - marker: "unklar"
+        delta_B: -0.22
+        beispiel: "Es ist unklar, ob..."
+
+      - marker: "in vitro"
+        delta_B: -0.25
+        beispiel: "In vitro zeigte sich..."
+
+      - marker: "tierexperimentell"
+        delta_B: -0.22
+        beispiel: "Im Tiermodell..."
+
+      - marker: "präliminär"
+        delta_B: -0.20
+        beispiel: "Präliminäre Daten deuten..."
+
+
+# =============================================================================
+# DISZIPLIN-SPEZIFISCHE REGELN
+# =============================================================================
+
+regeln:
+
+  kausalitaet:
+    beschreibung: |
+      Kausale Aussagen über Therapieeffekte erfordern RCT-Evidenz.
+      Bradford-Hill-Kriterien für Beobachtungsstudien.
+
+    erlaubt_wenn:
+      - "Randomisierte kontrollierte Studie"
+      - "Meta-Analyse von RCTs"
+      - "Bradford-Hill-Kriterien erfüllt"
+
+    verboten_wenn:
+      - "Beobachtungsstudie allein"
+      - "Fall-Kontroll-Design"
+      - "Querschnittsstudie"
+      - "Nur In-vitro/Tiermodell"
+
+    empfehlung: |
+      Bei Beobachtungsstudien: "ist assoziiert mit", "erhöht das Risiko",
+      "ist Risikofaktor für" – nicht "verursacht" oder "führt zu"
+
+  klinische_signifikanz:
+    beschreibung: |
+      Statistische Signifikanz ≠ klinische Relevanz.
+      Immer Effektgrößen und MCID berichten.
+
+    pflichtangaben:
+      - "Effektgröße (RR, OR, HR, ARR)"
+      - "Konfidenzintervall"
+      - "NNT/NNH bei Therapiestudien"
+      - "Vergleich mit MCID"
+
+    warnung: |
+      Bei großen Studien können triviale Unterschiede
+      signifikant werden. MCID als Relevanzschwelle.
+
+  praeklinik_klinik:
+    beschreibung: |
+      Translationaler Gap: ~90% präklinischer Befunde
+      scheitern in klinischen Studien.
+
+    modifikatoren:
+      in_vitro:
+        E_reduktion: -0.30
+        anmerkung: "Nicht auf Patienten übertragbar"
+
+      tiermodell:
+        E_reduktion: -0.25
+        anmerkung: "Begrenzte Übertragbarkeit"
+
+      phase_1:
+        E_reduktion: -0.15
+        anmerkung: "Nur Sicherheit, keine Wirksamkeit"
+
+    empfehlung: |
+      Bei präklinischen Daten: "Im Tiermodell...", "In vitro...",
+      "Ob dies auf Menschen übertragbar ist, muss geprüft werden"
+
+
+# =============================================================================
+# LEITLINIENSPRACHE
+# =============================================================================
+
+leitlinien:
+
+  beschreibung: |
+    Deutsche medizinische Leitlinien verwenden standardisierte
+    Empfehlungsgrade entsprechend GRADE und AWMF.
+
+  empfehlungsgrade:
+    A_stark_positiv:
+      formulierung: "soll"
+      bedeutung: "Starke Empfehlung, hohe Evidenz"
+      K_range: [0.80, 1.00]
+
+    B_schwach_positiv:
+      formulierung: "sollte"
+      bedeutung: "Empfehlung, moderate Evidenz"
+      K_range: [0.60, 0.80]
+
+    C_offen:
+      formulierung: "kann erwogen werden"
+      bedeutung: "Offene Empfehlung, niedrige Evidenz"
+      K_range: [0.40, 0.60]
+
+    D_schwach_negativ:
+      formulierung: "sollte nicht"
+      bedeutung: "Abraten, moderate Evidenz"
+      K_range: [0.60, 0.80]
+
+    E_stark_negativ:
+      formulierung: "soll nicht"
+      bedeutung: "Starkes Abraten, hohe Evidenz"
+      K_range: [0.80, 1.00]
+
+
+# =============================================================================
+# QUALITÄTSINDIKATOREN
+# =============================================================================
+
+qualitaetsindikatoren:
+
+  positiv:
+    - "Präregistrierung (ClinicalTrials.gov, PROSPERO)"
+    - "CONSORT/STROBE/PRISMA-Checkliste befolgt"
+    - "Intention-to-Treat-Analyse"
+    - "Verblindung durchgeführt"
+    - "Adequate Power (≥80%)"
+    - "Primärer Endpunkt klinisch relevant"
+    - "NNT/NNH berichtet"
+    - "Interessenkonflikte deklariert"
+    - "Unabhängige Finanzierung"
+
+  negativ:
+    - "Nicht präregistriert"
+    - "Per-Protocol statt ITT"
+    - "Composite Endpoint ohne Einzelanalyse"
+    - "Surrogat statt harter Endpunkt"
+    - "Hohes Bias-Risiko"
+    - "Industriefinanzierung ohne Unabhängigkeit"
+    - "Selektives Berichten"
+    - "Keine Intention-to-Treat-Analyse"
+    - "Hoher Loss to Follow-up (>20%)"
+
+
+# =============================================================================
+# BIAS-BEWERTUNG
+# =============================================================================
+
+bias_assessment:
+
+  cochrane_rob:
+    beschreibung: "Risk of Bias Tool der Cochrane Collaboration"
+    domains:
+      - "Random sequence generation"
+      - "Allocation concealment"
+      - "Blinding of participants and personnel"
+      - "Blinding of outcome assessment"
+      - "Incomplete outcome data"
+      - "Selective reporting"
+      - "Other bias"
+    bewertung:
+      low: "Geringes Risiko"
+      unclear: "Unklares Risiko"
+      high: "Hohes Risiko"
+
+  GRADE_downgrading:
+    gruende:
+      - "Risk of Bias"
+      - "Inconsistency (Heterogenität)"
+      - "Indirectness (Indirekte Evidenz)"
+      - "Imprecision (Ungenaue Schätzung)"
+      - "Publication Bias"
+
+
+# =============================================================================
+# VERWANDTE DATEIEN
+# =============================================================================
+
+verwandte_dateien:
+  primitive: "primitive_medizin.yaml"
+  glossar: "glossar_medizin.yaml"
+  lexikon: "lexikon_medizin.yaml"

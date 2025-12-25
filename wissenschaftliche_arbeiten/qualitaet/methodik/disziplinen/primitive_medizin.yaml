@@ -1,0 +1,384 @@
+# =============================================================================
+# ESL PRIMITIVE: Medizin
+# =============================================================================
+# Orthogonale Grundbegriffe der Medizin
+# Nicht weiter zerlegbar, bilden semantische Basis
+# Version: 1.0
+# =============================================================================
+
+meta:
+  disziplin: "Medizin"
+  anzahl_primitive: 24
+  kategorien: 6
+  beschreibung: |
+    Fundamentale Konzepte der Medizin. Diese Primitive bilden
+    die Grundlage für klinische Praxis und Forschung.
+    Evidence-Based Medicine als methodischer Rahmen.
+
+
+# =============================================================================
+# KATEGORIE 1: GESUNDHEIT UND KRANKHEIT
+# =============================================================================
+
+GESUNDHEIT_KRANKHEIT:
+
+  GESUNDHEIT:
+    definition: "Zustand vollständigen körperlichen, geistigen und sozialen Wohlbefindens"
+    quelle: "WHO Definition, 1948"
+    dimensionen:
+      - "Physisch"
+      - "Psychisch"
+      - "Sozial"
+    relationen:
+      - KRANKHEIT: "Gegenpol"
+      - PRAEVENTION: "Erhaltung"
+      - THERAPIE: "Wiederherstellung"
+
+  KRANKHEIT:
+    definition: "Störung der normalen Funktion mit klinischer Manifestation"
+    komponenten:
+      - "Ätiologie (Ursache)"
+      - "Pathogenese (Entstehung)"
+      - "Symptome/Zeichen"
+      - "Verlauf"
+      - "Prognose"
+    klassifikation: "ICD-10/ICD-11"
+    relationen:
+      - DIAGNOSE: "Identifikation"
+      - THERAPIE: "Behandlung"
+      - AETIOLOGIE: "Ursache"
+
+  SYMPTOM:
+    definition: "Subjektiv wahrgenommene Krankheitserscheinung"
+    beispiele:
+      - "Schmerz"
+      - "Übelkeit"
+      - "Müdigkeit"
+    relationen:
+      - ZEICHEN: "Objektives Korrelat"
+      - DIAGNOSE: "Grundlage der Diagnose"
+
+  ZEICHEN:
+    definition: "Objektiv feststellbare Krankheitserscheinung"
+    beispiele:
+      - "Fieber"
+      - "Schwellung"
+      - "Laborwerte"
+    relationen:
+      - SYMPTOM: "Subjektives Korrelat"
+      - DIAGNOSE: "Diagnostische Grundlage"
+
+  SYNDROM:
+    definition: "Charakteristische Kombination von Symptomen und Zeichen"
+    beispiele:
+      - "Metabolisches Syndrom"
+      - "Down-Syndrom"
+      - "SIRS"
+    relationen:
+      - KRANKHEIT: "Kann Krankheitsbild definieren"
+      - DIAGNOSE: "Erkennungsmuster"
+
+
+# =============================================================================
+# KATEGORIE 2: URSACHEN UND MECHANISMEN
+# =============================================================================
+
+URSACHEN_MECHANISMEN:
+
+  AETIOLOGIE:
+    definition: "Ursache oder Gesamtheit der Ursachen einer Krankheit"
+    typen:
+      - "Genetisch"
+      - "Infektiös"
+      - "Traumatisch"
+      - "Metabolisch"
+      - "Autoimmun"
+      - "Neoplastisch"
+      - "Iatrogen"
+      - "Idiopathisch (unbekannt)"
+    relationen:
+      - KRANKHEIT: "Verursacht Krankheit"
+      - PATHOGENESE: "Führt zu Pathogenese"
+      - RISIKOFAKTOR: "Beeinflusst durch"
+
+  PATHOGENESE:
+    definition: "Entstehungsmechanismus einer Krankheit"
+    ebenen:
+      - "Molekular"
+      - "Zellulär"
+      - "Gewebe/Organ"
+      - "Systemisch"
+    relationen:
+      - AETIOLOGIE: "Ausgelöst durch"
+      - PATHOPHYSIOLOGIE: "Führt zu"
+
+  PATHOPHYSIOLOGIE:
+    definition: "Gestörte Funktion bei Krankheit"
+    relationen:
+      - PATHOGENESE: "Resultat der Pathogenese"
+      - SYMPTOM: "Verursacht Symptome"
+      - THERAPIE: "Ziel der Therapie"
+
+  RISIKOFAKTOR:
+    definition: "Faktor, der Krankheitswahrscheinlichkeit erhöht"
+    typen:
+      modifizierbar:
+        - "Rauchen"
+        - "Ernährung"
+        - "Bewegung"
+      nicht_modifizierbar:
+        - "Alter"
+        - "Geschlecht"
+        - "Genetik"
+    relationen:
+      - AETIOLOGIE: "Beitragende Ursache"
+      - PRAEVENTION: "Ziel der Prävention"
+      - PROGNOSE: "Beeinflusst Prognose"
+
+
+# =============================================================================
+# KATEGORIE 3: DIAGNOSTIK
+# =============================================================================
+
+DIAGNOSTIK:
+
+  DIAGNOSE:
+    definition: "Zuordnung von Befunden zu einem Krankheitsbild"
+    typen:
+      - "Verdachtsdiagnose"
+      - "Arbeitsdiagnose"
+      - "Gesicherte Diagnose"
+      - "Differentialdiagnose"
+    prozess:
+      - "Anamnese"
+      - "Untersuchung"
+      - "Diagnostik"
+      - "Diagnosestellung"
+    relationen:
+      - SYMPTOM: "Basiert auf Symptomen"
+      - ZEICHEN: "Basiert auf Zeichen"
+      - THERAPIE: "Bestimmt Therapie"
+
+  SENSITIVITAET:
+    definition: "Wahrscheinlichkeit positiven Tests bei Kranken"
+    formel: "Richtig Positiv / (RP + FN)"
+    interpretation: "Hohe Sensitivität → wenige Kranke übersehen"
+    relationen:
+      - SPEZIFITAET: "Trade-off"
+      - DIAGNOSE: "Testgüte"
+
+  SPEZIFITAET:
+    definition: "Wahrscheinlichkeit negativen Tests bei Gesunden"
+    formel: "Richtig Negativ / (RN + FP)"
+    interpretation: "Hohe Spezifität → wenige Gesunde fälschlich positiv"
+    relationen:
+      - SENSITIVITAET: "Trade-off"
+      - DIAGNOSE: "Testgüte"
+
+  PRAEVALENZ:
+    definition: "Anteil Erkrankter in Population zu einem Zeitpunkt"
+    formel: "Kranke / Gesamtpopulation"
+    relationen:
+      - INZIDENZ: "Zeitliche Beziehung"
+      - PPV: "Beeinflusst prädiktive Werte"
+
+
+# =============================================================================
+# KATEGORIE 4: THERAPIE UND INTERVENTION
+# =============================================================================
+
+THERAPIE:
+
+  THERAPIE:
+    definition: "Behandlung mit dem Ziel der Heilung oder Linderung"
+    typen:
+      - "Kausal: Ursachenbeseitigung"
+      - "Symptomatisch: Linderung"
+      - "Palliativ: Lebensqualität"
+      - "Kurativ: Heilung"
+    modalitaeten:
+      - "Pharmakotherapie"
+      - "Chirurgie"
+      - "Strahlentherapie"
+      - "Physiotherapie"
+      - "Psychotherapie"
+    relationen:
+      - DIAGNOSE: "Folgt aus Diagnose"
+      - WIRKSAMKEIT: "Muss wirksam sein"
+      - SICHERHEIT: "Muss sicher sein"
+
+  WIRKSAMKEIT:
+    definition: "Ausmaß, in dem Therapie gewünschten Effekt erzielt"
+    ebenen:
+      efficacy: "Wirksamkeit unter Idealbedingungen (RCT)"
+      effectiveness: "Wirksamkeit unter Alltagsbedingungen"
+    masse:
+      - "Absolute Risikoreduktion (ARR)"
+      - "Relative Risikoreduktion (RRR)"
+      - "Number Needed to Treat (NNT)"
+    relationen:
+      - THERAPIE: "Eigenschaft der Therapie"
+      - EVIDENZ: "Durch Evidenz belegt"
+
+  SICHERHEIT:
+    definition: "Abwesenheit unakzeptabler Risiken"
+    aspekte:
+      - "Nebenwirkungen"
+      - "Interaktionen"
+      - "Kontraindikationen"
+    relationen:
+      - THERAPIE: "Eigenschaft der Therapie"
+      - NUTZEN: "Balance mit Nutzen"
+      - RISIKO: "Risiko-Nutzen-Abwägung"
+
+  PROGNOSE:
+    definition: "Vorhersage des Krankheitsverlaufs"
+    faktoren:
+      - "Erkrankung selbst"
+      - "Patientenfaktoren"
+      - "Therapie"
+    masse:
+      - "Überlebensrate"
+      - "Rezidivrate"
+      - "Lebensqualität"
+    relationen:
+      - KRANKHEIT: "Abhängig von Krankheit"
+      - THERAPIE: "Beeinflusst durch Therapie"
+
+
+# =============================================================================
+# KATEGORIE 5: PRÄVENTION UND PUBLIC HEALTH
+# =============================================================================
+
+PRAEVENTION:
+
+  PRAEVENTION:
+    definition: "Verhütung von Krankheit oder Verschlechterung"
+    stufen:
+      primaer: "Verhinderung der Entstehung"
+      sekundaer: "Früherkennung"
+      tertiaer: "Verhinderung von Komplikationen"
+    beispiele:
+      - "Impfung (primär)"
+      - "Screening (sekundär)"
+      - "Rehabilitation (tertiär)"
+    relationen:
+      - RISIKOFAKTOR: "Zielt auf Risikofaktoren"
+      - GESUNDHEIT: "Erhält Gesundheit"
+
+  INZIDENZ:
+    definition: "Neuerkrankungsrate in definiertem Zeitraum"
+    formel: "Neuerkrankungen / Personenzeit"
+    varianten:
+      - "Kumulative Inzidenz"
+      - "Inzidenzrate"
+    relationen:
+      - PRAEVALENZ: "P = I × D (bei Steady State)"
+      - RISIKOFAKTOR: "Beeinflusst durch"
+
+  MORTALITAET:
+    definition: "Sterberate in einer Population"
+    typen:
+      - "Gesamtmortalität"
+      - "Krankheitsspezifische Mortalität"
+      - "Altersstandardisierte Mortalität"
+    relationen:
+      - PROGNOSE: "Prognostisches Maß"
+      - THERAPIE: "Therapieziel"
+
+  MORBIDITÄT:
+    definition: "Krankheitslast in einer Population"
+    masse:
+      - "Inzidenz"
+      - "Prävalenz"
+      - "DALYs"
+      - "QALYs"
+    relationen:
+      - KRANKHEIT: "Maß für Krankheitslast"
+      - PRAEVENTION: "Ziel der Prävention"
+
+
+# =============================================================================
+# KATEGORIE 6: EVIDENZ UND METHODIK
+# =============================================================================
+
+EVIDENZ:
+
+  EVIDENZ:
+    definition: "Wissenschaftliche Grundlage für medizinische Entscheidungen"
+    hierarchie:
+      - "Systematische Reviews / Meta-Analysen"
+      - "Randomisierte kontrollierte Studien (RCTs)"
+      - "Kohortenstudien"
+      - "Fall-Kontroll-Studien"
+      - "Fallserien / Fallberichte"
+      - "Expertenmeinung"
+    bewertung: "GRADE-System"
+    relationen:
+      - WIRKSAMKEIT: "Belegt Wirksamkeit"
+      - THERAPIE: "Grundlage für Therapie"
+
+  BIAS:
+    definition: "Systematischer Fehler in Studien"
+    typen:
+      - "Selektionsbias"
+      - "Performance Bias"
+      - "Detection Bias"
+      - "Attrition Bias"
+      - "Reporting Bias"
+      - "Publication Bias"
+    relationen:
+      - EVIDENZ: "Mindert Evidenzqualität"
+      - RANDOMISIERUNG: "Kontrolliert durch"
+
+  RANDOMISIERUNG:
+    definition: "Zufällige Zuteilung zu Behandlungsgruppen"
+    zweck: "Eliminiert Selektionsbias, balanciert Confounder"
+    typen:
+      - "Einfache Randomisierung"
+      - "Stratifizierte Randomisierung"
+      - "Block-Randomisierung"
+    relationen:
+      - BIAS: "Reduziert Bias"
+      - RCT: "Kernmerkmal"
+
+  PLACEBO:
+    definition: "Scheinbehandlung ohne spezifische Wirkung"
+    anwendung: "Kontrolle in RCTs"
+    placeboeffekt: "Verbesserung durch Erwartung"
+    ethik: "Nur wenn keine wirksame Therapie existiert"
+    relationen:
+      - WIRKSAMKEIT: "Referenz für Wirksamkeit"
+      - BIAS: "Kontrolliert Performance Bias"
+
+
+# =============================================================================
+# RELATIONSGRAPH
+# =============================================================================
+
+relationsgraph:
+  zentrale_knoten:
+    - KRANKHEIT: "Zentrales Konzept, verbindet alle Kategorien"
+    - EVIDENZ: "Methodische Grundlage aller Aussagen"
+    - THERAPIE: "Praktisches Ziel der Medizin"
+    - DIAGNOSE: "Brücke zwischen Symptom und Therapie"
+
+  klinischer_prozess:
+    - "Symptom/Zeichen → Diagnose → Therapie → Prognose"
+    - "Evidenz informiert jeden Schritt"
+
+  evidenz_basierte_medizin:
+    saeulen:
+      - "Beste verfügbare Evidenz"
+      - "Klinische Expertise"
+      - "Patientenpräferenzen"
+    quelle: "Sackett et al., 1996"
+
+  ebm_hierarchie:
+    - "Stufe 1a: Systematische Reviews von RCTs"
+    - "Stufe 1b: Einzelne RCTs"
+    - "Stufe 2a: Systematische Reviews von Kohortenstudien"
+    - "Stufe 2b: Einzelne Kohortenstudien"
+    - "Stufe 3: Fall-Kontroll-Studien"
+    - "Stufe 4: Fallserien"
+    - "Stufe 5: Expertenmeinung"
