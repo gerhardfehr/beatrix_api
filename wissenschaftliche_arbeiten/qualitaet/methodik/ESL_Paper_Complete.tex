@@ -144,6 +144,8 @@
 \noindent
 We present the \textbf{Empirical Stability of Language (ESL)} framework---a universal, LLM-agnostic Quality Assurance (QA) module for AI-assisted knowledge systems. ESL addresses a fundamental challenge of the LLM era: \textbf{scaling amplifies epistemic errors}. When AI systems process thousands of analyses per hour, even small overclaiming rates produce substantial epistemic risk.
 
+\textbf{The Gap:} Existing quality assurance approaches address fragments of the epistemic problem: hallucination detection asks ``Is it false?'' (binary), uncertainty quantification measures model confidence (not evidence quality), and fact-checking provides categorical verdicts (true/false). None systematically addresses the calibration question: \textit{Is the claim strength appropriate for the available evidence?} A technically true statement can still represent overclaiming if stated with unwarranted confidence.
+
 ESL provides a systematic methodology for calibrating claim strength to underlying evidence. The framework introduces the \textbf{K-metric} ($K = 1 - |B - E| / B_{\max}$), quantifying alignment between linguistic claim strength ($B$) and evidence quality ($E$). Drawing on metascience, philosophy of science, and replication crisis research, we formalize discipline-specific evidence hierarchies and $K_{\text{stable}}$ thresholds.
 
 \textbf{Key Properties:}
