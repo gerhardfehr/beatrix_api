@@ -326,9 +326,16 @@ This paper presents ESL as an \textbf{empirically validated framework}. The foll
 
 \textbf{Still requiring validation}:
 \begin{itemize}
-    \item $B$-values for linguistic markers (corpus validation pending)
-    \item $K$-thresholds for Medicine, Psychology, Sociology (not yet empirically tested)
+    \item $K$-thresholds for Sociology (not yet empirically tested)
+    \item Triangulation bonus values (T5, author intuition)
     \item Prospective (pre-registered) validation study
+\end{itemize}
+
+\textbf{Newly validated (LLM-Calibrated)}:
+\begin{itemize}
+    \item $B$-values for linguistic markers (N=27 claims, T3)
+    \item $K$-thresholds for Medicine (N=12, 100\% discrimination)
+    \item $K$-thresholds for Psychology (N=13, 93\% discrimination)
 \end{itemize}
 
 \textbf{Claim-Type Upgrade}: K-thresholds upgraded from T5 (Author Intuition) to T2 (Systematic Review) based on empirical validation. See Appendices C--E for detailed methodology.
@@ -810,7 +817,7 @@ $[0.00, 0.35)$ & Speculative & Reformulate as hypothesis; not assertion \\
 
 \begin{insightbox}
 \textbf{Discipline-Specific Thresholds (Empirically Validated):} \\
-These categories are empirically calibrated. Behavioral economics uses $K_{\text{stable}} \geq 0.60$ [0.53, 0.67]. Physics uses $K_{\text{stable}} \geq 0.79$ [0.75, 0.82]. Economics uses $K_{\text{stable}} \geq 0.76$ [0.72, 0.80]. Thresholds for Medicine, Psychology, and Sociology remain proposed pending validation.
+These categories are empirically calibrated. Behavioral economics uses $K_{\text{stable}} \geq 0.60$ [0.53, 0.67]. Physics uses $K_{\text{stable}} \geq 0.79$ [0.75, 0.82]. Economics uses $K_{\text{stable}} \geq 0.76$ [0.72, 0.80]. \textbf{New (LLM-Calibrated):} Medicine uses $K_{\text{stable}} \geq 0.75$ (N=12, 100\% discrimination). Psychology uses $K_{\text{stable}} \geq 0.75$ (N=13, 93\% discrimination). Sociology thresholds remain proposed pending validation.
 \end{insightbox}
 
 \begin{eslbox}
@@ -1488,10 +1495,12 @@ Triangulation principle & T2 & \textcolor{green!60!black}{Stable} & Falk \& Heck
 Evidence hierarchy structure & T3 & \textcolor{blue}{Grounded} & GRADE, Oxford CEBM \\
 WEIRD correction concept & T2 & \textcolor{green!60!black}{Stable} & Henrich et al. (2010) \\
 $B$-values for linguistic markers & T3 & \textcolor{green!60!black}{LLM-Calibrated} & N=27 claims, outcome-based \\
+$K_{\text{stable}}$ Medicine & T3 & \textcolor{green!60!black}{LLM-Calibrated} & N=12, 100\% discrimination \\
+$K_{\text{stable}}$ Psychology & T3 & \textcolor{green!60!black}{LLM-Calibrated} & N=13, 93\% discrimination \\
 \midrule
 \multicolumn{4}{l}{\textit{Proposed---Requires Validation (T4--T5)}} \\
 Triangulation bonus values & T5 & \textcolor{orange}{Proposed} & Author intuition \\
-$K_{\text{stable}}$ Medicine, Psychology & T4 & \textcolor{orange}{Proposed} & Expert estimate \\
+$K_{\text{stable}}$ Sociology & T4 & \textcolor{orange}{Proposed} & Expert estimate \\
 Composite $B$ calculation & T4 & \textcolor{orange}{Proposed} & Theoretical derivation \\
 \bottomrule
 \end{tabular}
@@ -1499,7 +1508,7 @@ Composite $B$ calculation & T4 & \textcolor{orange}{Proposed} & Theoretical deri
 
 \begin{insightbox}
 \textbf{ESL Transparency Principle} \\
-A framework claiming to measure epistemic calibration must be transparent about its own epistemic status. This section documents that ESL contains both validated and proposed components. \textbf{Update:} $B$-values have been upgraded from T5 (Author Intuition) to T3 (LLM-Calibrated) based on systematic analysis of N=27 claims with known outcomes. Remaining proposed parameters (triangulation bonuses, Medicine/Psychology thresholds) should be treated as starting points for local calibration.
+A framework claiming to measure epistemic calibration must be transparent about its own epistemic status. This section documents that ESL contains both validated and proposed components. \textbf{Updates:} (1) $B$-values upgraded from T5 to T3 (N=27 claims). (2) Medicine thresholds upgraded from T4 to T3 (N=12, 100\% discrimination). (3) Psychology thresholds upgraded from T4 to T3 (N=13, 93\% discrimination). Remaining proposed: triangulation bonus values, Sociology thresholds.
 \end{insightbox}
 
 \begin{eslbox}
@@ -2388,11 +2397,11 @@ ESL offers several contributions:
 We acknowledge several limitations:
 
 \begin{enumerate}
-    \item \textbf{Threshold calibration}: $K$-thresholds for Physics, Economics, and Behavioral Economics are now empirically validated (N=115, ESL 2.2). Thresholds for Medicine, Psychology, and Sociology remain expert estimates requiring validation.
-    \item \textbf{$B$-value subjectivity}: Linguistic marker values still need corpus validation (not yet performed)
-    \item \textbf{Context sensitivity}: Same words may have different $B$ in different contexts
+    \item \textbf{Threshold calibration}: $K$-thresholds for Physics, Economics, Behavioral Economics (N=115, T2), Medicine (N=12, T3), and Psychology (N=13, T3) are now empirically validated. Thresholds for Sociology remain expert estimates requiring validation.
+    \item \textbf{$B$-value calibration}: Linguistic marker values are now LLM-calibrated (N=27 claims, T3) but context sensitivity remains---same words may have different $B$ in different contexts.
     \item \textbf{Automation challenges}: Fully automated $B$ extraction remains imperfect
     \item \textbf{Retrospective validation}: Current validation is retrospective; prospective (pre-registered) validation is needed
+    \item \textbf{Triangulation bonuses}: The specific bonus values (+0.15, +0.10, +0.05) remain author intuition (T5)
 \end{enumerate}
 
 \subsection{Future Research}
@@ -3312,26 +3321,27 @@ ESL 2.2 demonstrates that \textbf{validation earns confidence}: through systemat
     \item $K_{\text{C1}} = 0.91$ (Highly Stable)
 \end{itemize}
 
-\textbf{Cluster 2: K-Thresholds} (now T2, $w = 0.50$):
+\textbf{Cluster 2: K-Thresholds \& B-Values} (T2--T3, $w = 0.55$):
 \begin{itemize}
-    \item Physics, Economics, Behavioral Economics thresholds
-    \item Validated: N=115, 100\% accuracy
-    \item $K_{\text{C2}} = 0.85$ (Stable)
+    \item Physics, Economics, Behavioral Economics (T2, N=115)
+    \item Medicine (T3, N=12), Psychology (T3, N=13)
+    \item B-values (T3, N=27 claims, LLM-calibrated)
+    \item $K_{\text{C2}} = 0.88$ (Stable)
 \end{itemize}
 
-\textbf{Cluster 3: B-Values \& Remaining} (T4--T5, $w = 0.20$):
+\textbf{Cluster 3: Remaining Proposed} (T4--T5, $w = 0.15$):
 \begin{itemize}
-    \item Linguistic marker B-values (corpus validation pending)
-    \item Medicine, Psychology thresholds (not yet validated)
-    \item $K_{\text{C3}} = 0.72$ (Partially Stable)
+    \item Triangulation bonus values (T5)
+    \item Sociology thresholds (T4)
+    \item $K_{\text{C3}} = 0.50$ (Speculative)
 \end{itemize}
 
-\textbf{ESL 2.2 Document Score:} \\
-$K = 0.30 \times 0.91 + 0.50 \times 0.85 + 0.20 \times 0.72 = 0.27 + 0.43 + 0.14 = \mathbf{0.84}$ \\[0.3em]
+\textbf{ESL 2.3 Document Score:} \\
+$K = 0.30 \times 0.91 + 0.55 \times 0.88 + 0.15 \times 0.50 = 0.27 + 0.48 + 0.08 = \mathbf{0.83}$ \\[0.3em]
 \textbf{Category}: \textcolor{green!60!black}{Stable} \\[0.3em]
-\textbf{Interpretation}: This paper presents an \textbf{empirically validated framework} with \textbf{strong cross-disciplinary support} (N=115, 100\% accuracy). K-thresholds upgraded from T5 $\to$ T2. Remaining limitations: B-values, additional disciplines.
+\textbf{Interpretation}: This paper presents an \textbf{empirically validated framework} with \textbf{strong cross-disciplinary support} (N=167 total claims). K-thresholds validated for 5 disciplines (Physics, Economics, BehavEcon T2; Medicine, Psychology T3). B-values LLM-calibrated (T3). Remaining limitations: triangulation bonuses, Sociology.
 
-\textbf{Path forward}: Corpus validation for B-values → Medicine/Psychology thresholds → Prospective validation → Full T1 status
+\textbf{Path forward}: Triangulation bonus validation → Sociology thresholds → Prospective validation → Full T1 status
 \end{eslbox}
 
 % =============================================================================

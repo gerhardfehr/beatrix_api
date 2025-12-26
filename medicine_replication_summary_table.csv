@@ -1,0 +1,13 @@
+Study,Claim,B_value,E_value,K_value,Outcome,Notes
+"Statins (CTT)","Statins reduce major vascular events by ~20% per 1.0 mmol/L LDL-C reduction",0.82,0.95,0.87,1,"Meta-analysis of 27 RCTs, N>170k"
+"Aspirin (ISIS-2)","Aspirin reduces vascular mortality by 20% in acute MI",0.80,0.92,0.88,1,"N=17,187, 10-year follow-up"
+"HPV Vaccine","HPV vaccine prevents 98-99% of HPV-16/18 cervical neoplasia",0.85,0.95,0.90,1,"Multiple Phase III RCTs, Real-world validation"
+"PD-1 Inhibitors","PD-1 blockade produces 40% response rate in melanoma",0.75,0.88,0.87,1,"Multiple Phase III trials, FDA approved 2014"
+"BRCA1/2 Mutations","BRCA1/2 mutations increase breast cancer risk 50-87% by age 70",0.80,0.85,0.95,1,"Linkage studies, Myriad database validation"
+"Tamoxifen (NSABP P-1)","Tamoxifen reduces invasive breast cancer risk by 49%",0.82,0.85,0.97,1,"N=13,388 RCT, FDA approved for prevention"
+"STAP Cells","Acid stress converts adult cells to pluripotent stem cells",0.95,0.20,0.26,0,"Retracted July 2014, scientific fraud"
+"Beta-Amyloid Drugs","Anti-amyloid antibodies improve cognitive outcomes in Alzheimer's",0.85,0.45,0.53,0,"Solanezumab, Aducanumab failed Phase III"
+"Avastin/Breast Cancer","Bevacizumab improves outcomes in metastatic breast cancer",0.85,0.50,0.59,0,"FDA approval withdrawn 2011"
+"HRT (WHI 2002)","HRT reduces cardiovascular disease in postmenopausal women",0.85,0.40,0.47,0,"WHI RCT overturned observational benefits"
+"Antioxidant Supplements","Beta-carotene and vitamins C/E prevent cancer",0.90,0.35,0.39,0,"Multiple RCTs showed NO benefit or harm"
+"Preclinical Cancer (Begley)","53 landmark cancer studies in top journals",0.88,0.25,0.28,0,"Only 6/53 (11%) replicated at Amgen"
