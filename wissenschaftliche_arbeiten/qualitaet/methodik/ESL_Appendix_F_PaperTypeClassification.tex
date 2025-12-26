@@ -1,0 +1,784 @@
+% =============================================================================
+% ESL FRAMEWORK - APPENDIX F: PAPER TYPE CLASSIFICATION (PTC)
+% =============================================================================
+% Authors: Gerhard Fehr & Andrea Fehr
+% FehrAdvice & Partners AG, Zürich
+% Version: Extended Monograph
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\geometry{margin=2.5cm}
+
+% --- Colors ---
+\definecolor{eslblue}{RGB}{0,82,147}
+\definecolor{eslgreen}{RGB}{0,128,0}
+\definecolor{eslorange}{RGB}{230,159,0}
+\definecolor{eslred}{RGB}{204,51,17}
+\definecolor{eslgray}{RGB}{128,128,128}
+\definecolor{eslpurple}{RGB}{148,0,211}
+
+% --- Boxes ---
+\newtcolorbox{eslbox}[1][]{
+  colback=eslblue!5!white,
+  colframe=eslblue,
+  title={ESL Assessment},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{keyinsight}[1][]{
+  colback=eslgreen!5!white,
+  colframe=eslgreen!80!black,
+  title={Key Insight},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{warningbox}[1][]{
+  colback=eslorange!5!white,
+  colframe=eslorange!80!black,
+  title={Methodological Note},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{definitionbox}[1][]{
+  colback=white,
+  colframe=eslblue!80!black,
+  title={Definition},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{examplebox}[1][]{
+  colback=eslgray!10!white,
+  colframe=eslgray!80!black,
+  title={Example},
+  fonttitle=\bfseries,
+  #1
+}
+
+% --- Theorems ---
+\newtheorem{definition}{Definition}[section]
+\newtheorem{principle}{Principle}[section]
+
+% --- Header/Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small ESL Framework -- Extended Monograph}
+\fancyhead[R]{\small Appendix F: Paper Type Classification}
+\fancyfoot[C]{\thepage}
+
+% =============================================================================
+% TITLE
+% =============================================================================
+
+\title{%
+    \Large \textbf{Empirical Stability of Language (ESL)} \\[0.5em]
+    \large A Universal Quality Assurance Framework for \\
+    Scientific Claim Validation \\[1em]
+    \LARGE \textbf{Appendix F: Paper Type Classification (PTC)} \\[0.3em]
+    \large Type-Specific Evidence Scales and Workflow Integration
+}
+
+\author{%
+    \textbf{Gerhard Fehr}\textsuperscript{1,*} \and \textbf{Andrea Fehr}\textsuperscript{1} \\[0.5em]
+    \textsuperscript{1}FehrAdvice \& Partners AG, Klausstrasse 4, 8008 Zürich, Switzerland \\[0.3em]
+    \textsuperscript{*}Corresponding author: gerhard.fehr@fehradvice.com
+}
+
+\date{December 26, 2025}
+
+\begin{document}
+
+\maketitle
+
+% =============================================================================
+% ABSTRACT
+% =============================================================================
+
+\begin{abstract}
+\noindent
+This appendix extends the ESL framework to accommodate different types of scientific publications. While the core K-metric ($K = \min(B,E)/\max(B,E)$) remains universal, the operationalization of Evidence ($E$) varies by paper type. We introduce Paper Type Classification (PTC) as a mandatory first step in ESL assessment, define nine paper types with their characteristic claim structures, and provide type-specific evidence scales. The appendix establishes which paper types are amenable to replication probability estimation (R-Score) versus those requiring alternative quality metrics. Integration points with the main ESL workflow are specified.
+
+\vspace{0.5em}
+\noindent\textbf{Keywords:} Paper type classification, evidence scales, replication probability, meta-analysis, theoretical papers, methodology papers
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =============================================================================
+% F.1 MOTIVATION
+% =============================================================================
+
+\section{Motivation: Why Paper Type Matters}
+\label{sec:motivation}
+
+The ESL framework was initially developed for empirical studies, where ``evidence'' refers to study design quality and ``replication probability'' has a clear operational meaning. However, scientific literature encompasses diverse publication types, each with distinct claim structures and evidence standards.
+
+\begin{keyinsight}[title={The Generalization Challenge}]
+The K-metric measures \textbf{claim-evidence alignment}:
+\begin{equation}
+K = \frac{\min(B, E)}{\max(B, E)}
+\end{equation}
+
+This is universally applicable, but:
+\begin{itemize}
+    \item What counts as ``evidence'' varies by paper type
+    \item Not all paper types have ``replication probability'' in the traditional sense
+    \item E-scale calibration must be type-specific
+\end{itemize}
+\end{keyinsight}
+
+\subsection{The Core Insight}
+
+ESL's K-metric measures whether \textit{claim strength matches evidence strength}. This applies to:
+
+\begin{itemize}
+    \item Empirical claims (``Our study shows X'') $\rightarrow$ Evidence from study design
+    \item Theoretical claims (``X logically implies Y'') $\rightarrow$ Evidence from proof rigor
+    \item Synthetic claims (``The literature shows X'') $\rightarrow$ Evidence from source quality
+    \item Methodological claims (``Method M works for problem P'') $\rightarrow$ Evidence from validation
+\end{itemize}
+
+Paper Type Classification (PTC) enables appropriate E-scale selection for each case.
+
+% =============================================================================
+% F.2 PAPER TYPE TAXONOMY
+% =============================================================================
+
+\section{Paper Type Taxonomy}
+\label{sec:taxonomy}
+
+We distinguish nine primary paper types based on their epistemic function and claim structure.
+
+\begin{table}[h]
+\centering
+\caption{Scientific Paper Type Taxonomy}
+\label{tab:taxonomy}
+\begin{tabular}{clp{6cm}}
+\toprule
+\textbf{Code} & \textbf{Paper Type} & \textbf{Description} \\
+\midrule
+\textbf{EMP} & Empirical Study & New data collection and analysis \\
+\textbf{META} & Meta-Analysis & Quantitative synthesis of multiple studies \\
+\textbf{REV} & Review / Survey & Qualitative synthesis of existing research \\
+\textbf{THE} & Theoretical Paper & New model, framework, or formal theory \\
+\textbf{METH} & Methods Paper & New methodology, tool, or procedure \\
+\textbf{REP} & Replication Study & Reproduction of existing study \\
+\textbf{SIM} & Simulation Study & Computational modeling and analysis \\
+\textbf{CASE} & Case Study & In-depth analysis of single case(s) \\
+\textbf{COM} & Commentary / Letter & Response to or discussion of other work \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Type Definitions}
+
+\begin{definition}[Empirical Study (EMP)]
+\label{def:emp}
+A publication presenting \textbf{new primary data} collected through observation, experiment, survey, or other empirical methods, with original analysis of that data.
+
+\textbf{Characteristic claims}: ``We find that...'', ``Our results show...'', ``The data indicate...''
+
+\textbf{Examples}: RCTs, laboratory experiments, field studies, survey research, observational studies.
+\end{definition}
+
+\begin{definition}[Meta-Analysis (META)]
+\label{def:meta}
+A publication providing \textbf{quantitative synthesis} of multiple primary studies, using statistical methods to aggregate effect sizes and assess heterogeneity.
+
+\textbf{Characteristic claims}: ``Across N studies, the pooled effect is...'', ``Meta-analytic evidence shows...''
+
+\textbf{Examples}: Cochrane reviews, IPD meta-analyses, network meta-analyses.
+\end{definition}
+
+\begin{definition}[Review / Survey (REV)]
+\label{def:rev}
+A publication providing \textbf{qualitative synthesis} of existing research, organizing and interpreting the literature without formal statistical aggregation.
+
+\textbf{Characteristic claims}: ``The literature suggests...'', ``Research in this area has found...'', ``Several studies indicate...''
+
+\textbf{Examples}: Narrative reviews, scoping reviews, systematic reviews without meta-analysis.
+\end{definition}
+
+\begin{definition}[Theoretical Paper (THE)]
+\label{def:the}
+A publication presenting a \textbf{new conceptual framework, formal model, or logical argument} without primary empirical data.
+
+\textbf{Characteristic claims}: ``We propose that...'', ``It follows that...'', ``The model predicts...''
+
+\textbf{Examples}: Game-theoretic models, axiomatic frameworks, philosophical arguments, mathematical proofs.
+\end{definition}
+
+\begin{definition}[Methods Paper (METH)]
+\label{def:meth}
+A publication introducing a \textbf{new methodology, statistical technique, measurement instrument, or analytical tool}.
+
+\textbf{Characteristic claims}: ``The method achieves...'', ``Our approach outperforms...'', ``The instrument measures...''
+
+\textbf{Examples}: New statistical tests, software tools, measurement scales, experimental protocols.
+\end{definition}
+
+\begin{definition}[Replication Study (REP)]
+\label{def:rep}
+A publication \textbf{reproducing the methods of a prior study} to assess the robustness of original findings.
+
+\textbf{Characteristic claims}: ``We replicate/fail to replicate...'', ``The original finding is/is not robust...''
+
+\textbf{Examples}: Direct replications, conceptual replications, registered replication reports.
+\end{definition}
+
+\begin{definition}[Simulation Study (SIM)]
+\label{def:sim}
+A publication using \textbf{computational models} to explore theoretical predictions, test assumptions, or generate synthetic data.
+
+\textbf{Characteristic claims}: ``Simulations show...'', ``The model generates...'', ``Under conditions X, the system...''
+
+\textbf{Examples}: Agent-based models, Monte Carlo simulations, system dynamics models.
+\end{definition}
+
+\begin{definition}[Case Study (CASE)]
+\label{def:case}
+A publication providing \textbf{in-depth analysis of one or few cases}, prioritizing depth over generalizability.
+
+\textbf{Characteristic claims}: ``In this case...'', ``The patient presented...'', ``The organization demonstrated...''
+
+\textbf{Examples}: Clinical case reports, organizational case studies, historical analyses.
+\end{definition}
+
+\begin{definition}[Commentary / Letter (COM)]
+\label{def:com}
+A publication providing \textbf{response, critique, or discussion} of other published work, without substantial new data or theory.
+
+\textbf{Characteristic claims}: ``The authors overlook...'', ``An alternative interpretation...'', ``We note that...''
+
+\textbf{Examples}: Letters to the editor, commentaries, corrections, replies.
+\end{definition}
+
+% =============================================================================
+% F.3 REPLICATION APPLICABILITY
+% =============================================================================
+
+\section{Replication Probability Applicability}
+\label{sec:replication}
+
+A central question for ESL is: \textit{Which paper types have meaningful ``replication probability''?}
+
+\begin{table}[h]
+\centering
+\caption{Replication Probability Applicability by Paper Type}
+\label{tab:replication}
+\begin{tabular}{lcl}
+\toprule
+\textbf{Type} & \textbf{R-Score?} & \textbf{Rationale} \\
+\midrule
+\textbf{EMP} & \checkmark Yes & Core case: empirical claims can be replicated \\
+\textbf{META} & \checkmark Yes & Meta-analytic conclusions can be re-assessed \\
+\textbf{REP} & \checkmark Yes & Replication studies are themselves replicable \\
+\textbf{SIM} & $\sim$ Partial & Reproducible (same code), but ``replication'' differs \\
+\textbf{CASE} & $\sim$ Partial & Similar cases can be examined, not strict replication \\
+\textbf{REV} & $\times$ No & No original empirical claims to replicate \\
+\textbf{THE} & $\times$ No & Validity via logic, not replication \\
+\textbf{METH} & $\times$ No & Validated, not replicated \\
+\textbf{COM} & $\times$ No & No standalone empirical claims \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{keyinsight}[title={R-Score vs. K-Score}]
+\textbf{R-Score} (Replication probability) applies only to types with empirical claims.
+
+\textbf{K-Score} (Claim-evidence alignment) applies to \textbf{all} types---the evidence scale simply differs.
+
+For non-empirical types, K measures calibration against type-appropriate evidence standards.
+\end{keyinsight}
+
+\subsection{Simulation Studies: A Special Case}
+
+Simulation studies occupy an intermediate position:
+
+\begin{itemize}
+    \item \textbf{Reproducibility}: Given same code + parameters, results should be identical (deterministic) or statistically equivalent (stochastic). This is \textit{computational reproducibility}, not replication.
+
+    \item \textbf{Robustness}: Results should hold under reasonable parameter variations. This is closer to conceptual replication.
+
+    \item \textbf{Empirical grounding}: Claims about real-world phenomena based on simulations require empirical validation.
+\end{itemize}
+
+\begin{warningbox}[title={Simulation Claims Require Careful Classification}]
+A simulation paper may contain:
+\begin{enumerate}
+    \item \textbf{Model claims} (``The model captures mechanism X'') $\rightarrow$ THE-type evaluation
+    \item \textbf{Computational claims} (``The algorithm converges in N steps'') $\rightarrow$ METH-type evaluation
+    \item \textbf{Empirical claims} (``The simulation predicts real-world outcome Y'') $\rightarrow$ EMP-type evaluation
+\end{enumerate}
+Each claim type requires its own E-scale.
+\end{warningbox}
+
+% =============================================================================
+% F.4 TYPE-SPECIFIC EVIDENCE SCALES
+% =============================================================================
+
+\section{Type-Specific Evidence Scales}
+\label{sec:evidence-scales}
+
+This section provides E-scale calibrations for each paper type.
+
+\subsection{Empirical Studies (EMP)}
+
+Standard ESL evidence hierarchy applies (see Chapter 3). Summary:
+
+\begin{table}[h]
+\centering
+\caption{EMP Evidence Scale (Standard ESL)}
+\label{tab:emp-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Evidence Level} & \textbf{E-value} \\
+\midrule
+Systematic review with meta-analysis & 0.90--0.95 \\
+Large-scale RCT / pre-registered experiment & 0.80--0.90 \\
+Well-powered lab experiment & 0.65--0.75 \\
+Observational study with controls & 0.50--0.65 \\
+Cross-sectional survey & 0.40--0.55 \\
+Pilot study / exploratory analysis & 0.25--0.40 \\
+Anecdotal / author intuition & 0.05--0.20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Meta-Analyses (META)}
+
+Meta-analyses have their own evidence quality determinants:
+
+\begin{table}[h]
+\centering
+\caption{META Evidence Scale}
+\label{tab:meta-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Quality Indicator} & \textbf{E-value} \\
+\midrule
+Cochrane-standard with low heterogeneity ($I^2 < 25\%$) & 0.90--0.95 \\
+Pre-registered, comprehensive search, low bias & 0.80--0.90 \\
+Standard meta-analysis, moderate heterogeneity & 0.70--0.80 \\
+High heterogeneity ($I^2 > 75\%$) or publication bias & 0.50--0.65 \\
+Limited search, few studies ($k < 5$) & 0.35--0.50 \\
+Vote-counting or informal aggregation & 0.20--0.35 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Search comprehensiveness, inclusion criteria clarity, heterogeneity ($I^2$), publication bias assessment (funnel plot, Egger's test), quality of included studies.
+
+\subsection{Reviews (REV)}
+
+Review quality depends on systematicity and source quality:
+
+\begin{table}[h]
+\centering
+\caption{REV Evidence Scale}
+\label{tab:rev-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Review Type / Quality} & \textbf{E-value} \\
+\midrule
+Systematic review with clear protocol & 0.75--0.85 \\
+Comprehensive narrative review, multiple high-quality sources & 0.60--0.75 \\
+Scoping review with defined methodology & 0.55--0.70 \\
+Standard literature review, good coverage & 0.45--0.60 \\
+Selective review, limited sources & 0.30--0.45 \\
+Informal overview, author's perspective & 0.15--0.30 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Explicit search strategy, inclusion/exclusion criteria, source quality assessment, coverage of relevant literature, balanced presentation.
+
+\subsection{Theoretical Papers (THE)}
+
+Theoretical work is evaluated on logical rigor and internal consistency:
+
+\begin{table}[h]
+\centering
+\caption{THE Evidence Scale (Proof Rigor)}
+\label{tab:the-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Logical Status} & \textbf{E-value} \\
+\midrule
+Formal proof with verified axioms & 0.95--1.00 \\
+Complete proof, standard mathematical rigor & 0.85--0.95 \\
+Rigorous argument, minor gaps fillable & 0.75--0.85 \\
+Plausible argument, some steps informal & 0.55--0.70 \\
+Conceptual framework, logic outlined not proven & 0.40--0.55 \\
+Intuitive argument, key steps missing & 0.20--0.40 \\
+Speculation, no formal structure & 0.05--0.20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Axiom clarity, proof completeness, logical validity, assumption transparency, connection to established theory.
+
+\begin{examplebox}[title={Theoretical Paper Example}]
+\textbf{Claim}: ``Nash equilibrium exists in all finite games'' (Nash, 1950)
+
+\textbf{Boldness}: $B = 0.95$ (universal claim with ``all'')
+
+\textbf{Evidence}: Complete mathematical proof using Brouwer fixed-point theorem. $E = 0.98$
+
+\textbf{K-Score}: $K = 0.95/0.98 = 0.97$ (Highly Stable)
+
+The strong claim is justified by rigorous proof.
+\end{examplebox}
+
+\subsection{Methods Papers (METH)}
+
+Methods are evaluated on validation quality:
+
+\begin{table}[h]
+\centering
+\caption{METH Evidence Scale (Validation)}
+\label{tab:meth-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Validation Level} & \textbf{E-value} \\
+\midrule
+Multi-site validation, diverse benchmarks & 0.85--0.95 \\
+Independent validation by other researchers & 0.75--0.85 \\
+Comprehensive internal validation, simulations & 0.65--0.75 \\
+Limited validation, single benchmark & 0.45--0.60 \\
+Proof-of-concept only & 0.30--0.45 \\
+No validation, theoretical description only & 0.10--0.25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Benchmark diversity, comparison to alternatives, edge case testing, user studies (if applicable), reproducibility of implementation.
+
+\subsection{Replication Studies (REP)}
+
+Replication studies are evaluated similarly to EMP, with additional considerations:
+
+\begin{table}[h]
+\centering
+\caption{REP Evidence Scale}
+\label{tab:rep-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Replication Quality} & \textbf{E-value} \\
+\midrule
+Pre-registered, high-powered, multi-site & 0.90--0.95 \\
+Pre-registered, well-powered single site & 0.80--0.90 \\
+Direct replication, adequate power & 0.70--0.80 \\
+Conceptual replication, good design & 0.60--0.75 \\
+Under-powered replication attempt & 0.40--0.55 \\
+Informal replication, significant deviations & 0.25--0.40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Pre-registration, statistical power, fidelity to original protocol, sample characteristics, outcome measure alignment.
+
+\subsection{Simulation Studies (SIM)}
+
+\begin{table}[h]
+\centering
+\caption{SIM Evidence Scale (Computational Validity)}
+\label{tab:sim-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Simulation Quality} & \textbf{E-value} \\
+\midrule
+Validated against empirical data, robust to parameters & 0.80--0.90 \\
+Comprehensive sensitivity analysis, code available & 0.70--0.80 \\
+Standard robustness checks, reasonable assumptions & 0.55--0.70 \\
+Limited sensitivity analysis & 0.40--0.55 \\
+Single parameter set, no robustness testing & 0.25--0.40 \\
+No validation, illustrative only & 0.10--0.25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Parameter sensitivity, assumption transparency, code availability, comparison to analytical solutions (if available), empirical grounding.
+
+\subsection{Case Studies (CASE)}
+
+\begin{table}[h]
+\centering
+\caption{CASE Evidence Scale}
+\label{tab:case-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Case Study Quality} & \textbf{E-value} \\
+\midrule
+Multiple cases, systematic comparison, triangulation & 0.65--0.75 \\
+Single rich case, multiple data sources & 0.50--0.65 \\
+Detailed case, limited triangulation & 0.40--0.55 \\
+Descriptive case, single data source & 0.25--0.40 \\
+Anecdotal case report & 0.10--0.25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Case selection rationale, data triangulation, rival explanation consideration, thick description, analytic generalization attempt.
+
+\textbf{Note}: Case study E-values are inherently lower due to limited generalizability. This is appropriate---claims should be hedged accordingly ($B$ should be low).
+
+\subsection{Commentaries (COM)}
+
+\begin{table}[h]
+\centering
+\caption{COM Evidence Scale}
+\label{tab:com-scale}
+\begin{tabular}{lc}
+\toprule
+\textbf{Commentary Quality} & \textbf{E-value} \\
+\midrule
+Points to verifiable errors with evidence & 0.80--0.90 \\
+Substantive critique with citations & 0.60--0.75 \\
+Reasoned alternative interpretation & 0.45--0.60 \\
+Opinion with some support & 0.30--0.45 \\
+Unsupported opinion & 0.10--0.25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key factors}: Specificity of critique, evidential support, constructiveness, connection to broader literature.
+
+% =============================================================================
+% F.5 WORKFLOW INTEGRATION
+% =============================================================================
+
+\section{ESL Workflow Integration}
+\label{sec:workflow}
+
+Paper Type Classification becomes Step 0 in the ESL assessment workflow.
+
+\subsection{Updated ESL Workflow}
+
+\begin{table}[h]
+\centering
+\caption{Complete ESL Workflow with PTC}
+\label{tab:workflow}
+\begin{tabular}{clp{7cm}}
+\toprule
+\textbf{Step} & \textbf{Name} & \textbf{Description} \\
+\midrule
+0 & \textbf{PTC} & Classify paper type (EMP/META/REV/THE/METH/REP/SIM/CASE/COM) \\
+1 & \textbf{CTC} & Claim-Type Classification (T1--T5) \\
+2 & \textbf{B-Assessment} & Linguistic marker analysis for Boldness \\
+3 & \textbf{E-Assessment} & Type-specific evidence evaluation \\
+4 & \textbf{K-Calculation} & $K = \min(B,E)/\max(B,E)$ \\
+5 & \textbf{Safeguards} & Apply PP, WLA, EVA, RAS \\
+6 & \textbf{Aggregation} & Document-level K-score \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{PTC Decision Tree}
+
+\begin{verbatim}
+START
+  │
+  ├─ Does the paper present new primary data?
+  │   ├─ YES: Is it reproducing a prior study?
+  │   │        ├─ YES → REP (Replication)
+  │   │        └─ NO → EMP (Empirical)
+  │   │
+  │   └─ NO: Does it aggregate existing studies quantitatively?
+  │           ├─ YES → META (Meta-Analysis)
+  │           └─ NO: Does it synthesize existing literature?
+  │                   ├─ YES → REV (Review)
+  │                   └─ NO: Is it primarily computational/simulation?
+  │                           ├─ YES → SIM (Simulation)
+  │                           └─ NO: Does it introduce new methodology?
+  │                                   ├─ YES → METH (Methods)
+  │                                   └─ NO: Is it formal theory/proof?
+  │                                           ├─ YES → THE (Theoretical)
+  │                                           └─ NO: Is it single-case analysis?
+  │                                                   ├─ YES → CASE (Case Study)
+  │                                                   └─ NO → COM (Commentary)
+END
+\end{verbatim}
+
+\subsection{Mixed-Type Papers}
+
+Many papers contain multiple types of content. For mixed papers:
+
+\begin{principle}[Claim-Level Type Assignment]
+\label{princ:claim-level}
+When a paper contains multiple content types, assign paper type \textbf{at the claim level}, not the paper level. Each claim is evaluated against the E-scale appropriate to its type.
+\end{principle}
+
+\begin{examplebox}[title={Mixed-Type Paper Example}]
+A paper might contain:
+\begin{enumerate}
+    \item ``We propose a new theoretical model...'' $\rightarrow$ THE, E via proof rigor
+    \item ``We test the model with a laboratory experiment...'' $\rightarrow$ EMP, E via study design
+    \item ``Simulations confirm the model's predictions...'' $\rightarrow$ SIM, E via computational validity
+\end{enumerate}
+
+Each claim gets its own K-score; document K is aggregated per Chapter 2 rules.
+\end{examplebox}
+
+% =============================================================================
+% F.6 IMPLEMENTATION NOTES
+% =============================================================================
+
+\section{Implementation Notes}
+\label{sec:implementation}
+
+\subsection{LLM Prompt Integration}
+
+For automated ESL assessment, include PTC as the first step:
+
+\begin{verbatim}
+STEP 0 - PAPER TYPE CLASSIFICATION:
+Before analyzing claims, classify this paper's type:
+- EMP: New primary data collection and analysis
+- META: Quantitative synthesis of multiple studies
+- REV: Qualitative literature synthesis
+- THE: Theoretical framework or formal proof
+- METH: New methodology or tool
+- REP: Replication of prior study
+- SIM: Computational modeling
+- CASE: In-depth single-case analysis
+- COM: Commentary or response
+
+Primary type: [TYPE]
+Secondary types (if mixed): [TYPES]
+
+Select appropriate E-scale based on paper type.
+\end{verbatim}
+
+\subsection{Reporting Format}
+
+ESL reports should include paper type:
+
+\begin{verbatim}
+═══════════════════════════════════════════════════════
+ESL ASSESSMENT REPORT
+═══════════════════════════════════════════════════════
+Paper: [Title]
+Type: EMP (Empirical Study)
+───────────────────────────────────────────────────────
+Claim 1: "Our results demonstrate that X causes Y"
+  - Type: T1 (Empirical, EMP-assessed)
+  - B = 0.88 (strong: "demonstrate")
+  - E = 0.72 (lab experiment, n=200)
+  - K = 0.82 [STABLE]
+...
+\end{verbatim}
+
+\subsection{Type-Specific Thresholds}
+
+Consider adjusting K-thresholds by paper type:
+
+\begin{table}[h]
+\centering
+\caption{Suggested Type-Specific K-Thresholds}
+\label{tab:thresholds}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Type} & \textbf{Stable} & \textbf{Partially Stable} & \textbf{Unstable} \\
+\midrule
+THE (Theoretical) & $\geq 0.85$ & $0.65$--$0.85$ & $< 0.65$ \\
+EMP (Empirical) & $\geq 0.75$ & $0.50$--$0.75$ & $< 0.50$ \\
+CASE (Case Study) & $\geq 0.70$ & $0.45$--$0.70$ & $< 0.45$ \\
+COM (Commentary) & $\geq 0.65$ & $0.40$--$0.65$ & $< 0.40$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Rationale}: Theoretical papers making strong logical claims should be held to higher standards (proofs should be rigorous). Case studies and commentaries inherently have lower E-ceilings, so thresholds are adjusted downward.
+
+% =============================================================================
+% F.7 SUMMARY
+% =============================================================================
+
+\section{Summary}
+\label{sec:summary}
+
+This appendix has extended ESL to accommodate the full range of scientific publication types:
+
+\begin{enumerate}
+    \item \textbf{Nine Paper Types}: EMP, META, REV, THE, METH, REP, SIM, CASE, COM---each with distinct claim structures and evidence standards.
+
+    \item \textbf{R-Score Applicability}: Only EMP, META, and REP have traditional replication probability. Other types use K-scores with type-specific E-scales.
+
+    \item \textbf{Type-Specific E-Scales}: Each paper type has calibrated evidence hierarchies reflecting domain-appropriate quality indicators.
+
+    \item \textbf{Workflow Integration}: PTC becomes Step 0 in ESL assessment, determining which E-scale to apply.
+
+    \item \textbf{Mixed-Type Handling}: Claims are typed individually, enabling appropriate evaluation within multi-method papers.
+\end{enumerate}
+
+\begin{eslbox}
+\textbf{Appendix F Self-Assessment}
+
+This appendix proposes a classification system ($B \approx 0.75$) based on established publication typologies and ESL principles ($E \approx 0.70$ for framework extension with face validity but limited empirical testing).
+
+\textbf{Calculation}: $K = 0.70/0.75 = 0.93$
+
+\textbf{Status}: \textcolor{eslgreen}{\textbf{Highly Stable}} ($K \geq 0.90$)
+
+\textbf{Claim Types}:
+\begin{itemize}
+    \item Paper type taxonomy: T2 (Based on established typologies)
+    \item E-scale values: T4 (Expert proposal, requires validation)
+    \item Workflow integration: T3 (Logical extension of ESL)
+\end{itemize}
+\end{eslbox}
+
+% =============================================================================
+% REFERENCES
+% =============================================================================
+
+\newpage
+\bibliographystyle{apalike}
+
+\begin{thebibliography}{99}
+
+\bibitem[Bem, 2004]{Bem2004}
+Bem, D. J. (2004).
+Writing the empirical journal article.
+In J. M. Darley, M. P. Zanna, \& H. L. Roediger III (Eds.), \textit{The Compleat Academic} (2nd ed., pp. 185--219). APA.
+
+\bibitem[Borenstein et al., 2009]{Borenstein2009}
+Borenstein, M., Hedges, L. V., Higgins, J. P. T., \& Rothstein, H. R. (2009).
+\textit{Introduction to Meta-Analysis}.
+Wiley.
+
+\bibitem[Grant \& Booth, 2009]{Grant2009}
+Grant, M. J., \& Booth, A. (2009).
+A typology of reviews: An analysis of 14 review types and associated methodologies.
+\textit{Health Information \& Libraries Journal}, 26(2), 91--108.
+
+\bibitem[Yin, 2018]{Yin2018}
+Yin, R. K. (2018).
+\textit{Case Study Research and Applications: Design and Methods} (6th ed.).
+SAGE.
+
+\end{thebibliography}
+
+\end{document}
