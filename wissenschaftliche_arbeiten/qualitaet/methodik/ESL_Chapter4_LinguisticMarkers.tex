@@ -1,0 +1,922 @@
+% =============================================================================
+% ESL FRAMEWORK - CHAPTER 4: LINGUISTIC MARKERS
+% =============================================================================
+% Authors: Gerhard Fehr & Andrea Fehr
+% FehrAdvice & Partners AG, Zürich
+% Version: Extended Monograph
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{colortbl}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc,patterns}
+
+\geometry{margin=2.5cm}
+
+% --- Colors ---
+\definecolor{eslblue}{RGB}{0,82,147}
+\definecolor{eslgreen}{RGB}{0,128,0}
+\definecolor{eslorange}{RGB}{230,159,0}
+\definecolor{eslred}{RGB}{204,51,17}
+\definecolor{eslgray}{RGB}{128,128,128}
+\definecolor{eslpurple}{RGB}{148,0,211}
+\definecolor{strongcolor}{RGB}{180,0,0}
+\definecolor{moderatecolor}{RGB}{200,150,0}
+\definecolor{weakcolor}{RGB}{0,120,180}
+
+% --- Boxes ---
+\newtcolorbox{eslbox}[1][]{
+  colback=eslblue!5!white,
+  colframe=eslblue,
+  title={ESL Assessment},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{keyinsight}[1][]{
+  colback=eslgreen!5!white,
+  colframe=eslgreen!80!black,
+  title={Key Insight},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{warningbox}[1][]{
+  colback=eslorange!5!white,
+  colframe=eslorange!80!black,
+  title={Validation Status},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{examplebox}[1][]{
+  colback=eslgray!10!white,
+  colframe=eslgray!80!black,
+  title={Example},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{definitionbox}[1][]{
+  colback=white,
+  colframe=eslblue!80!black,
+  title={Definition},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{lexiconbox}[1][]{
+  colback=eslpurple!5!white,
+  colframe=eslpurple!80!black,
+  title={Marker Lexicon},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{calculationbox}[1][]{
+  colback=eslblue!5!white,
+  colframe=eslblue!80!black,
+  title={Calculation},
+  fonttitle=\bfseries,
+  #1
+}
+
+% --- Theorems ---
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{principle}{Principle}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{rule_def}{Rule}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% --- Header/Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small ESL Framework -- Extended Monograph}
+\fancyhead[R]{\small Chapter 4: Linguistic Markers}
+\fancyfoot[C]{\thepage}
+
+% =============================================================================
+% TITLE
+% =============================================================================
+
+\title{%
+    \Large \textbf{Empirical Stability of Language (ESL)} \\[0.5em]
+    \large A Universal Quality Assurance Framework for \\
+    Scientific Claim Validation \\[1em]
+    \LARGE \textbf{Chapter 4: Linguistic Markers} \\[0.3em]
+    \large B-Value Operationalization and Claim Strength Assessment
+}
+
+\author{%
+    \textbf{Gerhard Fehr}\textsuperscript{1,*} \and \textbf{Andrea Fehr}\textsuperscript{1} \\[0.5em]
+    \textsuperscript{1}FehrAdvice \& Partners AG, Binzmühlestrasse 170A, 8050 Zürich, Switzerland \\[0.3em]
+    \textsuperscript{*}Corresponding author: andrea.fehr@fehradvice.com
+}
+
+\date{December 26, 2025}
+
+\begin{document}
+
+\maketitle
+
+% =============================================================================
+% ABSTRACT
+% =============================================================================
+
+\begin{abstract}
+\noindent
+This chapter develops the B-component of the K-metric: the systematic identification and quantification of linguistic markers that signal claim strength. We present a comprehensive marker lexicon organized into five categories: epistemic verbs (proves, demonstrates, suggests), modal auxiliaries (must, may, might), quantifiers (all, most, some), hedging expressions (preliminary, in this sample), and intensifiers/downtoners. For each category, we provide proposed B-values based on ordinal linguistic analysis, with explicit acknowledgment of validation status. The chapter introduces the Composite B-Calculation algorithm for statements containing multiple markers, addresses context-sensitivity and discipline-specific variation, and outlines the Monte-Carlo validation approach for empirical B-value calibration. We conclude with practical guidelines for B-assessment in scientific texts and LLM-generated content.
+
+\vspace{0.5em}
+\noindent\textbf{Keywords:} Linguistic markers, epistemic modality, hedging, claim strength, B-values, corpus linguistics
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =============================================================================
+% 4.1 THEORETICAL FOUNDATIONS
+% =============================================================================
+
+\section{Theoretical Foundations}
+\label{sec:foundations}
+
+\subsection{Epistemic Modality in Language}
+
+Human languages have evolved sophisticated systems for expressing degrees of certainty. Linguists refer to this as \textbf{epistemic modality}---the grammatical and lexical resources for indicating a speaker's confidence in a proposition.
+
+\begin{definition}[Epistemic Modality]
+\label{def:epistemic}
+Epistemic modality is the linguistic expression of the speaker's degree of commitment to the truth of a proposition. It encompasses:
+\begin{itemize}
+    \item \textbf{Modal verbs}: must, may, might, could, should
+    \item \textbf{Epistemic adverbs}: certainly, probably, possibly, perhaps
+    \item \textbf{Evidential markers}: apparently, reportedly, allegedly
+    \item \textbf{Hedging expressions}: somewhat, to some extent, in certain cases
+\end{itemize}
+\end{definition}
+
+\subsection{The Linguistics Literature}
+
+ESL's B-value framework draws on established corpus linguistics research:
+
+\begin{itemize}
+    \item \textbf{Coates (1983)}: Systematic analysis of English modal verbs, establishing that modals form a cline from strong (must) to weak (might).
+
+    \item \textbf{Hyland (1998)}: Comprehensive study of hedging in academic writing, documenting pervasive uncertainty marking in scientific discourse.
+
+    \item \textbf{Salager-Meyer (1994)}: Analysis of hedging in medical research articles, showing discipline-specific patterns.
+
+    \item \textbf{Biber et al. (1999)}: Longman Grammar of Spoken and Written English, providing corpus-based frequency data for epistemic markers.
+\end{itemize}
+
+\begin{keyinsight}[title={The Linguistic Foundation}]
+The \textit{existence} of epistemic markers in language is well-established (Claim Type T1). The \textit{specific B-values} assigned to markers are proposed calibrations requiring empirical validation (Claim Type T4--T5).
+\end{keyinsight}
+
+\subsection{From Ordinal Ranking to Cardinal Values}
+
+Linguistics establishes ordinal rankings (``must'' is stronger than ``may''). ESL requires cardinal values ($B_{\text{must}} = 0.95$, $B_{\text{may}} = 0.40$).
+
+\begin{principle}[Ordinal-to-Cardinal Mapping]
+\label{princ:mapping}
+B-value assignment follows three principles:
+\begin{enumerate}
+    \item \textbf{Preserve ordinal ranking}: If $A$ is linguistically stronger than $B$, then $B_A > B_B$.
+    \item \textbf{Span the interval}: Strongest markers approach 1.0; weakest approach 0.0.
+    \item \textbf{Maintain discriminability}: Adjacent markers have distinguishable B-values ($|\Delta B| \geq 0.05$).
+\end{enumerate}
+\end{principle}
+
+\begin{warningbox}
+The specific numerical B-values in this chapter are \textbf{proposed estimates} based on:
+\begin{itemize}
+    \item Ordinal linguistic rankings (empirically grounded)
+    \item Expert judgment (author intuition)
+    \item Internal consistency requirements
+\end{itemize}
+
+\textbf{Validation status}: T4 (Expert Proposal) to T5 (Author Intuition). Corpus validation studies are needed to establish empirical B-values. See Section \ref{sec:validation} for the Monte-Carlo validation approach.
+\end{warningbox}
+
+% =============================================================================
+% 4.2 MARKER CATEGORY 1: EPISTEMIC VERBS
+% =============================================================================
+
+\section{Epistemic Verbs}
+\label{sec:epistemic-verbs}
+
+Epistemic verbs are the primary carriers of claim strength in scientific writing. They signal what the evidence ``does''---proves, demonstrates, suggests, or merely hints.
+
+\subsection{The Epistemic Verb Hierarchy}
+
+\begin{lexiconbox}[title={Epistemic Verb B-Values}]
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Category} & \textbf{Verb/Phrase} & \textbf{B-Value} & \textbf{95\% Range} \\
+\midrule
+\multirow{4}{*}{\textcolor{strongcolor}{\textbf{Definitive}}}
+    & proves, prove & 0.95 & [0.92, 0.98] \\
+    & demonstrates conclusively & 0.94 & [0.91, 0.97] \\
+    & establishes & 0.92 & [0.88, 0.95] \\
+    & confirms & 0.90 & [0.86, 0.93] \\
+\midrule
+\multirow{4}{*}{\textcolor{strongcolor}{\textbf{Strong}}}
+    & demonstrates & 0.88 & [0.84, 0.91] \\
+    & shows & 0.85 & [0.80, 0.88] \\
+    & reveals & 0.83 & [0.78, 0.87] \\
+    & finds & 0.80 & [0.75, 0.84] \\
+\midrule
+\multirow{4}{*}{\textcolor{moderatecolor}{\textbf{Moderate}}}
+    & indicates & 0.72 & [0.68, 0.76] \\
+    & supports & 0.70 & [0.65, 0.74] \\
+    & suggests & 0.62 & [0.58, 0.66] \\
+    & points to & 0.60 & [0.55, 0.64] \\
+\midrule
+\multirow{4}{*}{\textcolor{weakcolor}{\textbf{Tentative}}}
+    & is consistent with & 0.55 & [0.50, 0.60] \\
+    & is associated with & 0.52 & [0.47, 0.57] \\
+    & hints at & 0.45 & [0.40, 0.50] \\
+    & raises the possibility & 0.42 & [0.37, 0.47] \\
+\midrule
+\multirow{3}{*}{\textcolor{weakcolor}{\textbf{Minimal}}}
+    & does not rule out & 0.35 & [0.30, 0.40] \\
+    & cannot exclude & 0.32 & [0.27, 0.37] \\
+    & may be related to & 0.30 & [0.25, 0.35] \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lexiconbox}
+
+\subsection{Usage Patterns}
+
+\begin{examplebox}[title={Epistemic Verb Comparison}]
+The same finding can be expressed with different claim strengths:
+
+\begin{enumerate}
+    \item ``Our results \textbf{prove} that X causes Y.'' ($B = 0.95$)
+    \item ``Our results \textbf{demonstrate} that X causes Y.'' ($B = 0.88$)
+    \item ``Our results \textbf{suggest} that X causes Y.'' ($B = 0.62$)
+    \item ``Our results \textbf{are consistent with} X causing Y.'' ($B = 0.55$)
+    \item ``Our results \textbf{do not rule out} that X causes Y.'' ($B = 0.35$)
+\end{enumerate}
+
+Each formulation conveys a different degree of epistemic commitment. Calibrated writing matches verb choice to evidence strength.
+\end{examplebox}
+
+\subsection{Context Sensitivity}
+
+Epistemic verb strength varies by context:
+
+\begin{table}[h]
+\centering
+\caption{Context-Dependent B-Value Adjustments}
+\label{tab:context-verbs}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Context} & \textbf{Adjustment} & \textbf{Rationale} \\
+\midrule
+Abstract/Conclusion & $+0.00$ & Base interpretation \\
+Methods section & $-0.05$ & Procedural, not evidential \\
+Literature review & $-0.03$ & Reporting others' claims \\
+Speculation section & $-0.08$ & Explicitly tentative \\
+Title & $+0.05$ & Headline effect \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% 4.3 MARKER CATEGORY 2: MODAL AUXILIARIES
+% =============================================================================
+
+\section{Modal Auxiliaries}
+\label{sec:modals}
+
+Modal auxiliary verbs (must, will, should, may, might, could) are core grammatical resources for epistemic modality in English.
+
+\subsection{The Modal Hierarchy}
+
+\begin{lexiconbox}[title={Modal Auxiliary B-Values}]
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Strength} & \textbf{Modal} & \textbf{B-Value} & \textbf{Example} \\
+\midrule
+\multirow{2}{*}{\textcolor{strongcolor}{\textbf{Necessity}}}
+    & must (epistemic) & 0.92 & ``This must be the cause'' \\
+    & has to & 0.90 & ``It has to follow that...'' \\
+\midrule
+\multirow{2}{*}{\textcolor{strongcolor}{\textbf{Confidence}}}
+    & will (prediction) & 0.85 & ``This will replicate'' \\
+    & would (conditional) & 0.78 & ``This would suggest...'' \\
+\midrule
+\multirow{2}{*}{\textcolor{moderatecolor}{\textbf{Probability}}}
+    & should & 0.72 & ``Results should generalize'' \\
+    & ought to & 0.70 & ``We ought to observe...'' \\
+\midrule
+\multirow{3}{*}{\textcolor{weakcolor}{\textbf{Possibility}}}
+    & may & 0.45 & ``This may indicate...'' \\
+    & might & 0.40 & ``It might be that...'' \\
+    & could & 0.38 & ``This could explain...'' \\
+\midrule
+\textcolor{weakcolor}{\textbf{Remote}}
+    & can (theoretical) & 0.35 & ``One can imagine...'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lexiconbox}
+
+\subsection{Epistemic vs. Deontic Readings}
+
+Modal verbs have multiple meanings. ESL focuses on epistemic (knowledge-related) readings:
+
+\begin{definition}[Epistemic vs. Deontic Modality]
+\label{def:epistemic-deontic}
+\begin{itemize}
+    \item \textbf{Epistemic}: Relates to knowledge or belief. \\
+    ``You \textit{must} be tired'' = I conclude you are tired.
+
+    \item \textbf{Deontic}: Relates to obligation or permission. \\
+    ``You \textit{must} submit by Friday'' = You are required to submit.
+\end{itemize}
+\end{definition}
+
+\begin{rule_def}[Modal Disambiguation]
+\label{rule:modal}
+In scientific writing, prioritize epistemic readings unless context clearly indicates deontic meaning (e.g., methodological requirements).
+\end{rule_def}
+
+% =============================================================================
+% 4.4 MARKER CATEGORY 3: QUANTIFIERS
+% =============================================================================
+
+\section{Quantifiers}
+\label{sec:quantifiers}
+
+Quantifiers modulate claim scope---the range of cases to which a claim applies.
+
+\subsection{The Quantifier Hierarchy}
+
+\begin{lexiconbox}[title={Quantifier B-Values}]
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Scope} & \textbf{Quantifier} & \textbf{B-Value} & \textbf{Claim Scope} \\
+\midrule
+\multirow{4}{*}{\textcolor{strongcolor}{\textbf{Universal}}}
+    & all, every & 0.98 & 100\% of cases \\
+    & always, invariably & 0.96 & No exceptions \\
+    & never, none & 0.96 & Universal negation \\
+    & without exception & 0.98 & Explicit universality \\
+\midrule
+\multirow{3}{*}{\textcolor{strongcolor}{\textbf{Near-Universal}}}
+    & almost all & 0.90 & $>$95\% of cases \\
+    & nearly always & 0.88 & Few exceptions \\
+    & the vast majority & 0.86 & $>$90\% of cases \\
+\midrule
+\multirow{4}{*}{\textcolor{moderatecolor}{\textbf{Majority}}}
+    & most & 0.78 & $>$50\% of cases \\
+    & typically, usually & 0.75 & Normal/expected \\
+    & generally & 0.72 & With exceptions \\
+    & often & 0.68 & Frequent \\
+\midrule
+\multirow{4}{*}{\textcolor{moderatecolor}{\textbf{Common}}}
+    & many & 0.62 & Substantial portion \\
+    & frequently & 0.60 & Regular occurrence \\
+    & commonly & 0.58 & Not unusual \\
+    & tends to & 0.55 & Probabilistic \\
+\midrule
+\multirow{4}{*}{\textcolor{weakcolor}{\textbf{Partial}}}
+    & some & 0.45 & Unspecified portion \\
+    & sometimes & 0.42 & Occasional \\
+    & in some cases & 0.40 & Restricted scope \\
+    & occasionally & 0.38 & Infrequent \\
+\midrule
+\multirow{3}{*}{\textcolor{weakcolor}{\textbf{Rare}}}
+    & few & 0.28 & Small minority \\
+    & rarely, seldom & 0.25 & Uncommon \\
+    & in rare cases & 0.22 & Exceptional \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lexiconbox}
+
+\subsection{Quantifier Scope Interactions}
+
+\begin{examplebox}[title={Quantifier Impact on Claim Strength}]
+Consider variations of a finding:
+
+\begin{enumerate}
+    \item ``Loss aversion affects \textbf{all} economic decisions.'' ($B = 0.98$)
+    \item ``Loss aversion affects \textbf{most} economic decisions.'' ($B = 0.78$)
+    \item ``Loss aversion affects \textbf{many} economic decisions.'' ($B = 0.62$)
+    \item ``Loss aversion affects \textbf{some} economic decisions.'' ($B = 0.45$)
+    \item ``Loss aversion \textbf{rarely} affects economic decisions.'' ($B = 0.25$)
+\end{enumerate}
+
+The quantifier alone shifts B by up to 0.73 points.
+\end{examplebox}
+
+% =============================================================================
+% 4.5 MARKER CATEGORY 4: HEDGING EXPRESSIONS
+% =============================================================================
+
+\section{Hedging Expressions}
+\label{sec:hedging}
+
+Hedging expressions explicitly signal limitations, tentativeness, or reduced scope. Unlike epistemic verbs, hedges typically function as \textit{modifiers} that reduce the B-value of the primary claim.
+
+\subsection{Hedge Categories}
+
+\begin{lexiconbox}[title={Hedging Expression Modifiers ($\Delta B$)}]
+\begin{center}
+\begin{tabular}{llc}
+\toprule
+\textbf{Category} & \textbf{Expression} & \textbf{$\Delta B$} \\
+\midrule
+\multirow{4}{*}{\textbf{Tentativeness}}
+    & preliminary, initial & $-0.15$ \\
+    & exploratory & $-0.18$ \\
+    & tentative & $-0.20$ \\
+    & speculative & $-0.25$ \\
+\midrule
+\multirow{4}{*}{\textbf{Scope Limitation}}
+    & in this sample/study & $-0.10$ \\
+    & in this population & $-0.10$ \\
+    & under these conditions & $-0.12$ \\
+    & in this context & $-0.08$ \\
+\midrule
+\multirow{3}{*}{\textbf{Methodological}}
+    & with the caveat that... & $-0.10$ \\
+    & subject to limitations & $-0.12$ \\
+    & with reservations & $-0.15$ \\
+\midrule
+\multirow{4}{*}{\textbf{Future-Oriented}}
+    & further research is needed & $-0.18$ \\
+    & requires replication & $-0.15$ \\
+    & awaits confirmation & $-0.20$ \\
+    & remains to be seen & $-0.22$ \\
+\midrule
+\multirow{3}{*}{\textbf{Approximators}}
+    & approximately, roughly & $-0.05$ \\
+    & somewhat, to some extent & $-0.08$ \\
+    & more or less & $-0.10$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lexiconbox}
+
+\subsection{Cumulative Hedging}
+
+Multiple hedges accumulate:
+
+\begin{examplebox}[title={Cumulative Hedging Effect}]
+\textbf{Statement}: ``\textit{Preliminary} results \textit{in this sample} \textit{tentatively} suggest that, \textit{subject to limitations}, X may affect Y, though \textit{further research is needed}.''
+
+\textbf{Calculation}:
+\begin{align}
+B_{\text{base}} &= 0.62 \quad \text{(``suggest'')} \\
+\Delta_{\text{preliminary}} &= -0.15 \\
+\Delta_{\text{in this sample}} &= -0.10 \\
+\Delta_{\text{tentatively}} &= -0.20 \\
+\Delta_{\text{subject to limitations}} &= -0.12 \\
+\Delta_{\text{further research}} &= -0.18 \\
+\hline
+B_{\text{composite}} &= 0.62 - 0.15 - 0.10 - 0.20 - 0.12 - 0.18 \\
+&= 0.62 - 0.75 = -0.13 \to 0.00 \text{ (floor)}
+\end{align}
+
+Excessive hedging produces near-zero claim strength.
+\end{examplebox}
+
+% =============================================================================
+% 4.6 MARKER CATEGORY 5: INTENSIFIERS AND DOWNTONERS
+% =============================================================================
+
+\section{Intensifiers and Downtoners}
+\label{sec:intensifiers}
+
+Adverbial modifiers adjust claim strength up (intensifiers) or down (downtoners).
+
+\subsection{Intensifiers}
+
+\begin{table}[h]
+\centering
+\caption{Intensifier B-Value Modifiers}
+\label{tab:intensifiers}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Intensifier} & \textbf{$\Delta B$} & \textbf{Example} \\
+\midrule
+clearly, obviously & $+0.08$ & ``clearly demonstrates'' \\
+strongly, powerfully & $+0.10$ & ``strongly suggests'' \\
+definitively, conclusively & $+0.12$ & ``definitively establishes'' \\
+unequivocally, unambiguously & $+0.15$ & ``unequivocally confirms'' \\
+beyond doubt & $+0.18$ & ``proves beyond doubt'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Downtoners}
+
+\begin{table}[h]
+\centering
+\caption{Downtoner B-Value Modifiers}
+\label{tab:downtoners}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Downtoner} & \textbf{$\Delta B$} & \textbf{Example} \\
+\midrule
+slightly, marginally & $-0.08$ & ``slightly suggests'' \\
+partially, partly & $-0.10$ & ``partially supports'' \\
+weakly & $-0.12$ & ``weakly indicates'' \\
+barely, hardly & $-0.15$ & ``barely supports'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% 4.7 COMPOSITE B-CALCULATION
+% =============================================================================
+
+\section{Composite B-Calculation}
+\label{sec:composite}
+
+Real scientific statements contain multiple markers. ESL provides an algorithm for computing composite B-values.
+
+\subsection{The Composite B Algorithm}
+
+\begin{definition}[Composite B-Calculation]
+\label{def:composite-b}
+For a statement with primary marker $m_0$ and modifiers $m_1, \ldots, m_n$:
+
+\begin{equation}
+B_{\text{composite}} = \max\left(0, \min\left(1, B_{m_0} + \sum_{i=1}^{n} \Delta B_{m_i}\right)\right)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $B_{m_0}$ is the base B-value of the primary epistemic verb
+    \item $\Delta B_{m_i}$ is the modifier effect of marker $i$
+    \item Results are bounded to $[0, 1]$
+\end{itemize}
+\end{definition}
+
+\subsection{Marker Identification Priority}
+
+\begin{rule_def}[Marker Priority]
+\label{rule:priority}
+When identifying markers in a statement:
+\begin{enumerate}
+    \item \textbf{Primary verb}: Identify the main epistemic verb (proves, suggests, etc.)
+    \item \textbf{Modal auxiliary}: Check for modals modifying the verb
+    \item \textbf{Quantifiers}: Identify scope-modifying quantifiers
+    \item \textbf{Hedges}: Count all hedging expressions
+    \item \textbf{Intensifiers/Downtoners}: Apply adverbial modifiers
+\end{enumerate}
+\end{rule_def}
+
+\subsection{Worked Examples}
+
+\begin{calculationbox}[title={Example 1: Strong Claim}]
+\textbf{Statement}: ``Our experiments \textbf{conclusively demonstrate} that all subjects exhibit loss aversion.''
+
+\textbf{Markers}:
+\begin{itemize}
+    \item Primary verb: ``demonstrate'' ($B = 0.88$)
+    \item Intensifier: ``conclusively'' ($\Delta B = +0.12$)
+    \item Quantifier: ``all'' ($B_{\text{quant}} = 0.98$, but scope marker)
+\end{itemize}
+
+\textbf{Calculation}:
+\begin{equation}
+B = 0.88 + 0.12 = 1.00 \to 0.98 \text{ (adjusted for universal claim)}
+\end{equation}
+\end{calculationbox}
+
+\begin{calculationbox}[title={Example 2: Moderate Claim}]
+\textbf{Statement}: ``Results \textbf{suggest} that loss aversion \textbf{may} affect \textbf{many} decisions.''
+
+\textbf{Markers}:
+\begin{itemize}
+    \item Primary verb: ``suggest'' ($B = 0.62$)
+    \item Modal: ``may'' ($\Delta B = -0.17$, i.e., moves toward 0.45)
+    \item Quantifier: ``many'' (scope effect, not additive)
+\end{itemize}
+
+\textbf{Calculation} (using weighted average for modal interaction):
+\begin{equation}
+B = 0.62 \times 0.6 + 0.45 \times 0.4 = 0.372 + 0.180 = 0.55
+\end{equation}
+
+Alternative (simpler additive):
+\begin{equation}
+B = 0.62 - 0.10 = 0.52 \text{ (modal penalty)}
+\end{equation}
+\end{calculationbox}
+
+\begin{calculationbox}[title={Example 3: Heavily Hedged Claim}]
+\textbf{Statement}: ``\textbf{Preliminary} analysis of \textbf{this sample} \textbf{tentatively suggests} that X \textbf{might} be associated with Y, \textbf{subject to limitations} and \textbf{pending further research}.''
+
+\textbf{Markers}:
+\begin{itemize}
+    \item Primary verb: ``suggests'' ($B = 0.62$)
+    \item Hedge: ``preliminary'' ($\Delta B = -0.15$)
+    \item Hedge: ``this sample'' ($\Delta B = -0.10$)
+    \item Hedge: ``tentatively'' ($\Delta B = -0.20$)
+    \item Modal: ``might'' ($\Delta B = -0.10$)
+    \item Hedge: ``subject to limitations'' ($\Delta B = -0.12$)
+    \item Hedge: ``pending further research'' ($\Delta B = -0.18$)
+\end{itemize}
+
+\textbf{Calculation}:
+\begin{align}
+B &= 0.62 - 0.15 - 0.10 - 0.20 - 0.10 - 0.12 - 0.18 \\
+&= 0.62 - 0.85 = -0.23 \to 0.00 \text{ (floor)}
+\end{align}
+
+\textbf{Interpretation}: The claim is so heavily hedged that it conveys essentially no epistemic commitment.
+\end{calculationbox}
+
+% =============================================================================
+% 4.8 DISCIPLINE-SPECIFIC VARIATION
+% =============================================================================
+
+\section{Discipline-Specific Variation}
+\label{sec:discipline-variation}
+
+B-values are not universal constants. The same word may signal different claim strengths across disciplines.
+
+\subsection{Cross-Disciplinary Calibration}
+
+\begin{table}[h]
+\centering
+\caption{Discipline-Specific B-Value Variation}
+\label{tab:discipline-b}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Marker} & \textbf{Physics} & \textbf{Medicine} & \textbf{Psychology} & \textbf{Law} \\
+\midrule
+``proves'' & 0.98 & 0.90 & 0.88 & 0.95 \\
+``demonstrates'' & 0.92 & 0.85 & 0.82 & 0.88 \\
+``suggests'' & 0.70 & 0.60 & 0.58 & 0.65 \\
+``is consistent with'' & 0.65 & 0.52 & 0.50 & 0.58 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Disciplinary Defaults}
+
+\begin{principle}[Discipline Default Rule]
+\label{princ:discipline-default}
+In absence of explicit discipline specification:
+\begin{enumerate}
+    \item Use ``General Science'' B-values (this chapter's defaults)
+    \item Apply discipline-specific adjustments when known
+    \item Document any adjustments in ESL assessment
+\end{enumerate}
+\end{principle}
+
+% =============================================================================
+% 4.9 MONTE-CARLO VALIDATION APPROACH
+% =============================================================================
+
+\section{Monte-Carlo Validation Approach}
+\label{sec:validation}
+
+B-values in this chapter are expert proposals. ESL 2.1 introduces Monte-Carlo validation for empirical calibration.
+
+\subsection{The Validation Problem}
+
+\begin{definition}[B-Value Validation]
+\label{def:b-validation}
+A B-value is \textbf{empirically validated} when:
+\begin{enumerate}
+    \item Multiple independent raters assign similar values (inter-rater reliability)
+    \item Values predict outcomes (predictive validity)
+    \item Values are stable across samples (test-retest reliability)
+\end{enumerate}
+\end{definition}
+
+\subsection{Monte-Carlo LLM Sampling}
+
+ESL 2.1 proposes using LLM sampling for B-value estimation:
+
+\begin{definition}[Monte-Carlo B-Estimation]
+\label{def:mc-b}
+For a linguistic marker $m$:
+\begin{equation}
+\hat{B}_m = \frac{1}{N} \sum_{i=1}^{N} B_m^{(i)}
+\end{equation}
+where $B_m^{(i)}$ is the $i$-th LLM estimate under varied conditions (temperature, prompt variant).
+\end{definition}
+
+\begin{definition}[Consistency Coefficient]
+\label{def:kappa-mc}
+\begin{equation}
+\kappa_{\text{MC}} = 1 - \frac{\sigma_m}{\sigma_{\max}}
+\end{equation}
+where $\sigma_{\max} = 0.29$ (standard deviation of uniform distribution on $[0,1]$).
+
+High $\kappa_{\text{MC}}$ indicates consistent LLM estimates; low $\kappa_{\text{MC}}$ indicates marker ambiguity.
+\end{definition}
+
+\subsection{Validation Status Summary}
+
+\begin{table}[h]
+\centering
+\caption{B-Value Validation Status by Category}
+\label{tab:validation-status}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Category} & \textbf{Ordinal Ranking} & \textbf{Cardinal Values} & \textbf{Claim Type} \\
+\midrule
+Epistemic verbs & T1 (Empirical) & T4--T5 (Proposal) & Partial \\
+Modal auxiliaries & T1 (Empirical) & T4--T5 (Proposal) & Partial \\
+Quantifiers & T2 (Established) & T4 (Proposal) & Partial \\
+Hedging expressions & T2 (Established) & T5 (Intuition) & Weak \\
+Intensifiers & T3 (Logical) & T5 (Intuition) & Weak \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% 4.10 PRACTICAL GUIDELINES
+% =============================================================================
+
+\section{Practical Guidelines for B-Assessment}
+\label{sec:guidelines}
+
+\subsection{Step-by-Step B-Assessment}
+
+\begin{enumerate}
+    \item \textbf{Identify the core claim}: What proposition is being asserted?
+
+    \item \textbf{Find the primary epistemic verb}: What verb links evidence to claim? (proves, suggests, indicates, etc.)
+
+    \item \textbf{Check for modal auxiliaries}: Is the claim modified by must, may, might, could?
+
+    \item \textbf{Identify quantifiers}: What scope does the claim have? (all, most, some, etc.)
+
+    \item \textbf{Count hedging expressions}: How many qualifications, limitations, or caveats are present?
+
+    \item \textbf{Apply intensifiers/downtoners}: Are there adverbial modifiers?
+
+    \item \textbf{Calculate composite B}: Use the additive formula with floor/ceiling bounds.
+
+    \item \textbf{Document your assessment}: Record markers identified and calculation steps.
+\end{enumerate}
+
+\subsection{Common Pitfalls}
+
+\begin{table}[h]
+\centering
+\caption{Common B-Assessment Errors}
+\label{tab:pitfalls}
+\begin{tabular}{lp{8cm}}
+\toprule
+\textbf{Pitfall} & \textbf{Solution} \\
+\midrule
+Ignoring hedges & Count all qualifications systematically \\
+Double-counting & Each marker applies once \\
+Context neglect & Adjust for section type (abstract vs. methods) \\
+Discipline blindness & Apply discipline-specific calibration \\
+Missing implicit hedges & ``Initial,'' ``pilot,'' ``exploratory'' are hedges \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Quick Reference Card}
+
+\begin{table}[h]
+\centering
+\caption{B-Value Quick Reference}
+\label{tab:quick-ref}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Claim Strength} & \textbf{B Range} & \textbf{Typical Markers} \\
+\midrule
+Definitive & 0.90--1.00 & proves, establishes, confirms \\
+Strong & 0.75--0.89 & demonstrates, shows, reveals \\
+Moderate & 0.55--0.74 & indicates, suggests, supports \\
+Tentative & 0.35--0.54 & is consistent with, may indicate \\
+Minimal & 0.15--0.34 & does not rule out, hints at \\
+Speculative & 0.00--0.14 & (heavily hedged claims) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% 4.11 CHAPTER SUMMARY
+% =============================================================================
+
+\section{Chapter Summary}
+\label{sec:summary}
+
+This chapter has developed the B-component of the K-metric:
+
+\begin{enumerate}
+    \item \textbf{Theoretical Foundation}: Epistemic modality in language is well-established; specific B-values are proposed calibrations.
+
+    \item \textbf{Five Marker Categories}:
+    \begin{itemize}
+        \item Epistemic verbs (proves → hints at): $B \in [0.30, 0.95]$
+        \item Modal auxiliaries (must → might): $B \in [0.35, 0.92]$
+        \item Quantifiers (all → rarely): $B \in [0.22, 0.98]$
+        \item Hedging expressions: $\Delta B \in [-0.25, -0.05]$
+        \item Intensifiers/Downtoners: $\Delta B \in [-0.15, +0.18]$
+    \end{itemize}
+
+    \item \textbf{Composite B-Calculation}: Additive model with floor (0) and ceiling (1) bounds.
+
+    \item \textbf{Discipline Variation}: B-values require discipline-specific calibration.
+
+    \item \textbf{Validation Status}: Ordinal rankings are empirically grounded (T1--T2); cardinal values are proposals (T4--T5) requiring Monte-Carlo validation.
+
+    \item \textbf{Practical Guidelines}: Step-by-step assessment procedure with common pitfalls.
+\end{enumerate}
+
+\begin{eslbox}
+\textbf{Chapter 4 Self-Assessment}
+
+This chapter presents linguistic marker categories ($B \approx 0.75$) based on established corpus linguistics ($E \approx 0.80$ for existence of markers) but with proposed cardinal values ($E \approx 0.35$ for specific numbers).
+
+\textbf{Weighted Assessment}:
+\begin{itemize}
+    \item Structure and categories: $K = 0.94$ (T2)
+    \item Specific B-values: $K = 0.47$ (T5)
+    \item Weighted average: $K \approx 0.70$
+\end{itemize}
+
+\textbf{Status}: \textcolor{eslorange}{\textbf{Partially Stable}} ($K \in [0.50, 0.75)$)
+
+\textbf{Honest Assessment}: This chapter's specific numerical values are among the least validated components of ESL. The framework's utility does not depend on exact B-values---ordinal correctness (``proves'' $>$ ``suggests'' $>$ ``hints'') is sufficient for most applications. Cardinal precision requires the corpus validation studies outlined in Section \ref{sec:validation}.
+\end{eslbox}
+
+% =============================================================================
+% REFERENCES
+% =============================================================================
+
+\newpage
+\bibliographystyle{apalike}
+
+\begin{thebibliography}{99}
+
+\bibitem[Biber et al., 1999]{Biber1999}
+Biber, D., Johansson, S., Leech, G., Conrad, S., \& Finegan, E. (1999).
+\textit{Longman Grammar of Spoken and Written English}.
+Pearson Education.
+
+\bibitem[Coates, 1983]{Coates1983}
+Coates, J. (1983).
+\textit{The Semantics of the Modal Auxiliaries}.
+Croom Helm.
+
+\bibitem[Hyland, 1998]{Hyland1998}
+Hyland, K. (1998).
+\textit{Hedging in Scientific Research Articles}.
+John Benjamins.
+
+\bibitem[Palmer, 2001]{Palmer2001}
+Palmer, F. R. (2001).
+\textit{Mood and Modality} (2nd ed.).
+Cambridge University Press.
+
+\bibitem[Salager-Meyer, 1994]{SalagerMeyer1994}
+Salager-Meyer, F. (1994).
+Hedges and textual communicative function in medical English written discourse.
+\textit{English for Specific Purposes}, 13(2), 149--170.
+
+\bibitem[Varttala, 2001]{Varttala2001}
+Varttala, T. (2001).
+\textit{Hedging in Scientifically Oriented Discourse: Exploring Variation According to Discipline and Intended Audience}.
+University of Tampere.
+
+\end{thebibliography}
+
+\end{document}

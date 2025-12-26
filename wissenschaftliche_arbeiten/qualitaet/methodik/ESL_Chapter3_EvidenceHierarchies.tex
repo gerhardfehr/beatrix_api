@@ -1,0 +1,906 @@
+% =============================================================================
+% ESL FRAMEWORK - CHAPTER 3: EVIDENCE HIERARCHIES
+% =============================================================================
+% Authors: Gerhard Fehr & Andrea Fehr
+% FehrAdvice & Partners AG, Zürich
+% Version: Extended Monograph
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc}
+
+\geometry{margin=2.5cm}
+
+% --- Colors ---
+\definecolor{eslblue}{RGB}{0,82,147}
+\definecolor{eslgreen}{RGB}{0,128,0}
+\definecolor{eslorange}{RGB}{230,159,0}
+\definecolor{eslred}{RGB}{204,51,17}
+\definecolor{eslgray}{RGB}{128,128,128}
+\definecolor{eslpurple}{RGB}{148,0,211}
+\definecolor{physicscolor}{RGB}{0,100,180}
+\definecolor{econcolor}{RGB}{0,150,80}
+\definecolor{behavcolor}{RGB}{180,100,0}
+\definecolor{medcolor}{RGB}{180,0,0}
+\definecolor{lawcolor}{RGB}{100,0,150}
+
+% --- Boxes ---
+\newtcolorbox{eslbox}[1][]{
+  colback=eslblue!5!white,
+  colframe=eslblue,
+  title={ESL Assessment},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{keyinsight}[1][]{
+  colback=eslgreen!5!white,
+  colframe=eslgreen!80!black,
+  title={Key Insight},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{warningbox}[1][]{
+  colback=eslorange!5!white,
+  colframe=eslorange!80!black,
+  title={Methodological Note},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{disciplinebox}[2][]{
+  colback=#2!5!white,
+  colframe=#2!80!black,
+  title={#1},
+  fonttitle=\bfseries,
+}
+
+\newtcolorbox{examplebox}[1][]{
+  colback=eslgray!10!white,
+  colframe=eslgray!80!black,
+  title={Example},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{definitionbox}[1][]{
+  colback=white,
+  colframe=eslblue!80!black,
+  title={Definition},
+  fonttitle=\bfseries,
+  #1
+}
+
+% --- Theorems ---
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{principle}{Principle}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% --- Header/Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small ESL Framework -- Extended Monograph}
+\fancyhead[R]{\small Chapter 3: Evidence Hierarchies}
+\fancyfoot[C]{\thepage}
+
+% =============================================================================
+% TITLE
+% =============================================================================
+
+\title{%
+    \Large \textbf{Empirical Stability of Language (ESL)} \\[0.5em]
+    \large A Universal Quality Assurance Framework for \\
+    Scientific Claim Validation \\[1em]
+    \LARGE \textbf{Chapter 3: Evidence Hierarchies} \\[0.3em]
+    \large Discipline-Specific E-Scales and Calibration
+}
+
+\author{%
+    \textbf{Gerhard Fehr}\textsuperscript{1,*} \and \textbf{Andrea Fehr}\textsuperscript{1} \\[0.5em]
+    \textsuperscript{1}FehrAdvice \& Partners AG, Binzmühlestrasse 170A, 8050 Zürich, Switzerland \\[0.3em]
+    \textsuperscript{*}Corresponding author: andrea.fehr@fehradvice.com
+}
+
+\date{December 26, 2025}
+
+\begin{document}
+
+\maketitle
+
+% =============================================================================
+% ABSTRACT
+% =============================================================================
+
+\begin{abstract}
+\noindent
+This chapter develops discipline-specific evidence hierarchies---the E-component of the K-metric. We establish that different scientific disciplines have legitimately different evidence standards, reflecting their distinct ontological commitments, methodological traditions, and practical constraints. The chapter presents comprehensive E-scales for five domains: Physics (the ``gold standard'' with experimental replication and theoretical integration), Economics (laboratory experiments, field studies, and natural experiments), Behavioral Economics (the triangulation principle and replication considerations), Medicine (the GRADE-inspired hierarchy from RCTs to case reports), and Law (precedent, statute, and expert testimony). For each discipline, we provide operational definitions, numerical E-value assignments, and worked examples. The chapter concludes with cross-disciplinary calibration principles and the Triangulation Bonus system for multi-method evidence.
+
+\vspace{0.5em}
+\noindent\textbf{Keywords:} Evidence hierarchies, discipline-specific calibration, GRADE, triangulation, replication, E-values
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =============================================================================
+% 3.1 THE PRINCIPLE OF DISCIPLINE SPECIFICITY
+% =============================================================================
+
+\section{The Principle of Discipline Specificity}
+\label{sec:principle}
+
+\subsection{Why One Size Does Not Fit All}
+
+A central insight of ESL is that evidence standards legitimately differ across disciplines. What counts as strong evidence in particle physics differs fundamentally from what counts as strong evidence in constitutional law---not because one discipline is more rigorous, but because their epistemic situations differ.
+
+\begin{keyinsight}[title={Discipline Specificity Principle}]
+Evidence hierarchies must be calibrated to disciplinary context because:
+\begin{enumerate}
+    \item \textbf{Ontological differences}: Physics studies universal laws; sociology studies context-dependent social patterns.
+    \item \textbf{Methodological constraints}: Double-blind RCTs are possible in medicine; they are impossible in macroeconomics.
+    \item \textbf{Replication feasibility}: Lab experiments can be replicated exactly; historical events cannot.
+    \item \textbf{Practical stakes}: Different consequences attach to false positives vs. false negatives.
+\end{enumerate}
+\end{keyinsight}
+
+\subsection{The Universal Framework}
+
+Despite discipline-specific calibration, ESL maintains a universal structure:
+
+\begin{definition}[Universal Evidence Structure]
+\label{def:universal-e}
+Every discipline's E-scale shares:
+\begin{enumerate}
+    \item \textbf{Range}: $E \in [0, 1]$
+    \item \textbf{Ordering}: Higher E indicates stronger evidential warrant
+    \item \textbf{Levels}: 5--7 discrete levels mapping to evidence types
+    \item \textbf{Modifiers}: Adjustments for replication, triangulation, population
+\end{enumerate}
+\end{definition}
+
+\subsection{Cross-Disciplinary Comparability}
+
+\begin{principle}[Cross-Disciplinary Calibration]
+\label{princ:cross}
+$E = 0.80$ in Physics should represent approximately the same degree of epistemic warrant as $E = 0.80$ in Medicine---even though the evidence types differ completely.
+\end{principle}
+
+This calibration is achieved through:
+\begin{itemize}
+    \item Anchoring to replication rates (where available)
+    \item Expert judgment aggregation
+    \item Empirical validation against known outcomes (see Chapter 7)
+\end{itemize}
+
+% =============================================================================
+% 3.2 PHYSICS: THE GOLD STANDARD
+% =============================================================================
+
+\section{Physics: The Gold Standard}
+\label{sec:physics}
+
+Physics provides ESL's reference discipline due to its exceptional epistemic position: precise predictions, controlled experiments, and clear falsification criteria.
+
+\subsection{The Physics Evidence Hierarchy}
+
+\begin{disciplinebox}[Physics Evidence Hierarchy]{physicscolor}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Level} & \textbf{Evidence Type} & \textbf{E-Range} & \textbf{Code} \\
+\midrule
+1 & Nobel Prize / Textbook Knowledge & 0.95--1.00 & PHY-01 \\
+2 & Multi-experiment confirmation ($\geq 5\sigma$) & 0.88--0.95 & PHY-02 \\
+3 & Single major experiment ($\geq 5\sigma$) & 0.78--0.88 & PHY-03 \\
+4 & Preliminary results ($3\sigma$--$5\sigma$) & 0.60--0.78 & PHY-04 \\
+5 & Theoretical prediction (untested) & 0.40--0.60 & PHY-05 \\
+6 & Speculative theory & 0.20--0.40 & PHY-06 \\
+7 & Conjecture / Hypothesis & 0.05--0.20 & PHY-07 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{disciplinebox}
+
+\subsection{The $5\sigma$ Standard}
+
+Physics employs the $5\sigma$ standard for discovery claims:
+
+\begin{definition}[$5\sigma$ Threshold]
+\label{def:5sigma}
+A result reaches ``discovery'' status when:
+\begin{equation}
+p < 2.87 \times 10^{-7} \quad \text{(equivalently: } z > 4.99\sigma\text{)}
+\end{equation}
+This corresponds to a false positive rate of approximately 1 in 3.5 million.
+\end{definition}
+
+\begin{examplebox}[title={Higgs Boson Discovery (2012)}]
+The Higgs boson was announced on July 4, 2012, when:
+\begin{itemize}
+    \item ATLAS reported $5.0\sigma$ significance
+    \item CMS reported $4.9\sigma$ significance (later updated to $5.0\sigma$)
+    \item Combined significance: $>6\sigma$
+\end{itemize}
+
+\textbf{ESL Assessment}:
+\begin{itemize}
+    \item At announcement: $E = 0.88$ (PHY-03: single major experiment)
+    \item Post-confirmation: $E = 0.92$ (PHY-02: multi-experiment)
+    \item Post-Nobel (2013): $E = 0.98$ (PHY-01: Nobel Prize)
+\end{itemize}
+\end{examplebox}
+
+\subsection{Physics Modifiers}
+
+\begin{table}[h]
+\centering
+\caption{Physics E-Value Modifiers}
+\label{tab:physics-modifiers}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modifier} & \textbf{Adjustment} & \textbf{Condition} \\
+\midrule
+Independent replication & $+0.05$ & Different laboratory \\
+Theoretical integration & $+0.03$ & Fits established theory \\
+Precision measurement & $+0.02$ & $<1\%$ uncertainty \\
+Anomaly status & $-0.10$ & Conflicts with Standard Model \\
+Single lab only & $-0.05$ & No independent confirmation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Falsified Claims in Physics}
+
+ESL was validated against falsified physics claims:
+
+\begin{table}[h]
+\centering
+\caption{Falsified Physics Claims and ESL Assessment}
+\label{tab:physics-falsified}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Claim} & \textbf{Initial E} & \textbf{K at Claim} & \textbf{Outcome} \\
+\midrule
+OPERA superluminal neutrinos (2011) & 0.65 & 0.40 & Falsified \\
+BICEP2 B-modes (2014) & 0.70 & 0.41 & Falsified \\
+Cold Fusion (1989) & 0.30 & 0.19 & Falsified \\
+Pentaquark $\Theta^+$ (2003) & 0.55 & 0.69 & Falsified \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All falsified claims had $K < 0.75$, correctly classified as ``Unstable'' by ESL.
+
+% =============================================================================
+% 3.3 ECONOMICS
+% =============================================================================
+
+\section{Economics}
+\label{sec:economics}
+
+Economics presents methodological diversity: laboratory experiments, field experiments, natural experiments, and observational studies coexist.
+
+\subsection{The Economics Evidence Hierarchy}
+
+\begin{disciplinebox}[Economics Evidence Hierarchy]{econcolor}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Level} & \textbf{Evidence Type} & \textbf{E-Range} & \textbf{Code} \\
+\midrule
+1 & Replicated across lab + field + natural & 0.88--0.95 & ECON-01 \\
+2 & Meta-analysis ($\geq 10$ studies) & 0.82--0.90 & ECON-02 \\
+3 & Large-scale RCT / Field experiment & 0.75--0.85 & ECON-03 \\
+4 & Laboratory experiment (replicated) & 0.68--0.78 & ECON-04 \\
+5 & Natural experiment / IV & 0.58--0.70 & ECON-05 \\
+6 & Single laboratory experiment & 0.48--0.60 & ECON-06 \\
+7 & Observational / Correlational & 0.30--0.50 & ECON-07 \\
+8 & Case study / Anecdote & 0.15--0.30 & ECON-08 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{disciplinebox}
+
+\subsection{The Credibility Revolution}
+
+Modern economics has undergone a ``credibility revolution'' emphasizing causal identification \citep{Angrist2010}:
+
+\begin{definition}[Causal Identification Hierarchy]
+\label{def:causal-id}
+\begin{enumerate}
+    \item \textbf{Randomized experiments}: Direct manipulation, highest internal validity
+    \item \textbf{Natural experiments}: Exogenous variation, moderate internal validity
+    \item \textbf{Instrumental variables}: Exclusion restriction required
+    \item \textbf{Difference-in-differences}: Parallel trends assumption
+    \item \textbf{Regression discontinuity}: Local treatment effects
+    \item \textbf{OLS with controls}: Potential confounding
+\end{enumerate}
+\end{definition}
+
+\subsection{Economics Modifiers}
+
+\begin{table}[h]
+\centering
+\caption{Economics E-Value Modifiers}
+\label{tab:econ-modifiers}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modifier} & \textbf{Adjustment} & \textbf{Condition} \\
+\midrule
+Pre-registration & $+0.05$ & Registered before data collection \\
+Large sample ($N > 1000$) & $+0.03$ & Adequate statistical power \\
+Multiple countries & $+0.05$ & Cross-cultural replication \\
+Industry-funded & $-0.05$ & Potential conflict of interest \\
+WEIRD sample only & $-0.03$ & Limited generalizability \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Example: Loss Aversion}
+
+\begin{examplebox}[title={Loss Aversion ($\lambda \approx 2.0$--$2.5$)}]
+Loss aversion---the finding that losses loom larger than equivalent gains---is among the most replicated findings in behavioral economics.
+
+\textbf{Evidence Base}:
+\begin{itemize}
+    \item Original: Kahneman \& Tversky (1979) -- laboratory
+    \item Meta-analysis: Walasek et al. (2018) -- 150+ estimates
+    \item Field: Pope \& Schweitzer (2011) -- PGA Tour data
+    \item Neural: Tom et al. (2007) -- fMRI evidence
+\end{itemize}
+
+\textbf{ESL Assessment}:
+\begin{align}
+E_{\text{base}} &= 0.82 \quad \text{(ECON-02: meta-analysis)} \\
+\Delta_{\text{triangulation}} &= +0.08 \quad \text{(lab + field + neural)} \\
+E_{\text{final}} &= 0.90
+\end{align}
+
+With typical claim strength $B = 0.85$ (``strongly suggests''):
+\begin{equation}
+K = 1 - \frac{|0.85 - 0.90|}{0.90} = 0.94 \quad \text{(Highly Stable)}
+\end{equation}
+\end{examplebox}
+
+% =============================================================================
+% 3.4 BEHAVIORAL ECONOMICS
+% =============================================================================
+
+\section{Behavioral Economics}
+\label{sec:behavioral}
+
+Behavioral economics inherits methods from both psychology and economics, requiring a hybrid evidence hierarchy.
+
+\subsection{The Behavioral Economics Evidence Hierarchy}
+
+\begin{disciplinebox}[Behavioral Economics Evidence Hierarchy]{behavcolor}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Level} & \textbf{Evidence Type} & \textbf{E-Range} & \textbf{Code} \\
+\midrule
+1 & Triangulated (lab + field + mechanism) & 0.85--0.95 & BE-01 \\
+2 & Multi-lab replication (successful) & 0.78--0.88 & BE-02 \\
+3 & Large-scale field experiment & 0.72--0.82 & BE-03 \\
+4 & Replicated laboratory finding & 0.65--0.75 & BE-04 \\
+5 & Single well-powered study & 0.55--0.68 & BE-05 \\
+6 & Conceptual replication only & 0.45--0.58 & BE-06 \\
+7 & Single underpowered study & 0.30--0.48 & BE-07 \\
+8 & Failed replication / Contested & 0.15--0.35 & BE-08 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{disciplinebox}
+
+\subsection{The Replication Crisis Impact}
+
+Behavioral economics has been significantly affected by the replication crisis:
+
+\begin{table}[h]
+\centering
+\caption{Replication Status of Classic Behavioral Economics Findings}
+\label{tab:be-replication}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Finding} & \textbf{Original E} & \textbf{Post-Replication E} & \textbf{Status} \\
+\midrule
+Loss aversion & 0.75 & 0.88 & Confirmed \\
+Endowment effect & 0.70 & 0.82 & Confirmed \\
+Anchoring & 0.68 & 0.80 & Confirmed \\
+Ego depletion & 0.65 & 0.25 & Failed \\
+Power posing & 0.60 & 0.22 & Failed \\
+Social priming & 0.55 & 0.20 & Failed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The Triangulation Imperative}
+
+Following Falk \& Heckman (2009), behavioral economics emphasizes methodological triangulation:
+
+\begin{principle}[Triangulation Principle]
+\label{princ:triangulation}
+A behavioral finding achieves maximum evidential warrant when demonstrated through:
+\begin{enumerate}
+    \item \textbf{Laboratory experiments}: High internal validity, controlled setting
+    \item \textbf{Field experiments}: High external validity, real stakes
+    \item \textbf{Mechanism evidence}: Neural, process-tracing, or computational
+\end{enumerate}
+\end{principle}
+
+\begin{definition}[Triangulation Bonus]
+\label{def:tri-bonus}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Methods Combined} & $\Delta_{\text{tri}}$ & \textbf{Example} \\
+\midrule
+Single method & $+0.00$ & Lab only \\
+Lab + Survey & $+0.05$ & Stated + revealed preference \\
+Lab + Field & $+0.10$ & Internal + external validity \\
+Lab + Field + Neural & $+0.15$ & Full triangulation \\
+Lab + Field + Neural + Cross-cultural & $+0.20$ & Maximum \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\subsection{WEIRD Corrections}
+
+Following Henrich et al. (2010), ESL applies corrections for population representativeness:
+
+\begin{definition}[WEIRD Correction Factor]
+\label{def:weird}
+\begin{equation}
+E_{\text{corrected}} = E_{\text{base}} \times \omega_{\text{WEIRD}}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Sample Composition} & $\omega_{\text{WEIRD}}$ \\
+\midrule
+WEIRD only (Western undergraduate) & 0.92 \\
+WEIRD + 1 non-WEIRD culture & 0.96 \\
+Systematic cross-cultural (3+ cultures) & 1.00 \\
+Universal (5+ diverse contexts) & 1.02 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{warningbox}[title={Validation Status}]
+The specific $\omega_{\text{WEIRD}}$ values are \textbf{expert proposals} (Claim Type T4). Empirical calibration against cross-cultural replication rates is needed.
+\end{warningbox}
+
+% =============================================================================
+% 3.5 MEDICINE
+% =============================================================================
+
+\section{Medicine}
+\label{sec:medicine}
+
+Medical evidence hierarchies are the most developed, with established frameworks like GRADE (Grading of Recommendations, Assessment, Development and Evaluations).
+
+\subsection{The Medical Evidence Hierarchy}
+
+\begin{disciplinebox}[Medical Evidence Hierarchy (GRADE-Inspired)]{medcolor}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Level} & \textbf{Evidence Type} & \textbf{E-Range} & \textbf{Code} \\
+\midrule
+1 & Systematic review of RCTs & 0.90--0.98 & MED-01 \\
+2 & Large RCT ($N > 1000$, multi-site) & 0.82--0.92 & MED-02 \\
+3 & Standard RCT & 0.72--0.85 & MED-03 \\
+4 & Cohort study (prospective) & 0.60--0.75 & MED-04 \\
+5 & Case-control study & 0.50--0.65 & MED-05 \\
+6 & Case series & 0.35--0.52 & MED-06 \\
+7 & Case report & 0.20--0.38 & MED-07 \\
+8 & Expert opinion / Mechanism & 0.10--0.25 & MED-08 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{disciplinebox}
+
+\subsection{GRADE Quality Factors}
+
+The GRADE system adjusts evidence quality based on:
+
+\begin{table}[h]
+\centering
+\caption{GRADE-Inspired E-Value Modifiers for Medicine}
+\label{tab:grade-modifiers}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Factor} & \textbf{Direction} & \textbf{Adjustment} \\
+\midrule
+\multicolumn{3}{l}{\textit{Downgrade factors}} \\
+Risk of bias (high) & $\downarrow$ & $-0.10$ \\
+Inconsistency (high heterogeneity) & $\downarrow$ & $-0.08$ \\
+Indirectness (surrogate outcomes) & $\downarrow$ & $-0.05$ \\
+Imprecision (wide CIs) & $\downarrow$ & $-0.05$ \\
+Publication bias (suspected) & $\downarrow$ & $-0.08$ \\
+\midrule
+\multicolumn{3}{l}{\textit{Upgrade factors}} \\
+Large effect ($\text{RR} > 2$ or $< 0.5$) & $\uparrow$ & $+0.05$ \\
+Dose-response gradient & $\uparrow$ & $+0.05$ \\
+Confounders reduce effect & $\uparrow$ & $+0.03$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Example: Statin Efficacy}
+
+\begin{examplebox}[title={Statins for Cardiovascular Prevention}]
+Statins for primary prevention of cardiovascular disease:
+
+\textbf{Evidence Base}:
+\begin{itemize}
+    \item Cochrane systematic review (2013): 18 RCTs, 56,934 participants
+    \item Relative risk reduction: 27\% for major coronary events
+    \item Number needed to treat: 77 over 5 years
+\end{itemize}
+
+\textbf{ESL Assessment}:
+\begin{align}
+E_{\text{base}} &= 0.92 \quad \text{(MED-01: systematic review of RCTs)} \\
+\Delta_{\text{heterogeneity}} &= -0.03 \quad \text{(moderate heterogeneity)} \\
+\Delta_{\text{large effect}} &= +0.05 \quad \text{(RR $< 0.5$ for some outcomes)} \\
+E_{\text{final}} &= 0.94
+\end{align}
+
+Medical guidelines stating ``Statins significantly reduce cardiovascular risk'' ($B \approx 0.88$):
+\begin{equation}
+K = 1 - \frac{|0.88 - 0.94|}{0.94} = 0.94 \quad \text{(Highly Stable)}
+\end{equation}
+\end{examplebox}
+
+\subsection{Comparative Effectiveness}
+
+\begin{table}[h]
+\centering
+\caption{Comparison: Oxford CEBM vs. GRADE vs. ESL}
+\label{tab:compare-medical}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Evidence Type} & \textbf{Oxford} & \textbf{GRADE} & \textbf{ESL E} \\
+\midrule
+SR of RCTs & 1a & High & 0.92 \\
+Single RCT & 1b & Moderate--High & 0.78 \\
+Cohort study & 2b & Low & 0.65 \\
+Case-control & 3b & Very Low & 0.55 \\
+Case series & 4 & Very Low & 0.42 \\
+Expert opinion & 5 & Very Low & 0.18 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% 3.6 LAW
+% =============================================================================
+
+\section{Law}
+\label{sec:law}
+
+Legal evidence operates under fundamentally different principles: precedent, statutory interpretation, and standards of proof replace experimental replication.
+
+\subsection{The Legal Evidence Hierarchy}
+
+\begin{disciplinebox}[Legal Evidence Hierarchy]{lawcolor}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Level} & \textbf{Evidence Type} & \textbf{E-Range} & \textbf{Code} \\
+\midrule
+1 & Constitutional provision & 0.95--1.00 & LAW-01 \\
+2 & Supreme Court precedent & 0.88--0.95 & LAW-02 \\
+3 & Statutory law (clear) & 0.82--0.90 & LAW-03 \\
+4 & Appellate court precedent & 0.72--0.85 & LAW-04 \\
+5 & Regulatory guidance & 0.60--0.75 & LAW-05 \\
+6 & Trial court decisions & 0.50--0.65 & LAW-06 \\
+7 & Legal scholarship & 0.40--0.55 & LAW-07 \\
+8 & Expert testimony & 0.30--0.45 & LAW-08 \\
+9 & Party arguments & 0.15--0.35 & LAW-09 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{disciplinebox}
+
+\subsection{Standards of Proof}
+
+Legal systems employ explicit standards of proof:
+
+\begin{definition}[Legal Standards of Proof]
+\label{def:legal-standards}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Standard} & \textbf{Probability} & \textbf{ESL $E_{\text{required}}$} \\
+\midrule
+Beyond reasonable doubt (criminal) & $>0.95$ & 0.90 \\
+Clear and convincing (civil, serious) & $>0.75$ & 0.75 \\
+Preponderance (civil, standard) & $>0.50$ & 0.55 \\
+Probable cause (search warrant) & $>0.30$ & 0.40 \\
+Reasonable suspicion (stop) & $>0.20$ & 0.30 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\subsection{Legal Modifiers}
+
+\begin{table}[h]
+\centering
+\caption{Legal E-Value Modifiers}
+\label{tab:law-modifiers}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modifier} & \textbf{Adjustment} & \textbf{Condition} \\
+\midrule
+Unanimous decision & $+0.05$ & No dissenting opinions \\
+Long-standing precedent ($>50$ years) & $+0.05$ & Stability over time \\
+Frequently cited & $+0.03$ & $>100$ citations \\
+Split circuit & $-0.08$ & Conflicting appellate rulings \\
+Overruled precedent & $-0.20$ & Previously authoritative \\
+Dicta (not holding) & $-0.10$ & Non-binding statement \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Example: Constitutional Interpretation}
+
+\begin{examplebox}[title={First Amendment Speech Protection}]
+Claim: ``Political speech is protected under the First Amendment.''
+
+\textbf{Evidence Base}:
+\begin{itemize}
+    \item Constitutional text: ``Congress shall make no law... abridging the freedom of speech''
+    \item Precedent: Brandenburg v. Ohio (1969), Citizens United v. FEC (2010)
+    \item 200+ years of consistent interpretation
+\end{itemize}
+
+\textbf{ESL Assessment}:
+\begin{align}
+E_{\text{constitutional}} &= 0.98 \quad \text{(LAW-01)} \\
+E_{\text{precedent}} &= 0.92 \quad \text{(LAW-02)} \\
+E_{\text{combined}} &= 0.95 \quad \text{(convergent sources)}
+\end{align}
+
+With claim strength $B = 0.95$ (``established constitutional doctrine''):
+\begin{equation}
+K = 1.00 \quad \text{(Perfectly Stable)}
+\end{equation}
+\end{examplebox}
+
+% =============================================================================
+% 3.7 CROSS-DISCIPLINARY CALIBRATION
+% =============================================================================
+
+\section{Cross-Disciplinary Calibration}
+\label{sec:cross-calibration}
+
+\subsection{The Calibration Problem}
+
+How do we ensure that $E = 0.80$ means ``the same thing'' across disciplines?
+
+\begin{definition}[Epistemic Equivalence]
+\label{def:equivalence}
+Two pieces of evidence from different disciplines are \textbf{epistemically equivalent} if a rational agent would update their beliefs by the same amount upon learning either.
+\end{definition}
+
+\subsection{Anchoring Strategy}
+
+ESL uses replication rates as calibration anchors:
+
+\begin{table}[h]
+\centering
+\caption{Cross-Disciplinary Calibration Anchors}
+\label{tab:calibration-anchors}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Discipline} & \textbf{Replication Rate} & \textbf{$K_{\text{stable}}$} & \textbf{$E$ at Border} \\
+\midrule
+Physics & $\sim$95\% & 0.79 & 0.75 \\
+Economics & $\sim$61\% & 0.76 & 0.72 \\
+Behavioral Economics & $\sim$50\% & 0.60 & 0.53 \\
+Psychology & $\sim$36\% & 0.55 & 0.48 \\
+Medicine (RCTs) & $\sim$85\% & 0.78 & 0.74 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The Empirically Validated Thresholds}
+
+Based on ESL 2.2 validation (N=115 claims, 100\% accuracy):
+
+\begin{keyinsight}[title={Empirically Validated K-Thresholds}]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Discipline} & $K_{\text{stable}}$ & \textbf{95\% CI} & \textbf{N} \\
+\midrule
+Physics & 0.79 & [0.75, 0.82] & 25 \\
+Economics & 0.76 & [0.72, 0.80] & 28 \\
+Behavioral Economics & 0.60 & [0.53, 0.67] & 27 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+These thresholds are \textbf{empirically derived} (Claim Type T2), not expert proposals.
+\end{keyinsight}
+
+% =============================================================================
+% 3.8 THE CLAIM-TYPE CLASSIFICATION
+% =============================================================================
+
+\section{The Claim-Type Classification (CTC)}
+\label{sec:ctc}
+
+Before assigning E-values, ESL requires classifying claims by type:
+
+\begin{definition}[Claim-Type Classification]
+\label{def:ctc}
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Type} & \textbf{Description} & \textbf{$E_{\max}$} & \textbf{Example} \\
+\midrule
+T1 & Empirically measured & 1.00 & ``Replication rate = 62\%'' \\
+T2 & Meta-analytically aggregated & 0.95 & ``$\lambda \in [2.0, 2.5]$'' \\
+T3 & Theoretically derived & 0.75 & ``K-metric properties'' \\
+T4 & Expert proposal & 0.45 & ``$K_{\text{stable}} = 0.75$'' \\
+T5 & Author intuition & 0.25 & ``$B_{\text{suggests}} = 0.58$'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{principle}[CTC Ceiling Principle]
+\label{princ:ctc-ceiling}
+A claim's E-value cannot exceed its claim-type ceiling:
+\begin{equation}
+E_{\text{assigned}} \leq E_{\max}(\text{Claim Type})
+\end{equation}
+\end{principle}
+
+This prevents T5 claims (author intuition) from receiving high E-values regardless of confident language.
+
+% =============================================================================
+% 3.9 CHAPTER SUMMARY
+% =============================================================================
+
+\section{Chapter Summary}
+\label{sec:summary}
+
+This chapter has developed discipline-specific evidence hierarchies:
+
+\begin{enumerate}
+    \item \textbf{Physics} (PHY-01 to PHY-07): The gold standard, anchored by the $5\sigma$ discovery threshold. Nobel Prize findings achieve $E \geq 0.95$.
+
+    \item \textbf{Economics} (ECON-01 to ECON-08): Emphasizes causal identification. Field experiments and natural experiments complement laboratory work.
+
+    \item \textbf{Behavioral Economics} (BE-01 to BE-08): Triangulation principle central. Replication crisis has downgraded many classic findings.
+
+    \item \textbf{Medicine} (MED-01 to MED-08): GRADE-inspired hierarchy. Systematic reviews of RCTs at apex.
+
+    \item \textbf{Law} (LAW-01 to LAW-09): Precedent-based system. Constitutional provisions and Supreme Court rulings at apex.
+
+    \item \textbf{Cross-Disciplinary Calibration}: Replication rates anchor E-values across disciplines. Empirically validated thresholds from ESL 2.2.
+
+    \item \textbf{Claim-Type Classification}: Ceiling principle prevents inflated E-values for weak claim types.
+\end{enumerate}
+
+\begin{eslbox}
+\textbf{Chapter 3 Self-Assessment}
+
+This chapter presents evidence hierarchies ($B \approx 0.78$) based on established frameworks (GRADE, Oxford CEBM, legal doctrine) and ESL's empirical validation ($E \approx 0.82$).
+
+\textbf{Calculation}: $K = 1 - |0.78 - 0.82| / 0.82 = 1 - 0.049 = 0.95$
+
+\textbf{Status}: \textcolor{eslgreen}{\textbf{Highly Stable}} ($K \geq 0.90$)
+
+\textbf{Claim Types}:
+\begin{itemize}
+    \item Physics hierarchy structure: T2 (Based on established practice)
+    \item GRADE-inspired medical hierarchy: T1 (Published framework)
+    \item Specific E-value assignments: T4 (Expert proposal) to T2 (Empirically validated)
+    \item Triangulation bonus values: T4 (Expert proposal)
+    \item WEIRD correction factors: T4 (Expert proposal)
+\end{itemize}
+\end{eslbox}
+
+% =============================================================================
+% REFERENCES
+% =============================================================================
+
+\newpage
+\bibliographystyle{apalike}
+
+\begin{thebibliography}{99}
+
+\bibitem[Angrist \& Pischke, 2010]{Angrist2010}
+Angrist, J. D., \& Pischke, J.-S. (2010).
+The credibility revolution in empirical economics.
+\textit{Journal of Economic Perspectives}, 24(2), 3--30.
+
+\bibitem[Camerer et al., 2016]{Camerer2016}
+Camerer, C. F., et al. (2016).
+Evaluating replicability of laboratory experiments in economics.
+\textit{Science}, 351(6280), 1433--1436.
+
+\bibitem[Falk \& Heckman, 2009]{FalkHeckman2009}
+Falk, A., \& Heckman, J. J. (2009).
+Lab experiments are a major source of knowledge in the social sciences.
+\textit{Science}, 326(5952), 535--538.
+
+\bibitem[GRADE Working Group, 2004]{GRADE2004}
+GRADE Working Group. (2004).
+Grading quality of evidence and strength of recommendations.
+\textit{BMJ}, 328(7454), 1490.
+
+\bibitem[Henrich et al., 2010]{Henrich2010}
+Henrich, J., Heine, S. J., \& Norenzayan, A. (2010).
+The weirdest people in the world?
+\textit{Behavioral and Brain Sciences}, 33(2--3), 61--83.
+
+\bibitem[Kahneman \& Tversky, 1979]{KahnemanTversky1979}
+Kahneman, D., \& Tversky, A. (1979).
+Prospect theory: An analysis of decision under risk.
+\textit{Econometrica}, 47(2), 263--291.
+
+\bibitem[Open Science Collaboration, 2015]{OSC2015}
+Open Science Collaboration. (2015).
+Estimating the reproducibility of psychological science.
+\textit{Science}, 349(6251), aac4716.
+
+\bibitem[Oxford CEBM, 2011]{OxfordCEBM2011}
+OCEBM Levels of Evidence Working Group. (2011).
+The Oxford 2011 Levels of Evidence.
+Oxford Centre for Evidence-Based Medicine.
+
+\bibitem[Pope \& Schweitzer, 2011]{PopeSchweitzer2011}
+Pope, D. G., \& Schweitzer, M. E. (2011).
+Is Tiger Woods loss averse? Persistent bias in the face of experience, competition, and high stakes.
+\textit{American Economic Review}, 101(1), 129--157.
+
+\bibitem[Tom et al., 2007]{Tom2007}
+Tom, S. M., Fox, C. R., Trepel, C., \& Poldrack, R. A. (2007).
+The neural basis of loss aversion in decision-making under risk.
+\textit{Science}, 315(5811), 515--518.
+
+\bibitem[Walasek et al., 2018]{Walasek2018}
+Walasek, L., Mullett, T. L., \& Stewart, N. (2018).
+A meta-analysis of loss aversion in risky contexts.
+\textit{SSRN Working Paper}.
+
+\end{thebibliography}
+
+\end{document}
