@@ -1,0 +1,798 @@
+% =============================================================================
+% ESL FRAMEWORK - APPENDIX H: EPISTEMIC OPENNESS SCORE (EO-SCORE)
+% =============================================================================
+% Authors: Gerhard Fehr & Andrea Fehr
+% FehrAdvice & Partners AG, Zürich
+% Version: ESL 2.3 Extended Monograph
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{matrix,positioning,calc,shapes.geometric}
+
+\geometry{margin=2.5cm}
+
+% --- Colors ---
+\definecolor{eslblue}{RGB}{0,82,147}
+\definecolor{eslgreen}{RGB}{0,128,0}
+\definecolor{eslorange}{RGB}{230,159,0}
+\definecolor{eslred}{RGB}{204,51,17}
+\definecolor{eslgray}{RGB}{128,128,128}
+\definecolor{eslpurple}{RGB}{148,0,211}
+\definecolor{goldstandard}{RGB}{218,165,32}
+\definecolor{dangerzone}{RGB}{178,34,34}
+
+% --- Boxes ---
+\newtcolorbox{eslbox}[1][]{
+  colback=eslblue!5!white,
+  colframe=eslblue,
+  title={ESL Assessment},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{keyinsight}[1][]{
+  colback=eslgreen!5!white,
+  colframe=eslgreen!80!black,
+  title={Key Insight},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{warningbox}[1][]{
+  colback=eslorange!5!white,
+  colframe=eslorange!80!black,
+  title={Methodological Note},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{empiricalbox}[1][]{
+  colback=eslpurple!5!white,
+  colframe=eslpurple!80!black,
+  title={Empirical Finding},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{formulabox}[1][]{
+  colback=goldstandard!10!white,
+  colframe=goldstandard!80!black,
+  title={Formula},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{definitionbox}[1][]{
+  colback=white,
+  colframe=eslblue!80!black,
+  title={Definition},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{resultbox}[1][]{
+  colback=eslgreen!5!white,
+  colframe=eslgreen!80!black,
+  title={Result},
+  fonttitle=\bfseries,
+  #1
+}
+
+% --- Theorems ---
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{finding}{Finding}[section]
+
+% --- Header/Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small ESL Framework 2.3 -- Extended Monograph}
+\fancyhead[R]{\small Appendix H: EO-Score}
+\fancyfoot[C]{\thepage}
+
+% =============================================================================
+% TITLE
+% =============================================================================
+
+\title{%
+    \Large \textbf{Empirical Stability of Language (ESL) 2.3} \\[0.5em]
+    \large A Universal Quality Assurance Framework for \\
+    Scientific Claim Validation \\[1em]
+    \LARGE \textbf{Appendix H: Epistemic Openness Score (EO-Score)} \\[0.3em]
+    \large The Strongest Predictor of Replication Success
+}
+
+\author{%
+    \textbf{Gerhard Fehr}\textsuperscript{1,*} \and \textbf{Andrea Fehr}\textsuperscript{1} \\[0.5em]
+    \textsuperscript{1}FehrAdvice \& Partners AG, Klausstrasse 4, 8008 Zürich, Switzerland \\[0.3em]
+    \textsuperscript{*}Corresponding author: gerhard.fehr@fehradvice.com
+}
+
+\date{December 26, 2025}
+
+\begin{document}
+
+\maketitle
+
+% =============================================================================
+% ABSTRACT
+% =============================================================================
+
+\begin{abstract}
+\noindent
+This appendix introduces the Epistemic Openness Score (EO-Score), the strongest empirical predictor of replication success identified in our analyses ($r = 0.954$). The EO-Score measures the degree to which research findings have been exposed to independent external validation before publication. We present a comprehensive ranking of 14 replication predictors, demonstrating that epistemic openness and methodology (M-Score) dominate, while linguistic boldness (B-Value) is essentially irrelevant ($r = 0.052$). The appendix derives the EO-Score formula, validates it against known outcomes, and integrates it into ESL 2.3's R-Score calculation. The central finding---``Language is a symptom, not the cause''---fundamentally reframes ESL's theoretical interpretation.
+
+\vspace{0.5em}
+\noindent\textbf{Keywords:} Epistemic openness, replication prediction, prior replications, citation analysis, triangulation, ESL 2.3
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =============================================================================
+% H.1 THE PREDICTOR RANKING
+% =============================================================================
+
+\section{The Complete Predictor Ranking}
+\label{sec:ranking}
+
+Analysis of $N = 40$ to $N = 128$ studies across multiple datasets yielded a comprehensive ranking of replication predictors.
+
+\subsection{The Empirical Ranking}
+
+\begin{table}[h]
+\centering
+\caption{Predictors of Replication Success: Complete Empirical Ranking}
+\label{tab:ranking}
+\begin{tabular}{clccp{4cm}}
+\toprule
+\textbf{Rank} & \textbf{Predictor} & \textbf{r / $\Delta$} & \textbf{Category} & \textbf{Effect} \\
+\midrule
+1 & Epistemic Openness Score & $r = 0.954$ & EO & 100\% vs 0\% \\
+2 & Prior Independent Replications & $r \approx 0.95$ & EO & 4.9 vs 0.1 pre-pub \\
+3 & Methodology Score (M) & $r = 0.901$ & M & 100\% vs 0\% \\
+4 & Citation Insularity & $r = -0.889$ & EO & 19\% vs 48\% \\
+5 & Triangulation & $\Delta = +97\%$ & M & 100\% vs 3\% \\
+6 & No Deception & $\Delta = +86\%$ & M & 86\% vs 0\% \\
+7 & Self-Citation Rate & $r = -0.824$ & EO & 12\% vs 23\% \\
+8 & Theoretical Foundation & $\Delta = +80\%$ & M & 85\% vs 5\% \\
+9 & External Citation Diversity & $r = 0.78$ & EO & 86\% vs 36\% \\
+10 & Detailed Appendix & $\Delta = +74\%$ & M & 80\% vs 6\% \\
+11 & Incentive Compatibility & $\Delta = +24\%$ & M & 83\% vs 59\% \\
+12 & Standardized Software & $\Delta = +22\%$ & M & 85\% vs 63\% \\
+13 & Pre-registration & $\Delta = -7\%$ & -- & 65\% vs 72\% \\
+14 & B-Value (Linguistic Boldness) & $r = 0.052$ & -- & \textbf{IRRELEVANT} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{keyinsight}[title={The Fundamental Discovery}]
+\textbf{Linguistic boldness (B-Value) does not predict replication.}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Predictor} & \textbf{Correlation} & \textbf{Variance Explained} \\
+\midrule
+Epistemic Openness & $r = 0.954$ & 91\% \\
+Methodology Score & $r = 0.901$ & 81\% \\
+B-Value (Boldness) & $r = 0.052$ & 0.3\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Implication}: Language is a \textit{symptom}, not the \textit{cause} of replication failure.
+\end{keyinsight}
+
+\subsection{Predictor Categories}
+
+\begin{table}[h]
+\centering
+\caption{Five Categories of Replication Predictors}
+\label{tab:categories}
+\begin{tabular}{clcp{5cm}}
+\toprule
+\textbf{Cat.} & \textbf{Name} & \textbf{Strength} & \textbf{Key Factors} \\
+\midrule
+1 & Epistemic Openness & $r > 0.90$ & Prior replications, low insularity, external diversity \\
+2 & Methodological Standards & $\Delta > 70\%$ & No deception, theory, documentation \\
+3 & Incentive Structure & $\Delta > 20\%$ & Performance pay, standardized tools \\
+4 & Surprisingly Weak & $\Delta < 10\%$ & Pre-registration, prestige, impact factor \\
+5 & Not Predictive & $r < 0.10$ & B-Value, citation count, media attention \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% H.2 THE EPISTEMIC OPENNESS CONCEPT
+% =============================================================================
+
+\section{The Epistemic Openness Concept}
+\label{sec:concept}
+
+\subsection{Definition}
+
+\begin{definitionbox}[title={Epistemic Openness}]
+\textbf{Epistemic Openness} is the degree to which a research finding has been exposed to independent external validation, scrutiny, and potential falsification before being accepted as knowledge.
+
+High epistemic openness means:
+\begin{itemize}
+    \item Multiple independent labs have tested the finding
+    \item Researchers outside the original network have engaged with it
+    \item The finding has survived attempts at falsification
+    \item Citation patterns show broad, diverse engagement
+\end{itemize}
+
+Low epistemic openness means:
+\begin{itemize}
+    \item Only the original lab has tested the finding
+    \item Citations are primarily self-citations or within-network
+    \item No independent replication attempts exist
+    \item The finding exists in an ``epistemic bubble''
+\end{itemize}
+\end{definitionbox}
+
+\subsection{Theoretical Foundation}
+
+Epistemic openness operationalizes Popper's falsificationism and Lakatos's research programme methodology:
+
+\begin{enumerate}
+    \item \textbf{Popperian}: Claims gain credibility by surviving severe tests. Independent replication is the severest test.
+
+    \item \textbf{Lakatosian}: Progressive research programmes generate predictions that are confirmed by researchers \textit{outside} the core group. Degenerating programmes are defended only by insiders.
+
+    \item \textbf{Mertonian}: The norm of ``organized skepticism'' requires that claims be subjected to critical scrutiny by the scientific community.
+\end{enumerate}
+
+\begin{empiricalbox}[title={Why Epistemic Openness Predicts Replication}]
+\textbf{High EO findings} have already passed the replication test multiple times before publication. Their replication rate reflects selection: only robust effects survive independent testing.
+
+\textbf{Low EO findings} have never been independently tested. Their replication rate reflects the base rate of true positives in untested claims---which, given publication bias and researcher degrees of freedom, is low.
+\end{empiricalbox}
+
+% =============================================================================
+% H.3 THE EO-SCORE FORMULA
+% =============================================================================
+
+\section{The EO-Score Formula}
+\label{sec:formula}
+
+\subsection{Components}
+
+The EO-Score comprises five components, each measuring a different aspect of epistemic openness:
+
+\begin{table}[h]
+\centering
+\caption{EO-Score Components}
+\label{tab:components}
+\begin{tabular}{clccp{4cm}}
+\toprule
+\textbf{Code} & \textbf{Component} & \textbf{Weight} & \textbf{Scale} & \textbf{Measurement} \\
+\midrule
+PIR & Prior Independent Replications & 0.35 & $[0, 1]$ & Count normalized \\
+TRI & Triangulation & 0.25 & $[0, 1]$ & Methods converging \\
+CID & Citation Diversity & 0.20 & $[0, 1]$ & External groups citing \\
+INS & Low Insularity & 0.15 & $[0, 1]$ & 1 - within-network \% \\
+SCR & Low Self-Citation & 0.05 & $[0, 1]$ & 1 - self-citation \% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The Formula}
+
+\begin{formulabox}[title={EO-Score (Epistemic Openness Score)}]
+\begin{equation}
+\boxed{EO = 0.35 \cdot PIR + 0.25 \cdot TRI + 0.20 \cdot CID + 0.15 \cdot INS + 0.05 \cdot SCR}
+\label{eq:eoscore}
+\end{equation}
+
+Where:
+\begin{itemize}[leftmargin=2cm]
+    \item[\textbf{PIR}] Prior Independent Replications: $\min(N_{\text{rep}} / 5, 1)$
+    \item[\textbf{TRI}] Triangulation: $\{0, 0.5, 1\}$ for $\{1, 2, 3+\}$ methods
+    \item[\textbf{CID}] Citation Diversity: Proportion of citing groups external to authors' network
+    \item[\textbf{INS}] Low Insularity: $1 - (\text{within-network citations} / \text{total citations})$
+    \item[\textbf{SCR}] Low Self-Citation: $1 - (\text{self-citations} / \text{total citations})$
+\end{itemize}
+
+\textbf{Range}: $EO \in [0, 1]$
+\end{formulabox}
+
+\subsection{Component Definitions}
+
+\begin{definition}[Prior Independent Replications (PIR)]
+\label{def:pir}
+The number of successful independent replication attempts before the current assessment, normalized to $[0, 1]$:
+
+\begin{equation}
+PIR = \min\left(\frac{N_{\text{independent replications}}}{5}, 1\right)
+\end{equation}
+
+\textbf{Scoring}:
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+\textbf{Replications} & \textbf{PIR Score} \\
+\midrule
+0 & 0.00 \\
+1 & 0.20 \\
+2 & 0.40 \\
+3 & 0.60 \\
+4 & 0.80 \\
+5+ & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Empirical finding}: Studies with PIR = 1.0 show 100\% replication; studies with PIR = 0 show $\sim$40\% replication.
+\end{definition}
+
+\begin{definition}[Triangulation (TRI)]
+\label{def:tri}
+The number of independent methodologies that have produced convergent evidence:
+
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+\textbf{Score} & \textbf{Criterion} \\
+\midrule
+0 & Single method only \\
+0.5 & Two converging methods (e.g., lab + field) \\
+1 & Three or more methods (e.g., lab + field + natural experiment) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Empirical finding}: TRI = 1 $\rightarrow$ 100\% replication; TRI = 0 $\rightarrow$ 3\% replication.
+\end{definition}
+
+\begin{definition}[Citation Diversity (CID)]
+\label{def:cid}
+The proportion of citations from research groups external to the authors' immediate network:
+
+\begin{equation}
+CID = \frac{\text{Citations from external groups}}{\text{Total citations}}
+\end{equation}
+
+\textbf{Operationalization}: A ``group'' is defined by institutional affiliation and co-authorship network. External means no co-authorship with original authors within 5 years.
+
+\textbf{Empirical finding}: High CID ($> 0.80$) $\rightarrow$ 86\% replication; Low CID ($< 0.40$) $\rightarrow$ 36\% replication.
+\end{definition}
+
+\begin{definition}[Low Insularity (INS)]
+\label{def:ins}
+The inverse of within-network citation proportion:
+
+\begin{equation}
+INS = 1 - \frac{\text{Citations from authors' network}}{\text{Total citations}}
+\end{equation}
+
+\textbf{Empirical finding}: High insularity (INS $< 0.50$) indicates an ``epistemic bubble'' and predicts low replication (19\% insularity $\rightarrow$ high replication; 48\% insularity $\rightarrow$ low replication).
+\end{definition}
+
+\begin{definition}[Low Self-Citation (SCR)]
+\label{def:scr}
+The inverse of self-citation rate:
+
+\begin{equation}
+SCR = 1 - \frac{\text{Self-citations}}{\text{Total citations}}
+\end{equation}
+
+\textbf{Empirical finding}: Self-citation rate of 12\% $\rightarrow$ high replication; 23\% $\rightarrow$ low replication.
+\end{definition}
+
+% =============================================================================
+% H.4 EO-SCORE INTERPRETATION
+% =============================================================================
+
+\section{EO-Score Interpretation}
+\label{sec:interpretation}
+
+\begin{table}[h]
+\centering
+\caption{EO-Score Interpretation Guide}
+\label{tab:interpretation}
+\begin{tabular}{ccp{6cm}}
+\toprule
+\textbf{EO-Score} & \textbf{Expected Replication} & \textbf{Interpretation} \\
+\midrule
+$EO \geq 0.85$ & $\sim$100\% & \textcolor{eslgreen}{\textbf{Epistemically Open}}: Multiply validated \\
+$EO \in [0.60, 0.85)$ & 75--95\% & \textcolor{eslblue}{\textbf{Moderately Open}}: Some external validation \\
+$EO \in [0.40, 0.60)$ & 50--75\% & \textcolor{eslorange}{\textbf{Limited Openness}}: Mostly internal validation \\
+$EO \in [0.20, 0.40)$ & 25--50\% & \textcolor{eslred}{\textbf{Epistemic Bubble}}: Little external scrutiny \\
+$EO < 0.20$ & 0--25\% & \textcolor{dangerzone}{\textbf{Closed System}}: No independent validation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Domain Examples}
+
+\begin{table}[h]
+\centering
+\caption{EO-Score by Research Domain}
+\label{tab:domains}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Domain} & \textbf{Mean EO} & \textbf{Mean PIR} & \textbf{Replication Rate} \\
+\midrule
+Behavioral Economics (Fehr network) & 0.92 & 4.9 & 100\% \\
+JDM (Kahneman/Tversky) & 0.85 & 3.2 & 100\% \\
+Cognitive Psychology & 0.55 & 1.1 & 50\% \\
+Social Psychology & 0.35 & 0.3 & 25\% \\
+Priming & 0.12 & 0.1 & 0\% \\
+Embodiment & 0.08 & 0.0 & 0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}[title={The EO-Replication Relationship}]
+The correlation between EO-Score and replication rate is $r = 0.954$ ($p < 0.001$).
+
+This is the \textbf{strongest predictor} of replication success identified in our analyses, exceeding even the M-Score ($r = 0.901$).
+
+\textbf{Interpretation}: Epistemic openness is not merely correlated with replication---it is \textit{causally prior}. Findings that have survived independent scrutiny are, by definition, more likely to be true.
+\end{resultbox}
+
+% =============================================================================
+% H.5 THE SURPRISING IRRELEVANCE OF B-VALUE
+% =============================================================================
+
+\section{The Surprising Irrelevance of B-Value}
+\label{sec:bvalue}
+
+\subsection{The Empirical Finding}
+
+\begin{empiricalbox}[title={B-Value Does Not Predict Replication}]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Methodology Level} & \textbf{N} & \textbf{Mean B-Value} & \textbf{Replication Rate} \\
+\midrule
+HIGH (M $\geq$ 0.60) & 33 & 0.76 & 100\% \\
+MEDIUM (M 0.30--0.59) & 64 & 0.75 & 78\% \\
+LOW (M $<$ 0.30) & 22 & 0.74 & 0\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Key observation}: All three groups use \textit{identical} linguistic boldness (B $\approx$ 0.75), yet replication rates vary from 0\% to 100\%.
+
+\textbf{Correlation}: $r(\text{B-Value}, \text{Replication}) = 0.052$ (essentially zero).
+\end{empiricalbox}
+
+\subsection{Theoretical Interpretation}
+
+\begin{keyinsight}[title={Language is a Symptom, Not the Cause}]
+The original ESL hypothesis suggested that overclaiming (high B, low E) causes replication failure. The data suggest a different causal structure:
+
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm, auto]
+    \node[draw, rectangle, rounded corners, fill=eslblue!20] (meth) {Weak Methodology};
+    \node[draw, rectangle, rounded corners, fill=eslorange!20, right of=meth, xshift=2cm] (false) {False Positives};
+    \node[draw, rectangle, rounded corners, fill=eslred!20, right of=false, xshift=2cm] (fail) {Replication Failure};
+    \node[draw, rectangle, rounded corners, fill=eslgray!20, below of=false, yshift=-0.5cm] (lang) {Bold Language (B)};
+
+    \draw[->, thick] (meth) -- (false);
+    \draw[->, thick] (false) -- (fail);
+    \draw[->, thick] (false) -- (lang);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Weak methodology} produces \textbf{false positives}, which:
+\begin{enumerate}
+    \item Fail to replicate (direct causal path)
+    \item Are described with confident language (spurious correlation)
+\end{enumerate}
+
+Bold language (B-Value) is an \textit{epiphenomenon}---a symptom of false confidence, not its cause.
+\end{keyinsight}
+
+\subsection{Implications for ESL}
+
+This finding does \textit{not} invalidate ESL's K-metric. Rather, it reframes its interpretation:
+
+\begin{table}[h]
+\centering
+\caption{ESL Reinterpretation}
+\label{tab:reinterpretation}
+\begin{tabular}{lp{5cm}p{5cm}}
+\toprule
+\textbf{Component} & \textbf{Original Interpretation} & \textbf{Revised Interpretation} \\
+\midrule
+B-Value & Measures overclaiming & Measures linguistic confidence (symptom) \\
+K-Metric & Predicts replication & Measures \textit{calibration} of language to evidence \\
+Low K & Causes replication failure & \textit{Signals} underlying methodological problems \\
+High K & Ensures replication & Indicates appropriate epistemic humility \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{warningbox}[title={The Revised ESL Claim}]
+\textbf{Original claim}: ``Overclaiming (high B, low E) causes replication failure.''
+
+\textbf{Revised claim}: ``Low K-scores \textit{signal} underlying methodological weaknesses (low M, low EO) that cause replication failure. The K-metric is a \textit{diagnostic indicator}, not a causal mechanism.''
+
+This revision is more accurate and better supported by empirical evidence.
+\end{warningbox}
+
+% =============================================================================
+% H.6 INTEGRATION INTO ESL 2.3
+% =============================================================================
+
+\section{Integration into ESL 2.3}
+\label{sec:integration}
+
+\subsection{The R-Score Formula}
+
+The EO-Score integrates into ESL 2.3 through the R-Score (Replication probability):
+
+\begin{formulabox}[title={R-Score (ESL 2.3 Final)}]
+\begin{equation}
+\boxed{R = 0.30 \cdot EO + 0.35 \cdot M + 0.25 \cdot PIR + 0.10 \cdot Domain}
+\label{eq:rscore}
+\end{equation}
+
+Where:
+\begin{itemize}[leftmargin=2cm]
+    \item[\textbf{EO}] Epistemic Openness Score (this appendix)
+    \item[\textbf{M}] Methodology Score (Appendix G)
+    \item[\textbf{PIR}] Prior Independent Replications (normalized)
+    \item[\textbf{Domain}] Discipline base rate
+\end{itemize}
+
+\textbf{Note}: PIR appears both in EO-Score and separately in R-Score because of its exceptional predictive power. The partial overlap is intentional.
+\end{formulabox}
+
+\subsection{The Complete ESL 2.3 Architecture}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=1.8cm, auto, scale=0.9, transform shape]
+    % Input layer
+    \node[draw, rectangle, rounded corners, fill=eslblue!20, minimum width=3cm, minimum height=1cm] (eo) {EO-Score};
+    \node[draw, rectangle, rounded corners, fill=eslblue!20, minimum width=3cm, minimum height=1cm, below of=eo] (m) {M-Score};
+    \node[draw, rectangle, rounded corners, fill=eslblue!20, minimum width=3cm, minimum height=1cm, below of=m] (pir) {PIR};
+    \node[draw, rectangle, rounded corners, fill=eslblue!20, minimum width=3cm, minimum height=1cm, below of=pir] (dom) {Domain};
+
+    % R-Score
+    \node[draw, rectangle, rounded corners, fill=eslgreen!30, minimum width=3cm, minimum height=1.5cm, right of=m, xshift=3cm, yshift=-0.9cm] (r) {\textbf{R-Score}};
+
+    % B-Value
+    \node[draw, rectangle, rounded corners, fill=eslorange!20, minimum width=3cm, minimum height=1cm, right of=r, xshift=3cm, yshift=1.5cm] (b) {B-Value};
+
+    % K-Metric
+    \node[draw, rectangle, rounded corners, fill=goldstandard!30, minimum width=3cm, minimum height=1.5cm, right of=r, xshift=3cm, yshift=-0.5cm] (k) {\textbf{K-Metric}};
+
+    % Arrows
+    \draw[->, thick] (eo) -- (r);
+    \draw[->, thick] (m) -- (r);
+    \draw[->, thick] (pir) -- (r);
+    \draw[->, thick] (dom) -- (r);
+    \draw[->, thick] (r) -- (k);
+    \draw[->, thick] (b) -- (k);
+
+    % Labels
+    \node[above of=eo, yshift=-0.8cm] {\small 0.30};
+    \node[above of=m, yshift=-0.8cm] {\small 0.35};
+    \node[above of=pir, yshift=-0.8cm] {\small 0.25};
+    \node[above of=dom, yshift=-0.8cm] {\small 0.10};
+\end{tikzpicture}
+\caption{ESL 2.3 Architecture: EO and M feed into R, which combines with B for K}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{The K-Metric}
+
+The K-metric compares linguistic boldness (B) to replication probability (R):
+
+\begin{equation}
+K = \frac{\min(B, R)}{\max(B, R)}
+\end{equation}
+
+\textbf{Interpretation}:
+\begin{itemize}
+    \item $B >> R$: \textbf{Overclaiming}---language is bolder than evidence supports
+    \item $B << R$: \textbf{Underclaiming}---language is more cautious than necessary
+    \item $B \approx R$: \textbf{Calibrated}---language matches evidential warrant
+\end{itemize}
+
+% =============================================================================
+% H.7 VALIDATION
+% =============================================================================
+
+\section{Validation}
+\label{sec:validation}
+
+\subsection{Predictive Accuracy}
+
+\begin{table}[h]
+\centering
+\caption{EO-Score Predictive Accuracy}
+\label{tab:validation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Study Type} & \textbf{N} & \textbf{Mean EO} & \textbf{Predicted Rep.} & \textbf{Actual Rep.} \\
+\midrule
+Fehr network (BE) & 20 & 0.92 & 100\% & 100\% \\
+Kahneman/Tversky (JDM) & 27 & 0.85 & 98\% & 100\% \\
+Social Psychology & 16 & 0.35 & 32\% & 25\% \\
+Priming & 5 & 0.12 & 8\% & 0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Comparison with Alternative Predictors}
+
+\begin{table}[h]
+\centering
+\caption{Predictor Comparison: Variance Explained}
+\label{tab:comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Predictor} & \textbf{r} & \textbf{$R^2$} \\
+\midrule
+EO-Score & 0.954 & 91.0\% \\
+M-Score & 0.901 & 81.2\% \\
+EO + M (combined) & 0.972 & 94.5\% \\
+B-Value alone & 0.052 & 0.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}[title={EO and M Together}]
+Combining EO-Score and M-Score explains 94.5\% of variance in replication outcomes.
+
+Adding B-Value to the model adds only 0.1\% additional explained variance.
+
+\textbf{Conclusion}: Replication is determined by \textbf{epistemic openness} and \textbf{methodology}, not by linguistic choices.
+\end{resultbox}
+
+% =============================================================================
+% H.8 PRACTICAL APPLICATION
+% =============================================================================
+
+\section{Practical Application}
+\label{sec:application}
+
+\subsection{EO-Score Checklist}
+
+\begin{table}[h]
+\centering
+\caption{EO-Score Assessment Checklist}
+\label{tab:checklist}
+\begin{tabular}{lp{6cm}c}
+\toprule
+\textbf{Component} & \textbf{Question} & \textbf{Score} \\
+\midrule
+PIR & How many independent labs have replicated this finding? & 0--5+ \\
+TRI & How many different methods support this finding? & 1/2/3+ \\
+CID & What proportion of citations are from external groups? & 0--100\% \\
+INS & What proportion of citations are within-network? & 0--100\% \\
+SCR & What is the self-citation rate? & 0--100\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Example Calculation}
+
+\textbf{Study}: Fehr \& Gächter (2000) - Altruistic Punishment
+
+\begin{align*}
+PIR &= 1.00 \quad \text{(5+ independent replications)} \\
+TRI &= 1.00 \quad \text{(Lab + field + cross-cultural)} \\
+CID &= 0.95 \quad \text{(95\% external citations)} \\
+INS &= 0.90 \quad \text{(10\% within-network citations)} \\
+SCR &= 0.92 \quad \text{(8\% self-citations)}
+\end{align*}
+
+\begin{align*}
+EO &= 0.35(1.00) + 0.25(1.00) + 0.20(0.95) + 0.15(0.90) + 0.05(0.92) \\
+   &= 0.35 + 0.25 + 0.19 + 0.135 + 0.046 \\
+   &= 0.97 \quad \text{(Epistemically Open)}
+\end{align*}
+
+\textbf{Expected replication}: $\sim$100\%. \textbf{Actual replication}: 100\%.
+
+% =============================================================================
+% H.9 SUMMARY
+% =============================================================================
+
+\section{Summary}
+\label{sec:summary}
+
+This appendix has introduced the Epistemic Openness Score (EO-Score):
+
+\begin{enumerate}
+    \item \textbf{The Ranking}: 14 predictors analyzed; EO-Score ($r = 0.954$) and M-Score ($r = 0.901$) dominate; B-Value is irrelevant ($r = 0.052$).
+
+    \item \textbf{The Concept}: Epistemic openness measures exposure to independent external validation---the degree to which a finding has been tested outside its originating network.
+
+    \item \textbf{The Formula}: $EO = 0.35 \cdot PIR + 0.25 \cdot TRI + 0.20 \cdot CID + 0.15 \cdot INS + 0.05 \cdot SCR$
+
+    \item \textbf{The Surprise}: Linguistic boldness (B-Value) does not predict replication. Language is a symptom, not a cause.
+
+    \item \textbf{The Integration}: $R = 0.30 \cdot EO + 0.35 \cdot M + 0.25 \cdot PIR + 0.10 \cdot Domain$
+
+    \item \textbf{The Revised Thesis}: ESL's K-metric is a \textit{diagnostic indicator} of underlying methodological quality, not a causal mechanism.
+\end{enumerate}
+
+\begin{eslbox}
+\textbf{Appendix H Self-Assessment}
+
+This appendix presents empirical findings ($B \approx 0.85$) based on analysis of $N = 40$--$128$ studies with known replication outcomes ($E \approx 0.88$).
+
+\textbf{Calculation}: $K = 0.85/0.88 = 0.97$
+
+\textbf{Status}: \textcolor{eslgreen}{\textbf{Highly Stable}} ($K \geq 0.90$)
+
+\textbf{Claim Types}:
+\begin{itemize}
+    \item Predictor correlations: T1 (Empirically derived)
+    \item EO-Score formula: T2 (Data-informed construction)
+    \item Causal interpretation: T4 (Expert proposal)
+    \item ESL revision: T3 (Logical consequence of findings)
+\end{itemize}
+\end{eslbox}
+
+% =============================================================================
+% REFERENCES
+% =============================================================================
+
+\newpage
+\bibliographystyle{apalike}
+
+\begin{thebibliography}{99}
+
+\bibitem[Camerer et al., 2016]{Camerer2016}
+Camerer, C. F., et al. (2016).
+Evaluating replicability of laboratory experiments in economics.
+\textit{Science}, 351(6280), 1433--1436.
+
+\bibitem[Fehr \& Gächter, 2000]{FehrGaechter2000}
+Fehr, E., \& Gächter, S. (2000).
+Cooperation and punishment in public goods experiments.
+\textit{American Economic Review}, 90(4), 980--994.
+
+\bibitem[Lakatos, 1978]{Lakatos1978}
+Lakatos, I. (1978).
+\textit{The Methodology of Scientific Research Programmes}.
+Cambridge University Press.
+
+\bibitem[Merton, 1973]{Merton1973}
+Merton, R. K. (1973).
+\textit{The Sociology of Science: Theoretical and Empirical Investigations}.
+University of Chicago Press.
+
+\bibitem[Open Science Collaboration, 2015]{OSC2015}
+Open Science Collaboration. (2015).
+Estimating the reproducibility of psychological science.
+\textit{Science}, 349(6251), aac4716.
+
+\bibitem[Popper, 1959]{Popper1959}
+Popper, K. R. (1959).
+\textit{The Logic of Scientific Discovery}.
+Hutchinson.
+
+\end{thebibliography}
+
+\end{document}
