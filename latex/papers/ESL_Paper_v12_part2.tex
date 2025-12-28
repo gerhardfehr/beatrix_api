@@ -164,43 +164,253 @@ Methods & 0.5$\times$ & N/A & Mostly descriptive \\
 
 
 % ============================================================================
-% SECTION 10: COMPOSITIONAL SEMANTICS
+% SECTION 10: COMPOSITIONAL SEMANTICS OF EPISTEMIC STRENGTH
 % ============================================================================
 
-\section{Compositional Semantics: How Elements Modify Each Other}
+\section{Compositional Semantics of Epistemic Strength}
+\label{sec:compositional}
 
 \begin{analogybox}[The Recipe]
 The final dish is not just the sum of ingredients---it's how they combine. Language works similarly. ``X causes Y'' has $K = 0.90$. Add ``might'' and it becomes $K = 0.45$. Add ``in some cases'' and $K \approx 0.20$. The words \emph{multiply}, they don't simply add.
+
+This section develops the formal model: how epistemic strength composes through the hierarchy of text, and why hedges in Methods sections cannot reduce overclaiming in Abstracts.
 \end{analogybox}
 
 
-\subsection{Level 1: Word Interaction Within Sentences}
+\subsection{Motivation: Two Problems, One Solution}
 
+ESL faces two interconnected challenges.
+
+\paragraph{The Aggregation Problem.}
+How do sentence-level scores $(K_i, M_i)$ combine into text-level scores $(K_T, M_T)$? Simple functions (max, mean, min) fail to capture the structure of scientific argumentation.
+
+\paragraph{The Interaction Problem.}
+Claims within a text do not exist in isolation; they interact. A hedge modifies a claim. Multiple replications strengthen evidence. Redundant statements do not accumulate. How do we formalize these interactions?
+
+\begin{principlebox}[The Unified Insight]
+\textbf{Aggregation is interaction.} The way scores combine across levels depends on how claims relate to each other, and this relationship is constrained by \emph{scope}.
+
+The unified model has three components:
+\begin{enumerate}
+    \item \textbf{Hierarchy}: the tree structure of the text
+    \item \textbf{Interaction}: how claims combine (complement, modify, substitute)
+    \item \textbf{Scope}: which interactions are licensed where
+\end{enumerate}
+\end{principlebox}
+
+
+\subsection{Formal Framework}
+
+\subsubsection{The Text Hierarchy}
+
+\begin{termbox}[Text Tree]
+A text $T$ is a rooted tree with five levels:
+\begin{align*}
+L_0 &: \text{Markers } m \in M \\
+L_1 &: \text{Sentences (claims) } c \in C \\
+L_2 &: \text{Paragraphs } P \in \mathcal{P} \\
+L_3 &: \text{Sections } S \in \mathcal{S} \\
+L_4 &: \text{Text } T
+\end{align*}
+with containment relation $\prec$ such that $x \prec y$ iff $x$ is contained in $y$.
+\end{termbox}
+
+\subsubsection{Score Functions}
+
+At each level $\ell \in \{0,1,2,3,4\}$ we define:
+\begin{itemize}
+    \item $K^{(\ell)} : L_\ell \rightarrow [0,1]^5$ \quad (claim strength vector)
+    \item $M^{(\ell)} : L_\ell \rightarrow [0,1]$ \quad (evidence strength)
+    \item $\kappa^{(\ell)} : L_\ell \rightarrow [0,1]$ \quad (composite score)
+\end{itemize}
+where $\kappa = w^\top K$ with $w = (0.30, 0.20, 0.25, 0.10, 0.15)^\top$.
+
+\subsubsection{Interaction Types}
+
+For elements $x,y$ at the same level, we define three interaction operators:
+\begin{enumerate}
+    \item \textbf{Complementarity} ($\oplus$): $x$ and $y$ reinforce each other
+    \item \textbf{Modification} ($\triangleright$): $y$ modifies $x$
+    \item \textbf{Substitution} ($\equiv$): $x$ and $y$ are redundant
+\end{enumerate}
+
+\subsubsection{Scope Domains}
+
+\begin{termbox}[Scope Domain]
+A \textbf{scope domain} $\sigma \subseteq T$ is a maximal connected subtree within which modification operators are licensed. Two elements $x,y$ are \emph{in scope} iff $\exists \sigma$ such that $x,y \in \sigma$.
+
+\textbf{Scope Boundaries:}
+\begin{enumerate}
+    \item Section boundaries create scope breaks (except Methods $\rightarrow$ Results)
+    \item The Abstract forms its own isolated scope domain
+    \item Conclusions form their own scope domain
+\end{enumerate}
+\end{termbox}
+
+This formalizes the empirical fact that hedges in Methods do not modify claims in Abstracts.
+
+
+\subsection{Level 0 $\rightarrow$ Level 1: Markers to Sentences}
+
+Each marker $m \in M$ has a strength vector $\text{str}(m) = (s_1,\dots,s_5) \in [0,1]^5$.
+
+For a sentence $c$ containing markers $\{m_1,\dots,m_n\}$:
 \begin{equation}
-K_{\text{sentence}} = K_{\text{verb}} \times H \times Q \times T
+K^{(1)}_d(c) = \max_{m \in c : s_d(m) > 0} s_d(m)
 \end{equation}
 
-\textbf{Worked Example:}
-\begin{align*}
-\text{``X causes Y''} &\rightarrow K = 0.90 \\
-\text{``X might cause Y''} &\rightarrow K = 0.90 \times 0.50 = 0.45 \\
-\text{``X might sometimes cause Y in some people''} &\rightarrow K \approx 0.10
-\end{align*}
+The MAX operator reflects \textbf{substitution at the lexical level}: using both ``proves'' and ``demonstrates'' does not make a claim stronger than ``proves'' alone.
 
 
-\subsection{Level 2: Sentence Interaction Within Paragraphs}
+\subsection{Level 1 $\rightarrow$ Level 2: Sentences to Paragraphs}
 
-\textbf{Pattern 2.1: Reinforcement} --- $K_{\text{para}} = K_{\text{lead}} + \sum \text{bonus}$
+\subsubsection{Detecting Interaction Type}
 
-\textbf{Pattern 2.2: Qualification} --- $K_{\text{para}} = K_{\text{lead}} \times \prod \text{factor}$
+Interaction type is detected via discourse markers:
+\begin{itemize}
+    \item \emph{however, although, but} $\rightarrow$ Modification (hedge)
+    \item \emph{moreover, furthermore, also} $\rightarrow$ Complementarity
+    \item \emph{in other words, that is} $\rightarrow$ Substitution
+\end{itemize}
 
-\textbf{Pattern 2.3: Contradiction} --- $K_{\text{para}} = \frac{K_{S1} + K_{S2}}{2} \times \text{penalty}$
+\subsubsection{Modification Operators}
 
-\textbf{Pattern 2.4: Causal Chains} --- $M_{\text{chain}} = \min(M_i) \times 0.9^{n-1}$
+\paragraph{Hedging Modification ($\triangleright_H$).}
+\begin{equation}
+\kappa(c_i \triangleright_H c_j) = \kappa(c_i)\left(1 - \lambda_H(1-\kappa(c_j))\right)
+\end{equation}
+with $\lambda_H \in [0.5,1.0]$ controlling hedge strength.
+
+\paragraph{Scope Restriction ($\triangleright_S$).}
+\begin{equation}
+K_2(c_i \triangleright_S c_j) = K_2(c_i) \cdot K_2(c_j)
+\end{equation}
+
+\paragraph{Causal Weakening ($\triangleright_C$).}
+\begin{equation}
+K_3(c_i \triangleright_C c_j) = \min(K_3(c_i), K_3(c_j))
+\end{equation}
+
+\subsubsection{Complementarity Operators}
+
+\paragraph{Evidential Complementarity ($\oplus_E$).}
+Multiple independent evidence claims combine probabilistically:
+\begin{equation}
+M(c_1 \oplus_E \cdots \oplus_E c_n) = 1 - \prod_{i=1}^n (1 - M(c_i))
+\end{equation}
+
+\paragraph{Argumentative Complementarity ($\oplus_A$).}
+\begin{equation}
+\kappa(c_1 \oplus_A c_2) = \sqrt{\kappa(c_1)\kappa(c_2)}
+\end{equation}
+
+\subsubsection{Substitution}
+\begin{equation}
+\kappa(c_i \equiv c_j) = \max(\kappa(c_i),\kappa(c_j)), \quad
+M(c_i \equiv c_j) = \max(M(c_i),M(c_j))
+\end{equation}
+
+\subsubsection{Paragraph Composition Algorithm}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{l}
+\toprule
+\textbf{Algorithm: COMPOSE\_PARAGRAPH} \\
+\midrule
+\textbf{Input:} claims $c_1,\dots,c_n$ in reading order \\
+\textbf{Initialize:} $K_{\text{eff}} := K(c_1)$, $M_{\text{eff}} := M(c_1)$ \\
+\textbf{For} $i = 2 \dots n$: \\
+\quad Detect interaction type between $c_{i-1}$ and $c_i$ \\
+\quad Apply corresponding operator to update $(K_{\text{eff}}, M_{\text{eff}})$ \\
+\textbf{Return:} $(K_{\text{eff}}, M_{\text{eff}})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Level 2 $\rightarrow$ Level 3: Paragraphs to Sections}
+
+\subsubsection{Distance Decay}
+
+Modification strength decays with textual distance:
+\begin{equation}
+\lambda_{\text{eff}}(d) = \lambda_0 e^{-d/\tau} \quad \text{with } \tau \approx 2 \text{ paragraphs}
+\end{equation}
+
+\subsubsection{Section-Type Weights}
+
+Different section types contribute differently to text-level scores:
+\begin{equation}
+\tilde{K}^{(3)}(S) = \gamma_K(\text{type}(S)) \cdot K^{(3)}(S), \quad
+\tilde{M}^{(3)}(S) = \gamma_M(\text{type}(S)) \cdot M^{(3)}(S)
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Section-type weights $\gamma_K$ and $\gamma_M$}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Section Type} & \textbf{$\gamma_K$} & \textbf{$\gamma_M$} \\
+\midrule
+Title & 3.0 & 0.5 \\
+Abstract & 2.5 & 1.0 \\
+Conclusion & 2.0 & 1.0 \\
+Results & 1.5 & 1.5 \\
+Introduction & 1.0 & 1.0 \\
+Discussion & 0.8 & 1.0 \\
+Methods & 0.5 & 1.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Level 3 $\rightarrow$ Level 4: Sections to Text}
+
+\subsubsection{Scope Barrier}
+
+The Abstract and Conclusions form isolated scope domains. Hedges in Methods \emph{cannot} modify claims in the Abstract---they are not in scope.
+
+\subsubsection{Text-Level Aggregation}
+
+\begin{equation}
+K^{(4)}(T) = \max_{S \in T} \tilde{K}^{(3)}(S)
+\end{equation}
+\begin{equation}
+M^{(4)}(T) = \frac{\sum_S \gamma_M(S) \cdot M^{(3)}(S)}{\sum_S \gamma_M(S)}
+\end{equation}
+
+The MAX for $K$ reflects that \emph{the strongest claim determines perceived claim strength}. The weighted average for $M$ reflects that \emph{evidence accumulates across sections}.
+
+
+\subsection{Formal Properties}
+
+\begin{assumptionbox}
+\textbf{Theorem 1 (Scope Isolation).}
+Let $c_{\text{abs}}$ be a claim in the Abstract and $c_{\text{meth}}$ a hedge in Methods. Then:
+\begin{equation}
+\kappa^{(4)}(T) \geq \kappa^{(1)}(c_{\text{abs}})
+\end{equation}
+The hedge cannot reduce the text-level claim strength below the Abstract claim.
+
+\textbf{Proof sketch:} Since Abstract and Methods are in different scope domains, the modification operator $\triangleright_H$ is not licensed. The Abstract claim propagates unchanged to $L_4$, and $K^{(4)} = \max$ ensures no reduction.
+
+\vspace{1em}
+\textbf{Theorem 2 (Evidence Accumulation).}
+For $n$ independent evidence claims each with quality $M = m$:
+\begin{equation}
+\lim_{n \to \infty} M(c_1 \oplus_E \cdots \oplus_E c_n) = 1
+\end{equation}
+
+\textbf{Proof:} $M_n = 1 - (1-m)^n \to 1$ as $n \to \infty$ for any $m > 0$.
+\end{assumptionbox}
 
 
 \subsection{Cross-Section Consistency Rules}
 
+The formal framework implies consistency constraints:
 \begin{enumerate}
     \item \textbf{Abstract $\leq$ Body}: $K_{\text{abstract}} \leq \max(K_{\text{body}})$
     \item \textbf{Title $\leq$ Abstract}: $K_{\text{title}} \leq K_{\text{abstract}}$
@@ -208,6 +418,17 @@ K_{\text{sentence}} = K_{\text{verb}} \times H \times Q \times T
 \end{enumerate}
 
 Violations constitute distinct error types: \textbf{Abstract Inflation}, \textbf{Conclusion Creep}, \textbf{Headline Hype}, \textbf{Spin}.
+
+
+\subsection{The ESL Compositional Principle}
+
+\begin{principlebox}[Summary]
+\textbf{Epistemic strength composes through interaction within scope.}
+
+Putting hedges outside the scope of claims (e.g., in Methods instead of Abstract) violates the constraint $K \leq M$ at the text level and produces \textbf{structural overclaiming}.
+
+This explains the ``Trichter-Effekt'' observed in Harrison et al. (Appendix~\ref{app:peerreview}): Methods sections are well-calibrated ($\Delta \approx 0$), but Abstracts overclaim ($\Delta = +0.40$) because the hedges are out of scope.
+\end{principlebox}
 
 
 % ============================================================================
