@@ -1,0 +1,182 @@
+{
+    "document": {
+        "title": "KAPE-α Bridge: Mechanistic to Emergent Knowledge Activation",
+        "version": "1.0",
+        "date": "2025-12-28",
+        "author": "FehrAdvice & Partners AG",
+        "status": "Draft",
+        "reference": "Wang et al., SIGIR 2025"
+    },
+
+    "theoretical_framework": {
+        "hierarchy": {
+            "neuron_level": {
+                "metric": "KAPE (Knowledge Activation Probability Entropy)",
+                "measures": "source specificity of neural activations",
+                "interpretation": {
+                    "low_entropy": "knowledge-specific neurons (parametric OR retrieved)",
+                    "high_entropy": "diffuse/fluency-driven activation (mixed sources)"
+                }
+            },
+            "task_level": {
+                "metric": "α (Activation Competence)",
+                "measures": "knowledge application reliability during generation",
+                "interpretation": {
+                    "high_alpha": "consistent functional leverage of source-specific activations",
+                    "low_alpha": "unreliable translation of latent knowledge into output"
+                }
+            }
+        },
+        "relationship": "α = aggregated effect of low-KAPE neuron activation under generative requirements"
+    },
+
+    "key_distinctions": {
+        "KAPE": {
+            "level": "mechanistic (neuron-level)",
+            "scope": "source specificity",
+            "measures": "WHERE activation originates",
+            "does_not_measure": "correctness of knowledge usage"
+        },
+        "alpha": {
+            "level": "emergent (task-level)",
+            "scope": "functional reliability",
+            "measures": "WHETHER activations are leveraged",
+            "does_not_measure": "underlying mechanism"
+        }
+    },
+
+    "four_phase_model": {
+        "source": "Wang et al., SIGIR 2025",
+        "phases": [
+            {
+                "name": "Refinement",
+                "description": "Initial knowledge activation and source selection"
+            },
+            {
+                "name": "Integration",
+                "description": "Merging of parametric and retrieved knowledge"
+            },
+            {
+                "name": "Stabilization",
+                "description": "Consolidation of activation patterns"
+            },
+            {
+                "name": "Contestation",
+                "description": "Resolution of conflicting knowledge sources"
+            }
+        ],
+        "note": "These stages are not strictly sequential but reflect dominant modes of knowledge interaction during generation."
+    },
+
+    "visual_model": {
+        "title": "Prompt → KAPE → α → ESL Error Reduction",
+        "diagram": [
+            "┌─────────────────────────────────────────────────────────────────┐",
+            "│                     CAUSAL FLOW MODEL                           │",
+            "└─────────────────────────────────────────────────────────────────┘",
+            "",
+            "    ┌──────────────────┐",
+            "    │  Prompt Design   │  ← Retrieval/Application separation",
+            "    │  (R|A Structure) │",
+            "    └────────┬─────────┘",
+            "             │",
+            "             ▼",
+            "    ┌──────────────────┐",
+            "    │   Low-KAPE       │  ← Selective activation of",
+            "    │   Neurons        │    knowledge-specific pathways",
+            "    └────────┬─────────┘",
+            "             │",
+            "             ▼",
+            "    ┌──────────────────┐",
+            "    │   α (Activation  │  ← Emergent reliability measure",
+            "    │   Competence)    │    (aggregated KAPE effect)",
+            "    └────────┬─────────┘",
+            "             │",
+            "             ▼",
+            "    ┌──────────────────┐",
+            "    │   ESL Error      │  ← Reduced hallucination,",
+            "    │   Reduction      │    improved factual grounding",
+            "    └──────────────────┘"
+        ]
+    },
+
+    "hypothesis_preregistration": {
+        "id": "H_alpha_KAPE",
+        "title": "Activation Competence-KAPE Correlation Hypothesis",
+        "statement": {
+            "H1": "α correlates positively with the proportion of generation-time activation passing through low-KAPE (knowledge-specific) neurons.",
+            "H2": "Prompting strategies that explicitly separate retrieval and application phases selectively increase low-KAPE neuron activation, thereby increasing α without altering latent knowledge (K).",
+            "H3": "Models with equivalent latent knowledge (K) but different activation patterns will exhibit measurably different α values, predictable from their KAPE neuron distributions."
+        },
+        "operationalization": {
+            "independent_variable": "Proportion of low-KAPE neuron activation during generation",
+            "dependent_variable": "α (measured via ESL task performance)",
+            "control": "K (latent knowledge, held constant via same base model)",
+            "manipulation": "Prompt structure (R|A separation vs. standard)"
+        },
+        "prediction": "R|A-structured prompts → ↑ low-KAPE activation → ↑ α → ↓ ESL errors",
+        "falsification_criterion": "If R|A prompts increase low-KAPE activation but α remains unchanged, the hypothesis is falsified."
+    },
+
+    "reviewer_defense": {
+        "title": "Differentiation Statement",
+        "core_claim": "α is categorically distinct from existing constructs in the literature.",
+        "distinctions": {
+            "alpha_vs_CoT": {
+                "claim": "α ≠ Chain-of-Thought",
+                "rationale": "CoT is a prompting technique that externalizes reasoning steps. α is a latent competence parameter that exists independently of whether reasoning is externalized. CoT may increase α by providing retrieval scaffolding, but α is not reducible to CoT."
+            },
+            "alpha_vs_RAG": {
+                "claim": "α ≠ Retrieval-Augmented Generation",
+                "rationale": "RAG modifies the input context with external knowledge. α measures the reliability of knowledge application from any source (parametric or retrieved). A model can have high α with purely parametric knowledge and low α despite RAG augmentation."
+            },
+            "alpha_vs_Hallucination": {
+                "claim": "α ≠ Hallucination Rate",
+                "rationale": "Hallucination is an output phenomenon (factual incorrectness). α is a process characteristic (activation reliability). Low α may cause hallucination, but hallucination can also arise from knowledge gaps (low K) rather than activation failures."
+            },
+            "alpha_vs_KAPE": {
+                "claim": "α ≠ KAPE",
+                "rationale": "KAPE is a neuron-level metric of source specificity. α is a task-level measure of functional reliability. KAPE describes mechanism; α describes emergent outcome. They operate at different levels of analysis."
+            }
+        },
+        "summary_statement": "While KAPE characterizes neuron-level source specificity, our activation competence parameter α captures whether such source-specific activations are functionally leveraged during generative tasks. α is neither a prompting technique (CoT), an architectural modification (RAG), an error metric (hallucination), nor a mechanistic measure (KAPE)—it is an emergent property of how latent knowledge is reliably translated into output."
+    },
+
+    "paper_integration": {
+        "related_work_section": {
+            "title": "Related Work → Mechanistic Link",
+            "text": "Wang et al. (SIGIR 2025) introduce Knowledge Activation Probability Entropy (KAPE), a neuron-level metric that captures the degree to which model activations are specific to internal versus retrieved knowledge sources. KAPE does not measure correctness of knowledge usage, but the degree to which neural activations are source-specific rather than diffuse. While KAPE provides a mechanistic account of source specialization, it does not directly assess whether such activations are consistently integrated into generative outputs. Building on this distinction, we conceptualize activation competence (α) as an emergent, task-level property reflecting how reliably latent knowledge—once activated—is applied during generation."
+        },
+        "theory_section": {
+            "title": "Theory Section → Bridge to α",
+            "text": "We hypothesize that α correlates with the proportion of generation-time activation passing through low-KAPE (knowledge-specific) neurons. Prompting strategies that explicitly separate retrieval and application are expected to selectively increase this proportion, thereby increasing α without altering latent knowledge. This positions α as the functional outcome of KAPE-characterized activation patterns, bridging mechanistic interpretability with behavioral measurement."
+        }
+    },
+
+    "strategic_positioning": {
+        "avoids": [
+            "Reduction to 'just RAG'",
+            "Reduction to 'just KAPE'",
+            "Reduction to 'just prompting'"
+        ],
+        "achieves": [
+            "Clear level separation (micro vs. macro)",
+            "Theoretical depth stratification",
+            "Connection to Mechanistic Interpretability",
+            "Empirical testability via KAPE correlation"
+        ],
+        "position": "Between empirical evaluation (α) and mechanistic analysis (KAPE)"
+    },
+
+    "meta": {
+        "bcm_compatibility": "BEATRIX_V2.2+",
+        "module_type": "Theoretical Bridge Document",
+        "validation_status": "Pending empirical confirmation",
+        "next_steps": [
+            "Implement KAPE measurement protocol",
+            "Design R|A prompt variants for testing",
+            "Collect neuron activation data during ESL tasks",
+            "Correlate low-KAPE proportion with α estimates"
+        ]
+    }
+}
