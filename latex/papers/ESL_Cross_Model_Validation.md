@@ -556,3 +556,177 @@ Where:
 
 For Mistral: α × M_latent ≈ 0.29
 For top models: α × M_latent ≈ 0.54-0.74
+
+---
+
+## Theorie der Domain-Wissen-Aktivierung
+
+### Das Mistral-Paradox
+
+**Empirische Befunde:**
+- Mistral erkennt direkt gefragt: 25/25 Effekte korrekt klassifiziert
+- Mistral mit ESL-Guidance: Nur 29% K-Score-Reduktion, 3 falsche "well-documented"
+
+**Das Paradox:** Mistral HAT das Wissen (M_latent ≈ 1.0), WENDET es aber nicht an (α ≈ 0.30).
+
+### Zwei-Prozess-Modell der Wissensnutzung
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    DOMAIN-WISSEN                            │
+│                                                             │
+│   ┌─────────────┐                    ┌─────────────────┐   │
+│   │  RETRIEVAL  │                    │   APPLICATION   │   │
+│   │  (Abruf)    │                    │   (Anwendung)   │   │
+│   └──────┬──────┘                    └────────┬────────┘   │
+│          │                                    │             │
+│          ▼                                    ▼             │
+│   "Ist X real?"        vs.         "Beschreibe X"          │
+│   → Direkte Abfrage                 → Generativer Modus    │
+│   → Fakten-Check                    → Textproduktion       │
+│   → M_latent aktiviert              → M_latent IGNORIERT   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Prozess 1: Retrieval (Abruf)**
+- Aktiviert durch direkte Ja/Nein-Fragen
+- Greift auf faktisches Wissen zu
+- Funktioniert bei allen getesteten Modellen
+
+**Prozess 2: Application (Anwendung)**
+- Aktiviert durch generative Aufgaben ("Beschreibe...", "Erkläre...")
+- Erfordert Integration von Wissen IN die Textproduktion
+- Variiert stark zwischen Modellen
+
+### Die α-Komponente: Activation Competence
+
+**Definition:** α = Fähigkeit des Modells, Retrieval-Wissen während generativer Aufgaben zu aktivieren
+
+**Empirische Werte:**
+
+| Modell | M_latent | α (geschätzt) | Produkt (α × M) | K-Reduktion |
+|--------|----------|---------------|-----------------|-------------|
+| Claude | ~1.0 | ~0.74 | 0.74 | 74% |
+| Gemini | ~1.0 | ~0.58 | 0.58 | 58% |
+| GPT-4 | ~1.0 | ~0.54 | 0.54 | 54% |
+| Grok | ~1.0 | ~0.53 | 0.53 | 53% |
+| Mistral | **~1.0** | **~0.30** | 0.30 | 29% |
+
+**Kritische Erkenntnis:** Bei Mistral liegt das Problem nicht am Wissen, sondern an α.
+
+### Kognitionswissenschaftliche Analogie
+
+Das Zwei-Prozess-Modell entspricht etablierten Unterscheidungen:
+
+| Kognitionswissenschaft | LLM-Entsprechung |
+|------------------------|------------------|
+| Deklaratives Wissen | M_latent (Fakten vorhanden) |
+| Prozedurales Wissen | α (Wann/Wie anwenden) |
+| Verfügbarkeit vs. Zugänglichkeit | Stored vs. Activated |
+| System 1 vs. System 2 | Generation Mode vs. Verification Mode |
+
+### Hypothesen zur α-Varianz
+
+**Hypothese 1: Training-Emphasis**
+- Modelle mit mehr RLHF auf "helpful but accurate" → höheres α
+- Modelle mit mehr "helpful and engaging" → niedrigeres α
+- Mistral möglicherweise stärker auf Fluenz als auf Genauigkeit trainiert
+
+**Hypothese 2: Prompt-Following-Fähigkeit**
+- ESL-Guidance ist eine komplexe Instruktion
+- Erfordert: Verstehe Anweisung → Wende auf JEDE Behauptung an
+- Schwächere Instruktionsbefolgung → niedrigeres α
+
+**Hypothese 3: Meta-kognitive Tiefe**
+- Hohe α-Modelle "fragen sich selbst" während der Generierung
+- Niedrige α-Modelle generieren im "Flow" ohne Selbst-Check
+- α misst gewissermaßen "internal self-questioning capacity"
+
+### Interventionsstrategien zur α-Erhöhung
+
+#### Strategie 1: Zweistufiger Prompt (Retrieval → Application)
+
+```
+STUFE 1: "Bevor du antwortest, prüfe für jeden Effekt:
+         Ist dir dieser Effekt aus der Fachliteratur bekannt? (Ja/Nein)"
+
+STUFE 2: "Basierend auf deiner Prüfung, beschreibe jeden Effekt
+         mit angemessener Sicherheit."
+```
+
+**Rationale:** Erzwingt expliziten Retrieval VOR der Generierung.
+
+#### Strategie 2: Chain-of-Thought für Epistemic Claims
+
+```
+"Für jeden Effekt:
+1. Was weißt du über diesen Effekt?
+2. Welche Studien/Autoren kennst du dazu?
+3. Wenn du keine konkreten Quellen nennen kannst, markiere als unsicher.
+4. Formuliere dann deine Einschätzung."
+```
+
+**Rationale:** Macht implizite Wissensabfrage explizit.
+
+#### Strategie 3: Adversarial Self-Check
+
+```
+"Beschreibe jeden Effekt. ABER: Gehe davon aus, dass einige
+dieser Effekte erfunden sein könnten. Prüfe bei jedem, ob du
+tatsächlich Evidenz aus der Literatur kennst."
+```
+
+**Rationale:** Aktiviert skeptischen Modus vor Generierung.
+
+#### Strategie 4: Staged Verification
+
+```
+Phase A: "Liste diese 10 Effekte und markiere: Real / Unsicher / Unbekannt"
+Phase B: "Nun beschreibe nur die als 'Real' markierten ausführlich."
+```
+
+**Rationale:** Trennt Klassifikation von Elaboration physisch.
+
+### Testbare Vorhersagen
+
+| Intervention | Vorhersage für Mistral | Testbar |
+|--------------|------------------------|---------|
+| Zweistufiger Prompt | α steigt auf ~0.50 | Ja |
+| Chain-of-Thought | α steigt auf ~0.45 | Ja |
+| Adversarial Self-Check | α steigt auf ~0.55 | Ja |
+| Staged Verification | α steigt auf ~0.60 | Ja |
+
+**Falsifikationskriterium:** Wenn KEINE Intervention Mistrals α über 0.40 hebt, liegt das Problem nicht an der Prompt-Struktur, sondern an fundamentalen Modell-Eigenschaften.
+
+### Zusammenfassung: Die Aktivierungstheorie
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                                                                │
+│   ESL-Effektivität = f(M_latent, α, Prompt-Struktur)          │
+│                                                                │
+│   Wo:                                                          │
+│   • M_latent = Faktisches Wissen (✓ bei allen Modellen)       │
+│   • α = Aktivierungskompetenz (variiert stark)                │
+│   • Prompt = Wie gut der Prompt α triggert                    │
+│                                                                │
+│   Mistral-Diagnose:                                            │
+│   • M_latent = hoch (25/25 direkte Fragen korrekt)            │
+│   • α = niedrig (29% statt 50-74%)                            │
+│   • → Intervention: Prompt-Struktur optimieren                │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+```
+
+**Die zentrale Einsicht:**
+
+Domain-Wissen ist NOTWENDIG aber nicht HINREICHEND für ESL.
+Die Aktivierungskompetenz (α) bestimmt, ob vorhandenes Wissen
+während generativer Aufgaben angewendet wird.
+
+**Praktische Implikation:**
+
+Für Modelle mit niedrigem α sollten Prompts so strukturiert werden,
+dass sie expliziten Retrieval ERZWINGEN, bevor generative Elaboration
+beginnt.
