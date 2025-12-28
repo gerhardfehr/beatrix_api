@@ -1,37 +1,36 @@
 % ============================================================================
 % CONCLUSION SECTION (Paper-Ready)
 % ============================================================================
-% Status: FINAL - Kurz, prägnant, keine neuen Claims
+% Status: FINAL - ACL/EMNLP/NeurIPS style, prägnant, keine neuen Claims
 % Date: 2025-12-28
 % Placement: After Discussion, before References
 % ============================================================================
 
 \section{Conclusion}
 
-We have introduced a formal distinction between \textbf{latent knowledge} and \textbf{knowledge activation} in large language models. Our central finding is that models can possess knowledge---verified through direct retrieval---yet systematically fail to apply it during generative tasks. This gap persists even under maximally explicit epistemic constraints.
+This work argues that reliable language model behavior depends not only on what a model knows, but on whether it can activate that knowledge during generation. By formally distinguishing latent knowledge from knowledge activation, we identify activation competence ($\alpha$) as an independent and critical dimension of LLM performance.
 
-We formalize this observation through the concept of \textbf{activation competence} ($\alpha$), defined as the conditional probability of correct knowledge application given knowledge availability:
-\[
-\alpha := \mathbb{P}\big(A(x) \mid M_{\text{latent}}(x) = 1\big)
-\]
+Through the Activation Challenge, we show that even under fully formalized and epistemically restrictive prompts, some models systematically fail to apply knowledge they demonstrably possess. This finding challenges the common assumption that hallucination and epistemic unreliability primarily stem from missing information or insufficient prompt design. Instead, our results suggest that a substantial portion of such failures arise from limitations in knowledge activation itself.
 
-The Activation Challenge provides a minimal, controlled diagnostic that isolates this dimension. Across four contemporary language models, we observe:
-\begin{itemize}
-    \item All models exhibit activation gaps under baseline conditions ($\alpha < 1$).
-    \item Explicit epistemic prompting (ESL) increases $\alpha$ but does not guarantee $\alpha = 1$.
-    \item Some models show bounded activation competence, indicating intrinsic limitations.
-\end{itemize}
+Importantly, we find that explicit prompting and epistemic constraints have bounded effectiveness. While they can reduce interpretational ambiguity, they do not guarantee correct knowledge application. This indicates that improvements in epistemic reliability may require changes at the level of training objectives, model architecture, or internal control mechanisms, rather than relying solely on inference-time interventions.
 
-These results have implications for how we understand hallucination, evaluate model reliability, and design prompting strategies. They suggest that improving epistemic behavior may require interventions beyond prompt engineering---potentially at the level of training objectives or model architecture.
+By providing a formal vocabulary, a controlled diagnostic framework, and clear falsification criteria, this work lays the foundation for a more principled study of knowledge activation in generative models. We hope that future research will build on this framework to better understand, measure, and ultimately improve how language models use what they already know.
 
-We hope this work contributes to a more principled understanding of when and why language models fail to use what they know, and provides a foundation for future research on knowledge activation in generative systems.
+\vspace{0.5em}
+\begin{quote}
+\textit{Understanding what language models know is not enough; understanding when they can use that knowledge is the next critical challenge.}
+\end{quote}
 
 
 % ============================================================================
-% OPTIONAL: Final sentence (can be used or omitted)
+% INTERNAL NOTES (nicht für Paper)
 % ============================================================================
 %
-% \begin{quote}
-% \textit{Knowing is not enough; the question is whether knowledge is activated.}
-% \end{quote}
+% Diese Conclusion:
+% - Argumentiert (nicht nur zusammenfasst)
+% - Positioniert α als zentrale Dimension
+% - Challenget Hallucination-Annahmen
+% - Bounded effectiveness von Prompting
+% - Öffnet für Training/Architecture research
+% - Schließt mit prägnanter Einsicht
 %
