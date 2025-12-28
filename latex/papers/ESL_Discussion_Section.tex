@@ -1,0 +1,90 @@
+% ============================================================================
+% DISCUSSION SECTION (Paper-Ready)
+% ============================================================================
+% Status: FINAL - Interpretiert, kontextualisiert, öffnet Anschlussfragen
+% Date: 2025-12-28
+% Placement: After Results, before Conclusion
+% ============================================================================
+
+\section{Discussion}
+
+\subsection{Summary of Findings}
+
+This work identifies knowledge activation as a distinct and previously under-theorized dimension of large language model (LLM) behavior. Across multiple models, we observe that latent knowledge---verified via direct retrieval---does not reliably translate into correct epistemic judgments during generation, even when prompts are fully formalized and epistemically restrictive. The Activation Challenge demonstrates that this gap persists under conditions specifically designed to eliminate ambiguity, task misunderstanding, and informational deficits.
+
+These results suggest that failures commonly described as hallucinations may instead reflect systematic activation failures, where available knowledge fails to constrain generative decisions.
+
+
+\subsection{Implications for Prompting and Instruction Design}
+
+A key implication of our findings is that prompting has bounded effectiveness. While formalization and explicit epistemic rules reduce interpretational ambiguity, they do not guarantee reliable knowledge application. This challenges a common assumption in practice: that sufficiently careful prompt engineering can always elicit correct behavior from a knowledgeable model.
+
+Our results indicate a qualitative distinction between:
+\begin{itemize}
+    \item prompts that \emph{permit} knowledge activation, and
+    \item prompts that \emph{attempt to enforce} it.
+\end{itemize}
+
+Even under the latter, some models fail to improve, suggesting intrinsic limits to prompt-based control. This has practical implications for high-stakes applications, where reliance on prompt design alone may provide a false sense of epistemic safety.
+
+
+\subsection{Rethinking Hallucination}
+
+The activation framework reframes hallucination as a failure mode that can occur despite correct knowledge availability. In this view, hallucinations are not necessarily caused by missing or incorrect information, but by an inability to appropriately gate fluent generation with epistemic checks.
+
+This perspective helps reconcile seemingly contradictory observations: models that perform well on factual benchmarks may still produce confident falsehoods in open-ended tasks. It also suggests that mitigation strategies focused solely on improving knowledge coverage or retrieval may be insufficient if activation competence remains low.
+
+
+\subsection{Relation to Training and Alignment}
+
+The existence of bounded activation competence raises important questions for model training and alignment. If $\alpha$ reflects an intrinsic behavioral limitation, then improving epistemic reliability may require training interventions, not just inference-time controls.
+
+Potential avenues include:
+\begin{itemize}
+    \item objectives that explicitly penalize false-positive assertions,
+    \item training regimes that distinguish concept familiarity from terminological legitimacy,
+    \item or architectures that better separate generative fluency from epistemic decision-making.
+\end{itemize}
+
+While our work does not investigate training mechanisms directly, it provides a diagnostic framework for evaluating whether such interventions succeed.
+
+
+\subsection{Implications for Evaluation Practices}
+
+Current evaluation practices often conflate knowledge possession with reliable use. Our findings suggest that benchmarks emphasizing correct answers under direct questioning may systematically overestimate real-world epistemic reliability.
+
+The Activation Challenge complements existing evaluations by focusing on conditional knowledge use rather than unconditional accuracy. More broadly, it illustrates the value of minimal, theory-driven diagnostic tasks for uncovering specific behavioral limitations that may be obscured in large-scale benchmarks.
+
+
+\subsection{Limitations and Future Work}
+
+As discussed earlier, our study is deliberately narrow in scope. We focus on a single diagnostic task and a limited set of models and items. Future work could extend this framework across domains such as medicine, law, or physics, and explore how activation competence varies with task structure, uncertainty calibration, or interaction modality.
+
+An important open question is whether activation competence can be meaningfully decomposed into sub-components, or whether it reflects a single bottleneck in generative control. Connecting functional measures of $\alpha$ with mechanistic analyses---such as neuron- or circuit-level studies---represents a promising direction for future research.
+
+
+\subsection{Concluding Perspective}
+
+Taken together, our results suggest that knowledge activation, not knowledge availability, may be a central bottleneck for reliable language model behavior. By formalizing this distinction and providing a controlled diagnostic framework, we hope to shift attention from surface-level explanations toward a more principled understanding of how and when LLMs use what they already know.
+
+
+% ============================================================================
+% OPTIONAL: One-paragraph takeaway (can be used in abstract or as pull quote)
+% ============================================================================
+
+\begin{quote}
+\textbf{Takeaway:} This work argues that reliable language model behavior depends not only on what a model knows, but on whether it can activate that knowledge under generative conditions. Our findings show that explicit prompts and epistemic rules are sometimes insufficient to bridge this gap, pointing to knowledge activation as an independent and critical dimension for future model design and evaluation.
+\end{quote}
+
+
+% ============================================================================
+% INTERNAL NOTES (nicht für Paper)
+% ============================================================================
+%
+% Diese Discussion:
+% - Interpretiert ohne neue Claims
+% - Kontextualisiert für Training, Alignment, Evaluation
+% - Öffnet explizit für Anschlussforschung
+% - Bleibt vorsichtig und präzise
+% - Verbindet zurück zur Theorie (α, M_latent)
+%
