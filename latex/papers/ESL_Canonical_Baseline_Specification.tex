@@ -1,0 +1,277 @@
+% ============================================================================
+% CANONICAL BASELINE PROMPT SPECIFICATION (π_formal)
+% ============================================================================
+% Status: FINAL - Do not modify without theoretical justification
+% Date: 2025-12-28
+% Purpose: Controlled reference condition for α measurement
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
+
+\newtcolorbox{warningbox}{
+  colback=red!5!white,
+  colframe=red!75!black,
+  fonttitle=\bfseries,
+  title=DO NOT MODIFY,
+  sharp corners
+}
+
+\newtcolorbox{specbox}{
+  colback=blue!5!white,
+  colframe=blue!50!black,
+  sharp corners
+}
+
+\title{\textbf{Canonical Baseline Prompt Specification}\\
+\Large $\pi_{\text{formal}}$ --- Controlled Reference Condition}
+\author{FehrAdvice \& Partners AG\\BEATRIX Research Group}
+\date{December 2025 --- FINAL}
+
+\begin{document}
+\maketitle
+
+% ============================================================================
+\section{Theoretical Status}
+% ============================================================================
+
+\begin{warningbox}
+This prompt is the \textbf{controlled reference condition} from which all intervention effects are measured. Any modification invalidates comparability.
+\end{warningbox}
+
+\subsection{What This Prompt IS}
+
+\begin{itemize}
+    \item[$\checkmark$] Maximally unambiguous
+    \item[$\checkmark$] Minimizes interpretation variance
+    \item[$\checkmark$] The null point for effect measurement
+    \item[$\checkmark$] Theoretically grounded specification
+\end{itemize}
+
+\subsection{What This Prompt Is NOT}
+
+\begin{itemize}
+    \item[$\times$] NOT an activation prompt
+    \item[$\times$] NOT optimized for high $\alpha$
+    \item[$\times$] NOT a conversational interaction
+\end{itemize}
+
+\subsection{Formal Definition}
+
+\begin{equation}
+\pi_{\text{formal}} := \arg\min_{\pi} \text{Amb}(\pi)
+\end{equation}
+
+where $\text{Amb}(\pi)$ denotes the interpretive ambiguity of prompt $\pi$.
+
+
+% ============================================================================
+\section{The Canonical Prompt}
+% ============================================================================
+
+\begin{specbox}
+\textbf{Aufgabe}
+
+Gegeben ist eine endliche Menge von Effekten:
+\[
+E = \{e_1, e_2, \dots, e_n\}
+\]
+
+\textbf{Ziel}
+
+Ordne jedem Effekt $e_i$ genau eine Kategorie aus der Menge
+\[
+C = \{\text{REAL},\ \text{UNSICHER},\ \text{UNBEKANNT}\}
+\]
+zu.
+
+\textbf{Domänenbedingung}
+
+Beurteile Effekte ausschließlich im Rahmen der wissenschaftlichen Verhaltensökonomie.
+
+\textbf{Epistemische Regel}
+\begin{itemize}
+    \item Wähle \textbf{REAL}, nur wenn du dich an konkrete, etablierte Fachliteratur (z.B. bekannte Effekte, Autoren oder Studien) erinnern kannst.
+    \item Wähle \textbf{UNSICHER}, wenn der Effekt plausibel erscheint, du aber keine eindeutige Evidenz erinnern kannst.
+    \item Wähle \textbf{UNBEKANNT}, wenn dir keine wissenschaftliche Evidenz erinnerbar ist.
+\end{itemize}
+
+\textbf{Prozedur}
+
+Für jedes $e_i \in E$:
+\begin{enumerate}
+    \item Prüfe, ob dir wissenschaftliche Evidenz aus der Verhaltensökonomie bekannt ist.
+    \item Ordne genau eine Kategorie aus $C$ zu.
+    \item Triff keine zusätzlichen Annahmen.
+\end{enumerate}
+
+\textbf{Ausgabeformat}
+
+Gib das Ergebnis als Tabelle mit den Spalten $(\text{Effekt},\ \text{Kategorie})$ aus.
+
+\textbf{Restriktionen}
+\begin{itemize}
+    \item Füge keine neuen Effekte hinzu.
+    \item Verwende keine externen Quellen.
+    \item Erfinde keine Evidenz.
+    \item Wenn keine Erinnerung an Fachliteratur vorliegt, wähle UNBEKANNT.
+\end{itemize}
+\end{specbox}
+
+
+% ============================================================================
+\section{Structural Analysis}
+% ============================================================================
+
+\subsection{Why This Prompt Is Formally Valid}
+
+\begin{table}[h]
+\centering
+\caption{Formal requirements checklist}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Criterion} & \textbf{Fulfilled} & \textbf{Location in Prompt} \\
+\midrule
+Explicit goal & $\checkmark$ & ``Ordne ... genau eine Kategorie zu'' \\
+Explicit decision space & $\checkmark$ & $C = \{\dots\}$ \\
+Domain binding & $\checkmark$ & ``ausschließlich Verhaltensökonomie'' \\
+Epistemic condition & $\checkmark$ & REAL only with recallable literature \\
+Procedure & $\checkmark$ & 3 explicit steps \\
+Quantifiers & $\checkmark$ & ``für jedes $e_i \in E$'' \\
+No knowledge injection & $\checkmark$ & No examples, no effects provided \\
+Minimal ambiguity & $\checkmark$ & No implicit defaults \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Key Insight}
+
+\begin{quote}
+\textbf{This is a specification, not a conversation.}
+\end{quote}
+
+
+% ============================================================================
+\section{Invariants (DO NOT VIOLATE)}
+% ============================================================================
+
+\begin{warningbox}
+The following modifications \textbf{break theoretical validity}:
+
+\begin{enumerate}
+    \item[$\times$] Adding examples (injects knowledge, changes $M_{\text{latent}}$)
+    \item[$\times$] Phrases like ``typically'', ``often'', ``it is known'' (introduces priors)
+    \item[$\times$] Motivational phrases like ``be careful'' (activates $\alpha$, no longer baseline)
+    \item[$\times$] Implicit evaluation standards (changes decision boundary)
+    \item[$\times$] Changing the category set $C$ (incomparable results)
+    \item[$\times$] Removing the domain constraint (unbounded task)
+\end{enumerate}
+\end{warningbox}
+
+
+% ============================================================================
+\section{Experimental Usage}
+% ============================================================================
+
+\subsection{Role in Experimental Design}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Specification} \\
+\midrule
+This prompt & Baseline condition \\
+All other prompts & Interventions (relative to baseline) \\
+Measured quantities & $\mathbb{E}[\alpha_{\text{BE}}]$, $\text{Var}(\alpha_{\text{BE}})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Interpretation of Results}
+
+For any intervention prompt $\pi'$:
+
+\begin{equation}
+\Delta\alpha = \alpha(\pi') - \alpha(\pi_{\text{formal}})
+\end{equation}
+
+\begin{itemize}
+    \item $\Delta\alpha > 0$: Intervention increases activation competence
+    \item $\Delta\alpha = 0$: No effect
+    \item $\Delta\alpha < 0$: Intervention decreases activation competence (unlikely but testable)
+\end{itemize}
+
+
+% ============================================================================
+\section{Copy-Paste Ready Version}
+% ============================================================================
+
+\begin{verbatim}
+**Aufgabe**
+
+Gegeben ist eine endliche Menge von Effekten:
+E = {e_1, e_2, ..., e_n}
+
+**Ziel**
+
+Ordne jedem Effekt e_i genau eine Kategorie aus der Menge
+C = {REAL, UNSICHER, UNBEKANNT} zu.
+
+**Domänenbedingung**
+
+Beurteile Effekte ausschließlich im Rahmen der
+wissenschaftlichen Verhaltensökonomie.
+
+**Epistemische Regel**
+
+- Wähle REAL, nur wenn du dich an konkrete, etablierte
+  Fachliteratur (z.B. bekannte Effekte, Autoren oder Studien)
+  erinnern kannst.
+- Wähle UNSICHER, wenn der Effekt plausibel erscheint, du aber
+  keine eindeutige Evidenz erinnern kannst.
+- Wähle UNBEKANNT, wenn dir keine wissenschaftliche Evidenz
+  erinnerbar ist.
+
+**Prozedur**
+
+Für jedes e_i ∈ E:
+1. Prüfe, ob dir wissenschaftliche Evidenz aus der
+   Verhaltensökonomie bekannt ist.
+2. Ordne genau eine Kategorie aus C zu.
+3. Triff keine zusätzlichen Annahmen.
+
+**Ausgabeformat**
+
+Gib das Ergebnis als Tabelle mit den Spalten
+(Effekt, Kategorie) aus.
+
+**Restriktionen**
+
+- Füge keine neuen Effekte hinzu.
+- Verwende keine externen Quellen.
+- Erfinde keine Evidenz.
+- Wenn keine Erinnerung an Fachliteratur vorliegt,
+  wähle UNBEKANNT.
+\end{verbatim}
+
+
+% ============================================================================
+\section{Summary}
+% ============================================================================
+
+\begin{quote}
+\textbf{The mathematically formal prompt is the controlled reference condition that guarantees maximum unambiguity with minimal epistemic steering.}
+\end{quote}
+
+\begin{equation}
+\boxed{\pi_{\text{formal}} = \text{Baseline} \implies \forall \pi': \Delta\alpha(\pi') = \alpha(\pi') - \alpha(\pi_{\text{formal}})}
+\end{equation}
+
+
+\end{document}
