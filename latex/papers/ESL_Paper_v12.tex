@@ -24,6 +24,12 @@
 % CUSTOM ENVIRONMENTS
 % ============================================================================
 
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
 % Colored boxes for analogies
 \newtcolorbox{analogybox}[1][]{
   colback=blue!5!white,
@@ -887,6 +893,143 @@ where $\text{input}' = \text{input} + \text{ESL framework}$.
 
 \begin{principlebox}[Core Thesis]
 \textbf{ESL is not a knowledge base---it is a system-level activation function.} The framework does not modify the LLM (weights remain unchanged). Instead, it configures the system to activate the LLM's latent epistemic competence.
+\end{principlebox}
+
+
+% ============================================================================
+% SECTION 9: FORMAL THEORY OF α
+% ============================================================================
+
+\section{Formal Theory of Activation Competence ($\alpha$)}
+
+We now provide an axiomatic foundation for activation competence. The definition is purely functional---no assumptions about neurons, parameters, or architecture.
+
+\subsection{Primitive Objects}
+
+\begin{enumerate}
+    \item Let $f_\theta : \mathcal{X}^* \to \mathcal{P}(\mathcal{Y})$ be a generative language model.
+    \item Let $\mathcal{D} = \{(x, m)\}$ be a distribution of tasks $x$ with associated domain knowledge $m$.
+    \item Let $M_{\text{latent}}(x) \in \{0,1\}$ indicate whether the model possesses the relevant knowledge (operationalized via direct retrieval queries).
+\end{enumerate}
+
+\subsection{Knowledge Application as Observable Event}
+
+Define the event:
+\begin{equation}
+A(x) := \text{``The generated output correctly applies the relevant knowledge''}
+\end{equation}
+
+This event is empirically observable through:
+\begin{itemize}
+    \item ESL classification ($K \leq M$ verification)
+    \item Factuality labels
+    \item Expert judgments
+\end{itemize}
+
+\subsection{Definition of $\alpha$}
+
+\begin{principlebox}[Activation Competence --- Core Definition]
+\begin{equation}
+\boxed{\alpha := \mathbb{P}\big( A(x) \mid M_{\text{latent}}(x) = 1 \big)}
+\end{equation}
+
+\textbf{Interpretation:} $\alpha$ is the conditional probability that existing knowledge is actually applied during generation.
+\end{principlebox}
+
+\textbf{Key properties of this definition:}
+\begin{itemize}
+    \item Fully mathematical
+    \item Empirically estimable
+    \item Model-agnostic (no assumptions about architecture)
+    \item Not prompt-specific (prompt is part of $x$)
+\end{itemize}
+
+
+\subsection{Axiomatic Minimal Theory}
+
+We establish the following axioms---no more than necessary.
+
+\begin{table}[H]
+\centering
+\caption{Axioms of Activation Competence}
+\begin{tabular}{lp{10cm}}
+\toprule
+\textbf{Axiom} & \textbf{Statement} \\
+\midrule
+\textbf{A1} (Non-triviality) & $\alpha$ is defined only when $M_{\text{latent}} = 1$. No knowledge $\Rightarrow$ no activation competence. \\[0.5em]
+\textbf{A2} (Monotonicity) & For task $x'$ derived from $x$ via purely activating intervention (no new knowledge): $\alpha(x') \geq \alpha(x)$. \\[0.5em]
+\textbf{A3} (Invariance) & If $M_{\text{latent}}(x) = M_{\text{latent}}(x') = 1$ and the application context is identical, then $\alpha(x) = \alpha(x')$. $\alpha$ measures usage, not quantity. \\[0.5em]
+\textbf{A4} (Contextuality) & $\alpha = \alpha(\text{Model}, \text{Task}, \text{Prompt})$. This legitimizes prompt-based interventions. \\[0.5em]
+\textbf{A5} (Weak Compositionality) & For independent knowledge elements $m_1, m_2$: $\alpha(m_1 \cup m_2) \leq \min(\alpha(m_1), \alpha(m_2))$. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Derived Theorems}
+
+The following results are derivable from the axioms:
+
+\begin{theorem}[The Mistral Paradox is Consistent]
+High $M_{\emph{latent}}$ and low $\alpha$ simultaneously $\Rightarrow$ no contradiction.
+\end{theorem}
+
+\begin{proof}
+By A1, $\alpha$ is defined independently of the magnitude of $M_{\text{latent}}$. By A3, $\alpha$ measures application reliability, not knowledge quantity. $\square$
+\end{proof}
+
+\begin{theorem}[Prompting Cannot Create Knowledge]
+Prompts can increase $\alpha$ but cannot increase $M_{\emph{latent}}$:
+\begin{equation}
+\frac{\partial \alpha}{\partial \text{Prompt}} > 0 \quad \text{is possible, while} \quad \frac{\partial M_{\text{latent}}}{\partial \text{Prompt}} = 0
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Hallucination $\neq$ Knowledge Deficit]
+Hallucination can occur even with complete knowledge:
+\begin{equation}
+\text{Hallucination} = \big( M_{\emph{latent}} = 1 \big) \land \big( \alpha \ll 1 \big)
+\end{equation}
+\end{theorem}
+
+
+\subsection{What $\alpha$ Is Not}
+
+\begin{assumptionbox}
+\textbf{Critical Distinctions:} $\alpha$ must not be conflated with the following constructs.
+\end{assumptionbox}
+
+\begin{table}[H]
+\centering
+\caption{Non-reducibility of $\alpha$}
+\begin{tabular}{lp{9cm}}
+\toprule
+\textbf{Construct} & \textbf{Why $\alpha$ is distinct} \\
+\midrule
+Knowledge quantity & $\alpha$ is not: number of facts, model size, or training data volume. \\[0.3em]
+Reasoning score & A model can reason well yet fail to activate relevant knowledge. \\[0.3em]
+Neural measure & Neuronal quantities (KAPE, activation patterns) are \emph{correlates}, not definitions. $\alpha$ is behavioral. \\[0.3em]
+Chain-of-Thought & CoT is a technique; $\alpha$ is a latent competence that exists independently. \\[0.3em]
+RAG performance & RAG modifies input; $\alpha$ measures application from \emph{any} source. \\[0.3em]
+Hallucination rate & Hallucination is output; $\alpha$ is process. Low $\alpha$ may cause hallucination, but knowledge gaps ($M_{\text{latent}} = 0$) can too. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Sufficiency of the Minimal Theory}
+
+This axiomatic foundation is:
+\begin{itemize}
+    \item \textbf{Falsifiable}: $\alpha$ can be empirically estimated and predictions tested.
+    \item \textbf{Operationalizable}: Observable through ESL classification, factuality checks.
+    \item \textbf{Architecture-independent}: No assumptions about transformers, attention, or specific implementations.
+    \item \textbf{Non-speculative}: Avoids ontological commitments about internal representations.
+    \item \textbf{Extensible}: Permits mechanistic extensions (e.g., KAPE correlation) without requiring them.
+\end{itemize}
+
+\begin{principlebox}[Summary]
+$\alpha$ is the conditional probability that existing knowledge is applied under generative conditions---and this definition supports a complete minimal theory.
 \end{principlebox}
 
 
