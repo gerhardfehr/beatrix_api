@@ -1,0 +1,87 @@
+% ============================================================================
+% RELATED WORK SECTION (Paper-Ready)
+% ============================================================================
+% Status: FINAL - Zitierfähig, 1-1.5 Seiten
+% Date: 2025-12-28
+% ============================================================================
+
+\section{Related Work: Knowledge, Activation, and Epistemic Control in LLMs}
+
+\subsection{Knowledge Availability vs. Knowledge Use}
+
+A long-standing distinction in cognitive science separates the \emph{availability} of knowledge from its \emph{accessibility} and use in problem-solving contexts \citep{tulving1966availability}. This distinction underlies classic accounts of inert knowledge, where learners possess relevant information but fail to apply it appropriately when task conditions change \citep{whitehead1929aims}. Similar failures of transfer have been documented extensively in education research and expertise studies, demonstrating that knowledge possession alone is insufficient for correct application.
+
+Recent work on large language models (LLMs) has begun to rediscover this distinction. Several studies show that models can answer factual questions correctly when directly queried, yet produce hallucinated or epistemically incorrect content during free-form generation \citep{ji2023survey, manakul2023selfcheckgpt}. Our work formalizes this gap by distinguishing \textbf{latent knowledge} from \textbf{knowledge activation}, treating the latter as a separate functional competence.
+
+
+\subsection{Metacognitive Calibration and Overconfidence}
+
+Human decision-making research has consistently shown that overconfidence arises when individuals rely on plausibility or familiarity in the absence of explicit verification criteria \citep{fischhoff1977knowing, rozenblit2002misunderstood}. Metacognitive failures occur not because information is unavailable, but because confidence judgments are insufficiently constrained by evidence-based stopping rules.
+
+Explicit epistemic criteria---such as requiring recall of concrete sources or forbidding inference by analogy---have been shown to reduce false positives and improve calibration in expert judgment tasks. Our ESL (Epistemic Specification and Limitation) prompting framework directly operationalizes these principles by translating metacognitive stop rules into formal constraints on model outputs.
+
+
+\subsection{Dual-Process Models and Fluency Bias}
+
+Dual-process theories distinguish between fast, intuitive processes and slower, analytically controlled reasoning \citep{evans2013dual, kahneman2011thinking}. A robust finding across domains is that intuitive fluency dominates unless analytic checks are explicitly triggered. In LLMs, several authors have argued that fluent generation can override factual correctness, especially in the absence of explicit verification steps.
+
+Chain-of-thought prompting has been proposed as a mechanism to induce more deliberative reasoning, but recent work suggests that reasoning traces do not guarantee factual faithfulness or epistemic correctness. Our results align with these findings and show that even highly formal prompts may fail unless they explicitly constrain \emph{when} positive assertions (e.g., REAL classifications) are permitted.
+
+
+\subsection{Instruction Following vs. Epistemic Reliability in LLMs}
+
+Instruction-following capability in LLMs has improved substantially through fine-tuning and reinforcement learning, yet multiple studies demonstrate that compliance with instructions does not ensure epistemic reliability \citep{ji2023survey}. Models may follow procedural instructions while still hallucinating content or overgeneralizing from semantically related concepts.
+
+Our work contributes to this literature by distinguishing \textbf{procedural compliance} from \textbf{epistemic activation}. The ESL prompt does not merely instruct the model to be cautious; it specifies explicit exclusion rules that prohibit common failure modes such as semantic approximation (``similar to'') and label--concept conflation.
+
+
+\subsection{Terminological Precision and Concept--Label Dissociation}
+
+Scientific reasoning relies critically on terminological precision. Prior work in both cognitive science and machine learning has documented systematic errors arising from conflating related concepts with formally established terms. In LLMs, this manifests as confident endorsement of plausible-sounding but non-canonical labels.
+
+By explicitly separating \emph{concept familiarity} from \emph{label legitimacy}, our prompting framework builds on this insight and provides a controlled setting to test whether models can enforce terminological discipline when epistemic costs are made explicit.
+
+
+\subsection{Positioning of the Present Work}
+
+Unlike prior benchmarks that focus on knowledge coverage or factual accuracy in isolation, our approach isolates \textbf{knowledge activation} as an independent behavioral dimension. The Activation Challenge is not designed to estimate population-level performance, but to demonstrate the existence and persistence of an \emph{activation gap} under maximally controlled conditions. In doing so, we complement recent mechanistic and retrieval-augmented studies by providing a functional, model-agnostic framework for analyzing when and why latent knowledge fails to surface during generation.
+
+
+% ============================================================================
+% BIBLIOGRAPHY ENTRIES (to be merged with main bibliography)
+% ============================================================================
+%
+% \bibitem{tulving1966availability}
+% Tulving, E., \& Pearlstone, Z. (1966). Availability versus accessibility of
+% information in memory for words. Journal of Verbal Learning and Verbal
+% Behavior, 5(4), 381--391.
+%
+% \bibitem{whitehead1929aims}
+% Whitehead, A. N. (1929). The Aims of Education and Other Essays. Macmillan.
+%
+% \bibitem{ji2023survey}
+% Ji, Z., et al. (2023). Survey of hallucination in natural language generation.
+% ACM Computing Surveys, 55(12), 1--38.
+%
+% \bibitem{manakul2023selfcheckgpt}
+% Manakul, P., Liusie, A., \& Gales, M. J. (2023). SelfCheckGPT: Zero-resource
+% black-box hallucination detection for generative large language models.
+% arXiv:2303.08896.
+%
+% \bibitem{fischhoff1977knowing}
+% Fischhoff, B., Slovic, P., \& Lichtenstein, S. (1977). Knowing with certainty:
+% The appropriateness of extreme confidence. Journal of Experimental Psychology:
+% Human Perception and Performance, 3(4), 552--564.
+%
+% \bibitem{rozenblit2002misunderstood}
+% Rozenblit, L., \& Keil, F. (2002). The misunderstood limits of folk science:
+% An illusion of explanatory depth. Cognitive Science, 26(5), 521--562.
+%
+% \bibitem{evans2013dual}
+% Evans, J. St. B. T., \& Stanovich, K. E. (2013). Dual-process theories of
+% higher cognition: Advancing the debate. Perspectives on Psychological
+% Science, 8(3), 223--241.
+%
+% \bibitem{kahneman2011thinking}
+% Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.
+%
