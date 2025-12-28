@@ -1,0 +1,315 @@
+% ============================================================================
+% EVIDENCE BASE FOR EPISTEMIC PROMPTING
+% ============================================================================
+% Status: FINAL - Scientific legitimation of ESL methodology
+% Date: 2025-12-28
+% Purpose: Ground ESL in established cognitive science literature
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+
+\newtcolorbox{keypoint}{
+  colback=green!5!white,
+  colframe=green!50!black,
+  sharp corners
+}
+
+\title{\textbf{Evidence Base for Epistemic Prompting}\\
+\Large Scientific Foundations of the ESL Framework}
+\author{FehrAdvice \& Partners AG\\BEATRIX Research Group}
+\date{December 2025}
+
+\begin{document}
+\maketitle
+
+% ============================================================================
+\section{Executive Summary}
+% ============================================================================
+
+\begin{keypoint}
+The prompting strategy used in the Activation Challenge operationalizes established findings from cognitive science, metacognition, decision research, and Human--AI interaction.
+
+\textbf{It is not a new assumption, but a formal bundling of known effects.}
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 1: Knowledge Possession vs. Application}
+% ============================================================================
+
+\subsection{Finding}
+
+Humans (and systems) can:
+\begin{itemize}
+    \item Possess knowledge
+    \item Without using it
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item \textbf{Availability vs. Accessibility} \citep{tulving1966availability}
+    \item \textbf{Inert Knowledge Problem} \citep{whitehead1929aims}
+    \item \textbf{Transfer Failure} in learning and expertise research
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ Explicit retrieval conditions increase \emph{usage}, not possession.
+
+\begin{keypoint}
+ESL prompt = formal externalization of this separation.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 2: Metacognitive Calibration \& Overconfidence}
+% ============================================================================
+
+\subsection{Finding}
+
+Humans overestimate knowledge when:
+\begin{itemize}
+    \item No explicit verification rules are present
+    \item Plausibility is confused with evidence
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item \textbf{Overconfidence Bias} \citep{fischhoff1977knowing}
+    \item \textbf{Illusion of Explanatory Depth} \citep{rozenblit2002misunderstood}
+    \item \textbf{Metacognitive Monitoring Failures}
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ Explicit ``stop rules'' reduce false-positive judgments.
+
+\begin{keypoint}
+ESL rules (``similar $\neq$ identical'') are exactly such stop rules.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 3: Dual-Process Models}
+% ============================================================================
+
+\subsection{Finding}
+
+\begin{itemize}
+    \item Intuitive processes dominate by default
+    \item Analytical processes must be explicitly activated
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item \textbf{Thinking, Fast and Slow} \citep{kahneman2011thinking}
+    \item \textbf{Dual-process theories} \citep{evans2013dual}
+    \item \textbf{Cognitive Reflection Test (CRT)} \citep{frederick2005cognitive}
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ Without coercion, the system remains in fluency/plausibility mode.
+
+\begin{keypoint}
+ESL prompt forces System-2-like verification.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 4: Decision Rules \& Explicit Criteria}
+% ============================================================================
+
+\subsection{Finding}
+
+Decisions become more robust when:
+\begin{itemize}
+    \item Criteria are made explicit
+    \item Implicit heuristics are forbidden
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item \textbf{Fast-and-frugal heuristics} \citep{gigerenzer1999simple}
+    \item \textbf{Decision hygiene} \citep{kahneman2021noise}
+    \item \textbf{Checklist effects} in medicine and aviation
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ Explicit criteria reduce variance and bias.
+
+\begin{keypoint}
+Baseline prompt = checklist without coercion\\
+ESL prompt = checklist with hard exclusion rules
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 5: Instruction Following $\neq$ Knowledge Use}
+% ============================================================================
+
+\subsection{Finding (LLM-Specific)}
+
+LLMs:
+\begin{itemize}
+    \item Follow instructions syntactically
+    \item Without epistemic guarantee
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item Instruction-following $\neq$ factual reliability
+    \item \textbf{Faithfulness vs. Fluency} \citep{ji2023survey}
+    \item Hallucination under instruction compliance
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ Instructions must be \emph{epistemic}, not just procedural.
+
+\begin{keypoint}
+ESL is \textbf{epistemic prompting}, not task prompting.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Evidence Domain 6: Label Precision}
+% ============================================================================
+
+\subsection{Finding}
+
+\begin{itemize}
+    \item Label accuracy is central for knowledge access
+    \item Semantic proximity creates false confidence
+\end{itemize}
+
+\subsection{Key Evidence}
+
+\begin{itemize}
+    \item \textbf{Label leakage} in machine learning
+    \item \textbf{Concept--label dissociation}
+    \item \textbf{Terminological precision} in science
+\end{itemize}
+
+\subsection{Relevance for Prompting}
+
+$\rightarrow$ ``Moral Licensing'' $\neq$ ``Moral Licensing Spillover Effect''
+
+\begin{keypoint}
+ESL makes this separation explicit and verifiable.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Mapping to $\alpha$-Theory}
+% ============================================================================
+
+\begin{table}[h]
+\centering
+\caption{Evidence domains mapped to theoretical constructs}
+\begin{tabular}{ll}
+\toprule
+\textbf{Evidence Domain} & \textbf{Correspondence in $\alpha$-Theory} \\
+\midrule
+Inert knowledge & $M_{\text{latent}} \neq A$ (knowledge $\neq$ application) \\
+Metacognitive stop rules & Activation of $\alpha$ \\
+Dual-process & Fluency mode vs. Activation mode \\
+Decision rules & ESL calibration rules \\
+Instruction failures & Prompt $\neq$ Knowledge \\
+Label precision & $K \leq M$ principle \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{keypoint}
+Our prompting is a formal operationalization of all these findings.
+\end{keypoint}
+
+
+% ============================================================================
+\section{Paper-Ready Paragraph}
+% ============================================================================
+
+\begin{quote}
+Our prompting strategy is grounded in established findings from cognitive science and decision research, including the distinction between knowledge availability and accessibility \citep{tulving1966availability}, failures of metacognitive calibration \citep{rozenblit2002misunderstood}, and dual-process models of reasoning \citep{kahneman2011thinking}. Explicit epistemic rules and exclusion criteria have been shown to reduce overconfidence and heuristic-driven errors in human decision-making \citep{kahneman2021noise}. We translate these principles into a formal prompting framework that does not add information, but constrains the conditions under which latent knowledge may be applied.
+\end{quote}
+
+
+% ============================================================================
+\section{What We Do NOT Claim}
+% ============================================================================
+
+\begin{itemize}
+    \item[$\times$] That prompting creates knowledge
+    \item[$\times$] That ESL ``trains'' the model
+    \item[$\times$] That rules always help
+\end{itemize}
+
+\begin{itemize}
+    \item[$\checkmark$] \textbf{Only:} Prompting can formalize known cognitive control mechanisms---or fail.
+\end{itemize}
+
+
+% ============================================================================
+\section{Summary}
+% ============================================================================
+
+\begin{keypoint}
+\textbf{ESL prompting is evidence-based because it formalizes established cognitive mechanisms for controlling knowledge application and transfers them to LLMs.}
+\end{keypoint}
+
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\bibliographystyle{apalike}
+\begin{thebibliography}{99}
+
+\bibitem{tulving1966availability}
+Tulving, E., \& Pearlstone, Z. (1966). Availability versus accessibility of information in memory for words. \emph{Journal of Verbal Learning and Verbal Behavior}, 5(4), 381--391.
+
+\bibitem{whitehead1929aims}
+Whitehead, A. N. (1929). \emph{The Aims of Education and Other Essays}. Macmillan.
+
+\bibitem{fischhoff1977knowing}
+Fischhoff, B., Slovic, P., \& Lichtenstein, S. (1977). Knowing with certainty: The appropriateness of extreme confidence. \emph{Journal of Experimental Psychology: Human Perception and Performance}, 3(4), 552--564.
+
+\bibitem{rozenblit2002misunderstood}
+Rozenblit, L., \& Keil, F. (2002). The misunderstood limits of folk science: An illusion of explanatory depth. \emph{Cognitive Science}, 26(5), 521--562.
+
+\bibitem{kahneman2011thinking}
+Kahneman, D. (2011). \emph{Thinking, Fast and Slow}. Farrar, Straus and Giroux.
+
+\bibitem{evans2013dual}
+Evans, J. St. B. T., \& Stanovich, K. E. (2013). Dual-process theories of higher cognition: Advancing the debate. \emph{Perspectives on Psychological Science}, 8(3), 223--241.
+
+\bibitem{frederick2005cognitive}
+Frederick, S. (2005). Cognitive reflection and decision making. \emph{Journal of Economic Perspectives}, 19(4), 25--42.
+
+\bibitem{gigerenzer1999simple}
+Gigerenzer, G., Todd, P. M., \& the ABC Research Group. (1999). \emph{Simple Heuristics That Make Us Smart}. Oxford University Press.
+
+\bibitem{kahneman2021noise}
+Kahneman, D., Sibony, O., \& Sunstein, C. R. (2021). \emph{Noise: A Flaw in Human Judgment}. Little, Brown Spark.
+
+\bibitem{ji2023survey}
+Ji, Z., et al. (2023). Survey of hallucination in natural language generation. \emph{ACM Computing Surveys}, 55(12), 1--38.
+
+\end{thebibliography}
+
+\end{document}
