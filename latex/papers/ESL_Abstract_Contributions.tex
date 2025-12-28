@@ -1,0 +1,75 @@
+% ============================================================================
+% ABSTRACT AND CONTRIBUTIONS (Paper-Ready)
+% ============================================================================
+% Status: FINAL - ACL/EMNLP/NeurIPS-style
+% Date: 2025-12-28
+% ============================================================================
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+
+\begin{abstract}
+Large language models (LLMs) often demonstrate extensive factual knowledge when directly queried, yet fail to apply this knowledge reliably during generative tasks. This discrepancy is commonly attributed to hallucination or prompt deficiencies, but remains insufficiently theorized. In this work, we propose a \textbf{theory of knowledge activation} in LLMs that distinguishes latent knowledge from its functional activation during generation. We formalize this distinction via an \textbf{activation competence parameter ($\alpha$)}, defined as the conditional probability that a model correctly applies knowledge given that the knowledge is available.
+
+To empirically isolate this phenomenon, we introduce the \textbf{Activation Challenge}, a controlled diagnostic task that holds knowledge availability constant while systematically constraining epistemic conditions through formal prompting. Using a set of linguistically plausible but epistemically demanding psychological labels, we show that several contemporary LLMs systematically classify non-established concepts as real---even under fully formalized and epistemically restrictive prompts. Notably, some models fail to improve when explicit epistemic stop rules are enforced, indicating that activation competence is not trivially prompt-controllable.
+
+Our results demonstrate that \textbf{knowledge activation constitutes an independent behavioral dimension} of LLM performance, orthogonal to model size, instruction-following ability, and reasoning trace generation. We argue that failures commonly labeled as hallucinations can instead be understood as \textbf{activation failures}, and we provide a formal framework for diagnosing and studying this limitation.
+\end{abstract}
+
+
+% ============================================================================
+% CONTRIBUTIONS
+% ============================================================================
+
+\section*{Contributions}
+
+\begin{enumerate}
+    \item \textbf{A formal theory of knowledge activation in LLMs}\\
+    We introduce a principled distinction between latent knowledge and its application during generation, and formalize this gap using the activation competence parameter $\alpha$.
+
+    \item \textbf{The Activation Challenge: a controlled diagnostic benchmark}\\
+    We propose a minimal, theory-driven evaluation that isolates knowledge activation failures under maximally controlled epistemic and prompt conditions.
+
+    \item \textbf{Evidence that knowledge activation is not prompt-trivial}\\
+    We show that explicit epistemic constraints (ESL prompting) do not uniformly improve performance across models, indicating intrinsic limits to activation competence.
+
+    \item \textbf{A reframing of hallucination as activation failure}\\
+    Our findings suggest that many hallucination-like behaviors arise from failures to activate existing knowledge rather than from missing or incorrect knowledge.
+
+    \item \textbf{An evidence-based foundation for epistemic prompting}\\
+    We ground our prompting strategy in established findings from cognitive science and metacognition, demonstrating how explicit epistemic rules can be formalized---and where they fail.
+
+    \item \textbf{A diagnostic perspective complementary to mechanistic analyses}\\
+    By remaining model-agnostic and behavioral, our framework provides a foundation on which mechanistic explanations (e.g., neuron-level analyses) can later be built.
+\end{enumerate}
+
+
+% ============================================================================
+% KEYWORDS (optional, for submission)
+% ============================================================================
+
+\paragraph{Keywords:}
+Knowledge activation, activation competence, hallucination, epistemic prompting, large language models, metacognition, calibration
+
+
+% ============================================================================
+% INTERNAL NOTES
+% ============================================================================
+%
+% Abstract struktur:
+% - Problem: Knowledge vorhanden, aber nicht angewendet
+% - Lücke: Unzureichend theoretisiert
+% - Lösung: α-Theorie (formale Definition)
+% - Methode: Activation Challenge
+% - Ergebnis: Systematische Fehler, nicht prompt-trivial
+% - Implikation: Neue Dimension, Halluzination = Aktivierungsfehler
+%
+% Contributions:
+% 1. Theorie (α)
+% 2. Benchmark (Activation Challenge)
+% 3. Evidenz (nicht prompt-trivial)
+% 4. Reframing (Halluzination = Aktivierung)
+% 5. Evidenzbasis (Kognitionswissenschaft)
+% 6. Anschlussfähigkeit (Mechanistic Interpretability)
+%
