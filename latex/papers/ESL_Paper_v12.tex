@@ -233,7 +233,164 @@ A key strength of ESL as a causal theory is its falsifiability. The theory makes
 
 
 % ============================================================================
-% SECTION 2: RELATED WORK AND NOVELTY
+% SECTION 2: THEORETICAL FOUNDATIONS
+% ============================================================================
+
+\section{Theoretical Foundations: Belief Formation under Structured Information}
+\label{sec:theory}
+
+While Section 1 introduced the practical problem and proposed solution, this section develops ESL as a formal \emph{behavioral theory} of belief formation. We show that ESL is not merely a methodological tool but a unified framework that explains a range of well-known behavioral phenomena.
+
+\subsection{Core Objects}
+
+Consider an epistemic agent who evaluates a sequence of informational claims about an unknown state of the world $\theta$.
+
+Each claim $i$ is characterized by two conceptually distinct primitives:
+\begin{itemize}
+    \item \emph{Epistemic Commitment} $K_i \in [0,1]$, capturing the strength, generality, and causal force of the claim.
+    \item \emph{Evidential Support} $M_i \in [0,1]$, capturing the reliability, robustness, and independence of the supporting evidence.
+\end{itemize}
+
+\begin{principlebox}[The ESL Separation Principle]
+A central assumption of ESL is that epistemic commitment and evidential support are \textbf{not intrinsically aligned}. Strong claims may be weakly supported, and strong evidence may be paired with weak epistemic commitments.
+
+This separation is what makes overclaiming possible---and what ESL is designed to detect and correct.
+\end{principlebox}
+
+
+\subsection{Normative Benchmark}
+
+Under rational belief updating, posterior beliefs depend only on evidential support:
+\begin{equation}
+B^* = g(M_1, \dots, M_n),
+\end{equation}
+where $g(\cdot)$ denotes a Bayesian aggregation rule.
+
+We refer to beliefs as \emph{calibrated} if $B = B^*$. Any systematic deviation from this benchmark constitutes \emph{epistemic miscalibration}:
+\begin{equation}
+\Delta_B = B - B^*
+\end{equation}
+
+
+\subsection{Belief Formation under Structured Information}
+
+ESL departs from the normative benchmark by allowing belief formation to depend on the \emph{structure} of epistemic commitments in addition to evidence.
+
+\begin{termbox}[The ESL Belief Formation Function]
+Beliefs are formed according to:
+\begin{equation}
+B = F\!\Big(
+\max_t x_t,\;
+x_T,\;
+x_1,\;
+\mathcal{A}(M),\;
+\mathcal{S},\;
+\mathcal{R},\;
+\mathcal{C}
+\Big),
+\end{equation}
+where:
+\begin{itemize}
+    \item $x_t = f(K_t, M_t)$ denotes the epistemic impact of information at position $t$
+    \item $\mathcal{A}(M)$ captures non-linear aggregation of evidential support
+    \item $\mathcal{S}$ captures scope and structural placement
+    \item $\mathcal{R}$ captures reputational and consensus signals
+    \item $\mathcal{C}$ captures cognitive processing costs
+\end{itemize}
+\end{termbox}
+
+This formulation implies that beliefs respond not only to evidential content, but to stable structural properties of information.
+
+
+\subsection{Empirical Stability of Language}
+
+We refer to language as \emph{empirically stable} if marginal changes in evidential support lead to only limited changes in beliefs once epistemic commitments dominate aggregation.
+
+\begin{principlebox}[Empirical Stability Condition]
+Empirical stability arises when:
+\begin{equation}
+\left|\frac{\partial B}{\partial M_i}\right| \ll \left|\frac{\partial B}{\partial K_j}\right|
+\quad \text{for some } j.
+\end{equation}
+
+ESL predicts that such stability arises from \textbf{non-linear aggregation mechanisms} rather than from informational deficits.
+\end{principlebox}
+
+
+\subsection{Behavioral Effects as Special Cases of ESL}
+
+Several well-established behavioral effects can be interpreted as special cases of epistemic aggregation under ESL.
+
+\paragraph{Peak--End Rule.}
+\begin{equation}
+B = \alpha \max_t x_t + (1-\alpha) x_T
+\end{equation}
+The strongest claim ($\max_t x_t$) and the final claim ($x_T$) dominate belief formation.
+
+\paragraph{Anchoring.}
+\begin{equation}
+B = K_0 + \lambda \big(g(M) - K_0\big), \quad \lambda < 1
+\end{equation}
+The initial claim $K_0$ anchors subsequent updating, with insufficient adjustment ($\lambda < 1$).
+
+\paragraph{Primacy and Recency.}
+\begin{equation}
+w_t \propto e^{\pm \kappa t}
+\end{equation}
+Position weights decay exponentially, privileging either early (primacy, $-\kappa$) or late (recency, $+\kappa$) claims.
+
+\paragraph{Authority and Consensus.}
+\begin{equation}
+K_i^{\text{eff}} = K_i + \eta \cdot \mathcal{R}
+\end{equation}
+Reputational signals $\mathcal{R}$ inflate effective claim strength.
+
+\paragraph{Overconfidence and Overprecision.}
+\begin{equation}
+\widehat{\mathrm{Var}}(B) < \mathrm{Var}(B)
+\end{equation}
+Subjective uncertainty underestimates true uncertainty.
+
+
+\subsection{Motivated Belief Formation}
+
+Belief formation in ESL is not assumed to be purely accuracy-driven. Instead, beliefs may yield direct utility to epistemic agents.
+
+\begin{termbox}[Motivated Belief Utility]
+Both referees and readers maximize:
+\begin{equation}
+U^{(a)}(B) = - (B - \theta)^2 + \mu_a V_a(B) - c_a \mathcal{C}(\mathcal{S}),
+\end{equation}
+where:
+\begin{itemize}
+    \item $(B - \theta)^2$ is the accuracy loss
+    \item $\mu_a \geq 0$ captures the strength of motivation
+    \item $V_a(B)$ is the motivational value of holding belief $B$
+    \item $c_a \mathcal{C}(\mathcal{S})$ is the cognitive cost of processing structure $\mathcal{S}$
+\end{itemize}
+\end{termbox}
+
+All agents face a trade-off between epistemic accuracy and motivational considerations. They differ not in kind, but in the source and strength of motivation. Motivation amplifies non-linear aggregation mechanisms, increasing epistemic stability.
+
+
+\subsection{ESL under Machine Learning and Large Language Models}
+
+As scientific language is increasingly generated, summarized, and disseminated by machine learning systems, epistemic structure becomes an algorithmic object. Large language models do not perform normative belief updating. They learn from frequency, salience, and structural regularities in language.
+
+\begin{principlebox}[Algorithmic Inheritance of Motivation]
+Motivational distortions embedded in training data and usage contexts are inherited and amplified:
+\begin{equation}
+\mu_{\text{LLM}} = \mathbb{E}[\mu_{\text{human}}]
+\end{equation}
+
+Under machine learning, epistemic stability shifts from a cognitive phenomenon to an \textbf{infrastructural} one.
+\end{principlebox}
+
+This theoretical foundation motivates the practical ESL framework developed in subsequent sections: by explicitly calibrating $K \leq M$, we intervene on the structural properties that generate miscalibrated beliefs.
+
+
+% ============================================================================
+% SECTION 3: RELATED WORK AND NOVELTY
 % ============================================================================
 
 \section{Related Work and Novelty}
