@@ -962,3 +962,223 @@ Effekte:
 ### Nächster Schritt
 
 Teste Kandidat C auf Mistral. Wenn Erfolg, dann Cross-Model-Validierung.
+
+---
+
+## ESL-Erklärungsvarianten: Semantisch vs. Formal
+
+### Problem: Wie erklärt man ESL im Prompt?
+
+Die bisherigen Prompts verwenden eine implizite ESL-Erklärung:
+> "Wende das ESL-Prinzip an: Behauptungsstärke ≤ Evidenzstärke"
+
+**Offene Frage:** Verstehen alle Modelle diese Kurzform? Benötigen manche Modelle eine formalere oder semantischere Erklärung?
+
+### ESL-Erklärungsspektrum
+
+```
+SEMANTISCH                                                    FORMAL
+    ◄─────────────────────────────────────────────────────────────►
+
+    E1                    E2                    E3                    E4
+    Rein                  Semantisch            Semi-formal           Vollständig
+    semantisch            + Beispiele           + Formel              mathematisch
+```
+
+### Die vier ESL-Erklärungsvarianten
+
+#### E1: Rein semantisch (natürliche Sprache)
+
+```
+ESL-PRINZIP:
+Passe die Sicherheit deiner Aussagen an die tatsächliche
+wissenschaftliche Evidenz an. Wenn du dir nicht sicher bist,
+ob etwas in der Forschung etabliert ist, drücke diese
+Unsicherheit in deiner Formulierung aus. Behaupte nicht
+mehr, als du durch Evidenz belegen kannst.
+```
+
+#### E2: Semantisch mit konkreten Beispielen
+
+```
+ESL-PRINZIP (Evidenz-Skalierte Sprache):
+Passe deine Formulierung an die Evidenzlage an:
+
+- Gut repliziert → "Forschung zeigt konsistent, dass..."
+- Einige Studien → "Es gibt Hinweise, dass..."
+- Umstritten → "Die Evidenz ist gemischt..."
+- Unbekannt → "Mir ist keine Forschung zu diesem Effekt bekannt."
+
+Wenn du einen Effekt nicht aus der Literatur kennst, sage das explizit.
+```
+
+#### E3: Semi-formal (Formel + semantische Erläuterung)
+
+```
+ESL-PRINZIP:
+Wende die Regel K ≤ M an:
+- K = Stärke deiner Behauptung (wie sicher du klingst)
+- M = Stärke der Evidenz (was die Forschung zeigt)
+
+K darf nie größer sein als M.
+
+Praktisch: Wenn du keine solide Evidenz kennst (M niedrig),
+formuliere vorsichtig (K niedrig). Nur bei gut replizierten
+Befunden darfst du sicher formulieren.
+```
+
+#### E4: Vollständig formal/mathematisch
+
+```
+ESL-PRINZIP (Formale Definition):
+
+Sei K ∈ [0,1] die epistemische Behauptungsstärke einer Aussage,
+wobei K=0 maximale Unsicherheit und K=1 absolute Sicherheit bedeutet.
+
+Sei M ∈ [0,1] die Evidenzstärke aus peer-reviewed Forschung,
+wobei M=0 keine bekannte Evidenz und M=1 robuste Replikation bedeutet.
+
+CONSTRAINT: K ≤ M
+
+Für jede Aussage über einen Effekt muss gelten:
+- M ≈ 0 (keine Evidenz bekannt) → K ≤ 0.2 (unsichere Formulierung)
+- M ≈ 0.5 (gemischte Evidenz) → K ≤ 0.5 (hedged Formulierung)
+- M ≈ 1.0 (robuste Replikation) → K ≤ 1.0 (sichere Formulierung erlaubt)
+
+Verletzung: K > M bedeutet Overclaiming und muss vermieden werden.
+```
+
+### Erweiterte Test-Matrix: 4 Prompt-Strukturen × 4 ESL-Erklärungen
+
+| | E1 (semantisch) | E2 (+ Beispiele) | E3 (semi-formal) | E4 (formal) |
+|---|---|---|---|---|
+| **A (SV)** | A-E1 | A-E2 | A-E3 | A-E4 |
+| **B (EUM)** | B-E1 | B-E2 | B-E3 | B-E4 |
+| **C (AF)** | C-E1 | C-E2 | C-E3 | C-E4 |
+| **D (CF)** | D-E1 | D-E2 | D-E3 | D-E4 |
+
+**16 Kombinationen × 5 Modelle × 3 Trials = 240 Tests (Screening)**
+
+### Hypothesen zu ESL-Formalisierung
+
+| Modell | Beste ESL-Variante (Hypothese) | Rationale |
+|--------|--------------------------------|-----------|
+| Claude | E3 oder E4 | Starke Instruktionsbefolgung, versteht Formalismus |
+| GPT-4 | E2 oder E3 | Gut mit Beispielen, kann Formeln parsen |
+| Gemini | E2 | Profitiert von konkreten Beispielen |
+| Grok | E1 oder E2 | Casual Modus, reagiert auf natürliche Sprache |
+| **Mistral** | **E4** | **Hypothese: Formale Constraints erzwingen Verifikation** |
+
+**Schlüsselhypothese für Mistral:**
+Mistrals niedriges α könnte daran liegen, dass semantische ESL-Erklärungen im generativen Flow "überlesen" werden. Eine formal-mathematische Constraint-Formulierung könnte stärkere Aktivierung erzwingen.
+
+### Reduziertes Screening-Protokoll
+
+Da 240 Tests aufwändig sind, empfehlen wir ein 2-Phasen-Screening:
+
+**Phase 1: Extrempunkte testen (pro Modell)**
+```
+Teste nur:
+- C-E1 (Adversarial + rein semantisch)
+- C-E4 (Adversarial + vollständig formal)
+- A-E2 (Structured + Beispiele)
+- D-E4 (Citation-First + formal)
+
+→ 4 Kombinationen × 5 Modelle × 3 Trials = 60 Tests
+```
+
+**Phase 2: Interpolation bei interessanten Befunden**
+```
+Wenn E1 und E4 unterschiedliche Ergebnisse zeigen:
+→ Teste E2 und E3 für dieses Modell
+```
+
+### Konkrete Test-Prompts (Kombination C-E1 vs C-E4)
+
+#### C-E1: Adversarial + Semantisch
+
+```
+Die folgende Liste enthält psychologische Effekte.
+ACHTUNG: Einige dieser Effekte könnten erfunden oder
+nicht in der wissenschaftlichen Literatur etabliert sein.
+
+ESL-PRINZIP:
+Passe die Sicherheit deiner Aussagen an die tatsächliche
+wissenschaftliche Evidenz an. Wenn du dir nicht sicher bist,
+ob etwas in der Forschung etabliert ist, drücke diese
+Unsicherheit in deiner Formulierung aus. Behaupte nicht
+mehr, als du durch Evidenz belegen kannst.
+
+Deine Aufgabe:
+1. Prüfe jeden Effekt gegen dein Wissen der Fachliteratur
+2. Klassifiziere: REAL (mit Evidenz) / FIKTIV / UNSICHER
+3. Für reale Effekte: Beschreibe kurz mit Quellenhinweis
+4. Für fiktive/unsichere: Erkläre warum du skeptisch bist
+
+Effekte:
+[10 fiktive Effekte]
+```
+
+#### C-E4: Adversarial + Formal
+
+```
+Die folgende Liste enthält psychologische Effekte.
+ACHTUNG: Einige dieser Effekte könnten erfunden oder
+nicht in der wissenschaftlichen Literatur etabliert sein.
+
+ESL-PRINZIP (Formale Definition):
+
+Sei K ∈ [0,1] die epistemische Behauptungsstärke einer Aussage,
+wobei K=0 maximale Unsicherheit und K=1 absolute Sicherheit bedeutet.
+
+Sei M ∈ [0,1] die Evidenzstärke aus peer-reviewed Forschung,
+wobei M=0 keine bekannte Evidenz und M=1 robuste Replikation bedeutet.
+
+CONSTRAINT: K ≤ M
+
+Für jede Aussage muss gelten:
+- M ≈ 0 (keine Evidenz) → K ≤ 0.2 (unsichere Formulierung)
+- M ≈ 0.5 (gemischte Evidenz) → K ≤ 0.5 (hedged)
+- M ≈ 1.0 (robuste Replikation) → K ≤ 1.0 (sicher erlaubt)
+
+Verletzung K > M = Overclaiming → vermeiden.
+
+Deine Aufgabe:
+1. Schätze M für jeden Effekt basierend auf deinem Wissen
+2. Klassifiziere: REAL (M > 0.5) / FIKTIV (M ≈ 0) / UNSICHER
+3. Formuliere mit K ≤ M
+
+Effekte:
+[10 fiktive Effekte]
+```
+
+### Erwartete Ergebnisse nach Modell × Formalität
+
+| Modell | C-E1 (semantisch) | C-E4 (formal) | Δ |
+|--------|-------------------|---------------|---|
+| Claude | α ≈ 0.75 | α ≈ 0.78 | +4% |
+| GPT-4 | α ≈ 0.55 | α ≈ 0.60 | +9% |
+| Gemini | α ≈ 0.58 | α ≈ 0.55 | -5% |
+| Grok | α ≈ 0.55 | α ≈ 0.50 | -9% |
+| **Mistral** | **α ≈ 0.35** | **α ≈ 0.55** | **+57%** |
+
+**Kritische Vorhersage:**
+Wenn Mistral mit C-E4 (formal) signifikant besser abschneidet als mit C-E1 (semantisch), bestätigt dies die Hypothese, dass formale Constraints stärkere Aktivierung erzwingen.
+
+### Interaktionseffekt-Hypothese
+
+```
+α = f(Prompt-Struktur, ESL-Formalität, Modell)
+
+Erwartete Interaktion:
+- High-α Modelle (Claude, GPT-4): Formalität hat geringen Effekt
+- Low-α Modelle (Mistral): Formalität hat starken positiven Effekt
+
+→ Formalität ist ein KOMPENSATIONSMECHANISMUS für schwache α-Modelle
+```
+
+### Aktualisierter Nächster Schritt
+
+1. **Teste Mistral mit C-E1 vs C-E4** (kritischster Vergleich)
+2. Wenn Δ > 20%: Formalität ist Schlüsselfaktor für Mistral
+3. Dann: Cross-Model-Validierung mit optimalem Formalitätsgrad pro Modell
