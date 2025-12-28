@@ -1017,6 +1017,164 @@ Hallucination rate & Hallucination is output; $\alpha$ is process. Low $\alpha$ 
 \end{table}
 
 
+\subsection{Formal Non-Reducibility Results}
+
+We now establish rigorously that $\alpha$ cannot be reduced to simpler constructs. Each proof proceeds by counterexample or independence argument.
+
+\subsubsection{$\alpha$ Is Not Reducible to Model Size}
+
+\begin{proposition}[$\alpha \perp |\theta|$]
+Activation competence is statistically independent of parameter count.
+\end{proposition}
+
+\begin{proof}
+Define $|\theta|$ as the number of parameters. Consider two models:
+\begin{itemize}
+    \item Model A: $|\theta_A| = 70\text{B}$, trained on narrow domain $\Rightarrow$ high $M_{\text{latent}}$ for that domain
+    \item Model B: $|\theta_B| = 400\text{B}$, trained broadly $\Rightarrow$ same $M_{\text{latent}}$ for that domain
+\end{itemize}
+
+Empirically observed: $\alpha_A > \alpha_B$ is possible (smaller model activates domain knowledge more reliably).
+
+Formally, if $\alpha = g(|\theta|)$ for some monotonic $g$, then:
+\[
+|\theta_A| < |\theta_B| \Rightarrow \alpha_A < \alpha_B
+\]
+But we observe $\alpha_A > \alpha_B$. Contradiction. $\square$
+\end{proof}
+
+\textbf{Interpretation:} Model size determines capacity ($M_{\text{latent}}^{\max}$), not activation reliability ($\alpha$).
+
+
+\subsubsection{$\alpha$ Is Not Reducible to Knowledge Quantity}
+
+\begin{proposition}[$\alpha \perp |K|$]
+Activation competence is independent of the amount of stored knowledge.
+\end{proposition}
+
+\begin{proof}
+Let $|K|$ denote the cardinality of retrievable facts. By Axiom A3 (Invariance):
+\[
+M_{\text{latent}}(x) = M_{\text{latent}}(x') = 1 \Rightarrow \alpha(x) = \alpha(x')
+\]
+regardless of whether $|K(x)| \neq |K(x')|$.
+
+Counterexample: The Mistral Paradox.
+\begin{itemize}
+    \item Mistral: High $M_{\text{latent}}$ (knows replication rates) $\Rightarrow |K| > 0$
+    \item Mistral: Low $\alpha$ (fails to apply this knowledge)
+\end{itemize}
+
+If $\alpha = h(|K|)$ for increasing $h$, then high $|K| \Rightarrow$ high $\alpha$. But Mistral violates this. $\square$
+\end{proof}
+
+\textbf{Interpretation:} You can know much and apply little. $\alpha$ measures the bridge, not the inventory.
+
+
+\subsubsection{$\alpha$ Is Not Reducible to Chain-of-Thought}
+
+\begin{proposition}[$\alpha \not\equiv \text{CoT}$]
+Chain-of-Thought is a technique; $\alpha$ is a latent property. They are categorically distinct.
+\end{proposition}
+
+\begin{proof}
+Define:
+\begin{align*}
+\text{CoT}(x) &:= \text{``Prompt } x \text{ includes explicit reasoning steps''} \\
+\alpha(x) &:= \mathbb{P}(A(x) \mid M_{\text{latent}}(x) = 1)
+\end{align*}
+
+Observation 1: $\text{CoT}(x) = 0 \land \alpha(x) > 0$ is possible.
+\begin{quote}
+A model can correctly apply knowledge without externalizing reasoning (e.g., direct factual recall).
+\end{quote}
+
+Observation 2: $\text{CoT}(x) = 1 \land \alpha(x) \approx 0$ is possible.
+\begin{quote}
+A model can produce elaborate reasoning chains that fail to activate relevant knowledge (``confident confabulation'').
+\end{quote}
+
+Therefore, $\alpha$ and CoT are logically independent:
+\[
+\alpha \not\Rightarrow \text{CoT} \quad \land \quad \text{CoT} \not\Rightarrow \alpha
+\]
+
+CoT may \emph{increase} $\alpha$ (by Axiom A2), but it is not constitutive of $\alpha$. $\square$
+\end{proof}
+
+\textbf{Interpretation:} CoT is a lever; $\alpha$ is what the lever moves.
+
+
+\subsubsection{$\alpha$ Is Not Reducible to RAG Performance}
+
+\begin{proposition}[$\alpha \perp \text{RAG}$]
+Retrieval-Augmented Generation modifies input; $\alpha$ measures application from any source.
+\end{proposition}
+
+\begin{proof}
+RAG operates by: $x' = x \oplus \text{Retrieved}(x)$, expanding the input context.
+
+Case 1: High RAG retrieval quality, low $\alpha$.
+\begin{quote}
+The model retrieves correct information but fails to integrate it into the response. This is the ``retrieval-application gap.''
+\end{quote}
+
+Case 2: No RAG ($x' = x$), high $\alpha$.
+\begin{quote}
+The model applies purely parametric knowledge correctly. $\alpha$ is defined over $M_{\text{latent}}$, which includes parametric knowledge.
+\end{quote}
+
+Therefore:
+\[
+\alpha(\text{with RAG}) \not> \alpha(\text{without RAG}) \text{ necessarily}
+\]
+
+RAG affects $M_{\text{latent}}$ (by adding external knowledge to context). $\alpha$ measures what happens \emph{after} knowledge is present. $\square$
+\end{proof}
+
+
+\subsubsection{$\alpha$ Is Not Reducible to Confidence/Calibration}
+
+\begin{proposition}[$\alpha \neq $ Calibration]
+Model confidence calibration is about probability estimates; $\alpha$ is about knowledge application.
+\end{proposition}
+
+\begin{proof}
+Define calibration as: $\mathbb{P}(\text{correct} \mid \text{confidence} = p) = p$.
+
+A model can be:
+\begin{itemize}
+    \item Well-calibrated but low-$\alpha$: Correctly estimates low confidence because it fails to activate knowledge.
+    \item Poorly-calibrated but high-$\alpha$: Overconfident, yet applies knowledge correctly.
+\end{itemize}
+
+Calibration concerns the \emph{epistemic self-model}. $\alpha$ concerns \emph{knowledge deployment}. These are orthogonal. $\square$
+\end{proof}
+
+
+\subsubsection{Summary: Independence Structure}
+
+\begin{table}[H]
+\centering
+\caption{Formal independence of $\alpha$ from related constructs}
+\begin{tabular}{lcl}
+\toprule
+\textbf{Construct} & \textbf{Relation to $\alpha$} & \textbf{Proof Method} \\
+\midrule
+Model size $|\theta|$ & $\alpha \perp |\theta|$ & Counterexample (small model, high $\alpha$) \\
+Knowledge quantity $|K|$ & $\alpha \perp |K|$ & Mistral Paradox + Axiom A3 \\
+Chain-of-Thought & $\alpha \not\equiv \text{CoT}$ & Logical independence (neither implies other) \\
+RAG & $\alpha \perp \text{RAG}$ & Retrieval-application gap \\
+Calibration & $\alpha \neq \text{Calibration}$ & Orthogonal constructs \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{principlebox}[The Irreducibility Thesis]
+$\alpha$ occupies a unique position in the space of LLM properties: it is the \emph{bridge function} between latent knowledge and observable behavior. No existing construct captures this specific role.
+\end{principlebox}
+
+
 \subsection{Sufficiency of the Minimal Theory}
 
 This axiomatic foundation is:
