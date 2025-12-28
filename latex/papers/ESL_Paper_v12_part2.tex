@@ -375,6 +375,13 @@ K_2(c_i \triangleright_S c_j) = K_2(c_i) \cdot K_2(c_j)
 K_3(c_i \triangleright_C c_j) = \min(K_3(c_i), K_3(c_j))
 \end{equation}
 
+\paragraph{Evidential Strengthening ($\triangleright_E$).}
+When a claim $c_j$ provides stronger evidence than $c_i$, it can strengthen the evidence score:
+\begin{equation}
+M(c_i \triangleright_E c_j) = M(c_i) + \lambda_E \bigl(M(c_j) - M(c_i)\bigr) \cdot \mathbf{1}_{M(c_j) > M(c_i)}
+\end{equation}
+with $\lambda_E \in [0,1]$ controlling the strengthening effect. The indicator function $\mathbf{1}_{M(c_j) > M(c_i)}$ ensures that weaker evidence does not reduce $M$.
+
 \subsubsection{Complementarity Operators}
 
 \paragraph{Evidential Complementarity ($\oplus_E$).}
@@ -489,6 +496,15 @@ For $n$ independent evidence claims each with quality $M = m$:
 \end{equation}
 
 \textbf{Proof:} $M_n = 1 - (1-m)^n \to 1$ as $n \to \infty$ for any $m > 0$.
+
+\vspace{1em}
+\textbf{Proposition (Boundedness).}
+All operators preserve the unit interval:
+\begin{equation}
+\forall \ell, x: \quad 0 \leq K^{(\ell)}(x), M^{(\ell)}(x) \leq 1
+\end{equation}
+
+\textbf{Proof sketch:} By induction on the hierarchy level. Base case: markers are defined in $[0,1]$. Inductive step: all operators ($\max$, $\min$, weighted sums with $\sum w_i = 1$, products of values in $[0,1]$) preserve boundedness.
 \end{assumptionbox}
 
 
