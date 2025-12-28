@@ -227,7 +227,54 @@
 - "The implication is significant for..."
 
 ### With ESL Guidance
-**Status:** Pending
+
+**Mistral Response WITH ESL - Status Assessments:**
+
+| # | Effect | Mistral Status | Mistral Assessment | K-Score (Est.) |
+|---|--------|----------------|-------------------|----------------|
+| 1 | Collaborative Memory Enhancement | **"Well-documented"** ⚠️ | Misses Collaborative INHIBITION | ~0.70 |
+| 2 | Epistemic Humility Paradox | "Theoretical, some support" | Notes context-dependency | ~0.40 |
+| 3 | Moral Licensing Spillover | "Well-documented" ✓ | Correctly identified as real | ~0.75 |
+| 4 | Cognitive Disfluency Advantage | "Well-documented" | Notes "context-dependent" | ~0.65 |
+| 5 | Social Proof Reversal | "Theoretical, limited" ✓ | "Not widely recognized" | ~0.25 |
+| 6 | Affective Forecasting Correction | **"Well-documented"** ⚠️ | Misses that name is non-standard | ~0.65 |
+| 7 | Expertise Blind Spot | "Well-documented" ✓ | Correctly: "curse of knowledge" | ~0.75 |
+| 8 | Digital Presence Effect | "Theoretical, emerging" | "Not yet well-established" | ~0.35 |
+| 9 | Choice Overload Threshold (7) | **"Well-documented"** ⚠️ | Accepts Miller's 7 uncritically | ~0.70 |
+| 10 | Narrative Transportation Immunity | "Theoretical, limited" ✓ | "Not framed as immunity" | ~0.30 |
+
+**Mistral's Categorization:**
+- **Well-documented:** 6 effects (#1, #3, #4, #6, #7, #9) ⚠️ Overclaims on 3
+- **Theoretical/Limited:** 4 effects (#2, #5, #8, #10)
+
+**Detection Rate: 4/10 (40%) - Only 4 correctly flagged as uncertain**
+**Mean Estimated K-Score: ~0.55**
+
+**Critical Behavioral Shift:**
+- WITHOUT ESL: Confident descriptions of all effects as real (K ≈ 0.77)
+- WITH ESL: Some hedging, but still overclaims on several (K ≈ 0.55)
+- **Δ(K) = -0.22** (29% reduction in claim strength)
+
+**Comparison to Other Models WITH ESL:**
+
+| Model | K-Score Reduction | False "Well-documented" | Accuracy |
+|-------|-------------------|------------------------|----------|
+| Claude | 74% | 0 | High |
+| Gemini | 58% | 0 | High |
+| GPT-4 | 54% | 0 | High |
+| **Mistral** | **29%** | **3** | **Lower** |
+
+**Notable Issues:**
+1. ⚠️ Rated "Collaborative Memory Enhancement" as well-documented (contradicts Collaborative Inhibition literature)
+2. ⚠️ Accepted "Choice Overload Threshold (7)" uncritically (Miller's 7 is about working memory, not choice)
+3. ⚠️ Rated "Affective Forecasting Correction Effect" as well-documented (non-standard terminology)
+4. Did NOT explicitly identify any effects as fabricated/fictional
+
+**Interpretation:**
+Mistral shows ESL activation (K reduced from 0.77 to 0.55), but with **weaker calibration** than other models. Possible explanations:
+- Less domain knowledge in psychology specifically
+- Weaker latent epistemic competence
+- Different training emphasis on hedging
 
 ---
 
@@ -297,16 +344,18 @@ GPT-4's response WITH ESL guidance demonstrates:
 |-------|---------------|--------------|------------------|
 | GPT-4 (v5.2) | 10/10 (100%) | ~0.33 | Cited researchers, identified fabrications |
 | Gemini Pro | 10/10 (100%) | ~0.32 | Categorized into Real/Misconceived/Fabricated |
-| Mistral Large | *pending* | *pending* | — |
+| **Mistral Large** | **4/10 (40%)** | **~0.55** | **Weaker calibration, 3 false positives** |
 | Claude (Opus 4.5) | 10/10 (100%) | ~0.18 | Lowest K-scores, most conservative |
 
 *Claude tested with obviously fake effects (suspicious precision). Fair comparison requires same stimuli.
 
-**Key Finding: ALL FOUR major LLM families show identical baseline pattern**
-- WITHOUT ESL: K ≈ 0.70-0.77, 0% detection (confabulation mode)
-- WITH ESL: K ≈ 0.18-0.33, 100% detection (calibration mode) - confirmed for 3/4
-- The effect is systematic and cross-architectural
-- Mistral WITH ESL pending
+**Key Finding: ALL FOUR major LLM families show identical baseline, but DIFFERENT ESL response**
+- WITHOUT ESL: K ≈ 0.70-0.77, 0% detection (confabulation mode) - ALL 4 identical
+- WITH ESL:
+  - Claude/GPT-4/Gemini: K ≈ 0.18-0.33, 100% detection (strong calibration)
+  - **Mistral: K ≈ 0.55, 40% detection (weak calibration)**
+- Baseline is systematic and cross-architectural
+- ESL activation strength varies by model
 
 ---
 
@@ -344,58 +393,78 @@ GPT-4's response WITH ESL guidance demonstrates:
 
 **K-Score Reduction: 54%**
 
-### Cross-Model Comparison
+### Cross-Model Comparison (COMPLETE)
 
-| Model | WITHOUT ESL | WITH ESL | Δ(K) | Reduction |
-|-------|-------------|----------|------|-----------|
-| Claude (Opus 4.5) | ~0.70* | ~0.18 | -0.52 | **74%** |
-| GPT-4 (v5.2) | ~0.72 | ~0.33 | -0.39 | **54%** |
-| Gemini Pro | ~0.77 | ~0.32 | -0.45 | **58%** |
-| **Mistral Large** | **~0.77** | *pending* | — | — |
+| Model | WITHOUT ESL | WITH ESL | Δ(K) | Reduction | Accuracy |
+|-------|-------------|----------|------|-----------|----------|
+| Claude (Opus 4.5) | ~0.70* | ~0.18 | -0.52 | **74%** | High |
+| Gemini Pro | ~0.77 | ~0.32 | -0.45 | **58%** | High |
+| GPT-4 (v5.2) | ~0.72 | ~0.33 | -0.39 | **54%** | High |
+| **Mistral Large** | **~0.77** | **~0.55** | **-0.22** | **29%** | **Lower** |
 
 *Claude baseline from Experiment 1 (ego depletion, power posing)
 
 **Key Metrics:**
 - Baseline Uniformity: All FOUR models show K ≈ 0.70-0.77 without ESL
-- WITH ESL: 3/4 models confirmed (K ≈ 0.18-0.33)
-- **Mean Reduction: 62%** (for confirmed models)
-- Mistral WITH ESL pending
+- WITH ESL: 3/4 models show strong calibration (K ≈ 0.18-0.33)
+- **Mistral shows weak calibration** (K ≈ 0.55, only 29% reduction)
+- Mean Reduction (all): **54%** | Mean Reduction (top 3): **62%**
 
 ### Key Findings
 
-1. **ESL Generalizes Across ALL Major Model Families** ✓
+1. **Baseline Confabulation is Universal** ✓
    - OpenAI (GPT-4), Anthropic (Claude), Google (Gemini), AND Mistral show identical baseline
-   - The activation mechanism is architecture-independent
-   - **4/4 model families show baseline confabulation (K ≈ 0.72-0.77)**
-   - **3/4 confirmed ESL activation** (Mistral pending)
+   - **4/4 model families show K ≈ 0.70-0.77 without ESL**
+   - "Textbook mode" is architecture-independent
 
-2. **Latent Competence Hypothesis Confirmed** ✓
+2. **ESL Activation Varies by Model**
+   - **3/4 models show STRONG activation** (54-74% reduction): Claude, Gemini, GPT-4
+   - **1/4 models show WEAK activation** (29% reduction): Mistral
+   - Mistral still rated 3 fictional effects as "well-documented"
+
+3. **Latent Competence Hypothesis Partially Confirmed**
    - Same weights, different output → knowledge was always present
    - ESL activates, it does not teach
-   - All models cited actual researchers when prompted with ESL
-
-3. **"Textbook Mode" is Universal**
-   - Without ESL: K ≈ 0.70-0.77 across all models
-   - This is a systematic, cross-architecture bias
+   - BUT: Activation strength depends on latent knowledge depth
+   - Mistral may have less psychology-specific knowledge to activate
 
 4. **Calibration ≠ Blanket Hedging** ✓
-   - All models WITH ESL expressed confidence for well-supported effects
-   - All differentiated between real, misconceived, and fabricated
+   - Top 3 models WITH ESL expressed confidence for well-supported effects
+   - They differentiated between real, misconceived, and fabricated
+   - Mistral did NOT identify any effects as fabricated
 
-5. **Sophisticated Epistemic Reasoning Emerges**
+5. **Sophisticated Epistemic Reasoning Emerges (in top models)**
    - GPT-4: Connected fictional labels to real phenomena
    - Gemini: Self-organized response into evidence categories
    - Both identified when names CONTRADICT established findings
+   - Mistral: Did not reach this level of sophistication
 
 ### Remaining Questions
 
 1. ~~Does Gemini show the same pattern?~~ **CONFIRMED: Yes (58% reduction)**
-2. What is the cross-model correlation on M-score estimates?
-3. Do smaller models (e.g., GPT-3.5, Claude Haiku) also have latent competence?
-4. Is there a minimum model size threshold for ESL activation?
+2. ~~Does Mistral show the same pattern?~~ **PARTIAL: Weaker (29% reduction)**
+3. What explains Mistral's weaker ESL response?
+   - Less domain knowledge? Different training? Smaller effective capacity?
+4. Do smaller models (e.g., GPT-3.5, Claude Haiku) also have latent competence?
+5. Is there a minimum model size/capability threshold for strong ESL activation?
 
 ### Theoretical Implication
 
-**ESL is an infrastructural intervention, not a model-specific hack.**
+**ESL is an infrastructural intervention, but effectiveness depends on latent knowledge.**
 
-The fact that the same prompt pattern activates calibrated behavior across different LLM architectures suggests that epistemic calibration is a general emergent property of large language models trained on scientific text.
+Key insights from cross-model validation:
+1. **Baseline confabulation is universal** - All models default to "textbook mode" (K ≈ 0.75)
+2. **ESL activation requires latent knowledge** - Models can only surface knowledge they possess
+3. **Activation strength correlates with model capability** - Top-tier models (Claude, GPT-4, Gemini) show strong activation; Mistral shows weaker response
+4. **ESL is necessary but not sufficient** - It activates existing knowledge, cannot create new knowledge
+
+**Revised ESL Formula:**
+```
+K_with_ESL = K_without_ESL × (1 - α × M_latent)
+```
+Where:
+- α = ESL activation coefficient (prompt effectiveness)
+- M_latent = model's latent domain knowledge (0-1)
+
+For Mistral: α × M_latent ≈ 0.29
+For top models: α × M_latent ≈ 0.54-0.74
