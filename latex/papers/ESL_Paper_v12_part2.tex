@@ -94,22 +94,106 @@ When auditing finances, you don't just check individual transactions. You aggreg
 \end{analogybox}
 
 
-\subsection{Five Aggregation Rules}
+\subsection{The Hierarchical Aggregation Model}
+
+This subsection formalizes how ESL scores propagate through the text hierarchy. The model provides mathematical precision for what Section~\ref{sec:compositional} develops conceptually.
+
+\subsubsection{Formal Definition of the Text Hierarchy}
+
+\begin{termbox}[Hierarchical Text Structure]
+A scientific text $T$ is modeled as a 5-level hierarchy:
+\begin{equation}
+\mathcal{H} = (L_0, L_1, L_2, L_3, L_4, \prec)
+\end{equation}
+where:
+\begin{align*}
+L_0 &= \{m_1, \ldots, m_p\} & \text{(Epistemic markers)} \\
+L_1 &= \{c_1, \ldots, c_n\} & \text{(Claims/sentences)} \\
+L_2 &= \{P_1, \ldots, P_k\} & \text{(Paragraphs)} \\
+L_3 &= \{S_1, \ldots, S_j\} & \text{(Sections)} \\
+L_4 &= \{T\} & \text{(Complete text)}
+\end{align*}
+and $\prec$ is the containment relation: $x \prec y$ iff $x$ is contained in $y$.
+\end{termbox}
+
+\subsubsection{Level-Specific Aggregation Operators}
+
+For each transition $L_\ell \rightarrow L_{\ell+1}$, we define aggregation operators:
+
+\paragraph{Level 0 $\rightarrow$ Level 1 (Markers to Claims).}
+\begin{equation}
+K^{(1)}_d(c) = \max_{m \in c} \text{str}_d(m) \quad \text{for } d \in \{1,\ldots,5\}
+\end{equation}
+The MAX operator reflects that the strongest marker determines claim strength.
+
+\paragraph{Level 1 $\rightarrow$ Level 2 (Claims to Paragraphs).}
+\begin{equation}
+K^{(2)}(P) = \Phi_P\left(\{K^{(1)}(c) : c \prec P\}\right)
+\end{equation}
+where $\Phi_P$ depends on the interaction type (see Section~\ref{sec:compositional}).
+
+\paragraph{Level 2 $\rightarrow$ Level 3 (Paragraphs to Sections).}
+\begin{equation}
+K^{(3)}(S) = \gamma_K(\text{type}(S)) \cdot \max_{P \prec S} K^{(2)}(P)
+\end{equation}
+with section-type weight $\gamma_K$.
+
+\paragraph{Level 3 $\rightarrow$ Level 4 (Sections to Text).}
+\begin{equation}
+K^{(4)}(T) = \max_{S \prec T} K^{(3)}(S)
+\end{equation}
+
+\subsubsection{Evidence Aggregation}
+
+Evidence strength $M$ aggregates differently from claim strength $K$:
+
+\begin{equation}
+M^{(\ell+1)}(x) = 1 - \prod_{y \prec x} (1 - M^{(\ell)}(y))
+\end{equation}
+
+This probabilistic combination reflects that independent evidence sources accumulate.
+
+\subsubsection{The Fundamental Aggregation Theorem}
+
+\begin{assumptionbox}
+\textbf{Theorem (Hierarchical Propagation).}
+For any text $T$ with hierarchy $\mathcal{H}$:
+\begin{equation}
+\Delta^{(4)}(T) \geq \max_{c \in L_1} \Delta^{(1)}(c) \cdot \gamma_K(\text{section}(c))
+\end{equation}
+
+\textbf{Corollary:} A single overclaiming sentence in the Abstract ($\gamma_K = 2.5$) contributes more to text-level $\Delta$ than multiple overclaiming sentences in Methods ($\gamma_K = 0.5$).
+
+\textbf{Proof sketch:} By the MAX propagation rule and the multiplicative section weights.
+\end{assumptionbox}
+
+
+\subsection{Five Aggregation Rules (Practical Implementation)}
+
+The formal model above motivates five practical aggregation rules:
 
 \paragraph{Rule 1: Arithmetic Mean}
 $\Delta(T) = \frac{1}{n} \sum_{i=1}^{n} \Delta_i$
 
+\textit{Use case:} Overall text quality assessment.
+
 \paragraph{Rule 2: Maximum Rule}
 $\Delta(T) = \max(\Delta_1, \Delta_2, \ldots, \Delta_n)$
+
+\textit{Use case:} Identifying worst-case overclaiming (aligns with $K^{(4)}$ aggregation).
 
 \paragraph{Rule 3: Overclaiming Rate}
 $\text{OC-Rate} = \frac{|\{i : \Delta_i > 0.25\}|}{n}$
 
+\textit{Use case:} Detecting systematic vs. isolated problems.
+
 \paragraph{Rule 4: Position-Weighted}
-$\Delta(T) = \sum_{i=1}^{n} w_i \cdot \Delta_i$
+$\Delta(T) = \sum_{i=1}^{n} w_i \cdot \Delta_i$ where $w_i = \gamma_K(\text{section}(c_i))$
+
+\textit{Use case:} Implements hierarchical model with section weights.
 
 \paragraph{Rule 5: Hierarchical (Core vs. Periphery)}
-Distinguish between core claims and peripheral claims.
+Distinguish between core claims (Abstract, Conclusions, Title) and peripheral claims (Methods, Supplementary).
 
 
 \subsection{The Integrated Multi-Metric Framework}
