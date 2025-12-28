@@ -1207,16 +1207,72 @@ Yao et al. zeigen, dass bestimmte Attention Heads und MLP-Neuronen kollaborativ 
 
 **Wang et al. (SIGIR 2025)** führen KAPE ein: Ein Maß dafür, wie stark einzelne Neuronen mit internem vs. externem Wissen assoziiert sind.
 
+**Formale Definition:**
+```
+KAPE_{i,j} = − [p_int × log(p_int) + p_ext × log(p_ext)]
+```
+Wo:
+- `p_int` = Aktivierungswahrscheinlichkeit unter internem (parametrischem) Wissen
+- `p_ext` = Aktivierungswahrscheinlichkeit unter externem (retrieval) Wissen
+- Neuron `j` in Schicht `i`
+
+**Interpretation:**
+| KAPE-Wert | Bedeutung | Implikation |
+|-----------|-----------|-------------|
+| **Niedrig** | Neuron stark spezialisiert | Aktiviert bevorzugt EINE Wissensquelle |
+| **Hoch** | Neuron reagiert gemischt | Keine klare Präferenz |
+
 **Direkte Parallele zu α:**
 ```
-KAPE niedrig → Neuron stark spezialisiert → hohe Aktivierung
-KAPE hoch → Neuron unspezifisch → schwache Aktivierung
-
-Unsere Interpretation:
 α ∝ 1/KAPE (je niedriger die Entropie, desto höher α)
 ```
 
-Die Autoren zeigen, dass man durch selektives Deaktivieren von Neuronen die Balance zwischen parametrischem und retrievalem Wissen steuern kann.
+Die Autoren zeigen, dass man durch selektives Deaktivieren dieser Neuronen die Balance zwischen parametrischem und retrievalem Wissen steuern kann.
+
+#### Vier Stufen der Wissensverarbeitung (Wang et al.)
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│  KNOWLEDGE STREAMING IM RAG-KONTEXT                                │
+│                                                                     │
+│  1. KNOWLEDGE REFINEMENT                                           │
+│     └→ Erste Integration und Kontextualisierung                    │
+│                                                                     │
+│  2. KNOWLEDGE ELICITATION                                          │
+│     └→ Kernphase: Retrieval-Input wird relevant                    │
+│                                                                     │
+│  3. KNOWLEDGE EXPRESSION                                           │
+│     └→ Generierungseinfluss wächst                                 │
+│                                                                     │
+│  4. KNOWLEDGE CONTESTATION                                         │
+│     └→ Internes vs. externes Wissen konkurrieren                   │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+**Mapping auf unser Zwei-Prozess-Modell:**
+
+| Wang et al. Stufe | Unser Modell | Funktion |
+|-------------------|--------------|----------|
+| Refinement + Elicitation | **Retrieval** | Abruf & Integration |
+| Expression + Contestation | **Application** | Anwendung & Konfliktlösung |
+
+#### Operationalisierung von α durch KAPE
+
+**Kritische Einsicht:** α ist keine Black-Box-Nummer, sondern kann neuronal korreliert werden.
+
+```
+α_int = Aggregierte Neuron-Aktivierung für internes Wissen
+α_ext = Aggregierte Neuron-Aktivierung für externes Wissen
+
+Für ESL ohne RAG (nur parametrisches Wissen):
+α ≈ α_int = Σ (1/KAPE_{i,j}) für wissensrelevante Neuronen
+```
+
+**Implikation für Mistral:**
+- Wenn Mistrals KAPE für Psychologie-Wissen hoch ist → schwache Spezialisierung → niedriges α
+- ESL-Prompt könnte KAPE senken durch "Forced Retrieval" Mechanismus
 
 ### 3. Knowledge Pass Rate (KPR) & Knowledge-aware Refusal Rate (KRR)
 
