@@ -1,0 +1,140 @@
+% ============================================================================
+% THEORY SECTION (Paper-Ready, Formal)
+% ============================================================================
+% Status: FINAL - Axiomatisch, präzise, keine Metaphern
+% Date: 2025-12-28
+% Placement: After Related Work
+% ============================================================================
+
+\section{Theory of Knowledge Activation in Large Language Models}
+
+\subsection{Problem Statement}
+
+Empirical observations show that large language models (LLMs) can often answer direct factual questions correctly, yet fail to apply the same knowledge reliably during generative tasks. Existing explanations typically attribute such failures to hallucination, prompt ambiguity, or insufficient reasoning, but lack a formal account of why knowledge that is demonstrably available is not consistently used.
+
+We address this gap by introducing a formal distinction between \textbf{knowledge availability} and \textbf{knowledge activation}, and by modeling the latter as an independent behavioral competence.
+
+
+\subsection{Latent Knowledge}
+
+\begin{definition}[Latent Knowledge]
+Let $f_\theta : \mathcal{X}^* \rightarrow \mathcal{P}(\mathcal{Y})$ be a generative language model. The model is said to possess \emph{latent knowledge} relevant to an item $x$ if it can correctly answer a direct retrieval query about $x$.
+
+We denote this by:
+\[
+M_{\text{latent}}(x) = 1,
+\]
+and $M_{\text{latent}}(x) = 0$ otherwise.
+\end{definition}
+
+Latent knowledge is operationalized behaviorally and makes no assumptions about internal representations.
+
+
+\subsection{Knowledge Application}
+
+\begin{definition}[Knowledge Application]
+Let $A(x)$ denote the event that the model's output correctly reflects the epistemic status of $x$ under a given task specification (e.g., classification, explanation, or judgment).
+\end{definition}
+
+Knowledge application is evaluated with respect to task-specific correctness criteria and is distinct from surface fluency or semantic plausibility.
+
+
+\subsection{Activation Competence}
+
+\begin{definition}[Activation Competence]
+We define \emph{activation competence} $\alpha$ as the conditional probability that a model correctly applies knowledge given that the relevant knowledge is available:
+\begin{equation}
+\boxed{\alpha := \mathbb{P}\big(A(x) \mid M_{\text{latent}}(x) = 1\big)}
+\end{equation}
+\end{definition}
+
+Activation competence is a scalar property of model behavior under a given task and prompt condition. It does not measure how much knowledge a model has, but how reliably available knowledge is used.
+
+
+\subsection{Non-Implication Theorem}
+
+\begin{theorem}[Knowledge Availability Does Not Imply Knowledge Use]
+\[
+M_{\text{latent}}(x) = 1 \;\nRightarrow\; A(x)
+\]
+\end{theorem}
+
+\begin{proof}[Proof (Empirical)]
+In the Activation Challenge, models correctly answer direct queries confirming knowledge availability, yet systematically misclassify epistemically invalid labels as real under generative evaluation. Therefore, the implication fails.
+\end{proof}
+
+This establishes knowledge activation as a distinct functional dimension.
+
+
+\subsection{Role of Prompts}
+
+\begin{definition}[Prompt]
+A prompt $\pi$ is a specification of task, epistemic constraints, and procedural conditions under which generation occurs. Prompts modify the conditions of application but do not add knowledge:
+\[
+\alpha = \alpha(f_\theta, \pi)
+\]
+\end{definition}
+
+Prompts may increase or decrease activation competence, but cannot create latent knowledge.
+
+
+\subsection{Bounded Prompt Control}
+
+\begin{theorem}[Bounded Prompt Influence]
+There exist models $f_\theta$ for which:
+\[
+\exists \alpha_{\max} < 1 \quad \text{s.t.} \quad \forall \pi:\; \alpha(f_\theta, \pi) \le \alpha_{\max}
+\]
+\end{theorem}
+
+\begin{proof}[Proof (Empirical)]
+For some models, activation competence does not improve under maximally explicit epistemic constraints (ESL prompting), indicating an intrinsic upper bound.
+\end{proof}
+
+This result shows that activation competence is not trivially controllable via prompting.
+
+
+\subsection{Decomposition of Generative Performance}
+
+From the above definitions, generative epistemic performance can be decomposed as:
+\begin{equation}
+\text{Epistemic Performance} \approx M_{\text{latent}} \times \alpha
+\end{equation}
+
+This decomposition explains why models with comparable knowledge availability can exhibit radically different epistemic reliability.
+
+
+\subsection{Relation to Hallucination}
+
+Under this framework, hallucination-like behavior arises when:
+\[
+M_{\text{latent}}(x) = 1 \;\land\; \alpha \ll 1
+\]
+
+Thus, hallucination is reinterpreted not as missing knowledge, but as a \textbf{failure to activate and apply existing knowledge} under generative conditions.
+
+
+\subsection{Scope of the Theory}
+
+The proposed theory is functional and model-agnostic. It makes no claims about internal representations, neuron-level mechanisms, or training dynamics. Instead, it provides a formal vocabulary and set of testable claims for analyzing when and why latent knowledge fails to influence model outputs.
+
+\begin{quote}
+\textbf{One-sentence summary:} We formalize knowledge activation in LLMs as a distinct behavioral competence, showing that possessing knowledge does not guarantee its application during generation, even under explicit epistemic constraints.
+\end{quote}
+
+
+% ============================================================================
+% DEFINITIONS SUMMARY (for reference)
+% ============================================================================
+%
+% Definition 1: M_latent(x) = 1 iff model answers direct query correctly
+% Definition 2: A(x) = correct epistemic output under task specification
+% Definition 3: α = P(A(x) | M_latent(x) = 1)
+% Definition 4: π = prompt (task + epistemic constraints + procedure)
+%
+% Theorem 1: M_latent = 1 ⇏ A(x)
+% Theorem 2: ∃ α_max < 1 s.t. ∀π: α(f_θ, π) ≤ α_max
+%
+% Decomposition: Performance ≈ M_latent × α
+% Hallucination: M_latent = 1 ∧ α << 1
+%
