@@ -1326,25 +1326,115 @@ Unsere ESL-Prompts könnten als "Confidence-Lowering" Intervention wirken:
 - Ohne ESL: Modell überschätzt Confidence → K > M
 - Mit ESL: Modell senkt Confidence-Schwelle → K ≤ M
 
-### Synthese: Erweitertes α-Modell
+### Synthese: Klare Ebenentrennung KAPE ↔ α
+
+#### Wichtige Präzisierung
+
+**KAPE misst Präferenz, nicht Nutzungserfolg:**
+
+> KAPE does not measure correctness of knowledge usage, but the degree to which neural activations are source-specific rather than diffuse.
+
+**Vier Phasen sind nicht strikt sequentiell:**
+
+> These stages are not strictly sequential but reflect dominant modes of knowledge interaction during generation.
+
+#### Hierarchie der Konzepte
 
 ```
-┌────────────────────────────────────────────────────────────────────┐
-│                                                                    │
-│   α = f(Circuit_Entropy, Prompt_Structure, Confidence_Threshold)  │
-│                                                                    │
-│   Wo:                                                              │
-│   • Circuit_Entropy (KAPE): Wie spezialisiert sind Wissensneuronen │
-│   • Prompt_Structure: Wie stark erzwingt Prompt Retrieval-Check    │
-│   • Confidence_Threshold: Ab wann wird Wissen tatsächlich aktiviert│
-│                                                                    │
-│   Mistral-Hypothese (verfeinert):                                  │
-│   • Circuit_Entropy = normal (M_latent hoch)                       │
-│   • Confidence_Threshold = zu niedrig (generiert ohne Check)       │
-│   • → Intervention: Prompt erhöht Threshold durch ESL-Formalität   │
-│                                                                    │
-└────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   EBENE 1: NEURON-LEVEL (Mikrometrik)                              │
+│   ─────────────────────────────────                                │
+│   KAPE = Source Specificity                                         │
+│   → Misst: Wie stark unterscheidet ein Neuron zwischen             │
+│            internem und externem Wissen?                            │
+│   → Granularität: Einzelnes Neuron j in Schicht i                  │
+│                                                                     │
+│   ═══════════════════════════════════════════════════════════════  │
+│                                                                     │
+│   EBENE 2: TASK-LEVEL (Makroeigenschaft)                           │
+│   ────────────────────────────────────                             │
+│   α = Activation Competence                                         │
+│   → Misst: Wird quellenspezifische Aktivierung funktional          │
+│            während generativer Aufgaben genutzt?                    │
+│   → Granularität: Gesamtes Modell × Aufgabe                        │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+**Kernaussage:**
+
+> While KAPE characterizes neuron-level source specificity, our activation competence parameter α captures whether such source-specific activations are functionally leveraged during generative tasks.
+
+#### α als Aggregat über KAPE (Novelty-Kern)
+
+```
+α = aggregierter Effekt der Aktivierung wissensspezifischer Neuronen
+    unter generativen Anforderungen
+```
+
+**Warum zwei Modelle mit gleichem M_latent unterschiedliches α haben können:**
+
+| Modell | M_latent | KAPE (Psychologie) | α | Erklärung |
+|--------|----------|-------------------|---|-----------|
+| Claude | 1.0 | Niedrig (spezialisiert) | 0.74 | Wissen wird konsequent aktiviert |
+| Mistral | 1.0 | Hoch (diffus) | 0.30 | Wissen vorhanden, aber nicht fokussiert abgerufen |
+
+#### Kausale Kette: Prompt → α → ESL
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   PROMPT STRUCTURE                                                  │
+│        │                                                            │
+│        ▼                                                            │
+│   ┌─────────────────────────────────┐                              │
+│   │ Aktivierung von Low-KAPE        │                              │
+│   │ (wissensspezifischen) Neuronen  │                              │
+│   └─────────────────────────────────┘                              │
+│        │                                                            │
+│        ▼                                                            │
+│   ┌─────────────────────────────────┐                              │
+│   │ α (Activation Competence)       │                              │
+│   │ = Anteil der Generierung, der   │                              │
+│   │   durch Low-KAPE Neuronen läuft │                              │
+│   └─────────────────────────────────┘                              │
+│        │                                                            │
+│        ▼                                                            │
+│   ┌─────────────────────────────────┐                              │
+│   │ ESL Error Reduction             │                              │
+│   │ K_mit_ESL = K_ohne × (1 - α×M)  │                              │
+│   └─────────────────────────────────┘                              │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+#### Testbare Hypothese H_α-KAPE
+
+**Hypothese:** Prompting-Strategien, die explizit Retrieval von Application trennen, erhöhen selektiv den Anteil der Aktivierung durch Low-KAPE Neuronen und damit α, **ohne latentes Wissen zu verändern**.
+
+```
+H_α-KAPE: Δα(Prompt_structured) > Δα(Prompt_simple)
+          bei konstantem M_latent
+```
+
+**Vorhersage:**
+- Wenn Mistral mit strukturierten Prompts (A, C, D) höheres α zeigt
+- → Bestätigung, dass α durch Prompt-induzierte KAPE-Fokussierung steuerbar ist
+
+### Reviewer Defense: Was α NICHT ist
+
+| α ist NICHT... | Begründung |
+|----------------|------------|
+| ...nur CoT | CoT erhöht α, aber α existiert unabhängig von CoT |
+| ...nur RAG | ESL funktioniert ohne externe Retrieval (nur parametrisch) |
+| ...nur Hallucination-Reduktion | α misst Aktivierung, nicht nur Fehlerrate |
+| ...identisch mit KAPE | KAPE = Neuron-Level, α = Task-Level (emergent) |
+| ...modellspezifisch | α variiert zwischen Modellen, aber das Konzept ist universal |
+
+**Positionierung:**
+
+> α sitzt zwischen empirischer Evaluation (K-Score) und mechanistischer Analyse (KAPE). Es beschreibt die funktionale Brücke zwischen gespeichertem Wissen und dessen Anwendung während Generierung.
 
 ### Literaturbasierte Vorhersagen
 
