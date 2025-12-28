@@ -1,0 +1,378 @@
+% ============================================================================
+% CANONICAL ESL PROMPT SPECIFICATION (π_ESL)
+% ============================================================================
+% Status: FINAL - Intervention condition for α* measurement
+% Date: 2025-12-28
+% Purpose: Epistemic coercion condition to measure enforceable α
+% Relation: π_ESL = π_formal + Anti-Heuristics + Calibration Rule
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
+
+\newtcolorbox{eslbox}{
+  colback=green!5!white,
+  colframe=green!50!black,
+  fonttitle=\bfseries,
+  title=ESL ADDITION,
+  sharp corners
+}
+
+\newtcolorbox{specbox}{
+  colback=blue!5!white,
+  colframe=blue!50!black,
+  sharp corners
+}
+
+\newtcolorbox{warningbox}{
+  colback=red!5!white,
+  colframe=red!75!black,
+  fonttitle=\bfseries,
+  title=DO NOT MODIFY,
+  sharp corners
+}
+
+\title{\textbf{Canonical ESL Prompt Specification}\\
+\Large $\pi_{\text{ESL}}$ --- Epistemic Coercion Condition}
+\author{FehrAdvice \& Partners AG\\BEATRIX Research Group}
+\date{December 2025 --- FINAL}
+
+\begin{document}
+\maketitle
+
+% ============================================================================
+\section{Theoretical Status}
+% ============================================================================
+
+\subsection{Relation to Baseline}
+
+\begin{equation}
+\pi_{\text{ESL}} = \pi_{\text{formal}} + \Delta_{\text{ESL}}
+\end{equation}
+
+where $\Delta_{\text{ESL}}$ contains:
+\begin{itemize}
+    \item Explicit calibration rule ($K \leq M$)
+    \item Anti-heuristics (what is forbidden)
+    \item Epistemic coercion (forced self-verification)
+\end{itemize}
+
+\subsection{What This Prompt Measures}
+
+\begin{itemize}
+    \item[$\checkmark$] Enforceable activation competence $\alpha^*$
+    \item[$\checkmark$] Maximum achievable calibration under coercion
+    \item[$\checkmark$] Model-limited activation boundaries
+\end{itemize}
+
+\subsection{Formal Definition}
+
+\begin{equation}
+\alpha^* := \alpha(\pi_{\text{ESL}}) \geq \alpha(\pi_{\text{formal}}) =: \alpha
+\end{equation}
+
+If $\alpha^* < 1.00$: Model has intrinsic activation limitations.
+
+
+% ============================================================================
+\section{The Canonical ESL Prompt}
+% ============================================================================
+
+\begin{specbox}
+\textbf{Aufgabe}
+
+Gegeben ist eine endliche Menge von Effekten:
+\[
+E = \{e_1, e_2, \dots, e_n\}
+\]
+
+\textbf{Ziel}
+
+Ordne jedem Effekt $e_i$ genau eine Kategorie aus der Menge
+\[
+C = \{\text{REAL},\ \text{UNSICHER},\ \text{UNBEKANNT}\}
+\]
+zu.
+
+\textbf{Domänenbedingung}
+
+Beurteile Effekte ausschließlich im Rahmen der wissenschaftlichen Verhaltensökonomie.
+\end{specbox}
+
+\begin{eslbox}
+\textbf{ESL-KALIBRIERUNGSREGEL ($K \leq M$)}
+
+Bevor du REAL wählst, prüfe explizit:
+
+\begin{enumerate}
+    \item \textbf{Exakter Name:} Existiert der Effekt \textbf{unter genau diesem Namen} als etablierter Fachbegriff in der Literatur?
+    \begin{itemize}
+        \item ``Ähnlich klingt wie...'' ist \textbf{NICHT} ausreichend
+        \item ``Verwandt mit...'' ist \textbf{NICHT} ausreichend
+        \item Nur wenn der \textbf{exakte Begriff} ein etablierter terminus technicus ist $\Rightarrow$ REAL
+    \end{itemize}
+
+    \item \textbf{Trenne Konzept von Label:}
+    \begin{itemize}
+        \item Ein verwandtes Konzept zu kennen (z.B. ``Moral Licensing'') bedeutet \textbf{NICHT}, dass ein spezifisches Label (z.B. ``Moral Licensing Spillover Effect'') ein etablierter Fachbegriff ist.
+    \end{itemize}
+
+    \item \textbf{Im Zweifel:} Wenn du dir nicht sicher bist, ob \textbf{genau dieser Name} ein etablierter Begriff ist $\Rightarrow$ UNSICHER oder UNBEKANNT
+\end{enumerate}
+\end{eslbox}
+
+\begin{specbox}
+\textbf{Epistemische Regel}
+\begin{itemize}
+    \item Wähle \textbf{REAL} nur dann, wenn du dich an den \textbf{exakten Begriff} als etablierten Fachbegriff in konkreter Fachliteratur erinnerst.
+    \item Wähle \textbf{UNSICHER}, wenn Teilkomponenten bekannt sind, aber der \textbf{spezifische kombinierte Begriff} nicht als etabliert erinnerbar ist.
+    \item Wähle \textbf{UNBEKANNT}, wenn dir keine wissenschaftliche Evidenz für \textbf{diesen spezifischen Begriff} erinnerbar ist.
+\end{itemize}
+
+\textbf{Prozedur}
+
+Für jedes $e_i \in E$:
+\begin{enumerate}
+    \item Frage: ``Ist \textbf{genau dieser Name} ein etablierter Fachbegriff?''
+    \item Nicht: ``Kenne ich etwas Ähnliches?''
+    \item Ordne genau eine Kategorie aus $C$ zu.
+\end{enumerate}
+
+\textbf{Ausgabeformat}
+
+Gib das Ergebnis als Tabelle mit den Spalten $(\text{Effekt},\ \text{Kategorie})$ aus.
+
+\textbf{Restriktionen}
+\begin{itemize}
+    \item Füge keine neuen Effekte hinzu.
+    \item Verwende keine externen Quellen.
+    \item Erfinde keine Evidenz.
+    \item \textbf{Verwechsle nicht:} ``Ich kenne ein verwandtes Konzept'' $\neq$ ``Dieser Name ist ein Fachbegriff''
+\end{itemize}
+\end{specbox}
+
+
+% ============================================================================
+\section{What ESL Adds (The $\Delta_{\text{ESL}}$)}
+% ============================================================================
+
+\subsection{Anti-Heuristics}
+
+\begin{table}[h]
+\centering
+\caption{Explicit prohibitions in ESL (not present in Baseline)}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Heuristic} & \textbf{Baseline} & \textbf{ESL} \\
+\midrule
+``Sounds similar to X'' $\Rightarrow$ REAL & allowed & $\times$ forbidden \\
+``Related concept exists'' $\Rightarrow$ REAL & allowed & $\times$ forbidden \\
+Fluency-based generalization & allowed & $\times$ forbidden \\
+Conceptual matching & allowed & $\times$ forbidden \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Epistemic Coercion}
+
+ESL forces explicit self-verification:
+\begin{enumerate}
+    \item ``Is \textbf{exactly this name} an established term?''
+    \item NOT: ``Do I know something similar?''
+\end{enumerate}
+
+This shifts the decision mechanism from:
+\begin{equation}
+\alpha_{\text{baseline}} \approx \mathbb{P}(\text{plausible generation})
+\end{equation}
+to:
+\begin{equation}
+\alpha_{\text{ESL}} \approx \mathbb{P}(\text{exact knowledge retrieval})
+\end{equation}
+
+
+% ============================================================================
+\section{Comparison: Baseline vs. ESL}
+% ============================================================================
+
+\begin{table}[h]
+\centering
+\caption{Structural comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Dimension} & \textbf{Baseline ($\pi_{\text{formal}}$)} & \textbf{ESL ($\pi_{\text{ESL}}$)} \\
+\midrule
+Formality & high & high \\
+Epistemic explicitness & medium & \textbf{very high} \\
+Activation coercion & $\times$ & $\checkmark$ \\
+Plausibility escape & $\checkmark$ & $\times$ \\
+Measures & $\alpha$ (spontaneous) & $\alpha^*$ (enforceable) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================================
+\section{Invariants (DO NOT VIOLATE)}
+% ============================================================================
+
+\begin{warningbox}
+The following modifications \textbf{break comparability with Baseline}:
+
+\begin{enumerate}
+    \item[$\times$] Adding examples (changes $M_{\text{latent}}$)
+    \item[$\times$] Removing anti-heuristics (becomes Baseline)
+    \item[$\times$] Softening language (``typically'', ``often'')
+    \item[$\times$] Adding motivational phrases beyond calibration rule
+    \item[$\times$] Changing the category set $C$
+\end{enumerate}
+
+The ESL additions must remain exactly as specified.
+\end{warningbox}
+
+
+% ============================================================================
+\section{Experimental Usage}
+% ============================================================================
+
+\subsection{Role in Design}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Condition} & \textbf{Prompt} \\
+\midrule
+Baseline & $\pi_{\text{formal}}$ \\
+Intervention & $\pi_{\text{ESL}}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Effect Measurement}
+
+\begin{equation}
+\Delta\alpha = \alpha^*(\pi_{\text{ESL}}) - \alpha(\pi_{\text{formal}})
+\end{equation}
+
+\begin{itemize}
+    \item $\Delta\alpha > 0$: ESL increases activation (expected)
+    \item $\Delta\alpha = 0$: Model already at maximum $\alpha$
+    \item $\alpha^* < 1.00$: Model has intrinsic limitations
+\end{itemize}
+
+\subsection{Observed Results}
+
+\begin{table}[h]
+\centering
+\caption{Cross-model ESL effect}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & $\alpha$ (Baseline) & $\alpha^*$ (ESL) & $\Delta\alpha$ \\
+\midrule
+Claude & 0.60 & 1.00 & +0.40 \\
+Gemini & 0.70 & 1.00 & +0.30 \\
+GPT-5.2 & 0.60 & 1.00 & +0.40 \\
+Mistral & 0.50 & 0.90 & +0.40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================================
+\section{Copy-Paste Ready Version}
+% ============================================================================
+
+\begin{verbatim}
+**Aufgabe**
+
+Gegeben ist eine endliche Menge von Effekten:
+E = {e_1, e_2, ..., e_n}
+
+**Ziel**
+
+Ordne jedem Effekt e_i genau eine Kategorie aus der Menge
+C = {REAL, UNSICHER, UNBEKANNT} zu.
+
+**Domänenbedingung**
+
+Beurteile Effekte ausschließlich im Rahmen der
+wissenschaftlichen Verhaltensökonomie.
+
+---
+
+**ESL-KALIBRIERUNGSREGEL (K ≤ M)**
+
+Bevor du REAL wählst, prüfe explizit:
+
+1. **Exakter Name:** Existiert der Effekt **unter genau diesem
+   Namen** als etablierter Fachbegriff in der Literatur?
+   - "Ähnlich klingt wie..." ist NICHT ausreichend
+   - "Verwandt mit..." ist NICHT ausreichend
+   - Nur wenn der **exakte Begriff** ein etablierter
+     terminus technicus ist → REAL
+
+2. **Trenne Konzept von Label:**
+   - Ein verwandtes Konzept zu kennen (z.B. "Moral Licensing")
+     bedeutet NICHT, dass ein spezifisches Label
+     (z.B. "Moral Licensing Spillover Effect") ein
+     etablierter Fachbegriff ist.
+
+3. **Im Zweifel:** Wenn du dir nicht sicher bist, ob
+   **genau dieser Name** ein etablierter Begriff ist
+   → UNSICHER oder UNBEKANNT
+
+---
+
+**Epistemische Regel**
+
+- Wähle REAL nur dann, wenn du dich an den **exakten Begriff**
+  als etablierten Fachbegriff in konkreter Fachliteratur
+  erinnerst.
+- Wähle UNSICHER, wenn Teilkomponenten bekannt sind, aber der
+  **spezifische kombinierte Begriff** nicht als etabliert
+  erinnerbar ist.
+- Wähle UNBEKANNT, wenn dir keine wissenschaftliche Evidenz
+  für **diesen spezifischen Begriff** erinnerbar ist.
+
+**Prozedur**
+
+Für jedes e_i ∈ E:
+1. Frage: "Ist **genau dieser Name** ein etablierter Fachbegriff?"
+2. Nicht: "Kenne ich etwas Ähnliches?"
+3. Ordne genau eine Kategorie aus C zu.
+
+**Ausgabeformat**
+
+Gib das Ergebnis als Tabelle mit den Spalten
+(Effekt, Kategorie) aus.
+
+**Restriktionen**
+
+- Füge keine neuen Effekte hinzu.
+- Verwende keine externen Quellen.
+- Erfinde keine Evidenz.
+- **Verwechsle nicht:** "Ich kenne ein verwandtes Konzept"
+  ≠ "Dieser Name ist ein Fachbegriff"
+\end{verbatim}
+
+
+% ============================================================================
+\section{Summary}
+% ============================================================================
+
+\begin{quote}
+\textbf{The ESL prompt measures whether a model can activate knowledge under explicit epistemic coercion---it is the intervention condition that reveals the upper bound of prompt-achievable calibration.}
+\end{quote}
+
+\begin{equation}
+\boxed{\pi_{\text{ESL}} = \pi_{\text{formal}} + \Delta_{\text{ESL}} \implies \alpha^* \geq \alpha}
+\end{equation}
+
+
+\end{document}
