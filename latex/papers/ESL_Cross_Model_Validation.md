@@ -1182,3 +1182,128 @@ Erwartete Interaktion:
 1. **Teste Mistral mit C-E1 vs C-E4** (kritischster Vergleich)
 2. Wenn Δ > 20%: Formalität ist Schlüsselfaktor für Mistral
 3. Dann: Cross-Model-Validierung mit optimalem Formalitätsgrad pro Modell
+
+---
+
+## Theoretische Fundierung: α-Komponente in der Literatur
+
+### Verbindung zu Knowledge Mechanisms Research
+
+Unsere α-Komponente (Aktivierungskompetenz) findet starke Unterstützung in der aktuellen Forschung zu Wissens-Mechanismen in LLMs:
+
+### 1. Knowledge Circuits (Yao et al., NeurIPS 2024)
+
+**Konzept:** Wissen wird in "Knowledge Circuits" gespeichert - kritische Subgraphen im Computation Graph, die bestimmte Fakten kodieren.
+
+**Relevanz für ESL:**
+```
+Knowledge Circuit = Mechanistische Basis für M_latent
+α = Wie effizient diese Circuits während Generierung aktiviert werden
+```
+
+Yao et al. zeigen, dass bestimmte Attention Heads und MLP-Neuronen kollaborativ Wissen speichern. Dies erklärt, warum M_latent (gespeichertes Wissen) von α (Aktivierung) getrennt werden kann.
+
+### 2. Knowledge Activation Probability Entropy (KAPE)
+
+**Wang et al. (SIGIR 2025)** führen KAPE ein: Ein Maß dafür, wie stark einzelne Neuronen mit internem vs. externem Wissen assoziiert sind.
+
+**Direkte Parallele zu α:**
+```
+KAPE niedrig → Neuron stark spezialisiert → hohe Aktivierung
+KAPE hoch → Neuron unspezifisch → schwache Aktivierung
+
+Unsere Interpretation:
+α ∝ 1/KAPE (je niedriger die Entropie, desto höher α)
+```
+
+Die Autoren zeigen, dass man durch selektives Deaktivieren von Neuronen die Balance zwischen parametrischem und retrievalem Wissen steuern kann.
+
+### 3. Knowledge Pass Rate (KPR) & Knowledge-aware Refusal Rate (KRR)
+
+**UAQ-Fact Benchmark (2025)** definiert explizite 0-1 Metriken:
+
+| Metrik | Definition | Parallele zu ESL |
+|--------|------------|------------------|
+| **KPR** | Wie oft beantwortet das Modell Fragen korrekt, die es wissen sollte | ≈ α × M_latent |
+| **KRR** | Wie oft verweigert es Antworten bei fehlendem Wissen | ≈ ESL-Kalibrierung |
+
+**Empirischer Befund:** Größere Modelle haben höhere KPR und KRR → bessere Wissensnutzung.
+
+**Implikation für Mistral:**
+Mistrals niedriges α könnte sich in niedrigem KPR/KRR manifestieren - das Modell "weiß" etwas, aber der Wissenszugriff ist ineffizient.
+
+### 4. Chain-of-Thought als α-Intervention
+
+Mehrere Studien zeigen, dass CoT + RAG Halluzinationen reduziert:
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Chain-of-Knowledge (Li et al., ICLR 2024)         │
+│                                                     │
+│  1. Generiere mehrere Rationale-Answer-Paare       │
+│  2. Bei Disagreement → Retrieval aktivieren        │
+│  3. Korrigiere Rationales mit externem Wissen      │
+│  4. Konsolidiere finale Antwort                    │
+│                                                     │
+│  → Implizite α-Steuerung durch Confidence-Check    │
+└─────────────────────────────────────────────────────┘
+```
+
+**Verbindung zu unseren Prompt-Kandidaten:**
+- **Kandidat A (Structured Verification)** ≈ CoT für epistemische Claims
+- **Kandidat C (Adversarial Framing)** ≈ Confidence-trigger für Skeptizismus
+- **Kandidat D (Citation-First)** ≈ Forced Retrieval vor Generierung
+
+### 5. Confidence-Based Knowledge Gating
+
+Neuere Ansätze nutzen Modell-Unsicherheit zur Wissenssteuerung:
+
+```
+α_r = Confidence Boost durch Retrieval
+
+Wenn α_r > Schwellwert → Externe Info integrieren
+Wenn α_r < Schwellwert → Parametrisches Wissen nutzen
+```
+
+**Interpretation für ESL:**
+Unsere ESL-Prompts könnten als "Confidence-Lowering" Intervention wirken:
+- Ohne ESL: Modell überschätzt Confidence → K > M
+- Mit ESL: Modell senkt Confidence-Schwelle → K ≤ M
+
+### Synthese: Erweitertes α-Modell
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │
+│   α = f(Circuit_Entropy, Prompt_Structure, Confidence_Threshold)  │
+│                                                                    │
+│   Wo:                                                              │
+│   • Circuit_Entropy (KAPE): Wie spezialisiert sind Wissensneuronen │
+│   • Prompt_Structure: Wie stark erzwingt Prompt Retrieval-Check    │
+│   • Confidence_Threshold: Ab wann wird Wissen tatsächlich aktiviert│
+│                                                                    │
+│   Mistral-Hypothese (verfeinert):                                  │
+│   • Circuit_Entropy = normal (M_latent hoch)                       │
+│   • Confidence_Threshold = zu niedrig (generiert ohne Check)       │
+│   • → Intervention: Prompt erhöht Threshold durch ESL-Formalität   │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+### Literaturbasierte Vorhersagen
+
+| Literatur-Konzept | Vorhersage für ESL-Test | Testbar |
+|-------------------|-------------------------|---------|
+| KAPE (Wang et al.) | Formale Prompts senken Aktivierungs-Entropie | Indirekt |
+| KPR/KRR (UAQ-Fact) | ESL erhöht KRR (korrekte Verweigerungen) | Ja |
+| CoK (Li et al.) | Multi-Step Prompts (A, D) effektiver als Single-Step | Ja |
+| Confidence Gating | Adversarial Framing (C) aktiviert Unsicherheits-Check | Ja |
+
+### Referenzen
+
+1. Yao, Y. et al. (2024). "Knowledge Circuits in Pretrained Transformers." NeurIPS 2024.
+2. Ou, Y., Yao, Y. et al. (2025). "How Do LLMs Acquire New Knowledge? A Knowledge Circuits Perspective."
+3. Wang, Y. et al. (2025). "Unveiling Knowledge Utilization Mechanisms in LLM-based RAG." SIGIR 2025.
+4. UAQ-Fact (2025). "Evaluating Factual Knowledge Utilization on Unanswerable Questions."
+5. Li, X. et al. (2024). "Chain-of-Knowledge: Grounding Large Language Models via Dynamic Knowledge Adapting over Heterogeneous Sources." ICLR 2024.
+6. Tian, B. et al. (2024). "To Forget or Not? Practical Knowledge Unlearning for LLMs." EMNLP Findings 2024.
