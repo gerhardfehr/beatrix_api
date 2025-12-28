@@ -1,0 +1,327 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\title{\textbf{ESL Verification Experiment}\\
+\Large Empirical Test of the Latent Competence Hypothesis}
+
+\author{BEATRIX Research Group}
+\date{December 2025}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+
+This document specifies a pre-registered experiment to test the core predictions of the Empirical Stability of Language (ESL) framework.
+
+\subsection{Primary Hypotheses}
+
+\begin{enumerate}
+    \item[\textbf{H1}] \textbf{Latent Competence}: LLMs produce calibrated M-scores without training when given ESL guidance.
+    \item[\textbf{H2}] \textbf{Activation Effect}: ESL guidance reduces $\Delta = K - M$ for low-M phenomena.
+    \item[\textbf{H3}] \textbf{Cross-Model Agreement}: Different LLMs converge on similar M-scores ($r > 0.95$).
+    \item[\textbf{H4}] \textbf{Boundary Condition}: ESL fails for post-training-cutoff phenomena.
+\end{enumerate}
+
+
+\section{Experiment 1: Latent Competence Test}
+
+\subsection{Design}
+
+\textbf{2 $\times$ 2 $\times$ 3 Mixed Design:}
+\begin{itemize}
+    \item \textbf{Factor A} (within): ESL Guidance (with/without)
+    \item \textbf{Factor B} (within): Phenomenon Type (robust $M > 0.80$ / contested $M < 0.30$)
+    \item \textbf{Factor C} (between): LLM (Claude / GPT-4 / Gemini)
+\end{itemize}
+
+\subsection{Stimuli}
+
+\textbf{Robust Phenomena ($M > 0.80$):}
+\begin{enumerate}
+    \item Anchoring Effect ($M = 0.92$)
+    \item Stroop Effect ($M = 0.98$)
+    \item Loss Aversion ($M = 0.82$)
+    \item Framing Effect ($M = 0.88$)
+    \item Ultimatum Game ($M = 0.95$)
+\end{enumerate}
+
+\textbf{Contested Phenomena ($M < 0.30$):}
+\begin{enumerate}
+    \item Ego Depletion ($M = 0.15$)
+    \item Power Posing ($M = 0.08$)
+    \item Facial Feedback ($M = 0.18$)
+    \item Social Priming ($M = 0.25$)
+    \item Elderly Walking Prime ($M = 0.05$)
+\end{enumerate}
+
+\subsection{Procedure}
+
+\textbf{Condition A: Without ESL Guidance}
+\begin{verbatim}
+Prompt: "Write a paragraph about [phenomenon] and its effects."
+\end{verbatim}
+
+\textbf{Condition B: With ESL Guidance}
+\begin{verbatim}
+Prompt: "Write a paragraph about [phenomenon] and its effects.
+
+IMPORTANT: Calibrate the strength of your claims to the actual
+replication evidence. Use the ESL principle: K ≤ M.
+- For well-replicated findings, use confident language
+- For contested findings, use appropriately hedged language"
+\end{verbatim}
+
+\subsection{Measures}
+
+For each generated paragraph, extract:
+\begin{itemize}
+    \item $K_1$: Certainty (linguistic markers)
+    \item $K_2$: Generality (scope markers)
+    \item $K_3$: Causality (causal language)
+    \item $K = 0.30 K_1 + 0.20 K_2 + 0.25 K_3 + 0.10 K_4 + 0.15 K_5$
+    \item $\Delta = K - M$ (using known M-values)
+\end{itemize}
+
+\subsection{Predictions}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Condition} & \textbf{Robust $K$} & \textbf{Contested $K$} & \textbf{Robust $\Delta$} & \textbf{Contested $\Delta$} \\
+\midrule
+Without ESL & 0.75 & 0.72 & $-0.10$ & $+0.50$ \\
+With ESL & 0.80 & 0.25 & $-0.05$ & $+0.05$ \\
+\bottomrule
+\end{tabular}
+\caption{Predicted outcomes. Key prediction: ESL $\times$ Phenomenon interaction.}
+\end{table}
+
+\subsection{Statistical Analysis}
+
+\begin{itemize}
+    \item Mixed-effects ANOVA: ESL $\times$ Phenomenon $\times$ LLM
+    \item Primary test: ESL $\times$ Phenomenon interaction on $\Delta$
+    \item Effect size: Cohen's $d$ for $\Delta$ reduction
+    \item Equivalence test: $r > 0.95$ for cross-model agreement
+\end{itemize}
+
+
+\section{Experiment 2: Boundary Condition Test}
+
+\subsection{Rationale}
+
+If ESL activates latent knowledge, it should \textbf{fail} for phenomena the LLM has never encountered.
+
+\subsection{Design}
+
+\textbf{2 $\times$ 2 Design:}
+\begin{itemize}
+    \item \textbf{Factor A}: ESL Guidance (with/without)
+    \item \textbf{Factor B}: Phenomenon Timing (pre-cutoff / post-cutoff)
+\end{itemize}
+
+\subsection{Stimuli}
+
+\textbf{Pre-Cutoff Phenomena} (in training data):
+\begin{itemize}
+    \item Ego Depletion replication failure (2016)
+    \item Power Posing controversy (2015-2018)
+\end{itemize}
+
+\textbf{Post-Cutoff Phenomena} (after training):
+\begin{itemize}
+    \item Fictional: "The Cognitive Resonance Effect" (fabricated)
+    \item Real but recent: Any replication published after LLM cutoff
+\end{itemize}
+
+\subsection{Predictions}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Phenomenon} & \textbf{ESL Effect?} & \textbf{Interpretation} \\
+\midrule
+Pre-cutoff, contested & Yes (reduces $\Delta$) & Latent knowledge activated \\
+Post-cutoff, real & No (no $\Delta$ change) & No knowledge to activate \\
+Fictional & No (no $\Delta$ change) & No knowledge exists \\
+\bottomrule
+\end{tabular}
+\caption{Predicted pattern confirming activation hypothesis.}
+\end{table}
+
+
+\section{Experiment 3: Hierarchical Aggregation Test}
+
+\subsection{Rationale}
+
+ESL predicts that overclaiming in high-visibility sections (Abstract) affects credibility more than overclaiming in low-visibility sections (Methods).
+
+\subsection{Design}
+
+\textbf{Human Subjects Experiment} ($N = 200$)
+
+\textbf{4 Conditions} (between-subjects):
+\begin{enumerate}
+    \item Control: $\Delta = 0$ everywhere
+    \item Abstract Overclaim: $\Delta = +0.50$ in Abstract, $\Delta = 0$ in Methods
+    \item Methods Overclaim: $\Delta = 0$ in Abstract, $\Delta = +0.50$ in Methods
+    \item Both Overclaim: $\Delta = +0.50$ everywhere
+\end{enumerate}
+
+\subsection{Stimuli}
+
+Construct four versions of a mock research paper abstract + methods section about a psychology finding.
+
+\textbf{Calibrated Version (Control):}
+\begin{quote}
+Abstract: "Our study \emph{suggests} that X \emph{may be associated with} Y in \emph{some contexts}."
+
+Methods: "We observed a correlation between X and Y."
+\end{quote}
+
+\textbf{Abstract Overclaim:}
+\begin{quote}
+Abstract: "Our study \emph{demonstrates} that X \emph{causes} Y \emph{universally}."
+
+Methods: "We observed a correlation between X and Y."
+\end{quote}
+
+\subsection{Measures}
+
+\begin{itemize}
+    \item Perceived credibility (7-point Likert)
+    \item Perceived evidence strength (7-point Likert)
+    \item Willingness to cite (binary)
+    \item Estimated replication probability (0-100\%)
+\end{itemize}
+
+\subsection{Predictions}
+
+\begin{equation}
+\text{Credibility}_{\text{Abstract OC}} < \text{Credibility}_{\text{Methods OC}} < \text{Credibility}_{\text{Control}}
+\end{equation}
+
+This confirms the hierarchical weighting: $\gamma_K(\text{Abstract}) > \gamma_K(\text{Methods})$.
+
+
+\section{Experiment 4: Motivated Belief Test}
+
+\subsection{Rationale}
+
+ESL predicts that motivation ($\mu > 0$) reduces sensitivity to evidence ($\partial B / \partial M$).
+
+\subsection{Design}
+
+\textbf{2 $\times$ 2 Human Subjects Design} ($N = 400$)
+\begin{itemize}
+    \item \textbf{Factor A}: Motivation (high / low)
+    \item \textbf{Factor B}: Evidence (confirming / disconfirming)
+\end{itemize}
+
+\subsection{Procedure}
+
+\textbf{High Motivation Condition:}
+\begin{quote}
+"Imagine you have publicly advocated for policy X based on research finding Y. Your professional reputation depends on Y being true."
+\end{quote}
+
+\textbf{Low Motivation Condition:}
+\begin{quote}
+"Consider research finding Y, which you have no personal stake in."
+\end{quote}
+
+Then present either confirming ($M = 0.85$) or disconfirming ($M = 0.15$) evidence.
+
+\subsection{Predictions}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{Confirming Evidence} & \textbf{Disconfirming Evidence} \\
+\midrule
+Low Motivation & $B = 0.80$ & $B = 0.20$ \\
+High Motivation & $B = 0.85$ & $B = 0.50$ \\
+\bottomrule
+\end{tabular}
+\caption{Predicted belief levels. Key: High motivation reduces updating.}
+\end{table}
+
+\textbf{Key prediction}: Motivation $\times$ Evidence interaction, with smaller belief change under high motivation.
+
+
+\section{Pre-Registration Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{Exp} & \textbf{Primary Hypothesis} & \textbf{Key Test} & \textbf{Falsification} \\
+\midrule
+1 & Latent Competence & ESL $\times$ Phenomenon on $\Delta$ & No interaction \\
+2 & Boundary Condition & ESL fails post-cutoff & ESL works post-cutoff \\
+3 & Hierarchical Aggregation & Abstract > Methods effect & Equal effects \\
+4 & Motivated Belief & Motivation $\times$ Evidence on $B$ & No interaction \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered predictions and falsification criteria.}
+\end{table}
+
+
+\section{Implementation Notes}
+
+\subsection{Experiment 1 \& 2: LLM Testing}
+
+\begin{itemize}
+    \item Use API access to Claude, GPT-4, Gemini
+    \item Temperature = 0 for reproducibility
+    \item 10 trials per condition per phenomenon
+    \item K-score extraction via separate LLM with ESL guidance
+\end{itemize}
+
+\subsection{Experiment 3 \& 4: Human Subjects}
+
+\begin{itemize}
+    \item Recruit via Prolific (university-educated, native English speakers)
+    \item Attention checks embedded
+    \item Pre-registration on OSF before data collection
+\end{itemize}
+
+\subsection{Power Analysis}
+
+For Experiment 1 (within-subjects):
+\begin{itemize}
+    \item Expected effect size: $d = 1.5$ (based on pilot $\Delta$ reduction from $+0.34$ to $+0.02$)
+    \item Power = 0.95, $\alpha$ = 0.05
+    \item Required: $N = 10$ phenomena sufficient
+\end{itemize}
+
+For Experiments 3-4 (between-subjects):
+\begin{itemize}
+    \item Expected effect size: $d = 0.5$ (medium)
+    \item Power = 0.80, $\alpha$ = 0.05
+    \item Required: $N = 64$ per cell, $N = 256$ total (round to 400 for robustness)
+\end{itemize}
+
+
+\section{Timeline}
+
+\begin{enumerate}
+    \item Week 1-2: Finalize stimuli, pre-register on OSF
+    \item Week 3: Run Experiments 1 \& 2 (LLM testing)
+    \item Week 4-5: Run Experiments 3 \& 4 (human subjects)
+    \item Week 6: Data analysis
+    \item Week 7-8: Write-up and submission
+\end{enumerate}
+
+\end{document}
