@@ -1,0 +1,149 @@
+% ============================================================================
+% FIGURE 1: Knowledge → Activation → Output (Main Paper Figure)
+% ============================================================================
+% Status: FINAL - Paper-ready, theoretically correct, visually clear
+% Date: 2025-12-28
+% Usage: \input{ESL_Figure_1_Main.tex} in main paper
+% ============================================================================
+
+% Required in preamble:
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
+
+% ============================================================================
+% FIGURE 1: Main Diagram
+% ============================================================================
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+    node distance=2.0cm,
+    block/.style={
+        rectangle,
+        draw=black,
+        thick,
+        minimum width=3.5cm,
+        minimum height=1.6cm,
+        align=center,
+        rounded corners=4pt
+    },
+    prompt/.style={
+        rectangle,
+        draw=black,
+        thick,
+        dashed,
+        minimum width=2.5cm,
+        minimum height=1.2cm,
+        align=center,
+        rounded corners=4pt,
+        fill=gray!10
+    },
+    arrow/.style={-{Stealth[length=3.5mm]}, thick},
+    label/.style={font=\small\itshape, text=black!70}
+]
+
+% =========================================
+% Block A: Latent Knowledge (top)
+% =========================================
+\node[block, fill=blue!12] (M) {
+    \textbf{Latent Knowledge}\\[3pt]
+    $M_{\text{latent}}(x)$
+};
+\node[label, right=0.3cm of M, align=left] {
+    available\\
+    but inactive
+};
+
+% =========================================
+% Block B: Activation (middle) - THE BOTTLENECK
+% =========================================
+\node[block, fill=green!15, below=of M] (alpha) {
+    \textbf{Knowledge Activation}\\[3pt]
+    $\alpha := \mathbb{P}(A(x) \mid M_{\text{latent}}=1)$
+};
+
+% Bottleneck annotation
+\node[right=0.3cm of alpha, align=left, font=\small] (bottleneck) {
+    \textcolor{red!70!black}{\textbf{epistemic}}\\
+    \textcolor{red!70!black}{\textbf{bottleneck}}
+};
+
+% =========================================
+% Block C: Generative Output (bottom)
+% =========================================
+\node[block, fill=orange!12, below=of alpha] (output) {
+    \textbf{Generative Output}\\[3pt]
+    Decision / Text
+};
+\node[label, right=0.3cm of output, align=left] {
+    applied /\\
+    not applied
+};
+
+% =========================================
+% Prompt node (acts on activation, NOT knowledge)
+% =========================================
+\node[prompt, left=2.5cm of alpha] (pi) {
+    \textbf{Prompt}\\[2pt]
+    $\pi$
+};
+
+% =========================================
+% Arrows
+% =========================================
+% Main vertical flow
+\draw[arrow] (M) -- (alpha);
+\draw[arrow] (alpha) -- (output);
+
+% Prompt to Activation (dashed - modulates, not creates)
+\draw[arrow, dashed, gray!70] (pi) -- (alpha)
+    node[midway, above, font=\footnotesize\itshape] {modulates};
+
+% =========================================
+% Key insight box
+% =========================================
+\node[draw=red!60!black, thick, rounded corners=3pt, fill=red!5,
+      below=0.8cm of output, align=center, font=\small] (insight) {
+    \textbf{Key Finding:} $M_{\text{latent}}(x) = 1 \;\not\Rightarrow\; A(x)$
+};
+
+\end{tikzpicture}
+
+\caption{\textbf{Functional decomposition of language model behavior.} Latent knowledge (availability) does not directly determine generative output. Instead, knowledge must pass through an activation stage, characterized by activation competence $\alpha$, which governs whether available knowledge is applied during generation. Prompting and epistemic constraints act on this activation stage but do not modify latent knowledge itself. This is a functional abstraction, not an architectural claim.}
+\label{fig:activation-model}
+\end{figure}
+
+
+% ============================================================================
+% COMPONENT DEFINITIONS (for reference in text)
+% ============================================================================
+%
+% (A) Latent Knowledge — Availability
+%     M_latent(x) = 1 iff model can answer direct query about x
+%     - not visible in generative output
+%     - not equivalent to correct behavior
+%     - no guarantee of application
+%
+% (B) Knowledge Activation — the bottleneck
+%     α := P(A(x) | M_latent(x) = 1)
+%     - independent competence
+%     - bounded prompt-controllability
+%     - model-dependent
+%     - epistemically critical
+%
+% (C) Generative Output — Behavior
+%     Output ~ f_θ(x | α)
+%     - classification, text, decision, assertion
+%     - fluency can dominate when α is low
+%
+% ============================================================================
+% WHAT THIS FIGURE DOES NOT CLAIM (important for reviewers)
+% ============================================================================
+%
+% ❌ no neural module
+% ❌ no architectural assumption
+% ❌ no sequential processing claim
+% ✓  purely functional decomposition
+%
+% The diagram is an abstraction, not an implementation.
+%

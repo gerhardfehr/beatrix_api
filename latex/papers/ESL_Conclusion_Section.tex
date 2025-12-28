@@ -1,0 +1,37 @@
+% ============================================================================
+% CONCLUSION SECTION (Paper-Ready)
+% ============================================================================
+% Status: FINAL - Kurz, prägnant, keine neuen Claims
+% Date: 2025-12-28
+% Placement: After Discussion, before References
+% ============================================================================
+
+\section{Conclusion}
+
+We have introduced a formal distinction between \textbf{latent knowledge} and \textbf{knowledge activation} in large language models. Our central finding is that models can possess knowledge---verified through direct retrieval---yet systematically fail to apply it during generative tasks. This gap persists even under maximally explicit epistemic constraints.
+
+We formalize this observation through the concept of \textbf{activation competence} ($\alpha$), defined as the conditional probability of correct knowledge application given knowledge availability:
+\[
+\alpha := \mathbb{P}\big(A(x) \mid M_{\text{latent}}(x) = 1\big)
+\]
+
+The Activation Challenge provides a minimal, controlled diagnostic that isolates this dimension. Across four contemporary language models, we observe:
+\begin{itemize}
+    \item All models exhibit activation gaps under baseline conditions ($\alpha < 1$).
+    \item Explicit epistemic prompting (ESL) increases $\alpha$ but does not guarantee $\alpha = 1$.
+    \item Some models show bounded activation competence, indicating intrinsic limitations.
+\end{itemize}
+
+These results have implications for how we understand hallucination, evaluate model reliability, and design prompting strategies. They suggest that improving epistemic behavior may require interventions beyond prompt engineering---potentially at the level of training objectives or model architecture.
+
+We hope this work contributes to a more principled understanding of when and why language models fail to use what they know, and provides a foundation for future research on knowledge activation in generative systems.
+
+
+% ============================================================================
+% OPTIONAL: Final sentence (can be used or omitted)
+% ============================================================================
+%
+% \begin{quote}
+% \textit{Knowing is not enough; the question is whether knowledge is activated.}
+% \end{quote}
+%
