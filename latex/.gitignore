@@ -1,0 +1,29 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+
+# Output directory (PDFs are generated here)
+output/
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# OS files
+.DS_Store
+Thumbs.db

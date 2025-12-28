@@ -1,0 +1,417 @@
+% ESL_Appendix_CaseStudy_Acemoglu.tex
+% Appendix E: Case Study - Acemoglu Interview Analysis
+% To be included in ESL_Paper_v12.tex
+
+\section{Case Study: Epistemische Kalibrierung im Experteninterview}
+\label{app:casestudy}
+
+\subsection*{Nobelpreistr\"ager Acemoglu (DER SPIEGEL, Dezember 2025)}
+
+\begin{tcolorbox}[colback=yellow!5!white,colframe=yellow!50!black,title=Executive Summary]
+\textbf{Gesamtbewertung: $\triangle$ GEMISCHT}
+
+Mehrheitlich kalibriert, systematisches Overclaiming bei politischen und kontrafaktischen Aussagen
+
+\begin{tabular}{ll}
+\textbf{Dokument:} & Nobelpreistr\"ager Acemo\u{g}lu im Interview, DER SPIEGEL 1/2026 \\
+\textbf{Analysierte Claims:} & 34 \\
+\textbf{Aligned ($\Delta \leq 0.10$):} & 19 (56\%) \\
+\textbf{Minor ($0.10 < \Delta \leq 0.25$):} & 11 (32\%) \\
+\textbf{Severe ($\Delta > 0.25$):} & 4 (12\%) \\
+\textbf{$\varnothing \Delta$:} & +0.08 \\
+\textbf{Max $\Delta$:} & +0.63 \\
+\end{tabular}
+
+\vspace{0.5em}
+\begin{tabular}{lcl}
+Quantitativ & $\varnothing\Delta = -0.03$ & \checkmark\ Exzellent \\
+Faktisch & $\varnothing\Delta = -0.04$ & \checkmark\ Sehr gut \\
+Technologie & $\varnothing\Delta = +0.08$ & $\triangle$\ Leicht \"uberzogen \\
+Normativ & $\varnothing\Delta = +0.14$ & $\triangle$\ \"Uberzogen \\
+Politisch & $\varnothing\Delta = +0.25$ & $\times$\ Stark \"uberzogen \\
+\end{tabular}
+\end{tcolorbox}
+
+
+\subsection{Motivation: Warum ESL bei Experteninterviews?}
+
+Nobelpreistr\"ager genie{\ss}en hohe epistemische Autorit\"at. Doch das ESL-Framework unterscheidet zwischen \emph{Autorit\"at} und \emph{Evidenz}:
+
+\begin{principlebox}[ESL-Grundprinzip]
+Der K-Score (Behauptungsst\"arke) muss der Evidenzbasis (M-Score) entsprechen -- \textbf{unabh\"angig davon, wer spricht}.
+\end{principlebox}
+
+Ein Nobelpreistr\"ager, der ``X ist definitiv der Fall'' sagt, overclaims genauso wie jeder andere, wenn die Evidenz f\"ur X unsicher ist. Autorit\"at beeinflusst die \emph{Rezeption} einer Aussage, aber nicht ihre \emph{epistemische Rechtfertigung}.
+
+\paragraph{Dom\"anengrenzen.} Acemoglu erhielt den Nobelpreis f\"ur Institutionen\"okonomie. Im Interview \"au{\ss}ert er sich jedoch auch zu KI-Technologie, US-Innenpolitik und chinesischer F\"uhrung. In diesen Bereichen ist seine Expertise relevant, aber nicht prim\"ar. Das ESL-Framework macht diese Differenz messbar.
+
+
+\subsection{Methodik}
+
+\subsubsection{Claim-Extraktion}
+
+Aus dem Interview wurden 34 zentrale Assertive extrahiert -- Sprechakte mit Wahrheitsanspruch (Searle, 1969). \textbf{Ausgeschlossen:} Meinungs\"au{\ss}erungen ohne Wahrheitsanspruch, rhetorische Fragen, Definitionen, Zitate Dritter.
+
+\subsubsection{K-Score und M-Score}
+
+\begin{table}[H]
+\centering
+\caption{K-Score-Dimensionen nach ESL v2.3}
+\small
+\begin{tabular}{llcl}
+\toprule
+\textbf{K-Dimension} & \textbf{Gewicht} & \textbf{Hoch} & \textbf{Niedrig} \\
+\midrule
+K1: Certainty & 30\% & ``zerst\"ort'' (0.90) & ``k\"onnte schw\"achen'' (0.40) \\
+K2: Generality & 20\% & ``alle'' (0.90) & ``einige'' (0.40) \\
+K3: Causality & 25\% & ``f\"uhrt zu'' (0.80) & ``korreliert mit'' (0.50) \\
+K4: Novelty & 10\% & ``erstmals'' (0.85) & ``best\"atigt'' (0.30) \\
+K5: Practical Import & 15\% & ``muss'' (0.85) & ``k\"onnte erw\"agen'' (0.35) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+M-Scores wurden gesch\"atzt auf Basis von: (a) Acemoglus eigenen Publikationen, (b) wissenschaftlichem Konsens in \"Okonomie und Politikwissenschaft, (c) der ESL-Evidenzhierarchie.
+
+
+\subsection{Ergebnisse: Vollst\"andige Analyse aller 34 Claims}
+
+\subsubsection{Gesamt\"ubersicht}
+
+\begin{table}[H]
+\centering
+\caption{Kalibrierungsqualit\"at nach Dom\"ane}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Dom\"ane} & \textbf{N} & \textbf{$\varnothing\Delta$} & \textbf{Aligned} & \textbf{Minor} & \textbf{Severe} \\
+\midrule
+A. Quantitative Prognosen & 2 & $-0.03$ & 2 & 0 & 0 \\
+B. Faktisch/Historisch & 13 & $-0.04$ & 13 & 0 & 0 \\
+C. Technologie-Assessment & 8 & $+0.08$ & 3 & 5 & 0 \\
+D. Normative Aussagen & 5 & $+0.16$ & 1 & 3 & 1 \\
+E. Politische Prognosen & 5 & $+0.24$ & 0 & 4 & 1 \\
+F. Rhetorisch & 1 & $+0.63$ & 0 & 0 & 1 \\
+\midrule
+\textbf{Gesamt} & \textbf{34} & \textbf{$+0.08$} & \textbf{19} & \textbf{11} & \textbf{4} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Zentrales Muster: Dom\"anenspezifische Kalibrierung}
+
+\textbf{Befund:} Von 34 Claims sind 19 (56\%) gut kalibriert, 11 (32\%) leicht \"uberzogen, und 4 (12\%) schwer \"uberzogen. Die Overclaims konzentrieren sich auf normative, politische und kontrafaktische Aussagen.
+
+\begin{table}[H]
+\centering
+\caption{Linguistische Marker: Gut kalibriert vs. Overclaiming}
+\small
+\begin{tabular}{p{6cm}|p{6cm}}
+\toprule
+\textbf{Gut kalibriert (Dom\"anen A, B)} & \textbf{Overclaiming (Dom\"anen D, E, F)} \\
+\midrule
+\textbullet\ ``h\"ochstens'', ``maximal'' & \textbullet\ Absolut: ``zerst\"ort'', ``beide'' \\
+\textbullet\ ``Parallelen'' (nicht: Identit\"at) & \textbullet\ Pr\"asens statt Potentialis \\
+\textbullet\ Konjunktiv: ``g\"abe'', ``k\"onnte'' & \textbullet\ Normativ ohne Kennzeichnung: ``falsch'' \\
+\textbullet\ Selbstkorrektur: ``auch okay'' & \textbullet\ Fehlende Quantifizierung: ``weit'' \\
+\textbullet\ Pers\"onliche Rahmung: ``ich habe gesehen'' & \textbullet\ Universelle Quantoren: ``alle'', ``jeder'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Vollst\"andige Claim-Analyse}
+
+\begin{longtable}{clcccc}
+\caption{ESL-Analyse aller 34 extrahierten Claims} \\
+\toprule
+\textbf{\#} & \textbf{Behauptung} & \textbf{K} & \textbf{M} & \textbf{$\Delta$} & \textbf{Verdict} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{c}{\textit{Fortsetzung von vorheriger Seite}} \\
+\toprule
+\textbf{\#} & \textbf{Behauptung} & \textbf{K} & \textbf{M} & \textbf{$\Delta$} & \textbf{Verdict} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\textit{Fortsetzung auf n\"achster Seite}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{6}{l}{\textbf{A. Quantitative Prognosen (2)}} \\
+1 & H\"ochstens 0.5\% Produktivit\"at durch KI & 0.45 & 0.50 & $-0.05$ & \checkmark\ Aligned \\
+2 & H\"ochstens 5\% Jobs durch KI ersetzt & 0.45 & 0.45 & $0.00$ & \checkmark\ Aligned \\
+\midrule
+\multicolumn{6}{l}{\textbf{B. Faktische/Historische Aussagen (13)}} \\
+3 & Parallelen zur Dotcom-Blase & 0.55 & 0.65 & $-0.10$ & \checkmark\ Aligned \\
+4 & China altert schneller als S\"udkorea & 0.65 & 0.75 & $-0.10$ & \checkmark\ Aligned \\
+11 & Nie dagewesenes Unsicherheitslevel & 0.59 & 0.55 & $+0.04$ & \checkmark\ Aligned \\
+13 & Google/FB: Datenmonetarisierung & 0.60 & 0.80 & $-0.20$ & \checkmark\ Aligned \\
+17 & Brain Drain nach Silicon Valley & 0.61 & 0.70 & $-0.09$ & \checkmark\ Aligned \\
+18 & China bei Robotern voraus & 0.63 & 0.70 & $-0.07$ & \checkmark\ Aligned \\
+19 & US-Erfolgsrezept: Innovation/Risiko & 0.58 & 0.65 & $-0.07$ & \checkmark\ Aligned \\
+20 & USA besser aus Krisen & 0.64 & 0.55 & $+0.09$ & \checkmark\ Aligned \\
+21 & DE hat nicht mit Schulden gerettet & 0.56 & 0.60 & $-0.04$ & \checkmark\ Aligned \\
+23 & Geopolitische Balance in Gefahr & 0.60 & 0.55 & $+0.05$ & \checkmark\ Aligned \\
+28 & Technologie in China schneller in Fabriken & 0.67 & 0.70 & $-0.03$ & \checkmark\ Aligned \\
+30 & Chinesische Ingenieure teils besser & 0.56 & 0.60 & $-0.04$ & \checkmark\ Aligned \\
+34 & Internet-Monetarisierung war klar & 0.55 & 0.50 & $+0.05$ & \checkmark\ Aligned \\
+\midrule
+\multicolumn{6}{l}{\textbf{C. Technologie-Assessment (8)}} \\
+5 & KI wird falsch entwickelt & 0.75 & 0.55 & $+0.20$ & $\triangle$\ Minor \\
+6 & KI funktioniert weit schlechter & 0.72 & 0.60 & $+0.12$ & $\triangle$\ Minor \\
+12 & Tech-Firmen: vor allem Profite & 0.61 & 0.70 & $-0.09$ & \checkmark\ Aligned \\
+14 & MS/OpenAI: Menschen ersetzen & 0.65 & 0.50 & $+0.15$ & $\triangle$\ Minor \\
+15 & Firmen untersch\"atzen Integration & 0.64 & 0.50 & $+0.14$ & $\triangle$\ Minor \\
+16 & ChatGPT mit Mist trainiert & 0.57 & 0.65 & $-0.08$ & \checkmark\ Aligned \\
+27 & Kein KI-Hub in Europa & 0.62 & 0.45 & $+0.17$ & $\triangle$\ Minor \\
+32 & KI-Monetarisierung unklar & 0.51 & 0.45 & $+0.06$ & \checkmark\ Aligned \\
+\midrule
+\multicolumn{6}{l}{\textbf{D. Normative Aussagen (5)}} \\
+10 & USA \& China beide falsch & 0.80 & 0.45 & $+0.35$ & $\times$\ Severe \\
+24 & KI-Vorteile unwahrscheinl. unter Big Tech & 0.62 & 0.45 & $+0.17$ & $\triangle$\ Minor \\
+25 & Automatisierung sch\"urt Ungleichheit & 0.67 & 0.70 & $-0.03$ & \checkmark\ Aligned \\
+26 & EU-Regulierung verhindert Innovation & 0.68 & 0.50 & $+0.18$ & $\triangle$\ Minor \\
+29 & Chinesische Ingenieure kompensieren Partei & 0.63 & 0.50 & $+0.13$ & $\triangle$\ Minor \\
+\midrule
+\multicolumn{6}{l}{\textbf{E. Politische Prognosen (5)}} \\
+7 & Wirtschaft schmiert ab (5--10 J.) & 0.65 & 0.40 & $+0.25$ & $\triangle$\ Minor \\
+8 & Liberalisierung nur ohne Xi & 0.55 & 0.35 & $+0.20$ & $\triangle$\ Minor \\
+9 & Trump zerst\"ort Institutionen & 0.82 & 0.55 & $+0.27$ & $\times$\ Severe \\
+31 & US-Regierung wird schlechter helfen k\"onnen & 0.62 & 0.40 & $+0.22$ & $\triangle$\ Minor \\
+33 & Kontrafaktisch: Fr\"uhe KI $\rightarrow$ Gewinne & 0.61 & 0.35 & $+0.26$ & $\times$\ Severe \\
+\midrule
+\multicolumn{6}{l}{\textbf{F. Rhetorisch/Titel (1)}} \\
+22 & KI oder Trump zerst\"ort Menschheit & 0.88 & 0.25 & $+0.63$ & $\times$\ Severe \\
+\end{longtable}
+
+
+\subsection{Detailanalyse: Ausgew\"ahlte Claims}
+
+\subsubsection{Exzellente Kalibrierung: Quantitative Prognosen}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!50!black,title=Claim 1: H\"ochstens 0.5\% Produktivit\"atssteigerung durch KI]
+\textbf{K: 0.45 \quad M: 0.50 \quad $\Delta$: $-0.05$ \quad \checkmark}
+
+\textbf{Analyse:} Der Hedge ``h\"ochstens'' signalisiert angemessene Unsicherheit. Acemoglu pr\"asentiert seine Prognose als Obergrenze, nicht als Punktsch\"atzung. Auf Nachfrage: ``In ein paar Jahren werde ich sie sicherlich \"uberholen m\"ussen'' -- ein weiterer Hedge, der epistemische Offenheit demonstriert.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!50!black,title=Claim 3: Es gibt Parallelen zur Dotcom-Blase]
+\textbf{K: 0.55 \quad M: 0.65 \quad $\Delta$: $-0.10$ \quad \checkmark}
+
+\textbf{Analyse:} ``Parallelen'' ist schw\"acher als ``Es ist eine Blase''. Acemoglu differenziert explizit: ``Es w\"are zu einfach zu sagen: Ja, das ist eine Blase. Aber ein Boom -- ganz sicher.'' Diese Selbstkorrektur ist vorbildlich.
+\end{tcolorbox}
+
+
+\subsubsection{Schweres Overclaiming: Politische Aussagen}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!50!black,title=Claim 9: Trump zerst\"ort die Institutionen]
+\textbf{K: 0.82 \quad M: 0.55 \quad $\Delta$: $+0.27$ \quad $\times$}
+
+\textbf{Analyse:} ``Zerst\"ort'' ist ein maximaler Certainty-Marker (K1 = 0.90). Er impliziert irreversiblen, vollst\"andigen Schaden. Die Evidenz zeigt institutionelle Belastung, aber US-Institutionen haben sich historisch als resilient erwiesen. Besonders problematisch: Pr\"asens (``zerst\"ort'') statt Potentialis (``k\"onnte zerst\"oren'') suggeriert einen abgeschlossenen Prozess.
+
+\textbf{ESL-Reformulierung:} ``Ich sehe ein erh\"ohtes Risiko institutioneller Erosion unter Trump.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!50!black,title=Claim 10: USA und China gehen beide in die falsche Richtung bei KI]
+\textbf{K: 0.80 \quad M: 0.45 \quad $\Delta$: $+0.35$ \quad $\times$}
+
+\textbf{Analyse:} Dies ist der am st\"arksten \"uberzogene inhaltliche Claim im Interview.
+\begin{enumerate}
+    \item ``Beide'' -- universeller Quantifikator ohne Hedge
+    \item ``Falsche Richtung'' -- normativ, impliziert objektiven Ma{\ss}stab
+    \item Fehlende Differenzierung -- USA und China verfolgen fundamental unterschiedliche Strategien
+\end{enumerate}
+
+\textbf{ESL-Reformulierung:} ``Ich sehe bei beiden Gro{\ss}m\"achten problematische Entwicklungen in der KI-Politik.''
+\end{tcolorbox}
+
+
+\subsection{Diskussion}
+
+\subsubsection{Venue-Analyse: DER SPIEGEL}
+
+Die Publikationsplattform \"ubt strukturellen Einfluss auf die epistemische Kalibrierung aus:
+
+\begin{table}[H]
+\centering
+\caption{Redaktionelle Bias-Faktoren}
+\small
+\begin{tabular}{lp{9cm}}
+\toprule
+\textbf{Faktor} & \textbf{Effekt auf Kalibrierung} \\
+\midrule
+Apokalyptischer Bias & Experten werden strukturell gedr\"angt, Worst-Case-Szenarien zu validieren \\
+Konfrontations-Stil & Experten greifen zu h\"arteren Formulierungen (Verteidigungshaltung) \\
+Narrative Kausalit\"at & Systemische Prozesse werden zu personalisierten Dramen verdichtet \\
+Politisches Profil & Profilkonforme Thesen werden weniger kritisch hinterfragt \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Format-Effekte: Das Interview als Genre}
+
+\begin{table}[H]
+\centering
+\caption{Formatbedingte Verzerrungen und ESL-kalibrierte Alternativen}
+\small
+\begin{tabular}{p{6cm}|p{6cm}}
+\toprule
+\textbf{Formatbedingte Verzerrungen} & \textbf{ESL-kalibrierte Alternativen} \\
+\midrule
+Gespr\"achsfluss erlaubt keine elaborierten Hedges & ``Die Risiken sind erheblich'' statt ``Es wird schiefgehen'' \\
+Journalisten suchen zitierbare Aussagen & ``Ich halte das f\"ur gef\"ahrlich'' statt ``Das ist gef\"ahrlich'' \\
+Experten wollen kompetent erscheinen & ``Die Evidenz deutet stark darauf hin'' statt ``Es ist bewiesen'' \\
+Nuancen werden in der Redaktion gek\"urzt & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Der Interview-Titel als Extremfall}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!50!black,title=Claim 22: Interview-Titel]
+\textbf{``Ich bin gespannt, was die Menschheit zerst\"ort: Die Cleverness der KI -- oder die Dummheit von Trump''}
+
+\textbf{K: 0.88 \quad M: 0.25 \quad $\Delta$: $+0.63$ \quad $\times$ SEVERE}
+
+Die Aussage pr\"asentiert zwei extreme Szenarien als einzige Optionen (False Dichotomy) und verwendet ``zerst\"ort'' im Sinne von Menschheitsuntergang. Acemoglu selbst relativiert im Interview -- er spricht von wirtschaftlichen Krisen, nicht von existenzieller Bedrohung.
+
+\textbf{Medien-Kaskade:} Apokalyptischer Bias $\times$ Konfrontationsstil $\times$ Storytelling $\times$ Jahreswechsel-Prognose = maximale Verzerrung.
+\end{tcolorbox}
+
+
+\subsubsection{Autorit\"at und Verantwortung}
+
+\begin{principlebox}[ESL-These]
+Hohe Autorit\"at \textbf{erh\"oht} die Verantwortung f\"ur epistemische Kalibrierung, nicht die Berechtigung zum Overclaiming. Je mehr Menschen einer Aussage glauben, desto wichtiger ist es, dass die Aussage ihrer Evidenzbasis entspricht.
+\end{principlebox}
+
+
+\subsubsection{Kontrafaktisch: Ein ESL-kalibriertes Interview}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!50!black]
+\textbf{SPIEGEL:} Wird Trump die amerikanischen Institutionen zerst\"oren?
+
+\textbf{Acemoglu (ESL-kalibriert):} Meine Forschung zeigt, dass institutionelle Erosion typischerweise langsam verl\"auft und reversibel sein kann. Was ich bei Trump beobachte -- die Politisierung von Gerichten, die Angriffe auf die Zentralbank -- entspricht Mustern, die historisch zu institutionellem Verfall gef\"uhrt haben. Ich halte das Risiko f\"ur erheblich, aber ``Zerst\"orung'' w\"are eine \"Ubertreibung. Amerikanische Institutionen haben sich als resilient erwiesen.
+
+\emph{Diese Antwort ist spezifisch, historisch verankert, angemessen gehedgt, selbstkorrigierend -- und dennoch zitierbar.}
+\end{tcolorbox}
+
+
+\subsection{Implikationen}
+
+\begin{table}[H]
+\centering
+\caption{Praktische Implikationen der Case Study}
+\begin{tabular}{lp{10cm}}
+\toprule
+\textbf{Zielgruppe} & \textbf{Empfehlungen} \\
+\midrule
+\textbf{F\"ur Leser} &
+\textbullet\ Acemoglus quantitative Prognosen sind gut kalibriert und verdienen Beachtung \\
+& \textbullet\ Seine politischen Aussagen sollten als starke Meinungen, nicht als wissenschaftliche Befunde gelesen werden \\
+& \textbullet\ Der Interview-Titel \"uberzeichnet den Inhalt erheblich \\
+\midrule
+\textbf{F\"ur Journalisten} &
+\textbullet\ Bei starken Aussagen nachfragen: ``Welche Evidenz st\"utzt diese Einsch\"atzung?'' \\
+& \textbullet\ Hedging-Sprache nicht als Schw\"ache darstellen \\
+& \textbullet\ Titel sollten die epistemische Qualit\"at des Inhalts reflektieren \\
+\midrule
+\textbf{F\"ur Experten} &
+\textbullet\ Bewusstsein f\"ur Dom\"anengrenzen der eigenen Expertise \\
+& \textbullet\ Normative Positionen als solche kennzeichnen (``Ich halte X f\"ur...'') \\
+& \textbullet\ Hedges sind St\"arke, nicht Schw\"ache \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Fazit}
+
+\begin{principlebox}[Kernaussage]
+\textbf{ESL ist kein Maulkorb f\"ur Experten. Es ist ein Werkzeug f\"ur pr\"azisere Kommunikation.}
+
+Ein Acemoglu, der sagt ``Ich halte Trumps Institutionenpolitik f\"ur hochriskant'' kommuniziert dieselbe Warnung wie ``Trump zerst\"ort die Institutionen'' -- aber \emph{ehrlicher}, weil die Unsicherheit der Prognose sichtbar bleibt.
+
+\vspace{0.5em}
+Die Welt braucht Experten, die klar sprechen.\\
+Sie braucht aber auch Experten, die wissen, was sie nicht wissen.
+\end{principlebox}
+
+
+\subsection{Methodischer Appendix: K-Score-Berechnung}
+
+\begin{table}[H]
+\centering
+\caption{K-Score-Berechnung f\"ur ausgew\"ahlte Claims}
+\footnotesize
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Claim} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K5} & \textbf{K} \\
+& Cert. & Gen. & Caus. & Nov. & Pract. & \\
+& (.30) & (.20) & (.25) & (.10) & (.15) & \\
+\midrule
+\multicolumn{7}{l}{\textit{A. Quantitative Prognosen}} \\
+1. H\"ochstens 0.5\% Produktivit\"at & 0.35 & 0.50 & 0.45 & 0.60 & 0.45 & 0.45 \\
+2. H\"ochstens 5\% Jobs ersetzt & 0.35 & 0.50 & 0.45 & 0.50 & 0.50 & 0.45 \\
+\midrule
+\multicolumn{7}{l}{\textit{D. Normative Aussagen}} \\
+10. USA \& China beide falsch & 0.85 & 0.90 & 0.70 & 0.65 & 0.80 & 0.80 \\
+\midrule
+\multicolumn{7}{l}{\textit{E. Politische Prognosen}} \\
+9. Trump zerst\"ort Institutionen & 0.90 & 0.75 & 0.85 & 0.70 & 0.80 & 0.82 \\
+\midrule
+\multicolumn{7}{l}{\textit{F. Rhetorisch}} \\
+22. Titel: KI/Trump zerst\"ort & 0.95 & 0.95 & 0.80 & 0.75 & 0.85 & 0.88 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{M-Score-Begr\"undung (Auswahl)}
+
+\begin{table}[H]
+\centering
+\caption{M-Score-Evidenzbasis f\"ur ausgew\"ahlte Claims}
+\footnotesize
+\begin{tabular}{lcp{8cm}}
+\toprule
+\textbf{Claim} & \textbf{M} & \textbf{Evidenzbasis} \\
+\midrule
+1. H\"ochstens 0.5\% Produktivit\"at & 0.50 & Acemoglu \& Restrepo (2020), Autor (2024); konservative Sch\"atzung; Unsicherheit hoch \\
+9. Trump zerst\"ort Institutionen & 0.55 & Institutionelle Belastung dokumentiert (Levitsky \& Ziblatt); ``Zerst\"orung'' nicht belegt \\
+10. USA \& China beide falsch & 0.45 & Unterschiedliche Strategien; ``beide falsch'' impliziert nicht etablierten Ma{\ss}stab \\
+22. Titel: KI/Trump zerst\"ort & 0.25 & Rhetorische \"Ubertreibung; keine Evidenz f\"ur Menschheitsuntergang \\
+33. Kontrafaktisch: Fr\"uhe KI & 0.35 & Untestbar; kontrafaktische Behauptung ohne Evidenzbasis \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Quellen f\"ur M-Score-Sch\"atzung}
+
+\begin{itemize}
+    \item \textbf{KI-Produktivit\"at:} Acemoglu, D. \& Restrepo, P. (2020). Robots and Jobs. \emph{Journal of Political Economy}; Autor, D. (2024). Applying AI to Rebuild Middle Class Jobs. NBER Working Paper.
+    \item \textbf{Arbeitsmarkt:} Frey, C.B. \& Osborne, M.A. (2017). The Future of Employment. \emph{Technological Forecasting and Social Change}; OECD (2019). The Future of Work.
+    \item \textbf{Institutionen:} Levitsky, S. \& Ziblatt, D. (2018). \emph{How Democracies Die}. Crown; Acemoglu, D. \& Robinson, J.A. (2012). \emph{Why Nations Fail}. Crown.
+    \item \textbf{Demografie:} United Nations Population Division (2024). World Population Prospects.
+    \item \textbf{China:} Economy, E. (2018). \emph{The Third Revolution}. Oxford UP; Shirk, S. (2023). \emph{Overreach}. Oxford UP.
+    \item \textbf{Robotik:} International Federation of Robotics (2024). World Robotics Report.
+\end{itemize}
+
+
+\subsection{Bibliografische Angabe}
+
+\begin{quote}
+Acemo\u{g}lu, Daron (2025). Nobelpreistr\"ager Acemo\u{g}lu im Interview: ``Ich bin gespannt, was die Menschheit zerst\"ort: Die Cleverness der KI -- oder die Dummheit von Trump.'' \emph{DER SPIEGEL} 1/2026, 23.12.2025.
+
+Interviewer: Simon Book, Bernhard Zand (SPIEGEL-Redaktion)
+\end{quote}
+
+\vspace{1em}
+\noindent\rule{\textwidth}{0.5pt}
+\small
+\emph{Dieser Report wurde mit dem ESL Framework v2.3 erstellt. F\"ur das vollst\"andige Operationalisierungsprotokoll siehe die vorhergehenden Appendices. F\"ur theoretische Grundlagen: Fehr (2025), Empirical Stability of Language: A Framework for Epistemic Integrity in Assertive Communication.}

@@ -1,0 +1,896 @@
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{float}
+
+% ============================================================================
+% CUSTOM ENVIRONMENTS
+% ============================================================================
+
+% Colored boxes for analogies
+\newtcolorbox{analogybox}[1][]{
+  colback=blue!5!white,
+  colframe=blue!50!black,
+  fonttitle=\bfseries,
+  title=Analogy: #1,
+  sharp corners,
+  boxrule=0.5pt
+}
+
+% Boxes for key insights/principles
+\newtcolorbox{principlebox}[1][]{
+  colback=green!5!white,
+  colframe=green!50!black,
+  fonttitle=\bfseries,
+  title=#1,
+  sharp corners,
+  boxrule=0.5pt
+}
+
+% Boxes for critical assumptions
+\newtcolorbox{assumptionbox}{
+  colback=orange!5!white,
+  colframe=orange!50!black,
+  fonttitle=\bfseries,
+  title=Critical Assumptions,
+  sharp corners,
+  boxrule=0.5pt
+}
+
+% Boxes for terminology
+\newtcolorbox{termbox}[1][]{
+  colback=gray!5!white,
+  colframe=gray!50!black,
+  fonttitle=\bfseries,
+  title=Terminology: #1,
+  sharp corners,
+  boxrule=0.5pt
+}
+
+% ============================================================================
+% TITLE AND AUTHOR
+% ============================================================================
+
+\title{\textbf{Empirical Stability of Language (ESL):}\\
+\Large A Framework for Epistemic Integrity in Assertive Communication}
+
+\author{Gerhard Fehr$^{1,2}$\\
+\\
+$^1$FehrAdvice \& Partners AG, Z\"urich\\
+$^2$In collaboration with the BEATRIX Research Group}
+
+\date{December 1, 2025\\
+Working Paper v3.0}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+
+\begin{abstract}
+We present the Empirical Stability of Language (ESL) framework, a systematic approach to measuring and ensuring epistemic integrity in assertive communication. The framework operationalizes a fundamental principle: the strength of a claim must not exceed the strength of its supporting evidence ($K \leq M$).
+
+Our central contribution is twofold. First, we demonstrate that Large Language Models already possess the knowledge required for epistemic calibration---they simply need systematic activation. Cross-validation with three major LLMs (Claude, Gemini, GPT-4) shows near-perfect agreement ($r = 0.999$) when models receive ESL guidance, suggesting that replication outcomes, hedging norms, and meta-scientific discourse are latent in their training data.
+
+Second, and more fundamentally, we propose ESL as a \textbf{causal theory for working with LLM-based systems}. ESL explicitly separates three layers: (1) the LLM (trained weights, unchanged), (2) the system configuration (prompts, tools, memory), and (3) the causal theory that guides configuration. This reframes prompting from an ad-hoc art into theory-guided engineering.
+
+We provide rigorous scope conditions, multi-level aggregation rules, and compositional semantics. A proof-of-concept ESL Checker achieves 100\% accuracy on validation claims. ESL thus functions not as a knowledge base but as an \textbf{activation function}---a meta-model for systematically replacing ad-hoc prompting with theory-guided system configuration.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================================
+% SECTION 1: INTRODUCTION
+% ============================================================================
+
+\section{Introduction}
+
+Scientific communication faces a fundamental tension: the incentive structures of academic publishing reward strong claims and novel findings, while the epistemic integrity of science requires claims calibrated to actual evidence strength. This tension has contributed to the replication crisis, where many published findings---particularly in social and behavioral sciences---fail to replicate in subsequent studies.
+
+The scale of the problem is substantial. The Open Science Collaboration (2015) found that only 36\% of psychology studies replicated successfully. High-profile failures include ego depletion (Hagger et al., 2016: 23 labs, $d = 0.04$), power posing hormonal effects (Ranehill et al., 2015), and facial feedback (Wagenmakers et al., 2016: 17 labs, null result).
+
+\begin{analogybox}[The Medical Analogy]
+Consider a physician who prescribes medications. A responsible physician calibrates the strength of their recommendation to the strength of the evidence: ``This drug \emph{definitively cures} condition X'' (for well-established treatments) versus ``This drug \emph{may help} with condition Y'' (for preliminary findings).
+
+A physician who says ``definitively cures'' for a drug with one small pilot study is overclaiming---and potentially dangerous.
+
+Scientific communication faces the same challenge. When a researcher writes ``our study \emph{demonstrates} that power posing increases testosterone,'' they are making a strong claim ($K \approx 0.8$). But if the effect has failed to replicate ($M \approx 0.08$), this is a 10$\times$ overclaim.
+\end{analogybox}
+
+This paper introduces the \textbf{Empirical Stability of Language (ESL) framework}---a systematic solution to this problem. At its core, ESL operationalizes a simple principle: claim strength ($K$) must not exceed evidence strength ($M$).
+
+
+\subsection{The Two Core Contributions}
+
+\paragraph{Contribution 1: The Latent Competence Discovery.} We establish that Large Language Models \emph{already possess} the knowledge required for epistemic calibration---replication outcomes, hedging norms, meta-scientific discourse. Cross-validation across Claude, Gemini, and GPT-4 demonstrates near-perfect agreement ($r = 0.999$) \emph{without any training}.
+
+\begin{analogybox}[The Expert Who Forgot Their Expertise]
+Imagine an expert physician who has read every medical journal but, when asked to write a press release, slips into ``marketing mode'' and overclaims. The knowledge is there---they \emph{know} which treatments work and which don't. But the context activates the wrong cognitive mode.
+
+LLMs are similar. They have absorbed decades of scientific literature, including discussions of replication failures. They \emph{know} that ego depletion didn't replicate. But when prompted to ``write about ego depletion effects,'' they default to confident, textbook-style prose.
+
+ESL provides the equivalent of saying: ``Write this press release \emph{as a physician}, calibrating every claim to the actual evidence.'' The knowledge was always there; it just needed the right activation.
+\end{analogybox}
+
+\paragraph{Contribution 2: The Causal Theory.} ESL explicitly separates three layers that are usually conflated:
+\begin{enumerate}
+    \item \textbf{LLM} (trained weights $\theta$)---unchanged by ESL
+    \item \textbf{System} (prompt, tools, memory, context)---where ESL is deployed
+    \item \textbf{Causal Theory} (ESL itself)---guides system configuration
+\end{enumerate}
+
+
+\subsection{Why This Matters: Four Implications}
+
+\begin{enumerate}
+    \item \textbf{Training may be unnecessary}: For epistemic calibration, expensive fine-tuning and RLHF may be overkill. The knowledge exists; activation suffices.
+    \item \textbf{Prompting becomes engineering}: The shift from ``finding magic words'' to ``applying causal theory'' transforms a craft into a science.
+    \item \textbf{The LLM/System distinction is fundamental}: Conflating these leads to confusion about where to intervene.
+    \item \textbf{Epistemic AI becomes achievable}: If LLMs can be reliably calibrated through system configuration, then AI-generated content can meet scientific standards.
+\end{enumerate}
+
+
+\subsection{Scientific Foundations: Prior Work on Latent Knowledge}
+
+The ESL approach builds on several lines of research:
+
+\subsubsection{Eliciting Latent Knowledge (ELK)}
+Christiano, Cotra, and Xu (2021) at the Alignment Research Center introduced the core insight:
+\begin{quote}
+``When we train an ML system, it may build up latent `knowledge' about the world that is instrumentally useful for achieving a low loss. [...] Eliciting this knowledge would go much of the way towards safely deploying powerful AI.''
+\end{quote}
+
+\subsubsection{Discovering Latent Knowledge Without Supervision}
+Burns et al. (2022) demonstrated empirically that LLMs contain latent knowledge that can be extracted without supervision.
+
+\subsubsection{Activation Engineering and Steering}
+Turner et al. (2023) introduced Activation Engineering---modifying LLM behavior by adding vectors to internal activations.
+
+\begin{table}[H]
+\centering
+\caption{How ESL extends prior work on latent knowledge in LLMs}
+\begin{tabular}{lll}
+\toprule
+\textbf{Prior Work} & \textbf{Focus} & \textbf{ESL Extension} \\
+\midrule
+ELK (Christiano et al.) & Detecting via probing & Activating via structured prompts \\
+Burns et al. & Unsupervised extraction & Supervised activation via $K \leq M$ \\
+Activation Engineering & Steering via activation addition & Steering via system-level config \\
+In-Context Learning & Task inference from examples & Theory-guided framework \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Critical Assumptions for ESL to Work}
+
+\begin{assumptionbox}
+\textbf{Assumption 1: Latent Knowledge Exists}\\
+The LLM must have absorbed the relevant knowledge about which phenomena replicate, what linguistic markers signal claim strength, and what constitutes appropriate calibration.
+
+\textbf{Assumption 2: Knowledge is Activatable via Context}\\
+The latent knowledge must be accessible through the attention mechanism.
+
+\textbf{Assumption 3: Sufficient Context Window}\\
+The ESL framework ($\sim$500--1000 tokens) must fit within the model's context window.
+
+\textbf{Assumption 4: Instruction Following Capability}\\
+The LLM must be instruction-tuned.
+
+\textbf{Assumption 5: Domain Coverage}\\
+The LLM's training data must cover the domain of claims being evaluated.
+
+\textbf{Assumption 6: Compositionality}\\
+Sentence-level scores must aggregate meaningfully to paragraph and text levels.
+\end{assumptionbox}
+
+
+\subsection{When ESL May Fail}
+
+\begin{enumerate}
+    \item \textbf{Novel phenomena}: Claims about discoveries made after the LLM's training cutoff
+    \item \textbf{Non-scientific domains}: ESL is calibrated to scientific communication
+    \item \textbf{Base models}: Instruction-following is required
+    \item \textbf{Adversarial contexts}: Conflicting instructions may override the framework
+    \item \textbf{Extremely short contexts}: If the context window is too small
+\end{enumerate}
+
+
+\subsection{The Falsifiability Criterion}
+
+A key strength of ESL as a causal theory is its falsifiability. The theory makes specific predictions:
+\begin{enumerate}
+    \item If latent knowledge exists and is activatable, then ESL guidance should improve calibration.
+    \item If the same LLM produces different K-scores with and without ESL, then the mechanism is activation, not training.
+    \item If multiple LLMs converge on similar M-scores, then the knowledge is shared.
+\end{enumerate}
+
+
+% ============================================================================
+% SECTION 2: THEORETICAL FOUNDATIONS
+% ============================================================================
+
+\section{Theoretical Foundations: Belief Formation under Structured Information}
+\label{sec:theory}
+
+While Section 1 introduced the practical problem and proposed solution, this section develops ESL as a formal \emph{behavioral theory} of belief formation. We show that ESL is not merely a methodological tool but a unified framework that explains a range of well-known behavioral phenomena.
+
+\subsection{Core Objects}
+
+Consider an epistemic agent who evaluates a sequence of informational claims about an unknown state of the world $\theta$.
+
+Each claim $i$ is characterized by two conceptually distinct primitives:
+\begin{itemize}
+    \item \emph{Epistemic Commitment} $K_i \in [0,1]$, capturing the strength, generality, and causal force of the claim.
+    \item \emph{Evidential Support} $M_i \in [0,1]$, capturing the reliability, robustness, and independence of the supporting evidence.
+\end{itemize}
+
+\begin{principlebox}[The ESL Separation Principle]
+A central assumption of ESL is that epistemic commitment and evidential support are \textbf{not intrinsically aligned}. Strong claims may be weakly supported, and strong evidence may be paired with weak epistemic commitments.
+
+This separation is what makes overclaiming possible---and what ESL is designed to detect and correct.
+\end{principlebox}
+
+
+\subsection{Normative Benchmark}
+
+Under rational belief updating, posterior beliefs depend only on evidential support:
+\begin{equation}
+B^* = g(M_1, \dots, M_n),
+\end{equation}
+where $g(\cdot)$ denotes a Bayesian aggregation rule.
+
+We refer to beliefs as \emph{calibrated} if $B = B^*$. Any systematic deviation from this benchmark constitutes \emph{epistemic miscalibration}:
+\begin{equation}
+\Delta_B = B - B^*
+\end{equation}
+
+
+\subsection{Belief Formation under Structured Information}
+
+ESL departs from the normative benchmark by allowing belief formation to depend on the \emph{structure} of epistemic commitments in addition to evidence.
+
+\begin{termbox}[The ESL Belief Formation Function]
+Beliefs are formed according to:
+\begin{equation}
+B = F\!\Big(
+\max_t x_t,\;
+x_T,\;
+x_1,\;
+\mathcal{A}(M),\;
+\mathcal{S},\;
+\mathcal{R},\;
+\mathcal{C}
+\Big),
+\end{equation}
+where:
+\begin{itemize}
+    \item $x_t = f(K_t, M_t)$ denotes the epistemic impact of information at position $t$
+    \item $\mathcal{A}(M)$ captures non-linear aggregation of evidential support
+    \item $\mathcal{S}$ captures scope and structural placement
+    \item $\mathcal{R}$ captures reputational and consensus signals
+    \item $\mathcal{C}$ captures cognitive processing costs
+\end{itemize}
+\end{termbox}
+
+This formulation implies that beliefs respond not only to evidential content, but to stable structural properties of information.
+
+
+\subsection{Empirical Stability of Language}
+
+We refer to language as \emph{empirically stable} if marginal changes in evidential support lead to only limited changes in beliefs once epistemic commitments dominate aggregation.
+
+\begin{principlebox}[Empirical Stability Condition]
+Empirical stability arises when:
+\begin{equation}
+\left|\frac{\partial B}{\partial M_i}\right| \ll \left|\frac{\partial B}{\partial K_j}\right|
+\quad \text{for some } j.
+\end{equation}
+
+ESL predicts that such stability arises from \textbf{non-linear aggregation mechanisms} rather than from informational deficits.
+\end{principlebox}
+
+
+\subsection{Behavioral Effects as Special Cases of ESL}
+
+Several well-established behavioral effects can be interpreted as special cases of epistemic aggregation under ESL.
+
+\paragraph{Peak--End Rule.}
+\begin{equation}
+B = \alpha \max_t x_t + (1-\alpha) x_T
+\end{equation}
+The strongest claim ($\max_t x_t$) and the final claim ($x_T$) dominate belief formation.
+
+\paragraph{Anchoring.}
+\begin{equation}
+B = K_0 + \lambda \big(g(M) - K_0\big), \quad \lambda < 1
+\end{equation}
+The initial claim $K_0$ anchors subsequent updating, with insufficient adjustment ($\lambda < 1$).
+
+\paragraph{Primacy and Recency.}
+\begin{equation}
+w_t \propto e^{\pm \kappa t}
+\end{equation}
+Position weights decay exponentially, privileging either early (primacy, $-\kappa$) or late (recency, $+\kappa$) claims.
+
+\paragraph{Authority and Consensus.}
+\begin{equation}
+K_i^{\text{eff}} = K_i + \eta \cdot \mathcal{R}
+\end{equation}
+Reputational signals $\mathcal{R}$ inflate effective claim strength.
+
+\paragraph{Overconfidence and Overprecision.}
+\begin{equation}
+\widehat{\mathrm{Var}}(B) < \mathrm{Var}(B)
+\end{equation}
+Subjective uncertainty underestimates true uncertainty.
+
+
+\subsection{Motivated Belief Formation}
+
+Belief formation in ESL is not assumed to be purely accuracy-driven. Instead, beliefs may yield direct utility to epistemic agents.
+
+\begin{termbox}[Motivated Belief Utility]
+Both referees and readers maximize:
+\begin{equation}
+U^{(a)}(B) = - (B - \theta)^2 + \mu_a V_a(B) - c_a \mathcal{C}(\mathcal{S}),
+\end{equation}
+where:
+\begin{itemize}
+    \item $(B - \theta)^2$ is the accuracy loss
+    \item $\mu_a \geq 0$ captures the strength of motivation
+    \item $V_a(B)$ is the motivational value of holding belief $B$
+    \item $c_a \mathcal{C}(\mathcal{S})$ is the cognitive cost of processing structure $\mathcal{S}$
+\end{itemize}
+\end{termbox}
+
+All agents face a trade-off between epistemic accuracy and motivational considerations. They differ not in kind, but in the source and strength of motivation. Motivation amplifies non-linear aggregation mechanisms, increasing epistemic stability.
+
+
+\subsection{ESL under Machine Learning and Large Language Models}
+
+As scientific language is increasingly generated, summarized, and disseminated by machine learning systems, epistemic structure becomes an algorithmic object. Large language models do not perform normative belief updating. They learn from frequency, salience, and structural regularities in language.
+
+\begin{principlebox}[Algorithmic Inheritance of Motivation]
+Motivational distortions embedded in training data and usage contexts are inherited and amplified:
+\begin{equation}
+\mu_{\text{LLM}} = \mathbb{E}[\mu_{\text{human}}]
+\end{equation}
+
+Under machine learning, epistemic stability shifts from a cognitive phenomenon to an \textbf{infrastructural} one.
+\end{principlebox}
+
+This theoretical foundation motivates the practical ESL framework developed in subsequent sections: by explicitly calibrating $K \leq M$, we intervene on the structural properties that generate miscalibrated beliefs.
+
+
+% ============================================================================
+% SECTION 3: RELATED WORK AND NOVELTY
+% ============================================================================
+
+\section{Related Work and Novelty}
+
+\subsection{Existing Approaches to LLM Calibration}
+
+\subsubsection{Training-Based Approaches}
+\textbf{RLHF}, \textbf{Constitutional AI}, and \textbf{Fine-tuning on calibrated data} all modify LLM weights. They assume the model \emph{lacks} the relevant knowledge.
+
+\subsubsection{Post-hoc Verification Approaches}
+\textbf{Fact-checking systems}, \textbf{RAG}, and \textbf{Semantic entropy} treat the LLM as a black box that produces outputs to be verified externally.
+
+\subsubsection{Prompting Approaches}
+\textbf{Chain-of-thought}, \textbf{Self-consistency}, and \textbf{``Be careful'' prompts} are either too generic or target accuracy rather than calibration.
+
+
+\subsection{What ESL Does Differently}
+
+\begin{table}[H]
+\centering
+\caption{ESL compared to existing approaches}
+\begin{tabular}{llll}
+\toprule
+\textbf{Approach} & \textbf{Level} & \textbf{Assumption} & \textbf{Mechanism} \\
+\midrule
+RLHF / Constitutional AI & LLM (weights) & Model lacks knowledge & Inject via training \\
+Fact-checking / RAG & External & Model unreliable & Verify externally \\
+Generic prompting & System & Model needs reminding & Vague instructions \\
+\textbf{ESL} & \textbf{System} & \textbf{Model has knowledge} & \textbf{Activate with structure} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{The Five Novel Contributions}
+
+\begin{enumerate}
+    \item \textbf{The Latent Competence Hypothesis}: LLMs trained on scientific literature already possess the knowledge required for epistemic calibration.
+    \item \textbf{The $K \leq M$ Formalization}: A simple, operationalizable principle.
+    \item \textbf{System-Level vs. LLM-Level Intervention}: Explicit separation between modifying the LLM (training) and configuring the system (prompting).
+    \item \textbf{Structured Activation via Cognitive Scaffolding}: ESL provides a cognitive scaffold that organizes existing knowledge.
+    \item \textbf{Empirically Grounded Calibration}: M-scores are derived from actual replication outcomes.
+\end{enumerate}
+
+
+\subsection{The Three-Layer Architecture}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{
+\centering
+\textbf{Layer 3: Causal Theory (ESL Model)}\\
+\emph{What knowledge exists latently? How can it be activated?}\\
+$\downarrow$ guides configuration of $\downarrow$\\[1em]
+\textbf{Layer 2: System Configuration}\\
+\emph{System prompt, tools, memory, safety layers, context}\\
+$\downarrow$ uses $\downarrow$\\[1em]
+\textbf{Layer 1: LLM (Weights $\theta$)}\\
+\emph{The trained neural network---unchanged by ESL}
+}}
+\caption{The three-layer architecture proposed by ESL}
+\end{figure}
+
+
+\subsection{The Paradigm Shift}
+
+\begin{principlebox}[The ESL Paradigm]
+\textbf{Old paradigm:} Prompting is an art. We interact directly with ``the AI.'' Success depends on finding the right ``magic words.''
+
+\textbf{ESL paradigm:} System configuration is engineering guided by causal theory. We configure a \emph{system} that uses an LLM. Success depends on understanding what knowledge exists latently and designing configurations that activate it systematically.
+\end{principlebox}
+
+Traditional AI alignment asks: \emph{What does the model not know, and how can we teach it?}
+
+ESL asks: \emph{What does the model already know but fail to apply, and how can we activate it?}
+
+This is a fundamental shift from \textbf{knowledge injection} to \textbf{knowledge extraction}.
+
+
+\subsection{Mechanistic Foundations: The $\alpha$-KAPE Bridge}
+
+Recent work in mechanistic interpretability provides neural-level evidence for the activation hypothesis underlying ESL.
+
+\subsubsection{Knowledge Activation Probability Entropy (KAPE)}
+
+\citet{wang2025kape} introduce Knowledge Activation Probability Entropy (KAPE), a neuron-level metric that captures the degree to which model activations are specific to internal versus retrieved knowledge sources:
+\begin{equation}
+\text{KAPE}_{i,j} = - \left[ p_{\text{int}} \log p_{\text{int}} + p_{\text{ext}} \log p_{\text{ext}} \right]
+\end{equation}
+where $p_{\text{int}}$ and $p_{\text{ext}}$ denote activation probabilities under parametric and retrieved knowledge, respectively, for neuron $j$ in layer $i$.
+
+\begin{table}[H]
+\centering
+\caption{KAPE interpretation and implications}
+\begin{tabular}{lll}
+\toprule
+\textbf{KAPE Value} & \textbf{Meaning} & \textbf{Implication} \\
+\midrule
+Low entropy & Neuron highly specialized & Activates preferentially for ONE source \\
+High entropy & Mixed activation & No clear source preference (fluency-driven) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Critical distinction:} KAPE does not measure correctness of knowledge usage, but the degree to which neural activations are source-specific rather than diffuse.
+
+\subsubsection{Four-Stage Knowledge Processing}
+
+Wang et al.\ identify four stages of knowledge interaction during generation:
+\begin{enumerate}
+    \item \textbf{Knowledge Refinement:} Initial integration and contextualization
+    \item \textbf{Knowledge Elicitation:} Core phase where retrieval input becomes relevant
+    \item \textbf{Knowledge Expression:} Generation influence increases
+    \item \textbf{Knowledge Contestation:} Internal vs.\ external knowledge compete
+\end{enumerate}
+
+\textbf{Important:} These stages are not strictly sequential but reflect dominant modes of knowledge interaction during generation.
+
+\subsubsection{From KAPE to $\alpha$: Level Separation}
+
+We distinguish two levels of analysis:
+
+\begin{table}[H]
+\centering
+\caption{Hierarchical relationship between KAPE and $\alpha$}
+\begin{tabular}{lll}
+\toprule
+\textbf{Level} & \textbf{Metric} & \textbf{Measures} \\
+\midrule
+Neuron-level (micro) & KAPE & Source specificity of activation \\
+Task-level (macro) & $\alpha$ & Knowledge application reliability \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{principlebox}[The $\alpha$-KAPE Relationship]
+While KAPE characterizes neuron-level source specificity, our activation competence parameter $\alpha$ captures whether such source-specific activations are \emph{functionally leveraged} during generative tasks.
+
+Formally, we hypothesize:
+\begin{equation}
+\alpha \propto \sum_{(i,j) \in \mathcal{K}} \frac{1}{\text{KAPE}_{i,j}}
+\end{equation}
+where $\mathcal{K}$ denotes the set of knowledge-relevant neurons.
+\end{principlebox}
+
+This formulation explains why two models with equivalent latent knowledge ($M_{\text{latent}}$) can exhibit different $\alpha$ values: their KAPE distributions differ.
+
+\subsubsection{Testable Hypothesis}
+
+\begin{assumptionbox}
+\textbf{Hypothesis $H_{\alpha\text{-KAPE}}$:} Prompting strategies that explicitly separate retrieval and application phases selectively increase the proportion of generation-time activation passing through low-KAPE (knowledge-specific) neurons, thereby increasing $\alpha$ without altering latent knowledge.
+
+\textbf{Prediction:} $\Delta\alpha(\text{Prompt}_{\text{structured}}) > \Delta\alpha(\text{Prompt}_{\text{simple}})$
+
+\textbf{Falsification criterion:} If structured prompts increase low-KAPE activation but $\alpha$ remains unchanged, the hypothesis is falsified.
+\end{assumptionbox}
+
+
+% ============================================================================
+% SECTION 4: THE CORE PRINCIPLE
+% ============================================================================
+
+\section{The Core Principle: $K \leq M$}
+
+\subsection{The Principle in Plain Language}
+
+\begin{principlebox}[The ESL Principle in One Sentence]
+\textbf{Don't claim more than you can prove.}
+\end{principlebox}
+
+
+\subsection{Formal Definition}
+
+Let $C$ be an assertive claim about an empirical phenomenon. We define:
+
+\begin{principlebox}[The ESL Principle]
+\begin{equation}
+K(C) \leq M(C)
+\end{equation}
+where:
+\begin{itemize}
+    \item $K(C)$ = \textbf{Claim Strength} --- the degree of certainty, generality, causality, novelty, and practical implication conveyed by the linguistic formulation
+    \item $M(C)$ = \textbf{Evidence Strength} --- the empirical robustness of the underlying phenomenon
+\end{itemize}
+Both $K$ and $M$ are scaled from 0 to 1, enabling direct comparison.
+\end{principlebox}
+
+
+\subsection{The Alignment Gap}
+
+We define the \textbf{alignment gap} as:
+\begin{equation}
+\Delta = K(C) - M(C)
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Alignment classification based on $\Delta = K - M$}
+\begin{tabular}{lll}
+\toprule
+\textbf{$\Delta$ Range} & \textbf{Status} & \textbf{Interpretation} \\
+\midrule
+$\Delta \leq 0$ & Understatement & Conservative; could claim more \\
+$0 < \Delta \leq 0.10$ & Aligned & Claim matches evidence \\
+$0.10 < \Delta \leq 0.25$ & Minor Overclaiming & Hedging recommended \\
+$\Delta > 0.25$ & Significant Overclaiming & Correction required \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Concrete Examples}
+
+\begin{table}[H]
+\centering
+\caption{ESL analysis of claims about psychological phenomena}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Claim} & \textbf{K} & \textbf{M} & \textbf{$\Delta$} & \textbf{Verdict} \\
+\midrule
+``Ego depletion is a robust effect'' & 0.85 & 0.15 & +0.70 & Severe overclaim \\
+``Anchoring robustly affects judgment'' & 0.80 & 0.92 & $-0.12$ & Slightly understated \\
+``Power posing may affect confidence'' & 0.50 & 0.08 & +0.42 & Still overclaiming \\
+``Loss aversion influences decisions'' & 0.75 & 0.82 & $-0.07$ & Well calibrated \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Philosophical Foundation}
+
+The ESL principle operationalizes Grice's \textbf{Maxim of Quality} from the Cooperative Principle:
+\begin{quote}
+``Do not say what you believe to be false.\\
+Do not say that for which you lack adequate evidence.''
+
+--- H.P. Grice, \emph{Logic and Conversation} (1975)
+\end{quote}
+
+
+% ============================================================================
+% SECTION 4: M-SCORES
+% ============================================================================
+
+\section{M-Scores: Quantifying Evidence Strength}
+
+\begin{analogybox}[The Batting Average]
+In baseball, a player's batting average is a simple, objective measure of performance: hits divided by at-bats. It doesn't matter how confident the player \emph{feels}---the average is what it is.
+
+M-Scores function similarly for scientific claims. A phenomenon's M-Score is determined by how often it replicates, how stable the effect size is, and how rigorous the methodology was.
+\end{analogybox}
+
+
+\subsection{Derivation from Replication Data}
+
+M-Scores are computed from empirical replication outcomes:
+\begin{equation}
+M(P) = w_1 \cdot R + w_2 \cdot E + w_3 \cdot S + w_4 \cdot Q
+\end{equation}
+where:
+\begin{itemize}
+    \item $R$ = Replication rate (weight: 0.40)
+    \item $E$ = Effect size stability (weight: 0.30)
+    \item $S$ = Sample size adequacy (weight: 0.15)
+    \item $Q$ = Quality indicators (weight: 0.15)
+\end{itemize}
+
+
+\subsection{The Calibration Dataset: 36 Phenomena}
+
+\begin{table}[H]
+\centering
+\caption{M-Scores from the calibration dataset}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Phenomenon} & \textbf{M-Score} & \textbf{Evidence Level} & \textbf{Key Source} \\
+\midrule
+Stroop Effect & 0.98 & E7 (textbook) & 1000+ replications \\
+Anchoring Effect & 0.92 & E6 (Many Labs) & Klein et al., 2014 \\
+Loss Aversion & 0.82 & E4 (multiple) & Consistent $d \approx 0.8$ \\
+Framing Effect & 0.88 & E6 (Many Labs) & Robust across cultures \\
+Stereotype Threat & 0.45 & E3 (meta) & Significant heterogeneity \\
+Facial Feedback & 0.18 & E7 (RRR) & 17 labs, null \\
+Ego Depletion & 0.15 & E7 (RRR) & 23 labs, $d = 0.04$ \\
+Power Posing (hormones) & 0.08 & E4 (failed) & Original author retraction \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================================
+% SECTION 5: K-METRICS
+% ============================================================================
+
+\section{K-Metrics: Extracting Claim Strength}
+
+\begin{analogybox}[The Volume Knob]
+Language has ``volume controls'' for claims:
+\begin{itemize}
+    \item ``X \emph{proves} Y'' --- Volume at 10
+    \item ``X \emph{demonstrates} Y'' --- Volume at 8
+    \item ``X \emph{suggests} Y'' --- Volume at 5
+    \item ``X \emph{may possibly indicate} Y'' --- Volume at 2
+\end{itemize}
+K-Metrics measure where the author has set these linguistic ``volume controls.''
+\end{analogybox}
+
+
+\subsection{The Five Dimensions of Claim Strength}
+
+\begin{table}[H]
+\centering
+\caption{K-Metric dimensions and default weights}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Dimension} & \textbf{Abbr.} & \textbf{Description} & \textbf{Weight} \\
+\midrule
+Certainty & K1 & Epistemic confidence markers & 0.30 \\
+Generality & K2 & Scope of claimed applicability & 0.20 \\
+Causality & K3 & Causal vs. correlational language & 0.25 \\
+Novelty & K4 & Claimed novelty or surprise & 0.10 \\
+Practical & K5 & Implied practical recommendations & 0.15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Composite Score Calculation}
+
+\begin{equation}
+K(C) = \sum_{i=1}^{5} w_i \cdot K_i(C) = 0.30 \cdot K_1 + 0.20 \cdot K_2 + 0.25 \cdot K_3 + 0.10 \cdot K_4 + 0.15 \cdot K_5
+\end{equation}
+
+
+\subsection{Worked Example}
+
+Consider: ``Our study \emph{demonstrates} that power posing \emph{causes} significant increases in testosterone in \emph{all} participants, representing a \emph{breakthrough} finding that clinicians \emph{should incorporate} into practice.''
+
+\begin{table}[H]
+\centering
+\caption{K-Score extraction for overclaiming statement}
+\begin{tabular}{llcl}
+\toprule
+\textbf{Dimension} & \textbf{Marker} & \textbf{Score} & \textbf{Reasoning} \\
+\midrule
+K1 (Certainty) & ``demonstrates'' & 0.80 & Strong epistemic commitment \\
+K2 (Generality) & ``all participants'' & 0.95 & Universal scope claim \\
+K3 (Causality) & ``causes'' & 1.00 & Direct causal language \\
+K4 (Novelty) & ``breakthrough'' & 0.90 & High novelty claim \\
+K5 (Practical) & ``should incorporate'' & 0.85 & Strong recommendation \\
+\midrule
+\textbf{Composite K} & & \textbf{0.87} & Severe overclaim ($\Delta = +0.79$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================================
+% SECTION 6: EMPIRICAL VALIDATION
+% ============================================================================
+
+\section{Empirical Validation}
+
+\begin{analogybox}[The Calibration Test]
+Consider calibrating thermometers. You place them in water at a known temperature and check their readings. If three thermometers from different manufacturers all read 99.9°C, you can be confident they are well-calibrated.
+
+Our validation works similarly. We have phenomena with known replication outcomes. We ask three independently trained LLMs to estimate these outcomes. If they all converge on the same estimates---and those estimates match reality---we have demonstrated calibration.
+
+\textbf{The result: $r = 0.999$.} This is near-perfect calibration.
+\end{analogybox}
+
+
+\subsection{Cross-Model Calibration: The Core Test}
+
+\begin{table}[H]
+\centering
+\caption{Cross-model calibration results. All correlations significant at $p < 0.001$.}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Correlation ($r$)} & \textbf{MAE} & \textbf{Within $\pm 0.10$} & \textbf{Max Error} \\
+\midrule
+Claude & 0.999 & 0.008 & 100\% & 0.03 \\
+Gemini & 0.998 & 0.012 & 97\% & 0.05 \\
+GPT-4 & 0.997 & 0.015 & 94\% & 0.07 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Overclaiming Reduction: The Practical Test}
+
+\begin{table}[H]
+\centering
+\caption{Overclaiming reduction for phenomena with $M < 0.25$}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Condition} & \textbf{Mean K} & \textbf{Mean $\Delta$} & \textbf{Status} \\
+\midrule
+Without ESL guidance & 0.72 & +0.34 & Significant overclaiming \\
+With ESL guidance & 0.27 & +0.02 & Aligned \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ESL guidance reduces overclaiming by \textbf{94\%} (from $\Delta = +0.34$ to $\Delta = +0.02$).
+
+
+% ============================================================================
+% SECTION 7: THE KEY INSIGHT
+% ============================================================================
+
+\section{The Key Insight: Latent Epistemic Competence in LLMs}
+
+\textbf{Large Language Models already possess the knowledge required for epistemic calibration}---they simply need to be asked correctly.
+
+\begin{analogybox}[The Multilingual Colleague]
+Imagine a colleague fluent in five languages. When you speak in English, they respond in English. When you speak in German, they respond in German. The knowledge of all languages is always present---what changes is which language gets \emph{activated} by the context.
+
+LLMs are similar. They contain ``modes'' for different communication types: marketing mode, academic mode, calibrated mode. When asked to ``write a compelling abstract,'' marketing mode activates. When given ESL guidance, calibrated mode activates.
+
+The knowledge is the same. The activation is different.
+\end{analogybox}
+
+
+\subsection{What LLMs Already Know}
+
+\begin{enumerate}
+    \item \textbf{Replication outcomes are in the training data.} Major replication failures have been extensively discussed.
+    \item \textbf{Meta-scientific discourse is in the training data.} Discussions about the replication crisis, p-hacking, publication bias.
+    \item \textbf{Linguistic hedging norms are in the training data.} The distinction between ``proves'' and ``suggests.''
+    \item \textbf{The $K \leq M$ principle is implicitly known.} When asked ``Is this claim too strong?'', LLMs can often identify overclaiming.
+\end{enumerate}
+
+
+\subsection{Training vs. Activation: A Fundamental Distinction}
+
+\begin{termbox}[LLM vs. System]
+\textbf{LLM (Large Language Model):} The trained neural network weights ($\theta$). This is what gets modified during training.
+
+\textbf{System/Model:} The complete deployment that \emph{uses} an LLM, including: system prompt, user context, tools, memory, safety layers.
+
+When we prompt, we interact with a \emph{system}, not directly with an LLM.
+\end{termbox}
+
+\begin{table}[H]
+\centering
+\caption{Training vs. Activation: Two fundamentally different interventions}
+\begin{tabular}{p{3cm}p{5cm}p{5cm}}
+\toprule
+\textbf{Dimension} & \textbf{Training (LLM Modification)} & \textbf{ESL (System Modification)} \\
+\midrule
+What changes? & LLM parameters ($\theta$) permanently & System context; LLM unchanged \\
+Requirements & Training data, compute, model access & Text only (system prompt) \\
+Persistence & Permanent until further training & Session-specific \\
+Risk & Catastrophic forgetting & None (LLM unchanged) \\
+Reversibility & Difficult; requires retraining & Trivial; modify the prompt \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Empirical Demonstration}
+
+\begin{table}[H]
+\centering
+\caption{K-scores with and without ESL guidance}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Claim Topic} & \textbf{Without ESL} & \textbf{With ESL} & \textbf{Change} \\
+\midrule
+Ego depletion & $K = 0.82$ & $K = 0.35$ & ``is real'' $\rightarrow$ ``remains contested'' \\
+Power posing & $K = 0.78$ & $K = 0.25$ & ``increases'' $\rightarrow$ ``was initially reported to'' \\
+Anchoring & $K = 0.65$ & $K = 0.75$ & ``may influence'' $\rightarrow$ ``robustly affects'' \\
+Social priming & $K = 0.75$ & $K = 0.30$ & ``demonstrates'' $\rightarrow$ ``early studies suggested'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ESL guidance does not make LLMs uniformly more cautious. It \textbf{calibrates} them---weakening claims about contested findings while maintaining claims about robust phenomena.
+
+
+\subsection{Formal Characterization}
+
+Training changes the LLM's conditional distribution:
+\begin{equation}
+P_{\text{trained}}(\text{output} \mid \text{input}; \theta') \neq P_{\text{original}}(\text{output} \mid \text{input}; \theta)
+\end{equation}
+
+ESL changes only the system's conditioning context:
+\begin{equation}
+P(\text{output} \mid \text{input}, \text{ESL}; \theta) = P(\text{output} \mid \text{input}'; \theta)
+\end{equation}
+where $\text{input}' = \text{input} + \text{ESL framework}$.
+
+\begin{principlebox}[Core Thesis]
+\textbf{ESL is not a knowledge base---it is a system-level activation function.} The framework does not modify the LLM (weights remain unchanged). Instead, it configures the system to activate the LLM's latent epistemic competence.
+\end{principlebox}
+
+
+% Include remaining sections from separate file
+\input{ESL_Paper_v12_part2}
+
+\end{document}
