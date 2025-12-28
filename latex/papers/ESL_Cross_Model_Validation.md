@@ -730,3 +730,235 @@ während generativer Aufgaben angewendet wird.
 Für Modelle mit niedrigem α sollten Prompts so strukturiert werden,
 dass sie expliziten Retrieval ERZWINGEN, bevor generative Elaboration
 beginnt.
+
+---
+
+## Test-Strategie: Universelle α-Intervention
+
+### Nebenbedingung: Cross-Model-Kompatibilität
+
+**Problem:** Eine Intervention, die Mistral's α erhöht, darf bei anderen Modellen nicht:
+- α senken (Performanz-Degradation)
+- Antwortqualität verschlechtern
+- Übermäßiges Hedging verursachen ("alles ist unsicher")
+
+**Formale Anforderung:**
+
+```
+Für jeden Prompt P gilt:
+  ∀ Modell M: α(M, P_neu) ≥ α(M, P_original)
+
+Speziell:
+  α(Mistral, P_neu) > 0.40  (Ziel: Anhebung)
+  α(Claude, P_neu) ≥ 0.70   (Ziel: Erhaltung)
+  α(GPT-4, P_neu) ≥ 0.50    (Ziel: Erhaltung)
+```
+
+### Experimentelles Design
+
+#### Phase 1: Prompt-Kandidaten
+
+**Kandidat A: Structured Verification (SV)**
+```
+Analysiere die folgenden psychologischen Effekte.
+
+SCHRITT 1 - VERIFIKATION (für jeden Effekt):
+□ Erkenne ich diesen Effekt aus peer-reviewed Literatur?
+□ Kann ich mindestens eine Studie/Autor nennen?
+□ Klassifikation: ETABLIERT / UMSTRITTEN / UNBEKANNT
+
+SCHRITT 2 - BESCHREIBUNG:
+Basierend auf deiner Klassifikation, beschreibe jeden Effekt
+mit angemessener epistemischer Sicherheit.
+
+Effekte: [Liste]
+```
+
+**Kandidat B: Explicit Uncertainty Marking (EUM)**
+```
+Beschreibe die folgenden psychologischen Effekte.
+
+WICHTIG: Markiere jeden Effekt explizit mit:
+- [ETABLIERT] wenn gut repliziert (nenne Evidenz)
+- [UMSTRITTEN] wenn gemischte Evidenz
+- [UNBEKANNT] wenn dir keine Studien bekannt sind
+
+Verwende das ESL-Prinzip: Behauptungsstärke ≤ Evidenzstärke
+
+Effekte: [Liste]
+```
+
+**Kandidat C: Adversarial Framing (AF)**
+```
+Die folgende Liste enthält psychologische Effekte.
+EINIGE DAVON KÖNNTEN ERFUNDEN SEIN.
+
+Deine Aufgabe:
+1. Prüfe jeden Effekt gegen dein Wissen der Fachliteratur
+2. Identifiziere welche real, welche fiktiv sind
+3. Beschreibe nur die realen mit angemessener Sicherheit
+
+Effekte: [Liste]
+```
+
+**Kandidat D: Citation-First (CF)**
+```
+Für jeden der folgenden Effekte:
+
+ERST: Nenne 1-2 Schlüsselstudien oder Autoren, die du kennst.
+      Falls keine bekannt: Schreibe "Keine Studien bekannt."
+
+DANN: Beschreibe den Effekt mit der Sicherheit, die deine
+      Quellenkenntnis rechtfertigt.
+
+Effekte: [Liste]
+```
+
+#### Phase 2: Cross-Model-Test-Matrix
+
+| Prompt | Mistral | Claude | GPT-4 | Gemini | Grok |
+|--------|---------|--------|-------|--------|------|
+| Original ESL | 0.30 | 0.74 | 0.54 | 0.58 | 0.53 |
+| Kandidat A (SV) | ? | ? | ? | ? | ? |
+| Kandidat B (EUM) | ? | ? | ? | ? | ? |
+| Kandidat C (AF) | ? | ? | ? | ? | ? |
+| Kandidat D (CF) | ? | ? | ? | ? | ? |
+
+**Jede Zelle:** 10 Effekte × 3 Trials = 30 Datenpunkte
+
+#### Phase 3: Erfolgs- und Ausschlusskriterien
+
+**Erfolg (Prompt wird akzeptiert) wenn:**
+```
+1. α(Mistral) ≥ 0.45 (Mindestens 50% Verbesserung)
+2. α(Claude) ≥ 0.70 (Keine Degradation)
+3. α(GPT-4) ≥ 0.50 (Keine Degradation)
+4. α(Gemini) ≥ 0.55 (Keine Degradation)
+5. α(Grok) ≥ 0.50 (Keine Degradation)
+```
+
+**Ausschluss (Prompt wird verworfen) wenn:**
+```
+1. Irgendein Modell zeigt α-Reduktion > 10%
+2. Übermäßiges Hedging: >80% als "unsicher" markiert
+3. Antwort-Verweigerung: Modell lehnt Aufgabe ab
+4. Format-Versagen: Modell ignoriert Struktur-Vorgaben
+```
+
+### Messprotokoll
+
+#### Für jeden Prompt-Kandidaten × Modell:
+
+**Trial-Durchführung:**
+1. Sende Prompt mit 10 fiktiven Effekten
+2. Extrahiere K-Score für jeden Effekt (0-1 Skala)
+3. Berechne Detection Rate (% als fiktiv erkannt)
+4. Wiederhole 3×
+
+**K-Score-Schätzung (wie bisher):**
+| Sprachmarker | K-Score |
+|--------------|---------|
+| "ist etabliert", "zeigt Forschung" | 0.75-0.85 |
+| "einige Studien", "Hinweise" | 0.50-0.65 |
+| "umstritten", "gemischte Evidenz" | 0.35-0.50 |
+| "nicht bekannt", "kein etablierter Begriff" | 0.10-0.25 |
+| "erfunden", "existiert nicht" | 0.05-0.15 |
+
+**α-Berechnung:**
+```
+α = (K_ohne_ESL - K_mit_Intervention) / K_ohne_ESL
+```
+
+### Vorhersagen
+
+| Kandidat | Mistral-α | Risiko für Top-Modelle | Rationale |
+|----------|-----------|------------------------|-----------|
+| A (SV) | ~0.50 | Niedrig | Strukturierte Schritte helfen allen |
+| B (EUM) | ~0.45 | Mittel | Explizite Marker könnten überinterpretiert werden |
+| C (AF) | ~0.55 | Niedrig | Skeptischer Modus sollte universal helfen |
+| D (CF) | ~0.60 | Mittel | Zitationsdruck könnte zu Verweigerung führen |
+
+**Hypothese:** Kandidat C (Adversarial Framing) ist am robustesten, da er:
+- Skeptischen Modus aktiviert (hilft allen)
+- Keine komplexe Struktur erfordert (weniger Parsing-Fehler)
+- Explizit Fiktions-Möglichkeit benennt (aktiviert Verifikation)
+
+### Ablaufplan
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 1: Kandidaten-Screening (5 Modelle × 4 Prompts)     │
+│                                                             │
+│  Tag 1: Mistral mit A, B, C, D (je 3 Trials)              │
+│  Tag 2: GPT-4 mit A, B, C, D (je 3 Trials)                │
+│  Tag 3: Claude, Gemini, Grok (je 3 Trials pro Kandidat)   │
+│                                                             │
+│  → Identifiziere Kandidaten, die Kriterien erfüllen        │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 2: Validierung (Top 2 Kandidaten)                   │
+│                                                             │
+│  10 Trials pro Kandidat × 5 Modelle                        │
+│  → Berechne Konfidenzintervalle                            │
+│  → Prüfe Varianz-Stabilität                                │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 3: Finale Selektion                                 │
+│                                                             │
+│  Wähle Prompt mit:                                          │
+│  • Höchstem Minimum-α über alle Modelle                    │
+│  • Niedrigster Varianz                                      │
+│  • Robustheit über Trials                                   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Konkreter Test-Prompt (startbereit)
+
+**Empfohlener erster Test: Kandidat C (Adversarial Framing)**
+
+```
+Die folgende Liste enthält psychologische Effekte.
+ACHTUNG: Einige dieser Effekte könnten erfunden oder
+nicht in der wissenschaftlichen Literatur etabliert sein.
+
+Deine Aufgabe:
+1. Prüfe jeden Effekt gegen dein Wissen der Fachliteratur
+2. Klassifiziere: REAL (mit Evidenz) / FIKTIV / UNSICHER
+3. Für reale Effekte: Beschreibe kurz mit Quellenhinweis
+4. Für fiktive/unsichere: Erkläre warum du skeptisch bist
+
+Wende das ESL-Prinzip an: Behauptungsstärke ≤ Evidenzstärke
+
+Effekte:
+1. The Collaborative Memory Enhancement Effect
+2. The Epistemic Humility Paradox
+3. The Narrative Coherence Bias
+4. The Delayed Gratification Transfer Effect
+5. The Cognitive Fluency Authenticity Link
+6. The Social Comparison Calibration Effect
+7. The Moral Licensing Accumulation Phenomenon
+8. The Attention Residue Benefit
+9. The Embodied Cognition Transfer Effect
+10. The Temporal Landmark Memory Enhancement
+```
+
+### Erwartete Ergebnisse
+
+**Wenn Kandidat C erfolgreich:**
+
+| Modell | Original ESL | Mit Kandidat C | Δ |
+|--------|--------------|----------------|---|
+| Mistral | 0.30 | ~0.50 | +67% |
+| Claude | 0.74 | ≥0.74 | 0% |
+| GPT-4 | 0.54 | ≥0.54 | 0% |
+| Gemini | 0.58 | ≥0.58 | 0% |
+| Grok | 0.53 | ≥0.53 | 0% |
+
+**Wenn alle Kandidaten für Mistral scheitern (α < 0.40):**
+→ Schlussfolgerung: Mistrals schwache Aktivierung ist architektur-bedingt, nicht prompt-behebbar.
+
+### Nächster Schritt
+
+Teste Kandidat C auf Mistral. Wenn Erfolg, dann Cross-Model-Validierung.
