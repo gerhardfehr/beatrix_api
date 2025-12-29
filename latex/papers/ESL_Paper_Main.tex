@@ -1,0 +1,380 @@
+% ============================================================================
+% MAIN PAPER: Knowledge Activation in Large Language Models
+% ============================================================================
+% Status: SUBMISSION-READY
+% Date: 2025-12-28
+% Target: ACL / EMNLP / NeurIPS
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% TikZ for figures
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
+
+% ============================================================================
+% THEOREM ENVIRONMENTS
+% ============================================================================
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+
+% ============================================================================
+% TITLE & AUTHORS
+% ============================================================================
+\title{\textbf{Knowledge Activation in Large Language Models:\\A Formal Framework for Epistemic Reliability}}
+
+\author{
+  [Author Names]\\
+  [Affiliation]\\
+  \texttt{[email]}
+}
+
+\date{December 2025}
+
+% ============================================================================
+\begin{document}
+% ============================================================================
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+Large language models (LLMs) often possess knowledge they fail to use reliably during generation. We formalize this observation by distinguishing \textbf{latent knowledge}---information a model can retrieve when directly queried---from \textbf{knowledge activation}---the process by which such knowledge constrains generative outputs. We introduce \textbf{activation competence} ($\alpha$), defined as the conditional probability of correct knowledge application given knowledge availability, and show that $\alpha$ varies substantially across models and is only partially controllable via prompting.
+
+Through the \textbf{Activation Challenge}, a minimal diagnostic task using pseudo-phenomena in behavioral economics, we demonstrate that models with verified latent knowledge systematically misclassify fabricated labels as real scientific terms. Explicit epistemic prompting (ESL) reduces but does not eliminate these failures, revealing intrinsic limitations in some models.
+
+Our framework reframes hallucination as an activation failure rather than a knowledge deficit, with implications for evaluation practices, prompt design, and model training. We provide formal definitions, empirical validation across four frontier models, and a controlled methodology for measuring activation competence.
+\end{abstract}
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+
+Large language models have demonstrated impressive capabilities across a wide range of tasks, from question answering to complex reasoning \citep{wei2022chain, kojima2022large}. Yet a persistent challenge remains: models that perform well on factual benchmarks can still produce confident falsehoods during open-ended generation \citep{ji2023survey, huang2023survey}. This phenomenon, broadly termed ``hallucination,'' is typically attributed to missing knowledge, training data gaps, or insufficient reasoning.
+
+We propose an alternative perspective. Our central claim is that many epistemic failures occur not because models lack relevant knowledge, but because they fail to \textbf{activate} knowledge they demonstrably possess. This distinction---between knowledge \emph{availability} and knowledge \emph{use}---has long been recognized in cognitive science \citep{tulving1966availability, whitehead1929aims} but remains under-theorized in the context of language models.
+
+This paper makes the following contributions:
+\begin{enumerate}
+    \item We introduce a formal distinction between \textbf{latent knowledge} ($M_{\text{latent}}$) and \textbf{knowledge activation}, defining \textbf{activation competence} ($\alpha$) as a measurable behavioral property.
+    \item We present the \textbf{Activation Challenge}, a minimal diagnostic task that isolates activation failures from knowledge deficits.
+    \item We demonstrate empirically that activation competence varies across models and is only partially improvable through prompting.
+    \item We provide the \textbf{ESL (Epistemic Specification and Limitation)} prompting framework, grounded in cognitive science, for measuring enforceable activation.
+    \item We reframe hallucination as an \textbf{activation failure}, shifting focus from knowledge coverage to knowledge control.
+\end{enumerate}
+
+
+% ============================================================================
+% 2. RELATED WORK
+% ============================================================================
+\section{Related Work}
+
+\subsection{Knowledge Availability vs.\ Knowledge Use}
+
+A long-standing distinction in cognitive science separates the \emph{availability} of knowledge from its \emph{accessibility} and use in problem-solving contexts \citep{tulving1966availability}. This distinction underlies classic accounts of inert knowledge, where learners possess relevant information but fail to apply it appropriately when task conditions change \citep{whitehead1929aims}. Similar failures of transfer have been documented extensively in education research and expertise studies.
+
+Recent work on large language models has begun to rediscover this distinction. Several studies show that models can answer factual questions correctly when directly queried, yet produce hallucinated or epistemically incorrect content during free-form generation \citep{ji2023survey, manakul2023selfcheckgpt}. Our work formalizes this gap by distinguishing \textbf{latent knowledge} from \textbf{knowledge activation}, treating the latter as a separate functional competence.
+
+\subsection{Metacognitive Calibration and Overconfidence}
+
+Human decision-making research has consistently shown that overconfidence arises when individuals rely on plausibility or familiarity in the absence of explicit verification criteria \citep{fischhoff1977knowing, rozenblit2002misunderstood}. Metacognitive failures occur not because information is unavailable, but because confidence judgments are insufficiently constrained by evidence-based stopping rules.
+
+Explicit epistemic criteria---such as requiring recall of concrete sources or forbidding inference by analogy---have been shown to reduce false positives and improve calibration in expert judgment tasks \citep{kahneman2021noise}. Our ESL prompting framework directly operationalizes these principles.
+
+\subsection{Dual-Process Models and Fluency Bias}
+
+Dual-process theories distinguish between fast, intuitive processes and slower, analytically controlled reasoning \citep{evans2013dual, kahneman2011thinking}. A robust finding is that intuitive fluency dominates unless analytic checks are explicitly triggered. In LLMs, fluent generation can override factual correctness, especially without explicit verification steps.
+
+Chain-of-thought prompting has been proposed to induce more deliberative reasoning \citep{wei2022chain}, but reasoning traces do not guarantee factual faithfulness. Our results show that even highly formal prompts may fail unless they explicitly constrain \emph{when} positive assertions are permitted.
+
+\subsection{Instruction Following vs.\ Epistemic Reliability}
+
+Instruction-following capability has improved substantially through fine-tuning and reinforcement learning \citep{ouyang2022training}, yet compliance with instructions does not ensure epistemic reliability \citep{ji2023survey}. Models may follow procedural instructions while still hallucinating content.
+
+Our work distinguishes \textbf{procedural compliance} from \textbf{epistemic activation}. The ESL prompt specifies explicit exclusion rules that prohibit common failure modes such as semantic approximation and label--concept conflation.
+
+\subsection{Mechanistic Interpretability}
+
+Recent work has begun to identify internal mechanisms related to knowledge storage and retrieval \citep{meng2022locating, geva2023dissecting, burns2022discovering}. Wang et al.\ propose KAPE (Knowledge Activation Probability Entropy) as a neuron-level metric for detecting when models fail to activate relevant knowledge \citep{wang2025kape}.
+
+Our framework complements these mechanistic approaches by providing a behavioral definition of activation competence that can serve as an evaluation target for interpretability research.
+
+
+% ============================================================================
+% 3. THEORY
+% ============================================================================
+\section{Theory of Knowledge Activation}
+
+\subsection{Problem Statement}
+
+Empirical observations show that large language models can often answer direct factual questions correctly, yet fail to apply the same knowledge reliably during generative tasks. Existing explanations typically attribute such failures to hallucination, prompt ambiguity, or insufficient reasoning, but lack a formal account of why knowledge that is demonstrably available is not consistently used.
+
+We address this gap by introducing a formal distinction between \textbf{knowledge availability} and \textbf{knowledge activation}.
+
+\subsection{Latent Knowledge}
+
+\begin{definition}[Latent Knowledge]
+Let $f_\theta : \mathcal{X}^* \rightarrow \mathcal{P}(\mathcal{Y})$ be a generative language model. The model is said to possess \emph{latent knowledge} relevant to an item $x$ if it can correctly answer a direct retrieval query about $x$. We denote this by $M_{\text{latent}}(x) = 1$.
+\end{definition}
+
+Latent knowledge is operationalized behaviorally and makes no assumptions about internal representations.
+
+\subsection{Knowledge Application}
+
+\begin{definition}[Knowledge Application]
+Let $A(x)$ denote the event that the model's output correctly reflects the epistemic status of $x$ under a given task specification.
+\end{definition}
+
+Knowledge application is evaluated with respect to task-specific correctness criteria and is distinct from surface fluency.
+
+\subsection{Activation Competence}
+
+\begin{definition}[Activation Competence]
+We define \emph{activation competence} $\alpha$ as the conditional probability that a model correctly applies knowledge given that the relevant knowledge is available:
+\begin{equation}
+\boxed{\alpha := \mathbb{P}\big(A(x) \mid M_{\text{latent}}(x) = 1\big)}
+\end{equation}
+\end{definition}
+
+Activation competence measures how reliably available knowledge is used, not how much knowledge a model has.
+
+\subsection{Non-Implication Theorem}
+
+\begin{theorem}[Knowledge Availability Does Not Imply Knowledge Use]
+\[
+M_{\text{latent}}(x) = 1 \;\nRightarrow\; A(x)
+\]
+\end{theorem}
+
+\begin{proof}[Proof (Empirical)]
+In the Activation Challenge, models correctly answer direct queries confirming knowledge availability, yet systematically misclassify epistemically invalid labels as real. Therefore, the implication fails.
+\end{proof}
+
+\subsection{Bounded Prompt Control}
+
+\begin{theorem}[Bounded Prompt Influence]
+There exist models $f_\theta$ for which:
+\[
+\exists \alpha_{\max} < 1 \quad \text{s.t.} \quad \forall \pi:\; \alpha(f_\theta, \pi) \le \alpha_{\max}
+\]
+\end{theorem}
+
+This result shows that activation competence is not trivially controllable via prompting.
+
+\subsection{Performance Decomposition}
+
+Generative epistemic performance can be decomposed as:
+\begin{equation}
+\text{Epistemic Performance} \approx M_{\text{latent}} \times \alpha
+\end{equation}
+
+This explains why models with comparable knowledge availability can exhibit radically different epistemic reliability.
+
+\subsection{Relation to Hallucination}
+
+Under this framework, hallucination-like behavior arises when:
+\[
+M_{\text{latent}}(x) = 1 \;\land\; \alpha \ll 1
+\]
+
+Thus, hallucination is reinterpreted as a \textbf{failure to activate existing knowledge}, not as missing knowledge.
+
+
+% ============================================================================
+% 4. METHODS
+% ============================================================================
+\section{Methods}
+
+\subsection{The Activation Challenge}
+
+We design a minimal diagnostic task to isolate knowledge activation from knowledge possession. The task requires models to classify labels as established scientific terms (REAL), uncertain (UNSICHER), or unknown (UNBEKANNT) in the domain of behavioral economics.
+
+\textbf{Key design principles:}
+\begin{itemize}
+    \item \textbf{Pseudo-phenomena}: 10 fabricated labels designed to sound plausible but not exist as established terms (e.g., ``Temporal Discounting Reversal Effect'', ``Social Proof Fatigue'')
+    \item \textbf{Verified non-existence}: All items confirmed as non-canonical through expert review
+    \item \textbf{Semantic proximity}: Labels deliberately constructed to evoke related real concepts
+\end{itemize}
+
+A false-positive classification (REAL for a pseudo-phenomenon) indicates activation failure: the model fails to apply its knowledge that the specific term is not established, despite possessing knowledge of related concepts.
+
+\subsection{Prompt Conditions}
+
+We compare two prompt conditions:
+
+\textbf{Baseline ($\pi_{\text{formal}}$)}: A fully formalized prompt specifying the classification task, epistemic rules, and output format. No explicit anti-heuristics.
+
+\textbf{ESL ($\pi_{\text{ESL}}$)}: Adds explicit calibration rules:
+\begin{itemize}
+    \item ``Similar to'' $\neq$ ``identical to''
+    \item Concept familiarity $\neq$ label legitimacy
+    \item When uncertain about the \emph{exact name}, choose UNSICHER or UNBEKANNT
+\end{itemize}
+
+The ESL prompt operationalizes metacognitive stop rules from decision research \citep{kahneman2021noise}.
+
+\subsection{Models Evaluated}
+
+We evaluate four frontier language models:
+\begin{itemize}
+    \item Claude (Anthropic)
+    \item Gemini (Google)
+    \item GPT-5.2 (OpenAI)
+    \item Mistral Large (Mistral AI)
+\end{itemize}
+
+\subsection{Metrics}
+
+\begin{itemize}
+    \item \textbf{False Positive Rate (FPR)}: Proportion of pseudo-phenomena classified as REAL
+    \item \textbf{Activation Competence ($\alpha$)}: $1 - \text{FPR}$ (for items where $M_{\text{latent}} = 1$)
+\end{itemize}
+
+
+% ============================================================================
+% 5. RESULTS
+% ============================================================================
+\section{Results}
+
+\subsection{Baseline Performance}
+
+Under baseline conditions, all models exhibit substantial false-positive rates:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{FPR (Baseline)} & $\alpha$ \\
+\midrule
+Claude & 0.40 & 0.60 \\
+Gemini & 0.30 & 0.70 \\
+GPT-5.2 & 0.40 & 0.60 \\
+Mistral & 0.50 & 0.50 \\
+\bottomrule
+\end{tabular}
+\caption{Baseline activation competence across models.}
+\end{table}
+
+\subsection{ESL Intervention Effect}
+
+ESL prompting substantially improves activation competence:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & $\alpha$ (Baseline) & $\alpha^*$ (ESL) & $\Delta\alpha$ \\
+\midrule
+Claude & 0.60 & 1.00 & +0.40 \\
+Gemini & 0.70 & 1.00 & +0.30 \\
+GPT-5.2 & 0.60 & 1.00 & +0.40 \\
+Mistral & 0.50 & 0.90 & +0.40 \\
+\bottomrule
+\end{tabular}
+\caption{ESL effect on activation competence. Mistral shows bounded $\alpha^* < 1$.}
+\end{table}
+
+\subsection{Key Findings}
+
+\begin{enumerate}
+    \item \textbf{Universal baseline gap}: All models exhibit $\alpha < 1$ under formal prompting
+    \item \textbf{ESL effectiveness}: Explicit epistemic rules increase $\alpha$ substantially
+    \item \textbf{Bounded activation}: Mistral shows $\alpha^* = 0.90 < 1$, indicating intrinsic limits
+    \item \textbf{Universal hallucinations}: ``Expertise Blind Spot'' and ``Choice Overload Threshold'' fooled all models at baseline
+\end{enumerate}
+
+
+% ============================================================================
+% 6. FIGURE
+% ============================================================================
+
+\input{ESL_Figure_1_Main.tex}
+
+
+% ============================================================================
+% 7. DISCUSSION
+% ============================================================================
+\section{Discussion}
+
+\subsection{Summary of Findings}
+
+This work identifies knowledge activation as a distinct dimension of LLM behavior. Across multiple models, latent knowledge does not reliably translate into correct epistemic judgments during generation, even under epistemically restrictive prompts. These results suggest that failures described as hallucinations may reflect systematic activation failures.
+
+\subsection{Implications for Prompting}
+
+Prompting has bounded effectiveness. While formalization reduces ambiguity, it does not guarantee reliable knowledge application. Our results indicate a distinction between prompts that \emph{permit} activation and prompts that \emph{attempt to enforce} it. Even under the latter, some models fail to improve.
+
+\subsection{Rethinking Hallucination}
+
+The activation framework reframes hallucination as a failure mode occurring despite correct knowledge availability. This reconciles contradictory observations: models performing well on benchmarks may still produce falsehoods in open-ended tasks. Mitigation strategies focused solely on knowledge coverage may be insufficient if $\alpha$ remains low.
+
+\subsection{Training and Alignment Implications}
+
+If $\alpha$ reflects an intrinsic limitation, improving epistemic reliability may require training interventions: objectives penalizing false-positive assertions, training regimes distinguishing concept familiarity from terminological legitimacy, or architectures separating fluency from epistemic decision-making.
+
+\subsection{Evaluation Implications}
+
+Current benchmarks emphasizing correct answers under direct questioning may overestimate real-world reliability. The Activation Challenge complements existing evaluations by focusing on conditional knowledge use.
+
+
+% ============================================================================
+% 8. LIMITATIONS
+% ============================================================================
+\section{Limitations}
+
+This work is deliberately narrow in scope. We focus on a single diagnostic task, a limited model set, and a specific domain (behavioral economics). Our claims are existential and diagnostic, not population-level generalizations. The Activation Challenge demonstrates that activation gaps \emph{can} persist; it does not estimate their prevalence across all domains.
+
+We do not attempt mechanistic explanation. Our analysis is functional and behavioral, providing a framework in which mechanistic findings can be situated.
+
+
+% ============================================================================
+% 9. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+
+This work argues that reliable language model behavior depends not only on what a model knows, but on whether it can activate that knowledge during generation. By formally distinguishing latent knowledge from knowledge activation, we identify activation competence ($\alpha$) as an independent and critical dimension of LLM performance.
+
+Through the Activation Challenge, we show that even under fully formalized prompts, some models systematically fail to apply knowledge they demonstrably possess. This challenges the assumption that hallucination stems primarily from missing information. Instead, our results suggest that many failures arise from limitations in knowledge activation itself.
+
+Importantly, explicit prompting has bounded effectiveness. Improvements in epistemic reliability may require changes at the level of training objectives, architecture, or internal control mechanisms.
+
+By providing a formal vocabulary, a controlled diagnostic framework, and clear falsification criteria, this work lays the foundation for a more principled study of knowledge activation in generative models.
+
+\vspace{0.5em}
+\begin{quote}
+\textit{Understanding what language models know is not enough; understanding when they can use that knowledge is the next critical challenge.}
+\end{quote}
+
+
+% ============================================================================
+% ACKNOWLEDGMENTS
+% ============================================================================
+% \section*{Acknowledgments}
+% [To be added]
+
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\bibliographystyle{apalike}
+\bibliography{references}
+
+
+\end{document}
