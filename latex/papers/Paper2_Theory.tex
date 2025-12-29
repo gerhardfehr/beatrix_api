@@ -1,8 +1,8 @@
 % ============================================================================
-% PAPER 2: Epistemic Reliability as a System Property
+% PAPER 2: From Description to Intervention
 % ============================================================================
 % Type: PURE THEORY PAPER
-% Status: Draft
+% Status: Complete Draft
 % Position: Between Paper 1 (Diagnosis) and Paper 3 (System)
 % ============================================================================
 
@@ -32,7 +32,7 @@
 % ============================================================================
 % TITLE
 % ============================================================================
-\title{\textbf{Epistemic Reliability is a System Property, Not a Model Property:\\A Theoretical Framework for Knowledge Binding in Language Models}}
+\title{\textbf{From Description to Intervention:\\Why Reliable Generative AI Requires Explicit Domain Models\\and Epistemic Speech Control}}
 
 \author{
   [Author Names]\\
@@ -52,342 +52,305 @@
 % ABSTRACT
 % ============================================================================
 \begin{abstract}
-We argue that epistemic and behavioral reliability in AI systems cannot be achieved through language model capabilities alone. Building on empirical observations that prompting has bounded effectiveness, we develop a theoretical framework distinguishing \textbf{knowledge availability} from \textbf{knowledge binding}---the degree to which available knowledge deterministically constrains generation. We prove that no prompt can guarantee binding across models and tasks (Prompt Insufficiency Proposition), implying that reliability must be externalized from the language model. We introduce a three-level separation principle: epistemic control (what may be asserted), behavioral modeling (how agents act), and linguistic realization (how content is expressed) must be handled by distinct, non-interchangeable mechanisms. This reconceptualizes the language model's role: not as an epistemic agent, but as a linguistic engine whose outputs are governed by external formal modules. We do not propose a specific architecture; rather, we establish the theoretical necessity of such separation for any system claiming epistemic reliability.
+Large Language Models (LLMs) have demonstrated remarkable capabilities in generating fluent, contextually appropriate text across a wide range of domains. As a result, they are increasingly deployed in settings that involve not only descriptive summarization but also predictive and prescriptive claims about the world. However, these deployments expose a fundamental structural problem: LLMs routinely make inferential and intervention-relevant statements without explicit models of the domains they describe, and without formal constraints on the epistemic force of their language.
+
+This paper develops a minimal theoretical framework that distinguishes three classes of tasks---description, prediction, and intervention---and shows that each class imposes different modeling requirements. We argue that while descriptive tasks require epistemic control over language, predictive and intervention-oriented tasks require explicit theory-based domain models. Human behavior occupies a special role among such domains, as it is causally decisive in many real-world settings while being governed by no fixed laws.
+
+We further argue that epistemic reliability is a system-level property, not a property of language models alone, and that reliable AI systems must therefore separate linguistic generation, domain modeling, and epistemic speech licensing. Our contribution is structural rather than algorithmic: we do not propose architectures or training methods, but identify necessary components for epistemically responsible generative systems.
 \end{abstract}
+
 
 % ============================================================================
 % 1. INTRODUCTION
 % ============================================================================
 \section{Introduction}
 
-Large language models have achieved remarkable fluency and apparent knowledge across domains. Yet a growing body of evidence suggests that models possessing relevant knowledge often fail to apply it reliably during generation. This paper addresses a foundational question:
+Large Language Models are rapidly transitioning from tools for text generation to systems that participate in decision-making contexts. They summarize research, explain phenomena, forecast outcomes, and increasingly recommend actions. This expansion raises a central question: under what conditions are the claims produced by such systems epistemically legitimate?
 
-\begin{quote}
-\textit{How must epistemic and behavioral reliability be conceptualized when prompting is insufficient to guarantee correct knowledge use?}
-\end{quote}
+Much of the current discourse focuses on improving model accuracy, alignment, or training data. While important, these approaches implicitly assume that epistemic reliability is a property of the language model itself. In this paper, we argue that this assumption is false. Reliability does not arise from better language modeling alone, but from how language generation is embedded within a system that explicitly represents domain assumptions and constrains what may be asserted.
 
-Our central thesis is that \textbf{epistemic reliability is a property of systems, not of models}. This claim has several immediate consequences:
-\begin{itemize}
-    \item Activation competence ($\alpha$) should be understood as a system-level property, not an intrinsic model capability.
-    \item Prompting, regardless of sophistication, cannot guarantee that available knowledge will bind generation.
-    \item Reliable AI behavior requires external mechanisms that enforce epistemic and behavioral constraints.
-\end{itemize}
+We propose a minimal framework that distinguishes (i) \emph{what is being said}, (ii) \emph{what the statement is about}, and (iii) \emph{whether the system is entitled to say it}. This leads to a clear separation between three components: language models, domain models, and epistemic speech control.
 
-This is not an anti-LLM position. We do not claim that language models are useless or that their knowledge is illusory. Rather, we argue that the \emph{location of epistemic authority} must shift from the model to an external formal layer. Language models excel at linguistic realization; they should not be tasked with epistemic arbitration.
+\subsection{Scope and Contribution}
 
-\paragraph{Scope and Contribution.}
 This paper is purely theoretical. We do not propose architectures, training methods, or performance benchmarks. Instead, we:
 \begin{enumerate}
-    \item Formally distinguish knowledge \emph{availability} from knowledge \emph{binding}.
-    \item Prove that prompting cannot guarantee binding (Prompt Insufficiency).
-    \item Derive externalization as a logical necessity, not a design preference.
-    \item Introduce a three-level separation principle for epistemic, behavioral, and linguistic processing.
+    \item Distinguish three task classes: description, prediction, and intervention.
+    \item Show that each class imposes different modeling requirements.
+    \item Argue that human behavior requires explicit modeling when it mediates outcomes.
+    \item Establish that epistemic reliability is a system-level property.
+    \item Introduce the principle of separating linguistic generation from domain modeling and epistemic control.
 \end{enumerate}
 
 Subsequent work will demonstrate how these abstract principles can be instantiated in concrete systems.
 
 
 % ============================================================================
-% 2. BACKGROUND & MOTIVATION
+% 2. DESCRIPTION, PREDICTION, AND INTERVENTION
 % ============================================================================
-\section{Background and Motivation}
+\section{Description, Prediction, and Intervention}
 
-\subsection{The Knowledge-Action Gap}
+To clarify the modeling requirements of generative systems, we distinguish three task categories.
 
-Empirical studies consistently show that language models can answer direct factual questions correctly while failing to apply the same knowledge during generative tasks. A model that correctly identifies ``X is not an established scientific term'' when asked directly may nonetheless assert ``X is a well-known phenomenon'' during free-form generation.
+\subsection{Descriptive Tasks}
 
-This gap between knowledge \emph{possession} and knowledge \emph{use} has been documented across models, domains, and prompting strategies. It persists even under maximally explicit epistemic instructions.
-
-\subsection{The Limits of Prompting}
-
-A natural response is to improve prompts: add constraints, specify rules, require verification steps. While such interventions can reduce error rates, they cannot eliminate them. Our prior empirical work shows that even fully formalized, epistemically restrictive prompts fail to guarantee correct knowledge application in some models.
-
-This suggests a fundamental limitation: prompts are \emph{interpreted}, not \emph{executed}. The gap between instruction and behavior is probabilistic, not deterministic.
-
-\subsection{The Need for Theoretical Clarification}
-
-Current discourse conflates several distinct questions:
+Descriptive tasks answer questions such as:
 \begin{itemize}
-    \item Does the model \emph{have} the relevant knowledge?
-    \item Does the model \emph{use} the relevant knowledge?
-    \item Can the model be \emph{instructed} to use it reliably?
-    \item Can the model be \emph{guaranteed} to use it?
+    \item What is known about phenomenon $X$?
+    \item How is concept $Y$ defined in the literature?
+    \item What evidence exists for effect $Z$?
 \end{itemize}
 
-These questions require different analyses. This paper focuses on the fourth: under what conditions can knowledge use be guaranteed, and what follows when prompting cannot provide such guarantees?
+These tasks do not require the system to derive new facts about the world. Instead, they involve organizing, summarizing, and presenting existing knowledge. Crucially, however, even description involves \emph{assertive language}: statements are framed as established, uncertain, or unknown.
 
+Thus, description is not epistemically neutral. Without explicit constraints, a system may overstate consensus, conflate concepts with labels, or blur the boundary between evidence and speculation.
 
-% ============================================================================
-% 3. THE ACTIVATION BINDING PROBLEM
-% ============================================================================
-\section{The Activation Binding Problem}
+\begin{quote}
+\textbf{Requirement:} Descriptive tasks require an explicit \emph{epistemic speech model} that governs how claims are expressed, how uncertainty is marked, and how scope and confidence are signaled.
+\end{quote}
 
-\subsection{Knowledge Availability}
+\subsection{Predictive Tasks}
 
-\begin{definition}[Latent Knowledge]
-A language model $f_\theta$ possesses \emph{latent knowledge} about item $x$ if it can correctly answer a direct retrieval query about $x$. We write $M_{\text{latent}}(x) = 1$.
-\end{definition}
-
-Latent knowledge is operationalized behaviorally. We make no claims about internal representations.
-
-\subsection{Knowledge Binding}
-
-\begin{definition}[Knowledge Binding]
-Knowledge \emph{binds} generation if its presence deterministically constrains the output. We write $B(x) = 1$ when available knowledge about $x$ necessarily prevents epistemically invalid outputs concerning $x$.
-\end{definition}
-
-Binding is stronger than use. A model may \emph{sometimes} use available knowledge without that knowledge \emph{binding} generation.
-
-\subsection{The Activation Binding Coefficient}
-
-\begin{definition}[Activation Binding Coefficient]
-We define the \emph{activation binding coefficient} $\alpha$ as:
-\[
-\boxed{\alpha := \mathbb{P}\big(B(x) \mid M_{\text{latent}}(x) = 1\big)}
-\]
-the probability that available knowledge binds generation.
-\end{definition}
-
-Note the distinction from simple accuracy:
+Predictive tasks answer questions of the form:
 \begin{itemize}
-    \item $\alpha = 1$: Available knowledge always binds (deterministic constraint)
-    \item $\alpha < 1$: Available knowledge sometimes fails to bind (probabilistic)
-    \item $\alpha = 0$: Knowledge availability has no bearing on generation
+    \item What will happen if $X$ occurs?
+    \item How is outcome $Y$ expected to change under condition $Z$?
 \end{itemize}
 
-\subsection{Availability vs.\ Binding}
+Prediction introduces counterfactual reasoning. It asserts that certain outcomes follow from certain conditions. This necessarily presupposes a causal or structural relationship in the underlying domain.
 
-The central insight is that \textbf{availability does not imply binding}:
-\[
-M_{\text{latent}}(x) = 1 \;\not\Rightarrow\; B(x) = 1
-\]
+Language alone cannot justify such relationships. Plausible narratives are not derivations.
 
-A model can ``know'' something without that knowledge constraining its outputs. This is not a bug in specific models but a structural feature of how language models generate text.
-
-
-% ============================================================================
-% 4. WHY PROMPTING CANNOT GUARANTEE BINDING
-% ============================================================================
-\section{Why Prompting Cannot Guarantee Binding}
-
-\subsection{The Nature of Prompting}
-
-Prompts are linguistic instructions interpreted by the model. This interpretation is:
-\begin{itemize}
-    \item \textbf{Probabilistic}: The same prompt can yield different behaviors across runs or contexts.
-    \item \textbf{Model-dependent}: Different models interpret the same prompt differently.
-    \item \textbf{Approximative}: Models follow the ``spirit'' of instructions, not their literal execution.
-\end{itemize}
-
-\subsection{The Prompt Insufficiency Proposition}
-
-\begin{proposition}[Prompt Insufficiency]
-There exists no prompt $\pi$ such that, for all language models $f_\theta$ and all tasks $T$, relevant latent knowledge is guaranteed to bind generation:
-\[
-\nexists \pi : \forall f_\theta, T.\; M_{\text{latent}}(x) = 1 \Rightarrow B(x) = 1
-\]
-\end{proposition}
-
-\begin{proof}[Argument]
-Prompts are processed through the same probabilistic generation mechanism as other inputs. A prompt cannot create deterministic constraints because:
+\begin{quote}
+\textbf{Requirement:} Predictive tasks require:
 \begin{enumerate}
-    \item The model's response to any prompt is a probability distribution over outputs.
-    \item This distribution is shaped by training, not by the prompt alone.
-    \item No linguistic instruction can override the model's learned biases with certainty.
+    \item An explicit \emph{domain model} that supports counterfactual inference.
+    \item An \emph{epistemic speech model} to regulate the strength and framing of the prediction.
 \end{enumerate}
-Empirically, we observe that even maximally explicit prompts fail for some models on some tasks. Therefore, no universal binding guarantee exists.
-\end{proof}
-
-\subsection{Why This Matters}
-
-The Prompt Insufficiency Proposition has a crucial implication:
-
-\begin{corollary}
-If binding cannot be guaranteed through prompting, then any system requiring epistemic reliability must implement binding through mechanisms external to prompt interpretation.
-\end{corollary}
-
-This is not a design suggestion but a logical necessity.
-
-
-% ============================================================================
-% 5. EXTERNALIZING EPISTEMIC AND BEHAVIORAL CONTROL
-% ============================================================================
-\section{Externalizing Epistemic and Behavioral Control}
-
-\subsection{The Externalization Principle}
-
-From Prompt Insufficiency, we derive:
-
-\begin{quote}
-\textbf{Externalization Principle:} If binding cannot be achieved internally (via prompting), it must be achieved externally (via formal constraints that operate independently of the language model's interpretation).
 \end{quote}
 
-External binding means:
+\subsection{Intervention Tasks}
+
+Intervention tasks go further. They answer questions such as:
 \begin{itemize}
-    \item Epistemic constraints are \emph{computed}, not \emph{requested}.
-    \item The language model does not \emph{decide} what is epistemically valid.
-    \item Validity is determined by a formal module whose outputs are not subject to LLM interpretation.
+    \item What should we do to achieve outcome $Y$?
+    \item Which policy or action is preferable?
 \end{itemize}
 
-\subsection{What Externalization Is Not}
-
-Externalization does not mean:
-\begin{itemize}
-    \item Post-hoc fact-checking (which still relies on LLM generation)
-    \item Retrieval-augmented generation (which provides information but not binding)
-    \item Chain-of-thought prompting (which is still interpreted, not executed)
-    \item Fine-tuning for specific behaviors (which shifts probabilities but doesn't guarantee)
-\end{itemize}
-
-Externalization means structural prevention: the system architecture makes certain outputs impossible, not merely unlikely.
-
-\subsection{$\alpha$ as a System Property}
-
-Under externalization, we reconceptualize $\alpha$:
+Formally, intervention combines prediction with choice and normativity. It compares multiple possible actions under explicit or implicit objectives.
 
 \begin{quote}
-$\alpha$ is not an intrinsic property of a language model. It is a property of the \emph{system} in which the model operates.
+\textbf{Requirement:} Intervention tasks require:
+\begin{enumerate}
+    \item One or more \emph{domain models} to evaluate consequences.
+    \item An explicit \emph{objective or value function}.
+    \item \emph{Epistemic speech control}, because recommendations carry heightened authority and risk.
+\end{enumerate}
 \end{quote}
 
-A language model with low intrinsic $\alpha$ can be embedded in a system with $\alpha_{\text{system}} = 1$---not because the model improves, but because the system prevents unbinding.
+
+% ============================================================================
+% 3. DOMAIN MODELS AND THEIR NECESSITY
+% ============================================================================
+\section{Domain Models and Their Necessity}
+
+A \emph{domain model} is an explicit, theory-based structure that derives outcomes from assumptions. Importantly, we do not argue for any particular model, only for the necessity of having one whenever inference is required.
+
+\subsection{When Domain Models Are Not Required}
+
+Domain models are not required when:
+\begin{itemize}
+    \item The task is purely descriptive.
+    \item No counterfactual or prognostic claims are made.
+    \item The domain is governed by formal or physical laws and no human decisions are causally involved.
+\end{itemize}
+
+Examples include:
+\begin{itemize}
+    \item Formal mathematics and logic
+    \item Program semantics
+    \item Classical physics of closed systems
+    \item Chemical reactions under controlled laboratory conditions
+\end{itemize}
+
+\subsection{When Domain Models Are Required}
+
+Domain models are required whenever outcomes depend on:
+\begin{itemize}
+    \item Choices
+    \item Reactions
+    \item Adaptation
+    \item Strategic behavior
+    \item Information or incentives
+\end{itemize}
+
+In such cases, description alone is insufficient. Something must explain \emph{why} certain outcomes follow.
 
 
 % ============================================================================
-% 6. THE THREE-LEVEL SEPARATION PRINCIPLE
+% 4. HUMAN BEHAVIOR AS A SPECIAL DOMAIN
 % ============================================================================
-\section{The Three-Level Separation Principle}
+\section{Human Behavior as a Special Domain}
 
-\subsection{Three Distinct Functions}
+Human behavior plays a distinctive role in this framework.
 
-We identify three functions that must be handled separately:
+\subsection{Causal Centrality}
+
+In many real-world domains---medicine, law, safety, economics, public policy---the ultimate effectiveness of interventions depends on how people behave. Compliance, adherence, interpretation, and strategic response determine outcomes.
+
+\subsection{Absence of Laws}
+
+Unlike physics or logic, human behavior is not governed by fixed laws. It is context-sensitive, information-dependent, and often strategic. As a result, it cannot be reliably inferred from linguistic plausibility.
+
+\subsection{Error Amplification}
+
+Small errors in behavioral assumptions can produce large real-world consequences. Overconfidence in behaviorally mediated predictions is therefore particularly dangerous.
+
+\begin{quote}
+\textbf{Conclusion:} Human behavior is rarely sufficient to explain outcomes, but it is almost never irrelevant. Where it is causally implicated, it must be explicitly modeled.
+\end{quote}
+
+
+% ============================================================================
+% 5. WHY LANGUAGE MODELS ARE NOT BEHAVIORAL MODELS
+% ============================================================================
+\section{Why Language Models Are Not Behavioral Models}
+
+A common objection is that LLMs implicitly encode human behavior, having been trained on human-generated data. This is true descriptively but false structurally.
+
+Language models approximate distributions over text, not decision processes. They lack:
+\begin{itemize}
+    \item Explicit assumptions
+    \item Causal structure
+    \item Counterfactual invariance
+    \item Falsifiability
+\end{itemize}
+
+They can imitate how people \emph{talk about} behavior, but they cannot justify claims about how people \emph{will act}.
+
+\begin{quote}
+\textbf{Implicit representations are epistemically insufficient where accountability is required.}
+\end{quote}
+
+
+% ============================================================================
+% 6. EPISTEMIC SPEECH CONTROL (ESL)
+% ============================================================================
+\section{Epistemic Speech Control}
+
+Across all task categories, one component is universal: epistemic control over language.
+
+\subsection{What Epistemic Speech Control Is}
+
+An \emph{Epistemic Statement Layer} (ESL) is an explicit model governing:
+\begin{itemize}
+    \item When assertions are permitted
+    \item How uncertainty must be expressed
+    \item How labels are distinguished from concepts
+    \item How scope and confidence are constrained
+\end{itemize}
+
+\subsection{What Epistemic Speech Control Is Not}
+
+ESL does not:
+\begin{itemize}
+    \item Activate knowledge
+    \item Predict outcomes
+    \item Replace domain models
+    \item Control token generation
+\end{itemize}
+
+It \emph{licenses speech}; it does not \emph{generate content}.
+
+\subsection{Universality of ESL}
+
+Because every generated statement carries epistemic force, ESL is required in every domain, including those that do not require domain models.
+
+
+% ============================================================================
+% 7. KNOWLEDGE ACTIVATION AND MODEL VARIABILITY
+% ============================================================================
+\section{Knowledge Activation and Model Variability}
+
+LLMs differ significantly in their ability to activate latent knowledge during generation. We denote this empirical property as $\alpha$, the \emph{knowledge activation} or \emph{binding coefficient}.
+
+\begin{itemize}
+    \item $\alpha$ varies across models
+    \item $\alpha$ is influenced by training and prompting
+    \item $\alpha$ is not under explicit control
+\end{itemize}
+
+ESL does not increase $\alpha$. Instead, it ensures that:
+\begin{itemize}
+    \item When $\alpha$ is low, the system does not overclaim
+    \item When $\alpha$ is high, claims are appropriately scoped
+\end{itemize}
+
+Thus, ESL is robust to model variability.
+
+
+% ============================================================================
+% 8. SYSTEM-LEVEL SEPARATION PRINCIPLE
+% ============================================================================
+\section{The System-Level Separation Principle}
+
+Our analysis leads to a clear separation of responsibilities:
 
 \begin{center}
-\begin{tabular}{lll}
+\begin{tabular}{ll}
 \toprule
-\textbf{Level} & \textbf{Function} & \textbf{Question Answered} \\
+\textbf{Component} & \textbf{Responsibility} \\
 \midrule
-Epistemic & What may be asserted? & Is this claim warranted? \\
-Behavioral & How do agents act? & What will happen under intervention? \\
-Linguistic & How is content expressed? & How should this be communicated? \\
+Language models & Generate text \\
+Domain models & Derive outcomes \\
+Epistemic models (ESL) & License claims \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\subsection{Why Separation is Necessary}
-
-Each level has different requirements:
-\begin{itemize}
-    \item \textbf{Epistemic}: Requires evidence evaluation, logical consistency, uncertainty quantification. Must be \emph{deterministic} for reliability.
-    \item \textbf{Behavioral}: Requires causal/structural models, decision theory, counterfactual reasoning. Must be \emph{computed} from explicit models.
-    \item \textbf{Linguistic}: Requires fluency, style adaptation, audience awareness. Can be \emph{probabilistic}---this is where LLMs excel.
-\end{itemize}
-
-Language models are designed for the third function. Using them for the first two conflates distinct competencies.
-
-\subsection{The Separation Principle}
-
 \begin{quote}
-\textbf{Separation Principle:} Epistemic, behavioral, and linguistic functions must be handled by distinct mechanisms. No single component---especially not a language model---should be responsible for all three.
+\textbf{Epistemic reliability is a property of the system, not of any single component.}
 \end{quote}
 
-This principle is not an architectural prescription but a theoretical constraint that any reliable system must satisfy.
+This principle has immediate consequences:
+\begin{itemize}
+    \item Improving language models alone cannot guarantee reliability.
+    \item Prompting cannot substitute for explicit modeling.
+    \item Wrong models are acceptable; unmodeled claims are not.
+    \item Behavior must be modeled when it mediates outcomes.
+    \item Epistemic control is universally necessary.
+\end{itemize}
 
 
 % ============================================================================
-% 7. ABSTRACT FORMAL MODELS
+% 9. CENTRAL HYPOTHESES
 % ============================================================================
-\section{Abstract Formal Models}
+\section{Central Hypotheses}
 
-To illustrate that epistemic and behavioral binding can be specified independently of language models, we introduce two abstract formal devices.
-
-\subsection{Epistemic Specification (ESL)}
-
-An \emph{Epistemic Specification Language} (ESL) is an abstract formal system that:
-\begin{itemize}
-    \item Defines permissible epistemic acts (assertion, uncertainty, refusal)
-    \item Specifies evidence conditions for each act
-    \item Operates independently of linguistic formulation
-\end{itemize}
-
-ESL is not a prompt or a system---it is a formal device showing that epistemic constraints can be specified declaratively and evaluated deterministically.
-
-\subsection{Behavioral Change Model (BCM)}
-
-A \emph{Behavioral Change Model} (BCM) is an abstract formal system that:
-\begin{itemize}
-    \item Encodes decision-theoretic structures (utilities, reference points, constraints)
-    \item Computes behavioral predictions under specified interventions
-    \item Operates independently of linguistic description
-\end{itemize}
-
-BCM is not a simulation or a tool---it is a formal device showing that behavioral predictions can be derived from structure rather than generated from language.
-
-\subsection{Role of These Constructs}
-
-ESL and BCM serve as \emph{existence proofs}: they demonstrate that epistemic and behavioral binding can, in principle, be achieved through formal specification. They do not prescribe implementation.
+This work rests on two complementary hypotheses:
 
 \begin{quote}
-We introduce ESL and BCM as abstract formal devices illustrating how epistemic and behavioral binding can be specified independently of language models.
+\textbf{H1 (Behavioral Derivation):} Statements about human behavior must be derived from explicit formal models, not generated narratively.
 \end{quote}
 
-\subsection{BCM: Models vs.\ Rules}
+\begin{quote}
+\textbf{H2 (Epistemic Permission):} Even correctly derived statements may only be made if their epistemic preconditions are satisfied.
+\end{quote}
 
-A critical clarification: BCM is not a rule system or a bias list. This distinction is essential.
+The Behavioral Change Model (BCM) implements H1.\\
+The Epistemic Statement Layer (ESL) implements H2.
 
-\textbf{Rules} constrain the space of possible outputs. They say what is \emph{forbidden} or \emph{required}. Rules are reactive: they filter or block.
-
-\textbf{Models} generate decisions. They say what \emph{will happen} given preferences, constraints, and information. Models are generative: they produce predictions.
-
-BCM is a model, not a rule set. It does not say ``do not mention loss aversion incorrectly.'' It says: ``Given these preferences, these reference points, and these constraints, the agent will choose X.'' This is the difference between guardrails and behavioral economics.
-
-Many current approaches mistake rules for models. Guardrails prevent certain outputs; they do not explain behavior. BCM replaces behavioral \emph{guessing} with behavioral \emph{derivation}.
-
-\subsection{Why Correct Models Are Not Sufficient: The Role of ESL}
-
-A correctly computed behavioral model can still produce epistemically invalid outputs. Consider:
+Neither hypothesis alone is sufficient:
 \begin{itemize}
-    \item A model prediction based on unverified assumptions presented as fact
-    \item A theoretical implication stated as established knowledge
-    \item An undefined term used as if it were a recognized concept
+    \item H1 without H2 yields correct but epistemically overreaching predictions
+    \item H2 without H1 yields epistemically cautious but behaviorally unfounded claims
 \end{itemize}
 
-Model correctness is necessary but not sufficient for epistemic validity. ESL addresses this gap. ESL does not regulate style; it regulates \textbf{assertibility}---whether a particular epistemic speech act is permitted given the available evidence and definitional grounding.
-
-Without ESL, even a perfect BCM becomes a source of epistemic overreach: it would generate correct predictions but present them incorrectly.
-
-\subsection{Complementarity: Human and Machine Behavior}
-
-A novel contribution of this framework is the explicit complementarity of two formal models:
-
-\begin{center}
-\begin{tabular}{lll}
-\toprule
-\textbf{Model} & \textbf{Target} & \textbf{Function} \\
-\midrule
-BCM & Human behavior & Descriptive/causal: how do people act? \\
-ESL & Machine behavior & Normative/epistemic: what may be asserted? \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Both models are formal, but they serve fundamentally different purposes:
-\begin{itemize}
-    \item \textbf{BCM} models what humans \emph{do} (decision-theoretic, causal)
-    \item \textbf{ESL} models what machines \emph{may say} (normative, epistemic)
-\end{itemize}
-
-This symmetric treatment does not exist in current literature:
-\begin{itemize}
-    \item Economics models human behavior but not machine speech acts
-    \item NLP regulates language but does not model behavioral consequences
-    \item Guardrails control outputs but do not explain effects
-\end{itemize}
-
-The novelty lies not in the individual components but in their explicit, parallel formalization for the appropriate actor.
+Together, they define the minimal requirements for reliable behavioral AI.
 
 
 % ============================================================================
-% 8. WHY MARKET ALTERNATIVES DO NOT SUFFICE
+% 10. WHY CURRENT APPROACHES DO NOT SUFFICE
 % ============================================================================
 \section{Why Current Approaches Do Not Suffice}
 
@@ -405,7 +368,7 @@ All share a common assumption: \textbf{the LLM itself should be improved or pers
 Our framework draws a different conclusion:
 
 \begin{quote}
-The LLM is not the appropriate locus for epistemic or behavioral authority.
+\textbf{The LLM is not the appropriate locus for epistemic or behavioral authority.}
 \end{quote}
 
 We propose decoupling rather than optimization. Binding rather than persuasion. This is not an incremental improvement but a paradigm shift---which is precisely why it has been rarely pursued.
@@ -424,78 +387,7 @@ In short: it ends a mode of thinking rather than extending it. This is not a dea
 
 
 % ============================================================================
-% 9. CENTRAL HYPOTHESES
-% ============================================================================
-\section{Central Hypotheses}
-
-This work rests on two complementary hypotheses:
-
-\begin{quote}
-\textbf{H1 (Behavioral Derivation):} Statements about human behavior must be derived from explicit formal models, not generated narratively.
-\end{quote}
-
-\begin{quote}
-\textbf{H2 (Epistemic Permission):} Even correctly derived statements may only be made if their epistemic preconditions are satisfied.
-\end{quote}
-
-BCM implements H1. ESL implements H2.
-
-Neither hypothesis alone is sufficient:
-\begin{itemize}
-    \item H1 without H2 yields correct but epistemically overreaching predictions
-    \item H2 without H1 yields epistemically cautious but behaviorally unfounded claims
-\end{itemize}
-
-Together, they define the minimal requirements for reliable behavioral AI.
-
-
-% ============================================================================
-% 10. IMPLICATIONS
-% ============================================================================
-\section{Implications}
-
-\subsection{For AI System Design}
-
-Any system claiming epistemic reliability must satisfy the Separation Principle. This rules out architectures where the language model is the sole arbiter of what to assert.
-
-\subsection{For Evaluation}
-
-Current benchmarks that measure model accuracy under direct questioning may overestimate real-world reliability. Evaluation should distinguish:
-\begin{itemize}
-    \item Knowledge availability (can the model answer correctly when asked?)
-    \item Knowledge binding (does knowledge constrain generation?)
-    \item System reliability (does the full system guarantee correct behavior?)
-\end{itemize}
-
-\subsection{For the Role of Language Models}
-
-Language models should be understood as \textbf{linguistic engines}, not \textbf{epistemic agents}. They excel at:
-\begin{itemize}
-    \item Transforming structured content into fluent text
-    \item Adapting style to context and audience
-    \item Generating diverse phrasings of specified content
-\end{itemize}
-
-They should not be tasked with:
-\begin{itemize}
-    \item Determining what is true or warranted
-    \item Predicting behavioral responses to interventions
-    \item Guaranteeing factual accuracy
-\end{itemize}
-
-\subsection{For Research Directions}
-
-This framework suggests several research directions:
-\begin{itemize}
-    \item Developing formal specification languages for epistemic constraints
-    \item Creating computational models for behavioral prediction
-    \item Designing architectures that enforce the Separation Principle
-    \item Measuring $\alpha_{\text{system}}$ rather than model accuracy
-\end{itemize}
-
-
-% ============================================================================
-% 9. LIMITATIONS AND SCOPE
+% 11. LIMITATIONS AND SCOPE
 % ============================================================================
 \section{Limitations and Scope}
 
@@ -514,46 +406,44 @@ This paper is deliberately limited. We do not:
 
 This paper sets conceptual boundaries. We:
 \begin{itemize}
-    \item Distinguish availability from binding
-    \item Prove that prompting cannot guarantee binding
-    \item Derive externalization as a logical necessity
-    \item Introduce the Separation Principle as a theoretical constraint
+    \item Distinguish description, prediction, and intervention
+    \item Show when domain models are required
+    \item Establish human behavior as a special modeling domain
+    \item Prove that LLMs are not behavioral models
+    \item Introduce epistemic speech control as a universal requirement
+    \item Derive the system-level separation principle
 \end{itemize}
 
 \subsection{Scope of Claims}
 
 Our claims are:
 \begin{itemize}
-    \item \textbf{Existential}: We show that binding failures \emph{can} occur, not that they always do.
-    \item \textbf{Theoretical}: We establish what is \emph{necessary} for reliability, not what is sufficient.
+    \item \textbf{Structural}: We identify necessary components, not sufficient implementations.
+    \item \textbf{Theoretical}: We establish what is required for reliability, not how to achieve it.
     \item \textbf{Normative}: We argue how systems \emph{should} be conceptualized, not how they currently work.
 \end{itemize}
 
 
 % ============================================================================
-% 10. CONCLUSION
+% 12. CONCLUSION
 % ============================================================================
 \section{Conclusion}
 
-This paper argues that epistemic and behavioral reliability are properties of systems, not of language models. We have shown that:
+Generative AI systems increasingly move beyond description into prediction and intervention. This transition exposes a fundamental gap between linguistic fluency and epistemic legitimacy. We have argued that this gap cannot be closed by better language modeling alone.
 
+Reliable AI systems must separate three concerns:
 \begin{enumerate}
-    \item Knowledge \emph{availability} does not imply knowledge \emph{binding}.
-    \item No prompt can guarantee that available knowledge will bind generation.
-    \item Therefore, binding must be externalized from the language model.
-    \item Epistemic, behavioral, and linguistic functions require distinct mechanisms.
+    \item \textbf{Describing} what is known
+    \item \textbf{Deriving} what follows
+    \item \textbf{Licensing} what may be said
 \end{enumerate}
 
-The implications are significant. Language models should not be asked to decide when they know something. Epistemic authority must reside in formal modules whose outputs are computed, not generated.
+Human behavior occupies a special position in this framework, as it is both causally decisive and inherently model-dependent. Where behavior mediates outcomes, explicit behavioral models are indispensable.
 
-This is not a critique of language models but a clarification of their proper role. They are powerful linguistic engines. They should not be epistemic arbiters.
-
-\begin{quote}
-\textit{Reliable AI behavior requires binding theory to generation, not persuading models to behave epistemically.}
-\end{quote}
+Ultimately, language models should speak---but not decide what is true, what follows, or what ought to be done. Those responsibilities belong to explicit models and epistemic control mechanisms that bind theory to generation.
 
 \begin{quote}
-\textit{Epistemic reliability is a system property, not a model property.}
+\textit{We describe with language, predict with models, intervene with responsibility---and license all of it epistemically.}
 \end{quote}
 
 \vspace{1em}
