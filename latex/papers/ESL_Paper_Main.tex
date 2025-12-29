@@ -128,6 +128,18 @@ Research on epistemic agency extends this analysis. \citet{li2025reflection} sho
 
 Our contribution operationalizes these philosophical insights: rather than debating whether LLMs ``truly know,'' we measure how reliably available knowledge constrains output, treating activation competence as an empirically tractable behavioral property.
 
+\subsection{Industry Applications of Externalized Control}
+
+The principle of externalizing epistemic control from language models---separating linguistic generation from formal verification---has begun to manifest in commercial systems. Several companies have developed architectures that treat LLMs as constrained generators governed by external formal modules, validating the approach we propose.
+
+\textbf{Neuro-symbolic architectures.} Augmented Intelligence Inc.\ (AUI) developed Apollo-1, a hybrid system connecting LLMs with symbolic reasoning engines. Neural modules handle language understanding and generation, while a symbolic state machine determines task logic through deterministic rules. Business rules are encoded as explicit formal logic rather than implied through training, ensuring predictable, guaranteed-compliant responses. Elemental Cognition similarly combines neural pattern recognition with mathematical logic, producing outputs that are ``provably correct and fully transparent.''
+
+\textbf{Formal verification pipelines.} Harmonic's Aristotle system targets mathematical domains with formally verified answers. Solutions are constructed in the proof language Lean and validated by an external proof checker before user delivery---achieving gold-medal performance at the 2025 International Mathematical Olympiad when problems were translated to formal specifications. Logical Intelligence pursues similar verification for code generation, translating LLM outputs to mathematical proofs that are algorithmically verified.
+
+\textbf{Guardrail frameworks.} Open-source projects (Guardrails AI) and platform features (NVIDIA NeMo Guardrails) provide rule-based validation layers between users and LLMs. These systems enforce output format constraints, content filters, and schema validation, blocking or correcting outputs that violate predefined rules.
+
+These commercial developments---representing over \$200M in venture funding---demonstrate that externalized epistemic control is not merely theoretical but economically viable and technically feasible. The common architecture separates generative capacity (LLM) from epistemic authority (formal module), precisely the control inversion we advocate.
+
 
 % ============================================================================
 % 3. THEORY
