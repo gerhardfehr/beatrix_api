@@ -355,6 +355,16 @@ This perspective aligns with recent theoretical and epistemological analyses. Wo
 
 If $\alpha$ reflects an intrinsic limitation, improving epistemic reliability may require training interventions: objectives penalizing false-positive assertions, training regimes distinguishing concept familiarity from terminological legitimacy, or architectures separating fluency from epistemic decision-making.
 
+\subsection{Connection to Causal and Behavioral Economics}
+
+Our framework aligns with recent developments in economics that distinguish structural decision models from predictive approximation. \citet{kasy2026causality} argues that causality is fundamentally tied to decision-making under exogenous intervention rather than to predictive accuracy alone: behavioral responses must be derived from structural models of preferences and constraints, not from narrative descriptions or pattern matching.
+
+This perspective reinforces our central claim. Language models excel at linguistic approximation but lack the structural grounding required for causal or normative inference. When behavioral predictions matter---for instance, how an individual will respond to an intervention---the answer must be \emph{computed} from decision-theoretic models, not \emph{generated} from plausible-sounding text.
+
+Our proposed architecture operationalizes this insight: a formal Behavioral Change Model (BCM) computes behavioral predictions via explicit decision-theoretic structures (utility functions, reference points, constraints), executed by a code interpreter, while delegating linguistic explanation to the language model. The LLM describes; the model decides. This separation is precisely what \citeauthor{kasy2026causality}'s analysis implies is necessary for reliable causal reasoning.
+
+In summary: \citeauthor{kasy2026causality} explains why behavior must be derived from structure; we show how to enforce this in LLM-based systems.
+
 \subsection{Evaluation Implications}
 
 Current benchmarks emphasizing correct answers under direct questioning may overestimate real-world reliability. The Activation Challenge complements existing evaluations by focusing on conditional knowledge use.
