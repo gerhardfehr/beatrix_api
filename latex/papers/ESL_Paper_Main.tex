@@ -349,38 +349,66 @@ Current benchmarks emphasizing correct answers under direct questioning may over
 
 \subsection{Toward Externalized Epistemic Control}
 
-The finding that activation competence is bounded---even under maximally explicit prompting---suggests a more radical architectural implication: epistemic control may need to be externalized from the language model entirely.
+The finding that activation competence is bounded---even under maximally explicit prompting---suggests a more radical architectural implication: epistemic control may need to be externalized from the language model entirely. We propose a \textbf{control inversion principle}.
 
-We propose a separation of concerns:
-\begin{itemize}
-    \item \textbf{Epistemic control} $\in$ Code: A formal theoretical model $\mathcal{T}$, executed by a code interpreter, determines which epistemic commitments are permitted.
-    \item \textbf{Linguistic realization} $\in$ LLM: The language model serves solely as a constrained generator, producing text within boundaries set by $\mathcal{T}$.
-\end{itemize}
+\paragraph{The Standard Architecture (Prompt-Centric).}
+In conventional usage, the language model interprets prompts and decides how to activate knowledge:
+\[
+\text{User} \;\rightarrow\; \text{Prompt} \;\rightarrow\; \text{LLM} \;\rightarrow\; \text{Output}
+\]
+Here, the LLM interprets everything. Epistemic control is soft, mediated by linguistic instruction. Activation competence $\alpha$ remains unstable and model-dependent.
 
-Under this architecture, the theoretical model computes, for each candidate assertion $e_i$:
+\paragraph{The Proposed Architecture (Theory-Centric).}
+We invert the control hierarchy. A formal theoretical model $\mathcal{T}$ decides when knowledge may be asserted; the LLM provides only linguistic candidates:
+\[
+\text{User} \;\rightarrow\; \underbrace{\mathcal{T}}_{\text{Controller}} \;\rightarrow\; \underbrace{\text{LLM}}_{\text{Generator}} \;\rightarrow\; \text{Constrained Output}
+\]
+The theoretical model is an explicit, symbolic rule system---not a language model, not prompt-dependent, not subject to interpretation. It computes, for each candidate assertion $e_i$:
 \[
 \text{Allowed}(e_i) \subseteq \{\text{REAL}, \text{UNSICHER}, \text{UNBEKANNT}\}
 \]
 based on explicit evidence conditions. The LLM then generates linguistic output subject to these hard constraints.
 
-Crucially, this yields:
+\paragraph{Role Separation.}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Role} \\
+\midrule
+Theoretical model $\mathcal{T}$ & Normative (what may be asserted?) \\
+LLM & Generative (how might it be phrased?) \\
+Prompt & Interface, not control \\
+$\alpha$ & System property, not model property \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Why Control Inversion is Necessary.}
+Our findings show that language models understand epistemic rules (ESL is syntactically followed) but do not reliably enforce them. Prompting remains interpretive, not executive. This parallels mature safety-critical domains: aviation uses checklists rather than pilot intuition; medicine uses diagnostic protocols rather than clinical impression. When reliability matters, control must be externalized from the interpretive system.
+
+\paragraph{Formal Consequence.}
+Under this architecture:
 \[
 \alpha_{\text{system}} = 1 \quad \text{(for specified epistemic acts)}
 \]
-not because the model ``thinks better,'' but because it is no longer permitted to decide. Epistemic guarantees become \emph{computed} rather than \emph{generated}.
+not because the model ``thinks better,'' but because it is no longer permitted to decide. Epistemic guarantees become \emph{computed} rather than \emph{generated}. Crucially, $\alpha$ becomes a property of the system architecture, not an intrinsic model capability.
 
-This approach satisfies strong constraints:
+\paragraph{Constraints Satisfied.}
+This approach requires:
 \begin{itemize}
-    \item No retraining required
-    \item No additional data needed
+    \item No retraining
+    \item No additional data
     \item No prompt-dependence for epistemic validity
     \item No model modification
 \end{itemize}
 
+\paragraph{Theoretical Implication.}
 The implication is a reconceptualization of the LLM's role: not as an epistemic agent, but as a powerful linguistic engine whose epistemic outputs are governed by an external formal module. This connects naturally to neuro-symbolic architectures and safety-critical AI design.
 
+We do not claim that LLMs are useless---only that they should not function as epistemic arbiters. Knowledge claims require theory-level control, not linguistic persuasion.
+
 \begin{quote}
-\textit{Epistemic guarantees cannot be generated; they must be computed.}
+\textit{Large language models should not decide when they know something.}
 \end{quote}
 
 
