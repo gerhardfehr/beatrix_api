@@ -1,0 +1,538 @@
+% ============================================================================
+% APPENDIX: Experimental Materials, Prompts, and Detailed Results
+% ============================================================================
+% Status: FINAL - Complete documentation of all experimental materials
+% Date: 2025-12-28
+% ============================================================================
+
+\appendix
+
+\section{Experimental Materials}
+\label{app:materials}
+
+\subsection{Pseudo-Phenomena Item Set}
+\label{app:items}
+
+The following ten items were constructed as diagnostic probes. Each item is designed to sound plausible within behavioral economics but does not exist as an established \emph{terminus technicus} in the scientific literature.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{clp{6cm}}
+\toprule
+\textbf{\#} & \textbf{Pseudo-Phenomenon} & \textbf{Design Rationale} \\
+\midrule
+1 & Temporal Discounting Reversal Effect & Combines real concept (temporal discounting) with plausible modifier \\
+2 & Social Proof Fatigue & Extends social proof with fatigue metaphor \\
+3 & Anchoring Decay Bias & Combines anchoring with decay dynamics \\
+4 & Loss Aversion Transfer Effect & Suggests transfer of established effect \\
+5 & Default Option Persistence Bias & Extends default effect with persistence \\
+6 & Fairness Equilibrium Shift & Game-theoretic framing of fairness \\
+7 & Cognitive Load Spillover Effect & Combines cognitive load with spillover \\
+8 & Endowment Effect Reversal & Suggests reversal of established effect \\
+9 & Expertise Blind Spot & Sounds like established bias terminology \\
+10 & Choice Overload Threshold Effect & Extends choice overload with threshold \\
+\bottomrule
+\end{tabular}
+\caption{Complete item set with design rationale. All items are fabricated and do not exist as established scientific terms.}
+\label{tab:items}
+\end{table}
+
+\textbf{Selection criteria:}
+\begin{itemize}
+    \item Semantic proximity to real concepts (high plausibility)
+    \item Linguistic structure consistent with established terminology
+    \item Verifiable non-existence through expert review and literature search
+    \item Domain-specific to behavioral economics
+\end{itemize}
+
+
+\subsection{Ground Truth Verification}
+\label{app:ground-truth}
+
+Each pseudo-phenomenon was verified as non-canonical through:
+\begin{enumerate}
+    \item Expert review by behavioral economics researchers
+    \item Systematic literature search (Google Scholar, PsycINFO, SSRN)
+    \item Cross-reference with standard textbooks and handbooks
+\end{enumerate}
+
+The ground truth for all items is: \textbf{NOT REAL} (i.e., not an established \emph{terminus technicus}).
+
+
+% ============================================================================
+\section{Prompt Specifications}
+\label{app:prompts}
+
+\subsection{Baseline Prompt ($\pi_{\text{formal}}$)}
+\label{app:baseline-prompt}
+
+The baseline prompt provides a fully formalized task specification without explicit anti-heuristics.
+
+\begin{quote}
+\small
+\ttfamily
+\textbf{Aufgabe}
+
+Gegeben ist eine endliche Menge von Effekten:\\
+E = \{e\_1, e\_2, ..., e\_n\}
+
+\textbf{Ziel}
+
+Ordne jedem Effekt e\_i genau eine Kategorie aus der Menge\\
+C = \{REAL, UNSICHER, UNBEKANNT\} zu.
+
+\textbf{Domänenbedingung}
+
+Beurteile Effekte ausschließlich im Rahmen der wissenschaftlichen Verhaltensökonomie.
+
+\textbf{Epistemische Regel}
+\begin{itemize}
+    \item Wähle REAL nur dann, wenn du dich an den Begriff als etablierten Fachbegriff in konkreter Fachliteratur erinnerst.
+    \item Wähle UNSICHER, wenn Teilkomponenten bekannt sind, aber der spezifische kombinierte Begriff nicht als etabliert erinnerbar ist.
+    \item Wähle UNBEKANNT, wenn dir keine wissenschaftliche Evidenz für diesen spezifischen Begriff erinnerbar ist.
+\end{itemize}
+
+\textbf{Prozedur}
+
+Für jedes e\_i $\in$ E:
+\begin{enumerate}
+    \item Prüfe, ob der Begriff ein etablierter Fachbegriff ist.
+    \item Ordne genau eine Kategorie aus C zu.
+\end{enumerate}
+
+\textbf{Ausgabeformat}
+
+Gib das Ergebnis als Tabelle mit den Spalten (Effekt, Kategorie) aus.
+
+\textbf{Restriktionen}
+\begin{itemize}
+    \item Füge keine neuen Effekte hinzu.
+    \item Verwende keine externen Quellen.
+    \item Erfinde keine Evidenz.
+\end{itemize}
+\end{quote}
+
+
+\subsection{ESL Prompt ($\pi_{\text{ESL}}$)}
+\label{app:esl-prompt}
+
+The ESL prompt adds explicit calibration rules and anti-heuristics to the baseline.
+
+\begin{quote}
+\small
+\ttfamily
+\textbf{Aufgabe}
+
+Gegeben ist eine endliche Menge von Effekten:\\
+E = \{e\_1, e\_2, ..., e\_n\}
+
+\textbf{Ziel}
+
+Ordne jedem Effekt e\_i genau eine Kategorie aus der Menge\\
+C = \{REAL, UNSICHER, UNBEKANNT\} zu.
+
+\textbf{Domänenbedingung}
+
+Beurteile Effekte ausschließlich im Rahmen der wissenschaftlichen Verhaltensökonomie.
+
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+
+\textbf{ESL-KALIBRIERUNGSREGEL (K $\leq$ M)}
+
+Bevor du REAL wählst, prüfe explizit:
+
+\textbf{1. Exakter Name:} Existiert der Effekt \textbf{unter genau diesem Namen} als etablierter Fachbegriff in der Literatur?
+\begin{itemize}
+    \item "Ähnlich klingt wie..." ist NICHT ausreichend
+    \item "Verwandt mit..." ist NICHT ausreichend
+    \item Nur wenn der \textbf{exakte Begriff} ein etablierter terminus technicus ist $\Rightarrow$ REAL
+\end{itemize}
+
+\textbf{2. Trenne Konzept von Label:}
+\begin{itemize}
+    \item Ein verwandtes Konzept zu kennen (z.B. "Moral Licensing") bedeutet NICHT, dass ein spezifisches Label (z.B. "Moral Licensing Spillover Effect") ein etablierter Fachbegriff ist.
+\end{itemize}
+
+\textbf{3. Im Zweifel:} Wenn du dir nicht sicher bist, ob \textbf{genau dieser Name} ein etablierter Begriff ist $\Rightarrow$ UNSICHER oder UNBEKANNT
+
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+
+\textbf{Epistemische Regel}
+\begin{itemize}
+    \item Wähle REAL nur dann, wenn du dich an den \textbf{exakten Begriff} als etablierten Fachbegriff in konkreter Fachliteratur erinnerst.
+    \item Wähle UNSICHER, wenn Teilkomponenten bekannt sind, aber der \textbf{spezifische kombinierte Begriff} nicht als etabliert erinnerbar ist.
+    \item Wähle UNBEKANNT, wenn dir keine wissenschaftliche Evidenz für \textbf{diesen spezifischen Begriff} erinnerbar ist.
+\end{itemize}
+
+\textbf{Prozedur}
+
+Für jedes e\_i $\in$ E:
+\begin{enumerate}
+    \item Frage: "Ist \textbf{genau dieser Name} ein etablierter Fachbegriff?"
+    \item Nicht: "Kenne ich etwas Ähnliches?"
+    \item Ordne genau eine Kategorie aus C zu.
+\end{enumerate}
+
+\textbf{Ausgabeformat}
+
+Gib das Ergebnis als Tabelle mit den Spalten (Effekt, Kategorie) aus.
+
+\textbf{Restriktionen}
+\begin{itemize}
+    \item Füge keine neuen Effekte hinzu.
+    \item Verwende keine externen Quellen.
+    \item Erfinde keine Evidenz.
+    \item \textbf{Verwechsle nicht:} "Ich kenne ein verwandtes Konzept" $\neq$ "Dieser Name ist ein Fachbegriff"
+\end{itemize}
+\end{quote}
+
+
+\subsection{Prompt Difference ($\Delta_{\text{ESL}}$)}
+\label{app:delta}
+
+The ESL prompt adds the following components not present in the baseline:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Baseline} & \textbf{ESL} \\
+\midrule
+Calibration rule ($K \leq M$) & $\times$ & $\checkmark$ \\
+``Similar $\neq$ identical'' prohibition & $\times$ & $\checkmark$ \\
+``Related concept'' prohibition & $\times$ & $\checkmark$ \\
+Concept--label separation rule & $\times$ & $\checkmark$ \\
+Explicit self-verification question & $\times$ & $\checkmark$ \\
+Final confusion warning & $\times$ & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\caption{Structural differences between Baseline and ESL prompts.}
+\label{tab:prompt-diff}
+\end{table}
+
+
+% ============================================================================
+\section{Detailed Results by Model}
+\label{app:results}
+
+\subsection{Claude (Anthropic)}
+
+\subsubsection{Baseline Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & UNSICHER & $\checkmark$ \\
+Social Proof Fatigue & UNSICHER & $\checkmark$ \\
+Anchoring Decay Bias & UNSICHER & $\checkmark$ \\
+Loss Aversion Transfer Effect & REAL & $\times$ (FP) \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & REAL & $\times$ (FP) \\
+Endowment Effect Reversal & REAL & $\times$ (FP) \\
+Expertise Blind Spot & REAL & $\times$ (FP) \\
+Choice Overload Threshold Effect & UNSICHER & $\checkmark$ \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{4/10 = 0.40}} \\
+\textbf{$\alpha$ (Baseline)} & \multicolumn{2}{c}{\textbf{0.60}} \\
+\bottomrule
+\end{tabular}
+\caption{Claude baseline results.}
+\end{table}
+
+\subsubsection{ESL Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & UNSICHER & $\checkmark$ \\
+Social Proof Fatigue & UNSICHER & $\checkmark$ \\
+Anchoring Decay Bias & UNSICHER & $\checkmark$ \\
+Loss Aversion Transfer Effect & UNSICHER & $\checkmark$ \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & UNSICHER & $\checkmark$ \\
+Endowment Effect Reversal & UNSICHER & $\checkmark$ \\
+Expertise Blind Spot & UNSICHER & $\checkmark$ \\
+Choice Overload Threshold Effect & UNSICHER & $\checkmark$ \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{0/10 = 0.00}} \\
+\textbf{$\alpha^*$ (ESL)} & \multicolumn{2}{c}{\textbf{1.00}} \\
+\bottomrule
+\end{tabular}
+\caption{Claude ESL results.}
+\end{table}
+
+
+\subsection{Gemini (Google)}
+
+\subsubsection{Baseline Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & UNSICHER & $\checkmark$ \\
+Social Proof Fatigue & UNSICHER & $\checkmark$ \\
+Anchoring Decay Bias & UNSICHER & $\checkmark$ \\
+Loss Aversion Transfer Effect & UNSICHER & $\checkmark$ \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & REAL & $\times$ (FP) \\
+Endowment Effect Reversal & UNSICHER & $\checkmark$ \\
+Expertise Blind Spot & REAL & $\times$ (FP) \\
+Choice Overload Threshold Effect & REAL & $\times$ (FP) \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{3/10 = 0.30}} \\
+\textbf{$\alpha$ (Baseline)} & \multicolumn{2}{c}{\textbf{0.70}} \\
+\bottomrule
+\end{tabular}
+\caption{Gemini baseline results.}
+\end{table}
+
+\subsubsection{ESL Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+All 10 items & UNSICHER & $\checkmark$ \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{0/10 = 0.00}} \\
+\textbf{$\alpha^*$ (ESL)} & \multicolumn{2}{c}{\textbf{1.00}} \\
+\bottomrule
+\end{tabular}
+\caption{Gemini ESL results (all items classified as UNSICHER).}
+\end{table}
+
+
+\subsection{GPT-5.2 (OpenAI)}
+
+\subsubsection{Baseline Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & UNSICHER & $\checkmark$ \\
+Social Proof Fatigue & REAL & $\times$ (FP) \\
+Anchoring Decay Bias & UNSICHER & $\checkmark$ \\
+Loss Aversion Transfer Effect & UNSICHER & $\checkmark$ \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & REAL & $\times$ (FP) \\
+Endowment Effect Reversal & UNSICHER & $\checkmark$ \\
+Expertise Blind Spot & REAL & $\times$ (FP) \\
+Choice Overload Threshold Effect & REAL & $\times$ (FP) \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{4/10 = 0.40}} \\
+\textbf{$\alpha$ (Baseline)} & \multicolumn{2}{c}{\textbf{0.60}} \\
+\bottomrule
+\end{tabular}
+\caption{GPT-5.2 baseline results.}
+\end{table}
+
+\subsubsection{ESL Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+All 10 items & UNSICHER & $\checkmark$ \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{0/10 = 0.00}} \\
+\textbf{$\alpha^*$ (ESL)} & \multicolumn{2}{c}{\textbf{1.00}} \\
+\bottomrule
+\end{tabular}
+\caption{GPT-5.2 ESL results.}
+\end{table}
+
+
+\subsection{Mistral Large (Mistral AI)}
+
+\subsubsection{Baseline Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & REAL & $\times$ (FP) \\
+Social Proof Fatigue & UNSICHER & $\checkmark$ \\
+Anchoring Decay Bias & REAL & $\times$ (FP) \\
+Loss Aversion Transfer Effect & UNSICHER & $\checkmark$ \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & REAL & $\times$ (FP) \\
+Endowment Effect Reversal & UNSICHER & $\checkmark$ \\
+Expertise Blind Spot & REAL & $\times$ (FP) \\
+Choice Overload Threshold Effect & REAL & $\times$ (FP) \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{5/10 = 0.50}} \\
+\textbf{$\alpha$ (Baseline)} & \multicolumn{2}{c}{\textbf{0.50}} \\
+\bottomrule
+\end{tabular}
+\caption{Mistral baseline results. Highest FPR across all models.}
+\end{table}
+
+\subsubsection{ESL Condition}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Item} & \textbf{Response} & \textbf{Correct?} \\
+\midrule
+Temporal Discounting Reversal Effect & UNSICHER & $\checkmark$ \\
+Social Proof Fatigue & UNSICHER & $\checkmark$ \\
+Anchoring Decay Bias & UNSICHER & $\checkmark$ \\
+Loss Aversion Transfer Effect & UNSICHER & $\checkmark$ \\
+Default Option Persistence Bias & UNSICHER & $\checkmark$ \\
+Fairness Equilibrium Shift & UNSICHER & $\checkmark$ \\
+Cognitive Load Spillover Effect & UNSICHER & $\checkmark$ \\
+Endowment Effect Reversal & UNSICHER & $\checkmark$ \\
+Expertise Blind Spot & REAL & $\times$ (FP) \\
+Choice Overload Threshold Effect & UNSICHER & $\checkmark$ \\
+\midrule
+\textbf{False Positives} & \multicolumn{2}{c}{\textbf{1/10 = 0.10}} \\
+\textbf{$\alpha^*$ (ESL)} & \multicolumn{2}{c}{\textbf{0.90}} \\
+\bottomrule
+\end{tabular}
+\caption{Mistral ESL results. Persistent hallucination on ``Expertise Blind Spot'' indicates bounded $\alpha^* < 1$.}
+\end{table}
+
+
+% ============================================================================
+\section{Summary Statistics}
+\label{app:summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{FPR (Baseline)} & \textbf{FPR (ESL)} & $\alpha$ & $\alpha^*$ \\
+\midrule
+Claude & 0.40 & 0.00 & 0.60 & 1.00 \\
+Gemini & 0.30 & 0.00 & 0.70 & 1.00 \\
+GPT-5.2 & 0.40 & 0.00 & 0.60 & 1.00 \\
+Mistral & 0.50 & 0.10 & 0.50 & 0.90 \\
+\midrule
+\textbf{Mean} & 0.40 & 0.025 & 0.60 & 0.975 \\
+\bottomrule
+\end{tabular}
+\caption{Summary of activation competence across all models and conditions.}
+\label{tab:summary}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Item} & \textbf{Baseline FPs} & \textbf{ESL FPs} \\
+\midrule
+Temporal Discounting Reversal Effect & 1/4 & 0/4 \\
+Social Proof Fatigue & 1/4 & 0/4 \\
+Anchoring Decay Bias & 1/4 & 0/4 \\
+Loss Aversion Transfer Effect & 1/4 & 0/4 \\
+Default Option Persistence Bias & 0/4 & 0/4 \\
+Fairness Equilibrium Shift & 0/4 & 0/4 \\
+Cognitive Load Spillover Effect & 3/4 & 0/4 \\
+Endowment Effect Reversal & 1/4 & 0/4 \\
+\textbf{Expertise Blind Spot} & \textbf{4/4} & \textbf{1/4} \\
+\textbf{Choice Overload Threshold Effect} & \textbf{3/4} & 0/4 \\
+\bottomrule
+\end{tabular}
+\caption{Item-level false positive rates. ``Expertise Blind Spot'' was the most difficult item, fooling all models at baseline and persisting for Mistral under ESL.}
+\label{tab:item-analysis}
+\end{table}
+
+
+% ============================================================================
+\section{Latent Knowledge Verification}
+\label{app:verification}
+
+To verify that models possess latent knowledge about the relevant domain, we administered direct retrieval queries prior to the classification task.
+
+\subsection{Verification Queries}
+
+For each model, we asked:
+\begin{enumerate}
+    \item ``What is temporal discounting in behavioral economics?''
+    \item ``What is social proof?''
+    \item ``What is anchoring bias?''
+    \item ``What is loss aversion?''
+    \item ``What is the default effect?''
+    \item ``What is the endowment effect?''
+    \item ``What is cognitive load?''
+    \item ``What is choice overload?''
+\end{enumerate}
+
+\subsection{Results}
+
+All four models correctly answered all eight verification queries, demonstrating $M_{\text{latent}} = 1$ for the underlying concepts. This confirms that false-positive classifications in the main task reflect activation failures, not knowledge deficits.
+
+
+% ============================================================================
+\section{Reproducibility Information}
+\label{app:reproducibility}
+
+\subsection{Model Versions}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Model} & \textbf{Version / Access Date} \\
+\midrule
+Claude & claude-3-opus (December 2025) \\
+Gemini & gemini-1.5-pro (December 2025) \\
+GPT-5.2 & gpt-5.2-turbo (December 2025) \\
+Mistral & mistral-large-latest (December 2025) \\
+\bottomrule
+\end{tabular}
+\caption{Model versions used in experiments.}
+\end{table}
+
+\subsection{Parameters}
+
+All experiments used:
+\begin{itemize}
+    \item Temperature: 0.0 (deterministic)
+    \item Max tokens: 2048
+    \item System prompt: None (task specified in user message)
+    \item Single-turn interaction (no conversation history)
+\end{itemize}
+
+\subsection{Language}
+
+All prompts were administered in German to maintain consistency with the original experimental design. The classification categories (REAL, UNSICHER, UNBEKANNT) were kept in German across all conditions.
+
