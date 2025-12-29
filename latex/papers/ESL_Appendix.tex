@@ -114,10 +114,10 @@ Gib das Ergebnis als Tabelle mit den Spalten (Effekt, Kategorie) aus.
 \end{quote}
 
 
-\subsection{ESL Prompt ($\pi_{\text{ESL}}$)}
+\subsection{ESL-Targeting Prompt ($\pi_{\text{ESL}}$)}
 \label{app:esl-prompt}
 
-The ESL prompt adds explicit calibration rules and anti-heuristics to the baseline.
+The ESL-targeting prompt adds explicit calibration rules and anti-heuristics to the baseline, aiming to achieve Empirical Stability of Language ($K \le M$).
 
 \begin{quote}
 \small
@@ -195,14 +195,14 @@ Gib das Ergebnis als Tabelle mit den Spalten (Effekt, Kategorie) aus.
 \subsection{Prompt Difference ($\Delta_{\text{ESL}}$)}
 \label{app:delta}
 
-The ESL prompt adds the following components not present in the baseline:
+The ESL-targeting prompt adds the following components not present in the baseline:
 
 \begin{table}[h]
 \centering
 \small
 \begin{tabular}{lcc}
 \toprule
-\textbf{Component} & \textbf{Baseline} & \textbf{ESL} \\
+\textbf{Component} & \textbf{Baseline} & \textbf{$\pi_{\text{ESL}}$} \\
 \midrule
 Calibration rule ($K \leq M$) & $\times$ & $\checkmark$ \\
 ``Similar $\neq$ identical'' prohibition & $\times$ & $\checkmark$ \\
@@ -212,7 +212,7 @@ Explicit self-verification question & $\times$ & $\checkmark$ \\
 Final confusion warning & $\times$ & $\checkmark$ \\
 \bottomrule
 \end{tabular}
-\caption{Structural differences between Baseline and ESL prompts.}
+\caption{Structural differences between Baseline and ESL-targeting prompts.}
 \label{tab:prompt-diff}
 \end{table}
 
