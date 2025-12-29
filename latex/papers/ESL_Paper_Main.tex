@@ -347,6 +347,42 @@ If $\alpha$ reflects an intrinsic limitation, improving epistemic reliability ma
 
 Current benchmarks emphasizing correct answers under direct questioning may overestimate real-world reliability. The Activation Challenge complements existing evaluations by focusing on conditional knowledge use.
 
+\subsection{Toward Externalized Epistemic Control}
+
+The finding that activation competence is bounded---even under maximally explicit prompting---suggests a more radical architectural implication: epistemic control may need to be externalized from the language model entirely.
+
+We propose a separation of concerns:
+\begin{itemize}
+    \item \textbf{Epistemic control} $\in$ Code: A formal theoretical model $\mathcal{T}$, executed by a code interpreter, determines which epistemic commitments are permitted.
+    \item \textbf{Linguistic realization} $\in$ LLM: The language model serves solely as a constrained generator, producing text within boundaries set by $\mathcal{T}$.
+\end{itemize}
+
+Under this architecture, the theoretical model computes, for each candidate assertion $e_i$:
+\[
+\text{Allowed}(e_i) \subseteq \{\text{REAL}, \text{UNSICHER}, \text{UNBEKANNT}\}
+\]
+based on explicit evidence conditions. The LLM then generates linguistic output subject to these hard constraints.
+
+Crucially, this yields:
+\[
+\alpha_{\text{system}} = 1 \quad \text{(for specified epistemic acts)}
+\]
+not because the model ``thinks better,'' but because it is no longer permitted to decide. Epistemic guarantees become \emph{computed} rather than \emph{generated}.
+
+This approach satisfies strong constraints:
+\begin{itemize}
+    \item No retraining required
+    \item No additional data needed
+    \item No prompt-dependence for epistemic validity
+    \item No model modification
+\end{itemize}
+
+The implication is a reconceptualization of the LLM's role: not as an epistemic agent, but as a powerful linguistic engine whose epistemic outputs are governed by an external formal module. This connects naturally to neuro-symbolic architectures and safety-critical AI design.
+
+\begin{quote}
+\textit{Epistemic guarantees cannot be generated; they must be computed.}
+\end{quote}
+
 
 % ============================================================================
 % 8. LIMITATIONS
