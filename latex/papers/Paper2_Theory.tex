@@ -1,0 +1,453 @@
+% ============================================================================
+% PAPER 2: Epistemic Reliability as a System Property
+% ============================================================================
+% Type: PURE THEORY PAPER
+% Status: Draft
+% Position: Between Paper 1 (Diagnosis) and Paper 3 (System)
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+% ============================================================================
+% THEOREM ENVIRONMENTS
+% ============================================================================
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+% ============================================================================
+% TITLE
+% ============================================================================
+\title{\textbf{Epistemic Reliability is a System Property, Not a Model Property:\\A Theoretical Framework for Knowledge Binding in Language Models}}
+
+\author{
+  [Author Names]\\
+  [Affiliation]\\
+  \texttt{[email]}
+}
+
+\date{December 2025}
+
+% ============================================================================
+\begin{document}
+% ============================================================================
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+We argue that epistemic and behavioral reliability in AI systems cannot be achieved through language model capabilities alone. Building on empirical observations that prompting has bounded effectiveness, we develop a theoretical framework distinguishing \textbf{knowledge availability} from \textbf{knowledge binding}---the degree to which available knowledge deterministically constrains generation. We prove that no prompt can guarantee binding across models and tasks (Prompt Insufficiency Proposition), implying that reliability must be externalized from the language model. We introduce a three-level separation principle: epistemic control (what may be asserted), behavioral modeling (how agents act), and linguistic realization (how content is expressed) must be handled by distinct, non-interchangeable mechanisms. This reconceptualizes the language model's role: not as an epistemic agent, but as a linguistic engine whose outputs are governed by external formal modules. We do not propose a specific architecture; rather, we establish the theoretical necessity of such separation for any system claiming epistemic reliability.
+\end{abstract}
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+
+Large language models have achieved remarkable fluency and apparent knowledge across domains. Yet a growing body of evidence suggests that models possessing relevant knowledge often fail to apply it reliably during generation. This paper addresses a foundational question:
+
+\begin{quote}
+\textit{How must epistemic and behavioral reliability be conceptualized when prompting is insufficient to guarantee correct knowledge use?}
+\end{quote}
+
+Our central thesis is that \textbf{epistemic reliability is a property of systems, not of models}. This claim has several immediate consequences:
+\begin{itemize}
+    \item Activation competence ($\alpha$) should be understood as a system-level property, not an intrinsic model capability.
+    \item Prompting, regardless of sophistication, cannot guarantee that available knowledge will bind generation.
+    \item Reliable AI behavior requires external mechanisms that enforce epistemic and behavioral constraints.
+\end{itemize}
+
+This is not an anti-LLM position. We do not claim that language models are useless or that their knowledge is illusory. Rather, we argue that the \emph{location of epistemic authority} must shift from the model to an external formal layer. Language models excel at linguistic realization; they should not be tasked with epistemic arbitration.
+
+\paragraph{Scope and Contribution.}
+This paper is purely theoretical. We do not propose architectures, training methods, or performance benchmarks. Instead, we:
+\begin{enumerate}
+    \item Formally distinguish knowledge \emph{availability} from knowledge \emph{binding}.
+    \item Prove that prompting cannot guarantee binding (Prompt Insufficiency).
+    \item Derive externalization as a logical necessity, not a design preference.
+    \item Introduce a three-level separation principle for epistemic, behavioral, and linguistic processing.
+\end{enumerate}
+
+Subsequent work will demonstrate how these abstract principles can be instantiated in concrete systems.
+
+
+% ============================================================================
+% 2. BACKGROUND & MOTIVATION
+% ============================================================================
+\section{Background and Motivation}
+
+\subsection{The Knowledge-Action Gap}
+
+Empirical studies consistently show that language models can answer direct factual questions correctly while failing to apply the same knowledge during generative tasks. A model that correctly identifies ``X is not an established scientific term'' when asked directly may nonetheless assert ``X is a well-known phenomenon'' during free-form generation.
+
+This gap between knowledge \emph{possession} and knowledge \emph{use} has been documented across models, domains, and prompting strategies. It persists even under maximally explicit epistemic instructions.
+
+\subsection{The Limits of Prompting}
+
+A natural response is to improve prompts: add constraints, specify rules, require verification steps. While such interventions can reduce error rates, they cannot eliminate them. Our prior empirical work shows that even fully formalized, epistemically restrictive prompts fail to guarantee correct knowledge application in some models.
+
+This suggests a fundamental limitation: prompts are \emph{interpreted}, not \emph{executed}. The gap between instruction and behavior is probabilistic, not deterministic.
+
+\subsection{The Need for Theoretical Clarification}
+
+Current discourse conflates several distinct questions:
+\begin{itemize}
+    \item Does the model \emph{have} the relevant knowledge?
+    \item Does the model \emph{use} the relevant knowledge?
+    \item Can the model be \emph{instructed} to use it reliably?
+    \item Can the model be \emph{guaranteed} to use it?
+\end{itemize}
+
+These questions require different analyses. This paper focuses on the fourth: under what conditions can knowledge use be guaranteed, and what follows when prompting cannot provide such guarantees?
+
+
+% ============================================================================
+% 3. THE ACTIVATION BINDING PROBLEM
+% ============================================================================
+\section{The Activation Binding Problem}
+
+\subsection{Knowledge Availability}
+
+\begin{definition}[Latent Knowledge]
+A language model $f_\theta$ possesses \emph{latent knowledge} about item $x$ if it can correctly answer a direct retrieval query about $x$. We write $M_{\text{latent}}(x) = 1$.
+\end{definition}
+
+Latent knowledge is operationalized behaviorally. We make no claims about internal representations.
+
+\subsection{Knowledge Binding}
+
+\begin{definition}[Knowledge Binding]
+Knowledge \emph{binds} generation if its presence deterministically constrains the output. We write $B(x) = 1$ when available knowledge about $x$ necessarily prevents epistemically invalid outputs concerning $x$.
+\end{definition}
+
+Binding is stronger than use. A model may \emph{sometimes} use available knowledge without that knowledge \emph{binding} generation.
+
+\subsection{The Activation Binding Coefficient}
+
+\begin{definition}[Activation Binding Coefficient]
+We define the \emph{activation binding coefficient} $\alpha$ as:
+\[
+\boxed{\alpha := \mathbb{P}\big(B(x) \mid M_{\text{latent}}(x) = 1\big)}
+\]
+the probability that available knowledge binds generation.
+\end{definition}
+
+Note the distinction from simple accuracy:
+\begin{itemize}
+    \item $\alpha = 1$: Available knowledge always binds (deterministic constraint)
+    \item $\alpha < 1$: Available knowledge sometimes fails to bind (probabilistic)
+    \item $\alpha = 0$: Knowledge availability has no bearing on generation
+\end{itemize}
+
+\subsection{Availability vs.\ Binding}
+
+The central insight is that \textbf{availability does not imply binding}:
+\[
+M_{\text{latent}}(x) = 1 \;\not\Rightarrow\; B(x) = 1
+\]
+
+A model can ``know'' something without that knowledge constraining its outputs. This is not a bug in specific models but a structural feature of how language models generate text.
+
+
+% ============================================================================
+% 4. WHY PROMPTING CANNOT GUARANTEE BINDING
+% ============================================================================
+\section{Why Prompting Cannot Guarantee Binding}
+
+\subsection{The Nature of Prompting}
+
+Prompts are linguistic instructions interpreted by the model. This interpretation is:
+\begin{itemize}
+    \item \textbf{Probabilistic}: The same prompt can yield different behaviors across runs or contexts.
+    \item \textbf{Model-dependent}: Different models interpret the same prompt differently.
+    \item \textbf{Approximative}: Models follow the ``spirit'' of instructions, not their literal execution.
+\end{itemize}
+
+\subsection{The Prompt Insufficiency Proposition}
+
+\begin{proposition}[Prompt Insufficiency]
+There exists no prompt $\pi$ such that, for all language models $f_\theta$ and all tasks $T$, relevant latent knowledge is guaranteed to bind generation:
+\[
+\nexists \pi : \forall f_\theta, T.\; M_{\text{latent}}(x) = 1 \Rightarrow B(x) = 1
+\]
+\end{proposition}
+
+\begin{proof}[Argument]
+Prompts are processed through the same probabilistic generation mechanism as other inputs. A prompt cannot create deterministic constraints because:
+\begin{enumerate}
+    \item The model's response to any prompt is a probability distribution over outputs.
+    \item This distribution is shaped by training, not by the prompt alone.
+    \item No linguistic instruction can override the model's learned biases with certainty.
+\end{enumerate}
+Empirically, we observe that even maximally explicit prompts fail for some models on some tasks. Therefore, no universal binding guarantee exists.
+\end{proof}
+
+\subsection{Why This Matters}
+
+The Prompt Insufficiency Proposition has a crucial implication:
+
+\begin{corollary}
+If binding cannot be guaranteed through prompting, then any system requiring epistemic reliability must implement binding through mechanisms external to prompt interpretation.
+\end{corollary}
+
+This is not a design suggestion but a logical necessity.
+
+
+% ============================================================================
+% 5. EXTERNALIZING EPISTEMIC AND BEHAVIORAL CONTROL
+% ============================================================================
+\section{Externalizing Epistemic and Behavioral Control}
+
+\subsection{The Externalization Principle}
+
+From Prompt Insufficiency, we derive:
+
+\begin{quote}
+\textbf{Externalization Principle:} If binding cannot be achieved internally (via prompting), it must be achieved externally (via formal constraints that operate independently of the language model's interpretation).
+\end{quote}
+
+External binding means:
+\begin{itemize}
+    \item Epistemic constraints are \emph{computed}, not \emph{requested}.
+    \item The language model does not \emph{decide} what is epistemically valid.
+    \item Validity is determined by a formal module whose outputs are not subject to LLM interpretation.
+\end{itemize}
+
+\subsection{What Externalization Is Not}
+
+Externalization does not mean:
+\begin{itemize}
+    \item Post-hoc fact-checking (which still relies on LLM generation)
+    \item Retrieval-augmented generation (which provides information but not binding)
+    \item Chain-of-thought prompting (which is still interpreted, not executed)
+    \item Fine-tuning for specific behaviors (which shifts probabilities but doesn't guarantee)
+\end{itemize}
+
+Externalization means structural prevention: the system architecture makes certain outputs impossible, not merely unlikely.
+
+\subsection{$\alpha$ as a System Property}
+
+Under externalization, we reconceptualize $\alpha$:
+
+\begin{quote}
+$\alpha$ is not an intrinsic property of a language model. It is a property of the \emph{system} in which the model operates.
+\end{quote}
+
+A language model with low intrinsic $\alpha$ can be embedded in a system with $\alpha_{\text{system}} = 1$---not because the model improves, but because the system prevents unbinding.
+
+
+% ============================================================================
+% 6. THE THREE-LEVEL SEPARATION PRINCIPLE
+% ============================================================================
+\section{The Three-Level Separation Principle}
+
+\subsection{Three Distinct Functions}
+
+We identify three functions that must be handled separately:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Level} & \textbf{Function} & \textbf{Question Answered} \\
+\midrule
+Epistemic & What may be asserted? & Is this claim warranted? \\
+Behavioral & How do agents act? & What will happen under intervention? \\
+Linguistic & How is content expressed? & How should this be communicated? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Why Separation is Necessary}
+
+Each level has different requirements:
+\begin{itemize}
+    \item \textbf{Epistemic}: Requires evidence evaluation, logical consistency, uncertainty quantification. Must be \emph{deterministic} for reliability.
+    \item \textbf{Behavioral}: Requires causal/structural models, decision theory, counterfactual reasoning. Must be \emph{computed} from explicit models.
+    \item \textbf{Linguistic}: Requires fluency, style adaptation, audience awareness. Can be \emph{probabilistic}---this is where LLMs excel.
+\end{itemize}
+
+Language models are designed for the third function. Using them for the first two conflates distinct competencies.
+
+\subsection{The Separation Principle}
+
+\begin{quote}
+\textbf{Separation Principle:} Epistemic, behavioral, and linguistic functions must be handled by distinct mechanisms. No single component---especially not a language model---should be responsible for all three.
+\end{quote}
+
+This principle is not an architectural prescription but a theoretical constraint that any reliable system must satisfy.
+
+
+% ============================================================================
+% 7. ABSTRACT FORMAL MODELS
+% ============================================================================
+\section{Abstract Formal Models}
+
+To illustrate that epistemic and behavioral binding can be specified independently of language models, we introduce two abstract formal devices.
+
+\subsection{Epistemic Specification (ESL)}
+
+An \emph{Epistemic Specification Language} (ESL) is an abstract formal system that:
+\begin{itemize}
+    \item Defines permissible epistemic acts (assertion, uncertainty, refusal)
+    \item Specifies evidence conditions for each act
+    \item Operates independently of linguistic formulation
+\end{itemize}
+
+ESL is not a prompt or a system---it is a formal device showing that epistemic constraints can be specified declaratively and evaluated deterministically.
+
+\subsection{Behavioral Change Model (BCM)}
+
+A \emph{Behavioral Change Model} (BCM) is an abstract formal system that:
+\begin{itemize}
+    \item Encodes decision-theoretic structures (utilities, reference points, constraints)
+    \item Computes behavioral predictions under specified interventions
+    \item Operates independently of linguistic description
+\end{itemize}
+
+BCM is not a simulation or a tool---it is a formal device showing that behavioral predictions can be derived from structure rather than generated from language.
+
+\subsection{Role of These Constructs}
+
+ESL and BCM serve as \emph{existence proofs}: they demonstrate that epistemic and behavioral binding can, in principle, be achieved through formal specification. They do not prescribe implementation.
+
+\begin{quote}
+We introduce ESL and BCM as abstract formal devices illustrating how epistemic and behavioral binding can be specified independently of language models.
+\end{quote}
+
+
+% ============================================================================
+% 8. IMPLICATIONS
+% ============================================================================
+\section{Implications}
+
+\subsection{For AI System Design}
+
+Any system claiming epistemic reliability must satisfy the Separation Principle. This rules out architectures where the language model is the sole arbiter of what to assert.
+
+\subsection{For Evaluation}
+
+Current benchmarks that measure model accuracy under direct questioning may overestimate real-world reliability. Evaluation should distinguish:
+\begin{itemize}
+    \item Knowledge availability (can the model answer correctly when asked?)
+    \item Knowledge binding (does knowledge constrain generation?)
+    \item System reliability (does the full system guarantee correct behavior?)
+\end{itemize}
+
+\subsection{For the Role of Language Models}
+
+Language models should be understood as \textbf{linguistic engines}, not \textbf{epistemic agents}. They excel at:
+\begin{itemize}
+    \item Transforming structured content into fluent text
+    \item Adapting style to context and audience
+    \item Generating diverse phrasings of specified content
+\end{itemize}
+
+They should not be tasked with:
+\begin{itemize}
+    \item Determining what is true or warranted
+    \item Predicting behavioral responses to interventions
+    \item Guaranteeing factual accuracy
+\end{itemize}
+
+\subsection{For Research Directions}
+
+This framework suggests several research directions:
+\begin{itemize}
+    \item Developing formal specification languages for epistemic constraints
+    \item Creating computational models for behavioral prediction
+    \item Designing architectures that enforce the Separation Principle
+    \item Measuring $\alpha_{\text{system}}$ rather than model accuracy
+\end{itemize}
+
+
+% ============================================================================
+% 9. LIMITATIONS AND SCOPE
+% ============================================================================
+\section{Limitations and Scope}
+
+\subsection{What This Paper Does Not Do}
+
+This paper is deliberately limited. We do not:
+\begin{itemize}
+    \item Propose a specific architecture or system
+    \item Provide implementation details
+    \item Make performance claims or comparisons
+    \item Offer training procedures or fine-tuning methods
+    \item Promise scalability or generalization
+\end{itemize}
+
+\subsection{What This Paper Does}
+
+This paper sets conceptual boundaries. We:
+\begin{itemize}
+    \item Distinguish availability from binding
+    \item Prove that prompting cannot guarantee binding
+    \item Derive externalization as a logical necessity
+    \item Introduce the Separation Principle as a theoretical constraint
+\end{itemize}
+
+\subsection{Scope of Claims}
+
+Our claims are:
+\begin{itemize}
+    \item \textbf{Existential}: We show that binding failures \emph{can} occur, not that they always do.
+    \item \textbf{Theoretical}: We establish what is \emph{necessary} for reliability, not what is sufficient.
+    \item \textbf{Normative}: We argue how systems \emph{should} be conceptualized, not how they currently work.
+\end{itemize}
+
+
+% ============================================================================
+% 10. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+
+This paper argues that epistemic and behavioral reliability are properties of systems, not of language models. We have shown that:
+
+\begin{enumerate}
+    \item Knowledge \emph{availability} does not imply knowledge \emph{binding}.
+    \item No prompt can guarantee that available knowledge will bind generation.
+    \item Therefore, binding must be externalized from the language model.
+    \item Epistemic, behavioral, and linguistic functions require distinct mechanisms.
+\end{enumerate}
+
+The implications are significant. Language models should not be asked to decide when they know something. Epistemic authority must reside in formal modules whose outputs are computed, not generated.
+
+This is not a critique of language models but a clarification of their proper role. They are powerful linguistic engines. They should not be epistemic arbiters.
+
+\begin{quote}
+\textit{Reliable AI behavior requires binding theory to generation, not persuading models to behave epistemically.}
+\end{quote}
+
+\begin{quote}
+\textit{Epistemic reliability is a system property, not a model property.}
+\end{quote}
+
+\vspace{1em}
+
+In subsequent work, we demonstrate how these abstract principles can be instantiated in a concrete AI system.
+
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\bibliographystyle{apalike}
+\bibliography{references}
+
+
+\end{document}
