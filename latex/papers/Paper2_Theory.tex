@@ -86,6 +86,34 @@ Subsequent work will demonstrate how these abstract principles can be instantiat
 
 
 % ============================================================================
+% 1.2 RELATED WORK
+% ============================================================================
+\subsection{Related Work}
+
+Our framework builds on several emerging research streams while making a distinct contribution.
+
+\paragraph{Epistemic Risk in Generative AI.}
+Recent work has begun to characterize the epistemic risks inherent in generative systems. Research on epistemic injustice in AI highlights how models can amplify misinformation and produce epistemic inequities by misleading users about what is known versus what is merely plausible \citep{epistemicrisk2025}. Studies of plausibility as a failure mode show that LLM errors arise not only from incorrect facts but from how model plausibility interacts with human interpretation \citep{plausibilityfailure2025}. These findings support our core claim that fluency does not imply reliability, and that explicit controls on assertion are necessary.
+
+\paragraph{AI and Epistemic Authority.}
+A growing literature examines how generative AI alters traditional epistemic roles. Users often treat AI outputs as authoritative without adequate critical grounding \citep{epistemicauthority2025}. Normative frameworks have begun to examine the conditions under which epistemic dependence on AI is justified \citep{epistemiclegitimacy2025}. This research motivates our argument that epistemic licensing cannot be left to implicit model behavior---systems must explicitly govern how claims are made.
+
+\paragraph{Epistemology of Generative AI.}
+Philosophical work situates generative models within epistemological frameworks, examining how they construct and validate claims \citep{automatingepistemology2025}. These analyses emphasize the sociotechnical nature of truth claims and the structural distinction between linguistic fluency and epistemic validity. Our framework operationalizes these insights by proposing concrete separations between generation, derivation, and licensing.
+
+\paragraph{What Current Work Does Not Provide.}
+Existing research characterizes epistemic risks but does not formalize solutions. There is no prior work that:
+\begin{itemize}
+    \item Distinguishes task classes (description, prediction, intervention) by their modeling requirements
+    \item Formalizes epistemic speech licensing as a separable system component
+    \item Argues systematically for the separation of domain models from linguistic models
+    \item Identifies human behavior as a special modeling domain requiring explicit theory
+\end{itemize}
+
+Our contribution is therefore novel: we provide not merely a diagnosis of epistemic unreliability, but a structural framework specifying what components are necessary for reliable generative systems.
+
+
+% ============================================================================
 % 2. DESCRIPTION, PREDICTION, AND INTERVENTION
 % ============================================================================
 \section{Description, Prediction, and Intervention}
