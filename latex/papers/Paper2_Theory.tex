@@ -330,9 +330,127 @@ ESL and BCM serve as \emph{existence proofs}: they demonstrate that epistemic an
 We introduce ESL and BCM as abstract formal devices illustrating how epistemic and behavioral binding can be specified independently of language models.
 \end{quote}
 
+\subsection{BCM: Models vs.\ Rules}
+
+A critical clarification: BCM is not a rule system or a bias list. This distinction is essential.
+
+\textbf{Rules} constrain the space of possible outputs. They say what is \emph{forbidden} or \emph{required}. Rules are reactive: they filter or block.
+
+\textbf{Models} generate decisions. They say what \emph{will happen} given preferences, constraints, and information. Models are generative: they produce predictions.
+
+BCM is a model, not a rule set. It does not say ``do not mention loss aversion incorrectly.'' It says: ``Given these preferences, these reference points, and these constraints, the agent will choose X.'' This is the difference between guardrails and behavioral economics.
+
+Many current approaches mistake rules for models. Guardrails prevent certain outputs; they do not explain behavior. BCM replaces behavioral \emph{guessing} with behavioral \emph{derivation}.
+
+\subsection{Why Correct Models Are Not Sufficient: The Role of ESL}
+
+A correctly computed behavioral model can still produce epistemically invalid outputs. Consider:
+\begin{itemize}
+    \item A model prediction based on unverified assumptions presented as fact
+    \item A theoretical implication stated as established knowledge
+    \item An undefined term used as if it were a recognized concept
+\end{itemize}
+
+Model correctness is necessary but not sufficient for epistemic validity. ESL addresses this gap. ESL does not regulate style; it regulates \textbf{assertibility}---whether a particular epistemic speech act is permitted given the available evidence and definitional grounding.
+
+Without ESL, even a perfect BCM becomes a source of epistemic overreach: it would generate correct predictions but present them incorrectly.
+
+\subsection{Complementarity: Human and Machine Behavior}
+
+A novel contribution of this framework is the explicit complementarity of two formal models:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Model} & \textbf{Target} & \textbf{Function} \\
+\midrule
+BCM & Human behavior & Descriptive/causal: how do people act? \\
+ESL & Machine behavior & Normative/epistemic: what may be asserted? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Both models are formal, but they serve fundamentally different purposes:
+\begin{itemize}
+    \item \textbf{BCM} models what humans \emph{do} (decision-theoretic, causal)
+    \item \textbf{ESL} models what machines \emph{may say} (normative, epistemic)
+\end{itemize}
+
+This symmetric treatment does not exist in current literature:
+\begin{itemize}
+    \item Economics models human behavior but not machine speech acts
+    \item NLP regulates language but does not model behavioral consequences
+    \item Guardrails control outputs but do not explain effects
+\end{itemize}
+
+The novelty lies not in the individual components but in their explicit, parallel formalization for the appropriate actor.
+
 
 % ============================================================================
-% 8. IMPLICATIONS
+% 8. WHY MARKET ALTERNATIVES DO NOT SUFFICE
+% ============================================================================
+\section{Why Current Approaches Do Not Suffice}
+
+The market pursues several strategies for improving LLM reliability:
+\begin{itemize}
+    \item Better training (RLHF, alignment)
+    \item Better prompting (chain-of-thought, instructions)
+    \item Retrieval and grounding (RAG)
+    \item Guardrails and filters
+    \item Personas and simulation
+\end{itemize}
+
+All share a common assumption: \textbf{the LLM itself should be improved or persuaded}. They attempt to make the model more reliable through optimization, instruction, or constraint.
+
+Our framework draws a different conclusion:
+
+\begin{quote}
+The LLM is not the appropriate locus for epistemic or behavioral authority.
+\end{quote}
+
+We propose decoupling rather than optimization. Binding rather than persuasion. This is not an incremental improvement but a paradigm shift---which is precisely why it has been rarely pursued.
+
+\subsection{Why This Conclusion Is Rarely Drawn}
+
+The conclusion is technically feasible but structurally unattractive:
+\begin{itemize}
+    \item It does not produce state-of-the-art benchmarks
+    \item It reduces model autonomy
+    \item It demystifies ``intelligence''
+    \item It requires explicit theory
+\end{itemize}
+
+In short: it ends a mode of thinking rather than extending it. This is not a dead end but a terminus---one that becomes relevant only when probabilistic approaches no longer suffice.
+
+
+% ============================================================================
+% 9. CENTRAL HYPOTHESES
+% ============================================================================
+\section{Central Hypotheses}
+
+This work rests on two complementary hypotheses:
+
+\begin{quote}
+\textbf{H1 (Behavioral Derivation):} Statements about human behavior must be derived from explicit formal models, not generated narratively.
+\end{quote}
+
+\begin{quote}
+\textbf{H2 (Epistemic Permission):} Even correctly derived statements may only be made if their epistemic preconditions are satisfied.
+\end{quote}
+
+BCM implements H1. ESL implements H2.
+
+Neither hypothesis alone is sufficient:
+\begin{itemize}
+    \item H1 without H2 yields correct but epistemically overreaching predictions
+    \item H2 without H1 yields epistemically cautious but behaviorally unfounded claims
+\end{itemize}
+
+Together, they define the minimal requirements for reliable behavioral AI.
+
+
+% ============================================================================
+% 10. IMPLICATIONS
 % ============================================================================
 \section{Implications}
 
