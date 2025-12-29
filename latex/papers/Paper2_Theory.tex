@@ -52,7 +52,13 @@
 % ABSTRACT
 % ============================================================================
 \begin{abstract}
-Large language models have achieved unprecedented fluency, yet persistent concerns remain regarding epistemic reliability. We argue that such failures cannot be resolved through prompting, scale, or training improvements alone. Instead, epistemic reliability requires structural separation between linguistic generation, empirical calibration, and explicit theoretical modeling. We introduce the concept of \emph{Empirical Stability of Language} (ESL)---the property that claim strength does not exceed evidence strength ($K \le M$)---as a diagnostic criterion, and show why ESL alone is insufficient for prediction and intervention. Whenever systems make claims about future outcomes or recommend actions, explicit domain models are indispensable. Our central claim is structural: reliable generative systems require binding language to explicit models, not persuading models to behave reliably.
+Large language models (LLMs) exhibit impressive linguistic fluency, yet persistent concerns remain regarding their epistemic reliability. Empirical studies show that models often overstate uncertain claims, fail to maintain stable epistemic calibration across contexts, and provide predictions or recommendations without explicit justification. While existing work largely attributes these failures to hallucinations, miscalibration, or insufficient prompting, we argue that such explanations remain incomplete.
+
+In this paper, we present a structural framework that specifies necessary conditions for epistemically responsible generative systems. Central to our approach is \emph{Empirical Stability of Language} (ESL), an empirical property capturing whether the strength of a linguistic claim is proportionate to the available evidence and remains stable across contextual variations. We show that ESL is necessary but not sufficient for epistemic reliability.
+
+We further demonstrate that predictive and intervention-oriented statements require explicit domain models that externalize assumptions and enable counterfactual reasoning. This requirement is particularly critical in domains involving human behavior, where outcomes are causally mediated by decisions and not governed by stable laws. We argue that no amount of prompting, scale, or training can substitute for these structural components.
+
+Our contribution is neither architectural nor algorithmic. Instead, we provide a formal necessity argument establishing that epistemic reliability is a system property, not a model property. By separating linguistic generation, empirical epistemic calibration, and theoretical inference, our framework clarifies why fluent language alone cannot guarantee responsible generative behavior and identifies the minimal structural components required for epistemically legitimate AI systems.
 \end{abstract}
 
 
