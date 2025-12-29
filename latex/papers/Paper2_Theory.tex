@@ -349,165 +349,88 @@ A system may have high $\alpha$ (good knowledge activation) yet fail ESL (overcl
 
 
 % ============================================================================
-% 8. SYSTEM-LEVEL SEPARATION PRINCIPLE
+% 8. HUMAN BEHAVIOR AS A MODEL-OBLIGATORY DOMAIN
 % ============================================================================
-\section{The System-Level Separation Principle}
+\section{Human Behavior as a Model-Obligatory Domain}
 
-Our analysis leads to a clear separation of responsibilities:
+Among all domains in which generative systems are deployed, human behavior occupies a special structural role. This is not a normative claim, but a consequence of two objective properties.
 
-\begin{center}
-\begin{tabular}{ll}
-\toprule
-\textbf{Component} & \textbf{Function} \\
-\midrule
-Language models & Generate text \\
-Domain models & Derive outcomes \\
-ESL criterion & Measure calibration ($K \le M$) \\
-\bottomrule
-\end{tabular}
-\end{center}
+First, human behavior is \emph{causally mediating}: in many real-world settings, outcomes depend directly on how humans perceive, decide, and act in response to information, recommendations, or interventions. Second, human behavior is \emph{law-underdetermined}: unlike physical or formal systems, it is not governed by stable, universal laws that uniquely determine responses.
 
-\begin{quote}
-\textbf{Epistemic reliability is a property of the system, not of any single component.}
-\end{quote}
+As a result, whenever a predictive or intervention statement concerns human behavior, explicit behavioral models become obligatory. Without such models, claims about expected outcomes, policy effects, or decision impacts lack epistemic grounding.
 
-This principle has immediate consequences:
+Importantly, this does not imply that behavioral models must be correct, complete, or optimal. It only implies that some explicit model must exist. Wrong models are epistemically preferable to implicit ones, because their assumptions can be inspected, challenged, and revised.
+
+
+% ============================================================================
+% 9. IMPLICATIONS
+% ============================================================================
+\section{Implications}
+
+\subsection{Epistemic Reliability as a System Property}
+
+A central implication of our framework is that epistemic reliability is not a property of language models, but of the systems in which they are embedded. No amount of scale, training data, or prompt engineering can substitute for explicit epistemic calibration and theoretical modeling.
+
+This perspective reframes current debates about hallucinations and overconfidence. These phenomena are not merely model failures; they are structural consequences of systems that ask language to perform inferential work it cannot justify.
+
+\subsection{Why Model Quality Becomes the Primary Axis of Differentiation}
+
+Once linguistic generation and epistemic calibration are standardized, application-level differentiation necessarily shifts to the quality of the explicit domain models used for prediction and intervention.
+
+In other words, language ceases to be the competitive bottleneck. Instead, competition arises around:
 \begin{itemize}
-    \item Improving language models alone cannot guarantee reliability.
-    \item Prompting cannot substitute for explicit modeling.
-    \item Wrong models are acceptable; unmodeled claims are not.
-    \item Behavior must be modeled when it mediates outcomes.
-    \item ESL calibration is universally required.
+    \item the adequacy of theoretical assumptions,
+    \item the transparency of derivations,
+    \item and the robustness of domain-specific models.
 \end{itemize}
 
+This shift is a structural consequence of the framework, not an empirical performance claim.
 
-% ============================================================================
-% 9. CENTRAL HYPOTHESES
-% ============================================================================
-\section{Central Hypotheses}
+\subsection{Competition Under a Fixed Epistemic Standard}
 
-This work rests on two complementary hypotheses:
+Because ESL defines a criterion rather than a method, multiple competing implementations are possible. Different systems may operationalize claim strength, evidence strength, and contextual stability in distinct ways, while still satisfying the formal definition of ESL.
 
-\begin{quote}
-\textbf{H1 (Behavioral Derivation):} Statements about human behavior must be derived from explicit formal models, not generated narratively.
-\end{quote}
-
-\begin{quote}
-\textbf{H2 (Epistemic Permission):} Even correctly derived statements may only be made if their epistemic preconditions are satisfied.
-\end{quote}
-
-H1 is operationalized through explicit domain models (e.g., Behavioral Change Models).\\
-H2 is diagnosed through the ESL criterion ($K \le M$).
-
-Neither hypothesis alone is sufficient:
-\begin{itemize}
-    \item H1 without H2 yields correct but epistemically overreaching predictions
-    \item H2 without H1 yields epistemically cautious but behaviorally unfounded claims
-\end{itemize}
-
-Together, they define the minimal requirements for reliable behavioral AI.
+This enables methodological competition under a shared epistemic standard, analogous to competition among statistical models, risk assessments, or scientific theories.
 
 
 % ============================================================================
-% 10. WHY CURRENT APPROACHES DO NOT SUFFICE
-% ============================================================================
-\section{Why Current Approaches Do Not Suffice}
-
-The market pursues several strategies for improving LLM reliability:
-\begin{itemize}
-    \item Better training (RLHF, alignment)
-    \item Better prompting (chain-of-thought, instructions)
-    \item Retrieval and grounding (RAG)
-    \item Guardrails and filters
-    \item Personas and simulation
-\end{itemize}
-
-All share a common assumption: \textbf{the LLM itself should be improved or persuaded}. They attempt to make the model more reliable through optimization, instruction, or constraint.
-
-Our framework draws a different conclusion:
-
-\begin{quote}
-\textbf{The LLM is not the appropriate locus for epistemic or behavioral authority.}
-\end{quote}
-
-We propose decoupling rather than optimization. Binding rather than persuasion. This is not an incremental improvement but a paradigm shift---which is precisely why it has been rarely pursued.
-
-\subsection{Why This Conclusion Is Rarely Drawn}
-
-The conclusion is technically feasible but structurally unattractive:
-\begin{itemize}
-    \item It does not produce state-of-the-art benchmarks
-    \item It reduces model autonomy
-    \item It demystifies ``intelligence''
-    \item It requires explicit theory
-\end{itemize}
-
-In short: it ends a mode of thinking rather than extending it. This is not a dead end but a terminus---one that becomes relevant only when probabilistic approaches no longer suffice.
-
-
-% ============================================================================
-% 11. LIMITATIONS AND SCOPE
+% 10. LIMITATIONS AND SCOPE
 % ============================================================================
 \section{Limitations and Scope}
 
-\subsection{What This Paper Does Not Do}
+This work is intentionally limited in scope.
 
-This paper is deliberately limited. We do not:
-\begin{itemize}
-    \item Propose a specific architecture or system
-    \item Provide implementation details
-    \item Make performance claims or comparisons
-    \item Offer training procedures or fine-tuning methods
-    \item Promise scalability or generalization
-\end{itemize}
+First, we do not formalize a concrete ESL implementation. ESL is introduced as an empirical standard, not as a specific algorithm.
 
-\subsection{What This Paper Does}
+Second, we do not guarantee the correctness of any domain model. The framework permits wrong models; it disallows unmodeled inference.
 
-This paper sets conceptual boundaries. We:
-\begin{itemize}
-    \item Distinguish description, prediction, and intervention
-    \item Show when domain models are required
-    \item Establish human behavior as a special modeling domain
-    \item Prove that LLMs are not behavioral models
-    \item Define ESL as a universal diagnostic criterion ($K \le M$)
-    \item Derive the system-level separation principle
-\end{itemize}
+Third, we do not propose an architecture or system design. Questions of integration, deployment, and optimization are explicitly deferred.
 
-\subsection{Scope of Claims}
-
-Our claims are:
-\begin{itemize}
-    \item \textbf{Structural}: We identify necessary components, not sufficient implementations.
-    \item \textbf{Theoretical}: We establish what is required for reliability, not how to achieve it.
-    \item \textbf{Normative}: We argue how systems \emph{should} be conceptualized, not how they currently work.
-\end{itemize}
+These limitations are not omissions, but boundary conditions. The goal of this paper is to establish necessary structural requirements, not sufficient conditions for correctness.
 
 
 % ============================================================================
-% 12. CONCLUSION
+% 11. CONCLUSION
 % ============================================================================
 \section{Conclusion}
 
-Generative AI systems increasingly move beyond description into prediction and intervention. This transition exposes a fundamental gap between linguistic fluency and epistemic legitimacy. We have argued that this gap cannot be closed by better language modeling alone.
+We have argued that epistemic reliability in generative AI systems cannot be achieved through prompting, scale, or linguistic competence alone. Instead, it requires a structural separation between language generation, empirical epistemic calibration, and explicit theoretical modeling.
 
-Reliable AI systems must address three distinct requirements:
-\begin{enumerate}
-    \item \textbf{Description}: Accurate representation of what is known
-    \item \textbf{Derivation}: Explicit models for what follows (prediction, intervention)
-    \item \textbf{Calibration}: Claim strength proportionate to evidence (ESL: $K \le M$)
-\end{enumerate}
+Empirical Stability of Language (ESL) provides a diagnostic standard for calibrated language use. However, ESL alone is insufficient for prediction and intervention. Whenever systems make claims about future outcomes or recommend actions---especially in domains involving human behavior---explicit domain models are indispensable.
 
-Human behavior occupies a special position in this framework, as it is both causally decisive and inherently model-dependent. Where behavior mediates outcomes, explicit behavioral models are indispensable.
-
-Ultimately, language models should speak---but not decide what is true, what follows, or what ought to be done. Those responsibilities belong to explicit domain models and systems that satisfy the ESL criterion.
+Our central claim is therefore structural:
 
 \begin{quote}
-\textit{We describe with language, predict with models, intervene with responsibility---and license all of it epistemically.}
+\textbf{Reliable generative systems require binding language to explicit models, not persuading models to behave reliably.}
 \end{quote}
 
-\vspace{1em}
+This framework does not prescribe how to build such systems, nor does it guarantee correctness. It specifies what must be present for epistemic responsibility to be possible at all.
 
-In subsequent work, we demonstrate how these abstract principles can be instantiated in a concrete AI system.
+In subsequent work, we demonstrate how these abstract principles can be instantiated in concrete AI systems.
+
+\begin{quote}
+\textit{Language can describe the world, but only explicit models can justify inference---and only systems that bind the two can be epistemically reliable.}
+\end{quote}
 
 
 % ============================================================================
