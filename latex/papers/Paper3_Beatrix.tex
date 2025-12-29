@@ -1,0 +1,356 @@
+% ============================================================================
+% PAPER 3: Beatrix - A Theory-Bound Generative AI System
+% ============================================================================
+% Type: SYSTEM PAPER
+% Status: FINAL DRAFT
+% Position: After Paper 1 (Diagnosis) and Paper 2 (Theory)
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+% ============================================================================
+% THEOREM ENVIRONMENTS
+% ============================================================================
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+% ============================================================================
+% TITLE
+% ============================================================================
+\title{\textbf{Beatrix: A Theory-Bound Generative AI System}\\[0.5em]
+\large Instantiating Empirical Stability of Language and Explicit Behavioral Models\\Without Modifying the Language Model}
+
+\author{
+  [Author Names]\\
+  [Affiliation]\\
+  \texttt{[email]}
+}
+
+\date{December 2025}
+
+% ============================================================================
+\begin{document}
+% ============================================================================
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+Large language models have demonstrated remarkable linguistic and descriptive capabilities, yet their outputs often lack epistemic reliability when claims require justification, prediction, or intervention---particularly in domains mediated by human behavior. Prior work has shown that this unreliability is not primarily a matter of missing knowledge, but of unreliable activation and binding of available knowledge during generation.
+
+In this paper, we demonstrate that epistemic responsibility in generative AI systems is a system-level property, not a property of language models in isolation. Building on the concept of \emph{Empirical Stability of Language} (ESL) as a diagnostic standard for linguistic assertability, we present a minimal system architecture that enforces an explicit separation between linguistic generation, epistemic calibration, and domain-specific inference. Central to this architecture is the use of explicit behavioral models for claims involving human behavior, while the language model is retained unchanged as a linguistic interface.
+
+We show that such separation can be instantiated without retraining, constraining, or otherwise modifying the language model itself. Our contribution is structural rather than empirical: we specify minimal conditions under which epistemic responsibility becomes possible in generative systems, and provide an existence proof that these conditions can be realized in practice.
+\end{abstract}
+
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+
+Generative AI systems based on large language models (LLMs) are increasingly used to produce explanations, predictions, and recommendations across a wide range of domains. While these systems excel at fluent language production, their epistemic reliability remains fragile: the same model may produce confident yet weakly justified claims, or vary its conclusions substantially under prompt reformulation.
+
+Recent analyses have shown that this problem cannot be reduced to a lack of knowledge or data. In many cases, language models possess relevant information internally but fail to activate or apply it reliably during generative tasks. This suggests that epistemic unreliability is not merely a modeling deficiency, but a structural one.
+
+In preceding work, we argued that epistemic reliability is a system property, not a model property. In particular, reliable generative systems require explicit mechanisms that bind linguistic claims to available evidence and domain models, rather than relying on prompting strategies to elicit correct behavior from language models.
+
+This paper addresses the remaining open question: \emph{Can these structural requirements be instantiated in a concrete generative AI system without modifying the language model itself?}
+
+We answer this question in the affirmative. We present \textbf{Beatrix}, a minimal, theory-bound generative system that externalizes epistemic calibration and behavioral inference while retaining an off-the-shelf language model as a linguistic interface. The paper does not propose a new architecture, training method, or performance improvement. Instead, it demonstrates the feasibility of enforcing epistemic responsibility at the system level through explicit separation of roles.
+
+
+% ============================================================================
+% 2. DESIGN PRINCIPLES
+% ============================================================================
+\section{Design Principles}
+
+\subsection{Separation of Linguistic and Inferential Functions}
+
+The central design principle of Beatrix is the strict separation between language generation and epistemic inference. The language model is responsible solely for parsing inputs and producing natural-language output. It is not permitted to perform numerical prediction, causal reasoning, or intervention planning.
+
+This separation does not diminish the expressive power of the system. Rather, it clarifies which components are responsible for justification, prediction, and explanation. The system does not replace statistical learning with symbolic reasoning; it constrains where each is epistemically legitimate.
+
+\subsection{Empirical Stability of Language (ESL)}
+
+\emph{Empirical Stability of Language} (ESL) is introduced as a diagnostic epistemic standard governing linguistic assertability. Informally, ESL requires that the strength of a linguistic claim not exceed the strength of the evidence available to support it.
+
+Formally, a claim satisfies ESL if and only if its assertive strength $K$ does not exceed the available evidence strength $M$:
+\[
+K(c) \le M(c)
+\]
+
+ESL is not a model, algorithm, or control mechanism. It does not generate outputs or optimize behavior. Instead, it specifies a criterion by which linguistic claims can be evaluated for epistemic admissibility.
+
+Crucially, ESL is prompt-independent and model-agnostic. Any operationalization that satisfies the ESL criterion is compatible with the system architecture presented here.
+
+\subsection{Explicit Behavioral Models}
+
+For claims involving prediction, explanation, or intervention in domains mediated by human behavior, the system requires an explicit behavioral model. A behavioral model is any formal representation that specifies states, parameters, and transitions governing behavior.
+
+The purpose of the behavioral model is not predictive superiority. Behavioral models may be simplistic or empirically weak. Their epistemic role is to make assumptions explicit, inspectable, and falsifiable.
+
+\begin{quote}
+\textbf{A wrong explicit model is epistemically preferable to a correct but implicit one.}
+\end{quote}
+
+\subsection{Human Behavior as a Model-Obligatory Domain}
+
+Human behavior occupies a special status in the system. Because behavioral outcomes are causally mediated, context-dependent, and underdetermined by surface regularities, claims about behavior cannot be epistemically justified without an explicit model.
+
+Whenever a claim concerns human behavior, the absence of an explicit behavioral model renders ESL evaluation impossible. Behavioral modeling is therefore a structural necessity, not a modeling preference.
+
+
+% ============================================================================
+% 3. FORMAL FRAMEWORK
+% ============================================================================
+\section{Formal Framework}
+
+This section summarizes the formal foundations; full formalization is provided in Appendix~B.
+
+\subsection{Definitions}
+
+We define:
+\begin{itemize}
+    \item \textbf{Language models} as stochastic mappings from inputs to linguistic outputs
+    \item \textbf{Claims} as pairs of propositional content and assertive strength
+    \item \textbf{ESL} as a constraint enforcing proportionality between claim strength and evidence strength
+    \item \textbf{Behavioral models} as explicit state-transition systems
+    \item \textbf{Epistemically responsible systems} as tuples consisting of a language model, ESL criterion, behavioral model, and external inference mechanism
+\end{itemize}
+
+\subsection{Core Propositions}
+
+We establish four core results:
+
+\begin{proposition}[Prompt Insufficiency]
+Prompting cannot guarantee epistemic binding across contexts.
+\end{proposition}
+
+\begin{proposition}[Behavioral Model Necessity]
+Explicit behavioral models are necessary for ESL evaluation in behavioral domains.
+\end{proposition}
+
+\begin{proposition}[System-Level Responsibility]
+Epistemic responsibility is a system-level property, not a model property.
+\end{proposition}
+
+\begin{proposition}[Non-Modification Feasibility]
+Epistemic responsibility can be achieved without modifying the language model.
+\end{proposition}
+
+\subsection{Central Result}
+
+\begin{theorem}[Separation Theorem]
+Epistemic responsibility is achievable if and only if linguistic generation, epistemic calibration, and domain modeling are structurally separated.
+\end{theorem}
+
+
+% ============================================================================
+% 4. SYSTEM ARCHITECTURE
+% ============================================================================
+\section{System Architecture}
+
+The Beatrix system consists of four components:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Function} \\
+\midrule
+Language Model & Linguistic interaction (parsing, generation) \\
+ESL Criterion & Epistemic calibration ($K \le M$) \\
+Behavioral Model & Explicit assumptions and derivations \\
+Inference Mechanism & Formal computation (e.g., code interpreter) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The language model handles linguistic interaction. The inference mechanism executes formal computations over the behavioral model. ESL governs which claims may be asserted in natural language.
+
+\begin{quote}
+\textbf{Externalization of inference is not an avoidance of responsibility; it is the only way responsibility becomes assignable.}
+\end{quote}
+
+
+% ============================================================================
+% 5. CASE STUDY
+% ============================================================================
+\section{Case Study: Behavioral Prediction Without Linguistic Inference}
+
+We illustrate the system with a minimal case study involving a behavioral prediction task. The task is deliberately simple and serves as an existence proof rather than a performance evaluation.
+
+The execution trace demonstrates how:
+\begin{enumerate}
+    \item Predictions are derived from the behavioral model
+    \item Results are checked against ESL constraints
+    \item Only then are claims rendered in natural language by the language model
+\end{enumerate}
+
+The comparison with a pure LLM output highlights differences in \emph{inference provenance} rather than output quality.
+
+
+% ============================================================================
+% 6. DISCUSSION
+% ============================================================================
+\section{Discussion}
+
+The system demonstrates that epistemic requirements can be enforced without modifying language models. This shifts the focus from improving models to designing responsible systems.
+
+Performance comparisons are intentionally avoided: epistemic justification and predictive accuracy are orthogonal concerns.
+
+\begin{quote}
+\textbf{Explicit models do not compete with language models; they complement them by carrying epistemic responsibility.}
+\end{quote}
+
+The contribution of this work lies in enforced separation, not component novelty.
+
+
+% ============================================================================
+% 7. LIMITATIONS AND FALSIFICATION
+% ============================================================================
+\section{Limitations and Falsification}
+
+The framework would be falsified if a language model alone could reliably generate epistemically calibrated predictions or interventions, invariant across prompts and contexts, without explicit domain models or external epistemic standards.
+
+Poor model quality or low predictive accuracy do not falsify the framework, which makes no performance claims.
+
+\subsection{What Would Falsify This Framework}
+
+\begin{itemize}
+    \item Demonstration that prompting guarantees epistemic binding
+    \item Evidence that implicit models suffice for epistemic accountability
+    \item Proof that ESL can be satisfied without explicit evidence evaluation
+\end{itemize}
+
+\subsection{What Would Not Falsify This Framework}
+
+\begin{itemize}
+    \item Poor predictive performance of behavioral models
+    \item Existence of better alternative architectures
+    \item Computational inefficiency of the system
+\end{itemize}
+
+
+% ============================================================================
+% 8. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+
+Epistemic responsibility in generative AI systems is a system property, not a property of language models in isolation. By externalizing epistemic calibration through Empirical Stability of Language and binding behavioral claims to explicit models, we show that epistemic responsibility can be instantiated without retraining or modifying the language model.
+
+Our contribution is structural rather than empirical: we specify minimal conditions under which epistemic responsibility becomes possible at all.
+
+\begin{quote}
+\textbf{Reliable generative systems require binding language to explicit models, not persuading models to behave reliably.}
+\end{quote}
+
+\begin{quote}
+\textit{Language can describe the world, but only explicit models can justify inference---and only systems that bind the two can be epistemically reliable.}
+\end{quote}
+
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\bibliographystyle{apalike}
+\bibliography{references}
+
+
+% ============================================================================
+% APPENDICES
+% ============================================================================
+\appendix
+
+% ============================================================================
+% APPENDIX A: CONTEXTUALIZATION
+% ============================================================================
+\section{Contextualization and Anticipated Challenges}
+
+This appendix addresses anticipated challenges to the system design. The structure follows the contextualization provided in Paper~2, adapted to implementation concerns.
+
+\subsection{Why Not Improve the Language Model?}
+
+The system does not improve language models because epistemic responsibility is not a property that language models can possess in isolation. Improvement efforts (RLHF, fine-tuning, prompting) address model behavior, not system-level justification.
+
+\subsection{Why External Inference?}
+
+External inference mechanisms (code interpreters, formal solvers) provide deterministic, inspectable computation. Language model inference is stochastic and opaque. Epistemic responsibility requires assignability, which opacity precludes.
+
+\subsection{Why Explicit Behavioral Models?}
+
+Behavioral models are not chosen for predictive accuracy but for epistemic function. They make assumptions visible, enable falsification, and carry responsibility that language models cannot.
+
+
+% ============================================================================
+% APPENDIX B: FORMAL DEFINITIONS
+% ============================================================================
+\section{Formal Definitions and Structural Conditions}
+
+\subsection{Language Model}
+
+A language model is a stochastic function:
+\[
+f_\theta : \mathcal{X}^* \rightarrow \mathcal{P}(\mathcal{Y}^*)
+\]
+mapping input sequences to distributions over output sequences.
+
+\subsection{Claims and Assertive Strength}
+
+A claim $c$ is a pair $(p, K)$ where $p$ is propositional content and $K \in [0,1]$ is assertive strength.
+
+\subsection{ESL Criterion}
+
+The ESL criterion is satisfied when:
+\[
+\forall c \in \mathcal{C}: K(c) \le M(c)
+\]
+where $M(c)$ denotes evidence strength for claim $c$.
+
+\subsection{Behavioral Model}
+
+A behavioral model is a tuple:
+\[
+\mathcal{B} = (S, \Theta, T, O)
+\]
+where $S$ is a state space, $\Theta$ are parameters, $T: S \times \Theta \rightarrow S$ is a transition function, and $O: S \rightarrow \mathcal{Y}$ is an observation function.
+
+\subsection{Epistemically Responsible System}
+
+An epistemically responsible system is a tuple:
+\[
+\Sigma = (f_\theta, \text{ESL}, \mathcal{B}, \mathcal{I})
+\]
+where $f_\theta$ is a language model, ESL is the epistemic criterion, $\mathcal{B}$ is a behavioral model, and $\mathcal{I}$ is an external inference mechanism.
+
+\subsection{Separation Theorem (Formal)}
+
+\begin{theorem}
+A system $\Sigma$ achieves epistemic responsibility if and only if:
+\begin{enumerate}
+    \item Linguistic generation is performed by $f_\theta$
+    \item Epistemic calibration is evaluated by ESL
+    \item Domain inference is computed by $\mathcal{I}$ over $\mathcal{B}$
+    \item These three functions are structurally separated
+\end{enumerate}
+\end{theorem}
+
+
+\end{document}
