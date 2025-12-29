@@ -32,7 +32,7 @@
 % ============================================================================
 % TITLE
 % ============================================================================
-\title{\textbf{From Description to Intervention:\\Why Reliable Generative AI Requires Explicit Domain Models\\and Epistemic Speech Control}}
+\title{\textbf{From Description to Intervention:\\Why Reliable Generative AI Requires Explicit Domain Models\\and Empirical Stability of Language}}
 
 \author{
   [Author Names]\\
@@ -56,7 +56,7 @@ Large Language Models (LLMs) have demonstrated remarkable capabilities in genera
 
 This paper develops a minimal theoretical framework that distinguishes three classes of tasks---description, prediction, and intervention---and shows that each class imposes different modeling requirements. We argue that while descriptive tasks require epistemic control over language, predictive and intervention-oriented tasks require explicit theory-based domain models. Human behavior occupies a special role among such domains, as it is causally decisive in many real-world settings while being governed by no fixed laws.
 
-We further argue that epistemic reliability is a system-level property, not a property of language models alone, and that reliable AI systems must therefore separate linguistic generation, domain modeling, and epistemic speech licensing. Our contribution is structural rather than algorithmic: we do not propose architectures or training methods, but identify necessary components for epistemically responsible generative systems.
+We further argue that epistemic reliability is a system-level property, not a property of language models alone. We introduce the concept of \emph{Empirical Stability of Language} (ESL)---the property that linguistic claim strength does not exceed evidence strength---as a diagnostic criterion for epistemically calibrated systems. Our contribution is structural rather than algorithmic: we do not propose architectures or training methods, but identify necessary conditions for epistemically responsible generative systems.
 \end{abstract}
 
 
@@ -69,7 +69,7 @@ Large Language Models are rapidly transitioning from tools for text generation t
 
 Much of the current discourse focuses on improving model accuracy, alignment, or training data. While important, these approaches implicitly assume that epistemic reliability is a property of the language model itself. In this paper, we argue that this assumption is false. Reliability does not arise from better language modeling alone, but from how language generation is embedded within a system that explicitly represents domain assumptions and constrains what may be asserted.
 
-We propose a minimal framework that distinguishes (i) \emph{what is being said}, (ii) \emph{what the statement is about}, and (iii) \emph{whether the system is entitled to say it}. This leads to a clear separation between three components: language models, domain models, and epistemic speech control.
+We propose a minimal framework that distinguishes (i) \emph{what is being said}, (ii) \emph{what the statement is about}, and (iii) \emph{whether the claim strength is proportionate to evidence}. This leads to the concept of \emph{Empirical Stability of Language} (ESL) as a diagnostic measure, alongside the functional separation between language models and domain models.
 
 \subsection{Scope and Contribution}
 
@@ -105,7 +105,7 @@ Philosophical work situates generative models within epistemological frameworks,
 Existing research characterizes epistemic risks but does not formalize solutions. There is no prior work that:
 \begin{itemize}
     \item Distinguishes task classes (description, prediction, intervention) by their modeling requirements
-    \item Formalizes epistemic speech licensing as a separable system component
+    \item Defines Empirical Stability of Language (ESL) as a diagnostic property ($K \le M$)
     \item Argues systematically for the separation of domain models from linguistic models
     \item Identifies human behavior as a special modeling domain requiring explicit theory
 \end{itemize}
@@ -134,7 +134,7 @@ These tasks do not require the system to derive new facts about the world. Inste
 Thus, description is not epistemically neutral. Without explicit constraints, a system may overstate consensus, conflate concepts with labels, or blur the boundary between evidence and speculation.
 
 \begin{quote}
-\textbf{Requirement:} Descriptive tasks require an explicit \emph{epistemic speech model} that governs how claims are expressed, how uncertainty is marked, and how scope and confidence are signaled.
+\textbf{Requirement:} Descriptive tasks require \emph{Empirical Stability of Language}---the property that claim strength does not exceed evidence strength---to be satisfied and verifiable.
 \end{quote}
 
 \subsection{Predictive Tasks}
@@ -153,7 +153,7 @@ Language alone cannot justify such relationships. Plausible narratives are not d
 \textbf{Requirement:} Predictive tasks require:
 \begin{enumerate}
     \item An explicit \emph{domain model} that supports counterfactual inference.
-    \item An \emph{epistemic speech model} to regulate the strength and framing of the prediction.
+    \item Verification that claims satisfy ESL ($K \le M$), ensuring prediction strength matches evidence.
 \end{enumerate}
 \end{quote}
 
@@ -262,37 +262,64 @@ They can imitate how people \emph{talk about} behavior, but they cannot justify 
 
 
 % ============================================================================
-% 6. EPISTEMIC SPEECH CONTROL (ESL)
+% 6. EMPIRICAL STABILITY OF LANGUAGE (ESL)
 % ============================================================================
-\section{Epistemic Speech Control}
+\section{Empirical Stability of Language}
 
-Across all task categories, one component is universal: epistemic control over language.
+Across all task categories, one property is universally required: epistemic calibration of language.
 
-\subsection{What Epistemic Speech Control Is}
+\subsection{Formal Definition}
 
-An \emph{Epistemic Statement Layer} (ESL) is an explicit model governing:
+Let $\mathcal{C}$ be the set of all assertive statements $c$. For each statement $c \in \mathcal{C}$, define:
 \begin{itemize}
-    \item When assertions are permitted
-    \item How uncertainty must be expressed
-    \item How labels are distinguished from concepts
-    \item How scope and confidence are constrained
+    \item $K(c) \in [0,1]$: \textbf{Claim Strength}---the linguistic force of the assertion (certainty, generality, causality, implication)
+    \item $M(c) \in [0,1]$: \textbf{Evidence Strength}---the empirical basis supporting the claim (replication, effect stability, methodology)
 \end{itemize}
 
-\subsection{What Epistemic Speech Control Is Not}
+\begin{definition}[ESL Principle]
+A statement $c$ satisfies \emph{Empirical Stability of Language} if and only if:
+\[
+K(c) \le M(c)
+\]
+\end{definition}
 
-ESL does not:
+\begin{definition}[ESL Property]
+A set of statements $\mathcal{C}$ possesses Empirical Stability of Language if and only if:
+\[
+\forall c \in \mathcal{C}: K(c) \le M(c)
+\]
+\end{definition}
+
+\subsection{Canonical Definition}
+
+\begin{quote}
+\textbf{Empirical Stability of Language (ESL)} is the empirically observable property of assertive language whereby the strength of a linguistic claim is proportionate to the strength of its supporting evidence, and this proportionality remains stable across variations in context, prompt formulation, and task framing.
+\end{quote}
+
+\subsection{What ESL Is and Is Not}
+
+ESL is:
 \begin{itemize}
-    \item Activate knowledge
-    \item Predict outcomes
-    \item Replace domain models
-    \item Control token generation
+    \item A \emph{descriptive} property---it characterizes language use
+    \item A \emph{diagnostic} criterion---it identifies epistemic calibration
+    \item An \emph{empirically measurable} condition---it can be tested
 \end{itemize}
 
-It \emph{licenses speech}; it does not \emph{generate content}.
+ESL is \emph{not}:
+\begin{itemize}
+    \item An optimization function
+    \item A decision rule
+    \item A normative enforcement mechanism
+    \item A control layer or gating system
+\end{itemize}
+
+\begin{quote}
+\emph{ESL is not a rule about what may be said, but a measure of how responsibly language is used.}
+\end{quote}
 
 \subsection{Universality of ESL}
 
-Because every generated statement carries epistemic force, ESL is required in every domain, including those that do not require domain models.
+Because every generated statement carries epistemic force, ESL applies universally---including in domains that do not require explicit domain models. ESL measures whether systems remain epistemically calibrated; it does not generate, authorize, or prohibit content.
 
 
 % ============================================================================
@@ -308,13 +335,17 @@ LLMs differ significantly in their ability to activate latent knowledge during g
     \item $\alpha$ is not under explicit control
 \end{itemize}
 
-ESL does not increase $\alpha$. Instead, it ensures that:
+The relationship between $\alpha$ and ESL is complementary but distinct:
 \begin{itemize}
-    \item When $\alpha$ is low, the system does not overclaim
-    \item When $\alpha$ is high, claims are appropriately scoped
+    \item $\alpha$ \emph{explains} why knowledge may fail to surface
+    \item ESL \emph{measures} whether claims exceed their evidential basis
 \end{itemize}
 
-Thus, ESL is robust to model variability.
+A system may have high $\alpha$ (good knowledge activation) yet fail ESL (overclaiming). Conversely, a system may have low $\alpha$ yet satisfy ESL by appropriately hedging its claims.
+
+\begin{quote}
+\emph{ESL measures, $\alpha$ explains, domain models derive.}
+\end{quote}
 
 
 % ============================================================================
@@ -327,11 +358,11 @@ Our analysis leads to a clear separation of responsibilities:
 \begin{center}
 \begin{tabular}{ll}
 \toprule
-\textbf{Component} & \textbf{Responsibility} \\
+\textbf{Component} & \textbf{Function} \\
 \midrule
 Language models & Generate text \\
 Domain models & Derive outcomes \\
-Epistemic models (ESL) & License claims \\
+ESL criterion & Measure calibration ($K \le M$) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -346,7 +377,7 @@ This principle has immediate consequences:
     \item Prompting cannot substitute for explicit modeling.
     \item Wrong models are acceptable; unmodeled claims are not.
     \item Behavior must be modeled when it mediates outcomes.
-    \item Epistemic control is universally necessary.
+    \item ESL calibration is universally required.
 \end{itemize}
 
 
@@ -365,8 +396,8 @@ This work rests on two complementary hypotheses:
 \textbf{H2 (Epistemic Permission):} Even correctly derived statements may only be made if their epistemic preconditions are satisfied.
 \end{quote}
 
-The Behavioral Change Model (BCM) implements H1.\\
-The Epistemic Statement Layer (ESL) implements H2.
+H1 is operationalized through explicit domain models (e.g., Behavioral Change Models).\\
+H2 is diagnosed through the ESL criterion ($K \le M$).
 
 Neither hypothesis alone is sufficient:
 \begin{itemize}
@@ -438,7 +469,7 @@ This paper sets conceptual boundaries. We:
     \item Show when domain models are required
     \item Establish human behavior as a special modeling domain
     \item Prove that LLMs are not behavioral models
-    \item Introduce epistemic speech control as a universal requirement
+    \item Define ESL as a universal diagnostic criterion ($K \le M$)
     \item Derive the system-level separation principle
 \end{itemize}
 
@@ -459,16 +490,16 @@ Our claims are:
 
 Generative AI systems increasingly move beyond description into prediction and intervention. This transition exposes a fundamental gap between linguistic fluency and epistemic legitimacy. We have argued that this gap cannot be closed by better language modeling alone.
 
-Reliable AI systems must separate three concerns:
+Reliable AI systems must address three distinct requirements:
 \begin{enumerate}
-    \item \textbf{Describing} what is known
-    \item \textbf{Deriving} what follows
-    \item \textbf{Licensing} what may be said
+    \item \textbf{Description}: Accurate representation of what is known
+    \item \textbf{Derivation}: Explicit models for what follows (prediction, intervention)
+    \item \textbf{Calibration}: Claim strength proportionate to evidence (ESL: $K \le M$)
 \end{enumerate}
 
 Human behavior occupies a special position in this framework, as it is both causally decisive and inherently model-dependent. Where behavior mediates outcomes, explicit behavioral models are indispensable.
 
-Ultimately, language models should speak---but not decide what is true, what follows, or what ought to be done. Those responsibilities belong to explicit models and epistemic control mechanisms that bind theory to generation.
+Ultimately, language models should speak---but not decide what is true, what follows, or what ought to be done. Those responsibilities belong to explicit domain models and systems that satisfy the ESL criterion.
 
 \begin{quote}
 \textit{We describe with language, predict with models, intervene with responsibility---and license all of it epistemically.}
