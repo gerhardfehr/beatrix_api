@@ -1,8 +1,8 @@
 % ============================================================================
-% PAPER 2: From Description to Intervention
+% PAPER 2: Epistemic Reliability Beyond Prompting
 % ============================================================================
 % Type: PURE THEORY PAPER
-% Status: Complete Draft
+% Status: FINAL
 % Position: Between Paper 1 (Diagnosis) and Paper 3 (System)
 % ============================================================================
 
@@ -32,7 +32,7 @@
 % ============================================================================
 % TITLE
 % ============================================================================
-\title{\textbf{From Description to Intervention:\\Why Reliable Generative AI Requires Explicit Domain Models\\and Empirical Stability of Language}}
+\title{\textbf{Epistemic Reliability Beyond Prompting:\\Structural Requirements for Responsible Generative Systems}}
 
 \author{
   [Author Names]\\
@@ -52,11 +52,7 @@
 % ABSTRACT
 % ============================================================================
 \begin{abstract}
-Large Language Models (LLMs) have demonstrated remarkable capabilities in generating fluent, contextually appropriate text across a wide range of domains. As a result, they are increasingly deployed in settings that involve not only descriptive summarization but also predictive and prescriptive claims about the world. However, these deployments expose a fundamental structural problem: LLMs routinely make inferential and intervention-relevant statements without explicit models of the domains they describe, and without formal constraints on the epistemic force of their language.
-
-This paper develops a minimal theoretical framework that distinguishes three classes of tasks---description, prediction, and intervention---and shows that each class imposes different modeling requirements. We argue that while descriptive tasks require epistemic control over language, predictive and intervention-oriented tasks require explicit theory-based domain models. Human behavior occupies a special role among such domains, as it is causally decisive in many real-world settings while being governed by no fixed laws.
-
-We further argue that epistemic reliability is a system-level property, not a property of language models alone. We introduce the concept of \emph{Empirical Stability of Language} (ESL)---the property that linguistic claim strength does not exceed evidence strength---as a diagnostic criterion for epistemically calibrated systems. Our contribution is structural rather than algorithmic: we do not propose architectures or training methods, but identify necessary conditions for epistemically responsible generative systems.
+Large language models have achieved unprecedented fluency, yet persistent concerns remain regarding epistemic reliability. We argue that such failures cannot be resolved through prompting, scale, or training improvements alone. Instead, epistemic reliability requires structural separation between linguistic generation, empirical calibration, and explicit theoretical modeling. We introduce the concept of \emph{Empirical Stability of Language} (ESL)---the property that claim strength does not exceed evidence strength ($K \le M$)---as a diagnostic criterion, and show why ESL alone is insufficient for prediction and intervention. Whenever systems make claims about future outcomes or recommend actions, explicit domain models are indispensable. Our central claim is structural: reliable generative systems require binding language to explicit models, not persuading models to behave reliably.
 \end{abstract}
 
 
@@ -65,287 +61,126 @@ We further argue that epistemic reliability is a system-level property, not a pr
 % ============================================================================
 \section{Introduction}
 
-Large Language Models are rapidly transitioning from tools for text generation to systems that participate in decision-making contexts. They summarize research, explain phenomena, forecast outcomes, and increasingly recommend actions. This expansion raises a central question: under what conditions are the claims produced by such systems epistemically legitimate?
+Large language models (LLMs) have achieved unprecedented fluency and coverage across domains. Yet despite their apparent competence, persistent concerns remain regarding epistemic reliability: models frequently overstate uncertain claims, blur distinctions between established knowledge and speculation, and provide recommendations without transparent justification.
 
-Much of the current discourse focuses on improving model accuracy, alignment, or training data. While important, these approaches implicitly assume that epistemic reliability is a property of the language model itself. In this paper, we argue that this assumption is false. Reliability does not arise from better language modeling alone, but from how language generation is embedded within a system that explicitly represents domain assumptions and constrains what may be asserted.
+A growing body of work diagnoses these failures in terms of hallucination, miscalibration, or overconfidence. In this paper, we argue that such diagnoses, while correct, are incomplete. The core problem is not merely that language models sometimes err, but that epistemic reliability cannot be guaranteed by linguistic competence alone.
 
-We propose a minimal framework that distinguishes (i) \emph{what is being said}, (ii) \emph{what the statement is about}, and (iii) \emph{whether the claim strength is proportionate to evidence}. This leads to the concept of \emph{Empirical Stability of Language} (ESL) as a diagnostic measure, alongside the functional separation between language models and domain models.
-
-\subsection{Scope and Contribution}
-
-This paper is purely theoretical. We do not propose architectures, training methods, or performance benchmarks. Instead, we:
-\begin{enumerate}
-    \item Distinguish three task classes: description, prediction, and intervention.
-    \item Show that each class imposes different modeling requirements.
-    \item Argue that human behavior requires explicit modeling when it mediates outcomes.
-    \item Establish that epistemic reliability is a system-level property.
-    \item Introduce the principle of separating linguistic generation from domain modeling and epistemic control.
-\end{enumerate}
-
-Subsequent work will demonstrate how these abstract principles can be instantiated in concrete systems.
+We introduce a structural framework that specifies what components must exist for epistemically responsible generative behavior to be possible in principle. Our contribution is not architectural or algorithmic. Instead, we identify necessary conditions for epistemic legitimacy and show why prompting, scale, or training improvements cannot substitute for them.
 
 
 % ============================================================================
-% 1.2 RELATED WORK
+% 2. BACKGROUND AND MOTIVATION
 % ============================================================================
-\subsection{Related Work}
+\section{Background and Motivation}
 
-Our framework builds on several emerging research streams while making a distinct contribution.
+\subsection{Empirical Stability of Language (ESL)}
 
-\paragraph{Epistemic Risk in Generative AI.}
-Recent work has begun to characterize the epistemic risks inherent in generative systems. Research on epistemic injustice in AI highlights how models can amplify misinformation and produce epistemic inequities by misleading users about what is known versus what is merely plausible \citep{epistemicrisk2025}. Studies of plausibility as a failure mode show that LLM errors arise not only from incorrect facts but from how model plausibility interacts with human interpretation \citep{plausibilityfailure2025}. These findings support our core claim that fluency does not imply reliability, and that explicit controls on assertion are necessary.
+Recent empirical work has shown that LLM outputs vary substantially in epistemic calibration across prompts, contexts, and task formulations. To analyze this phenomenon, we build on the concept of \emph{Empirical Stability of Language} (ESL).
 
-\paragraph{AI and Epistemic Authority.}
-A growing literature examines how generative AI alters traditional epistemic roles. Users often treat AI outputs as authoritative without adequate critical grounding \citep{epistemicauthority2025}. Normative frameworks have begun to examine the conditions under which epistemic dependence on AI is justified \citep{epistemiclegitimacy2025}. This research motivates our argument that epistemic licensing cannot be left to implicit model behavior---systems must explicitly govern how claims are made.
-
-\paragraph{Epistemology of Generative AI.}
-Philosophical work situates generative models within epistemological frameworks, examining how they construct and validate claims \citep{automatingepistemology2025}. These analyses emphasize the sociotechnical nature of truth claims and the structural distinction between linguistic fluency and epistemic validity. Our framework operationalizes these insights by proposing concrete separations between generation, derivation, and licensing.
-
-\paragraph{What Current Work Does Not Provide.}
-Existing research characterizes epistemic risks but does not formalize solutions. There is no prior work that:
-\begin{itemize}
-    \item Distinguishes task classes (description, prediction, intervention) by their modeling requirements
-    \item Defines Empirical Stability of Language (ESL) as a diagnostic property ($K \le M$)
-    \item Argues systematically for the separation of domain models from linguistic models
-    \item Identifies human behavior as a special modeling domain requiring explicit theory
-\end{itemize}
-
-Our contribution is therefore novel: we provide not merely a diagnosis of epistemic unreliability, but a structural framework specifying what components are necessary for reliable generative systems.
-
-
-% ============================================================================
-% 2. DESCRIPTION, PREDICTION, AND INTERVENTION
-% ============================================================================
-\section{Description, Prediction, and Intervention}
-
-To clarify the modeling requirements of generative systems, we distinguish three task categories.
-
-\subsection{Descriptive Tasks}
-
-Descriptive tasks answer questions such as:
-\begin{itemize}
-    \item What is known about phenomenon $X$?
-    \item How is concept $Y$ defined in the literature?
-    \item What evidence exists for effect $Z$?
-\end{itemize}
-
-These tasks do not require the system to derive new facts about the world. Instead, they involve organizing, summarizing, and presenting existing knowledge. Crucially, however, even description involves \emph{assertive language}: statements are framed as established, uncertain, or unknown.
-
-Thus, description is not epistemically neutral. Without explicit constraints, a system may overstate consensus, conflate concepts with labels, or blur the boundary between evidence and speculation.
-
-\begin{quote}
-\textbf{Requirement:} Descriptive tasks require \emph{Empirical Stability of Language}---the property that claim strength does not exceed evidence strength---to be satisfied and verifiable.
-\end{quote}
-
-\subsection{Predictive Tasks}
-
-Predictive tasks answer questions of the form:
-\begin{itemize}
-    \item What will happen if $X$ occurs?
-    \item How is outcome $Y$ expected to change under condition $Z$?
-\end{itemize}
-
-Prediction introduces counterfactual reasoning. It asserts that certain outcomes follow from certain conditions. This necessarily presupposes a causal or structural relationship in the underlying domain.
-
-Language alone cannot justify such relationships. Plausible narratives are not derivations.
-
-\begin{quote}
-\textbf{Requirement:} Predictive tasks require:
-\begin{enumerate}
-    \item An explicit \emph{domain model} that supports counterfactual inference.
-    \item Verification that claims satisfy ESL ($K \le M$), ensuring prediction strength matches evidence.
-\end{enumerate}
-\end{quote}
-
-\subsection{Intervention Tasks}
-
-Intervention tasks go further. They answer questions such as:
-\begin{itemize}
-    \item What should we do to achieve outcome $Y$?
-    \item Which policy or action is preferable?
-\end{itemize}
-
-Formally, intervention combines prediction with choice and normativity. It compares multiple possible actions under explicit or implicit objectives.
-
-\begin{quote}
-\textbf{Requirement:} Intervention tasks require:
-\begin{enumerate}
-    \item One or more \emph{domain models} to evaluate consequences.
-    \item An explicit \emph{objective or value function}.
-    \item \emph{Epistemic speech control}, because recommendations carry heightened authority and risk.
-\end{enumerate}
-\end{quote}
-
-
-% ============================================================================
-% 3. DOMAIN MODELS AND THEIR NECESSITY
-% ============================================================================
-\section{Domain Models and Their Necessity}
-
-A \emph{domain model} is an explicit, theory-based structure that derives outcomes from assumptions. Importantly, we do not argue for any particular model, only for the necessity of having one whenever inference is required.
-
-\subsection{When Domain Models Are Not Required}
-
-Domain models are not required when:
-\begin{itemize}
-    \item The task is purely descriptive.
-    \item No counterfactual or prognostic claims are made.
-    \item The domain is governed by formal or physical laws and no human decisions are causally involved.
-\end{itemize}
-
-Examples include:
-\begin{itemize}
-    \item Formal mathematics and logic
-    \item Program semantics
-    \item Classical physics of closed systems
-    \item Chemical reactions under controlled laboratory conditions
-\end{itemize}
-
-\subsection{When Domain Models Are Required}
-
-Domain models are required whenever outcomes depend on:
-\begin{itemize}
-    \item Choices
-    \item Reactions
-    \item Adaptation
-    \item Strategic behavior
-    \item Information or incentives
-\end{itemize}
-
-In such cases, description alone is insufficient. Something must explain \emph{why} certain outcomes follow.
-
-
-% ============================================================================
-% 4. HUMAN BEHAVIOR AS A SPECIAL DOMAIN
-% ============================================================================
-\section{Human Behavior as a Special Domain}
-
-Human behavior plays a distinctive role in this framework.
-
-\subsection{Causal Centrality}
-
-In many real-world domains---medicine, law, safety, economics, public policy---the ultimate effectiveness of interventions depends on how people behave. Compliance, adherence, interpretation, and strategic response determine outcomes.
-
-\subsection{Absence of Laws}
-
-Unlike physics or logic, human behavior is not governed by fixed laws. It is context-sensitive, information-dependent, and often strategic. As a result, it cannot be reliably inferred from linguistic plausibility.
-
-\subsection{Error Amplification}
-
-Small errors in behavioral assumptions can produce large real-world consequences. Overconfidence in behaviorally mediated predictions is therefore particularly dangerous.
-
-\begin{quote}
-\textbf{Conclusion:} Human behavior is rarely sufficient to explain outcomes, but it is almost never irrelevant. Where it is causally implicated, it must be explicitly modeled.
-\end{quote}
-
-
-% ============================================================================
-% 5. WHY LANGUAGE MODELS ARE NOT BEHAVIORAL MODELS
-% ============================================================================
-\section{Why Language Models Are Not Behavioral Models}
-
-A common objection is that LLMs implicitly encode human behavior, having been trained on human-generated data. This is true descriptively but false structurally.
-
-Language models approximate distributions over text, not decision processes. They lack:
-\begin{itemize}
-    \item Explicit assumptions
-    \item Causal structure
-    \item Counterfactual invariance
-    \item Falsifiability
-\end{itemize}
-
-They can imitate how people \emph{talk about} behavior, but they cannot justify claims about how people \emph{will act}.
-
-\begin{quote}
-\textbf{Implicit representations are epistemically insufficient where accountability is required.}
-\end{quote}
-
-
-% ============================================================================
-% 6. EMPIRICAL STABILITY OF LANGUAGE (ESL)
-% ============================================================================
-\section{Empirical Stability of Language}
-
-Across all task categories, one property is universally required: epistemic calibration of language.
-
-\subsection{Formal Definition}
-
-Let $\mathcal{C}$ be the set of all assertive statements $c$. For each statement $c \in \mathcal{C}$, define:
-\begin{itemize}
-    \item $K(c) \in [0,1]$: \textbf{Claim Strength}---the linguistic force of the assertion (certainty, generality, causality, implication)
-    \item $M(c) \in [0,1]$: \textbf{Evidence Strength}---the empirical basis supporting the claim (replication, effect stability, methodology)
-\end{itemize}
-
-\begin{definition}[ESL Principle]
-A statement $c$ satisfies \emph{Empirical Stability of Language} if and only if:
+ESL refers to the empirically observable property that the strength of a linguistic claim does not exceed the strength of the available evidence, and that this calibration remains stable across contextual variations. Formally, ESL follows the principle:
 \[
 K(c) \le M(c)
 \]
-\end{definition}
+where $K(c)$ denotes claim strength and $M(c)$ denotes evidence strength.
 
-\begin{definition}[ESL Property]
-A set of statements $\mathcal{C}$ possesses Empirical Stability of Language if and only if:
-\[
-\forall c \in \mathcal{C}: K(c) \le M(c)
-\]
-\end{definition}
+Crucially, ESL is descriptive and diagnostic. It does not authorize or prohibit statements; it measures whether language remains epistemically calibrated.
 
-\subsection{Canonical Definition}
+\subsection{The Limits of Empirical Calibration}
 
-\begin{quote}
-\textbf{Empirical Stability of Language (ESL)} is the empirically observable property of assertive language whereby the strength of a linguistic claim is proportionate to the strength of its supporting evidence, and this proportionality remains stable across variations in context, prompt formulation, and task framing.
-\end{quote}
+While ESL captures an essential dimension of epistemic responsibility, it alone cannot explain why models fail differently across tasks, nor why correct calibration in descriptive contexts often collapses in predictive or intervention-oriented settings.
 
-\subsection{What ESL Is and Is Not}
-
-ESL is:
-\begin{itemize}
-    \item A \emph{descriptive} property---it characterizes language use
-    \item A \emph{diagnostic} criterion---it identifies epistemic calibration
-    \item An \emph{empirically measurable} condition---it can be tested
-\end{itemize}
-
-ESL is \emph{not}:
-\begin{itemize}
-    \item An optimization function
-    \item A decision rule
-    \item A normative enforcement mechanism
-    \item A control layer or gating system
-\end{itemize}
-
-\begin{quote}
-\emph{ESL is not a rule about what may be said, but a measure of how responsibly language is used.}
-\end{quote}
-
-\subsection{Universality of ESL}
-
-Because every generated statement carries epistemic force, ESL applies universally---including in domains that do not require explicit domain models. ESL measures whether systems remain epistemically calibrated; it does not generate, authorize, or prohibit content.
+This observation motivates a deeper structural analysis.
 
 
 % ============================================================================
-% 7. KNOWLEDGE ACTIVATION AND MODEL VARIABILITY
+% 3. THE ACTIVATION BINDING PROBLEM
 % ============================================================================
-\section{Knowledge Activation and Model Variability}
+\section{The Activation Binding Problem ($\alpha$)}
 
-LLMs differ significantly in their ability to activate latent knowledge during generation. We denote this empirical property as $\alpha$, the \emph{knowledge activation} or \emph{binding coefficient}.
+Empirical studies indicate that many LLMs possess substantial latent domain knowledge, yet fail to apply this knowledge reliably during generation. We denote this phenomenon as the \emph{Activation Binding Problem}, captured by the coefficient $\alpha$.
 
-\begin{itemize}
-    \item $\alpha$ varies across models
-    \item $\alpha$ is influenced by training and prompting
-    \item $\alpha$ is not under explicit control
-\end{itemize}
+Intuitively, $\alpha$ measures the probability that available knowledge is activated and applied during generative tasks. A low $\alpha$ indicates that knowledge exists but is not consistently used.
 
-The relationship between $\alpha$ and ESL is complementary but distinct:
-\begin{itemize}
-    \item $\alpha$ \emph{explains} why knowledge may fail to surface
-    \item ESL \emph{measures} whether claims exceed their evidential basis
-\end{itemize}
+Importantly, improving $\alpha$ through prompting or instruction tuning does not guarantee epistemic reliability. Activation alone does not determine whether a claim is justified, nor whether an inference is valid.
 
-A system may have high $\alpha$ (good knowledge activation) yet fail ESL (overclaiming). Conversely, a system may have low $\alpha$ yet satisfy ESL by appropriately hedging its claims.
+
+% ============================================================================
+% 4. WHY PROMPTING CANNOT GUARANTEE BINDING
+% ============================================================================
+\section{Why Prompting Cannot Guarantee Binding}
+
+A natural response to epistemic failures is to improve prompting. However, prompting operates entirely within the linguistic system and remains subject to interpretation.
+
+We formalize this limitation as follows:
+
+\begin{proposition}[Prompt Insufficiency]
+There exists no prompt $\pi$ such that epistemic binding is guaranteed across contexts.
+\end{proposition}
+
+Prompts may encourage caution, uncertainty marking, or self-reflection, but they cannot enforce invariant behavior. Prompt interpretation itself is model-dependent and unstable.
+
+Thus, prompting may improve ESL or $\alpha$ empirically, but it cannot serve as a structural guarantee.
+
+
+% ============================================================================
+% 5. EXTERNALIZING EPISTEMIC CONTROL
+% ============================================================================
+\section{Externalizing Epistemic Control}
+
+To achieve epistemic reliability, key inferential steps must be externalized from the language model.
+
+We distinguish between three functions:
+\begin{enumerate}
+    \item \textbf{Linguistic generation} (LLM output)
+    \item \textbf{Epistemic calibration} (ESL)
+    \item \textbf{Inference and intervention} (domain models)
+\end{enumerate}
+
+Only the first is performed by the LLM itself. The latter two require explicit structure.
+
+
+% ============================================================================
+% 6. THE THREE-LEVEL SEPARATION PRINCIPLE
+% ============================================================================
+\section{The Three-Level Separation Principle}
+
+We propose the \emph{Three-Level Separation Principle}:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Level} & \textbf{Function} & \textbf{Role} \\
+\midrule
+Linguistic & Generation & Produce language \\
+Epistemic & Calibration (ESL) & Ensure $K \le M$ \\
+Theoretical & Domain models & Enable inference \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This separation clarifies why fluent language cannot substitute for theory, and why epistemic reliability is a system property, not a model property.
+
+
+% ============================================================================
+% 7. ABSTRACT FORMAL MODELS
+% ============================================================================
+\section{Abstract Formal Models}
+
+\subsection{ESL as an Empirical Standard}
+
+ESL defines a \emph{standard}, not a model. Any approach that operationalizes claim strength and evidence strength and evaluates their alignment qualifies as ESL-compliant.
+
+Consequently, competition arises at the level of ESL models, not at the level of the ESL definition itself.
+
+\subsection{Domain Models for Prediction and Intervention}
+
+For predictive and intervention tasks, explicit domain models are required. A domain model specifies assumptions, variables, and derivation rules.
 
 \begin{quote}
-\emph{ESL measures, $\alpha$ explains, domain models derive.}
+\textbf{Incorrect models are allowed. Implicit models are not.}
 \end{quote}
+
+This distinction is essential: epistemic responsibility requires explicit derivation, not empirical correctness.
 
 
 % ============================================================================
