@@ -219,6 +219,48 @@ Retrieval supports description, not derivation.
 
 This appendix demonstrates that the structural claims of the paper are grounded in established scientific traditions. The contribution of this work lies not in refuting prior results, but in clarifying the epistemic scope within which existing approaches can be responsibly applied.
 
+
+% ============================================================================
+% B.12 MATCHING TABLE
+% ============================================================================
+\subsection{Challenge--Foundation--Response Matching Table}
+
+Table~\ref{tab:challenge-response} summarizes anticipated challenges and structural responses.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Challenge--Foundation--Response Matching}
+\label{tab:challenge-response}
+\begin{tabular}{p{3.2cm}p{3.2cm}p{2.8cm}p{3.2cm}p{1.2cm}}
+\toprule
+\textbf{Challenge} & \textbf{Underlying Assumption} & \textbf{Foundations} & \textbf{Response} & \textbf{Loc.} \\
+\midrule
+Prompting guarantees reliability & Instructions enforce invariant behavior & Wittgenstein; Bender et al. & Prompting is interpretive; no guarantee & Sec.~4 \\
+\addlinespace
+Scale/training solves reliability & Implicit learning yields justification & Pearl (2009); Lipton & Scale increases competence, not structure & Sec.~4--5 \\
+\addlinespace
+LLMs contain implicit world models & Implicit representations qualify as models & Pearl \& Mackenzie; Cartwright & Models require explicit assumptions & Sec.~6--7 \\
+\addlinespace
+ESL is uncertainty calibration & Probabilistic confidence = justification & Gigerenzer & ESL measures $K \le M$, not probability & Sec.~2, App.~A \\
+\addlinespace
+No concrete ESL algorithm & Standards need implementation & Arrow (1951); Pearl & ESL defines standard; implementations compete & Sec.~7, App.~A \\
+\addlinespace
+Domain models may be wrong & Incorrect models lack value & Box (1976); Lakatos & Wrong explicit $>$ implicit inference & Sec.~7 \\
+\addlinespace
+Framework is normative/regulatory & Epistemic standards imply governance & Phil.\ of science & ESL is descriptive, not regulatory & Sec.~2, App.~A \\
+\addlinespace
+Human behavior not special & Behavior follows general laws & Kahneman; Simon & Behavior is causally mediating, law-underdetermined & Sec.~8 \\
+\addlinespace
+Human-in-the-loop suffices & Judgment replaces modeling & Automation bias lit. & Oversight complements, not substitutes & Sec.~8 \\
+\addlinespace
+RAG/tools replace models & Retrieval = inference & Phil.\ of explanation & Retrieval supports description, not derivation & Sec.~6--7 \\
+\addlinespace
+Lack of experiments weakens claims & All contributions need empirical validation & Theory-building traditions & Necessity framework, not performance study & Sec.~10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{quote}
 \textbf{Final Statement:} The present framework does not invalidate existing methods; it specifies the structural conditions under which their outputs can be epistemically justified.
 \end{quote}
