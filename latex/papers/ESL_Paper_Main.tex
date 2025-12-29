@@ -57,7 +57,7 @@
 \begin{abstract}
 Large language models (LLMs) often possess knowledge they fail to use reliably during generation. We formalize this observation by distinguishing \textbf{latent knowledge}---information a model can retrieve when directly queried---from \textbf{knowledge activation}---the process by which such knowledge constrains generative outputs. We introduce \textbf{activation competence} ($\alpha$), defined as the conditional probability of correct knowledge application given knowledge availability, and show that $\alpha$ varies substantially across models and is only partially controllable via prompting.
 
-Through the \textbf{Activation Challenge}, a minimal diagnostic task using pseudo-phenomena in behavioral economics, we demonstrate that models with verified latent knowledge systematically misclassify fabricated labels as real scientific terms. Explicit epistemic prompting (ESL) reduces but does not eliminate these failures, revealing intrinsic limitations in some models.
+Through the \textbf{Activation Challenge}, a minimal diagnostic task using pseudo-phenomena in behavioral economics, we demonstrate that models with verified latent knowledge systematically misclassify fabricated labels as real scientific terms. Prompts targeting \textbf{Empirical Stability of Language} (ESL)---the property that claim strength does not exceed evidence strength---reduce but do not eliminate these failures, revealing intrinsic limitations in some models.
 
 Our framework reframes hallucination as an activation failure rather than a knowledge deficit, with implications for evaluation practices, prompt design, and model training. We provide formal definitions, empirical validation across four frontier models, and a controlled methodology for measuring activation competence.
 \end{abstract}
@@ -76,7 +76,7 @@ This paper makes the following contributions:
     \item We introduce a formal distinction between \textbf{latent knowledge} ($M_{\text{latent}}$) and \textbf{knowledge activation}, defining \textbf{activation competence} ($\alpha$) as a measurable behavioral property.
     \item We present the \textbf{Activation Challenge}, a minimal diagnostic task that isolates activation failures from knowledge deficits.
     \item We demonstrate empirically that activation competence varies across models and is only partially improvable through prompting.
-    \item We provide the \textbf{ESL (Epistemic Specification and Limitation)} prompting framework, grounded in cognitive science, for measuring enforceable activation.
+    \item We introduce \textbf{Empirical Stability of Language (ESL)}---the property that claim strength does not exceed evidence strength ($K \le M$)---and provide an ESL-targeting prompt framework for measuring enforceable activation.
     \item We reframe hallucination as an \textbf{activation failure}, shifting focus from knowledge coverage to knowledge control.
 \end{enumerate}
 
@@ -96,7 +96,7 @@ Recent work on large language models has begun to rediscover this distinction. S
 
 Human decision-making research has consistently shown that overconfidence arises when individuals rely on plausibility or familiarity in the absence of explicit verification criteria \citep{fischhoff1977knowing, rozenblit2002misunderstood}. Metacognitive failures occur not because information is unavailable, but because confidence judgments are insufficiently constrained by evidence-based stopping rules.
 
-Explicit epistemic criteria---such as requiring recall of concrete sources or forbidding inference by analogy---have been shown to reduce false positives and improve calibration in expert judgment tasks \citep{kahneman2021noise}. Our ESL prompting framework directly operationalizes these principles.
+Explicit epistemic criteria---such as requiring recall of concrete sources or forbidding inference by analogy---have been shown to reduce false positives and improve calibration in expert judgment tasks \citep{kahneman2021noise}. Our ESL-targeting prompts directly operationalize these principles to achieve Empirical Stability of Language.
 
 \subsection{Dual-Process Models and Fluency Bias}
 
@@ -108,7 +108,7 @@ Chain-of-thought prompting has been proposed to induce more deliberative reasoni
 
 Instruction-following capability has improved substantially through fine-tuning and reinforcement learning \citep{ouyang2022training}, yet compliance with instructions does not ensure epistemic reliability \citep{ji2023survey}. Models may follow procedural instructions while still hallucinating content.
 
-Our work distinguishes \textbf{procedural compliance} from \textbf{epistemic activation}. The ESL prompt specifies explicit exclusion rules that prohibit common failure modes such as semantic approximation and label--concept conflation.
+Our work distinguishes \textbf{procedural compliance} from \textbf{epistemic activation}. The ESL-targeting prompt ($\pi_{\text{ESL}}$) specifies explicit exclusion rules that prohibit common failure modes such as semantic approximation and label--concept conflation.
 
 \subsection{Mechanistic Interpretability}
 
@@ -202,6 +202,30 @@ There exist models $f_\theta$ for which:
 
 This result shows that activation competence is not trivially controllable via prompting.
 
+\subsection{Empirical Stability of Language (ESL)}
+
+\begin{definition}[Claim Strength and Evidence Strength]
+For any assertive statement $c$:
+\begin{itemize}
+    \item $K(c) \in [0,1]$: \textbf{Claim Strength}---the linguistic force of the assertion (certainty, generality, causality, implication)
+    \item $M(c) \in [0,1]$: \textbf{Evidence Strength}---the empirical basis supporting the claim
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Empirical Stability of Language]
+A statement $c$ satisfies \emph{Empirical Stability of Language} (ESL) if and only if:
+\begin{equation}
+\boxed{K(c) \le M(c)}
+\end{equation}
+ESL is the empirically observable property of assertive language whereby the strength of a linguistic claim is proportionate to the strength of its supporting evidence, and this proportionality remains stable across variations in context, prompt formulation, and task framing.
+\end{definition}
+
+\textbf{Critical distinction:} ESL is a \emph{descriptive property} to be measured, not a control mechanism. ESL measures whether language is epistemically calibrated; it does not generate, authorize, or prohibit content.
+
+\begin{quote}
+\emph{ESL measures, $\alpha$ explains, domain models derive.}
+\end{quote}
+
 \subsection{Performance Decomposition}
 
 Generative epistemic performance can be decomposed as:
@@ -245,14 +269,14 @@ We compare two prompt conditions:
 
 \textbf{Baseline ($\pi_{\text{formal}}$)}: A fully formalized prompt specifying the classification task, epistemic rules, and output format. No explicit anti-heuristics.
 
-\textbf{ESL ($\pi_{\text{ESL}}$)}: Adds explicit calibration rules:
+\textbf{ESL-targeting ($\pi_{\text{ESL}}$)}: Adds explicit calibration rules designed to achieve Empirical Stability of Language ($K \le M$):
 \begin{itemize}
     \item ``Similar to'' $\neq$ ``identical to''
     \item Concept familiarity $\neq$ label legitimacy
     \item When uncertain about the \emph{exact name}, choose UNSICHER or UNBEKANNT
 \end{itemize}
 
-The ESL prompt operationalizes metacognitive stop rules from decision research \citep{kahneman2021noise}.
+The ESL-targeting prompt operationalizes metacognitive stop rules from decision research \citep{kahneman2021noise}, aiming to ensure claim strength does not exceed evidence strength.
 
 \subsection{Models Evaluated}
 
@@ -296,15 +320,15 @@ Mistral & 0.50 & 0.50 \\
 \caption{Baseline activation competence across models.}
 \end{table}
 
-\subsection{ESL Intervention Effect}
+\subsection{ESL-Targeting Intervention Effect}
 
-ESL prompting substantially improves activation competence:
+ESL-targeting prompts substantially improve activation competence:
 
 \begin{table}[h]
 \centering
 \begin{tabular}{lccc}
 \toprule
-\textbf{Model} & $\alpha$ (Baseline) & $\alpha^*$ (ESL) & $\Delta\alpha$ \\
+\textbf{Model} & $\alpha$ (Baseline) & $\alpha^*$ ($\pi_{\text{ESL}}$) & $\Delta\alpha$ \\
 \midrule
 Claude & 0.60 & 1.00 & +0.40 \\
 Gemini & 0.70 & 1.00 & +0.30 \\
@@ -312,14 +336,14 @@ GPT-5.2 & 0.60 & 1.00 & +0.40 \\
 Mistral & 0.50 & 0.90 & +0.40 \\
 \bottomrule
 \end{tabular}
-\caption{ESL effect on activation competence. Mistral shows bounded $\alpha^* < 1$.}
+\caption{ESL-targeting prompt effect on activation competence. Mistral shows bounded $\alpha^* < 1$.}
 \end{table}
 
 \subsection{Key Findings}
 
 \begin{enumerate}
     \item \textbf{Universal baseline gap}: All models exhibit $\alpha < 1$ under formal prompting
-    \item \textbf{ESL effectiveness}: Explicit epistemic rules increase $\alpha$ substantially
+    \item \textbf{ESL-targeting effectiveness}: Explicit epistemic rules increase $\alpha$ substantially
     \item \textbf{Bounded activation}: Mistral shows $\alpha^* = 0.90 < 1$, indicating intrinsic limits
     \item \textbf{Universal hallucinations}: ``Expertise Blind Spot'' and ``Choice Overload Threshold'' fooled all models at baseline
 \end{enumerate}
@@ -406,7 +430,7 @@ $\alpha$ & System property, not model property \\
 \end{center}
 
 \paragraph{Why Control Inversion is Necessary.}
-Our findings show that language models understand epistemic rules (ESL is syntactically followed) but do not reliably enforce them. Prompting remains interpretive, not executive. This parallels mature safety-critical domains: aviation uses checklists rather than pilot intuition; medicine uses diagnostic protocols rather than clinical impression. When reliability matters, control must be externalized from the interpretive system.
+Our findings show that language models understand epistemic rules ($\pi_{\text{ESL}}$ is syntactically followed) but do not reliably enforce them---ESL (Empirical Stability of Language) is not guaranteed by prompting alone. Prompting remains interpretive, not executive. This parallels mature safety-critical domains: aviation uses checklists rather than pilot intuition; medicine uses diagnostic protocols rather than clinical impression. When reliability matters, control must be externalized from the interpretive system.
 
 \paragraph{Formal Consequence.}
 Under this architecture:
