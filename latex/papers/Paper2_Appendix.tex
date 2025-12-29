@@ -1,0 +1,235 @@
+% ============================================================================
+% PAPER 2 APPENDIX: Formal Framework
+% ============================================================================
+% Status: FINAL
+% Purpose: Formalize ESL and structural requirements
+% Relation: Appendix to Paper2_Theory.tex
+% ============================================================================
+
+% ============================================================================
+% APPENDIX A
+% ============================================================================
+\appendix
+\section{Empirical Stability of Language and Structural Requirements for Epistemically Responsible Generative Systems}
+
+
+% ============================================================================
+% A.1 PURPOSE AND SCOPE
+% ============================================================================
+\subsection{Purpose, Scope, and Boundary Conditions}
+
+This appendix formalizes the epistemic framework underlying the main paper and clarifies the role of Empirical Stability of Language (ESL) within it.
+
+The purpose of this appendix is structural, not algorithmic. It specifies necessary conditions for epistemically responsible generative behavior. It does not propose an implementation, architecture, training method, or performance guarantee. The correctness of any particular model is explicitly outside scope.
+
+In particular, this appendix:
+\begin{itemize}
+    \item defines ESL as an empirical property, not a control mechanism,
+    \item separates empirical measurement from theoretical necessity,
+    \item and identifies where methodological competition is expected and legitimate.
+\end{itemize}
+
+
+% ============================================================================
+% A.2 LINGUISTIC OUTPUTS AND TASK TYPES
+% ============================================================================
+\subsection{Linguistic Outputs and Task Types}
+
+Let $\mathcal{L}$ denote the set of all assertive linguistic outputs produced by a generative system.
+
+We define a task classification function:
+\[
+\tau : \mathcal{L} \rightarrow \{ \text{Desc}, \text{Pred}, \text{Int} \}
+\]
+
+where:
+\begin{itemize}
+    \item \textbf{Desc} (Descriptive) statements summarize or classify existing knowledge.
+    \item \textbf{Pred} (Predictive) statements assert future or counterfactual outcomes.
+    \item \textbf{Int} (Intervention) statements recommend or evaluate actions intended to influence outcomes.
+\end{itemize}
+
+This classification is exhaustive and mutually exclusive.
+
+
+% ============================================================================
+% A.3 CLAIM STRENGTH AND EVIDENCE STRENGTH
+% ============================================================================
+\subsection{Claim Strength and Evidence Strength}
+
+For each assertive statement $c \in \mathcal{L}$, we define:
+\begin{itemize}
+    \item $K(c) \in [0,1]$: \textbf{Claim Strength}, representing the linguistic force of the assertion (e.g., certainty, generality, causal implication).
+    \item $M(c) \in [0,1]$: \textbf{Evidence Strength}, representing the empirical support available (e.g., methodological rigor, replication, robustness).
+\end{itemize}
+
+These quantities are conceptual variables. Their concrete operationalization is deliberately left open.
+
+
+% ============================================================================
+% A.4 DEFINITION OF ESL
+% ============================================================================
+\subsection{Definition of Empirical Stability of Language (ESL)}
+
+\subsubsection{Formal Definition}
+
+\begin{definition}[Empirical Stability of Language]
+A set of assertions $\mathcal{C} \subseteq \mathcal{L}$ satisfies \emph{Empirical Stability of Language} (ESL) if and only if:
+\[
+\forall c \in \mathcal{C}:\quad K(c) \le M(c)
+\]
+\end{definition}
+
+\subsubsection{Stability Across Contexts}
+
+Let $\Pi$ denote the set of admissible contexts (prompts, formulations, task framings).
+
+\begin{definition}[Strong ESL]
+Strong ESL holds if:
+\[
+\forall c \in \mathcal{C}, \forall \pi \in \Pi:\quad K(c,\pi) \le M(c)
+\]
+\end{definition}
+
+ESL therefore measures robust epistemic calibration under contextual variation.
+
+\subsubsection{Interpretative Status}
+
+ESL is:
+\begin{itemize}
+    \item \emph{empirical}---it concerns observable linguistic behavior,
+    \item \emph{descriptive}---it characterizes a property, not a norm,
+    \item \emph{diagnostic}---it identifies calibration, not compliance.
+\end{itemize}
+
+\begin{quote}
+\textbf{ESL does not authorize, prohibit, or enforce statements. It measures whether linguistic behavior remains epistemically calibrated.}
+\end{quote}
+
+
+% ============================================================================
+% A.5 ESL AS A STANDARD
+% ============================================================================
+\subsection{ESL as a Standard, Not a Model}
+
+ESL defines a \emph{criterion}, not a \emph{method}.
+
+Any concrete system that:
+\begin{enumerate}
+    \item distinguishes claim strength $K$ from evidence strength $M$,
+    \item evaluates whether $K \le M$,
+    \item tests stability across contexts,
+\end{enumerate}
+qualifies as an ESL-compliant model.
+
+Different operationalizations of $K$, $M$, and contextual robustness are therefore expected to compete. This competition concerns measurement quality, not the definition of ESL itself.
+
+
+% ============================================================================
+% A.6 DOMAIN MODELS AND INFERENCE
+% ============================================================================
+\subsection{Domain Models and Inference}
+
+For predictive and intervention tasks, epistemic calibration alone is insufficient.
+
+For each domain $d \in \mathcal{D}$, define a domain model:
+\[
+M_d = (\Theta_d, A_d, f_d)
+\]
+
+where:
+\begin{itemize}
+    \item $\Theta_d$ are explicit assumptions,
+    \item $A_d$ are actions or conditions,
+    \item $f_d : A_d \times \Theta_d \rightarrow \mathcal{W}$ maps assumptions to outcomes.
+\end{itemize}
+
+Domain models are required for derivation, not for description.
+
+\begin{quote}
+\textbf{Incorrect domain models are permitted; implicit models are not.}
+\end{quote}
+
+
+% ============================================================================
+% A.7 HUMAN BEHAVIOR
+% ============================================================================
+\subsection{Human Behavior as a Model-Obligatory Domain}
+
+Let $d = \text{HB}$ denote the domain of human behavior.
+
+Human behavior is characterized by:
+\begin{enumerate}
+    \item causal mediation of outcomes,
+    \item absence of stable universal laws.
+\end{enumerate}
+
+Formally:
+\[
+\exists h:\; \text{Outcome} = f(h,a)
+\quad \land \quad
+\neg \exists g:\; A \rightarrow \mathcal{W}
+\]
+
+Thus:
+\[
+\tau(c) \in \{\text{Pred}, \text{Int}\}
+\land c \text{ concerns human behavior}
+\Rightarrow \exists M_{\text{HB}}
+\]
+
+
+% ============================================================================
+% A.8 STRUCTURAL NECESSITY RESULT
+% ============================================================================
+\subsection{Structural Necessity Result}
+
+\begin{theorem}[Structural Necessity of Models Beyond ESL]
+No system can produce epistemically justified predictive or intervention statements solely by maintaining ESL.
+\end{theorem}
+
+Formally, there exists no system $S$ such that:
+\[
+\forall c:\;
+\tau(c) \in \{\text{Pred}, \text{Int}\}
+\land K(c) \le M(c)
+\land \neg \exists M_d
+\]
+
+\begin{quote}
+\textbf{ESL is necessary for epistemic responsibility, but not sufficient for inference.}
+\end{quote}
+
+
+% ============================================================================
+% A.9 FALSIFIABILITY
+% ============================================================================
+\subsection{Falsifiability Condition}
+
+This framework would be falsified if one could demonstrate:
+\begin{itemize}
+    \item epistemically justified predictive or intervention statements,
+    \item without explicit domain models,
+    \item while remaining epistemically accountable.
+\end{itemize}
+
+No such system is currently known.
+
+
+% ============================================================================
+% A.10 SUMMARY
+% ============================================================================
+\subsection{Summary}
+
+This appendix establishes a clear separation:
+\begin{itemize}
+    \item \textbf{ESL} ensures epistemic calibration of language.
+    \item \textbf{Domain models} enable inference and intervention.
+    \item \textbf{Competition} arises at the level of model quality, not linguistic scale.
+\end{itemize}
+
+The framework makes no claims about implementation, performance, regulation, or governance.
+
+\begin{quote}
+\textbf{Final Canonical Statement:} Empirical Stability of Language measures whether language consistently claims no more than the available evidence supports. Inference and intervention require additional explicit models beyond ESL.
+\end{quote}
