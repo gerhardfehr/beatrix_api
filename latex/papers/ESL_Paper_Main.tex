@@ -407,6 +407,29 @@ The implication is a reconceptualization of the LLM's role: not as an epistemic 
 
 We do not claim that LLMs are useless---only that they should not function as epistemic arbiters. Knowledge claims require theory-level control, not linguistic persuasion.
 
+\paragraph{Implementation Approaches.}
+Under the constraint that model parameters remain fixed, three training-free approaches satisfy our requirements:
+
+\textbf{(A) Decoding-level constraints.} Hard restrictions on token generation based on formal conditions:
+\[
+P(y_t = \text{REAL}) = 0 \quad \text{if } C_{\text{evidence}} = 0
+\]
+The model retains all knowledge but is structurally prevented from making unsupported epistemic commitments.
+
+\textbf{(B) Two-pass inference.} A silent internal classification pass determines epistemic status; the output pass generates text constrained by this classification:
+\[
+y = f_\theta(x \mid z), \quad z = f_\theta^{\text{silent}}(x)
+\]
+This is not chain-of-thought reasoning but functional separation without linguistic mediation.
+
+\textbf{(C) Epistemic gating.} An external post-processor evaluates candidate outputs: ``Is this an epistemic claim? Is evidence present?'' Unsupported assertions are downgraded (e.g., REAL $\rightarrow$ UNSICHER) before emission.
+
+All three approaches share the critical property: activation is \emph{enforced}, not \emph{requested}. The shift is from interpretable prompts to executable rules.
+
+\begin{quote}
+\textit{As long as knowledge activation depends on how a prompt is phrased, epistemic reliability remains fundamentally unstable.}
+\end{quote}
+
 \begin{quote}
 \textit{Large language models should not decide when they know something.}
 \end{quote}
