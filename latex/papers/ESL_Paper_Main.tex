@@ -116,6 +116,18 @@ Recent work has begun to identify internal mechanisms related to knowledge stora
 
 Our framework complements these mechanistic approaches by providing a behavioral definition of activation competence that can serve as an evaluation target for interpretability research.
 
+\subsection{Theoretical Foundations of Hallucination}
+
+Recent theoretical work has begun to formalize hallucination as a characterizable risk rather than merely a pragmatic artifact. \citet{gumaan2025theoretical} distinguish intrinsic from extrinsic hallucinations and provide formal risk characterization, demonstrating that hallucination phenomena are amenable to principled analysis. Detection and mitigation frameworks such as HaDeMiF \citep{hademif2024} combine external evaluation with internal state analysis, while active decoding strategies probe model uncertainty during generation \citep{diversiondecoding2024}. These approaches move toward external verification mechanisms, consistent with our emphasis on activation control.
+
+\subsection{Epistemological Perspectives}
+
+Philosophical work on LLM epistemology provides foundational support for our distinction between knowledge possession and knowledge use. \citet{hila2025epistemological} argues that LLMs function as reliabilist information sources---capable of transferring factual content---but lack internalist epistemic justification. They reproduce knowledge without the reflective grounding that characterizes justified belief. This aligns directly with our separation of $M_{\text{latent}}$ (what models can retrieve) from $\alpha$ (whether retrieval constrains generation).
+
+Research on epistemic agency extends this analysis. \citet{li2025reflection} show that LLMs exhibit limited meta-reflective capabilities, struggling to monitor and adjust their own knowledge states. If models lack robust epistemic self-monitoring, then activation control must be externally specified---precisely what our ESL framework provides. More broadly, discussions of knowledge versus pattern imitation in generative models \citep{epistemologyLLM2024} support the view that semantic competence (fluent generation) can dissociate from epistemic competence (reliable knowledge use).
+
+Our contribution operationalizes these philosophical insights: rather than debating whether LLMs ``truly know,'' we measure how reliably available knowledge constrains output, treating activation competence as an empirically tractable behavioral property.
+
 
 % ============================================================================
 % 3. THEORY
@@ -324,6 +336,8 @@ Prompting has bounded effectiveness. While formalization reduces ambiguity, it d
 \subsection{Rethinking Hallucination}
 
 The activation framework reframes hallucination as a failure mode occurring despite correct knowledge availability. This reconciles contradictory observations: models performing well on benchmarks may still produce falsehoods in open-ended tasks. Mitigation strategies focused solely on knowledge coverage may be insufficient if $\alpha$ remains low.
+
+This perspective aligns with recent theoretical and epistemological analyses. Work in both NLP and philosophy has identified that LLMs can reproduce factual knowledge without internal justification mechanisms \citep{hila2025epistemological}, and that hallucinations persist even under sophisticated prompting or retrieval regimes \citep{gumaan2025theoretical}. Our framework operationalizes these insights by proposing that reliable knowledge activation requires explicit epistemic control---a position consonant with discussions of limited epistemic agency in language models \citep{li2025reflection}.
 
 \subsection{Training and Alignment Implications}
 
